@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <base href="/site/" />
+    <script src="assets/js/load-head.js" defer></script>
+  </head>
 
-<head>
-  <base href="/site/">
-  <script src="assets/js/load-head.js" defer></script>
-</head>
+  <body>
+    <header></header>
+    <script src="/site/assets/js/load-header.js" defer></script>
+    <script src="/site/assets/js/link-generator.js"></script>
 
-<body>
-  <header></header>
-  <script src="/site/assets/js/load-header.js" defer></script>
-  <script src="/site/assets/js/link-generator.js"></script>
+    <main id="main-content">
+      <h1>Web Development II - JavaScript</h1>
 
-  <main id="main-content">
-    <h1>Web Development II - JavaScript</h1>
+      <!-- Course Overview -->
+      <section>
+        <h3>Course Overview</h3>
+        <p>etc etc etc</p>
+      </section>
 
-    <!-- Course Overview -->
-    <section>
-      <h3>Course Overview</h3>
-      <p>etc etc etc</p>
-    </section>
+      <!-- Course Objectives -->
+      <section>
+        <h3>Course Objectives</h3>
+        <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+          <li>6</li>
+        </ul>
+      </section>
 
-    <!-- Course Objectives -->
-    <section>
-      <h3>Course Objectives</h3>
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-      </ul>
-    </section>
-
-    <!-- Unit Material -->
-    <script id="unit-data" type="application/json">
+      <!-- Unit Material -->
+      <script id="unit-data" type="application/json">
         [
           {
             "title": "Unit 1: ___",
@@ -79,12 +78,11 @@
         ]
       </script>
 
-    <!-- Generate Content -->
-    <div id="unit-sections"></div>
-  </main>
+      <!-- Generate Content -->
+      <div id="unit-sections"></div>
+    </main>
 
-  <div id="footer-placeholder"></div>
-  <script src="assets/js/load-footer.js" defer></script>
-</body>
-
+    <div id="footer-placeholder"></div>
+    <script src="assets/js/load-footer.js" defer></script>
+  </body>
 </html>

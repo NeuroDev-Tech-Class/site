@@ -1,78 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <base href="/site/" />
+    <script src="assets/js/load-head.js" defer></script>
+  </head>
 
-<head>
-  <base href="/site/">
-  <script src="assets/js/load-head.js" defer></script>
-</head>
+  <body>
+    <header></header>
+    <script src="assets/js/load-header.js" defer></script>
 
-<body>
-  <header></header>
-  <script src="assets/js/load-header.js" defer></script>
+    <main id="main-content">
+      <h1>Course Catalog</h1>
 
-  <main id="main-content">
-    <h1>Course Catalog</h1>
+      <section>
+        <h2>Computer Basics</h2>
+        <ul>
+          <li><a href="courses/digital-literacy.html">Digital Literacy</a></li>
+          <li>
+            <a href="courses/ai-usage.html"
+              >AI Usage &amp; Prompt Engineering</a
+            >
+          </li>
+          <li>
+            <a href="courses/office-software.html"
+              >Office Software: Microsoft 365 &amp; Google Workspace</a
+            >
+          </li>
+        </ul>
+      </section>
 
-    <section>
-      <h2>Computer Basics</h2>
-      <ul>
-        <li><a href="courses/digital-literacy.html">Digital Literacy</a></li>
-        <li>
-          <a href="courses/ai-usage.html">AI Usage &amp; Prompt Engineering</a>
-        </li>
-        <li>
-          <a href="courses/office-software.html">Office Software: Microsoft 365 &amp; Google Workspace</a>
-        </li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Computer Programming</h2>
-      <ul>
-        <li>
-          <a href="courses/python-1.html">Python I - Programming Fundamentals</a>
-        </li>
-        <li>
-          <a href="courses/python-2.html">Python II - Object-Oriented Programming</a>
-        </li>
-        <!-- <li><a href="courses/algorithms.html">Algorithms & Data Structures</a></li>
+      <section>
+        <h2>Computer Programming</h2>
+        <ul>
+          <li>
+            <a href="courses/python-1.html"
+              >Python I - Programming Fundamentals</a
+            >
+          </li>
+          <li>
+            <a href="courses/python-2.html"
+              >Python II - Object-Oriented Programming</a
+            >
+          </li>
+          <!-- <li><a href="courses/algorithms.html">Algorithms & Data Structures</a></li>
 <li><a href="courses/ai.html">Introduction to AI Agents</a></li> -->
-      </ul>
-    </section>
+        </ul>
+      </section>
 
-    <section>
-      <h2>I.T.</h2>
-      <ul>
-        <li><a href="courses/hardware.html">Computer Hardware</a></li>
-        <li><a href="courses/under-construction.html">Introduction to Linux</a></li>
-      </ul>
-    </section>
+      <section>
+        <h2>I.T.</h2>
+        <ul>
+          <li><a href="courses/hardware.html">Computer Hardware</a></li>
+          <li>
+            <a href="courses/under-construction.html">Introduction to Linux</a>
+          </li>
+        </ul>
+      </section>
 
-    <section>
-      <h2>Web Development</h2>
-      <ul>
-        <li>
-          <a href="courses/web-dev-1.html">Web Development I - HTML &amp; CSS</a>
-        </li>
-        <li>
-          <a href="courses/under-construction.html">Web Development II - JavaScript</a>
-        </li>
-      </ul>
-    </section>
+      <section>
+        <h2>Web Development</h2>
+        <ul>
+          <li>
+            <a href="courses/web-dev-1.html"
+              >Web Development I - HTML &amp; CSS</a
+            >
+          </li>
+          <li>
+            <a href="courses/under-construction.html"
+              >Web Development II - JavaScript</a
+            >
+          </li>
+        </ul>
+      </section>
 
-    <section>
-      <h2>Game Development</h2>
-      <ul>
-        <li>
-          <a href="assets/pdfs/game_dev-unreal_engine.pdf">Intro to Unreal Engine</a>
-        </li>
-        <li>
-          <a href="assets/pdfs/digital_art-blender.pdf">Intro to Blender &amp; ZBrush Mini</a>
-        </li>
-      </ul>
-    </section>
+      <section>
+        <h2>Game Development</h2>
+        <ul>
+          <li>
+            <a href="assets/pdfs/game_dev-unreal_engine.pdf"
+              >Intro to Unreal Engine</a
+            >
+          </li>
+          <li>
+            <a href="assets/pdfs/digital_art-blender.pdf"
+              >Intro to Blender &amp; ZBrush Mini</a
+            >
+          </li>
+        </ul>
+      </section>
 
-    <!--         <section>
+      <!--         <section>
 <h2>Digital Art</h2>
 <ul>
 <li><a href="courses/digital-art/2d-gimp.html">2D Digital Art - GIMP</a></li>
@@ -87,10 +104,9 @@
 <li><a href="courses/under-construction.html">Video Software - DaVinci Resolve</a></li>
 </ul>
 </section> -->
-  </main>
+    </main>
 
-  <div id="footer-placeholder"></div>
-  <script src="assets/js/load-footer.js" defer></script>
-</body>
-
+    <div id="footer-placeholder"></div>
+    <script src="assets/js/load-footer.js" defer></script>
+  </body>
 </html>
