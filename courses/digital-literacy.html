@@ -1,53 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <base href="/site/" />
+    <script src="assets/js/load-head.js" defer></script>
+  </head>
 
-<head>
-  <base href="/site/" />
-  <script src="assets/js/load-head.js" defer></script>
-</head>
+  <body>
+    <header></header>
+    <script src="/site/assets/js/load-header.js" defer></script>
+    <script src="/site/assets/js/link-generator.js"></script>
 
-<body>
-  <header></header>
-  <script src="/site/assets/js/load-header.js" defer></script>
-  <script src="/site/assets/js/link-generator.js"></script>
+    <main id="main-content">
+      <h1>Digital Literacy</h1>
 
-  <main id="main-content">
-    <h1>Digital Literacy</h1>
+      <!-- Course Overview -->
+      <section>
+        <h3>Course Overview</h3>
+        <p>
+          The goal of this entry-level course is to equip students with
+          essential digital literacy skills, important for both personal and
+          professional success in today's digital world. By mastering basic
+          computer and internet skills, students will improve their
+          productivity, safety, and digital communication abilities. Even
+          tech-savvy learners should find this course helpful.
+        </p>
+      </section>
 
-    <!-- Course Overview -->
-    <section>
-      <h3>Course Overview</h3>
-      <p>
-        The goal of this entry-level course is to equip students with
-        essential digital literacy skills, important for both personal and
-        professional success in today's digital world. By mastering basic
-        computer and internet skills, students will improve their
-        productivity, safety, and digital communication abilities. Even
-        tech-savvy learners should find this course helpful.
-      </p>
-    </section>
+      <!-- Course Objectives -->
+      <section>
+        <h3>Course Objectives</h3>
+        <ul>
+          <li>
+            Understand the function of basic hardware and software components.
+          </li>
+          <li>
+            Navigate efficiently through an operating system (Windows or macOS).
+          </li>
+          <li>Employ effective internet search strategies.</li>
+          <li>Practice digital communication etiquette.</li>
+          <li>Apply best practices for digital security and privacy.</li>
+          <li>
+            Utilize common productivity tools and cloud storage solutions.
+          </li>
+        </ul>
+      </section>
 
-    <!-- Course Objectives -->
-    <section>
-      <h3>Course Objectives</h3>
-      <ul>
-        <li>
-          Understand the function of basic hardware and software components.
-        </li>
-        <li>
-          Navigate efficiently through an operating system (Windows or macOS).
-        </li>
-        <li>Employ effective internet search strategies.</li>
-        <li>Practice digital communication etiquette.</li>
-        <li>Apply best practices for digital security and privacy.</li>
-        <li>
-          Utilize common productivity tools and cloud storage solutions.
-        </li>
-      </ul>
-    </section>
-
-    <!-- Unit Material -->
-    <script id="unit-data" type="application/json">
+      <!-- Unit Material -->
+      <script id="unit-data" type="application/json">
         [
           {
             "title": "Unit 1: Intro to Computers",
@@ -255,12 +254,11 @@
         ]
       </script>
 
-    <!-- Generate Content -->
-    <div id="unit-sections"></div>
-  </main>
+      <!-- Generate Content -->
+      <div id="unit-sections"></div>
+    </main>
 
-  <div id="footer-placeholder"></div>
-  <script src="assets/js/load-footer.js" defer></script>
-</body>
-
+    <div id="footer-placeholder"></div>
+    <script src="assets/js/load-footer.js" defer></script>
+  </body>
 </html>

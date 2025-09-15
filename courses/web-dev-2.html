@@ -1,65 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <base href="/site/" />
+    <script src="assets/js/load-head.js" defer></script>
+  </head>
 
-<head>
-  <base href="/site/" />
-  <script src="assets/js/load-head.js" defer></script>
-</head>
+  <body>
+    <header></header>
+    <script src="/site/assets/js/load-header.js" defer></script>
+    <script src="/site/assets/js/link-generator.js"></script>
 
-<body>
-  <header></header>
-  <script src="/site/assets/js/load-header.js" defer></script>
-  <script src="/site/assets/js/link-generator.js"></script>
+    <main id="main-content">
+      <h1>Web Development II - JavaScript</h1>
 
-  <main id="main-content">
-    <h1>Web Development II - JavaScript</h1>
+      <!-- Course Overview -->
+      <section>
+        <h3>Course Overview</h3>
+        <p>
+          This beginner JavaScript programming course introduces students to the
+          coding in JavaScript, focusing on foundational concepts like data
+          types, variables, loops, and functions. Students will learn to write
+          JavaScript code within the Visual Studio Code IDE.
+        </p>
+        <p>
+          This course is designed for students who have some knowledge of
+          programming. If that is not the case, I would recommend looking at our
+          <a href="courses/python1.html"> Python Course</a> first. Javascript is
+          used along side HTML / CSS. It is recommended that you go through the
+          the <a href="courses/web-dev-1">Web Development I</a> course if you
+          haven't.
+        </p>
+      </section>
 
-    <!-- Course Overview -->
-    <section>
-      <h3>Course Overview</h3>
-      <p>
-        This beginner JavaScript programming course introduces students to the
-        coding in JavaScript, focusing on foundational concepts like data
-        types, variables, loops, and functions. Students will learn to write
-        JavaScript code within the Visual Studio Code IDE. This course is
-        designed for students who have some knowledge of programming. If that
-        is not the case, I would recommend looking at our
-        <a href="courses/python1.html"> Python Course</a> first. Javascript is
-        used along side HTML / CSS. It is recommended that you go through the
-        the <a href="courses/web-dev-1">Web Development I</a> course if you
-        haven't.
-      </p>
-    </section>
+      <!-- Course Objectives -->
+      <section>
+        <h3>Course Objectives</h3>
+        <ul>
+          <li>
+            Gain foundational knowledge of JavaScript concepts including
+            variables, conditionals, loops, and data structures.
+          </li>
+          <li>
+            Develop proficiency in JavaScript by learning syntax and writing
+            code.
+          </li>
+          <li>
+            Become comfortable with using JavaScript in a code editor like
+            Visual Studio Code.
+          </li>
+          <li>
+            Apply problem-solving skills to tackle programming challenges.
+          </li>
+          <li>
+            Understand and implement best practices in code readability and
+            version control.
+          </li>
+          <li>Demonstrate knowledge with a text-based math game.</li>
+        </ul>
+      </section>
 
-    <!-- Course Objectives -->
-    <section>
-      <h3>Course Objectives</h3>
-      <ul>
-        <li>
-          Gain foundational knowledge of JavaScript concepts including
-          variables, conditionals, loops, and data structures.
-        </li>
-        <li>
-          Develop proficiency in JavaScript by learning syntax and writing
-          code.
-        </li>
-        <li>
-          Become comfortable with using JavaScript in a code editor like
-          Visual Studio Code.
-        </li>
-        <li>
-          Apply problem-solving skills to tackle programming challenges.
-        </li>
-        <li>
-          Understand and implement best practices in code readability and
-          version control.
-        </li>
-        <li>Demonstrate knowledge with a text-based math game.</li>
-      </ul>
-    </section>
-
-    <!-- Unit Material -->
-    <script id="unit-data" type="application/json">
+      <!-- Unit Material -->
+      <script id="unit-data" type="application/json">
         [
           {
             "title": "Getting Started",
@@ -240,12 +241,11 @@
         ]
       </script>
 
-    <!-- Generate Content -->
-    <div id="unit-sections"></div>
-  </main>
+      <!-- Generate Content -->
+      <div id="unit-sections"></div>
+    </main>
 
-  <div id="footer-placeholder"></div>
-  <script src="assets/js/load-footer.js" defer></script>
-</body>
-
+    <div id="footer-placeholder"></div>
+    <script src="assets/js/load-footer.js" defer></script>
+  </body>
 </html>
