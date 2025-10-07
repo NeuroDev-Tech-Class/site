@@ -327,6 +327,10 @@ a:focus {
   outline-offset: 2px;
 }
 
+ol {
+  margin-left: 4vh;
+}
+
 /* Mobile */
 @media (max-width: 700px) {
   * {

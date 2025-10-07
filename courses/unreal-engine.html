@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Intro to Unreal Engine — Complete Course</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <base href="/site/" />
+  <script src="/site/assets/js/load-head.js" defer></script>
+</head>
+<body>
+  <header>
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/2/20/UE_Logo_Black_Centered.svg" alt="Unreal Engine logo" />
+    <nav aria-label="Main">
+      <a href="#overview">Overview</a>
+      <a href="#module-1">Module 1</a>
+      <a href="#module-2">Module 2</a>
+      <a href="#module-3">Module 3</a>
+      <a href="#module-4">Module 4</a>
+      <a href="#resources">Resources</a>
+    </nav>
+  </header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <script src="/site/assets/js/link-generator.js" defer></script>
+
+  <main id="overview">
+    <h1>Intro to Unreal Engine</h1>
+    <p class="muted">Unreal Engine Course designed by <strong>Ethan Minnich</strong>. This page mirrors the provided PDF content, lightly enhanced with clarifications, best‑practices, and reference links for modern Unreal Engine 5 workflows.</p>
+
+    <section class="section callout">
+      <div class="grid-2">
+        <div>
+          <h2>Course Goals (At a Glance)</h2>
+          <ul>
+            <li>Get comfortable with the UE5 interface and tools.</li>
+            <li>Start a Third‑Person Blueprint project with Starter Content.</li>
+            <li>Model with meshes, materials, and transform tools.</li>
+            <li>Use Landscapes, Layers, and Foliage to build worlds.</li>
+            <li>Blueprint fundamentals: variables, flow, functions, UI.</li>
+            <li>Design and graybox a level; add core win/lose mechanics.</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Before You Begin</h2>
+          <ul class="checklist">
+            <li>Install <strong>Epic Games Launcher</strong> and <strong>Unreal Engine 5</strong>.</li>
+            <li>Sign in to Epic Games (create an account if needed).</li>
+            <li>Enable <strong>Starter Content</strong> in project creation.</li>
+            <li>Optional: In Project Settings, set your default maps under <em>Maps &amp; Modes</em>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="controls">
+      <h2>Editor &amp; Viewport Controls</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Selection &amp; Navigation</h3>
+          <ul>
+            <li><span class="kbd">Left‑Click</span> select</li>
+            <li><span class="kbd">Right‑Click + Drag</span> look around</li>
+            <li><span class="kbd">W/A/S/D</span> while holding Right‑Click to fly</li>
+            <li><span class="kbd">Mouse Wheel</span> zoom</li>
+            <li><span class="kbd">F</span> focus selected actor</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Play &amp; Save</h3>
+          <ul>
+            <li><span class="kbd">Alt + P</span> Play In Editor</li>
+            <li><span class="kbd">Esc</span> Stop play</li>
+            <li><span class="kbd">Ctrl + S</span> Save Level</li>
+            <li><span class="kbd">Ctrl + Shift + S</span> Save All</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="module-1">
+      <h2>Module 1 — Getting Started</h2>
+      <h3>Create a Project</h3>
+      <ul>
+        <li>Launch Epic Games Launcher and sign in.</li>
+        <li>Create a new <strong>Third Person</strong> project using <strong>Blueprint</strong> with <strong>Starter Content</strong>.</li>
+      </ul>
+
+      <h3>Recommended Performance Tweaks</h3>
+      <p class="small">If your machine struggles, try:</p>
+      <ul>
+        <li><strong>Settings &rarr; Engine Scalability</strong>: reduce from Epic to Medium.</li>
+        <li><strong>Project Settings &rarr; Rendering</strong>: consider disabling <em>Lumen</em> for older GPUs, set Reflection Method to <em>None</em> for speed, choose a lighter <em>Anti‑Aliasing</em> method.</li>
+      </ul>
+
+      <h3>Add Content Packs</h3>
+      <ol>
+        <li>Save your project; close UE5.</li>
+        <li>In Epic Games Launcher &rarr; <strong>Marketplace</strong> &rarr; <strong>Free</strong>, find an asset pack (e.g., building kits).</li>
+        <li>Click <strong>Add to Project</strong> and select your game.</li>
+      </ol>
+
+      <h3>Create a Level</h3>
+      <ol>
+        <li><strong>File &rarr; New Level &rarr; Basic</strong>.</li>
+        <li>Save as <code class="code-inline">CastleLevel</code> and open it.</li>
+      </ol>
+
+      <h3>Set Default Level</h3>
+      <ol>
+        <li><strong>Edit &rarr; Project Settings &rarr; Maps &amp; Modes</strong>.</li>
+        <li>Set your <strong>Editor Startup Map</strong> and <strong>Game Default Map</strong>.</li>
+      </ol>
+
+      <h3>Place &amp; Transform Meshes</h3>
+      <ul>
+        <li>In <strong>Content Browser</strong>, filter <em>Static Mesh</em>, search <em>Wall</em>, drag <code class="code-inline">SM_Plains_Wall_Straight_01</code> into the viewport.</li>
+        <li>Move <span class="kbd">W</span>, Rotate <span class="kbd">E</span>, Scale <span class="kbd">R</span>. Use snapping options for precision.</li>
+        <li>Duplicate with <span class="kbd">Alt</span> + drag. Group multiple meshes with <span class="kbd">Ctrl + G</span>.</li>
+        <li>Delete selected meshes with <span class="kbd">Delete</span>.</li>
+      </ul>
+
+      <h3>Materials</h3>
+      <ul>
+        <li>In <strong>Content</strong>, filter <em>Material</em> and drag onto meshes.</li>
+        <li>Use the <strong>Details</strong> panel for fine‑tuning.</li>
+      </ul>
+
+      <h3>Player Start</h3>
+      <ul>
+        <li>From <em>Place Actors</em>, drag a <strong>Player Start</strong> into the level and orient it as needed.</li>
+      </ul>
+
+      <h3>Level Planning</h3>
+      <ul>
+        <li>Create a reference image folder.</li>
+        <li>Sketch a top‑down layout before building.</li>
+      </ul>
+
+      <h3>Build a Platforming Challenge</h3>
+      <ul>
+        <li>Assemble obstacles from static meshes.</li>
+        <li>Adjust <strong>Collision</strong> on meshes if needed via the Static Mesh Editor (Auto Convex).</li>
+      </ul>
+    </section>
+
+    <section class="section" id="module-2">
+      <h2>Module 2 — Landscapes &amp; Blueprints</h2>
+      <h3>Create a Landscape</h3>
+      <ul>
+        <li>Delete the floor beneath your castle.</li>
+        <li>Switch to <strong>Landscape</strong> mode.</li>
+        <li>Pick a Section Size (e.g., 15×15 Quads), then <strong>Create</strong>.</li>
+      </ul>
+
+      <h3>Sculpt Tool</h3>
+      <ul>
+        <li>Drag to raise; hold <span class="kbd">Shift</span> to carve valleys.</li>
+        <li>Shape mountains around your castle; form a valley inside.</li>
+      </ul>
+
+      <h3>Landscape Materials &amp; Layers</h3>
+      <ol>
+        <li>Create <code class="code-inline">CustomMaterials/MAT_Landscape</code>.</li>
+        <li>Add texture samples and a <strong>LandscapeLayerBlend</strong> node.</li>
+        <li>Name layers (e.g., <em>Grass</em>, <em>Gravel</em>), set preview weights, wire to <em>Base Color</em>.</li>
+        <li>Feed <strong>LandscapeLayerCoords</strong> into texture UVs; tweak <em>Mapping Scale</em> (e.g., 7).</li>
+        <li>Set <em>Roughness</em> via a Constant (1.0).</li>
+      </ol>
+
+      <h3>Paint the Landscape</h3>
+      <ul>
+        <li>Assign <code class="code-inline">MAT_Landscape</code> to your Landscape.</li>
+        <li>In <strong>Paint</strong> tab, create <em>Weight‑Blended Layer Info</em> assets for each layer.</li>
+        <li>Paint with adjustable brush size/strength to blend textures.</li>
+      </ul>
+
+      <h3>Foliage Tool</h3>
+      <ul>
+        <li>Open <strong>Foliage</strong> mode and drop in tree static meshes.</li>
+        <li>Set <strong>Density</strong> (start small) and paint test strips before committing.</li>
+      </ul>
+
+      <h3>Blueprints — Strings, Variables, Print</h3>
+      <ol>
+        <li>Open <strong>Level Blueprint</strong>.</li>
+        <li>Add <span class="kbd">N</span> keyboard event &rarr; <strong>Print String</strong>.</li>
+        <li>Create a <code class="code-inline">PlayerName</code> string variable and append to “Hello ”.</li>
+      </ol>
+
+      <h3>Blueprints — Integers &amp; Branch</h3>
+      <ol>
+        <li>Add <span class="kbd">G</span> keyboard event &rarr; <strong>Print String</strong>.</li>
+        <li>Create <code class="code-inline">TotalGold</code> (int) and <code class="code-inline">GainGold = 1</code>.</li>
+        <li>Set <code class="code-inline">TotalGold = TotalGold + GainGold</code>, print a message, and use a <strong>Branch</strong> to check thresholds.</li>
+        <li>Organize with <strong>comment boxes</strong>, <strong>reroute pins</strong>, and <strong>functions</strong> (e.g., <em>AddGold</em>).</li>
+      </ol>
+    </section>
+
+    <section class="section" id="module-3">
+      <h2>Module 3 — Interactables, UI &amp; Sprint</h2>
+      <h3>Locked Door &amp; Key Setup</h3>
+      <ol>
+        <li>Create <strong>BP_Key</strong> (Actor) with <em>Sphere</em> and a trigger <em>Box Collision</em>.</li>
+        <li>Create <strong>BP_Door</strong> (Actor) with a <em>Static Mesh</em> and <em>Box Collision</em> (plus an inner collision box set to <em>BlockAll</em>).</li>
+      </ol>
+
+      <h4>Key Blueprint</h4>
+      <ul>
+        <li>On TriggerBox <em>BeginOverlap</em> &rarr; <strong>Cast to</strong> <em>BP_ThirdPersonCharacter</em>.</li>
+        <li>Set a boolean variable <code class="code-inline">Key = true</code>; then <strong>Destroy Actor</strong> (self).</li>
+      </ul>
+
+      <h4>Door Blueprint</h4>
+      <ul>
+        <li>On TriggerBox <em>BeginOverlap</em> &rarr; <strong>Cast</strong> to player.</li>
+        <li><strong>Branch</strong> on <code class="code-inline">Get Key</code>: if true, <em>Destroy Actor</em> (open door), else <em>Print String</em> “Door is locked.”</li>
+      </ul>
+
+      <h3>Jump Pad</h3>
+      <ol>
+        <li>Create <strong>BP_JumpPad</strong> (Actor) with a <em>Cylinder</em>.</li>
+        <li>On <em>Hit</em>, <strong>Cast</strong> to player and use <strong>Launch Character</strong> (e.g., Z = 1000).</li>
+      </ol>
+
+      <h3>Double Jump</h3>
+      <ul>
+        <li>Open <em>BP_ThirdPersonCharacter</em>, set <strong>Jump Max Count</strong> to 2.</li>
+      </ul>
+
+      <h3>Collectible Coins</h3>
+      <ol>
+        <li>Add <code class="code-inline">CoinCount</code> (int) to the Character.</li>
+        <li>Create <strong>BP_Coin</strong> with <em>Sphere</em> + <em>Sphere Collision</em>, optional <em>Rotating Movement</em> and <em>Spot Light</em>.</li>
+        <li>On overlap, increment <code class="code-inline">CoinCount</code> then <em>DestroyActor</em>.</li>
+      </ol>
+
+      <h3>UI Widget for Coins</h3>
+      <ol>
+        <li>Create <strong>Widget Blueprint</strong> <em>HUD_Coin</em>.</li>
+        <li>Use a <em>Canvas</em> with a <em>Horizontal Box</em> and two Text blocks.</li>
+        <li>Bind the second Text to <code class="code-inline">CoinCount</code> (e.g., via getter or binding function).</li>
+        <li>In Game Mode (or on BeginPlay), <em>Create Widget</em> &rarr; <em>Add to Viewport</em>.</li>
+      </ol>
+
+      <h3>Sprinting with Inputs &amp; Functions</h3>
+      <ol>
+        <li>Create <strong>IA_Sprint</strong> (Input Action) with <em>Hold</em> and <em>Released</em> triggers.</li>
+        <li>Add to your Input Mapping Context (e.g., Left Shift and Gamepad RT).</li>
+        <li>Create <em>SprintStart</em>/<em>SprintStop</em> functions to set <strong>Max Walk Speed</strong> higher/lower. Optionally track <code class="code-inline">IsSprinting</code> (bool).</li>
+      </ol>
+    </section>
+
+    <section class="section" id="module-4">
+      <h2>Module 4 — Game Design &amp; Grayboxing</h2>
+      <h3>Game Design Document (GDD)</h3>
+      <ul>
+        <li>Clone the template and fill in: title, author, genre, and theme.</li>
+        <li>Collect reference images; define scope, schedule, and core mechanics.</li>
+        <li>Write a short “Hollywood pitch” that captures your hook.</li>
+      </ul>
+
+      <h3>Level Design</h3>
+      <ul>
+        <li>Define audience, primary objective, duration, theme, and difficulty.</li>
+        <li>Graybox with <strong>Brushes</strong>; ensure flow is readable and fun.</li>
+      </ul>
+
+      <h3>Mechanics: Win / Lose / Checkpoint</h3>
+      <ol>
+        <li><strong>BP_Win</strong>: box overlap prints “You Win!”.</li>
+        <li><strong>BP_Checkpoint</strong>: store a <code class="code-inline">Checkpoint</code> vector in Character.</li>
+        <li><strong>BP_Enemy</strong>: on overlap, print “Game Over” and respawn at <code class="code-inline">Checkpoint</code>.</li>
+        <li>Transfer working logic from <em>DebugLevel</em> back into the main level.</li>
+      </ol>
+    </section>
+
+    <section class="section callout" id="extras">
+      <h2>Helpful Extras &amp; Clarifications</h2>
+      <div class="grid-2">
+        <div class="card tip">
+          <h3>Default Maps</h3>
+          <p>Set both the <em>Editor Startup Map</em> and <em>Game Default Map</em> in <strong>Project Settings &rarr; Maps &amp; Modes</strong> so the correct level opens in the editor and when you press Play.</p>
+        </div>
+        <div class="card tip">
+          <h3>Player Start</h3>
+          <p>The <strong>Player Start</strong> actor is a drag‑and‑drop spawn point. You can have more than one and choose which to use in Blueprint or via GameMode logic.</p>
+        </div>
+        <div class="card tip">
+          <h3>Launch Character</h3>
+          <p><em>Launch Character</em> sets a pending launch velocity and moves the Character into a falling state on the next tick—perfect for jump pads.</p>
+        </div>
+        <div class="card tip">
+          <h3>Enhanced Input</h3>
+          <p>Use <strong>Enhanced Input</strong> with <em>Input Actions</em> and <em>Input Mapping Contexts</em> (IMCs) to map keyboard and gamepad controls and react to <em>Triggered</em> / <em>Completed</em> events.</p>
+        </div>
+        <div class="card tip">
+          <h3>Landscape Layer Blending</h3>
+          <p><em>LandscapeLayerBlend</em> supports Weight, Height, and Alpha blending. Weight blending is common for gradual transitions; Height blending uses a height mask for sharper, more natural mixes.</p>
+        </div>
+        <div class="card tip">
+          <h3>UMG Binding</h3>
+          <p>For dynamic UI, bind Text to a getter function or variable; when your variable updates, the widget reflects the change automatically.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="resources">
+      <h2>Further Reading &amp; Official Docs</h2>
+      <ul>
+        <li>Changing Default Level (Maps &amp; Modes) — Unreal Docs</li>
+        <li>Player Start Actor — Unreal Docs</li>
+        <li>Launch Character (Blueprint API) — Unreal Docs</li>
+        <li>Landscape Paint Mode — Unreal Docs</li>
+        <li>Landscape Materials &amp; Layer Blend — Unreal Docs</li>
+        <li>Enhanced Input — Unreal Docs</li>
+        <li>UMG Property Binding &amp; UI Quick Start — Unreal Docs</li>
+        <li>Character Movement &amp; Max Walk Speed — Unreal Docs</li>
+      </ul>
+    </section>
+
+    <div class="theme-toggle-container">
+      <button id="theme-toggle" aria-pressed="false" aria-label="Toggle theme">Toggle Theme</button>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p class="small">This page is adapted from your PDF with supplemental guidance and links to documentation. Keep iterating and playtesting!</p>
+  </footer>
+
+  <script>
+    // Minimal dark mode toggle without altering your design system
+    const btn = document.getElementById('theme-toggle');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (prefersDark) document.body.classList.add('dark-mode');
+    btn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      btn.setAttribute('aria-pressed', document.body.classList.contains('dark-mode'));
+    });
+  </script>
+</body>
+</html>
