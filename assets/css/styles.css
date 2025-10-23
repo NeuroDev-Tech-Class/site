@@ -292,7 +292,7 @@ footer p {
 }
 
 .callout {
-  text-align: justify;
+  text-align: left;
   background-color: var(--background-color);
   margin: 2rem auto;
   padding: 2.5rem;
