@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/site/" />
+    <script src="/site/assets/js/load-head.js" defer></script>
+  </head>
+
+  <body>
+    <header></header>
+    <script src="/site/assets/js/load-header.js" defer></script>
+
+    <main id="main-content">
+      <h1>Intro To Blender &amp; ZBrush Mini</h1>
+
+      <section class="callout">
+        <h3>Course Outline</h3>
+        <ul>
+          <li><strong>Module 1:</strong> Modeling basics; model a car; model dice; Blender UI and core tools.</li>
+          <li><strong>Module 2:</strong> 3D printing fundamentals; slicing; printer setup; dice workflow.</li>
+          <li><strong>Module 3:</strong> N-gons and topology; model a sword; model and size a ring.</li>
+          <li><strong>Module 4:</strong> Tablet sculpting in ZBrushCoreMini; key brushes; export workflow.</li>
+          <li><strong>Module 5:</strong> Sanding &amp; painting; printer cleaning with cleaning filament.</li>
+        </ul>
+      </section>
+
+      <section id="module-1">
+        <h2>Module 1 — Blender Modeling Basics</h2>
+
+        <h3>Goals</h3>
+        <ul>
+          <li>Learn the basics of Modeling</li>
+          <li>Model a Car</li>
+          <li>Model Dice</li>
+        </ul>
+
+        <h3>Scene Setup</h3>
+        <p><em>Mode toggle:</em> press <span class="kbd">Tab</span> to switch between <strong>Object Mode</strong> and <strong>Edit Mode</strong>.</p>
+
+        <h3>Interface Primer</h3>
+        <ul>
+          <li><strong>Viewport:</strong> main window you use to look around your object.</li>
+          <li><strong>Scene Collection:</strong> shows all the objects in your scene.</li>
+          <li><strong>Properties Editor:</strong> detailed settings and modifiers for the selected object.</li>
+        </ul>
+
+        <h3>Axes in 3D</h3>
+        <ul>
+          <li><strong>X</strong> axis: red</li>
+          <li><strong>Y</strong> axis: green</li>
+          <li><strong>Z</strong> axis: blue</li>
+        </ul>
+
+        <h3>Viewport Navigation</h3>
+        <ul>
+          <li><strong>Zoom:</strong> Mouse wheel or <span class="kbd">Ctrl</span> + <span class="kbd">MMB</span></li>
+          <li><strong>Rotate (Orbit):</strong> Click &amp; hold the mouse wheel and drag</li>
+          <li><strong>Pan:</strong> <span class="kbd">Shift</span> + <span class="kbd">MMB</span> and drag</li>
+          <li><strong>Orthographic Views:</strong> Numpad 1/3/7, or click the gizmo axes</li>
+        </ul>
+
+        <h3>Basic Transform Tools</h3>
+        <ul>
+          <li><strong>Move:</strong> <span class="kbd">G</span></li>
+          <li><strong>Rotate:</strong> <span class="kbd">R</span></li>
+          <li><strong>Scale:</strong> <span class="kbd">S</span></li>
+          <li><strong>Shortcut Pop-Up:</strong> <span class="kbd">Shift</span> + <span class="kbd">Space</span></li>
+        </ul>
+
+        <h3>Create &amp; Manage Primitives</h3>
+        <ul>
+          <li><strong>Add:</strong> <em>Add &gt; Mesh &gt; Cube</em> (Hotkey: <span class="kbd">Shift</span> + <span class="kbd">A</span>)</li>
+          <li><strong>Delete an Object:</strong> In <em>Object Mode</em>, select and press <span class="kbd">Delete</span></li>
+        </ul>
+
+        <h3>Viewport Shading</h3>
+        <ul>
+          <li><strong>Wireframe</strong></li>
+          <li><strong>Solid</strong></li>
+          <li><strong>Material Preview</strong></li>
+          <li><strong>Rendered</strong></li>
+          <li><em>Hotkey:</em> <span class="kbd">Z</span> to open shading pie menu</li>
+        </ul>
+
+        <h3>Mesh Sub-Elements (Edit Mode)</h3>
+        <ul>
+          <li><strong>Vertex:</strong> 1 key</li>
+          <li><strong>Edge:</strong> 2 key</li>
+          <li><strong>Face:</strong> 3 key</li>
+          <li><strong>Multi-Select:</strong> hold <span class="kbd">Shift</span> while clicking</li>
+          <li><strong>De-select:</strong> box select then hold <span class="kbd">Ctrl</span> to subtract</li>
+          <li><strong>Select Loops:</strong> hold <span class="kbd">Alt</span> and click an edge/face</li>
+        </ul>
+
+        <h3>Edit Tools</h3>
+        <ul>
+          <li><strong>Loop Cut:</strong> <span class="kbd">Ctrl</span> + <span class="kbd">R</span> (use mouse wheel for more cuts)</li>
+          <li><strong>Extrude:</strong> select face(s) then press <span class="kbd">E</span></li>
+          <li><strong>Inset:</strong> select face(s) then press <span class="kbd">I</span></li>
+        </ul>
+
+        <h3>Properties Editor</h3>
+        <ul>
+          <li>Inspect precise <em>Location</em>, <em>Rotation</em>, and <em>Scale</em>.</li>
+          <li><em>Subdivisions</em> example: add a UV Sphere and change segments to 8 (bottom-left operator box).</li>
+        </ul>
+
+        <h3>Project: Model a Car</h3>
+        <p>Use Loop Cut, Extrude, and Inset to block out form; refine with transforms.</p>
+
+        <h3>Project: Model Dice</h3>
+        <p>Block out a cube and use inset/extrude for pips.</p>
+
+        <h3>Export from Blender</h3>
+        <ol>
+          <li>Select the entire object</li>
+          <li><em>File &gt; Export &gt; Wavefront (.obj)</em></li>
+          <li>Name and save into your student folder &rarr; <strong>Export OBJ</strong></li>
+        </ol>
+      </section>
+
+      <section id="module-2">
+        <h2>Module 2 — 3D Printing Basics &amp; Dice Pipeline</h2>
+
+        <h3>Goals</h3>
+        <ul>
+          <li>Learn about 3D printer parts</li>
+          <li>Learn about layered printing</li>
+          <li>Prepare the printer</li>
+          <li>Print first object</li>
+        </ul>
+
+        <h3>3D Printer Basics</h3>
+        <ul>
+          <li><strong>Build Platform:</strong> where the first layer is placed.</li>
+          <li><strong>Filament (PLA):</strong> printer material, typically plastic.</li>
+          <li><strong>Extruder (cold end) &amp; Nozzle (hot end):</strong> feeds and melts filament; <em>very hot</em>.</li>
+        </ul>
+
+        <h3>From Model to Print</h3>
+        <p>Use slicing software to convert your 3D model to layers (G-code) the printer understands.</p>
+
+        <h3>Overhangs &amp; Supports</h3>
+        <ul>
+          <li>Overhangs steeper than ~45–50° often need supports.</li>
+          <li><strong>Linear</strong> supports: straight up from the bed.</li>
+          <li><strong>Tree</strong> supports: branched structures to reach complex overhangs.</li>
+        </ul>
+
+        <h3>Raft vs Brim</h3>
+        <ul>
+          <li><strong>Raft:</strong> full base layer under the object for adhesion/stability.</li>
+          <li><strong>Brim:</strong> single-layer flange around the model to improve bed adhesion.</li>
+        </ul>
+
+        <h3>Dice Setup (Slicer)</h3>
+        <ol>
+          <li>Load your Dice OBJ.</li>
+          <li>Accept prompts to lay flat/repair if offered.</li>
+          <li>Scale to 15–20 mm on X, Y, Z.</li>
+          <li>Rotate so the face with least detail is on the bed (e.g., put the “1” face down).</li>
+          <li>Print to printer.</li>
+        </ol>
+      </section>
+
+      <section id="module-3">
+        <h2>Module 3 — Topology, N-Gons &amp; Prop Modeling</h2>
+
+        <h3>Goals</h3>
+        <ul>
+          <li>Understand N-gons</li>
+          <li>Model a sword from reference</li>
+          <li>Create your own reference</li>
+          <li>Model a ring and print multiple sizes</li>
+        </ul>
+
+        <h3>About N-Gons</h3>
+        <p>A quad has four sides and is preferred for deformation and clean subdivision. N-gons (5+ sides) can cause pinching and shading artifacts—convert to quads where possible.</p>
+
+        <h3>Knife Tool</h3>
+        <p>Use the Knife tool (<span class="kbd">K</span>) to cut edges manually and resolve N-gons into quads.</p>
+
+        <h3>Projects</h3>
+        <ul>
+          <li><strong>Create a Sword:</strong> block out, add bevels and details.</li>
+          <li><strong>Model a Diamond Ring:</strong> size appropriately; print test rings.</li>
+        </ul>
+      </section>
+
+      <section id="module-4">
+        <h2>Module 4 — ZBrushCoreMini Tablet Sculpting</h2>
+
+        <h3>Goals</h3>
+        <ul>
+          <li>Learn sculpting brushes</li>
+          <li>Export your sculpt</li>
+          <li>Create a final model (use the Inspiration Generator if needed)</li>
+        </ul>
+
+        <h3>ZBrushCoreMini Interface</h3>
+        <ul>
+          <li><strong>Open Project:</strong> folder icon (down)</li>
+          <li><strong>Save Project:</strong> folder icon (up)</li>
+          <li><strong>Brush Menu:</strong> common brushes (e.g., Standard, ClayBuildup, Inflate, Pinch, Move, SnakeHook, Slash3, hPolish)</li>
+          <li><strong>Create New Mesh:</strong> start over with a sphere or textured cube</li>
+          <li><strong>Symmetry Switch</strong></li>
+          <li><strong>Draw Size</strong> &amp; <strong>Z-Intensity</strong></li>
+          <li><strong>Poly Size:</strong> Low/Med/High</li>
+          <li><strong>Printer Export:</strong> export as .OBJ</li>
+        </ul>
+
+        <h3>Navigation (Tablet)</h3>
+        <ul>
+          <li><strong>Pan:</strong> <span class="kbd">Alt</span> + drag (outside the mesh)</li>
+          <li><strong>Rotate:</strong> drag (outside the mesh)</li>
+          <li><strong>Zoom:</strong> <span class="kbd">Ctrl</span> + drag (outside the mesh)</li>
+        </ul>
+
+        <h3>Mini Exercise</h3>
+        <ul>
+          <li>Use <strong>Standard</strong> to sculpt a smiley face on the front; hold <span class="kbd">Alt</span> to carve instead of raise.</li>
+          <li>Rotate and sculpt a sad face on the back.</li>
+        </ul>
+
+        <h3>Brush Notes</h3>
+        <ul>
+          <li><strong>Standard:</strong> soft, round add; <span class="kbd">Alt</span> to carve.</li>
+          <li><strong>ClayBuildup:</strong> rough, square-edged buildup.</li>
+          <li><strong>Inflate:</strong> bulge or deflate with <span class="kbd">Alt</span>.</li>
+          <li><strong>Pinch:</strong> sharp crease; <span class="kbd">Alt</span> tight groove.</li>
+          <li><strong>Move:</strong> block out broad shapes.</li>
+          <li><strong>SnakeHook:</strong> pull long extensions (use cautiously for printing).</li>
+          <li><strong>Slash3:</strong> stylized indent.</li>
+          <li><strong>hPolish:</strong> flatten areas (useful for creating flat bases).</li>
+          <li><strong>Smooth:</strong> hold <span class="kbd">Shift</span> to smooth.</li>
+        </ul>
+
+        <h3>Export &amp; Blender Round-Trip</h3>
+        <ol>
+          <li>Click the printer icon in ZBrushCoreMini to export .OBJ.</li>
+          <li>Open Blender &rarr; <em>File &gt; Import &gt; Wavefront (.obj)</em>.</li>
+          <li>Optionally add a <em>Torus</em> loop for pendants; reposition and export .OBJ again.</li>
+        </ol>
+      </section>
+
+      <section id="module-5">
+        <h2>Module 5 — Finishing &amp; Maintenance</h2>
+
+        <h3>Plan</h3>
+        <ul>
+          <li>Sand and paint student models.</li>
+          <li>Clean printers using cleaning filament.</li>
+          <li>Ensure students back up all projects (USB drive).</li>
+        </ul>
+
+        <h3>Sanding Tips</h3>
+        <p>Sanding smooths layer lines and preps surfaces for paint. Work in a ventilated area and consider a dust mask/respirator.</p>
+
+        <h3>Painting Tips</h3>
+        <p>After sanding, prime if needed, then paint. Thin coats usually yield smoother finishes.</p>
+      </section>
+
+      <section id="resources">
+        <h2>Further Reading &amp; Official Docs</h2>
+        <ul>
+          <li><a href="https://docs.blender.org/manual/en/latest/editors/3dview/navigate/navigation.html" target="_blank" rel="noopener">Blender: Viewport Navigation</a></li>
+          <li><a href="https://docs.blender.org/manual/en/latest/modeling/meshes/tools/loop.html" target="_blank" rel="noopener">Blender: Loop Cut</a></li>
+          <li><a href="https://docs.blender.org/manual/en/latest/modeling/meshes/editing/face/extrude_faces.html" target="_blank" rel="noopener">Blender: Extrude Faces</a></li>
+          <li><a href="https://docs.blender.org/manual/en/latest/modeling/meshes/editing/face/index.html" target="_blank" rel="noopener">Blender: Face Operators (Inset)</a></li>
+          <li><a href="https://docs.blender.org/manual/en/latest/editors/3dview/display/shading.html" target="_blank" rel="noopener">Blender: Viewport Shading Modes</a></li>
+          <li><a href="https://docs.blender.org/manual/en/4.0/files/import_export/obj.html" target="_blank" rel="noopener">Blender: Wavefront OBJ I/O</a></li>
+          <li><a href="https://help.maxon.net/zbr/en-us/Content/html/zbrushcore/zbrushcoremini/zbrushcoremini.html" target="_blank" rel="noopener">ZBrushCoreMini: Brushes Overview</a></li>
+        </ul>
+      </section>
+
+      <div id="footer-placeholder"></div>
+      <script src="assets/js/load-footer.js" defer></script>
+    </main>
+  </body>
+</html>
