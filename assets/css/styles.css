@@ -287,7 +287,7 @@ footer p {
   height: auto;
   border-radius: var(--border-radius);
   margin-bottom: 1.9rem;
-  box-shadow: 2px 3px 3px #000b;
+  box-shadow: 2px 3px 5px #000;
   display: block;
 }
 
