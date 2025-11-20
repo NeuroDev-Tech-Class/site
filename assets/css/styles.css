@@ -299,7 +299,7 @@ footer p {
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   font-size: 1.55rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .theme-toggle-container {
