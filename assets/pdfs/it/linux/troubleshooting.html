@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+
+  <main id="main-content">
+    <a href="courses/linux.html" class="back-link">&larr; Back to Introduction to Linux</a>
+
+    <div class="doc-header">
+      <span class="course-tag">Introduction to Linux</span>
+      <h1>Basic Troubleshooting Techniques</h1>
+      <p class="subtitle">How to diagnose and fix common Linux problems</p>
+    </div>
+
+    <h2>The Troubleshooting Mindset</h2>
+    <p>Things will break. That's not a failure — it's a learning opportunity. The best Linux users aren't the ones who never have problems; they're the ones who know how to <strong>figure out what went wrong</strong> and fix it.</p>
+    <p>Here's a simple framework you can use every time something goes wrong:</p>
+    <ol>
+      <li><strong>Read the error message</strong> — Seriously, read the whole thing. It usually tells you what's wrong.</li>
+      <li><strong>Reproduce the problem</strong> — Can you make it happen again? What exact steps trigger it?</li>
+      <li><strong>Research</strong> — Copy/paste the error message into a search engine. Someone has probably seen it before.</li>
+      <li><strong>Isolate</strong> — Change one thing at a time to narrow down the cause.</li>
+      <li><strong>Fix and verify</strong> — Apply a fix, then confirm the problem is actually gone.</li>
+    </ol>
+
+    <h2>Common Problem: "Command Not Found"</h2>
+    <pre><code>$ htop
+Command 'htop' not found, but can be installed with:
+sudo apt install htop</code></pre>
+    <p><strong>What this means:</strong> The program isn't installed on your system.</p>
+    <p><strong>How to fix it:</strong></p>
+    <pre><code># Install the missing program
+sudo apt install htop
+
+# If you're not sure of the package name, search for it
+apt search htop</code></pre>
+
+    <h2>Common Problem: "Permission Denied"</h2>
+    <pre><code>$ ./script.sh
+bash: ./script.sh: Permission denied</code></pre>
+    <p><strong>What this means:</strong> You don't have permission to execute this file.</p>
+    <p><strong>How to fix it:</strong></p>
+    <pre><code># Check current permissions
+ls -l script.sh
+
+# Add execute permission
+chmod +x script.sh
+
+# If it's a system file, you might need sudo
+sudo chmod +x script.sh</code></pre>
+
+    <h2>Common Problem: "No Space Left on Device"</h2>
+    <pre><code>$ cp bigfile.zip /home/alice/
+cp: error writing '/home/alice/bigfile.zip': No space left on device</code></pre>
+    <p><strong>What this means:</strong> Your disk is full.</p>
+    <p><strong>How to fix it:</strong></p>
+    <pre><code># Check disk usage
+df -h
+
+# Find large files and directories
+du -sh /* 2>/dev/null | sort -rh | head -10
+
+# Clean up package manager cache
+sudo apt clean
+
+# Remove old packages no longer needed
+sudo apt autoremove</code></pre>
+
+    <h2>Common Problem: "Unable to Locate Package"</h2>
+    <pre><code>$ sudo apt install coolprogram
+E: Unable to locate package coolprogram</code></pre>
+    <p><strong>What this means:</strong> The package doesn't exist in your current repositories, or your package list is outdated.</p>
+    <p><strong>How to fix it:</strong></p>
+    <pre><code># Update your package list first
+sudo apt update
+
+# Try again
+sudo apt install coolprogram
+
+# If still not found, check the spelling or search
+apt search cool</code></pre>
+
+    <h2>Common Problem: A Program is Frozen</h2>
+    <p><strong>What this means:</strong> A process has stopped responding.</p>
+    <p><strong>How to fix it:</strong></p>
+    <pre><code># If your terminal is stuck, try Ctrl+C to cancel the current command
+# Press Ctrl+C
+
+# If a background program is frozen, find it and kill it
+ps aux | grep frozen-program
+kill [PID]
+
+# If it won't die, force kill it
+kill -9 [PID]
+
+# Or use htop to find and kill it interactively
+htop</code></pre>
+
+    <h2>Common Problem: "Could Not Get Lock"</h2>
+    <pre><code>E: Could not get lock /var/lib/dpkg/lock-frontend
+E: Unable to acquire the dpkg frontend lock</code></pre>
+    <p><strong>What this means:</strong> Another program is currently using the package manager (like an automatic update running in the background).</p>
+    <p><strong>How to fix it:</strong></p>
+    <pre><code># Wait a minute and try again — it's probably an auto-update
+
+# Check if another apt process is running
+ps aux | grep apt
+
+# If it's stuck, you can (carefully!) remove the lock
+sudo rm /var/lib/dpkg/lock-frontend
+sudo rm /var/lib/apt/lists/lock
+sudo dpkg --configure -a</code></pre>
+
+    <div class="warning">
+      <strong>Only remove lock files as a last resort!</strong> Usually, you just need to wait for the other process to finish. Removing locks while another process is actively using them can cause problems.
+    </div>
+
+    <h2>Useful Diagnostic Commands</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>What It Checks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>dmesg | tail</code></td><td>Recent kernel messages (hardware errors, driver issues)</td></tr>
+        <tr><td><code>journalctl -xe</code></td><td>Recent system log entries with explanations</td></tr>
+        <tr><td><code>systemctl status [service]</code></td><td>Check if a system service is running</td></tr>
+        <tr><td><code>ping google.com</code></td><td>Test internet connectivity</td></tr>
+        <tr><td><code>ip addr</code></td><td>Show network interface info (IP addresses)</td></tr>
+        <tr><td><code>lsblk</code></td><td>List storage devices and partitions</td></tr>
+        <tr><td><code>lsusb</code></td><td>List USB devices</td></tr>
+        <tr><td><code>uname -a</code></td><td>Show system/kernel information</td></tr>
+        <tr><td><code>cat /etc/os-release</code></td><td>Show Linux distribution info</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Reading Log Files</h2>
+    <p>Linux keeps detailed logs of system events. These are your best friend when troubleshooting:</p>
+    <pre><code># View the system log (recent entries)
+journalctl -xe
+
+# View only error messages
+journalctl -p err
+
+# Follow the log in real-time (like a live feed)
+journalctl -f
+
+# Check the traditional syslog
+cat /var/log/syslog | tail -50
+
+# Check authentication/login logs
+cat /var/log/auth.log | tail -20</code></pre>
+
+    <h2>The Power of Search Engines</h2>
+    <p>When you encounter an error you don't recognize:</p>
+    <ol>
+      <li><strong>Copy the exact error message</strong> (excluding file paths specific to your system)</li>
+      <li><strong>Add "Ubuntu" or "Linux"</strong> to your search query</li>
+      <li><strong>Check these resources:</strong>
+        <ul>
+          <li><strong>Ask Ubuntu</strong> (askubuntu.com) — Q&amp;A site specifically for Ubuntu</li>
+          <li><strong>Stack Overflow</strong> — Programming and sysadmin Q&amp;A</li>
+          <li><strong>Arch Wiki</strong> (wiki.archlinux.org) — Incredibly detailed Linux documentation (works for Ubuntu too)</li>
+          <li><strong>Man pages</strong> — Type <code>man [command]</code> for built-in documentation</li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="tip">
+      <strong>Don't forget <code>man</code> pages!</strong> Almost every command has built-in documentation. Try <code>man ls</code>, <code>man chmod</code>, or <code>man apt</code>. Press <kbd>q</kbd> to quit. You can also use <code>[command] --help</code> for a shorter summary.
+    </div>
+
+    <h2>Troubleshooting Checklist</h2>
+    <p>When something goes wrong, run through this checklist:</p>
+    <div class="card">
+      <ol>
+        <li>Did you read the entire error message?</li>
+        <li>Did you check your spelling? (Linux is case-sensitive!)</li>
+        <li>Are you in the right directory? (<code>pwd</code>)</li>
+        <li>Do you have the right permissions? (<code>ls -l</code>)</li>
+        <li>Do you need <code>sudo</code>?</li>
+        <li>Is the program installed? (<code>which [program]</code>)</li>
+        <li>Is your package list up to date? (<code>sudo apt update</code>)</li>
+        <li>Is there enough disk space? (<code>df -h</code>)</li>
+        <li>Is the service running? (<code>systemctl status [service]</code>)</li>
+        <li>What do the logs say? (<code>journalctl -xe</code>)</li>
+      </ol>
+    </div>
+
+    <div class="activity">
+      <h3>Try It Yourself</h3>
+      <ol>
+        <li>Run <code>uname -a</code> and <code>cat /etc/os-release</code> to check your system info.</li>
+        <li>Try running a program that doesn't exist: <code>fakecommand123</code>. Read the error message carefully.</li>
+        <li>Check your disk space with <code>df -h</code>.</li>
+        <li>Read the man page for a command you've used: <code>man ls</code>. Use <kbd>q</kbd> to quit.</li>
+        <li>Check recent system logs with <code>journalctl -xe</code> (use arrow keys to scroll, <kbd>q</kbd> to quit).</li>
+        <li>Test your internet connection with <code>ping -c 4 google.com</code> (sends 4 pings then stops).</li>
+      </ol>
+    </div>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class — Introduction to Linux</p>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="assets/js/load-footer.js" defer></script>
+</body>
+</html>

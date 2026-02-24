@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/linux.html" class="back-link">&larr; Back to Introduction to Linux</a>
+    <div class="doc-header">
+      <span class="course-tag">Introduction to Linux</span>
+      <h1>Bash Command Tutorial 3</h1>
+      <p class="subtitle">wget, head, tail, less, grep, cp, |, &gt;, &gt;&gt;</p>
+    </div>
+
+    <p>We're really cooking now. Let's practice some more advanced file commands.</p>
+
+    <p>But first, we need something to work with.</p>
+
+    <p>Make a new folder with <code>mkdir</code> and move into it with <code>cd</code>. Call it whatever you want, I'll just call mine "practice".</p>
+
+    <div class="tip">
+      <p>One thing to remember moving forward: Linux is case-sensitive, so "practice" and "Practice" would be considered different folders. This is not the case on Windows, so it may take some getting used to.</p>
+    </div>
+
+    <p>We're going to download a real text file using the <code>wget</code> command. This grabs a file from the internet and saves it to your current directory. Run this:</p>
+
+    <pre><code>wget https://www.gutenberg.org/cache/epub/1661/pg1661.txt</code></pre>
+
+    <p>This file contains the full text of <em>The Adventures of Sherlock Holmes</em>. Once it finishes downloading, run <code>ls</code> and you should see <code>pg1661.txt</code>.</p>
+
+    <p>We grabbed this longer file so we can practice some new commands. For example, <code>head</code> shows the first 10 lines of a text file:</p>
+
+    <pre><code>head pg1661.txt</code></pre>
+
+    <p>And <code>tail</code> shows the last 10 lines:</p>
+
+    <pre><code>tail pg1661.txt</code></pre>
+
+    <p>The file is so long that <code>cat</code> won't show us the entire thing; it will flood the terminal. But we can scroll through the file one line at a time with <code>less</code>.</p>
+
+    <pre><code>less pg1661.txt</code></pre>
+
+    <p>Use the arrow keys to move up and down. Press <kbd>q</kbd> to quit when you're done.</p>
+
+    <p>Now let's search the file using <code>grep</code>. For example, if you want to find every line that mentions Watson:</p>
+
+    <pre><code>grep Watson pg1661.txt</code></pre>
+
+    <p>That's a lot of Watsons. If we use the <code>-c</code> flag we can count exactly how many Watsons there are.</p>
+
+    <pre><code>grep -c Watson pg1661.txt</code></pre>
+
+    <p>Looks like there are 81. Pretty cool!</p>
+
+    <p>Let's make a backup of the file by copying it with <code>cp</code>.</p>
+
+    <pre><code>cp pg1661.txt sherlock.txt</code></pre>
+
+    <p>This makes a copy of <code>pg1661.txt</code> called <code>sherlock.txt</code>. Run <code>ls</code> to check that it worked (this should be a habit by now).</p>
+
+    <h2>Now onto the really cool stuff.</h2>
+
+    <p>This vertical bar <code>|</code> is called the "pipe" symbol. (It looks like a capital "i" or lowercase "L" but it's actually the symbol above the Enter key.) It takes the output of one command and sends it as input to another command.</p>
+
+    <p>Let's try it out. We'll use <code>grep</code> on <code>sherlock.txt</code> to find lines with "Holmes", then pipe that output into the <code>head</code> command.</p>
+
+    <pre><code>grep Holmes sherlock.txt | head</code></pre>
+
+    <p>This takes the output of <code>grep Holmes sherlock.txt</code> and feeds it to the <code>head</code> command.</p>
+
+    <p>Similarly, the greater-than symbol <code>&gt;</code> saves the output of a command to a file. A single <code>&gt;</code> will overwrite an existing file (or create a new one), and a double <code>&gt;&gt;</code> will append to the end of an existing file.</p>
+
+    <pre><code>grep Holmes sherlock.txt > holmes.txt</code></pre>
+
+    <p>This creates a new file <code>holmes.txt</code> that only contains the lines with the word "Holmes". Check it with <code>head holmes.txt</code> to see what that looks like.</p>
+
+    <pre><code>grep the sherlock.txt > holmes.txt</code></pre>
+
+    <p>This overwrites <code>holmes.txt</code>, so it now contains only lines with the word "the". Check it again and you'll see that it's been overwritten.</p>
+
+    <pre><code>echo "And they all lived happily ever after." >> holmes.txt</code></pre>
+
+    <p>This adds that line to the end of <code>holmes.txt</code>. Run <code>tail holmes.txt</code> to see if it worked.</p>
+
+    <p>Hopefully you can see the potential in these tools, they're very powerful! Chaining commands like this is one reason developers and IT people love the command line.</p>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class — Introduction to Linux</p>
+    </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="assets/js/load-footer.js" defer></script>
+</body>
+</html>

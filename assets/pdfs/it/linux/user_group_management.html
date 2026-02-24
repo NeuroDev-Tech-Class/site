@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+
+  <main id="main-content">
+    <a href="courses/linux.html" class="back-link">&larr; Back to Introduction to Linux</a>
+
+    <div class="doc-header">
+      <span class="course-tag">Introduction to Linux</span>
+      <h1>User and Group Management</h1>
+      <p class="subtitle">Creating users, managing groups, and switching accounts in Linux</p>
+    </div>
+
+    <h2>Why Users and Groups?</h2>
+    <p>Linux is designed for multiple people to use the same machine, each with their own files, settings, and permissions. The system uses <strong>users</strong> and <strong>groups</strong> to organize who can access what.</p>
+    <ul>
+      <li>A <strong>user</strong> is an account on the system — it could be a person or a service (like a web server).</li>
+      <li>A <strong>group</strong> is a collection of users who share certain access rights.</li>
+    </ul>
+
+    <h2>Important System Users</h2>
+    <p>Linux has some special built-in users:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>root</strong></td>
+          <td>The superuser/administrator. Has unrestricted access to everything. User ID (UID) is always <code>0</code>.</td>
+        </tr>
+        <tr>
+          <td><strong>Your username</strong></td>
+          <td>The account you created during setup. Can use <code>sudo</code> to perform admin tasks.</td>
+        </tr>
+        <tr>
+          <td><strong>nobody</strong></td>
+          <td>A restricted account used by some services to limit access.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip">
+      <strong>Who am I?</strong> Run the <code>whoami</code> command at any time to see which user you're currently logged in as. Run <code>id</code> to see your user ID, group ID, and all groups you belong to.
+    </div>
+
+    <h2>Viewing User Information</h2>
+    <pre><code># Who am I?
+$ whoami
+alice
+
+# Full user/group information
+$ id
+uid=1000(alice) gid=1000(alice) groups=1000(alice),27(sudo),1001(students)
+
+# List all users on the system (one per line in /etc/passwd)
+$ cat /etc/passwd
+
+# See just the usernames
+$ cut -d: -f1 /etc/passwd</code></pre>
+
+    <h3>Understanding <code>/etc/passwd</code></h3>
+    <p>The <code>/etc/passwd</code> file stores basic info about every user. Each line looks like:</p>
+    <pre><code>alice:x:1000:1000:Alice Smith:/home/alice:/bin/bash</code></pre>
+    <p>The fields are separated by colons:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Example</th>
+          <th>Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td><code>alice</code></td><td>Username</td></tr>
+        <tr><td>2</td><td><code>x</code></td><td>Password placeholder (actual password is in <code>/etc/shadow</code>)</td></tr>
+        <tr><td>3</td><td><code>1000</code></td><td>User ID (UID)</td></tr>
+        <tr><td>4</td><td><code>1000</code></td><td>Primary Group ID (GID)</td></tr>
+        <tr><td>5</td><td><code>Alice Smith</code></td><td>Full name / description</td></tr>
+        <tr><td>6</td><td><code>/home/alice</code></td><td>Home directory</td></tr>
+        <tr><td>7</td><td><code>/bin/bash</code></td><td>Default shell</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Creating a New User</h2>
+    <p>Use the <kbd>adduser</kbd> command (the friendlier option) or <kbd>useradd</kbd> (the lower-level command):</p>
+    <pre><code># The easy way (interactive, sets up home directory automatically)
+sudo adduser bob
+
+# It will prompt you for:
+# - Password
+# - Full name
+# - Other optional info</code></pre>
+
+    <p>What <code>adduser</code> does behind the scenes:</p>
+    <ol>
+      <li>Creates the user account</li>
+      <li>Creates a home directory at <code>/home/bob</code></li>
+      <li>Copies default config files (like <code>.bashrc</code>) into the home directory</li>
+      <li>Creates a group with the same name as the user</li>
+      <li>Sets the password</li>
+    </ol>
+
+    <h2>Deleting a User</h2>
+    <pre><code># Remove the user (keeps their home directory)
+sudo deluser bob
+
+# Remove the user AND their home directory
+sudo deluser --remove-home bob</code></pre>
+
+    <div class="warning">
+      <strong>Be careful with <code>--remove-home</code>!</strong> This permanently deletes all the user's files. Make sure you don't need them before running this command.
+    </div>
+
+    <h2>Managing Groups</h2>
+
+    <h3>Viewing Groups</h3>
+    <pre><code># See which groups you belong to
+$ groups
+alice sudo students
+
+# See groups for a specific user
+$ groups bob
+
+# List all groups on the system
+$ cat /etc/group</code></pre>
+
+    <h3>Creating a Group</h3>
+    <pre><code>sudo addgroup developers</code></pre>
+
+    <h3>Adding a User to a Group</h3>
+    <pre><code># Add bob to the "developers" group
+sudo usermod -aG developers bob</code></pre>
+
+    <div class="tip">
+      <strong>The <code>-aG</code> flags are important!</strong>
+      <ul>
+        <li><code>-a</code> means <strong>append</strong> — add to the group without removing from other groups</li>
+        <li><code>-G</code> specifies the <strong>group</strong> to add to</li>
+      </ul>
+      Without <code>-a</code>, the user would be removed from all their other groups! Always use <code>-aG</code> together.
+    </div>
+
+    <h3>Removing a User from a Group</h3>
+    <pre><code>sudo deluser bob developers</code></pre>
+
+    <h3>Deleting a Group</h3>
+    <pre><code>sudo delgroup developers</code></pre>
+
+    <h2>Switching Users</h2>
+    <p>You can switch to another user account with the <kbd>su</kbd> (<strong>s</strong>witch <strong>u</strong>ser) command:</p>
+    <pre><code># Switch to user "bob" (you'll need bob's password)
+su bob
+
+# Switch to user "bob" and load their environment
+su - bob
+
+# Switch to root (the superuser)
+sudo su
+
+# Go back to your original user
+exit</code></pre>
+
+    <div class="tip">
+      <strong>su vs. su -</strong><br>
+      <code>su bob</code> switches to bob but keeps your current environment (directory, variables).<br>
+      <code>su - bob</code> switches to bob <em>and</em> loads bob's environment — like a fresh login. The <code>-</code> version is usually what you want.
+    </div>
+
+    <h2>The <code>sudo</code> Group</h2>
+    <p>On Ubuntu, users in the <strong>sudo</strong> group can run commands as root using <code>sudo</code>. If you created the first user during Ubuntu installation, that user is automatically in the sudo group.</p>
+    <pre><code># Check if a user can use sudo
+groups alice
+# alice : alice sudo students  ← "sudo" appears in the list
+
+# Give another user sudo access
+sudo usermod -aG sudo bob</code></pre>
+
+    <h2>Setting and Changing Passwords</h2>
+    <pre><code># Change your own password
+passwd
+
+# Change another user's password (requires sudo)
+sudo passwd bob
+
+# Force a user to change their password on next login
+sudo passwd -e bob</code></pre>
+
+    <h2>Quick Reference</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>whoami</code></td><td>Show current username</td></tr>
+        <tr><td><code>id</code></td><td>Show user ID, group IDs, and all groups</td></tr>
+        <tr><td><code>groups</code></td><td>List groups for current user</td></tr>
+        <tr><td><code>sudo adduser [name]</code></td><td>Create a new user (interactive)</td></tr>
+        <tr><td><code>sudo deluser [name]</code></td><td>Delete a user</td></tr>
+        <tr><td><code>sudo addgroup [name]</code></td><td>Create a new group</td></tr>
+        <tr><td><code>sudo usermod -aG [group] [user]</code></td><td>Add user to a group</td></tr>
+        <tr><td><code>su - [user]</code></td><td>Switch to another user</td></tr>
+        <tr><td><code>passwd</code></td><td>Change your password</td></tr>
+        <tr><td><code>sudo passwd [user]</code></td><td>Change another user's password</td></tr>
+      </tbody>
+    </table>
+
+    <div class="activity">
+      <h3>Try It Yourself</h3>
+      <ol>
+        <li>Run <code>whoami</code> and <code>id</code> to see your current user info.</li>
+        <li>Run <code>groups</code> to see which groups you belong to.</li>
+        <li>Create a new user: <code>sudo adduser testuser</code></li>
+        <li>Switch to that user: <code>su - testuser</code></li>
+        <li>Run <code>whoami</code> to confirm you've switched, then type <code>exit</code> to return.</li>
+        <li>Create a group: <code>sudo addgroup myteam</code></li>
+        <li>Add the test user to the group: <code>sudo usermod -aG myteam testuser</code></li>
+        <li>Verify: <code>groups testuser</code></li>
+        <li>Clean up: <code>sudo deluser --remove-home testuser</code> and <code>sudo delgroup myteam</code></li>
+      </ol>
+    </div>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class — Introduction to Linux</p>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="assets/js/load-footer.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+
+  <main id="main-content">
+    <a href="courses/linux.html" class="back-link">&larr; Back to Introduction to Linux</a>
+
+    <div class="doc-header">
+      <span class="course-tag">Introduction to Linux</span>
+      <h1>File Permissions and Ownership</h1>
+      <p class="subtitle">Controlling who can read, write, and execute files in Linux</p>
+    </div>
+
+    <h2>Why Permissions Matter</h2>
+    <p>Linux is a <strong>multi-user operating system</strong>. That means multiple people (or programs) can be logged into the same machine at the same time. File permissions are the system that decides <em>who</em> can do <em>what</em> with each file and directory. Without them, any user could read, modify, or delete anyone else's files — that would be chaos!</p>
+
+    <h2>Viewing Permissions</h2>
+    <p>You can see file permissions by running <kbd>ls -l</kbd> (the "long listing" option):</p>
+    <pre><code>$ ls -l
+-rw-r--r-- 1 alice students  4096 Mar 15 10:30 report.txt
+drwxr-xr-x 2 alice students  4096 Mar 15 10:31 Projects
+-rwxr-x--- 1 alice students   512 Mar 15 10:32 script.sh</code></pre>
+
+    <p>Let's break down the first line:</p>
+    <pre><code>-rw-r--r-- 1 alice students 4096 Mar 15 10:30 report.txt
+│├──┤├──┤├──┤   │      │
+│  │   │   │    │      └── Group owner
+│  │   │   │    └── User owner
+│  │   │   └── Others permissions (r--)
+│  │   └── Group permissions (r--)
+│  └── User permissions (rw-)
+└── File type (- = regular file, d = directory)</code></pre>
+
+    <h2>The Three Permission Types</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Permission</th>
+          <th>Symbol</th>
+          <th>For Files</th>
+          <th>For Directories</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Read</strong></td>
+          <td><code>r</code></td>
+          <td>View the file's contents</td>
+          <td>List the directory's contents (<code>ls</code>)</td>
+        </tr>
+        <tr>
+          <td><strong>Write</strong></td>
+          <td><code>w</code></td>
+          <td>Modify or overwrite the file</td>
+          <td>Add or delete files in the directory</td>
+        </tr>
+        <tr>
+          <td><strong>Execute</strong></td>
+          <td><code>x</code></td>
+          <td>Run the file as a program/script</td>
+          <td>Enter the directory with <code>cd</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>A dash (<code>-</code>) in place of a letter means that permission is <strong>not granted</strong>.</p>
+
+    <h2>The Three User Categories</h2>
+    <p>Permissions are applied to three categories of users:</p>
+    <ol>
+      <li><strong>User (u)</strong> — The owner of the file. Usually the person who created it.</li>
+      <li><strong>Group (g)</strong> — A set of users who share certain access rights. Every file belongs to one group.</li>
+      <li><strong>Others (o)</strong> — Everyone else on the system who isn't the owner and isn't in the group.</li>
+    </ol>
+
+    <h3>Reading the Permission String</h3>
+    <p>The 9-character permission string is divided into three sets of three:</p>
+    <pre><code>rw-  r--  r--
+│    │    │
+│    │    └── Others: read only
+│    └── Group: read only
+└── User: read and write</code></pre>
+
+    <h2>Changing Permissions with <code>chmod</code></h2>
+    <p>The <kbd>chmod</kbd> (<strong>ch</strong>ange <strong>mod</strong>e) command lets you change file permissions. There are two ways to use it: <strong>symbolic mode</strong> and <strong>numeric mode</strong>.</p>
+
+    <h3>Symbolic Mode</h3>
+    <p>In symbolic mode, you specify <em>who</em>, <em>what action</em>, and <em>which permission</em>:</p>
+    <pre><code># Give the user (owner) execute permission
+chmod u+x script.sh
+
+# Remove write permission from group and others
+chmod go-w report.txt
+
+# Give everyone read permission
+chmod a+r readme.txt
+
+# Set exact permissions: user=rwx, group=rx, others=nothing
+chmod u=rwx,g=rx,o= script.sh</code></pre>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>u</code></td><td>User (owner)</td></tr>
+        <tr><td><code>g</code></td><td>Group</td></tr>
+        <tr><td><code>o</code></td><td>Others</td></tr>
+        <tr><td><code>a</code></td><td>All (user + group + others)</td></tr>
+        <tr><td><code>+</code></td><td>Add permission</td></tr>
+        <tr><td><code>-</code></td><td>Remove permission</td></tr>
+        <tr><td><code>=</code></td><td>Set exact permission</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Numeric (Octal) Mode</h3>
+    <p>In numeric mode, each permission has a number value:</p>
+    <ul>
+      <li><strong>Read (r)</strong> = 4</li>
+      <li><strong>Write (w)</strong> = 2</li>
+      <li><strong>Execute (x)</strong> = 1</li>
+      <li><strong>No permission</strong> = 0</li>
+    </ul>
+    <p>You add the values together for each user category to create a three-digit code:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Permissions</th>
+          <th>Calculation</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>rwx</code></td><td>4 + 2 + 1</td><td><strong>7</strong></td></tr>
+        <tr><td><code>rw-</code></td><td>4 + 2 + 0</td><td><strong>6</strong></td></tr>
+        <tr><td><code>r-x</code></td><td>4 + 0 + 1</td><td><strong>5</strong></td></tr>
+        <tr><td><code>r--</code></td><td>4 + 0 + 0</td><td><strong>4</strong></td></tr>
+        <tr><td><code>---</code></td><td>0 + 0 + 0</td><td><strong>0</strong></td></tr>
+      </tbody>
+    </table>
+
+    <pre><code># rwx for user, r-x for group, r-- for others
+chmod 754 script.sh
+
+# rw- for user, r-- for group and others
+chmod 644 report.txt
+
+# rwx for user, nothing for group and others
+chmod 700 private_script.sh</code></pre>
+
+    <div class="tip">
+      <strong>Common Permission Sets:</strong>
+      <ul>
+        <li><code>755</code> — Standard for executable scripts and directories (owner can do everything, others can read and execute)</li>
+        <li><code>644</code> — Standard for regular files (owner can read/write, others can only read)</li>
+        <li><code>700</code> — Private (only the owner can access)</li>
+      </ul>
+    </div>
+
+    <h2>File Ownership</h2>
+    <p>Every file has two owners:</p>
+    <ul>
+      <li><strong>User owner</strong> — Usually the person who created the file</li>
+      <li><strong>Group owner</strong> — The group associated with the file</li>
+    </ul>
+
+    <h3>Changing Ownership with <code>chown</code></h3>
+    <p>The <kbd>chown</kbd> (<strong>ch</strong>ange <strong>own</strong>er) command changes who owns a file. You typically need <code>sudo</code> to use it:</p>
+    <pre><code># Change the user owner to bob
+sudo chown bob report.txt
+
+# Change both user and group owner
+sudo chown bob:teachers report.txt
+
+# Change only the group owner
+sudo chown :teachers report.txt
+
+# Change ownership of a directory and everything inside it (-R = recursive)
+sudo chown -R bob:teachers Projects/</code></pre>
+
+    <h3>Changing Group with <code>chgrp</code></h3>
+    <p>The <kbd>chgrp</kbd> command changes just the group owner:</p>
+    <pre><code>sudo chgrp teachers report.txt</code></pre>
+
+    <h2>The Superuser: <code>sudo</code></h2>
+    <p>Some actions require <strong>root</strong> (administrator) privileges. The <kbd>sudo</kbd> command lets authorized users run commands as root:</p>
+    <pre><code># Install software (requires root)
+sudo apt install htop
+
+# Edit a system configuration file
+sudo nano /etc/hostname</code></pre>
+
+    <div class="warning">
+      <strong>Be careful with sudo!</strong> Running commands as root bypasses all permission checks. A typo in a <code>sudo rm</code> command could delete critical system files. Always double-check your commands before pressing Enter.
+    </div>
+
+    <h2>Real-World Example</h2>
+    <p>Let's say you write a bash script and want to make it runnable:</p>
+    <pre><code># Create a simple script
+echo '#!/bin/bash' > greet.sh
+echo 'echo "Hello, $(whoami)!"' >> greet.sh
+
+# Check its permissions
+ls -l greet.sh
+# -rw-r--r-- 1 alice students 45 Mar 15 greet.sh
+
+# Try to run it — Permission denied!
+./greet.sh
+# bash: ./greet.sh: Permission denied
+
+# Add execute permission
+chmod u+x greet.sh
+
+# Check permissions again
+ls -l greet.sh
+# -rwxr--r-- 1 alice students 45 Mar 15 greet.sh
+
+# Now it works!
+./greet.sh
+# Hello, alice!</code></pre>
+
+    <div class="activity">
+      <h3>Try It Yourself</h3>
+      <ol>
+        <li>Create a file with <code>touch secret.txt</code> and check its default permissions with <code>ls -l</code>.</li>
+        <li>Remove all permissions for group and others: <code>chmod go-rwx secret.txt</code></li>
+        <li>Verify with <code>ls -l</code> — it should show <code>-rw-------</code>.</li>
+        <li>Create a script file: <code>echo '#!/bin/bash' > test.sh && echo 'echo "It works!"' >> test.sh</code></li>
+        <li>Try running it with <code>./test.sh</code> — it should fail.</li>
+        <li>Add execute permission: <code>chmod +x test.sh</code></li>
+        <li>Run it again — it should work now!</li>
+      </ol>
+    </div>
+
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>Permissions control <strong>who</strong> (user, group, others) can do <strong>what</strong> (read, write, execute).</li>
+      <li>Use <code>ls -l</code> to view permissions and <code>chmod</code> to change them.</li>
+      <li>Numeric mode (like <code>755</code>) is fast; symbolic mode (like <code>u+x</code>) is more readable.</li>
+      <li>Use <code>chown</code> to change file ownership and <code>chgrp</code> to change the group.</li>
+      <li>Use <code>sudo</code> carefully — it gives you full root power.</li>
+    </ul>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class — Introduction to Linux</p>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="assets/js/load-footer.js" defer></script>
+</body>
+</html>

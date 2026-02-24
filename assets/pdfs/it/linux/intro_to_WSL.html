@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/linux.html" class="back-link">&larr; Back to Introduction to Linux</a>
+    <div class="doc-header">
+      <span class="course-tag">Introduction to Linux</span>
+      <h1>Intro to WSL</h1>
+    </div>
+
+    <p>When you launch Ubuntu (WSL) from the Start Menu in Windows, a black window pops up. You should see your username and a blinking cursor. But what exactly are we looking at? Let's break it down and define some key terms before we move forward. Be sure to come back and check this doc if you're ever confused about wording.</p>
+
+    <h2>Terminal</h2>
+
+    <p>The terminal is the black window you type commands into. Think of it as a chat window between you and your computer. It's a simple command-line interface (CLI) that lets you interact with something called a shell. But what's a shell?</p>
+
+    <h2>Shell</h2>
+
+    <p>The shell is the program that reads the commands you type into the terminal. You write a command, hit Enter, and the shell interprets it and translates your words into instructions the system can understand. There are many types of shells. You might have heard of PowerShell on Windows. The most popular Linux shell is probably Bash. But what's Bash?</p>
+
+    <h2>Bash</h2>
+
+    <p>Bash is a type of shell, one that understands Linux commands like <code>ls</code>, <code>cd</code>, and <code>mkdir</code>. It's the default shell that comes bundled with most Linux distributions, including Ubuntu. When you type a command, Bash processes it and passes the request to the Linux kernel. But what's the kernel?</p>
+
+    <h2>Kernel</h2>
+
+    <p>The kernel (Linux) is the core of the operating system (Ubuntu). You don't talk to the kernel directly. You talk to the shell (Bash), the shell talks to the kernel, the kernel talks to your hardware (memory, CPU, keyboard, hard drive, etc.)</p>
+
+    <p>Remember, Linux is just a kernel, not a full OS. When someone says they use "Linux," they mean they're using one of many Linux distributions, or distros. A distro is a complete OS that bundles the Linux kernel with all the other tools, programs, and user interfaces you actually interact with. The Linux distro we're using is called Ubuntu. But what's Ubuntu?</p>
+
+    <h2>Ubuntu</h2>
+
+    <p>Ubuntu is one of many Linux distros, and the one we're using for this course. It includes the Linux kernel plus all the extra stuff that makes it a usable OS. When you installed WSL, Ubuntu is the distro that came with it by default. But what's WSL?</p>
+
+    <h2>WSL</h2>
+
+    <p>Windows Subsystem for Linux (WSL) is the program you installed earlier and it's what we'll be using for Unit 1. When you run WSL you're running Ubuntu inside of Windows. It lets you use a real Linux environment without needing to dual-boot.</p>
+
+    <p>This is a super simplified diagram of what's going on when you use WSL. Under the hood, WSL runs a real Linux kernel inside of a lightweight virtual machine. You're using Ubuntu's userspace (which includes Bash, apt, and other tools) while the kernel operates separately in the background. This gives you full Linux compatibility without leaving Windows.</p>
+
+    <p>Later on we'll actually set up Linux within a virtual machine, but for now WSL is a great place to practice simple commands.</p>
+
+    <h2>WSL Tips</h2>
+
+    <p>Before we move on, here are a few rules of thumb to keep you out of trouble:</p>
+
+    <ul>
+      <li><strong>Line endings:</strong> Windows and Linux use different newline characters (CRLF in Windows, LF in Linux). If you edit a file in Notepad (Windows) and run it in Linux, you might get strange errors. Stick to Linux editors like nano, or use a cross-platform editor (like VS Code with WSL integration).</li>
+      <li><strong>Don't edit Linux files from Windows:</strong> Similarly, avoid opening <code>/home/…</code> files in Windows tools (Notepad, Word, Explorer). This can corrupt them.</li>
+      <li><strong>Work in your home folder (~):</strong> For now, keep your projects inside <code>~</code>. Treat <code>/mnt/c</code> (Windows) as off-limits until you know what you're doing.</li>
+    </ul>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class — Introduction to Linux</p>
+    </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="assets/js/load-footer.js" defer></script>
+</body>
+</html>
