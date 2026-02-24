@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/blender-zbrush-mini.html" class="back-link">&larr; Back to 3D Art &mdash; Blender &amp; ZBrush</a>
+    <div class="doc-header">
+    <span class="course-tag">Blender &amp; ZBrush Mini</span>
+    <h1>Exporting Models</h1>
+    <p class="subtitle">Getting your 3D models out of Blender and into the real world</p>
+  </div>
+
+  <h2>Why Export?</h2>
+  <p>
+    Blender's native file format is <strong>.blend</strong>, but most other software — game engines, 3D printers, web viewers, other 3D apps — can't read .blend files directly. To use your models elsewhere, you need to <strong>export</strong> them into a standard format that other programs understand.
+  </p>
+
+  <h2>How to Export</h2>
+  <ol>
+    <li><strong>Select the object(s)</strong> you want to export in Object Mode. If you want to export everything, press <kbd>A</kbd> to select all.</li>
+    <li>Go to <strong>File &gt; Export</strong> in the top menu bar</li>
+    <li>Choose the format you want from the list</li>
+    <li>In the export dialog, set your desired options (see below)</li>
+    <li>Choose a file name and location, then click <strong>Export</strong></li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> In the export settings panel (usually on the right side of the file browser), check the <strong>"Selected Only"</strong> checkbox if you only want to export the objects you've selected — not everything in the scene. This is important when your scene contains cameras, lights, and other objects you don't want in the exported file.
+  </div>
+
+  <h2>Common Export Formats</h2>
+
+  <h3>Wavefront OBJ (.obj)</h3>
+  <p>
+    One of the oldest and most widely supported 3D formats. Nearly every 3D program can import OBJ files. It's a great universal choice when you're not sure what format to use.
+  </p>
+  <ul>
+    <li><strong>Best for:</strong> Sharing between different 3D software, 3D printing</li>
+    <li><strong>Supports:</strong> Geometry, basic materials (via .mtl file)</li>
+    <li><strong>Limitations:</strong> No animation, no advanced materials</li>
+  </ul>
+
+  <h3>FBX (.fbx)</h3>
+  <p>
+    A popular format for game engines like <strong>Unity</strong> and <strong>Unreal Engine</strong>. FBX supports more data than OBJ, including animations and armatures (skeletal rigs).
+  </p>
+  <ul>
+    <li><strong>Best for:</strong> Game engines, animation pipelines</li>
+    <li><strong>Supports:</strong> Geometry, materials, animations, armatures</li>
+    <li><strong>Limitations:</strong> Proprietary format (owned by Autodesk)</li>
+  </ul>
+
+  <h3>STL (.stl)</h3>
+  <p>
+    The standard format for <strong>3D printing</strong>. STL files contain only geometry — no colors, no materials, no textures. If you're planning to 3D print your model, this is the format your slicer software (like Cura or PrusaSlicer) expects.
+  </p>
+  <ul>
+    <li><strong>Best for:</strong> 3D printing</li>
+    <li><strong>Supports:</strong> Geometry only</li>
+    <li><strong>Limitations:</strong> No color, no materials, no animation</li>
+  </ul>
+
+  <h3>glTF / GLB (.gltf / .glb)</h3>
+  <p>
+    A modern, open format designed for the web and real-time applications. glTF is often called the "JPEG of 3D" because of its efficiency and wide support. GLB is the binary (single-file) version of glTF.
+  </p>
+  <ul>
+    <li><strong>Best for:</strong> Web viewers, modern game engines, AR/VR</li>
+    <li><strong>Supports:</strong> Geometry, materials (PBR), animations, textures</li>
+    <li><strong>Limitations:</strong> Newer format — some older software may not support it</li>
+  </ul>
+
+  <h2>Export Settings to Check</h2>
+  <p>When exporting, pay attention to these common settings in the options panel:</p>
+  <ul>
+    <li><strong>Selected Only</strong> — Export only selected objects (recommended)</li>
+    <li><strong>Apply Modifiers</strong> — Bake modifiers into the exported mesh (usually yes)</li>
+    <li><strong>Include Materials</strong> — Whether to export material data (depends on your target)</li>
+    <li><strong>Scale</strong> — Some programs expect different unit scales; you may need to adjust this</li>
+    <li><strong>Forward / Up Axis</strong> — Different software uses different axis conventions. Blender uses Z-up by default, while some game engines use Y-up.</li>
+  </ul>
+
+  <h2>Naming Conventions</h2>
+  <p>Good file naming habits will save you headaches:</p>
+  <ul>
+    <li>Use <strong>lowercase</strong> letters</li>
+    <li>Use <strong>underscores</strong> or <strong>hyphens</strong> instead of spaces (e.g., <code>wooden_table.obj</code>)</li>
+    <li>Be descriptive but concise (e.g., <code>red_chair.fbx</code>, not <code>model_final_v2_FINAL_real.fbx</code>)</li>
+    <li>Include version numbers if you're iterating (e.g., <code>robot_v3.fbx</code>)</li>
+  </ul>
+
+  <h2>Where to Save</h2>
+  <p>
+    Create an organized folder structure for your projects. A common approach:
+  </p>
+  <pre><code>my-project/
+├── blender/          ← .blend source files
+├── exports/          ← exported .obj, .fbx, .stl files
+├── textures/         ← image textures
+└── references/       ← reference images</code></pre>
+
+  <div class="warning">
+    <strong>Always keep your .blend file!</strong> Exported formats often lose some data. Your .blend file is your primary source file — treat exports as copies for specific purposes.
+  </div>
+
+  <h2>Format Comparison</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Format</th>
+        <th>Geometry</th>
+        <th>Materials</th>
+        <th>Animation</th>
+        <th>Best Use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>OBJ</td>
+        <td>Yes</td>
+        <td>Basic</td>
+        <td>No</td>
+        <td>Universal sharing, 3D printing</td>
+      </tr>
+      <tr>
+        <td>FBX</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Game engines</td>
+      </tr>
+      <tr>
+        <td>STL</td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
+        <td>3D printing</td>
+      </tr>
+      <tr>
+        <td>glTF / GLB</td>
+        <td>Yes</td>
+        <td>Yes (PBR)</td>
+        <td>Yes</td>
+        <td>Web, modern apps</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Blender &amp; ZBrush Mini</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

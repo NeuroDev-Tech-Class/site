@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/gimp.html" class="back-link">&larr; Back to 2D Digital Art &mdash; GIMP</a>
+    <div class="doc-header">
+    <span class="course-tag">2D Digital Art — GIMP</span>
+    <h1>Print vs. Web Design</h1>
+    <p class="subtitle">Understanding the Key Differences Between Designing for Print and Screen</p>
+  </div>
+
+  <h2>Overview</h2>
+  <p>
+    Designing for print and designing for web/screen are fundamentally different tasks. A poster meant to be printed at a shop requires different settings than a banner meant for a website. Getting the setup wrong means your final product will look wrong — blurry prints, oversized web images, or incorrect colors. Understanding the differences ensures your work looks great in its intended medium.
+  </p>
+
+  <h2>Resolution</h2>
+  <p>
+    <strong>Resolution</strong> is the density of pixels in an image, measured in <strong>DPI</strong> (dots per inch) or <strong>PPI</strong> (pixels per inch).
+  </p>
+
+  <h3>Print: 300 DPI</h3>
+  <p>
+    Printed materials require high resolution — <strong>300 DPI</strong> is the industry standard for professional print. At this density, individual pixels are too small for the human eye to see, resulting in smooth, sharp images. If you print a 72 DPI image, it will look pixelated, blurry, and unprofessional.
+  </p>
+
+  <h3>Screen: 72 DPI</h3>
+  <p>
+    Screens display images pixel-by-pixel, so the DPI value doesn't affect how the image looks on screen — <strong>what matters is the total pixel dimensions</strong>. An image that is 1920 × 1080 pixels will look the same on screen regardless of whether it's set to 72 DPI or 300 DPI. Using 72 DPI keeps file sizes smaller, which is important for web performance.
+  </p>
+
+  <div class="tip">
+    <strong>Tip:</strong> When setting up a new project, the first question to ask is: "Will this be printed or displayed on a screen?" That answer determines your DPI.
+  </div>
+
+  <h2>Color: RGB vs. CMYK</h2>
+
+  <h3>RGB (Screen)</h3>
+  <p>
+    <strong>RGB</strong> (Red, Green, Blue) is the color model used by screens. Colors are created by mixing light — adding all three colors at full intensity produces white. GIMP works in RGB by default, which is ideal for any work that will be displayed on a screen.
+  </p>
+
+  <h3>CMYK (Print)</h3>
+  <p>
+    <strong>CMYK</strong> (Cyan, Magenta, Yellow, Key/Black) is the color model used by printers. Colors are created by mixing inks — adding all four inks produces black. Some colors that look vibrant in RGB (like neon green or bright electric blue) <strong>cannot be accurately reproduced</strong> in CMYK ink.
+  </p>
+  <p>
+    GIMP works primarily in RGB and does not have native CMYK mode. For most student and personal print projects, this isn't a problem — send your RGB file to the printer and results will be acceptable. For professional print production, you may need to:
+  </p>
+  <ul>
+    <li>Use GIMP's <strong>Soft Proofing</strong> (<strong>View &gt; Color Management &gt; Soft-Proofing</strong>) to simulate how colors will look in print.</li>
+    <li>Avoid using extremely bright, saturated colors that won't reproduce in CMYK.</li>
+    <li>Consult with the print shop about color requirements.</li>
+  </ul>
+
+  <h2>Size: Inches vs. Pixels</h2>
+
+  <h3>Print Dimensions</h3>
+  <p>
+    Print projects are measured in <strong>inches</strong> or <strong>centimeters</strong> because the physical output size matters. To calculate the required pixel dimensions:
+  </p>
+  <p>
+    <strong>Pixels = Inches × DPI</strong>
+  </p>
+  <p>
+    For example, an 8.5 × 11 inch flyer at 300 DPI requires: 8.5 × 300 = 2550 pixels wide, 11 × 300 = 3300 pixels tall.
+  </p>
+
+  <h3>Screen Dimensions</h3>
+  <p>
+    Web and screen projects are measured in <strong>pixels</strong> because that is the unit screens use to display images. The physical size in inches is irrelevant — what matters is the pixel count.
+  </p>
+
+  <h2>Common Sizes Reference</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Project Type</th>
+        <th>Physical Size</th>
+        <th>Pixel Size (at proper DPI)</th>
+        <th>DPI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Social media banner</td>
+        <td>—</td>
+        <td>1500 × 500 px</td>
+        <td>72</td>
+      </tr>
+      <tr>
+        <td>Facebook cover photo</td>
+        <td>—</td>
+        <td>820 × 312 px</td>
+        <td>72</td>
+      </tr>
+      <tr>
+        <td>Instagram post</td>
+        <td>—</td>
+        <td>1080 × 1080 px</td>
+        <td>72</td>
+      </tr>
+      <tr>
+        <td>Desktop wallpaper</td>
+        <td>—</td>
+        <td>1920 × 1080 px</td>
+        <td>72</td>
+      </tr>
+      <tr>
+        <td>Poster</td>
+        <td>11 × 17 in</td>
+        <td>3300 × 5100 px</td>
+        <td>300</td>
+      </tr>
+      <tr>
+        <td>Flyer / Letter</td>
+        <td>8.5 × 11 in</td>
+        <td>2550 × 3300 px</td>
+        <td>300</td>
+      </tr>
+      <tr>
+        <td>Business card</td>
+        <td>3.5 × 2 in</td>
+        <td>1050 × 600 px</td>
+        <td>300</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>GIMP's Print Size Dialog</h2>
+  <p>
+    GIMP has a built-in tool for checking and adjusting print size: <strong>Image &gt; Print Size</strong>. This dialog shows:
+  </p>
+  <ul>
+    <li>The current pixel dimensions of the image.</li>
+    <li>The physical print size at the current resolution (e.g., "8.5 × 11 inches at 300 DPI").</li>
+    <li>The resolution (DPI) — you can change this here. <strong>Note:</strong> changing the DPI in Print Size does <em>not</em> change the pixel count; it only changes how big the image will be when printed. To actually add or remove pixels, use <strong>Image &gt; Scale Image</strong>.</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Warning:</strong> Scaling a small image (e.g., 500 px wide) up to a large print size (e.g., 11 × 17 inches at 300 DPI) will result in a pixelated, blurry print. You cannot add detail that didn't exist. Always start with an image large enough for your final output.
+  </div>
+
+  <h2>Export Settings by Use Case</h2>
+
+  <h3>For Web / Screen</h3>
+  <ul>
+    <li>Format: <strong>PNG</strong> (graphics, logos, screenshots) or <strong>JPEG</strong> (photos).</li>
+    <li>JPEG quality: <strong>70–85</strong> is usually a good balance between quality and file size.</li>
+    <li>No DPI requirement — pixel dimensions are what matter.</li>
+    <li>Keep file sizes small for fast loading (aim for under 500 KB for web images).</li>
+  </ul>
+
+  <h3>For Print</h3>
+  <ul>
+    <li>Format: <strong>TIFF</strong> (best quality, lossless) or <strong>PNG</strong> (lossless, widely compatible).</li>
+    <li>JPEG is acceptable at <strong>quality 95–100</strong> if TIFF/PNG is not accepted.</li>
+    <li>Ensure the resolution is <strong>300 DPI</strong>.</li>
+    <li>Include <strong>bleed</strong> if required by the print shop (typically 0.125 inches extra on all sides).</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> When in doubt about print requirements, ask the print shop directly. They can tell you exactly what file format, size, resolution, and color settings they need.
+  </div>
+
+  <h2>Summary</h2>
+  <ul>
+    <li><strong>Print</strong>: 300 DPI, size in inches/cm, CMYK color considerations, TIFF or high-quality PNG/JPEG.</li>
+    <li><strong>Screen</strong>: 72 DPI, size in pixels, RGB color, PNG or compressed JPEG.</li>
+    <li>Calculate pixel dimensions: <strong>Inches × DPI = Pixels</strong>.</li>
+    <li>Use <strong>Image &gt; Print Size</strong> to check physical output dimensions.</li>
+    <li>Always start large enough — you can scale down but scaling up degrades quality.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — 2D Digital Art — GIMP</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

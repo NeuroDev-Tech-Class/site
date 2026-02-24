@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/site/" />
+    <script src="assets/js/load-head.js" defer></script>
+  </head>
+
+  <body>
+    <header></header>
+    <script src="/site/assets/js/load-header.js" defer></script>
+    <script src="/site/assets/js/link-generator.js" defer></script>
+
+    <main id="main-content">
+      <h1>Video Software &mdash; DaVinci Resolve</h1>
+
+      <section>
+        <h3>Course Overview</h3>
+        <p>
+          This course introduces students to professional video editing, color
+          correction, and audio post-production using
+          <strong>DaVinci Resolve</strong>, the free industry-standard software
+          from Blackmagic Design used on Hollywood films and TV shows. Students
+          will learn the full post-production workflow: importing media,
+          editing on a timeline, adding transitions and titles, correcting
+          color, mixing audio, and exporting a finished video. DaVinci Resolve
+          runs on Windows, macOS, and Linux.
+        </p>
+      </section>
+
+      <section>
+        <h3>Course Objectives</h3>
+        <ul>
+          <li>Install DaVinci Resolve and set up a project with correct frame rate and resolution.</li>
+          <li>Navigate the seven workspace pages: Media, Cut, Edit, Fusion, Color, Fairlight, and Deliver.</li>
+          <li>Import, organize, and manage media in bins and the media pool.</li>
+          <li>Edit video on a timeline using cuts, trims, transitions, and titles.</li>
+          <li>Apply basic color correction and simple color grading.</li>
+          <li>Edit and mix audio tracks using the Fairlight page.</li>
+          <li>Export a finished video for YouTube, social media, or local playback.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>System Requirements</h3>
+        <p>
+          <strong>DaVinci Resolve 20</strong> is free to download and use (a
+          paid Studio version exists, but is not required for this course).
+          It runs on Windows 10+, macOS 12.0+, and Linux. Minimum: 16 GB
+          RAM recommended, a dedicated GPU with 2+ GB VRAM, and a fast
+          storage drive (SSD preferred) for smooth video playback.
+        </p>
+      </section>
+
+      <script id="unit-data" type="application/json">
+        [
+          {
+            "title": "Getting Started",
+            "description": "Install DaVinci Resolve and understand its seven-page workspace layout.",
+            "content": [
+              {
+                "type": "doc",
+                "title": "Reading - What Is Video Editing?",
+                "url": "assets/pdfs/media/davinci-resolve/unit1/what_is_video_editing.html"
+              },
+              {
+                "type": "html",
+                "html": "Download and install <a href=\"https://www.blackmagicdesign.com/products/davinciresolve\" target=\"_blank\" rel=\"noopener noreferrer\">DaVinci Resolve</a> (free version). You'll need to create a free Blackmagic account."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - The DaVinci Resolve Interface",
+                "url": "assets/pdfs/media/davinci-resolve/unit1/the_resolve_interface.html"
+              },
+              {
+                "type": "video",
+                "title": "DaVinci Resolve in 15 Minutes - Beginner Tutorial",
+                "url": "https://www.youtube.com/embed/63Ln33O4p4c"
+              }
+            ]
+          },
+          {
+            "title": "Unit 1: Editing Fundamentals",
+            "description": "Learn to import media, assemble clips on a timeline, and perform basic edits.",
+            "content": [
+              {
+                "type": "doc",
+                "title": "Reading - Project Settings & Media Management",
+                "url": "assets/pdfs/media/davinci-resolve/unit1/project_settings_media.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 1.1:</strong> Create a new project. Set the timeline resolution to 1920×1080 and frame rate to 24 fps. Import several video clips and organize them in bins on the Media page."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - The Edit Page: Timeline & Tools",
+                "url": "assets/pdfs/media/davinci-resolve/unit1/edit_page_timeline.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 1.2:</strong> Drag clips to the timeline. Practice the Selection mode (<code>A</code>), Trim mode (<code>T</code>), Blade tool (<code>B</code>), and ripple/roll edits."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - Transitions, Speed & Keyframes",
+                "url": "assets/pdfs/media/davinci-resolve/unit1/transitions_speed_keyframes.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 1.3:</strong> Add Cross Dissolve and Wipe transitions between clips. Speed up one clip and slow down another. Keyframe a clip's position to create a simple pan-and-zoom (Ken Burns) effect."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - Titles & Graphics",
+                "url": "assets/pdfs/media/davinci-resolve/unit1/titles_and_graphics.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 1.4:</strong> Add a title card at the beginning and end credits. Style the text using the Inspector panel (font, size, color, drop shadow)."
+              },
+              {
+                "type": "doc",
+                "title": "Unit 1 Activity - Edit a Mini Highlight Reel",
+                "url": "assets/pdfs/media/davinci-resolve/unit1/activity_highlight_reel.html"
+              }
+            ]
+          },
+          {
+            "title": "Unit 2: Color, Audio & Effects",
+            "description": "Learn color correction, audio editing on the Fairlight page, and simple visual effects in Fusion.",
+            "content": [
+              {
+                "type": "doc",
+                "title": "Reading - The Color Page: Correction vs. Grading",
+                "url": "assets/pdfs/media/davinci-resolve/unit2/color_correction_grading.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 2.1:</strong> On the Color page, use the Primary Wheels (Lift, Gamma, Gain) to correct a clip with poor exposure. Then apply a creative look by adjusting the color temperature and adding a vignette."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - Color Scopes & Matching",
+                "url": "assets/pdfs/media/davinci-resolve/unit2/color_scopes_matching.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 2.2:</strong> Use the waveform, vectorscope, and parade scopes to evaluate two clips. Match their colors so they look consistent in the edit."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - The Fairlight Page: Audio Editing",
+                "url": "assets/pdfs/media/davinci-resolve/unit2/fairlight_audio_editing.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 2.3:</strong> Switch to the Fairlight page. Normalize audio levels, add EQ to clean up dialogue, adjust volume with keyframes, and add a background music track."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - Intro to Fusion (Basic Compositing)",
+                "url": "assets/pdfs/media/davinci-resolve/unit2/intro_to_fusion.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 2.4:</strong> On the Fusion page, create a simple lower-third title with a background shape and animated text using keyframes."
+              },
+              {
+                "type": "doc",
+                "title": "Unit 2 Activity - Color Grade a Short Scene",
+                "url": "assets/pdfs/media/davinci-resolve/unit2/activity_color_grade_scene.html"
+              }
+            ]
+          },
+          {
+            "title": "Unit 3: Delivering & Final Project",
+            "description": "Learn export settings, delivery formats, and complete a final video project.",
+            "content": [
+              {
+                "type": "doc",
+                "title": "Reading - The Deliver Page: Export Settings",
+                "url": "assets/pdfs/media/davinci-resolve/unit3/deliver_page_export.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 3.1:</strong> Export a video using the YouTube preset. Then create a custom export at 1080p H.264 with a specific bitrate. Compare file sizes and quality."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - Optimizing Your Workflow",
+                "url": "assets/pdfs/media/davinci-resolve/unit3/optimizing_workflow.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 3.2:</strong> Use Optimized Media or Proxy Media to improve playback performance on a complex timeline with effects."
+              },
+              {
+                "type": "doc",
+                "title": "Final Project - Produce a Short Video",
+                "url": "assets/pdfs/media/davinci-resolve/unit3/final_project.html"
+              }
+            ]
+          }
+        ]
+      </script>
+
+      <div id="unit-sections"></div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="assets/js/load-footer.js" defer></script>
+  </body>
+</html>

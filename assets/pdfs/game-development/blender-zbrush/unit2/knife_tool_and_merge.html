@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/blender-zbrush-mini.html" class="back-link">&larr; Back to 3D Art &mdash; Blender &amp; ZBrush</a>
+    <div class="doc-header">
+    <span class="course-tag">Blender &amp; ZBrush Mini</span>
+    <h1>Knife Tool &amp; Merge</h1>
+    <p class="subtitle">Cutting, Merging, and Cleaning Up Geometry</p>
+  </div>
+
+  <h2>The Knife Tool (K)</h2>
+  <p>
+    The <strong>Knife tool</strong> lets you manually cut new edges into existing faces. This is one of the most useful
+    tools for fixing topology — you can split N-gons into quads, add edge loops where you need more detail, or carve
+    custom shapes into a surface.
+  </p>
+
+  <h3>How to Use the Knife Tool</h3>
+  <ol>
+    <li>Enter <strong>Edit Mode</strong> (Tab key).</li>
+    <li>Press <strong>K</strong> to activate the Knife tool. Your cursor changes to a small knife icon.</li>
+    <li><strong>Click</strong> on the mesh to place a starting point for your cut. Each click adds a new point along the
+      cut path.</li>
+    <li>Continue clicking to draw the cut line across one or more faces. You'll see a green line showing the planned
+      cut.</li>
+    <li>Press <strong>Enter</strong> (or <strong>Return</strong>) to confirm the cut. New edges and vertices are created
+      along your path.</li>
+    <li>Press <strong>Escape</strong> to cancel if you change your mind.</li>
+  </ol>
+
+  <h3>Tips for the Knife Tool</h3>
+  <ul>
+    <li><strong>Snap to midpoints:</strong> Hold <strong>Ctrl</strong> while using the knife to snap your cuts to the
+      midpoint of edges. This helps keep geometry even.</li>
+    <li><strong>Cut through:</strong> Press <strong>Z</strong> while the knife is active to cut through the entire mesh
+      (front and back faces), not just the visible side. This is great for symmetrical cuts.</li>
+    <li><strong>Stay on edges:</strong> Try to start and end your cuts on existing edges or vertices. Cuts that start or
+      end in the middle of a face can create awkward geometry.</li>
+    <li><strong>Fixing N-gons:</strong> If you have a 5-sided face, one knife cut from one edge to the opposite side can
+      split it into a quad and a triangle — or two quads if you plan carefully.</li>
+  </ul>
+
+  <h3>Cutting Through Multiple Faces</h3>
+  <p>
+    The Knife tool isn't limited to a single face. You can draw a cut line across several faces in one operation. This is
+    useful when you need to add a continuous edge loop manually, or when you want to carve a line across a complex
+    surface. Just keep clicking across face boundaries — the knife will automatically split each face it crosses.
+  </p>
+
+  <h2>Merging Vertices (M)</h2>
+  <p>
+    Sometimes you end up with extra vertices that need to be combined into one. The <strong>Merge</strong> command does
+    exactly this — it takes two or more selected vertices and collapses them into a single vertex.
+  </p>
+
+  <h3>How to Merge</h3>
+  <ol>
+    <li>In <strong>Edit Mode</strong>, select two or more vertices you want to merge.</li>
+    <li>Press <strong>M</strong> to open the Merge menu.</li>
+    <li>Choose one of the following options:</li>
+  </ol>
+
+  <h3>Merge Options</h3>
+  <ul>
+    <li><strong>At Center:</strong> All selected vertices collapse to the average center point between them. This is the
+      most common option.</li>
+    <li><strong>At Cursor:</strong> All selected vertices move to the 3D cursor's current position and merge there.
+      Useful when you want precise control over where the merged vertex ends up.</li>
+    <li><strong>Collapse:</strong> Each connected group of selected vertices merges at its own center. Useful when
+      merging multiple pairs at once.</li>
+    <li><strong>By Distance:</strong> Automatically merges any vertices that are closer together than a specified
+      threshold. This is extremely useful for cleaning up overlapping vertices after a Boolean operation or import.
+      You can adjust the merge distance in the operator panel (bottom-left corner) after running it.</li>
+  </ul>
+
+  <h3>When to Use Merge</h3>
+  <ul>
+    <li>Closing gaps where two edges almost meet but aren't connected.</li>
+    <li>Cleaning up doubled vertices (two vertices sitting in the exact same spot).</li>
+    <li>Simplifying geometry by collapsing unnecessary detail.</li>
+    <li>Joining separate mesh pieces into a continuous surface.</li>
+  </ul>
+
+  <h2>Dissolve vs. Delete</h2>
+  <p>
+    When you want to remove geometry, Blender offers two different approaches: <strong>Delete</strong> and
+    <strong>Dissolve</strong>. Understanding the difference is important.
+  </p>
+
+  <h3>Delete (X or Delete Key)</h3>
+  <p>
+    Pressing <strong>X</strong> or <strong>Delete</strong> opens the Delete menu. Deleting a vertex, edge, or face
+    <em>removes</em> it entirely, leaving a hole in the mesh. For example, deleting a face removes that face and leaves
+    an open gap where it used to be. This is useful when you intentionally want to create an opening or remove unwanted
+    parts of a mesh.
+  </p>
+
+  <h3>Dissolve (Ctrl + X)</h3>
+  <p>
+    <strong>Dissolve</strong> removes edges or vertices without leaving a hole. Instead, the surrounding faces merge
+    together to fill the space. For example, dissolving an edge between two quads combines them into one larger face.
+    Dissolving is the tool of choice when you want to <em>simplify</em> topology without creating gaps.
+  </p>
+  <ul>
+    <li><strong>Dissolve Vertices:</strong> Removes a vertex and merges the surrounding edges and faces.</li>
+    <li><strong>Dissolve Edges:</strong> Removes an edge and merges the two faces on either side into one.</li>
+    <li><strong>Dissolve Faces:</strong> Merges selected faces into a single face (may create an N-gon).</li>
+  </ul>
+
+  <h3>When to Use Each</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Situation</th>
+        <th>Use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Remove a face and leave a hole</td>
+        <td>Delete (X)</td>
+      </tr>
+      <tr>
+        <td>Remove an edge loop to simplify topology</td>
+        <td>Dissolve (Ctrl+X)</td>
+      </tr>
+      <tr>
+        <td>Get rid of an extra vertex on an edge</td>
+        <td>Dissolve Vertices</td>
+      </tr>
+      <tr>
+        <td>Delete an entire section of a mesh</td>
+        <td>Delete (X)</td>
+      </tr>
+      <tr>
+        <td>Merge two adjacent faces into one</td>
+        <td>Dissolve Edges</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Putting It All Together</h2>
+  <p>
+    These three skills — cutting with the Knife tool, merging vertices, and dissolving/deleting — form your core toolkit
+    for cleaning up mesh topology. A typical workflow might look like this:
+  </p>
+  <ol>
+    <li>Identify an N-gon using <strong>Select → All by Trait → Faces by Sides</strong>.</li>
+    <li>Use the <strong>Knife tool (K)</strong> to cut it into quads.</li>
+    <li>If the cut created any overlapping vertices, <strong>Merge by Distance (M)</strong> to clean them up.</li>
+    <li>If you accidentally created unnecessary edges, <strong>Dissolve (Ctrl+X)</strong> to remove them without leaving
+      holes.</li>
+  </ol>
+  <p>
+    Practice these tools often — they're essential for every 3D modeler, from beginner to professional.
+  </p>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Blender &amp; ZBrush Mini</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

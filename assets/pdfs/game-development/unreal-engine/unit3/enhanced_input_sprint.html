@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>Enhanced Input &amp; Sprint</h1>
+    <p class="subtitle">Use UE5's Enhanced Input system to add a sprint mechanic with keyboard and gamepad support</p>
+  </div>
+
+  <h2>What Is Enhanced Input?</h2>
+  <p>Unreal Engine 5 uses the <strong>Enhanced Input</strong> system — a modern, flexible way to handle player input. Instead of directly checking "is the W key pressed?", you define abstract <strong>Input Actions</strong> like "Sprint" or "Jump" and then map physical keys/buttons to those actions separately. This makes it easy to support multiple input devices (keyboard, gamepad, etc.) without duplicating logic.</p>
+
+  <h2>Key Concepts</h2>
+
+  <h3>Input Actions (IA)</h3>
+  <p>An <strong>Input Action</strong> represents <em>what</em> the player wants to do — not which button they pressed. For example:</p>
+  <ul>
+    <li><code>IA_Sprint</code> — the player wants to sprint</li>
+    <li><code>IA_Jump</code> — the player wants to jump</li>
+    <li><code>IA_Interact</code> — the player wants to interact with an object</li>
+  </ul>
+  <p>Each Input Action has a <strong>Value Type</strong> (Boolean for on/off, Axis1D for analog triggers, etc.) and can have <strong>Triggers</strong> that define when the action fires:</p>
+  <ul>
+    <li><strong>Down</strong> — fires while the key is held down (continuous)</li>
+    <li><strong>Pressed</strong> — fires once when the key is first pressed</li>
+    <li><strong>Released</strong> — fires once when the key is let go</li>
+    <li><strong>Hold</strong> — fires after the key is held for a specified duration</li>
+  </ul>
+
+  <h3>Input Mapping Contexts (IMC)</h3>
+  <p>An <strong>Input Mapping Context</strong> is where you map physical inputs (keys, buttons, sticks) to your Input Actions. Think of it as a binding table:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Input Action</th>
+        <th>Key/Button</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>IA_Sprint</td>
+        <td>Left Shift, Gamepad Right Trigger</td>
+      </tr>
+      <tr>
+        <td>IA_Jump</td>
+        <td>Space Bar, Gamepad Bottom Face Button</td>
+      </tr>
+      <tr>
+        <td>IA_Interact</td>
+        <td>E, Gamepad Left Face Button</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>You can have multiple IMCs — for example, one for on-foot gameplay and a different one for driving. Swap them at runtime to completely change the controls.</p>
+
+  <div class="tip">
+    <strong>Why this separation matters:</strong> Input Actions define <em>what</em> happens. Input Mapping Contexts define <em>which buttons</em> trigger it. This means you can change key bindings without touching any game logic, and you can support keyboard + gamepad simultaneously with zero extra code.
+  </div>
+
+  <h2>Creating IA_Sprint</h2>
+  <ol>
+    <li>In the Content Browser, right-click → <strong>Input → Input Action</strong>. Name it <code>IA_Sprint</code>.</li>
+    <li>Double-click to open it.</li>
+    <li>Set the <strong>Value Type</strong> to <strong>Digital (Bool)</strong> — sprinting is either on or off.</li>
+    <li>Under <strong>Triggers</strong>, add two entries:
+      <ul>
+        <li><strong>Hold</strong> — the sprint action fires while the key is held down. You can set the <strong>Hold Time Threshold</strong> to <code>0</code> for instant activation (no delay before sprinting starts).</li>
+        <li><strong>Released</strong> — this fires when the key is released, which we'll use to stop sprinting.</li>
+      </ul>
+    </li>
+    <li>Save the asset.</li>
+  </ol>
+
+  <h2>Adding to the Input Mapping Context</h2>
+  <ol>
+    <li>Open your project's Input Mapping Context (the Third Person template usually has one called <code>IMC_Default</code> in the <code>Input</code> folder).</li>
+    <li>Click the <strong>+</strong> button to add a new mapping.</li>
+    <li>Set the <strong>Input Action</strong> to <code>IA_Sprint</code>.</li>
+    <li>Under this action, add two key mappings:
+      <ul>
+        <li><strong>Left Shift</strong> — for keyboard players</li>
+        <li><strong>Gamepad Right Trigger</strong> — for controller players</li>
+      </ul>
+    </li>
+    <li>Save the IMC.</li>
+  </ol>
+
+  <h2>Implementing Sprint in the Player Character</h2>
+  <p>Now we need to make the character actually sprint when the input fires.</p>
+  <ol>
+    <li>Open your player character Blueprint (<code>BP_ThirdPersonCharacter</code>).</li>
+    <li>In the Event Graph, right-click and search for <code>IA_Sprint</code>. You'll see an <strong>Enhanced Input Action</strong> event node — add it.</li>
+    <li>This node has multiple execution pins based on your triggers:
+      <ul>
+        <li><strong>Triggered</strong> — fires while the key is held (from our Hold trigger)</li>
+        <li><strong>Completed</strong> — fires when the key is released (from our Released trigger)</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>SprintStart Function</h3>
+  <ol>
+    <li>Create a new function called <code>SprintStart</code>.</li>
+    <li>Inside the function, drag a reference to the <strong>CharacterMovement</strong> component.</li>
+    <li>From it, add a <strong>Set Max Walk Speed</strong> node.</li>
+    <li>Set the value to <code>1200</code> (Unreal's default walk speed is 600, so 1200 is double speed).</li>
+    <li>Connect the execution from the function entry to the Set node.</li>
+  </ol>
+
+  <h3>SprintStop Function</h3>
+  <ol>
+    <li>Create another function called <code>SprintStop</code>.</li>
+    <li>Same as above, but set Max Walk Speed back to <code>600</code> (the default).</li>
+  </ol>
+
+  <h3>Connecting the Input</h3>
+  <ol>
+    <li>Back in the Event Graph, connect the <strong>Triggered</strong> pin from the IA_Sprint event to your <strong>SprintStart</strong> function call.</li>
+    <li>Connect the <strong>Completed</strong> pin to your <strong>SprintStop</strong> function call.</li>
+    <li>Compile and save.</li>
+  </ol>
+
+  <p>That's it! Press Play, hold <kbd>Left Shift</kbd>, and your character should move noticeably faster. Release the key and they'll return to normal speed.</p>
+
+  <div class="tip">
+    <strong>Fine-tuning:</strong> A sprint speed of <code>1200</code> feels like a solid run. Try values between <code>900</code> (light jog) and <code>1500</code> (very fast) to find what feels right for your game. You can also add a sprint cooldown or stamina system later.
+  </div>
+
+  <h2>Optional: IsSprinting Boolean for Animation</h2>
+  <p>If you want the character's animation to change while sprinting (e.g., a faster run animation), you'll need a way for the Animation Blueprint to know whether the player is currently sprinting.</p>
+  <ol>
+    <li>Add a <strong>Boolean</strong> variable to your character Blueprint called <code>IsSprinting</code>. Default: <code>false</code>.</li>
+    <li>In your <code>SprintStart</code> function, add a <strong>Set IsSprinting</strong> node and set it to <strong>True</strong>.</li>
+    <li>In your <code>SprintStop</code> function, add a <strong>Set IsSprinting</strong> node and set it to <strong>False</strong>.</li>
+    <li>In the Animation Blueprint, you can now read <code>IsSprinting</code> from the character and use it to blend to a sprint animation.</li>
+  </ol>
+
+  <div class="warning">
+    <strong>Don't worry about the Animation Blueprint for now</strong> — animation is an advanced topic. The IsSprinting variable is useful to set up now so it's ready when you learn animation blending later.
+  </div>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>UE5's <strong>Enhanced Input</strong> system separates <em>actions</em> (what the player does) from <em>mappings</em> (which buttons they press).</li>
+    <li><strong>Input Actions (IA)</strong> define abstract actions with triggers like Hold and Released.</li>
+    <li><strong>Input Mapping Contexts (IMC)</strong> map physical keys/buttons to Input Actions.</li>
+    <li>Sprint is implemented by changing <strong>Max Walk Speed</strong> on the CharacterMovement component: <code>1200</code> for sprinting, <code>600</code> for walking.</li>
+    <li>An optional <strong>IsSprinting</strong> Boolean can be used later for animation blending.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

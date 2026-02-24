@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/audacity.html" class="back-link">&larr; Back to Audio Production &mdash; Audacity</a>
+    <div class="doc-header">
+    <span class="course-tag">Audio Production — Audacity</span>
+    <h1>Audio Production Concepts</h1>
+    <p class="subtitle">Essential theory and terminology every audio producer should know</p>
+  </div>
+
+  <h2>Signal Flow</h2>
+  <p>Understanding <strong>signal flow</strong> means knowing the path your audio takes from beginning to end. In a typical Audacity workflow, signal flow looks like this:</p>
+  <ol>
+    <li><strong>Input</strong> — Sound enters through a microphone or imported file.</li>
+    <li><strong>Recording</strong> — Audacity captures the audio as a digital waveform.</li>
+    <li><strong>Editing</strong> — You cut, trim, rearrange, and clean up the audio.</li>
+    <li><strong>Mixing</strong> — Multiple tracks are combined, with volume balancing and effects.</li>
+    <li><strong>Export</strong> — The final mix is saved as an audio file (WAV, MP3, etc.).</li>
+  </ol>
+  <p>Keeping this flow in mind helps you work in the right order and troubleshoot problems. For example, if your final export sounds distorted, you can work backward through the signal flow to find where the problem started.</p>
+
+  <h2>Gain Staging</h2>
+  <p><strong>Gain staging</strong> is the practice of managing volume levels at every stage of your signal flow to avoid distortion and maintain clear audio.</p>
+  <ul>
+    <li>Set your microphone gain so peaks hit about <strong>-12 dB to -6 dB</strong> during recording.</li>
+    <li>When applying effects, check that the output level hasn't jumped above 0 dB.</li>
+    <li>When mixing multiple tracks, adjust individual track volumes so the combined mix doesn't clip.</li>
+  </ul>
+  <p>Think of gain staging as managing the volume at each "stage" of production so that nothing gets too loud or too quiet along the way.</p>
+
+  <h2>Headroom</h2>
+  <p><strong>Headroom</strong> is the amount of space between your audio's peak level and the maximum level (0 dB). Leaving headroom is crucial because:</p>
+  <ul>
+    <li>It gives you room to apply effects without clipping.</li>
+    <li>It provides a safety margin for unexpected loud moments.</li>
+    <li>Industry standard for recording: peaks at <strong>-6 dB to -3 dB</strong>.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> Aim for peaks around <strong>-6 dB</strong> during recording. You can always increase volume later (with Amplify or Normalize), but you can't fix audio that was clipped during recording.
+  </div>
+
+  <h2>Noise Floor</h2>
+  <p>The <strong>noise floor</strong> is the level of background noise present in a recording when no intentional sound is being made. Every recording environment has some amount of ambient noise — air conditioning, computer fans, room reverb, electrical hum.</p>
+  <ul>
+    <li>A quiet room might have a noise floor around <strong>-60 dB</strong>.</li>
+    <li>A noisy room might have a noise floor around <strong>-30 dB</strong>.</li>
+    <li>The lower (more negative) the noise floor, the better.</li>
+  </ul>
+  <p>Your goal is to keep the noise floor as low as possible so that when you amplify your recording, the background noise doesn't become audible.</p>
+
+  <h2>Signal-to-Noise Ratio (SNR)</h2>
+  <p>The <strong>signal-to-noise ratio</strong> is the difference between your intended audio (the "signal") and the background noise. A greater difference means cleaner audio.</p>
+  <ul>
+    <li>If your voice peaks at <strong>-6 dB</strong> and the noise floor is at <strong>-60 dB</strong>, your SNR is <strong>54 dB</strong> — excellent.</li>
+    <li>If your voice peaks at <strong>-12 dB</strong> and the noise floor is at <strong>-30 dB</strong>, your SNR is only <strong>18 dB</strong> — your voice will be fighting the noise.</li>
+  </ul>
+  <p>To improve SNR: record in a quiet environment, use a good microphone, position it close to the sound source, and set proper gain levels.</p>
+
+  <h2>Dynamic Range</h2>
+  <p><strong>Dynamic range</strong> is the difference between the quietest and loudest parts of your audio. A recording with wide dynamic range has dramatic volume differences (like a whisper followed by a shout). A recording with narrow dynamic range is more consistent in volume.</p>
+  <ul>
+    <li><strong>Wide dynamic range</strong> — Natural sounding but may require the listener to adjust their volume. Common in music and film.</li>
+    <li><strong>Narrow dynamic range</strong> — Easier to listen to at a consistent volume. Preferred for podcasts, voiceovers, and broadcast.</li>
+  </ul>
+  <p>The <strong>Compressor</strong> effect (covered in Unit 2) is the primary tool for reducing dynamic range — it makes quiet parts louder and loud parts quieter.</p>
+
+  <h2>Panning</h2>
+  <p><strong>Panning</strong> controls where a sound sits in the stereo field — left, right, or center. In Audacity, each track has a <strong>Pan slider</strong> (labeled L and R) in the track control panel.</p>
+  <ul>
+    <li><strong>Center (0)</strong> — Sound comes equally from both speakers. Default for voice.</li>
+    <li><strong>Hard Left (-1)</strong> — Sound comes only from the left speaker.</li>
+    <li><strong>Hard Right (+1)</strong> — Sound comes only from the right speaker.</li>
+  </ul>
+  <p>Panning creates a sense of space and separation in a mix. For example, in a multi-track project, you might keep narration centered and pan background music slightly to one side.</p>
+
+  <h2>Monitoring</h2>
+  <p><strong>Monitoring</strong> means listening to your audio while recording or editing. Your choice of monitoring equipment matters:</p>
+  <ul>
+    <li><strong>Headphones</strong> — Best for detailed editing and recording. They let you hear subtle noise, clicks, and mouth sounds. They also prevent your microphone from picking up playback audio (which would cause feedback).</li>
+    <li><strong>Speakers</strong> — Good for checking how a mix sounds in a more natural listening environment. However, never use speakers while recording with a microphone — the audio will feed back into the mic.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> For this course, <strong>headphones are strongly recommended</strong> for all recording and editing. They give you the most accurate representation of what your audio actually sounds like.
+  </div>
+
+  <h2>Non-Destructive vs. Destructive Editing</h2>
+  <p>This is an important concept in audio production:</p>
+  <ul>
+    <li><strong>Non-destructive editing</strong> means your original audio is preserved and changes can be undone or adjusted at any time. Some professional audio software (called DAWs) are fully non-destructive — effects are applied in real time without changing the source file.</li>
+    <li><strong>Destructive editing</strong> means changes are applied directly to the audio data. Once you save and close, the original is gone (unless you kept a backup).</li>
+  </ul>
+  <p><strong>Audacity is primarily a destructive editor.</strong> When you apply an effect or delete audio, the waveform is physically changed. However, Audacity provides unlimited <strong>Undo</strong> (<kbd>Ctrl</kbd>+<kbd>Z</kbd>) within a session, and the project file preserves undo history as long as the project is open.</p>
+
+  <div class="warning">
+    <strong>Warning:</strong> Always keep your original, unedited recordings as a backup. If you need to start over, you'll be glad you have the originals. Export an unedited WAV copy before you begin editing.
+  </div>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li><strong>Signal flow:</strong> Input → Recording → Editing → Mixing → Export.</li>
+    <li><strong>Gain staging</strong> ensures consistent, distortion-free levels at every stage.</li>
+    <li><strong>Headroom</strong> is the safety margin below 0 dB — aim for peaks at -6 to -3 dB.</li>
+    <li><strong>Noise floor</strong> and <strong>SNR</strong> determine how clean your recording sounds.</li>
+    <li><strong>Dynamic range</strong> is the volume difference between soft and loud parts.</li>
+    <li>Use <strong>headphones</strong> for recording and editing; keep backups because Audacity edits are <strong>destructive</strong>.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Audio Production — Audacity</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

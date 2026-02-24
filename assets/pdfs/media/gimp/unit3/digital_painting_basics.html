@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/gimp.html" class="back-link">&larr; Back to 2D Digital Art &mdash; GIMP</a>
+    <div class="doc-header">
+    <span class="course-tag">2D Digital Art — GIMP</span>
+    <h1>Digital Painting Basics</h1>
+    <p class="subtitle">Painting Original Artwork in GIMP</p>
+  </div>
+
+  <h2>Overview</h2>
+  <p>
+    Digital painting is the process of creating artwork from scratch on a computer using tools that simulate traditional brushes, pencils, and paint. GIMP provides everything you need to paint digitally — customizable brushes, pressure sensitivity with drawing tablets, and a layer-based workflow that gives you far more flexibility than physical media.
+  </p>
+
+  <h2>Brush Tool Settings</h2>
+  <p>
+    The <strong>Paintbrush</strong> (<kbd>P</kbd>) is your primary painting tool. Understanding its settings is key to getting the results you want.
+  </p>
+
+  <h3>Brush Tip</h3>
+  <p>
+    The brush tip defines the shape and texture of each stroke. GIMP comes with dozens of built-in brush tips — round, square, textured, soft, and hard. Select a brush tip from the <strong>Brushes</strong> dialog or from the brush selector in Tool Options.
+  </p>
+
+  <h3>Size</h3>
+  <p>
+    Controls the diameter of the brush. Use <kbd>[</kbd> and <kbd>]</kbd> to quickly decrease or increase the size. Large brushes are great for blocking in color; small brushes are for fine details.
+  </p>
+
+  <h3>Opacity</h3>
+  <p>
+    Controls how transparent each stroke is. At <strong>100%</strong>, the stroke is fully opaque; at lower values, underlying content shows through. Building up low-opacity strokes creates smooth, gradual transitions — a fundamental painting technique.
+  </p>
+
+  <h3>Dynamics</h3>
+  <p>
+    <strong>Paint dynamics</strong> link brush properties to input from a drawing tablet or mouse. When using a <strong>pressure-sensitive tablet</strong>, dynamics can map pen pressure to:
+  </p>
+  <ul>
+    <li><strong>Size</strong> — press harder for a wider stroke, lighter for a thinner one.</li>
+    <li><strong>Opacity</strong> — press harder for more opaque paint, lighter for more transparent.</li>
+    <li><strong>Color</strong> — vary the color based on pressure (e.g., from foreground to background color).</li>
+    <li><strong>Hardness</strong> — press harder for sharp edges, lighter for soft edges.</li>
+  </ul>
+  <p>
+    GIMP includes several preset dynamics profiles. Select one from the <strong>Dynamics</strong> dropdown in Tool Options. "Basic Dynamics" is a good starting point — it maps pressure to size and opacity.
+  </p>
+
+  <div class="tip">
+    <strong>Tip:</strong> If you're using a mouse instead of a tablet, dynamics won't respond to pressure, but you can still use dynamics mapped to velocity (speed of the stroke) or random variation for texture effects.
+  </div>
+
+  <h3>Spacing</h3>
+  <p>
+    Controls the distance between each dab (stamp) of the brush as you draw a stroke. Lower spacing creates a smooth, continuous line; higher spacing creates a dotted or textured effect. For painting, keep spacing low (around 10–20%).
+  </p>
+
+  <h3>Jitter</h3>
+  <p>
+    Adds random positional variation to each brush dab, scattering them around the stroke path. This creates natural, organic textures. Use low jitter for controlled painting and higher jitter for effects like foliage, grass, or particle textures.
+  </p>
+
+  <h2>Custom Brushes</h2>
+  <p>
+    You can create your own brush tips from any image:
+  </p>
+  <ol>
+    <li>Create or open a small image (ideally square, grayscale). Dark areas will be opaque; white areas will be transparent.</li>
+    <li>Go to <strong>File &gt; Export As</strong> and save it as a <strong>.gbr</strong> file (GIMP Brush) in GIMP's brushes folder.</li>
+    <li>Click <strong>Refresh</strong> in the Brushes dialog to load the new brush.</li>
+  </ol>
+  <p>
+    Custom brushes are great for stamps, textures, and specialized effects like leaves, clouds, or fur.
+  </p>
+
+  <h2>Digital Painting Workflow</h2>
+  <p>
+    A structured layer-based workflow keeps your painting organized and flexible:
+  </p>
+
+  <h3>Step 1: Rough Sketch</h3>
+  <p>
+    Create a new layer and name it "Sketch." Using a small, hard brush (the Pencil tool or a hard-edged Paintbrush), draw the rough outlines and composition of your subject. Lower the layer's <strong>opacity to around 20–30%</strong> so the sketch acts as a faint guide.
+  </p>
+
+  <h3>Step 2: Base Colors</h3>
+  <p>
+    Create a <strong>new layer below the sketch</strong> and name it "Base Colors." Using a larger brush, block in the main color areas of your painting. Don't worry about shading or detail yet — just lay down flat, solid colors to establish the palette. This is sometimes called "flatting."
+  </p>
+
+  <h3>Step 3: Shading</h3>
+  <p>
+    Create a <strong>new layer above the base colors</strong> and name it "Shading." Using darker versions of your base colors (or using the <strong>Multiply</strong> blend mode on this layer), paint in shadows. Consider where the light source is: areas facing away from the light should be darker. Use a soft brush at reduced opacity to build up shadows gradually.
+  </p>
+
+  <h3>Step 4: Highlights and Details</h3>
+  <p>
+    Create another <strong>new layer on top</strong> named "Details." Add highlights (bright spots where light hits directly), texture details, small features (eyes, patterns, edges), and any finishing touches. Use a smaller brush and zoom in closely.
+  </p>
+
+  <div class="tip">
+    <strong>Tip:</strong> You can always add more layers for specific elements — rim lighting, background effects, color overlays. More layers means more control, but don't overthink it early on.
+  </div>
+
+  <h2>Color Theory Basics</h2>
+  <p>
+    Understanding color will dramatically improve your paintings:
+  </p>
+
+  <h3>Complementary Colors</h3>
+  <p>
+    Colors that sit opposite each other on the color wheel (red and green, blue and orange, yellow and purple). Placing complementary colors next to each other creates vibrant contrast and makes both colors appear more intense.
+  </p>
+
+  <h3>Warm and Cool Colors</h3>
+  <p>
+    <strong>Warm colors</strong> (reds, oranges, yellows) feel energetic and advance forward visually. <strong>Cool colors</strong> (blues, greens, purples) feel calm and recede into the background. Use this to create depth — warm your foreground, cool your background.
+  </p>
+
+  <h3>Value</h3>
+  <p>
+    <strong>Value</strong> refers to how light or dark a color is. A painting with a good range of values — from deep darks to bright highlights — will look three-dimensional and readable even in grayscale. If your painting looks flat, the problem is almost always insufficient value contrast.
+  </p>
+
+  <h2>Using Reference Images</h2>
+  <p>
+    Even professional artists use references. Keep reference images open alongside your canvas:
+  </p>
+  <ul>
+    <li>Photos for anatomy, lighting, texture, and proportion</li>
+    <li>Color palette references for consistent, harmonious color choices</li>
+    <li>Artwork by other artists for inspiration and technique study</li>
+  </ul>
+  <p>
+    Using references is not cheating — it's good practice. The goal is to learn from reality and other art, not to copy them exactly.
+  </p>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>Configure <strong>brush size</strong>, <strong>opacity</strong>, <strong>dynamics</strong>, <strong>spacing</strong>, and <strong>jitter</strong> for different effects.</li>
+    <li>Use <strong>paint dynamics</strong> with a tablet for pressure-sensitive strokes.</li>
+    <li>Create <strong>custom brushes</strong> from images for unique textures and stamps.</li>
+    <li>Follow a <strong>layered workflow</strong>: sketch → base colors → shading → details.</li>
+    <li>Apply <strong>color theory</strong>: complementary colors, warm/cool, and value contrast.</li>
+    <li>Use <strong>reference images</strong> to improve accuracy and learn from reality.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — 2D Digital Art — GIMP</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

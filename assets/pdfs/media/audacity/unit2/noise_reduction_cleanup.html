@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/audacity.html" class="back-link">&larr; Back to Audio Production &mdash; Audacity</a>
+    <div class="doc-header">
+    <span class="course-tag">Audio Production — Audacity</span>
+    <h1>Noise Reduction &amp; Cleanup</h1>
+    <p class="subtitle">Remove background noise, shorten pauses, and fix audio glitches</p>
+  </div>
+
+  <h2>Why Noise Reduction Matters</h2>
+  <p>Almost every recording has some unwanted background noise — fan hum, room ambiance, electrical buzz, or hiss. Audacity's <strong>Noise Reduction</strong> effect is one of the most powerful cleanup tools available, and learning to use it properly is an essential skill for any audio producer.</p>
+
+  <h2>How Noise Reduction Works</h2>
+  <p>Audacity's Noise Reduction is a two-step process. First, you tell Audacity what the noise sounds like by giving it a <strong>noise profile</strong> — a sample of the unwanted sound. Then, Audacity uses that profile to identify and reduce that noise throughout the entire recording.</p>
+
+  <h3>Step 1: Get the Noise Profile</h3>
+  <ol>
+    <li>Find a section of your recording that contains <strong>only background noise</strong> — no speech, music, or intentional sound. This is often the silence at the very beginning or end of a recording. You need at least <strong>half a second</strong>, but 1–2 seconds is ideal.</li>
+    <li>Use the <strong>Selection tool</strong> to highlight that noise-only section.</li>
+    <li>Go to <strong>Effect &gt; Noise Reduction</strong>.</li>
+    <li>Click <strong>Get Noise Profile</strong>.</li>
+    <li>The dialog closes. Audacity has now analyzed and stored the noise pattern.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> This is why we recommended leaving 2–3 seconds of silence at the beginning of your recordings in Unit 1. That silence gives you a clean noise sample to work with.
+  </div>
+
+  <h3>Step 2: Apply Noise Reduction</h3>
+  <ol>
+    <li>Select the audio you want to clean up. In most cases, select the <strong>entire track</strong> by pressing <kbd>Ctrl</kbd>+<kbd>A</kbd>.</li>
+    <li>Go to <strong>Effect &gt; Noise Reduction</strong> again.</li>
+    <li>Adjust the settings (see below) or leave them at defaults for a first try.</li>
+    <li>Click <strong>Preview</strong> to listen to a short sample of the result.</li>
+    <li>If it sounds good, click <strong>OK</strong> to apply.</li>
+  </ol>
+
+  <h2>Noise Reduction Settings</h2>
+  <p>The Noise Reduction dialog has three sliders. Here's what each one does and recommended starting values:</p>
+
+  <table>
+    <thead>
+      <tr><th>Setting</th><th>What It Controls</th><th>Recommended Start</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Noise reduction (dB)</strong></td>
+        <td>How much to reduce the noise volume. Higher values remove more noise but increase the risk of artifacts.</td>
+        <td><strong>12 dB</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Sensitivity</strong></td>
+        <td>How aggressively Audacity identifies what counts as noise. Higher values treat more sounds as noise (may eat into speech).</td>
+        <td><strong>6</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Frequency smoothing (bands)</strong></td>
+        <td>Smooths the reduction across neighboring frequency bands to reduce "musical noise" artifacts.</td>
+        <td><strong>3</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Reduce vs. Residue</h3>
+  <p>At the bottom of the dialog, you'll see two radio buttons:</p>
+  <ul>
+    <li><strong>Reduce</strong> — This is the normal mode. It keeps your audio and removes the noise.</li>
+    <li><strong>Residue</strong> — This plays <em>only</em> the noise that would be removed. Use this to check that you're not accidentally removing parts of your speech or music. If you hear your voice in the residue, lower the sensitivity.</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Warning:</strong> Over-processing with Noise Reduction can make your audio sound <strong>robotic, hollow, or "underwater."</strong> This is sometimes called "artifacts" or "musical noise." If your audio sounds unnatural after Noise Reduction, undo (<kbd>Ctrl</kbd>+<kbd>Z</kbd>) and try again with gentler settings — lower the dB value and sensitivity.
+  </div>
+
+  <h2>Best Practices for Noise Reduction</h2>
+  <ul>
+    <li><strong>Get a good noise sample.</strong> The more representative your noise profile, the better the results. Choose a section with consistent noise and absolutely no speech.</li>
+    <li><strong>Apply gently.</strong> It's better to apply a mild noise reduction twice than to crank the settings up and destroy your audio quality in one pass.</li>
+    <li><strong>Use Preview.</strong> Always preview before applying. Listen for artifacts.</li>
+    <li><strong>Recording quality matters most.</strong> Noise Reduction is a fix, not a miracle. A cleaner recording will always sound better than a noisy recording with heavy noise reduction applied.</li>
+  </ul>
+
+  <h2>Other Cleanup Tools</h2>
+
+  <h3>Truncate Silence</h3>
+  <p><strong>Effect &gt; Truncate Silence</strong> automatically shortens long silent gaps in your recording. This is great for tightening up a podcast or voice recording without manually finding and deleting every pause.</p>
+  <ul>
+    <li><strong>Threshold:</strong> What Audacity considers "silence" (e.g., -40 dB).</li>
+    <li><strong>Duration:</strong> Only silences longer than this value are shortened (e.g., 0.5 seconds).</li>
+    <li><strong>Truncate to:</strong> What the silence should be shortened to (e.g., 0.3 seconds).</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> Truncate Silence works best on spoken word recordings. Be careful with music — removing silence from a musical piece can destroy the rhythm and feel.
+  </div>
+
+  <h3>Click Removal</h3>
+  <p><strong>Effect &gt; Click Removal</strong> detects and removes short, sharp clicks and pops. This is particularly useful for:</p>
+  <ul>
+    <li>Recordings transferred from vinyl records.</li>
+    <li>Audio with digital glitches or connection dropouts.</li>
+    <li>Mouth clicks in close-mic voice recordings.</li>
+  </ul>
+  <p>Settings:</p>
+  <ul>
+    <li><strong>Threshold:</strong> How sensitive the detection is (lower = more aggressive).</li>
+    <li><strong>Max Spike Width:</strong> The maximum width of a click to be detected (in samples).</li>
+  </ul>
+
+  <h3>Repair</h3>
+  <p><strong>Effect &gt; Repair</strong> fixes very short glitches (up to 128 samples, which is a tiny fraction of a second). It works by interpolating (estimating) what the audio should look like based on the surrounding waveform.</p>
+  <ol>
+    <li>Zoom in very closely to the glitch (<kbd>Ctrl</kbd>+<kbd>1</kbd> several times).</li>
+    <li>Select the damaged samples (a very short region).</li>
+    <li>Go to <strong>Effect &gt; Repair</strong>.</li>
+  </ol>
+  <p>Repair only works on selections shorter than 128 samples. For longer problems, use Click Removal or manually cut out the damaged section.</p>
+
+  <h2>Recommended Cleanup Workflow</h2>
+  <p>When cleaning up a recording, follow this order for best results:</p>
+  <ol>
+    <li><strong>Noise Reduction</strong> — Remove background noise first.</li>
+    <li><strong>Click Removal</strong> — Fix any clicks or pops.</li>
+    <li><strong>Manual editing</strong> — Cut out mistakes, ums, and ahs.</li>
+    <li><strong>Truncate Silence</strong> — Shorten long pauses.</li>
+    <li><strong>Normalize / Compressor</strong> — Set final volume levels (covered in the next lesson).</li>
+  </ol>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>Noise Reduction is a <strong>two-step process</strong>: capture a noise profile, then apply the reduction.</li>
+    <li>Start with moderate settings (<strong>12 dB reduction, 6 sensitivity, 3 smoothing</strong>) and adjust from there.</li>
+    <li>Use <strong>Preview</strong> and <strong>Residue</strong> mode to check your work before applying.</li>
+    <li>Over-processing creates artifacts — apply gently and repeat if needed.</li>
+    <li><strong>Truncate Silence</strong>, <strong>Click Removal</strong>, and <strong>Repair</strong> handle other common cleanup tasks.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Audio Production — Audacity</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

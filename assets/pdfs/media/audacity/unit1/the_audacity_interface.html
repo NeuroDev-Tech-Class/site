@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/audacity.html" class="back-link">&larr; Back to Audio Production &mdash; Audacity</a>
+    <div class="doc-header">
+    <span class="course-tag">Audio Production — Audacity</span>
+    <h1>The Audacity Interface</h1>
+    <p class="subtitle">A complete walkthrough of every panel, toolbar, and control you'll use</p>
+  </div>
+
+  <h2>Overview</h2>
+  <p>When you first open Audacity, the window can look overwhelming. This guide breaks down every part of the interface so you know exactly what each area does. By the end, you'll be able to navigate the application with confidence.</p>
+
+  <h2>The Menu Bar</h2>
+  <p>The menu bar runs across the very top of the window. Each menu groups related commands together:</p>
+
+  <table>
+    <thead>
+      <tr><th>Menu</th><th>What It Contains</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>File</strong></td><td>Create, open, save projects; import and export audio files.</td></tr>
+      <tr><td><strong>Edit</strong></td><td>Undo/Redo, Cut/Copy/Paste, Preferences, and clipboard operations.</td></tr>
+      <tr><td><strong>View</strong></td><td>Zoom controls, show/hide toolbars, track display options.</td></tr>
+      <tr><td><strong>Transport</strong></td><td>Play, Stop, Record, Pause, Loop, and cursor movement commands.</td></tr>
+      <tr><td><strong>Tracks</strong></td><td>Add, remove, and manage audio tracks; mix and render.</td></tr>
+      <tr><td><strong>Generate</strong></td><td>Create tones, noise, silence, and other generated audio.</td></tr>
+      <tr><td><strong>Effect</strong></td><td>Audio effects — Amplify, Normalize, Noise Reduction, EQ, Reverb, and many more.</td></tr>
+      <tr><td><strong>Analyze</strong></td><td>Measurement tools — Plot Spectrum, Find Clipping, Contrast analysis.</td></tr>
+      <tr><td><strong>Tools</strong></td><td>Macro manager, Nyquist prompt, and plug-in management.</td></tr>
+      <tr><td><strong>Help</strong></td><td>Manual, diagnostics, "About Audacity" info.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Tip:</strong> You don't need to memorize every menu right now. As we work through lessons, you'll naturally learn where each command lives.
+  </div>
+
+  <h2>Transport Toolbar</h2>
+  <p>The Transport toolbar is one of the most-used areas. It contains the main playback and recording controls:</p>
+  <ul>
+    <li><strong>Play</strong> (green triangle) — Begins playback from the cursor position or the start of a selection.</li>
+    <li><strong>Stop</strong> (yellow square) — Stops playback or recording completely.</li>
+    <li><strong>Pause</strong> (two vertical bars) — Pauses playback or recording. Press again to resume.</li>
+    <li><strong>Record</strong> (red circle) — Starts recording on the current track or appends to the end.</li>
+    <li><strong>Skip to Start</strong> (bar + left arrow) — Moves the cursor to the very beginning of the project.</li>
+    <li><strong>Skip to End</strong> (right arrow + bar) — Moves the cursor to the very end of the project.</li>
+    <li><strong>Loop</strong> (circular arrows) — When enabled, the selected region plays on repeat.</li>
+  </ul>
+
+  <h2>Tools Toolbar</h2>
+  <p>The Tools toolbar lets you select which tool is active when you click on the waveform. Audacity's main tools include:</p>
+
+  <h3>Selection Tool (I-beam) — <kbd>F1</kbd></h3>
+  <p>This is the default tool you'll use most of the time. Click and drag on the waveform to highlight a region. That region can then be cut, copied, deleted, or have effects applied to it.</p>
+
+  <h3>Envelope Tool — <kbd>F2</kbd></h3>
+  <p>Allows you to create volume changes over time directly on the waveform. You add control points by clicking and then drag them up or down to raise or lower the volume at that point. Perfect for ducking music under narration.</p>
+
+  <h3>Draw Tool — <kbd>F3</kbd></h3>
+  <p>Lets you draw individual samples when zoomed in extremely close. This is an advanced tool used to manually fix tiny clicks or pops in a recording.</p>
+
+  <h3>Multi-Tool — <kbd>F6</kbd></h3>
+  <p>Combines several tools into one — the tool automatically switches depending on where you hover your mouse on the track. Hovering in the center activates Selection; near the top or bottom edge activates Envelope.</p>
+
+  <h2>Meter Toolbar</h2>
+  <p>The Meter toolbar displays two horizontal bar meters:</p>
+  <ul>
+    <li><strong>Playback Meter</strong> (speaker icon) — Shows the audio level during playback in real time.</li>
+    <li><strong>Recording Meter</strong> (microphone icon) — Shows the input level from your microphone. Use this to set proper recording levels <em>before</em> you hit Record.</li>
+  </ul>
+  <p>The meters are color-coded: <strong>green</strong> indicates safe levels, <strong>yellow</strong> means you're getting loud, and <strong>red</strong> means the audio is clipping (distorting). Always keep your levels in the green-to-yellow range.</p>
+
+  <div class="warning">
+    <strong>Warning:</strong> If the recording meter shows red during recording, your audio is clipping. Lower the input gain before continuing.
+  </div>
+
+  <h2>Mixer Toolbar</h2>
+  <p>The Mixer toolbar gives you quick access to input and output volume:</p>
+  <ul>
+    <li><strong>Recording Volume</strong> (microphone slider) — Controls how loud your microphone input is within Audacity.</li>
+    <li><strong>Playback Volume</strong> (speaker slider) — Controls how loud audio plays through your headphones or speakers.</li>
+  </ul>
+
+  <h2>Timeline (Ruler)</h2>
+  <p>The horizontal ruler running across the top of the track area is the <strong>Timeline</strong>. It shows time in minutes and seconds (or other units, depending on your settings). The thin vertical line on the timeline is the <strong>playback cursor</strong>, showing you exactly where you are in the project.</p>
+
+  <h2>Track Area (Waveform Display)</h2>
+  <p>The large central area of the screen is where your audio tracks live. Each track appears as a horizontal lane displaying the <strong>waveform</strong> — a visual representation of your audio's volume over time.</p>
+  <p>On the left side of each track is the <strong>Track Control Panel</strong>, which shows:</p>
+  <ul>
+    <li>The track name (click to rename).</li>
+    <li><strong>Mute</strong> button — silences that track during playback.</li>
+    <li><strong>Solo</strong> button — plays only that track, muting all others.</li>
+    <li><strong>Gain slider</strong> — adjusts the overall volume of the track.</li>
+    <li><strong>Pan slider</strong> — moves the audio left or right in the stereo field.</li>
+    <li>A dropdown arrow for more track options (rate, format, channels).</li>
+  </ul>
+
+  <h2>Status Bar</h2>
+  <p>The <strong>Status Bar</strong> runs along the bottom of the Audacity window. It displays helpful messages about the current tool, hints about what you can do, and feedback about recent operations (e.g., "Selection saved" or "Noise profile obtained").</p>
+
+  <h2>Selection Toolbar</h2>
+  <p>The <strong>Selection Toolbar</strong> (usually at the bottom or configurable via <strong>View &gt; Toolbars</strong>) displays precise numerical start and end times (or start and length) for your current selection. You can type exact values here to make frame-perfect selections — useful when you need to cut at an exact timestamp.</p>
+
+  <h2>Customizing the Layout</h2>
+  <p>You can show, hide, and rearrange toolbars by going to <strong>View &gt; Toolbars</strong>. If a toolbar disappears, use this menu to bring it back. You can also drag toolbars to rearrange them to suit your workflow.</p>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>The <strong>Transport toolbar</strong> controls playback and recording.</li>
+    <li>The <strong>Tools toolbar</strong> switches between Selection, Envelope, Draw, and Multi-Tool modes.</li>
+    <li>The <strong>Meter toolbar</strong> shows live recording and playback levels — keep them out of the red.</li>
+    <li>The <strong>Track area</strong> displays your audio as waveforms with per-track volume, pan, mute, and solo controls.</li>
+    <li>The <strong>Selection toolbar</strong> lets you make precise, time-accurate selections.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Audio Production — Audacity</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

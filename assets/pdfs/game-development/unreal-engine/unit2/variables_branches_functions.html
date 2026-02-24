@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>Variables, Branches &amp; Functions</h1>
+    <p class="subtitle">Store data, make decisions, and organize your Blueprint logic</p>
+  </div>
+
+  <h2>Variables in Blueprints</h2>
+  <p>A <strong>variable</strong> is a named container that holds a piece of data. Just like a labeled box — you give it a name, choose what type of thing goes inside, and then you can read from it or change its contents whenever you need to.</p>
+
+  <h3>Variable Types</h3>
+  <p>Every variable in Blueprints has a <strong>type</strong> that determines what kind of data it can store:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Color</th>
+        <th>What It Stores</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Boolean</strong></td>
+        <td>Dark Red</td>
+        <td>True or False</td>
+        <td>HasKey = True</td>
+      </tr>
+      <tr>
+        <td><strong>Integer</strong></td>
+        <td>Teal</td>
+        <td>Whole numbers</td>
+        <td>CoinCount = 5</td>
+      </tr>
+      <tr>
+        <td><strong>Float</strong></td>
+        <td>Light Green</td>
+        <td>Decimal numbers</td>
+        <td>Speed = 600.0</td>
+      </tr>
+      <tr>
+        <td><strong>String</strong></td>
+        <td>Magenta</td>
+        <td>Text</td>
+        <td>PlayerName = "Alex"</td>
+      </tr>
+      <tr>
+        <td><strong>Vector</strong></td>
+        <td>Yellow</td>
+        <td>X, Y, Z values</td>
+        <td>SpawnPoint = (0, 0, 100)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Creating a Variable</h3>
+  <ol>
+    <li>Open a Blueprint (Level Blueprint or an Actor Blueprint).</li>
+    <li>In the <strong>My Blueprint</strong> panel on the left, find the <strong>Variables</strong> section.</li>
+    <li>Click the <strong>+ Variable</strong> button.</li>
+    <li>Give it a name (e.g., <code>TotalGold</code>).</li>
+    <li>In the <strong>Details</strong> panel on the right, set the <strong>Variable Type</strong> (e.g., Integer).</li>
+    <li>Optionally set a <strong>Default Value</strong> — you may need to compile first before the default value field appears.</li>
+  </ol>
+
+  <h3>Get and Set Nodes</h3>
+  <p>Once you've created a variable, you interact with it using two types of nodes:</p>
+  <ul>
+    <li><strong>Get</strong> — reads the current value. Drag the variable from the My Blueprint panel into the Event Graph, or hold <kbd>Ctrl</kbd> and drag it. This creates a Get node.</li>
+    <li><strong>Set</strong> — changes the value. Hold <kbd>Alt</kbd> and drag the variable into the graph. This creates a Set node with an execution pin (because changing data is an action that happens in sequence).</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Remember:</strong> <kbd>Ctrl</kbd>+Drag = Get (read). <kbd>Alt</kbd>+Drag = Set (write). You'll use this constantly.
+  </div>
+
+  <h2>The Branch Node (If/Then Logic)</h2>
+  <p>The <strong>Branch</strong> node is Blueprints' version of an if/then statement. It takes a <strong>Boolean</strong> (true/false) input and splits the execution into two paths:</p>
+  <ul>
+    <li><strong>True</strong> — this path executes if the condition is true.</li>
+    <li><strong>False</strong> — this path executes if the condition is false.</li>
+  </ul>
+  <p>To add one, right-click the Event Graph and search for <code>Branch</code>. Connect a Boolean value to the <strong>Condition</strong> pin. Then wire different actions to the True and False outputs.</p>
+
+  <h2>Keyboard Input Events</h2>
+  <p>You can listen for keyboard presses in the Level Blueprint. Right-click the Event Graph and search for the key name — for example, <code>N</code>. Select <strong>Keyboard Events → N</strong>. This creates a node with <strong>Pressed</strong> and <strong>Released</strong> execution pins. You can do the same for any key: <code>G</code>, <code>E</code>, <code>Space Bar</code>, etc.</p>
+
+  <h2>Building a Gold System</h2>
+  <p>Let's put variables, input, and branches together by building a simple gold-collecting system in the Level Blueprint.</p>
+
+  <h3>Step 1: Create the Variables</h3>
+  <ol>
+    <li>Open the <strong>Level Blueprint</strong> (Blueprints toolbar → Open Level Blueprint).</li>
+    <li>Create an <strong>Integer</strong> variable called <code>TotalGold</code>. Set its default value to <code>0</code>.</li>
+    <li>Create another <strong>Integer</strong> variable called <code>GainGold</code>. Set its default value to <code>10</code>.</li>
+  </ol>
+
+  <h3>Step 2: Add Gold on Key Press</h3>
+  <ol>
+    <li>Right-click the Event Graph and add a <strong>Keyboard Event for the G key</strong>.</li>
+    <li>From the <strong>Pressed</strong> pin, drag out a wire and add a <strong>Get TotalGold</strong> node and a <strong>Get GainGold</strong> node.</li>
+    <li>Add an <strong>Integer + Integer</strong> node (search for "int + int" or just "+"). Connect TotalGold and GainGold to its inputs.</li>
+    <li>Add a <strong>Set TotalGold</strong> node. Connect the output of the addition to the input of the Set node.</li>
+    <li>Add a <strong>Print String</strong> node after the Set node. To print the new gold total, you'll need to right-click the integer output and select <strong>Convert to String</strong>, or use an <strong>Append String</strong> node to combine text like <code>"Gold: "</code> with the number.</li>
+  </ol>
+
+  <h3>Step 3: Check a Threshold with Branch</h3>
+  <ol>
+    <li>After the Print String, add a <strong>Branch</strong> node.</li>
+    <li>Add an <strong>Integer >= Integer</strong> node (search for ">="). Connect TotalGold to the top input and type <code>100</code> in the bottom input.</li>
+    <li>Connect the Boolean output of the >= node to the <strong>Condition</strong> pin of the Branch.</li>
+    <li>On the <strong>True</strong> path, add a Print String: <code>"You have enough gold to buy the sword!"</code></li>
+    <li>Compile and play — press <kbd>G</kbd> repeatedly to gain gold and watch the messages change when you hit 100!</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Experiment:</strong> Try changing GainGold's default value to different amounts. Try adding a second key (<kbd>N</kbd>) that subtracts gold. What happens if TotalGold goes below zero?
+  </div>
+
+  <h2>Functions</h2>
+  <p>As your Blueprint grows, you'll find yourself repeating the same set of nodes in multiple places. <strong>Functions</strong> let you bundle a group of nodes into a single reusable block — like creating your own custom node.</p>
+
+  <h3>Creating a Function</h3>
+  <ol>
+    <li>In the <strong>My Blueprint</strong> panel, find the <strong>Functions</strong> section and click <strong>+ Function</strong>.</li>
+    <li>Name it <code>AddGold</code>.</li>
+    <li>A new graph tab opens — this is the function's own mini Event Graph.</li>
+    <li>You'll see a purple <strong>entry node</strong> at the left. This is where execution enters the function.</li>
+  </ol>
+
+  <h3>Parameters (Inputs)</h3>
+  <p>Functions can accept <strong>inputs</strong> (parameters) — data you pass in when you call the function.</p>
+  <ol>
+    <li>Select the purple entry node.</li>
+    <li>In the <strong>Details</strong> panel, click the <strong>+</strong> button next to <strong>Inputs</strong>.</li>
+    <li>Name the input <code>Amount</code> and set its type to <strong>Integer</strong>.</li>
+    <li>Now build the addition logic inside the function: Get TotalGold → add Amount → Set TotalGold.</li>
+  </ol>
+
+  <h3>Return Values (Outputs)</h3>
+  <p>Functions can also <strong>return</strong> data (outputs).</p>
+  <ol>
+    <li>Select the purple entry node again.</li>
+    <li>Click the <strong>+</strong> button next to <strong>Outputs</strong>.</li>
+    <li>Name the output <code>NewTotal</code> and set its type to <strong>Integer</strong>.</li>
+    <li>A <strong>Return Node</strong> appears at the end of the function graph. Connect the updated TotalGold value to the NewTotal output pin.</li>
+  </ol>
+
+  <h3>Calling the Function</h3>
+  <p>Back in the main Event Graph, right-click and search for <code>AddGold</code> — your custom function appears! Place it and connect the execution pin. Pass in a value for Amount (e.g., <code>10</code>). The function handles all the internal logic.</p>
+
+  <div class="warning">
+    <strong>Functions don't support latent actions:</strong> You cannot use Delay, timelines, or other time-based nodes inside functions. If you need time-based logic, use the Event Graph directly or use a <strong>Macro</strong> instead.
+  </div>
+
+  <h2>Organization Tips</h2>
+
+  <h3>Comment Boxes</h3>
+  <p>Select a group of nodes and press <kbd>C</kbd> to wrap them in a labeled comment box. Use descriptive names like <code>Gold System — Add on G Press</code> or <code>Branch — Check Gold Threshold</code>. Color-code them for quick visual identification.</p>
+
+  <h3>Reroute Pins</h3>
+  <p>When wires cross over each other and create a tangled mess, add <strong>reroute nodes</strong>. Double-click on any wire to add a reroute pin — a small dot that you can drag to redirect the wire's path. This keeps your graph clean and readable.</p>
+
+  <h2>Summary</h2>
+  <ul>
+    <li><strong>Variables</strong> store data — Booleans, Integers, Floats, Strings, Vectors.</li>
+    <li>Use <strong>Get</strong> (<kbd>Ctrl</kbd>+Drag) to read and <strong>Set</strong> (<kbd>Alt</kbd>+Drag) to write.</li>
+    <li>The <strong>Branch</strong> node splits execution based on a true/false condition.</li>
+    <li><strong>Keyboard events</strong> let you respond to key presses.</li>
+    <li><strong>Functions</strong> bundle reusable logic with inputs (parameters) and outputs (return values).</li>
+    <li>Keep your graphs clean with <strong>comment boxes</strong> and <strong>reroute pins</strong>.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

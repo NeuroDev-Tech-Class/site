@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/blender-zbrush-mini.html" class="back-link">&larr; Back to 3D Art &mdash; Blender &amp; ZBrush</a>
+    <div class="doc-header">
+    <span class="course-tag">Blender &amp; ZBrush Mini</span>
+    <h1>Activity: Model &amp; Print a Ring</h1>
+    <p class="subtitle">Design, Model, Slice, and 3D Print a Custom Ring</p>
+  </div>
+
+  <h2>Overview</h2>
+  <p>
+    In this guided activity, you'll go through the entire pipeline from idea to physical object: research a ring size,
+    model a custom ring in Blender, prepare it for printing, and produce a finished 3D-printed ring. This brings
+    together modeling skills, modifier knowledge, and 3D printing fundamentals.
+  </p>
+
+  <h2>Step 1: Research Ring Sizes</h2>
+  <p>
+    Before you start modeling, you need to know the <strong>inner diameter</strong> of the ring so it fits the intended
+    finger. There are two easy ways to figure this out:
+  </p>
+  <ul>
+    <li><strong>Measure an existing ring:</strong> If you have a ring that fits, measure its inner diameter with a ruler
+      or calipers. A US size 7 ring is about 17.3mm inner diameter.</li>
+    <li><strong>Use a sizing chart:</strong> Look up a ring size chart online. Common sizes range from about 14mm (size 3)
+      to 23mm (size 13) inner diameter.</li>
+  </ul>
+  <p>
+    Write down your target inner diameter in millimeters — you'll need this when creating the torus.
+  </p>
+
+  <h2>Step 2: Create a Torus in Blender</h2>
+  <ol>
+    <li>Open Blender and delete the default cube (select it, press <strong>X</strong>, confirm).</li>
+    <li>Add a torus: <strong>Add → Mesh → Torus</strong> (or press Shift+A and navigate to Mesh → Torus).</li>
+    <li>Immediately after adding, look at the <strong>operator panel</strong> in the bottom-left corner. Here you can set
+      the torus dimensions:
+      <ul>
+        <li><strong>Major Radius:</strong> The distance from the center of the torus to the center of the tube. This
+          determines the ring's overall size. Set this to <em>half your inner diameter</em> plus half the tube thickness.</li>
+        <li><strong>Minor Radius:</strong> The thickness of the ring band itself. Start with something like 1.5-2.5mm
+          for a realistic ring band.</li>
+        <li><strong>Major Segments:</strong> Controls how round the ring is (48 is a good, smooth value).</li>
+        <li><strong>Minor Segments:</strong> Controls how round the band cross-section is (12-16 works well).</li>
+      </ul>
+    </li>
+    <li>After setting values, click away to confirm. <em>Note:</em> You can only adjust these settings right after
+      adding the torus — once you perform another action, the operator panel disappears.</li>
+  </ol>
+
+  <h2>Step 3: Add Detail</h2>
+  <p>
+    Now make the ring your own! Here are some ideas:
+  </p>
+  <ul>
+    <li><strong>Gemstone mount:</strong> Add a small sphere or cone on top of the ring to simulate a gem setting. Use a
+      Boolean modifier to embed it into the band.</li>
+    <li><strong>Engravings:</strong> Use the Knife tool or Boolean operations with text objects to carve initials,
+      symbols, or patterns into the band.</li>
+    <li><strong>Custom shape:</strong> Enter Edit Mode and reshape the band — make it wider at the top, add a flat face
+      for a signet-style ring, or create a tapered design.</li>
+    <li><strong>Pattern:</strong> Use the Array modifier to create repeating elements around the ring, like small bumps
+      or facets.</li>
+  </ul>
+
+  <h2>Step 4: Use Modifiers</h2>
+  <ul>
+    <li><strong>Bevel Modifier:</strong> Add a subtle bevel to the edges of the ring for a comfortable, rounded feel.
+      Even 1-2 segments with a small width makes a difference — especially on the inner edge that touches your
+      finger.</li>
+    <li><strong>Subdivision Surface:</strong> If your ring has a faceted or angular look, a level-1 or level-2
+      Subdivision Surface smooths it out beautifully.</li>
+    <li><strong>Boolean Modifier:</strong> Use this to cut shapes into the ring (like holes for a pattern) or to embed
+      decorative elements. Remember that Booleans can create messy topology — clean up with the Knife tool and Merge
+      if needed.</li>
+  </ul>
+
+  <h2>Step 5: Check for Manifold / Watertight Mesh</h2>
+  <p>
+    For a successful 3D print, your mesh must be <strong>manifold</strong> (also called "watertight") — meaning it forms
+    a completely closed solid with no holes, gaps, or flipped faces. Imagine filling it with water: if water would leak
+    out, the mesh isn't manifold.
+  </p>
+  <ol>
+    <li>Enable the <strong>3D Print Toolbox</strong> addon: Edit → Preferences → Add-ons → search "3D Print Toolbox" →
+      enable it.</li>
+    <li>In the 3D viewport sidebar (press <strong>N</strong>), find the <strong>3D-Print</strong> tab.</li>
+    <li>Click <strong>Check All</strong> to scan your mesh for problems.</li>
+    <li>Fix any issues it reports: non-manifold edges, flipped normals, zero-area faces, etc.</li>
+  </ol>
+
+  <h2>Step 6: Export as STL</h2>
+  <ol>
+    <li>Select your ring object.</li>
+    <li>Go to <strong>File → Export → STL (.stl)</strong>.</li>
+    <li>In the export options, make sure <strong>Selection Only</strong> is checked (so you don't export other objects
+      in the scene).</li>
+    <li>Verify the <strong>Scale</strong> is set to 1.0 (assuming you modeled in millimeters). If you modeled at a
+      different scale, adjust here.</li>
+    <li>Choose a filename and location, then click <strong>Export STL</strong>.</li>
+  </ol>
+
+  <h2>Step 7: Load in Slicer, Orient, and Scale</h2>
+  <ol>
+    <li>Open your slicer (Cura, PrusaSlicer, Bambu Studio, etc.).</li>
+    <li>Import / drag in your STL file.</li>
+    <li>Check the dimensions — do they match your intended ring size? Adjust the scale if needed.</li>
+    <li><strong>Orient the ring standing upright</strong> (like it's sitting on a finger) for best print quality. This
+      minimizes the need for supports inside the ring hole.</li>
+    <li>Add a <strong>brim</strong> for bed adhesion, since the ring has a small contact area with the bed.</li>
+  </ol>
+
+  <h2>Step 8: Print at Fine Layer Height</h2>
+  <ul>
+    <li>Set the <strong>layer height</strong> to <strong>0.12mm</strong> for a smooth surface with minimal visible layer
+      lines.</li>
+    <li>Preview the sliced layers to make sure everything looks correct.</li>
+    <li>Send the file to the printer and begin printing.</li>
+    <li>Once complete, carefully remove the ring from the build plate and peel off any brim material.</li>
+    <li>Try it on! If the fit is off, adjust your model dimensions and print again.</li>
+  </ul>
+
+  <h2>Activity Checklist</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>✓</th>
+        <th>Task</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>☐</td><td>Researched and recorded target ring size (inner diameter in mm)</td></tr>
+      <tr><td>☐</td><td>Created a torus with correct dimensions in Blender</td></tr>
+      <tr><td>☐</td><td>Added at least one custom detail (gemstone, engraving, shape, or pattern)</td></tr>
+      <tr><td>☐</td><td>Applied at least one modifier (Bevel, Subdivision Surface, Boolean, etc.)</td></tr>
+      <tr><td>☐</td><td>Ran the 3D Print Toolbox check — mesh is manifold / watertight</td></tr>
+      <tr><td>☐</td><td>Exported as STL</td></tr>
+      <tr><td>☐</td><td>Loaded in slicer, verified dimensions, and oriented correctly</td></tr>
+      <tr><td>☐</td><td>Sliced at fine layer height (0.12mm) and previewed layers</td></tr>
+      <tr><td>☐</td><td>Successfully printed the ring</td></tr>
+      <tr><td>☐</td><td>Removed brim/supports and tested fit</td></tr>
+    </tbody>
+  </table>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Blender &amp; ZBrush Mini</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

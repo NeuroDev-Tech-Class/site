@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/davinci-resolve.html" class="back-link">&larr; Back to Video Production &mdash; DaVinci Resolve</a>
+    <div class="doc-header">
+    <span class="course-tag">Video Production — DaVinci Resolve</span>
+    <h1>Project Settings &amp; Media Management</h1>
+    <p class="subtitle">Configuring your project, importing footage, and organizing your media library</p>
+  </div>
+
+  <h2>Setting Up a New Project</h2>
+  <p>When you launch DaVinci Resolve, the <strong>Project Manager</strong> appears. This is where you create, open, and manage your projects. Click <strong>New Project</strong>, give it a descriptive name (e.g., "Highlight Reel v1"), and double-click to open it.</p>
+  <p>Before you start editing, take a moment to configure your <strong>Project Settings</strong>. Getting these right from the start saves headaches later.</p>
+
+  <h2>Project Settings</h2>
+  <p>Open Project Settings by clicking the <strong>gear icon</strong> in the bottom-right corner of the screen (available from any page).</p>
+
+  <h3>Master Settings — Timeline Format</h3>
+  <p>The most important settings are under <em>Master Settings</em>:</p>
+
+  <table>
+    <thead>
+      <tr><th>Setting</th><th>What It Does</th><th>Recommended Value</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Timeline Resolution</strong></td><td>Sets the pixel dimensions of your project</td><td>1920 × 1080 for HD, 3840 × 2160 for 4K</td></tr>
+      <tr><td><strong>Timeline Frame Rate</strong></td><td>How many frames per second your timeline uses</td><td>Match your footage (usually 24, 30, or 60)</td></tr>
+      <tr><td><strong>Playback Frame Rate</strong></td><td>Frame rate used for playback (should match timeline)</td><td>Same as Timeline Frame Rate</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warning">
+    <strong>Warning:</strong> The <strong>Timeline Frame Rate</strong> cannot be changed after you create your first timeline. Set it correctly before you begin editing. If your footage is 30 fps, set your timeline to 30 fps.
+  </div>
+
+  <div class="tip">
+    <strong>Tip:</strong> Not sure what frame rate your footage is? Import a clip into the Media Pool first, right-click it, and choose <em>Clip Attributes</em> to check. Or look at the clip's metadata in the Media page.
+  </div>
+
+  <h3>Other Useful Settings</h3>
+  <ul>
+    <li><strong>Mismatched Resolution:</strong> Under <em>Image Scaling > Input Scaling</em>, set how Resolve handles clips that don't match your timeline resolution. "Scale full frame with crop" and "Scale entire image to fit" are the most common choices.</li>
+    <li><strong>Working Color Space:</strong> For beginners, leave this at the default (DaVinci YRGB). As you advance, you can explore DaVinci YRGB Color Managed or ACES.</li>
+    <li><strong>Optimized Media Resolution:</strong> If you plan to use proxy editing for performance, set this here (typically Half or Quarter resolution).</li>
+  </ul>
+
+  <h2>The Media Page</h2>
+  <p>Switch to the <strong>Media</strong> page (first icon at the bottom, or <kbd>Shift</kbd>+<kbd>2</kbd>) to start importing and organizing your footage.</p>
+
+  <h3>Importing Clips</h3>
+  <p>There are several ways to bring media into your project:</p>
+  <ul>
+    <li><strong>Drag and drop:</strong> Open a file explorer window next to Resolve and drag files directly into the Media Pool.</li>
+    <li><strong>File browser:</strong> Use the file browser on the left side of the Media page to navigate to your footage, then drag clips to the Media Pool.</li>
+    <li><strong>Menu:</strong> Go to <em>File > Import > Media</em> (or press <kbd>Ctrl</kbd>+<kbd>I</kbd>) to open a standard file dialog.</li>
+    <li><strong>Import entire folders:</strong> Right-click in the Media Pool and choose <em>Import Media Folder</em> to bring in the full contents of a folder, preserving its structure.</li>
+  </ul>
+
+  <h3>What You Can Import</h3>
+  <p>DaVinci Resolve supports a wide range of formats:</p>
+  <ul>
+    <li><strong>Video:</strong> MP4, MOV, AVI, MKV, ProRes, DNxHD, and many more</li>
+    <li><strong>Audio:</strong> WAV, MP3, AAC, FLAC, AIFF</li>
+    <li><strong>Images:</strong> JPEG, PNG, TIFF, BMP, EXR (also image sequences)</li>
+  </ul>
+
+  <h2>Organizing with Bins</h2>
+  <p>As your project grows, a flat list of clips becomes hard to navigate. <strong>Bins</strong> are folders inside the Media Pool that help you stay organized.</p>
+  <ul>
+    <li>Right-click in the Media Pool and choose <strong>New Bin</strong> to create a folder.</li>
+    <li>Name your bins descriptively: <code>Video</code>, <code>Audio</code>, <code>Music</code>, <code>Images</code>, <code>Sound Effects</code>, <code>B-Roll</code>.</li>
+    <li>Drag clips into the appropriate bins.</li>
+    <li>You can nest bins inside bins for deeper organization.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> A good bin structure might look like this: a top-level bin for each category (Video, Audio, Graphics), with sub-bins inside for specific scenes or types of content.
+  </div>
+
+  <h2>Metadata and Markers</h2>
+  <p><strong>Metadata</strong> is information attached to each clip — things like file name, resolution, frame rate, codec, duration, and creation date. You can view and edit metadata in the <strong>Metadata</strong> panel on the Media page.</p>
+  <p>You can also add your own metadata, like descriptions, scene numbers, or keywords. This is especially useful on larger projects where you need to find specific shots quickly.</p>
+  <p><strong>Markers</strong> let you flag specific moments within a clip. Press <kbd>M</kbd> while viewing a clip to add a marker at the playhead position. You can color-code markers and add notes to them.</p>
+
+  <h2>Smart Bins</h2>
+  <p><strong>Smart Bins</strong> are virtual bins that automatically collect clips based on metadata criteria. For example, you could create a Smart Bin that shows only clips with a resolution of 3840×2160, or only audio files, or only clips with a specific keyword.</p>
+  <p>To create a Smart Bin, right-click in the Smart Bins area (left sidebar of Media Pool) and choose <em>Add Smart Bin</em>. Set your filter criteria and Resolve will automatically populate it.</p>
+
+  <h2>Power Bins</h2>
+  <p><strong>Power Bins</strong> are special bins that persist across all projects in your database. If you have assets you use in every project — like a logo, an intro animation, or a music track — put them in a Power Bin so they're always available without re-importing.</p>
+  <p>To show Power Bins, click <em>View > Show Power Bins</em> in the Media Pool.</p>
+
+  <h2>Media Storage</h2>
+  <p>At the top of the Media page, you'll find the <strong>Media Storage</strong> browser. This shows your computer's drives and lets you browse for footage without leaving Resolve. You can add frequently-used folders to your favorites for quick access under <em>Preferences > Media Storage</em>.</p>
+
+  <div class="warning">
+    <strong>Warning:</strong> DaVinci Resolve does <strong>not</strong> copy your source files into the project. It <em>links</em> to them. If you move, rename, or delete your source files after importing, Resolve will lose track of them and show "Media Offline" errors. Keep your source files in a stable location and don't move them once you've started editing.
+  </div>
+
+  <h2>Media Management Best Practices</h2>
+  <ul>
+    <li><strong>Create a project folder</strong> on your drive before you start. Put all your footage, audio, and images inside it.</li>
+    <li><strong>Don't move source files</strong> after importing them into Resolve.</li>
+    <li><strong>Use descriptive file names.</strong> <code>interview_john_take2.mp4</code> is better than <code>MVI_3842.mp4</code>.</li>
+    <li><strong>Back up your project folder</strong> regularly — external drive or cloud storage.</li>
+    <li><strong>Use bins</strong> inside the Media Pool to mirror your folder structure.</li>
+  </ul>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>Configure <strong>Timeline Resolution</strong> and <strong>Timeline Frame Rate</strong> in Project Settings before you start editing.</li>
+    <li>Import media through drag-and-drop, the file browser, or <kbd>Ctrl</kbd>+<kbd>I</kbd>.</li>
+    <li>Organize clips into <strong>bins</strong> for a clean, navigable Media Pool.</li>
+    <li><strong>Smart Bins</strong> auto-organize by metadata; <strong>Power Bins</strong> persist across projects.</li>
+    <li>Never move or rename source files after importing — Resolve links to them, it doesn't copy them.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Video Production — DaVinci Resolve</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

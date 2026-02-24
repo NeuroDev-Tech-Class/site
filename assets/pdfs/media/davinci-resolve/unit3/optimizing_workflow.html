@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/davinci-resolve.html" class="back-link">&larr; Back to Video Production &mdash; DaVinci Resolve</a>
+    <div class="doc-header">
+    <span class="course-tag">Video Production — DaVinci Resolve</span>
+    <h1>Optimizing Your Workflow</h1>
+    <p class="subtitle">Tips and techniques for faster, smoother editing in DaVinci Resolve</p>
+  </div>
+
+  <h2>Why Optimize?</h2>
+  <p>Video editing can be demanding on your computer. Large files, complex effects, and high-resolution footage can cause stuttering playback, slow renders, and a frustrating experience. DaVinci Resolve offers several tools to keep things running smoothly — even on modest hardware.</p>
+
+  <h2>Proxy Workflow</h2>
+  <p>If your footage plays back with lag, dropped frames, or stuttering — especially with 4K or heavily compressed media — a <strong>proxy workflow</strong> lets you edit with lower-resolution versions of your clips for smooth playback, then automatically switches back to the full-resolution originals for export.</p>
+
+  <h3>Optimized Media</h3>
+  <p>DaVinci Resolve's built-in approach to proxies is called <strong>Optimized Media</strong>:</p>
+  <ol>
+    <li>In the Media Pool, select the clips that are causing performance issues (or select all).</li>
+    <li>Right-click and choose <strong>Generate Optimized Media</strong>.</li>
+    <li>Resolve will create lower-resolution, edit-friendly copies of those clips in the background.</li>
+    <li>Once generated, go to <em>Playback > Use Optimized Media If Available</em> to enable them.</li>
+    <li>When you export via the Deliver page, Resolve automatically uses the <strong>original full-resolution</strong> files — not the proxies.</li>
+  </ol>
+  <p>Configure the proxy resolution and format in <em>Project Settings > Master Settings > Optimized Media Resolution</em> (Quarter or Half resolution is typical) and <em>Optimized media format</em> (DNxHR SQ or ProRes Proxy are good choices).</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> Optimized media takes disk space and time to generate, but the smooth editing experience is worth it. Generate optimized media during a break or overnight.
+  </div>
+
+  <h2>Render Cache</h2>
+  <p>The <strong>Render Cache</strong> pre-renders complex sections of your timeline in the background so they play back smoothly. This is especially useful when you've applied effects, color grades, fusion compositions, or transitions that cause playback to stutter.</p>
+  <ol>
+    <li>Go to <em>Playback > Render Cache > Smart</em>.</li>
+    <li>Resolve will automatically detect which parts of the timeline need caching and begin rendering them in the background.</li>
+    <li>Cached sections appear with a <strong>blue bar</strong> above the timeline (red = needs caching, blue = cached).</li>
+    <li>Once cached, those sections play back in real time regardless of how many effects are applied.</li>
+  </ol>
+
+  <h3>Cache Options</h3>
+  <ul>
+    <li><strong>None:</strong> No caching. Only use this if your system handles everything fine without it.</li>
+    <li><strong>Smart:</strong> Resolve decides what to cache — recommended for most users.</li>
+    <li><strong>User:</strong> You manually mark which clips to cache (right-click clip > <em>Render Cache Color Output</em>).</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> If you're running low on disk space, you can delete the render cache: <em>Playback > Delete Render Cache > All</em>. The cache will be regenerated as needed.
+  </div>
+
+  <h2>Timeline Proxy Resolution</h2>
+  <p>For a quick performance boost without generating proxy files, you can lower the <strong>timeline playback resolution</strong>:</p>
+  <ol>
+    <li>Go to <em>Playback > Timeline Proxy Resolution</em>.</li>
+    <li>Choose <strong>Half</strong> or <strong>Quarter</strong>.</li>
+    <li>The viewer will show a lower-resolution preview, but playback will be much smoother.</li>
+    <li>This affects <strong>preview only</strong> — your final export is always at full resolution.</li>
+  </ol>
+
+  <h2>Keyboard Customization</h2>
+  <p>Efficient editors live on the keyboard. DaVinci Resolve's shortcuts are fully customizable:</p>
+  <ol>
+    <li>Go to <em>DaVinci Resolve > Keyboard Customization</em> (on Windows: <em>DaVinci Resolve > Keyboard Customization</em>, accessible from the menu bar).</li>
+    <li>Search for any command by name.</li>
+    <li>Click the shortcut field and press your desired key combination.</li>
+    <li>Save your custom preset so you can restore it if needed.</li>
+  </ol>
+
+  <h3>Shortcuts Worth Customizing</h3>
+  <p>Most editors customize shortcuts for the actions they use most frequently. Consider assigning easy-to-reach keys to:</p>
+  <ul>
+    <li>Your most-used transitions</li>
+    <li>Render cache toggles</li>
+    <li>Favorite viewing modes</li>
+    <li>Mark In/Out and navigation commands</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> Resolve also supports importing keyboard layouts from other NLEs (Premiere Pro, Final Cut, Avid). If you're coming from another editor, this can ease the transition. Check the dropdown at the top of the Keyboard Customization window.
+  </div>
+
+  <h2>Project Backup &amp; Versioning</h2>
+  <p>Losing an editing project is devastating. Protect your work:</p>
+
+  <h3>Save As (Versioning)</h3>
+  <p>Use <em>File > Save Project As</em> to create named versions of your project at key milestones:</p>
+  <ul>
+    <li><code>My Project - Rough Cut</code></li>
+    <li><code>My Project - Fine Cut</code></li>
+    <li><code>My Project - Color Graded</code></li>
+    <li><code>My Project - Final</code></li>
+  </ul>
+  <p>This way, you can always go back to an earlier version if something goes wrong.</p>
+
+  <h3>Auto-Save</h3>
+  <p>DaVinci Resolve has <strong>auto-save</strong> enabled by default. Check its settings under <em>Preferences > User > Project Save and Load</em>. You can set how often it auto-saves (every 5 or 10 minutes is recommended) and how many backups it keeps.</p>
+
+  <h3>Exporting a Project Archive</h3>
+  <p>For a full backup (including all media), use <em>File > Export Project Archive</em>. This creates a folder with the project file and copies of all media — useful for transferring projects between computers or creating a complete backup.</p>
+
+  <h2>Collaborative Workflow</h2>
+  <p>DaVinci Resolve supports <strong>project databases</strong> (local or PostgreSQL) where multiple projects are stored. For team collaboration, the Studio version supports multi-user projects — multiple editors can work on the same timeline simultaneously with different roles. While this is beyond the scope of this course, knowing it exists is useful for future professional work.</p>
+
+  <h2>Organizing Projects</h2>
+  <p>Good organization saves time and prevents errors:</p>
+  <ul>
+    <li><strong>Project naming:</strong> Use descriptive names with versions: <code>Travel_Vlog_v3_Final</code>.</li>
+    <li><strong>Bin structure:</strong> Create a consistent bin layout across projects: <code>Video</code>, <code>Audio/Music</code>, <code>Audio/SFX</code>, <code>Graphics</code>, <code>Exports</code>.</li>
+    <li><strong>File naming:</strong> Rename source files descriptively before importing if their camera-generated names are meaningless.</li>
+    <li><strong>Color coding:</strong> Use clip colors in the timeline and Media Pool to visually categorize content (e.g., blue for B-roll, green for interviews, red for needs review).</li>
+    <li><strong>Markers:</strong> Place timeline markers at key points with notes. This helps you navigate large projects quickly.</li>
+  </ul>
+
+  <h2>Performance Settings Summary</h2>
+  <table>
+    <thead>
+      <tr><th>Technique</th><th>What It Does</th><th>When to Use</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Optimized Media</strong></td><td>Creates lightweight proxy copies of clips</td><td>4K footage, heavily compressed media (H.265, screen recordings)</td></tr>
+      <tr><td><strong>Render Cache (Smart)</strong></td><td>Pre-renders complex timeline sections</td><td>Many effects, color grades, Fusion compositions</td></tr>
+      <tr><td><strong>Timeline Proxy Resolution</strong></td><td>Lowers preview resolution (Half/Quarter)</td><td>Quick fix for any playback stutter</td></tr>
+      <tr><td><strong>GPU acceleration</strong></td><td>Uses GPU for processing (enabled by default)</td><td>Ensure your GPU drivers are up to date</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>Use <strong>Optimized Media</strong> or <strong>Timeline Proxy Resolution</strong> if playback is laggy.</li>
+    <li>Enable <strong>Render Cache > Smart</strong> to pre-render effects-heavy sections.</li>
+    <li>Customize <strong>keyboard shortcuts</strong> for your most-used actions.</li>
+    <li>Save project versions with <strong>Save As</strong> and enable <strong>auto-save</strong>.</li>
+    <li>Maintain consistent <strong>project naming and bin organization</strong> across all your work.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Video Production — DaVinci Resolve</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

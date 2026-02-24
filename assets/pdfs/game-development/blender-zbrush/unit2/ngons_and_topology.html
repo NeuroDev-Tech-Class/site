@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/blender-zbrush-mini.html" class="back-link">&larr; Back to 3D Art &mdash; Blender &amp; ZBrush</a>
+    <div class="doc-header">
+    <span class="course-tag">Blender &amp; ZBrush Mini</span>
+    <h1>N-Gons &amp; Topology</h1>
+    <p class="subtitle">Understanding How Meshes Are Built — and Why It Matters</p>
+  </div>
+
+  <h2>What Is Topology?</h2>
+  <p>
+    Every 3D model in Blender is made up of three basic building blocks: <strong>vertices</strong> (points in space),
+    <strong>edges</strong> (lines connecting two vertices), and <strong>faces</strong> (flat surfaces enclosed by edges).
+    <em>Topology</em> refers to the way these vertices, edges, and faces are arranged across a mesh. Think of it like the
+    wireframe skeleton underneath the smooth surface you see.
+  </p>
+  <p>
+    Two models can look identical on the outside but have completely different topology underneath. Good topology makes a
+    model easy to work with — it subdivides cleanly, deforms properly for animation, and renders with smooth shading.
+    Bad topology leads to visual glitches, difficult editing, and problems down the line.
+  </p>
+
+  <h2>Types of Faces</h2>
+  <p>
+    Faces in a 3D mesh are classified by how many sides (edges) they have:
+  </p>
+
+  <h3>Quads (4-Sided Faces) — The Gold Standard</h3>
+  <p>
+    A <strong>quad</strong> is a face with exactly four vertices and four edges. Quads are considered the ideal face type
+    in 3D modeling for several important reasons:
+  </p>
+  <ul>
+    <li><strong>Smooth subdivision:</strong> When you apply a Subdivision Surface modifier, quads split evenly into four
+      smaller quads. This produces predictable, uniform smoothing across the entire surface.</li>
+    <li><strong>Clean deformation:</strong> If your model will ever be animated (bent, stretched, posed), quads deform
+      smoothly along edge loops. Imagine bending your elbow — the skin stretches evenly. Quads behave the same way.</li>
+    <li><strong>Consistent shading:</strong> Quads shade predictably because their normals (the invisible arrows
+      pointing outward from each face) are evenly distributed.</li>
+  </ul>
+  <p>
+    Professional modelers aim for <em>all-quad</em> meshes whenever possible. You'll hear this called "clean topology"
+    or "good topology."
+  </p>
+
+  <h3>Triangles (3-Sided Faces) — Acceptable</h3>
+  <p>
+    A <strong>triangle</strong> (or <em>tri</em>) is a face with three vertices and three edges. Triangles are perfectly
+    valid and are actually the most basic polygon — every face in a video game is ultimately converted to triangles by
+    the game engine.
+  </p>
+  <p>
+    Triangles are fine in certain situations:
+  </p>
+  <ul>
+    <li>Game engines use them natively, so game-ready models often contain triangles.</li>
+    <li>They work well on flat surfaces or areas that won't be subdivided.</li>
+    <li>Sometimes a few strategically placed triangles help redirect edge flow.</li>
+  </ul>
+  <p>
+    However, triangles don't subdivide as cleanly as quads. On curved surfaces, they can cause slight shading artifacts
+    — small dimples or uneven highlights that break the illusion of smoothness.
+  </p>
+
+  <h3>N-Gons (5+ Sided Faces) — Problematic</h3>
+  <p>
+    An <strong>N-gon</strong> is any face with five or more sides. The "N" stands for any number greater than four.
+    N-gons are the most troublesome face type, and experienced modelers actively avoid them. Here's why:
+  </p>
+  <ul>
+    <li><strong>Pinching:</strong> When an N-gon is subdivided, the extra vertices create uneven geometry that "pinches"
+      inward, leaving visible dents or creases in your surface.</li>
+    <li><strong>Shading artifacts:</strong> N-gons are inherently non-planar (their vertices don't all sit on the same
+      flat plane). This confuses Blender's shading calculations, producing dark spots, streaks, or flickering shadows.</li>
+    <li><strong>Poor subdivision:</strong> The Subdivision Surface modifier doesn't know how to evenly split a 5-, 6-,
+      or 7-sided face. The result is unpredictable, lumpy geometry.</li>
+    <li><strong>Export issues:</strong> Many game engines and 3D printers require triangulated meshes. When Blender
+      automatically triangulates an N-gon, it may choose an ugly or inefficient split.</li>
+  </ul>
+
+  <h2>Why Clean Topology Matters</h2>
+  <p>
+    You might wonder: "If my model looks fine right now, why should I care about topology?" Here are the key reasons:
+  </p>
+  <ol>
+    <li><strong>Smooth subdivision:</strong> The Subdivision Surface modifier is one of the most common tools in Blender.
+      It only works well on clean quad-based topology. If you plan to smooth your model at all, you need good topology.</li>
+    <li><strong>Proper deformation:</strong> If your model will be rigged and animated (given a skeleton to move), clean
+      edge loops allow joints to bend naturally. Messy topology creates ugly stretching and collapsing at joints.</li>
+    <li><strong>Cleaner shading:</strong> Smooth shading across a surface depends on consistent face normals. Quads
+      produce even normals; N-gons produce chaotic ones.</li>
+    <li><strong>Easier editing:</strong> When you need to go back and change something, clean topology is much easier to
+      select, modify, and extend. Messy topology is like trying to untangle a knot.</li>
+    <li><strong>Professional standard:</strong> In the industry — games, film, 3D printing — clean topology is expected.
+      Building good habits now will serve you for your entire 3D modeling journey.</li>
+  </ol>
+
+  <h2>What Does Good vs. Bad Topology Look Like?</h2>
+  <p>
+    Imagine a simple sphere. With good topology, the wireframe shows a neat grid of quads flowing from pole to pole, like
+    lines of latitude and longitude on a globe. Each face is roughly the same size, and the edge loops form clean rings
+    around the shape.
+  </p>
+  <p>
+    Now imagine that same sphere after careless Boolean operations: some faces have 7 or 8 sides, edges zig-zag in
+    random directions, and certain areas have tiny cramped faces next to huge stretched ones. That's bad topology.
+    Applying a Subdivision Surface modifier to this mesh would produce visible pinching and lumps.
+  </p>
+  <p>
+    Another example: picture a character's face. Good topology has edge loops that follow the natural contours — rings
+    around the eyes, loops around the mouth, and quads flowing along the cheekbones. This allows the face to animate
+    naturally when the character smiles, blinks, or talks.
+  </p>
+
+  <h2>How to Identify N-Gons in Blender</h2>
+  <p>
+    Blender gives you tools to find N-gons so you can fix them:
+  </p>
+
+  <h3>Method 1: Face Stats Overlay</h3>
+  <ol>
+    <li>Enter <strong>Edit Mode</strong> (Tab key).</li>
+    <li>Open the <strong>Viewport Overlays</strong> dropdown (the two overlapping circles icon in the header bar).</li>
+    <li>Under <strong>Mesh Analysis</strong>, enable the overlay or look for <strong>Statistics</strong> to display face
+      information.</li>
+    <li>N-gons and triangles will be highlighted, making them easy to spot.</li>
+  </ol>
+
+  <h3>Method 2: Select All by Trait</h3>
+  <ol>
+    <li>Enter <strong>Edit Mode</strong> and switch to <strong>Face Select</strong> mode (press <strong>3</strong>).</li>
+    <li>Go to <strong>Select</strong> (top menu) → <strong>All by Trait</strong> → <strong>Faces by Sides</strong>.</li>
+    <li>In the pop-up, set the number of vertices to <strong>5</strong> and the comparison to <strong>Greater Than or Equal To</strong>.</li>
+    <li>All N-gons in your mesh will be selected and highlighted. You can now see exactly where the problems are and fix them.</li>
+  </ol>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li><strong>Quads are ideal</strong> — aim for all-quad meshes whenever possible.</li>
+    <li><strong>Triangles are acceptable</strong> — especially for game assets and flat surfaces.</li>
+    <li><strong>N-gons cause problems</strong> — avoid them; fix them when they appear.</li>
+    <li><strong>Use Blender's tools</strong> to detect N-gons early, before they cause bigger issues.</li>
+    <li>Building good topology habits now will save you countless hours of frustration later.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Blender &amp; ZBrush Mini</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

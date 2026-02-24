@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/blender-zbrush-mini.html" class="back-link">&larr; Back to 3D Art &mdash; Blender &amp; ZBrush</a>
+    <div class="doc-header">
+    <span class="course-tag">Blender &amp; ZBrush Mini</span>
+    <h1>Slicing &amp; Print Settings</h1>
+    <p class="subtitle">Turning a 3D Model into Printer-Ready Instructions</p>
+  </div>
+
+  <h2>What Is Slicing?</h2>
+  <p>
+    A 3D printer can't read a Blender file directly. It needs a set of precise, step-by-step instructions telling the
+    nozzle exactly where to move, when to extrude plastic, and how fast to go. This instruction set is called
+    <strong>G-code</strong>, and the process of converting a 3D model into G-code is called <strong>slicing</strong>.
+  </p>
+  <p>
+    The name comes from the fact that the software literally "slices" your 3D model into hundreds or thousands of thin
+    horizontal layers — each layer becomes one pass of the printer nozzle. A <strong>slicer</strong> is the software
+    that does this conversion.
+  </p>
+
+  <h2>Common Slicer Software</h2>
+  <p>
+    Several free slicer programs are widely used. They all do the same basic job but differ in interface and features:
+  </p>
+  <ul>
+    <li><strong>UltiMaker Cura:</strong> One of the most popular free slicers. Great for beginners with sensible
+      defaults and a clean interface. Supports a huge range of printers.</li>
+    <li><strong>PrusaSlicer:</strong> Developed by Prusa Research. Excellent slicer with advanced features like paint-on
+      supports and adaptive layer height. Also free and open-source.</li>
+    <li><strong>Bambu Studio:</strong> Designed for Bambu Lab printers. Based on PrusaSlicer with additional features
+      specific to Bambu hardware. If you're using a Bambu printer, this is the go-to choice.</li>
+  </ul>
+  <p>
+    The workflow is similar across all slicers, so the skills you learn with one transfer easily to others.
+  </p>
+
+  <h2>Loading Your Model</h2>
+  <p>
+    To bring your 3D model into the slicer, you need to export it from Blender in a format the slicer can read. The two
+    most common formats are:
+  </p>
+  <ul>
+    <li><strong>STL</strong> (Stereolithography): The most widely used 3D printing format. It stores only the surface
+      geometry — no color, no textures, just the shape. This is the standard for most printing.</li>
+    <li><strong>OBJ</strong> (Wavefront Object): Also common and supported by most slicers. Can include color
+      information, though most FDM printers don't use it.</li>
+  </ul>
+  <p>
+    In the slicer, you typically just drag and drop the file into the window, or use <strong>File → Open</strong> /
+    <strong>Import</strong>. The model will appear on a virtual representation of your printer's build plate.
+  </p>
+
+  <h2>Key Print Settings</h2>
+  <p>
+    Every slicer lets you adjust settings that control print quality, speed, and strength. Here are the most important
+    ones:
+  </p>
+
+  <h3>Layer Height</h3>
+  <p>
+    How thick each layer is. <strong>0.2mm</strong> is a good all-around default. Use <strong>0.12mm</strong> for fine
+    detail, or <strong>0.28mm</strong> for fast drafts. This is the single biggest factor in print quality and time.
+  </p>
+
+  <h3>Infill Percentage</h3>
+  <p>
+    3D prints are usually not solid inside — they have an internal pattern called <strong>infill</strong>. The percentage
+    controls how dense that pattern is:
+  </p>
+  <ul>
+    <li><strong>10-15%:</strong> Light and fast. Good for decorative objects that won't bear weight.</li>
+    <li><strong>20-30%:</strong> A solid middle ground for most prints.</li>
+    <li><strong>50%+:</strong> Strong and heavy. Use for functional parts that need to handle stress.</li>
+    <li><strong>100%:</strong> Completely solid. Uses the most material and takes the longest, but maximum strength.</li>
+  </ul>
+
+  <h3>Print Speed</h3>
+  <p>
+    How fast the nozzle moves while printing. Slower speeds generally produce cleaner results. Most slicers default to
+    around <strong>50-60 mm/s</strong>, which is a good starting point. You can go faster (80-100+ mm/s) for quick
+    drafts, or slower (30-40 mm/s) for fine detail work.
+  </p>
+
+  <h3>Temperature</h3>
+  <p>
+    <strong>Nozzle temperature</strong> controls how hot the filament gets. For PLA, this is typically
+    <strong>190-210°C</strong>. <strong>Bed temperature</strong> (if your printer has a heated bed) is usually
+    <strong>50-60°C</strong> for PLA. The filament manufacturer's recommendation (printed on the spool or box) is the
+    best starting point.
+  </p>
+
+  <h3>Supports</h3>
+  <p>
+    Toggle supports on or off depending on your model. Most slicers can automatically detect overhangs and generate
+    supports where needed. You can usually choose between regular (grid/linear) and tree supports. Some slicers also let
+    you paint support areas manually for more control.
+  </p>
+
+  <h3>Raft / Brim</h3>
+  <p>
+    Choose a bed adhesion method (or none). A <strong>brim</strong> is the most common choice — it adds a thin border
+    around the base. A <strong>raft</strong> builds a full platform underneath for tricky models. For most prints on a
+    well-leveled bed, a brim or even no adhesion helper is sufficient.
+  </p>
+
+  <h2>Orienting Your Model</h2>
+  <p>
+    How you position your model on the virtual build plate matters a lot:
+  </p>
+  <ul>
+    <li><strong>Flat side down:</strong> Place the largest flat surface on the build plate for stability and good
+      adhesion.</li>
+    <li><strong>Minimize overhangs:</strong> Rotate the model so fewer areas stick out horizontally. This reduces the
+      need for supports.</li>
+    <li><strong>Surface quality:</strong> The side facing up will generally have the smoothest finish. The side touching
+      the bed (or raft) may have a slightly different texture.</li>
+    <li><strong>Strength:</strong> Printed layers have the weakest bond between them. Orient the model so the layer
+      lines don't run perpendicular to the main stress direction.</li>
+  </ul>
+
+  <h2>Scaling</h2>
+  <p>
+    In the slicer, you can scale your model up or down. This is useful if your Blender model is the wrong size for the
+    real world. Most slicers show dimensions in millimeters and let you scale by percentage or by entering exact
+    dimensions. Always double-check the size before printing — it's easy to accidentally print something too small or
+    too large.
+  </p>
+
+  <h2>Previewing Layers</h2>
+  <p>
+    After you click "Slice" (or "Prepare"), the slicer generates all the layers and usually shows a <strong>layer
+    preview</strong>. You can scrub through the layers one by one with a slider to see exactly what the printer will do
+    at each height. This is your last chance to catch problems:
+  </p>
+  <ul>
+    <li>Are supports placed where they need to be?</li>
+    <li>Is the infill pattern reasonable?</li>
+    <li>Does the first layer have good coverage on the build plate?</li>
+    <li>Are there any suspiciously thin walls or missing sections?</li>
+  </ul>
+
+  <h2>Sending to the Printer</h2>
+  <p>
+    Once you're happy with the preview, you save or export the G-code. Depending on your printer, you can:
+  </p>
+  <ul>
+    <li><strong>Save to SD card / USB drive:</strong> Transfer the G-code file to a memory card, insert it into the
+      printer, and start the print from the printer's menu.</li>
+    <li><strong>Send over Wi-Fi / network:</strong> Many modern printers (like Bambu Lab models) connect to your
+      network. You can send the print job directly from the slicer.</li>
+    <li><strong>USB cable:</strong> Some printers can receive G-code directly via USB connection.</li>
+  </ul>
+
+  <h2>Print Time Estimation</h2>
+  <p>
+    After slicing, the software will display an estimated print time and material usage. Small objects might take 30
+    minutes to an hour. Larger or more detailed prints can take several hours — or even a full day. Use this estimate
+    to plan your printing. The slicer also shows how much filament (in grams or meters) the print will use.
+  </p>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>A <strong>slicer</strong> converts your 3D model (STL/OBJ) into G-code instructions for the printer.</li>
+    <li><strong>Layer height</strong> is the biggest quality/speed tradeoff.</li>
+    <li><strong>Infill</strong> controls how solid (and strong) the inside of your print is.</li>
+    <li><strong>Orient your model</strong> to minimize supports and maximize quality.</li>
+    <li>Always <strong>preview layers</strong> before sending to the printer.</li>
+    <li>Check the <strong>estimated time</strong> so you know what to expect.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Blender &amp; ZBrush Mini</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

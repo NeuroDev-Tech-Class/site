@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/blender-zbrush-mini.html" class="back-link">&larr; Back to 3D Art &mdash; Blender &amp; ZBrush</a>
+    <div class="doc-header">
+    <span class="course-tag">Blender &amp; ZBrush Mini</span>
+    <h1>The Blender Interface</h1>
+    <p class="subtitle">A detailed walkthrough of Blender's workspace</p>
+  </div>
+
+  <h2>First Launch</h2>
+  <p>
+    When you open Blender for the first time, you'll see a splash screen with recent files and quick-start options. Click anywhere outside the splash screen to dismiss it. You'll now be looking at Blender's default workspace — and it can feel overwhelming at first. Don't worry. We'll break down every section so you know exactly what everything does.
+  </p>
+  <p>
+    By default, Blender starts you off with three objects already in the scene: a <strong>cube</strong>, a <strong>camera</strong>, and a <strong>light</strong>. The cube is the famous "default cube" — every Blender artist's first companion.
+  </p>
+
+  <div class="tip">
+    <strong>The Default Cube:</strong> It's a running joke in the 3D community that the first thing you do in Blender is delete the default cube. But for learning, it's actually quite useful! We'll keep it around for now.
+  </div>
+
+  <h2>Main Areas of the Interface</h2>
+
+  <h3>The 3D Viewport (Center)</h3>
+  <p>
+    This is the largest area and the heart of Blender. The <strong>3D Viewport</strong> is where you see, select, move, and manipulate your 3D objects. Think of it as a window into your 3D world. You can orbit around, zoom in and out, and pan across the scene.
+  </p>
+  <p>
+    At the top of the viewport, you'll see a header bar with dropdown menus and a mode selector (more on modes below). At the top-right corner of the viewport, there's a small <strong>navigation gizmo</strong> — a set of colored circles representing the X, Y, and Z axes that you can click to snap to specific views.
+  </p>
+
+  <h3>The Toolbar (Left Side of Viewport)</h3>
+  <p>
+    On the left edge of the viewport is the <strong>Toolbar</strong>. It contains icons for common tools: Move, Rotate, Scale, and more. You can toggle the toolbar on and off by pressing <kbd>T</kbd>. When you select a tool here, you can use it by clicking and dragging in the viewport.
+  </p>
+  <p>
+    While the toolbar is helpful for beginners, most experienced Blender users rely on keyboard shortcuts instead, which are much faster. You'll learn the most important shortcuts in the next lesson.
+  </p>
+
+  <h3>Scene Collection / Outliner (Top Right)</h3>
+  <p>
+    The <strong>Outliner</strong> panel sits in the top-right corner and shows a hierarchical list of every object in your scene. You'll see entries like "Camera," "Cube," and "Light" listed here. This is your scene's table of contents.
+  </p>
+  <p>You can use the Outliner to:</p>
+  <ul>
+    <li><strong>Select objects</strong> by clicking their name</li>
+    <li><strong>Rename objects</strong> by double-clicking their name</li>
+    <li><strong>Hide objects</strong> by clicking the eye icon next to them</li>
+    <li><strong>Organize objects</strong> into collections (like folders)</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> Always name your objects! As your scenes grow more complex, having objects named "Cube," "Cube.001," "Cube.002" will quickly become confusing. Double-click any name in the Outliner to rename it.
+  </div>
+
+  <h3>Properties Editor (Bottom Right)</h3>
+  <p>
+    The <strong>Properties Editor</strong> is the tall panel on the bottom-right side of the screen. It has a row of icons along its top, each leading to a different category of settings. The most important tabs for beginners are:
+  </p>
+  <ul>
+    <li><strong>Object Properties</strong> (orange square icon) — position, rotation, and scale of the selected object</li>
+    <li><strong>Modifier Properties</strong> (wrench icon) — non-destructive operations like Subdivision Surface, Mirror, and Boolean</li>
+    <li><strong>Material Properties</strong> (sphere icon) — surface colors, textures, and shader settings</li>
+    <li><strong>Render Properties</strong> (camera icon) — output resolution, render engine, and quality settings</li>
+  </ul>
+  <p>
+    You don't need to memorize all the tabs right now. Just know that if you need to change a setting on an object, you'll likely find it somewhere in the Properties Editor.
+  </p>
+
+  <h3>Timeline (Bottom)</h3>
+  <p>
+    The <strong>Timeline</strong> runs along the bottom of the screen. It's primarily used for animation — setting keyframes and playing back motion over time. We won't use the Timeline much in this course since we're focused on modeling, but it's good to know it's there.
+  </p>
+  <p>
+    You can drag the top edge of the Timeline panel up or down to resize it. If you want more viewport space, you can shrink it down.
+  </p>
+
+  <h3>Header / Menu Bar (Very Top)</h3>
+  <p>
+    At the very top of the Blender window is the <strong>Header</strong> or main menu bar. It contains familiar menus like <strong>File</strong>, <strong>Edit</strong>, <strong>Render</strong>, and <strong>Window</strong>. You'll use <strong>File &gt; Save</strong> (or <kbd>Ctrl</kbd>+<kbd>S</kbd>) frequently. You'll also find workspace tabs here (Layout, Modeling, Sculpting, etc.) that rearrange the interface for different tasks.
+  </p>
+
+  <h2>Object Mode vs. Edit Mode</h2>
+  <p>
+    Blender has several <strong>modes</strong> that change what you can do in the viewport. The two most important modes for modeling are:
+  </p>
+
+  <h3>Object Mode</h3>
+  <p>
+    This is the default mode. In Object Mode, you work with <strong>whole objects</strong> — you can select them, move them, rotate them, scale them, and organize them. You cannot modify the internal geometry (vertices, edges, faces) of an object in Object Mode.
+  </p>
+
+  <h3>Edit Mode</h3>
+  <p>
+    Press <kbd>Tab</kbd> to switch from Object Mode to Edit Mode (and press <kbd>Tab</kbd> again to switch back). In Edit Mode, you can see and manipulate the individual <strong>vertices</strong>, <strong>edges</strong>, and <strong>faces</strong> that make up your selected object. This is where all the detailed modeling happens.
+  </p>
+
+  <div class="warning">
+    <strong>Important:</strong> Make sure you have an object selected before pressing <kbd>Tab</kbd> to enter Edit Mode. If nothing is selected, nothing will happen. You can only edit one object at a time in Edit Mode.
+  </div>
+
+  <h2>The Three Axes</h2>
+  <p>
+    Blender uses a 3D coordinate system with three axes. Understanding these is essential for moving and placing objects precisely:
+  </p>
+  <ul>
+    <li><strong style="color: #e74c3c;">X axis (Red)</strong> — Left and Right</li>
+    <li><strong style="color: #2ecc71;">Y axis (Green)</strong> — Forward and Backward</li>
+    <li><strong style="color: #3498db;">Z axis (Blue)</strong> — Up and Down</li>
+  </ul>
+  <p>
+    You'll see these colors reflected throughout the interface: the gizmo arrows, the axis indicators, and the transform handles all use red, green, and blue to represent X, Y, and Z. Memorize this — it will make everything easier.
+  </p>
+
+  <h2>Saving Your Work</h2>
+  <p>
+    Blender saves projects as <strong>.blend files</strong>. These files contain everything about your project: all objects, materials, textures, camera settings, and more.
+  </p>
+  <ul>
+    <li><kbd>Ctrl</kbd>+<kbd>S</kbd> — Save the current file</li>
+    <li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> — Save As (new file name or location)</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Save often!</strong> Blender does have an auto-save feature, but don't rely on it. Get in the habit of pressing <kbd>Ctrl</kbd>+<kbd>S</kbd> frequently, especially before trying something experimental. You can also use <strong>File &gt; Revert</strong> to go back to your last saved version if something goes wrong.
+  </div>
+
+  <h2>Summary</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Area</th>
+        <th>Location</th>
+        <th>Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>3D Viewport</td>
+        <td>Center</td>
+        <td>View and manipulate 3D objects</td>
+      </tr>
+      <tr>
+        <td>Toolbar</td>
+        <td>Left side of viewport</td>
+        <td>Quick access to tools (Move, Rotate, Scale)</td>
+      </tr>
+      <tr>
+        <td>Outliner</td>
+        <td>Top right</td>
+        <td>List of all objects in the scene</td>
+      </tr>
+      <tr>
+        <td>Properties Editor</td>
+        <td>Bottom right</td>
+        <td>Settings, modifiers, materials</td>
+      </tr>
+      <tr>
+        <td>Timeline</td>
+        <td>Bottom</td>
+        <td>Animation playback and keyframes</td>
+      </tr>
+      <tr>
+        <td>Header / Menu Bar</td>
+        <td>Very top</td>
+        <td>File, Edit, Render menus; workspace tabs</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Blender &amp; ZBrush Mini</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

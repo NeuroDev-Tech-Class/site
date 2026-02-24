@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/blender-zbrush-mini.html" class="back-link">&larr; Back to 3D Art &mdash; Blender &amp; ZBrush</a>
+    <div class="doc-header">
+    <span class="course-tag">Blender &amp; ZBrush Mini</span>
+    <h1>Extrude, Inset &amp; Loop Cut</h1>
+    <p class="subtitle">The three most important modeling tools in Blender</p>
+  </div>
+
+  <h2>Why These Three Tools?</h2>
+  <p>
+    Of all the tools in Blender's modeling toolkit, <strong>Extrude</strong>, <strong>Inset</strong>, and <strong>Loop Cut</strong> are the ones you'll reach for the most. Together, they let you add geometry, create detail, and shape almost any object imaginable — all starting from a simple cube. Master these three tools and you can model just about anything.
+  </p>
+  <p>
+    All three tools are used in <strong>Edit Mode</strong>. Make sure you've entered Edit Mode (<kbd>Tab</kbd>) before trying to use them.
+  </p>
+
+  <h2>Extrude — <kbd>E</kbd></h2>
+  <p>
+    Extrude creates <strong>new geometry</strong> by pushing or pulling a selected face (or edge, or vertex) outward or inward from the mesh. It's like pulling fresh clay out of an existing surface.
+  </p>
+
+  <h3>How to Use Extrude</h3>
+  <ol>
+    <li>Enter Edit Mode (<kbd>Tab</kbd>)</li>
+    <li>Switch to Face select mode (<kbd>3</kbd>)</li>
+    <li>Select one or more faces</li>
+    <li>Press <kbd>E</kbd></li>
+    <li>Move the mouse to push the new geometry outward (or inward)</li>
+    <li>Left-click to confirm, or right-click / <kbd>Esc</kbd> to cancel</li>
+  </ol>
+
+  <h3>Extrude Along an Axis</h3>
+  <p>
+    After pressing <kbd>E</kbd>, you can press <kbd>X</kbd>, <kbd>Y</kbd>, or <kbd>Z</kbd> to constrain the extrusion to a specific axis. By default, Extrude moves along the face's <strong>normal</strong> (the direction the face points), which is usually what you want.
+  </p>
+
+  <h3>Extrude Along Normals</h3>
+  <p>
+    If you have <strong>multiple faces</strong> selected, you can use <strong>Extrude Faces Along Normals</strong> to push each face outward along its own normal. Access this through <strong>Mesh &gt; Extrude &gt; Extrude Faces Along Normals</strong>, or press <kbd>Alt</kbd>+<kbd>E</kbd> to open the Extrude menu.
+  </p>
+
+  <div class="warning">
+    <strong>Common mistake:</strong> If you press <kbd>E</kbd> and then immediately right-click to cancel, the new geometry is still created — it's just sitting in the same spot as the original face. This creates <strong>double faces</strong> (overlapping geometry) which can cause shading problems. If you accidentally do this, immediately press <kbd>Ctrl</kbd>+<kbd>Z</kbd> to undo.
+  </div>
+
+  <h3>Extrude Inward</h3>
+  <p>
+    Extrude doesn't just go outward. Move the mouse inward (toward the object's center) to create an indentation or hole. This is great for creating recessed details like windows, buttons, or grooves.
+  </p>
+
+  <h2>Inset — <kbd>I</kbd></h2>
+  <p>
+    Inset creates a <strong>smaller face inside an existing face</strong>. It doesn't add depth — it just divides the face into an inner face surrounded by a border of new faces. Think of it like creating a picture frame on the surface of your model.
+  </p>
+
+  <h3>How to Use Inset</h3>
+  <ol>
+    <li>Enter Edit Mode and switch to Face select mode (<kbd>3</kbd>)</li>
+    <li>Select one or more faces</li>
+    <li>Press <kbd>I</kbd></li>
+    <li>Move the mouse to control how much the face is inset</li>
+    <li>Left-click to confirm</li>
+  </ol>
+
+  <h3>Why Inset Is Useful</h3>
+  <p>
+    Inset is often used <strong>before</strong> an extrude. By insetting first, you create a smaller face that you can then extrude inward or outward. This pattern — <strong>Inset then Extrude</strong> — is one of the most common modeling workflows:
+  </p>
+  <ul>
+    <li>Inset + Extrude inward = a window or recessed panel</li>
+    <li>Inset + Extrude outward = a raised button or bump</li>
+    <li>Inset alone = decorative border detail</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> When you have multiple faces selected and press <kbd>I</kbd>, Blender insets them as a single region by default. If you want each face inset individually, press <kbd>I</kbd> twice (or press <kbd>I</kbd> then <kbd>I</kbd> again) to toggle <strong>Individual</strong> mode.
+  </div>
+
+  <h2>Loop Cut — <kbd>Ctrl</kbd>+<kbd>R</kbd></h2>
+  <p>
+    Loop Cut adds a new <strong>ring of edges</strong> (a loop) around your mesh, dividing it into more sections. More sections means more geometry to work with, which means more detail and more control.
+  </p>
+
+  <h3>How to Use Loop Cut</h3>
+  <ol>
+    <li>Enter Edit Mode (<kbd>Tab</kbd>)</li>
+    <li>Press <kbd>Ctrl</kbd>+<kbd>R</kbd></li>
+    <li>Hover your mouse over an edge — a yellow preview line will appear showing where the cut will go</li>
+    <li>Scroll the <kbd>Mouse Wheel</kbd> to add more parallel cuts</li>
+    <li><strong>Left-click</strong> to place the cut(s)</li>
+    <li>Move the mouse to slide the cut along the surface, then left-click to confirm — or <strong>right-click</strong> to snap the cut to the exact center</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> Right-clicking during the slide step places the loop cut at the exact center between edges. This is usually what you want, so get in the habit of: <kbd>Ctrl</kbd>+<kbd>R</kbd> → hover → click → right-click.
+  </div>
+
+  <h3>Why Loop Cuts Matter</h3>
+  <p>
+    A default cube only has 6 faces — that's not much to work with. By adding loop cuts, you create many more faces that you can select, extrude, inset, move, and shape independently. Loop cuts are how you go from a blocky shape to a detailed model.
+  </p>
+
+  <h2>Combining the Three Tools</h2>
+  <p>
+    The real power comes from using these tools together. Here's the general workflow:
+  </p>
+  <ol>
+    <li><strong>Loop Cut</strong> to add more geometry where you need detail</li>
+    <li><strong>Inset</strong> faces to create smaller target areas</li>
+    <li><strong>Extrude</strong> those faces inward or outward to create 3D features</li>
+  </ol>
+  <p>Almost every hard-surface model (furniture, vehicles, buildings, props) follows this pattern.</p>
+
+  <h2>Step-by-Step Example: Model a Simple Table</h2>
+  <p>
+    Let's put all three tools together to model a basic table from the default cube.
+  </p>
+
+  <div class="activity">
+    <h3>Building a Table from a Cube</h3>
+    <ol>
+      <li>
+        <strong>Start with the default cube.</strong> Open Blender and leave the default cube in the scene. Enter Edit Mode (<kbd>Tab</kbd>).
+      </li>
+      <li>
+        <strong>Scale it into a tabletop shape.</strong> Press <kbd>S</kbd>, then <kbd>Z</kbd>, then type <code>0.1</code> and press <kbd>Enter</kbd>. This flattens the cube along the Z axis. Now press <kbd>S</kbd>, then <kbd>X</kbd>, type <code>2</code>, and press <kbd>Enter</kbd> to stretch it wider. You should have a flat slab shape.
+      </li>
+      <li>
+        <strong>Add loop cuts for the legs.</strong> Press <kbd>Ctrl</kbd>+<kbd>R</kbd> and hover over a horizontal edge to see a vertical cut preview. Left-click to place it, then right-click to center it. Repeat on the other axis so you have a grid on the bottom face. You want at least 2 cuts in each direction so the bottom of the table has a 3×3 grid of faces.
+      </li>
+      <li>
+        <strong>Select the four corner faces on the bottom.</strong> Switch to Face select mode (<kbd>3</kbd>). Look at the bottom of your table (press <kbd>Numpad 7</kbd> for the top view, then <kbd>Ctrl</kbd>+<kbd>Numpad 7</kbd> for the bottom view). Select the four corner faces by clicking one, then <kbd>Shift</kbd>+clicking the other three.
+      </li>
+      <li>
+        <strong>Inset the corner faces.</strong> Press <kbd>I</kbd>, then <kbd>I</kbd> again (to toggle individual mode so each face insets separately). Move the mouse to create a small inset on each face, then left-click.
+      </li>
+      <li>
+        <strong>Extrude the legs.</strong> With the four inset faces still selected, press <kbd>E</kbd>, then <kbd>Z</kbd>, then type <code>-2</code> and press <kbd>Enter</kbd>. This extrudes four legs downward from the table.
+      </li>
+      <li>
+        <strong>Exit Edit Mode.</strong> Press <kbd>Tab</kbd> to return to Object Mode and admire your table!
+      </li>
+    </ol>
+  </div>
+
+  <p>
+    Congratulations — you've just used all three core modeling tools to create a real object from a single cube. The same workflow (Loop Cut → Inset → Extrude) can be applied to create chairs, shelves, buildings, robots, vehicles, and much more.
+  </p>
+
+  <h2>Quick Reference</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Tool</th>
+        <th>Shortcut</th>
+        <th>What It Does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Extrude</td>
+        <td><kbd>E</kbd></td>
+        <td>Creates new geometry by pushing/pulling faces outward or inward</td>
+      </tr>
+      <tr>
+        <td>Inset</td>
+        <td><kbd>I</kbd></td>
+        <td>Creates a smaller face inside an existing face</td>
+      </tr>
+      <tr>
+        <td>Loop Cut</td>
+        <td><kbd>Ctrl</kbd> + <kbd>R</kbd></td>
+        <td>Adds a ring of edges to subdivide the mesh</td>
+      </tr>
+      <tr>
+        <td>Extrude menu</td>
+        <td><kbd>Alt</kbd> + <kbd>E</kbd></td>
+        <td>Opens advanced extrude options</td>
+      </tr>
+      <tr>
+        <td>Inset individual</td>
+        <td><kbd>I</kbd> then <kbd>I</kbd></td>
+        <td>Insets each selected face independently</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Blender &amp; ZBrush Mini</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

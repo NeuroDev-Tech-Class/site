@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>Introduction to Blueprints</h1>
+    <p class="subtitle">Learn Unreal Engine's visual scripting system — no coding required</p>
+  </div>
+
+  <h2>What Are Blueprints?</h2>
+  <p>Blueprints are Unreal Engine's <strong>visual scripting system</strong>. Instead of writing lines of code in a text file, you create logic by placing <strong>nodes</strong> on a graph and connecting them with <strong>wires</strong>. Each node represents an action, a piece of data, or a decision — and the wires tell the engine what order to do things in and what information to pass along.</p>
+  <p>Professional game studios use Blueprints alongside traditional C++ code, but you can build entire games using <em>only</em> Blueprints. They're powerful enough for real production work, and they're the perfect starting point for learning game logic.</p>
+
+  <div class="tip">
+    <strong>Think of it this way:</strong> If Unreal Engine is a kitchen, Blueprints are your recipe cards. Each card (node) tells the engine to do one thing — "play a sound," "move the player," "check if a door is locked." You connect the cards in order to create complete gameplay systems.
+  </div>
+
+  <h2>The Blueprint Editor</h2>
+  <p>When you open a Blueprint, you'll see the <strong>Blueprint Editor</strong> — a dedicated workspace with several panels. The most important one is the <strong>Event Graph</strong>.</p>
+
+  <h3>The Event Graph</h3>
+  <p>The Event Graph is the large grid area where you build your logic. This is where you place nodes, connect wires, and create the behavior for your game. Think of it as your canvas — you can pan around by holding the right mouse button and dragging, and zoom in/out with the scroll wheel.</p>
+
+  <h3>Nodes</h3>
+  <p>Nodes are the building blocks of Blueprints. Each node is a rectangular box that does one specific thing. Some common examples:</p>
+  <ul>
+    <li><strong>Event nodes</strong> — trigger when something happens (e.g., the game starts, a key is pressed)</li>
+    <li><strong>Action nodes</strong> — do something (e.g., print text, play a sound, move an object)</li>
+    <li><strong>Data nodes</strong> — hold or calculate values (e.g., a number, a true/false value)</li>
+  </ul>
+
+  <h3>Wires</h3>
+  <p>Wires connect nodes together. You create a wire by clicking on a <strong>pin</strong> on one node and dragging it to a pin on another node. There are two types of pins:</p>
+  <ul>
+    <li><strong>Execution pins</strong> (white arrows) — control the <em>order</em> things happen. They look like white triangles on the left and right sides of a node. The flow goes left to right: when a node finishes, it fires its output execution pin, which triggers the next node.</li>
+    <li><strong>Data pins</strong> (colored circles) — pass <em>information</em> between nodes. Different colors represent different data types: green for Booleans (true/false), teal for integers (whole numbers), light green for floats (decimals), magenta for strings (text), and yellow for vectors (X, Y, Z positions).</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Key difference:</strong> Execution pins control <em>when</em> something happens. Data pins control <em>what</em> information is used. You'll use both on almost every node.
+  </div>
+
+  <h2>Level Blueprint vs. Actor Blueprints</h2>
+  <p>There are two main places you can write Blueprint logic:</p>
+  <ul>
+    <li><strong>Level Blueprint</strong> — belongs to the current level (map). Logic here affects the entire level. Good for things like "when the level starts, play a cutscene" or "when the player enters this area, open a door." Every level has exactly one Level Blueprint.</li>
+    <li><strong>Actor Blueprints (Blueprint Classes)</strong> — belong to a specific object (actor) that you can place in any level. Good for reusable things like coins, enemies, doors, or weapons. You can place multiple copies of the same Actor Blueprint in a level, and each one runs its own logic independently.</li>
+  </ul>
+  <p>We'll start with the Level Blueprint since it's the simplest way to get your first logic running. In later lessons, we'll move to Actor Blueprints for more powerful, reusable systems.</p>
+
+  <h2>Opening the Level Blueprint</h2>
+  <ol>
+    <li>Open any level in Unreal Engine.</li>
+    <li>In the toolbar at the top, click the <strong>Blueprints</strong> dropdown button (it has a blue hexagon icon).</li>
+    <li>Select <strong>Open Level Blueprint</strong>.</li>
+    <li>The Blueprint Editor will open, showing the Event Graph for this level.</li>
+  </ol>
+
+  <h2>Creating Your First Nodes</h2>
+  <p>Let's create a simple Blueprint that prints a message when the game starts.</p>
+
+  <h3>Adding Nodes</h3>
+  <ol>
+    <li>Right-click anywhere on the Event Graph grid. A <strong>search menu</strong> appears — this is how you add every node in Blueprints.</li>
+    <li>Type <code>BeginPlay</code> in the search bar and select <strong>Event BeginPlay</strong>. This node fires once when the game starts (when you press Play).</li>
+    <li>Right-click on an empty area again and search for <code>Print String</code>. Select it.</li>
+    <li>You now have two nodes on your graph. Connect the <strong>output execution pin</strong> (white arrow) on BeginPlay to the <strong>input execution pin</strong> on Print String by clicking and dragging from one to the other.</li>
+    <li>In the Print String node, you'll see a text field labeled <strong>In String</strong>. Type a message like <code>Hello, Unreal!</code>.</li>
+    <li>Click <strong>Compile</strong> (the big blue checkmark button at the top left of the Blueprint Editor), then close the Blueprint Editor.</li>
+    <li>Press <strong>Play</strong> (<kbd>Alt</kbd>+<kbd>P</kbd>) — your message should appear in the top-left corner of the viewport!</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Always Compile!</strong> After making changes to any Blueprint, click the <strong>Compile</strong> button. This tells Unreal to process your changes. If there's an error, the Compile button will show a red X and tell you what went wrong.
+  </div>
+
+  <h3>The BeginPlay Event</h3>
+  <p><strong>Event BeginPlay</strong> is one of the most important event nodes. It fires exactly once — the moment the game starts running (or when the actor is first created in the world). Use it for setup tasks: initializing variables, creating UI widgets, printing debug info, or starting background logic.</p>
+
+  <h3>The Print String Node</h3>
+  <p><strong>Print String</strong> displays text on-screen during gameplay. It's Unreal's version of <code>print()</code> or <code>console.log()</code>. It's your best friend for <strong>debugging</strong> — whenever you want to check if something is working, add a Print String to see if that part of your Blueprint is being reached. You can change the text color and duration in the node's details.</p>
+
+  <h2>Comment Boxes for Organization</h2>
+  <p>As your Blueprint grows, it will get messy fast. <strong>Comment boxes</strong> help you stay organized by grouping related nodes together with a label.</p>
+  <ol>
+    <li>Select one or more nodes (click and drag a selection box around them, or <kbd>Ctrl</kbd>+click individual nodes).</li>
+    <li>Press <kbd>C</kbd> on your keyboard.</li>
+    <li>A comment box appears around the selected nodes. Type a descriptive title like <code>Setup</code>, <code>Gold System</code>, or <code>Door Logic</code>.</li>
+    <li>You can change the comment color by right-clicking the comment header bar and choosing <strong>Comment Color</strong>.</li>
+  </ol>
+
+  <div class="warning">
+    <strong>Get in the habit now:</strong> Always comment your Blueprint sections. Professional developers comment constantly. When you come back to a Blueprint a week later, you won't remember what each cluster of nodes does — but a comment box labeled "Check if player has key" will tell you instantly.
+  </div>
+
+  <h2>Summary</h2>
+  <ul>
+    <li><strong>Blueprints</strong> are a visual scripting system — logic without code.</li>
+    <li>The <strong>Event Graph</strong> is where you place nodes and connect them with wires.</li>
+    <li><strong>Execution pins</strong> (white arrows) control order; <strong>data pins</strong> (colored circles) pass information.</li>
+    <li>The <strong>Level Blueprint</strong> controls the current level; <strong>Actor Blueprints</strong> control individual objects.</li>
+    <li><strong>BeginPlay</strong> fires when the game starts; <strong>Print String</strong> displays debug text.</li>
+    <li>Use <strong>comment boxes</strong> (<kbd>C</kbd>) to keep your graphs organized.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

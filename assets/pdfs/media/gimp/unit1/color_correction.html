@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/gimp.html" class="back-link">&larr; Back to 2D Digital Art &mdash; GIMP</a>
+    <div class="doc-header">
+    <span class="course-tag">2D Digital Art — GIMP</span>
+    <h1>Color Correction</h1>
+    <p class="subtitle">Fixing Exposure, White Balance, and Color in Your Images</p>
+  </div>
+
+  <h2>Why Color Correct?</h2>
+  <p>
+    Photos straight from a camera often have issues: they may be too dark, too bright, have a yellow or blue color cast, or look flat and dull. <strong>Color correction</strong> is the process of adjusting these tonal and color properties so that the image looks natural and visually appealing. GIMP provides all the tools you need in the <strong>Colors</strong> menu.
+  </p>
+
+  <h2>Color Correction Tools</h2>
+
+  <h3>Brightness-Contrast</h3>
+  <p>
+    <strong>Colors &gt; Brightness-Contrast</strong> is the simplest adjustment. It has two sliders:
+  </p>
+  <ul>
+    <li><strong>Brightness</strong> — makes the entire image lighter or darker.</li>
+    <li><strong>Contrast</strong> — increases or decreases the difference between light and dark areas.</li>
+  </ul>
+  <p>
+    While easy to use, Brightness-Contrast is a blunt tool — it affects all pixels equally, which can wash out highlights or crush shadows. For more control, use Levels or Curves.
+  </p>
+
+  <h3>Levels</h3>
+  <p>
+    <strong>Colors &gt; Levels</strong> is a histogram-based adjustment tool that gives you much finer control. The dialog shows a histogram — a graph of how many pixels exist at each brightness level (dark on the left, bright on the right).
+  </p>
+  <p>
+    Key controls:
+  </p>
+  <ul>
+    <li><strong>Input Levels</strong> — three sliders below the histogram:
+      <ul>
+        <li><strong>Black point</strong> (left) — drag right to deepen the darkest shadows.</li>
+        <li><strong>Gray point / midtone</strong> (middle) — drag left to brighten or right to darken midtones.</li>
+        <li><strong>White point</strong> (right) — drag left to brighten highlights.</li>
+      </ul>
+    </li>
+    <li><strong>Output Levels</strong> — limits the range of the output. Rarely needed for basic corrections.</li>
+    <li><strong>Channel</strong> — you can adjust the overall <em>Value</em> (brightness) or adjust the <em>Red</em>, <em>Green</em>, and <em>Blue</em> channels individually to fix color casts.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> A quick way to improve most photos: open Levels and drag the black-point slider to where the histogram data begins on the left, and drag the white-point slider to where the data ends on the right. This "stretches" the tonal range and often makes images look dramatically better.
+  </div>
+
+  <h3>Curves</h3>
+  <p>
+    <strong>Colors &gt; Curves</strong> is the most powerful color correction tool. It displays the same histogram as Levels, but instead of sliders, you get a <strong>diagonal line</strong> (the "curve") that you can click and drag to reshape.
+  </p>
+  <ul>
+    <li>The <strong>horizontal axis</strong> represents input brightness (original values).</li>
+    <li>The <strong>vertical axis</strong> represents output brightness (adjusted values).</li>
+    <li>Clicking a point on the curve and dragging it <strong>up</strong> brightens those tones; dragging <strong>down</strong> darkens them.</li>
+    <li>An <strong>S-curve</strong> (highlights pulled up, shadows pulled down) increases contrast naturally.</li>
+  </ul>
+  <p>
+    Like Levels, you can adjust individual Red, Green, and Blue channels to correct color casts with extreme precision.
+  </p>
+
+  <h3>Hue-Saturation</h3>
+  <p>
+    <strong>Colors &gt; Hue-Saturation</strong> adjusts the color properties of the image:
+  </p>
+  <ul>
+    <li><strong>Hue</strong> — shifts all colors around the color wheel (e.g., turning reds into oranges, blues into greens).</li>
+    <li><strong>Saturation</strong> — increases or decreases color intensity. Sliding all the way left produces a grayscale image.</li>
+    <li><strong>Lightness</strong> — makes the image lighter or darker (similar to brightness).</li>
+  </ul>
+  <p>
+    You can adjust <em>all colors</em> at once or select a specific color range (Red, Yellow, Green, Cyan, Blue, Magenta) to adjust individually.
+  </p>
+
+  <h3>Color Balance</h3>
+  <p>
+    <strong>Colors &gt; Color Balance</strong> lets you shift the overall color of the image toward one color or its opposite. You can independently adjust:
+  </p>
+  <ul>
+    <li><strong>Shadows</strong> — affects only the dark areas of the image.</li>
+    <li><strong>Midtones</strong> — affects the middle brightness range (where most detail lives).</li>
+    <li><strong>Highlights</strong> — affects only the bright areas.</li>
+  </ul>
+  <p>
+    For each range, three sliders let you push the color toward Cyan–Red, Magenta–Green, or Yellow–Blue. This is an intuitive way to remove unwanted color casts — for example, if a photo looks too yellow, push the midtones slider toward Blue.
+  </p>
+
+  <h3>Desaturate</h3>
+  <p>
+    <strong>Colors &gt; Desaturate</strong> converts a color image to grayscale while keeping it in RGB mode. Multiple methods are available (Luminosity, Lightness, Average, etc.) — <strong>Luminosity</strong> usually produces the most natural-looking result because it weights the green channel more heavily, matching how our eyes perceive brightness.
+  </p>
+
+  <h2>Recommended Workflow</h2>
+  <p>
+    When color correcting a photo, follow this order for the best results:
+  </p>
+  <ol>
+    <li><strong>Fix exposure with Levels</strong> — set black and white points, adjust midtones.</li>
+    <li><strong>Adjust white balance</strong> — use Curves (per-channel) or Color Balance to remove color casts.</li>
+    <li><strong>Fine-tune saturation</strong> — use Hue-Saturation to boost or reduce color intensity as needed.</li>
+  </ol>
+
+  <h2>Reading a Histogram</h2>
+  <p>
+    The histogram tells you a lot about your image at a glance:
+  </p>
+  <ul>
+    <li>If the data is bunched up on the <strong>left</strong>, the image is <strong>underexposed</strong> (too dark).</li>
+    <li>If the data is bunched up on the <strong>right</strong>, the image is <strong>overexposed</strong> (too bright).</li>
+    <li>If there's a <strong>gap</strong> on either end, the image isn't using its full tonal range — adjust Levels to fix this.</li>
+    <li>A <strong>spike</strong> at the far left or right means clipping — pure black or pure white pixels with no detail.</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Warning:</strong> Once highlights or shadows are clipped (pure white or pure black), the detail in those areas is gone and can't be recovered. Try to preserve detail across the full range.
+  </div>
+
+  <h2>Summary</h2>
+  <ul>
+    <li><strong>Brightness-Contrast</strong> is simple but imprecise — use it for quick adjustments only.</li>
+    <li><strong>Levels</strong> provides histogram-based control with black point, white point, and midtone sliders.</li>
+    <li><strong>Curves</strong> is the most powerful tool for precise tonal and color control.</li>
+    <li><strong>Hue-Saturation</strong> adjusts color intensity; <strong>Color Balance</strong> fixes color casts in shadows, midtones, and highlights.</li>
+    <li>Follow the workflow: Levels → White Balance → Saturation.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — 2D Digital Art — GIMP</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

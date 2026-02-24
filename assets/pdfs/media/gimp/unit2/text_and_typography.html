@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/gimp.html" class="back-link">&larr; Back to 2D Digital Art &mdash; GIMP</a>
+    <div class="doc-header">
+    <span class="course-tag">2D Digital Art — GIMP</span>
+    <h1>Text &amp; Typography</h1>
+    <p class="subtitle">Adding and Styling Text in GIMP</p>
+  </div>
+
+  <h2>The Text Tool</h2>
+  <p>
+    The <strong>Text tool</strong> (<kbd>T</kbd>) lets you add text to your image. Click anywhere on the canvas to place a text cursor, then start typing. A floating text editor may appear for longer text. The text is placed on its own special <strong>text layer</strong>, which you can see in the Layers dialog marked with a "T" icon.
+  </p>
+
+  <h2>Text Tool Options</h2>
+  <p>
+    When the Text tool is active, the <strong>Tool Options</strong> panel (below the Toolbox) provides all the typography controls you need:
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Setting</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Font</strong></td>
+        <td>Choose from all fonts installed on your system. Click the font name to browse or type to search.</td>
+      </tr>
+      <tr>
+        <td><strong>Size</strong></td>
+        <td>Font size in pixels (px), points (pt), or other units. For screen use, px is most common.</td>
+      </tr>
+      <tr>
+        <td><strong>Color</strong></td>
+        <td>The text color. Click the color swatch to open the color chooser. By default, text uses the current foreground color.</td>
+      </tr>
+      <tr>
+        <td><strong>Justify</strong></td>
+        <td>Text alignment — left, center, right, or fill (justified on both sides).</td>
+      </tr>
+      <tr>
+        <td><strong>Letter Spacing</strong></td>
+        <td>Adjusts the space between individual characters (tracking). Increase for an airy, spaced-out look; decrease for tighter text.</td>
+      </tr>
+      <tr>
+        <td><strong>Line Spacing</strong></td>
+        <td>Adjusts the vertical space between lines of text (leading). Increase for readability in body text.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Tip:</strong> You can change any of these settings after placing the text. Just select the Text tool, click on the text layer on the canvas, select the text you want to change, and adjust the options.
+  </div>
+
+  <h2>Working with Text Layers</h2>
+  <p>
+    Text layers are special in GIMP — they remain <strong>editable</strong> as long as they stay as text layers. You can go back and change the wording, font, or size at any time by clicking on them with the Text tool.
+  </p>
+  <p>
+    However, text layers have limitations: you cannot paint on them, apply most filters to them, or use many pixel-level tools. To unlock the full range of editing capabilities, you must first <strong>flatten the text layer to a regular image layer</strong>.
+  </p>
+
+  <h3>Flattening a Text Layer</h3>
+  <p>
+    To convert a text layer into a normal pixel layer, go to <strong>Layer &gt; Discard Text Information</strong> or right-click the text layer in the Layers dialog and choose the same option. After flattening, the text is no longer editable as text — it becomes ordinary pixels that you can paint on, filter, transform, and manipulate freely.
+  </p>
+
+  <div class="warning">
+    <strong>Warning:</strong> Once you flatten a text layer, you cannot go back and edit the text. Always make sure your text is final (correct spelling, right font, right size) before flattening.
+  </div>
+
+  <h2>Text Along a Path</h2>
+  <p>
+    One of GIMP's most powerful text features is the ability to flow text along a curved path. This is perfect for circular text, wavy text, or text that follows any custom shape.
+  </p>
+  <ol>
+    <li><strong>Create a path</strong> using the Paths tool (<kbd>B</kbd>). Draw the curve you want the text to follow.</li>
+    <li><strong>Type your text</strong> using the Text tool. The wording, font, and size should be set now.</li>
+    <li>Make sure the <strong>text layer</strong> is active in the Layers dialog.</li>
+    <li>Go to <strong>Layer &gt; Text along Path</strong>. GIMP will create a new path in the Paths dialog that follows your original path's curve in the shape of the text characters.</li>
+    <li>Go to <strong>Edit &gt; Stroke Path</strong> or use <strong>Select &gt; From Path</strong> and then fill the selection to render the text along the curve.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> Make the path longer than you think you'll need. If the path is too short, text characters will bunch up or be cut off at the end.
+  </div>
+
+  <h2>Adding Effects to Text</h2>
+  <p>
+    Once you flatten a text layer (or use Alpha to Selection), you can apply any visual effect. Here are some popular text effects:
+  </p>
+
+  <h3>Drop Shadow</h3>
+  <ol>
+    <li>Right-click the text layer and choose <strong>Alpha to Selection</strong> (selects the shape of the text).</li>
+    <li>Go to <strong>Filters &gt; Light and Shadow &gt; Drop Shadow</strong>.</li>
+    <li>Adjust offset, blur, color, and opacity.</li>
+  </ol>
+
+  <h3>Gradient Fill Text</h3>
+  <ol>
+    <li>Right-click the text layer and choose <strong>Alpha to Selection</strong>.</li>
+    <li>Create a <strong>new layer</strong> above the text layer.</li>
+    <li>Select the <strong>Gradient</strong> tool (<kbd>G</kbd>), choose your gradient colors, and drag across the selection.</li>
+    <li>The gradient will fill only the text shape.</li>
+  </ol>
+
+  <h3>Bevel / Emboss and Logo Effects</h3>
+  <p>
+    GIMP includes built-in logo scripts that can create elaborate text effects automatically:
+  </p>
+  <ol>
+    <li>Go to <strong>Filters &gt; Alpha to Logo</strong>.</li>
+    <li>Browse the available effects: 3D Outline, Alien Glow, Basic I &amp; II, Blended, Chrome, Cool Metal, Glossy, Neon, and many more.</li>
+    <li>Select an effect and configure its settings.</li>
+  </ol>
+  <p>
+    These scripts generate multiple layers with lighting, shadows, and color effects to create polished, professional-looking text treatments.
+  </p>
+
+  <h2>Typography Best Practices</h2>
+  <ul>
+    <li><strong>Limit your fonts</strong> — use no more than 2–3 different fonts in a single design.</li>
+    <li><strong>Use font hierarchy</strong> — make titles large and bold, subtitles medium, and body text smaller.</li>
+    <li><strong>Ensure contrast</strong> — text should be easy to read against the background. Light text on dark backgrounds (or vice versa).</li>
+    <li><strong>Watch spacing</strong> — adjust letter spacing and line spacing for readability.</li>
+    <li><strong>Avoid stretching text</strong> — use the Scale tool on text sparingly. Distorted text looks unprofessional. Change the font size instead.</li>
+  </ul>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>Use the <strong>Text tool</strong> (<kbd>T</kbd>) to place editable text on its own layer.</li>
+    <li>Control font, size, color, alignment, and spacing in <strong>Tool Options</strong>.</li>
+    <li>Flatten text to a pixel layer before applying filters or painting on it.</li>
+    <li>Use <strong>Text along Path</strong> for curved or shaped text.</li>
+    <li>Apply effects like drop shadows, gradients, and logo scripts using <strong>Alpha to Selection</strong>.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — 2D Digital Art — GIMP</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

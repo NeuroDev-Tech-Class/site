@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>Win, Lose &amp; Checkpoints</h1>
+    <p class="subtitle">Build the core game loop — victory conditions, failure states, and respawn points</p>
+  </div>
+
+  <h2>Why These Matter</h2>
+  <p>Every game needs three fundamental systems: a way to <strong>win</strong>, a way to <strong>lose</strong>, and a way to <strong>try again</strong>. Without these, you don't have a game — you just have a sandbox. In this lesson, we'll build all three as Actor Blueprints that you can drop into any level.</p>
+
+  <h2>BP_Win — Victory Trigger</h2>
+  <p>The win trigger is an invisible zone that fires when the player enters it, signaling that they've completed the level (or a major section of it).</p>
+
+  <h3>Setting Up</h3>
+  <ol>
+    <li>Create a new Actor Blueprint: right-click in the Content Browser → <strong>Blueprint Class → Actor</strong>. Name it <code>BP_Win</code>.</li>
+    <li>Open it and add a <strong>Box Collision</strong> component. Make it the root.</li>
+    <li>Scale the Box Collision to cover the victory area — large enough that the player can't accidentally skip over it (e.g., Box Extent X: <code>200</code>, Y: <code>200</code>, Z: <code>200</code>).</li>
+    <li>Set the collision's <strong>Collision Presets</strong> to <code>OverlapAllDynamic</code> and enable <strong>Generate Overlap Events</strong>.</li>
+    <li>Optionally add a <strong>Static Mesh</strong> component for visual reference in the editor (like a flag or trophy). Set it to <strong>Hidden In Game</strong> if you want the trigger to be invisible during gameplay, or leave it visible as a goal marker.</li>
+  </ol>
+
+  <h3>Win Logic</h3>
+  <ol>
+    <li>Select the Box Collision and add an <strong>On Component Begin Overlap</strong> event.</li>
+    <li>Drag from <strong>Other Actor</strong> and add a <strong>Cast To BP_ThirdPersonCharacter</strong> — we only want the player to trigger the win, not a random physics object.</li>
+    <li>From the cast's execution pin, add a <strong>Print String</strong> node: <code>"You Win!"</code></li>
+    <li>Optionally, after the Print String:
+      <ul>
+        <li>Add a <strong>Set Game Paused</strong> node (set to True) to freeze the game on victory.</li>
+        <li>Or create and display a <strong>Widget</strong> with a "You Win!" message and a "Play Again" button (if you've learned UMG widgets).</li>
+      </ul>
+    </li>
+    <li>Compile and save.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Level transition:</strong> In a multi-level game, you could replace Print String with an <strong>Open Level</strong> node to load the next level automatically. Search for "Open Level by Name" and type the level name.
+  </div>
+
+  <h2>BP_Checkpoint — Respawn Point</h2>
+  <p>Checkpoints save the player's position so that when they die, they respawn at the last checkpoint they touched instead of starting the level over.</p>
+
+  <h3>Setting Up the Player Variable</h3>
+  <p>First, the player character needs a variable to store the checkpoint location:</p>
+  <ol>
+    <li>Open your player character Blueprint (<code>BP_ThirdPersonCharacter</code>).</li>
+    <li>Add a <strong>Vector</strong> variable called <code>Checkpoint</code>.</li>
+    <li>Set the default value to the Player Start's location (or <code>0, 0, 0</code> — we'll update it when the player hits a checkpoint).</li>
+    <li>Compile and save the character Blueprint.</li>
+  </ol>
+
+  <h3>Setting Up BP_Checkpoint</h3>
+  <ol>
+    <li>Create a new Actor Blueprint named <code>BP_Checkpoint</code>.</li>
+    <li>Add a <strong>Box Collision</strong> component as the root. Size it reasonably — the player should be able to walk through it naturally (e.g., Box Extent X: <code>100</code>, Y: <code>100</code>, Z: <code>150</code>).</li>
+    <li>Set <strong>Collision Presets</strong> to <code>OverlapAllDynamic</code> and enable <strong>Generate Overlap Events</strong>.</li>
+    <li>Optionally add a Static Mesh (like a tall thin cylinder or a flag pole) so you can see where checkpoints are in the editor.</li>
+  </ol>
+
+  <h3>Checkpoint Logic</h3>
+  <ol>
+    <li>Add an <strong>On Component Begin Overlap</strong> event from the Box Collision.</li>
+    <li>Cast to <strong>BP_ThirdPersonCharacter</strong> from the Other Actor pin.</li>
+    <li>From the character output, drag and add a <strong>Set Checkpoint</strong> node (this sets the Vector variable you created on the player).</li>
+    <li>For the value, use a <strong>Get Actor Location</strong> node (right-click → search "GetActorLocation"). This stores the checkpoint's position as the new respawn point.</li>
+    <li>Optionally add a <strong>Print String</strong>: <code>"Checkpoint reached!"</code> so the player gets feedback.</li>
+    <li>Compile and save.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Visual feedback:</strong> A simple Print String works, but consider changing the checkpoint mesh's material color when activated (from red to green, for example). This gives the player a clear visual cue that the checkpoint has been registered.
+  </div>
+
+  <h2>BP_Enemy — Failure Trigger</h2>
+  <p>For now, our "enemies" are simple hazard zones — walk into them and you get sent back to the last checkpoint. We're not building AI behavior yet, just the lose/respawn mechanic.</p>
+
+  <h3>Setting Up</h3>
+  <ol>
+    <li>Create a new Actor Blueprint named <code>BP_Enemy</code>.</li>
+    <li>Add a <strong>Static Mesh</strong> component — use a sphere or cube and give it a threatening material (red, dark, spiky-looking if you have one). This is the visible "enemy."</li>
+    <li>Add a <strong>Box Collision</strong> or <strong>Sphere Collision</strong> as the root, sized slightly larger than the mesh so the player gets caught in the trigger zone.</li>
+    <li>Set <strong>Collision Presets</strong> to <code>OverlapAllDynamic</code> and enable <strong>Generate Overlap Events</strong>.</li>
+  </ol>
+
+  <h3>Enemy Logic</h3>
+  <ol>
+    <li>Add an <strong>On Component Begin Overlap</strong> event.</li>
+    <li>Cast to <strong>BP_ThirdPersonCharacter</strong>.</li>
+    <li>Add a <strong>Print String</strong>: <code>"Game Over!"</code></li>
+    <li>From the character output, drag and add a <strong>Get Checkpoint</strong> node to retrieve the saved checkpoint Vector.</li>
+    <li>Add a <strong>Set Actor Location</strong> node (search for "SetActorLocation"). Connect the character reference to the <strong>Target</strong> pin, and the Checkpoint vector to the <strong>New Location</strong> pin.</li>
+    <li>This teleports the player back to their last checkpoint instantly.</li>
+    <li>Compile and save.</li>
+  </ol>
+
+  <div class="warning">
+    <strong>Test order matters:</strong> Make sure you hit a checkpoint <em>before</em> hitting an enemy. If the Checkpoint variable is still at its default value (0, 0, 0) and you die, you'll be teleported to the world origin — which might be underground or in the void. Always place a checkpoint near the Player Start.
+  </div>
+
+  <h2>Testing in a Debug Level</h2>
+  <p>Before adding these actors to your main level, it's smart to test them in isolation:</p>
+  <ol>
+    <li>Create a new, simple level: <code>File → New Level → Basic</code>. Save it as <code>DebugLevel</code>.</li>
+    <li>Place a flat floor mesh, a <strong>Player Start</strong>, and add one of each:
+      <ul>
+        <li><code>BP_Checkpoint</code> — near the Player Start</li>
+        <li><code>BP_Enemy</code> — a few meters away</li>
+        <li><code>BP_Win</code> — at the far end of the floor</li>
+      </ul>
+    </li>
+    <li>Press Play and test each one:
+      <ul>
+        <li>Walk into the checkpoint — do you see "Checkpoint reached!"?</li>
+        <li>Walk into the enemy — do you see "Game Over!" and get teleported back to the checkpoint?</li>
+        <li>Walk into the win trigger — do you see "You Win!"?</li>
+      </ul>
+    </li>
+    <li>Once everything works, copy these Blueprints into your main level with confidence.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Debug levels are a professional habit.</strong> Real game studios have test levels for every mechanic. It's much faster to debug a simple flat room than a complex game level. Build the habit now.
+  </div>
+
+  <h2>Transferring to the Main Level</h2>
+  <p>Once everything is verified in your debug level:</p>
+  <ol>
+    <li>Open your main game level.</li>
+    <li>Drag <code>BP_Checkpoint</code>, <code>BP_Enemy</code>, and <code>BP_Win</code> from the Content Browser into the level.</li>
+    <li>Position them where they make sense in your level design.</li>
+    <li>Place a checkpoint near the Player Start as a safety net.</li>
+    <li>Play-test the full level to make sure everything works in context.</li>
+  </ol>
+
+  <h2>Summary</h2>
+  <ul>
+    <li><strong>BP_Win</strong> — Box Collision that prints "You Win!" (or shows a UI widget) on player overlap.</li>
+    <li><strong>BP_Checkpoint</strong> — Box Collision that stores the player's location in a Checkpoint vector variable.</li>
+    <li><strong>BP_Enemy</strong> — Mesh + Collision that prints "Game Over!" and teleports the player to the Checkpoint location.</li>
+    <li>Always <strong>test in a debug level</strong> before placing actors in your main level.</li>
+    <li>Place a checkpoint near the Player Start so the respawn system works from the very beginning.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

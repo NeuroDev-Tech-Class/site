@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/davinci-resolve.html" class="back-link">&larr; Back to Video Production &mdash; DaVinci Resolve</a>
+    <div class="doc-header">
+    <span class="course-tag">Video Production — DaVinci Resolve</span>
+    <h1>The Deliver Page &amp; Exporting</h1>
+    <p class="subtitle">Configuring render settings and exporting your finished video</p>
+  </div>
+
+  <h2>The Deliver Page Layout</h2>
+  <p>The <strong>Deliver</strong> page is the final step in your workflow — where your timeline becomes a video file you can share, upload, or archive. Switch to it by clicking the Deliver icon at the bottom of the screen (or <kbd>Shift</kbd>+<kbd>8</kbd>). The layout has three main areas:</p>
+  <ul>
+    <li><strong>Render Settings (left panel):</strong> Where you configure format, codec, resolution, quality, audio settings, and filename.</li>
+    <li><strong>Timeline Preview (center):</strong> A viewer showing your timeline so you can set In/Out points if you only want to export a portion.</li>
+    <li><strong>Render Queue (right panel):</strong> A list of jobs waiting to be rendered. You can queue multiple exports and render them all at once.</li>
+  </ul>
+
+  <h2>Using Presets</h2>
+  <p>DaVinci Resolve provides built-in presets for common platforms. These automatically configure the optimal settings for you:</p>
+
+  <table>
+    <thead>
+      <tr><th>Preset</th><th>Settings Applied</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>YouTube</strong></td><td>MP4, H.264, 1080p or 4K, high quality</td></tr>
+      <tr><td><strong>Vimeo</strong></td><td>MP4, H.264, optimized for Vimeo's processing</td></tr>
+      <tr><td><strong>Twitter</strong></td><td>MP4, H.264, settings within Twitter's limits</td></tr>
+      <tr><td><strong>Audio Only</strong></td><td>Exports just the audio track (WAV or AAC)</td></tr>
+      <tr><td><strong>ProRes Master</strong></td><td>High-quality ProRes for archiving or further editing</td></tr>
+    </tbody>
+  </table>
+
+  <p>To use a preset, simply click it at the top of the Render Settings panel. The settings below will update automatically. You can still tweak individual settings after selecting a preset.</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> For most class projects, the <strong>YouTube</strong> preset at <strong>1080p</strong> is the easiest choice. It produces a widely compatible MP4 file that works everywhere.
+  </div>
+
+  <h2>Custom Export Settings</h2>
+  <p>If the presets don't fit your needs, you can configure everything manually under "Custom Export":</p>
+
+  <h3>Format</h3>
+  <p>The <strong>Format</strong> determines the container file type:</p>
+  <ul>
+    <li><strong>MP4</strong> — The most universally compatible format. Recommended for virtually all web and sharing purposes.</li>
+    <li><strong>QuickTime (MOV)</strong> — Common on macOS, supports ProRes codec for high-quality masters.</li>
+    <li><strong>MKV</strong> — Open container format, less commonly used for delivery.</li>
+  </ul>
+
+  <h3>Codec</h3>
+  <p>The <strong>Codec</strong> determines how the video is compressed:</p>
+  <ul>
+    <li><strong>H.264</strong> — The standard codec for web video. Excellent compatibility (plays on every device and browser). Good quality at reasonable file sizes. This is your go-to choice.</li>
+    <li><strong>H.265 (HEVC)</strong> — The successor to H.264. Produces <strong>smaller files at the same quality</strong> (or better quality at the same size). However, not all devices and browsers support it yet. Great if file size is important.</li>
+    <li><strong>ProRes</strong> — High-quality professional codec. Large files. Use for masters or if you need to bring the file into another editing application.</li>
+    <li><strong>DNxHD / DNxHR</strong> — Avid's professional codec. Similar use case as ProRes.</li>
+  </ul>
+
+  <h3>Resolution</h3>
+  <p>Set the output resolution. It defaults to your timeline resolution. Common choices:</p>
+  <ul>
+    <li><strong>1920 × 1080</strong> (1080p Full HD) — Standard for most content</li>
+    <li><strong>3840 × 2160</strong> (4K UHD) — For high-resolution delivery</li>
+  </ul>
+
+  <h3>Frame Rate</h3>
+  <p>This should match your timeline frame rate. If your timeline is 30 fps, export at 30 fps.</p>
+
+  <h3>Quality</h3>
+  <p>You can control quality in two ways:</p>
+  <ul>
+    <li><strong>Automatic:</strong> Let Resolve choose the best bitrate. This usually produces good results.</li>
+    <li><strong>Restrict to (bitrate):</strong> Set a maximum bitrate in kbps. For 1080p H.264, <strong>10,000–20,000 kbps</strong> is a good range. For 4K, <strong>30,000–50,000 kbps</strong>. Higher bitrate = larger file but better quality.</li>
+  </ul>
+
+  <h2>Audio Settings</h2>
+  <p>Under the <strong>Audio</strong> tab in Render Settings:</p>
+  <ul>
+    <li><strong>Codec:</strong> <strong>AAC</strong> is the standard for MP4 files. Compatible everywhere.</li>
+    <li><strong>Sample Rate:</strong> <strong>48,000 Hz</strong> (48 kHz) is the standard for video. Don't change it unless you have a specific reason.</li>
+    <li><strong>Bitrate:</strong> 192 kbps or 320 kbps for stereo audio.</li>
+  </ul>
+
+  <h2>Filename and Destination</h2>
+  <p>At the top of the Render Settings panel:</p>
+  <ul>
+    <li><strong>Filename:</strong> Give your export a descriptive name (e.g., <code>Highlight_Reel_v2_1080p</code>).</li>
+    <li><strong>Location:</strong> Click <strong>Browse</strong> to choose where the rendered file will be saved. Pick a folder you can easily find.</li>
+  </ul>
+
+  <h2>Render as Individual Clips vs. Single Clip</h2>
+  <ul>
+    <li><strong>Single Clip:</strong> The entire timeline is exported as one continuous video file. This is what you want 99% of the time.</li>
+    <li><strong>Individual Clips:</strong> Each clip on the timeline is exported as a separate file. Useful for batch processing or when you need individual shots.</li>
+  </ul>
+
+  <h2>Rendering</h2>
+  <ol>
+    <li>Configure all your settings.</li>
+    <li>Click <strong>Add to Render Queue</strong>. The job appears in the Render Queue panel on the right.</li>
+    <li>You can add multiple jobs with different settings (e.g., a 1080p version and a 4K version) to the queue.</li>
+    <li>Click <strong>Start Render</strong> (or <strong>Render All</strong>) to begin.</li>
+    <li>A progress bar shows the render status. Rendering time depends on your project's length, resolution, effects, and your hardware (especially GPU).</li>
+  </ol>
+
+  <div class="warning">
+    <strong>Warning:</strong> Don't close DaVinci Resolve or put your computer to sleep while rendering. Let it finish completely. If a render fails, check the error message — common issues include insufficient disk space, unsupported codec, or missing media.
+  </div>
+
+  <h2>Quick Export</h2>
+  <p>For a fast export without going to the Deliver page, use <em>File > Quick Export</em> from the Edit, Cut, or Color pages. A dialog appears with preset options (H.264 Master, YouTube, Vimeo, etc.). Select one, choose a filename and destination, and click <strong>Export</strong>. This is convenient for simple exports when you don't need custom settings.</p>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>The Deliver page has three areas: <strong>Render Settings</strong> (left), <strong>Timeline Preview</strong> (center), <strong>Render Queue</strong> (right).</li>
+    <li>Use <strong>presets</strong> (YouTube, Vimeo, etc.) for quick, optimized exports.</li>
+    <li>For custom exports: <strong>MP4 + H.264</strong> is the safest, most compatible choice. Use <strong>H.265</strong> for smaller files.</li>
+    <li>Set audio to <strong>AAC at 48 kHz</strong>.</li>
+    <li><strong>Add to Render Queue</strong> then <strong>Start Render</strong> to export. Use <strong>Quick Export</strong> for simple one-click exports.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Video Production — DaVinci Resolve</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

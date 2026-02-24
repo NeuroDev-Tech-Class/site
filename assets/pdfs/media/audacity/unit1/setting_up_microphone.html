@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/audacity.html" class="back-link">&larr; Back to Audio Production &mdash; Audacity</a>
+    <div class="doc-header">
+    <span class="course-tag">Audio Production — Audacity</span>
+    <h1>Setting Up Your Microphone</h1>
+    <p class="subtitle">Configuring audio input so Audacity records clear, properly leveled sound</p>
+  </div>
+
+  <h2>Why Setup Matters</h2>
+  <p>Before you record a single word, taking a few minutes to configure your microphone saves hours of frustration later. A badly configured input can result in recordings that are too quiet, distorted, or completely silent. This guide walks you through every step.</p>
+
+  <h2>Selecting Your Input Device</h2>
+  <p>Audacity needs to know <em>which</em> microphone to listen to. There are two ways to choose your input device:</p>
+
+  <h3>Method 1: Audio Setup Toolbar</h3>
+  <ol>
+    <li>Look for the <strong>Audio Setup</strong> button in the toolbar area (or the microphone dropdown near the meter toolbar).</li>
+    <li>Click the dropdown next to the microphone icon.</li>
+    <li>Select your microphone from the list (e.g., "USB Microphone," "Realtek Audio," or your audio interface name).</li>
+  </ol>
+
+  <h3>Method 2: Preferences</h3>
+  <ol>
+    <li>Go to <strong>Edit &gt; Preferences</strong> (or press <kbd>Ctrl</kbd>+<kbd>P</kbd>).</li>
+    <li>Click <strong>Audio Settings</strong> (or <strong>Devices</strong> in older versions).</li>
+    <li>Under <strong>Recording</strong>, set the <strong>Device</strong> dropdown to your microphone.</li>
+    <li>Click <strong>OK</strong>.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> If your microphone doesn't appear in the list, make sure it's plugged in, then go to <strong>Transport &gt; Rescan Audio Devices</strong> to refresh the list.
+  </div>
+
+  <h2>Choosing Channels</h2>
+  <p>In the same Recording section, you'll see a <strong>Channels</strong> option:</p>
+  <ul>
+    <li><strong>1 (Mono)</strong> — Records a single channel. Best for voice recordings, podcasts, narration, and any single-microphone setup.</li>
+    <li><strong>2 (Stereo)</strong> — Records two channels (left and right). Use this only if your device actually provides two separate channels (e.g., a stereo microphone or a two-input audio interface).</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Warning:</strong> If you select Stereo with a mono microphone, one channel will be silent (or a duplicate). This wastes space and can cause issues during editing. Stick with <strong>Mono</strong> for a single mic.
+  </div>
+
+  <h2>Setting Your Recording Level</h2>
+  <p>Getting the right recording level is one of the most important steps. Too quiet and your audio will be noisy when you turn it up later; too loud and it will clip (distort).</p>
+
+  <h3>Step-by-Step Level Check</h3>
+  <ol>
+    <li>Click the <strong>Recording Meter</strong> (the bar with the microphone icon at the top of the screen) to activate monitoring — you can also click <strong>Start Monitoring</strong> from the meter's dropdown.</li>
+    <li>Speak into your microphone at the volume you'll actually use during recording. Don't whisper or shout — use your natural speaking voice.</li>
+    <li>Watch the meter as you speak:
+      <ul>
+        <li>The peaks should land between <strong>-12 dB and -6 dB</strong>. This is the sweet spot.</li>
+        <li>If peaks are barely moving (below -30 dB), your input is too quiet.</li>
+        <li>If the meter hits <strong>0 dB</strong> or turns red, your input is too loud.</li>
+      </ul>
+    </li>
+    <li>Adjust the recording volume slider in Audacity's Mixer toolbar, or adjust the gain knob on your microphone or audio interface, until peaks consistently fall in the -12 to -6 dB range.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> It's always better to record a little too quiet than too loud. You can easily boost a quiet recording later, but you <em>cannot</em> fix clipped audio.
+  </div>
+
+  <h2>Test Recording Workflow</h2>
+  <p>Before starting a real project, always make a quick test recording:</p>
+  <ol>
+    <li>Press <kbd>R</kbd> (or click the red Record button) to start recording.</li>
+    <li>Speak a few sentences at your normal speaking voice and volume.</li>
+    <li>Press <kbd>Space</kbd> (or click Stop) to stop recording.</li>
+    <li>Press <kbd>Home</kbd> to move the cursor to the beginning.</li>
+    <li>Press <kbd>Space</kbd> to play back your recording.</li>
+    <li>Listen for: clear voice, no distortion, no background hum, reasonable volume.</li>
+  </ol>
+  <p>If everything sounds good, delete the test track and start your real recording. If not, adjust your setup and test again.</p>
+
+  <h2>Common Issues and Fixes</h2>
+
+  <h3>No Sound at All</h3>
+  <ul>
+    <li><strong>Wrong device selected</strong> — Double-check that Audacity is set to the correct input device.</li>
+    <li><strong>Microphone not connected</strong> — Make sure the mic is plugged in and recognized by your computer (check your system sound settings).</li>
+    <li><strong>Microphone muted</strong> — Some mics have a physical mute button. Make sure it's off.</li>
+    <li><strong>Permissions</strong> — On Windows 10/11, go to <strong>Settings &gt; Privacy &gt; Microphone</strong> and ensure microphone access is allowed for desktop apps.</li>
+  </ul>
+
+  <h3>Too Quiet</h3>
+  <ul>
+    <li>Increase the recording volume slider in Audacity.</li>
+    <li>Turn up the gain knob on your USB mic or audio interface.</li>
+    <li>Move closer to the microphone (6–12 inches is typical for speech).</li>
+  </ul>
+
+  <h3>Clipping / Distortion</h3>
+  <ul>
+    <li>Lower the recording volume slider or gain knob.</li>
+    <li>Move slightly farther from the microphone.</li>
+    <li>Avoid speaking directly into the mic; angle it slightly to the side to reduce plosives (hard "P" and "B" sounds).</li>
+  </ul>
+
+  <h3>Background Noise / Hum</h3>
+  <ul>
+    <li>Record in the quietest room available. Close windows and doors.</li>
+    <li>Turn off fans, air conditioners, and other noisy appliances.</li>
+    <li>Use a microphone with a cardioid pickup pattern — it rejects sound from behind and the sides.</li>
+    <li>We'll learn how to reduce noise in a later lesson using <strong>Effect &gt; Noise Reduction</strong>.</li>
+  </ul>
+
+  <h2>USB Microphone Tips</h2>
+  <ul>
+    <li>Plug the mic in <em>before</em> opening Audacity so it's detected on startup.</li>
+    <li>USB mics have their own built-in sound card — select the mic itself as the input device, not your computer's default audio.</li>
+    <li>If your USB mic has a headphone jack, use it for monitoring to avoid latency (delay) issues.</li>
+    <li>Avoid using USB hubs — plug directly into your computer for the most reliable connection.</li>
+  </ul>
+
+  <h2>Recommended Settings Summary</h2>
+  <table>
+    <thead>
+      <tr><th>Setting</th><th>Recommended Value</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Input Device</td><td>Your USB mic or audio interface</td></tr>
+      <tr><td>Channels</td><td>1 (Mono) for single mic</td></tr>
+      <tr><td>Sample Rate</td><td>44,100 Hz or 48,000 Hz</td></tr>
+      <tr><td>Peak Recording Level</td><td>-12 dB to -6 dB</td></tr>
+    </tbody>
+  </table>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Audio Production — Audacity</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

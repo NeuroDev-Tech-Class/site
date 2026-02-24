@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/davinci-resolve.html" class="back-link">&larr; Back to Video Production &mdash; DaVinci Resolve</a>
+    <div class="doc-header">
+    <span class="course-tag">Video Production — DaVinci Resolve</span>
+    <h1>Fairlight Audio Editing</h1>
+    <p class="subtitle">Using the Fairlight page to mix, EQ, and polish the audio in your video projects</p>
+  </div>
+
+  <h2>Why Audio Matters in Video</h2>
+  <p>Viewers will tolerate imperfect video, but bad audio makes them click away instantly. Muffled dialogue, sudden volume jumps, distracting background noise, or clipping distortion all ruin the experience. DaVinci Resolve includes <strong>Fairlight</strong>, a full-featured digital audio workstation (DAW), so you can mix and master your audio without leaving the application.</p>
+
+  <h2>The Fairlight Page Layout</h2>
+  <p>Switch to Fairlight by clicking its icon (or <kbd>Shift</kbd>+<kbd>7</kbd>). The page is divided into several areas:</p>
+  <ul>
+    <li><strong>Timeline</strong> — Your audio tracks and clips, similar to the Edit page timeline but optimized for audio work.</li>
+    <li><strong>Mixer</strong> — A traditional mixing console on the right with a fader, pan knob, mute, and solo for each track.</li>
+    <li><strong>Meters</strong> — Level meters showing the output volume in real time. The main meters are on the far right.</li>
+    <li><strong>Inspector</strong> — Clip-level audio properties (volume, pan, pitch, EQ).</li>
+    <li><strong>Effects</strong> — Audio plug-ins including EQ, dynamics, reverb, delay, and more.</li>
+  </ul>
+
+  <h2>Adjusting Clip Volume</h2>
+  <p>The quickest way to change a clip's volume is directly on the timeline:</p>
+  <ol>
+    <li>Look at the audio clip on the timeline — you'll see a thin <strong>horizontal line</strong> running through the middle of the waveform.</li>
+    <li>Hover over this line until your cursor changes to an up/down arrow.</li>
+    <li>Drag the line <strong>up</strong> to increase volume or <strong>down</strong> to decrease it.</li>
+    <li>The dB change appears as you drag.</li>
+  </ol>
+  <p>You can also select a clip and adjust its <strong>Volume</strong> numerically in the Inspector.</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> A good target for dialogue is around <strong>-12 dB to -6 dB</strong> on the meters. Background music should sit comfortably <strong>below</strong> the dialogue — often around <strong>-20 dB to -15 dB</strong> — so it doesn't compete.
+  </div>
+
+  <h2>The Mixer</h2>
+  <p>The <strong>Mixer</strong> panel provides a per-track mixing console, just like you'd see in a recording studio:</p>
+  <ul>
+    <li><strong>Fader:</strong> The vertical slider controls the track's overall volume. Drag it up or down. The fader is your primary volume control for each track.</li>
+    <li><strong>Pan knob:</strong> The dial above the fader pans the audio left or right in the stereo field. Center is default. Pan dialogue to center; pan music or effects for spatial placement.</li>
+    <li><strong>Mute (M):</strong> Silences the track completely. Useful when you want to hear other tracks without deleting anything.</li>
+    <li><strong>Solo (S):</strong> Plays <em>only</em> this track, muting everything else. Invaluable for isolating a specific sound.</li>
+  </ul>
+
+  <h2>EQ (Equalization)</h2>
+  <p>EQ lets you boost or cut specific frequency ranges to shape the character of a sound. Fairlight provides a <strong>4-band parametric EQ</strong> built into each track's mixer channel.</p>
+
+  <h3>Common EQ Adjustments</h3>
+  <table>
+    <thead>
+      <tr><th>Frequency Range</th><th>What Lives Here</th><th>Common Adjustment</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Below 80 Hz</strong></td><td>Rumble, HVAC noise, handling noise</td><td>Apply a <strong>high-pass filter</strong> (cut everything below ~80 Hz) to clean up low-end rumble</td></tr>
+      <tr><td><strong>200–500 Hz</strong></td><td>Body of the voice, warmth</td><td>Cut if voice sounds "muddy" or "boxy"</td></tr>
+      <tr><td><strong>1–4 kHz</strong></td><td>Presence, intelligibility</td><td>Subtle boost to make dialogue clearer and more present</td></tr>
+      <tr><td><strong>6–10 kHz</strong></td><td>Sibilance ("s" sounds), air, brightness</td><td>Cut if "s" sounds are harsh; boost slightly for clarity</td></tr>
+    </tbody>
+  </table>
+
+  <p>To use the EQ: double-click the EQ area at the top of a mixer channel strip to open the EQ editor. Click to add points and drag them to boost or cut frequencies. You can also set the filter type (bell, shelf, high-pass, low-pass) for each band.</p>
+
+  <div class="warning">
+    <strong>Warning:</strong> Subtle EQ adjustments go a long way. Boosting or cutting by more than 6 dB usually sounds unnatural. Make small moves and listen critically.
+  </div>
+
+  <h2>Dynamics Processing</h2>
+  <p>The <strong>Dynamics</strong> section of each mixer channel provides four processors:</p>
+
+  <h3>Compressor</h3>
+  <p>A <strong>compressor</strong> reduces the volume of the loudest parts of the audio, making the overall level more consistent. This is essential for dialogue — it tames sudden loud words while keeping quiet words audible. Key parameters: <strong>Threshold</strong> (volume above which compression starts), <strong>Ratio</strong> (how much to compress), <strong>Attack</strong> (how fast compression kicks in), <strong>Release</strong> (how fast it lets go).</p>
+
+  <h3>Limiter</h3>
+  <p>A <strong>limiter</strong> is like an extreme compressor — it prevents audio from ever exceeding a set ceiling. Set the ceiling to <strong>-1 dB</strong> or <strong>-0.5 dB</strong> to prevent clipping. Place it at the end of your audio chain as a safety net.</p>
+
+  <h3>Gate</h3>
+  <p>A <strong>noise gate</strong> silences audio when it falls below a set threshold. This helps eliminate background noise between lines of dialogue — when a person isn't speaking, the gate closes and you hear silence instead of room tone or hum.</p>
+
+  <h3>Expander</h3>
+  <p>An <strong>expander</strong> is a gentler version of a gate — instead of fully silencing quiet audio, it makes it quieter. This feels more natural than a hard gate.</p>
+
+  <h2>Automation</h2>
+  <p><strong>Automation</strong> lets you draw volume (and pan, EQ, or effect) changes over time directly on the timeline. Think of it as keyframing for audio.</p>
+  <ol>
+    <li>Click the <strong>automation</strong> button on a track header (or press <kbd>Alt</kbd>+<kbd>A</kbd>).</li>
+    <li>An automation lane appears on the timeline showing a horizontal line (volume by default).</li>
+    <li>Click on the line to add control points.</li>
+    <li>Drag points up or down to create volume changes over time.</li>
+  </ol>
+  <p>Use automation to duck the music under dialogue, create gradual fade-outs, or adjust volume moment by moment.</p>
+
+  <h2>Audio Effects</h2>
+  <p>Fairlight includes built-in audio effects that you can apply to individual clips or entire tracks:</p>
+  <ul>
+    <li><strong>Reverb:</strong> Adds the ambience of a room or hall. Use sparingly for creative effect.</li>
+    <li><strong>Delay / Echo:</strong> Repeats the audio with a time offset.</li>
+    <li><strong>De-Esser:</strong> Reduces harsh sibilance ("s" and "sh" sounds).</li>
+    <li><strong>Noise Reduction:</strong> Reduces consistent background noise (hum, hiss, room tone).</li>
+  </ul>
+  <p>To add effects, open the <strong>Effects Library</strong> in Fairlight and drag an effect onto a clip or into the effects insert rack on the mixer channel.</p>
+
+  <h2>Bus Routing</h2>
+  <p>As your project grows, you may have many audio tracks. A <strong>bus</strong> lets you group tracks together and control them with a single fader. For example, route all dialogue tracks (A1, A2, A3) to a "Dialogue Bus," all music to a "Music Bus," and all sound effects to an "SFX Bus." Then you can balance the three groups against each other using just three faders.</p>
+  <p>To create a bus: go to <em>Fairlight > Bus Format</em> or right-click in the mixer area and add a new bus. Assign tracks using the bus output routing on each channel strip.</p>
+
+  <h2>Monitoring</h2>
+  <p>Always mix with <strong>headphones</strong> or <strong>studio monitors</strong> — laptop speakers don't reproduce bass or stereo information accurately. If you're using headphones, be aware that mixes can sound different on speakers, and vice versa. Check your mix on multiple playback devices when possible.</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> Take breaks while mixing audio. Ear fatigue sets in after 30–60 minutes and your judgment becomes less reliable. Step away, rest your ears, and come back fresh.
+  </div>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>Adjust clip volume by dragging the horizontal line on the waveform, or use the <strong>Mixer faders</strong>.</li>
+    <li>Use <strong>EQ</strong> to shape the tone: high-pass filter to remove rumble, presence boost for clarity.</li>
+    <li>Apply a <strong>compressor</strong> to even out dialogue levels and a <strong>limiter</strong> to prevent clipping.</li>
+    <li>Use <strong>automation</strong> to create volume changes over time (music ducks, fades, etc.).</li>
+    <li>Group tracks with <strong>buses</strong> for easier mixing of dialogue, music, and effects.</li>
+    <li>Always monitor with headphones or decent speakers — and take ear breaks.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Video Production — DaVinci Resolve</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>Final Project</h1>
+    <p class="subtitle">Design and build a complete, playable game level from scratch</p>
+  </div>
+
+  <h2>Overview</h2>
+  <p>This is your capstone project for the Intro to Unreal Engine course. You will design and build a <strong>complete, playable game level</strong> that showcases everything you've learned across all three units — environment creation, Blueprint mechanics, UI, level design, and game systems.</p>
+  <p>You have creative freedom over the theme, setting, and layout. The project must meet the technical requirements listed below, but <em>how</em> you meet them is entirely up to you. A medieval castle, a space station, a candy world, a haunted forest — whatever inspires you.</p>
+
+  <div class="tip">
+    <strong>Start with your GDD.</strong> Before you open Unreal Engine, fill out a Game Design Document (see the GDD lesson). A clear plan will save you hours of wasted work and keep you focused throughout the project.
+  </div>
+
+  <h2>Project Requirements</h2>
+  <p>Your final level must include <strong>all</strong> of the following elements. Each one demonstrates a skill from the course.</p>
+
+  <h3>Environment (Unit 1 Skills)</h3>
+  <ul>
+    <li><strong>Landscape</strong> — a sculpted and painted landscape with at least 2 terrain layers (e.g., grass + dirt/stone).</li>
+    <li><strong>Building or Structure</strong> — at least one constructed area using static meshes (walls, floors, pillars, etc.). Can be a room, a tower, a bridge, a cave — anything architectural.</li>
+    <li><strong>Foliage</strong> — trees, bushes, grass, or other foliage painted onto the landscape or placed as props.</li>
+    <li><strong>Lighting</strong> — a deliberate lighting setup. Not just the default sun — adjust the Directional Light angle and color, add Fog for atmosphere, and include at least one Post Process Volume effect (Bloom, Vignette, Color Grading, etc.).</li>
+  </ul>
+
+  <h3>Gameplay Mechanics (Unit 2 Skills)</h3>
+  <ul>
+    <li><strong>Collectible Coins</strong> — at least 8 BP_Coin actors scattered throughout the level, all functional (overlap → increment CoinCount → destroy).</li>
+    <li><strong>HUD Display</strong> — a UMG widget showing the player's current coin count on screen.</li>
+    <li><strong>Key and Door</strong> — at least one BP_Key and one BP_Door. The door must block progress until the key is collected.</li>
+    <li><strong>Jump Pads</strong> — at least 2 BP_JumpPad actors that launch the player to otherwise unreachable areas.</li>
+  </ul>
+
+  <h3>Game Systems (Unit 3 Skills)</h3>
+  <ul>
+    <li><strong>Checkpoints</strong> — at least 2 BP_Checkpoint actors placed at meaningful progress points.</li>
+    <li><strong>Enemies</strong> — at least 1 BP_Enemy that triggers a "Game Over" and respawns the player at the last checkpoint.</li>
+    <li><strong>Win Condition</strong> — a BP_Win trigger at the end of the level that displays a victory message or UI.</li>
+  </ul>
+
+  <h3>Documentation</h3>
+  <ul>
+    <li><strong>Game Design Document</strong> — a completed GDD submitted alongside the project. Must include: Title, Author, Genre, Theme/Setting, Target Audience, Core Mechanics, and Hollywood Pitch.</li>
+  </ul>
+
+  <h2>Requirements Checklist</h2>
+  <div class="activity">
+    <strong>Check off each requirement as you complete it:</strong>
+    <table>
+      <thead>
+        <tr>
+          <th>✓</th>
+          <th>Category</th>
+          <th>Requirement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>☐</td>
+          <td>Environment</td>
+          <td>Landscape created, sculpted, and painted with at least 2 layers</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>Environment</td>
+          <td>At least one building or structure built from static meshes</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>Environment</td>
+          <td>Foliage placed on the landscape</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>Environment</td>
+          <td>Custom lighting setup with at least one Post Process effect</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>Gameplay</td>
+          <td>At least 8 collectible coins (BP_Coin) — all functional</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>Gameplay</td>
+          <td>HUD widget displaying the current coin count</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>Gameplay</td>
+          <td>At least 1 key and 1 locked door (BP_Key + BP_Door)</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>Gameplay</td>
+          <td>At least 2 jump pads (BP_JumpPad) — functional</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>Systems</td>
+          <td>At least 2 checkpoints (BP_Checkpoint) — functional</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>Systems</td>
+          <td>At least 1 enemy (BP_Enemy) — triggers respawn</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>Systems</td>
+          <td>Win condition (BP_Win) — triggers at level end</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>Documentation</td>
+          <td>Completed GDD submitted with the project</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>General</td>
+          <td>Level is fully playable from start to finish</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>General</td>
+          <td>Project saved and all Blueprints compile without errors</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Evaluation Criteria</h2>
+  <p>Your project will be evaluated on three areas:</p>
+
+  <h3>Creativity (30%)</h3>
+  <p>Does the level have a clear theme and identity? Is the setting interesting? Did you put thought into the layout and design? A level that tells a story — even a simple one — scores higher than a generic collection of platforms.</p>
+
+  <h3>Functionality (50%)</h3>
+  <p>Does everything <em>work</em>? Can the player collect every coin? Does the key unlock the door? Do checkpoints save progress? Does the enemy respawn the player? Can the player reach the win trigger and complete the level? Functionality is the most heavily weighted category — a polished game that works perfectly beats a beautiful game that's broken.</p>
+
+  <h3>Polish (20%)</h3>
+  <p>The finishing touches that make the difference between "it works" and "it feels good." This includes:</p>
+  <ul>
+    <li>Consistent lighting and atmosphere</li>
+    <li>Clean level layout with no gaps, floating objects, or z-fighting</li>
+    <li>Organized Outliner with named and grouped actors</li>
+    <li>Readable UI (font size, color, positioning)</li>
+    <li>Smooth pacing — does the level feel good to play through, or is it frustrating?</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Don't leave testing for the last day.</strong> Play-test your level throughout the build process. Have a classmate play it — watch where they get stuck or confused. The earlier you find problems, the easier they are to fix.
+  </div>
+
+  <h2>Tips for Success</h2>
+  <ul>
+    <li><strong>Graybox first.</strong> Build the entire level layout with plain cubes before adding any detail. Once the layout is fun, then add terrain, foliage, lighting, and polish.</li>
+    <li><strong>Test every mechanic individually.</strong> Before integrating everything, test each Blueprint in a debug level to make sure it works in isolation.</li>
+    <li><strong>Save often.</strong> Use <kbd>Ctrl</kbd>+<kbd>S</kbd> constantly. Unreal can crash, and losing work is devastating.</li>
+    <li><strong>Keep your Blueprints organized.</strong> Use comment boxes, meaningful variable names, and a clean folder structure in the Content Browser.</li>
+    <li><strong>Scope realistically.</strong> It's better to submit a small, polished, fully functional level than a sprawling, broken one. Nail the requirements first, then add extras if you have time.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Going Further:</strong> If you've met all the requirements and have extra time, consider adding: a sprint mechanic, moving platforms, sound effects, multiple enemies with different behaviors, a timer challenge, or a second level that loads after the win trigger.
+  </div>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

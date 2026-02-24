@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/gimp.html" class="back-link">&larr; Back to 2D Digital Art &mdash; GIMP</a>
+    <div class="doc-header">
+    <span class="course-tag">2D Digital Art — GIMP</span>
+    <h1>Paths &amp; Vectors</h1>
+    <p class="subtitle">Drawing Precise Shapes with Bézier Curves</p>
+  </div>
+
+  <h2>What Are Paths?</h2>
+  <p>
+    A <strong>path</strong> (also called a <strong>vector path</strong>) is a line defined by mathematical points rather than pixels. Unlike painted strokes, paths are infinitely smooth at any zoom level and can be edited, reshaped, and reused at any time without quality loss. Paths are not visible in the final image — they are guides that you convert into selections, strokes, or text curves.
+  </p>
+
+  <h2>The Paths Tool</h2>
+  <p>
+    Select the <strong>Paths tool</strong> by pressing <kbd>B</kbd> or clicking its icon in the Toolbox (it looks like a fountain pen nib). The Paths tool creates <strong>Bézier curves</strong> — smooth curves defined by anchor points and control handles.
+  </p>
+
+  <h3>Creating Paths</h3>
+  <ul>
+    <li><strong>Click</strong> to place a corner anchor point (a straight segment connects each point).</li>
+    <li><strong>Click and drag</strong> to place a smooth anchor point with control handles. The handles determine the curve's direction and intensity — the further you drag, the more pronounced the curve.</li>
+    <li>Continue clicking or click-dragging to add more points.</li>
+    <li>To <strong>close the path</strong> (create a shape), hold <kbd>Ctrl</kbd> and click on the first point.</li>
+    <li>Press <kbd>Enter</kbd> to confirm the path.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> When drawing curves, fewer points usually produce smoother results. Try to use as few anchor points as possible and let the control handles do the shaping.
+  </div>
+
+  <h3>Editing Path Nodes</h3>
+  <p>
+    After creating a path, you can refine it by editing its anchor points (nodes):
+  </p>
+  <ul>
+    <li><strong>Move a node</strong> — click and drag any anchor point to reposition it.</li>
+    <li><strong>Adjust handles</strong> — click and drag a control handle to change the curve shape.</li>
+    <li><strong>Add a node</strong> — click on a path segment between two existing nodes. A new anchor point appears.</li>
+    <li><strong>Delete a node</strong> — hold <kbd>Ctrl</kbd>+<kbd>Shift</kbd> and click a node to remove it.</li>
+  </ul>
+  <p>
+    The <strong>Paths dialog</strong> (accessible from <strong>Windows &gt; Dockable Dialogs &gt; Paths</strong>) shows all paths in the current image. You can have multiple paths, rename them, toggle their visibility, and select which path is active.
+  </p>
+
+  <h2>Path to Selection</h2>
+  <p>
+    One of the most important uses of paths is converting them into pixel-perfect selections:
+  </p>
+  <ul>
+    <li>Press <kbd>Enter</kbd> while the path is active, or</li>
+    <li>Go to <strong>Select &gt; From Path</strong>.</li>
+  </ul>
+  <p>
+    The path becomes a marching-ants selection. You can then fill, paint, delete, or apply effects inside the selected area. This technique is ideal for cutting out objects with smooth, precise edges.
+  </p>
+
+  <h2>Selection to Path</h2>
+  <p>
+    You can also do the reverse — convert any existing selection into a path:
+  </p>
+  <ul>
+    <li>Go to <strong>Select &gt; To Path</strong>.</li>
+  </ul>
+  <p>
+    This creates an editable path from the selection boundary, letting you refine the shape with the Paths tool before converting back to a selection.
+  </p>
+
+  <h2>Stroking a Path</h2>
+  <p>
+    <strong>Stroking</strong> a path means drawing a visible line along the path. Go to <strong>Edit &gt; Stroke Path</strong> and choose:
+  </p>
+  <ul>
+    <li><strong>Stroke line</strong> — draws a line of a specified width, with options for line style (solid, dashed, dotted), cap style, and join style.</li>
+    <li><strong>Stroke with a paint tool</strong> — uses the currently selected brush and paint tool to draw along the path. This lets you create strokes with textures, opacity variation, and dynamics.</li>
+  </ul>
+  <p>
+    Stroking is how you turn an invisible path into visible artwork — outlines, borders, decorative lines, and custom shapes.
+  </p>
+
+  <div class="tip">
+    <strong>Tip:</strong> Before stroking, make sure you're on the correct layer and that the foreground color and brush settings are what you want. The stroke will be painted onto the active layer.
+  </div>
+
+  <h2>Common Uses for Paths</h2>
+  <ul>
+    <li><strong>Precise cutouts</strong> — use paths to trace around objects for clean selections, especially when other selection tools struggle with complex edges.</li>
+    <li><strong>Custom shapes</strong> — draw stars, arrows, logos, and other geometric or freeform shapes with smooth, scalable curves.</li>
+    <li><strong>Text along a curve</strong> — create a curved path and use <strong>Layer &gt; Text along Path</strong> to flow text along it (covered in the Text &amp; Typography lesson).</li>
+    <li><strong>Decorative borders and lines</strong> — stroke paths with custom brushes for artistic outlines.</li>
+  </ul>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>The <strong>Paths tool</strong> (<kbd>B</kbd>) creates Bézier curves with anchor points and control handles.</li>
+    <li><strong>Click</strong> for straight corners; <strong>click and drag</strong> for smooth curves.</li>
+    <li>Edit nodes by moving, adding, or deleting anchor points.</li>
+    <li>Convert paths to selections with <strong>Select &gt; From Path</strong> (<kbd>Enter</kbd>).</li>
+    <li>Convert selections to paths with <strong>Select &gt; To Path</strong>.</li>
+    <li><strong>Stroke Path</strong> (<strong>Edit &gt; Stroke Path</strong>) draws a visible line along the path.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — 2D Digital Art — GIMP</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

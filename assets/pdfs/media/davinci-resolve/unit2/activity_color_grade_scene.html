@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/davinci-resolve.html" class="back-link">&larr; Back to Video Production &mdash; DaVinci Resolve</a>
+    <div class="doc-header">
+    <span class="course-tag">Video Production — DaVinci Resolve</span>
+    <h1>Activity: Color Grade a Short Scene</h1>
+    <p class="subtitle">Apply primary correction, shot matching, and a creative grade to a multi-clip scene</p>
+  </div>
+
+  <h2>Overview</h2>
+  <p>In this activity you will practice the full color correction and grading workflow on a short scene made up of 3–5 clips. You'll fix technical issues, match shots for consistency, apply a creative look, and use a targeted adjustment with a Power Window or Qualifier.</p>
+
+  <h2>Finding Footage</h2>
+  <p>Use footage from one of these sources:</p>
+  <ul>
+    <li><strong>Your own footage:</strong> Film 3–5 short clips in the same location (indoors or outdoors) to simulate a scene.</li>
+    <li><strong>Royalty-free stock:</strong> Download 3–5 clips with a similar setting from <code>pexels.com/videos</code> or <code>pixabay.com/videos</code>. Try to find clips from the same category or visual theme so they can pass as a cohesive scene.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> Choose footage that has some room for improvement — slightly over/underexposed, a minor color cast, or flat-looking video is ideal for practice. Perfectly graded stock footage won't give you much to work with.
+  </div>
+
+  <h2>Requirements</h2>
+  <ul>
+    <li><strong>Clips:</strong> 3–5 clips assembled on a timeline</li>
+    <li><strong>Primary Correction:</strong> Fix exposure and white balance on each clip using the Color page</li>
+    <li><strong>Shot Matching:</strong> Make all clips look consistent with each other</li>
+    <li><strong>Creative Grade:</strong> Apply a unified creative look (warm, cool, high contrast, vintage, etc.)</li>
+    <li><strong>Targeted Adjustment:</strong> Use at least 1 <strong>Power Window</strong> or <strong>Qualifier</strong> for a localized adjustment</li>
+    <li><strong>Gallery Still:</strong> Save a still of your favorite grade</li>
+  </ul>
+
+  <h2>Step-by-Step Instructions</h2>
+
+  <h3>Step 1: Set Up the Timeline</h3>
+  <ol>
+    <li>Create a new project in DaVinci Resolve (or use an existing one).</li>
+    <li>Import your 3–5 clips into the Media Pool.</li>
+    <li>Switch to the Edit page and create a timeline with all clips in sequence. Trim as needed — each clip should be at least 3–5 seconds long.</li>
+  </ol>
+
+  <h3>Step 2: Open the Color Page</h3>
+  <ol>
+    <li>Switch to the <strong>Color</strong> page (<kbd>Shift</kbd>+<kbd>6</kbd>).</li>
+    <li>Open your <strong>Scopes</strong> (Waveform at minimum; Parade is also very helpful).</li>
+    <li>Click on the first clip in the thumbnail strip at the bottom.</li>
+  </ol>
+
+  <h3>Step 3: Primary Correction (Each Clip)</h3>
+  <p>For each clip, on the first node (Node 01 — your correction node):</p>
+  <ol>
+    <li><strong>Fix exposure:</strong> Check the Waveform. If the image is too dark, raise <strong>Gamma</strong> and/or <strong>Gain</strong>. If it's too bright, lower them. Make sure you're not clipping at the top or crushing at the bottom.</li>
+    <li><strong>Fix white balance:</strong> Check the Parade. If the RGB channels don't align in the highlights, adjust <strong>Temperature</strong> and <strong>Tint</strong> until neutral whites have balanced channels. Or use the white balance eyedropper on a neutral gray/white area.</li>
+    <li><strong>Adjust contrast:</strong> If the image looks flat, add some <strong>Contrast</strong> or create a subtle S-curve in the Curves panel.</li>
+    <li><strong>Adjust saturation:</strong> Tweak the <strong>Saturation</strong> slider if colors appear too muted or too vivid.</li>
+  </ol>
+  <p>Repeat for each clip in the scene.</p>
+
+  <h3>Step 4: Match Shots</h3>
+  <ol>
+    <li>Choose your <strong>hero shot</strong> — the one that looks the best after correction.</li>
+    <li>For each other clip, use <strong>Split Screen</strong> or <strong>Image Wipe</strong> mode (viewer buttons on the Color page) to compare against the hero shot.</li>
+    <li>Adjust Lift, Gamma, and Gain until the brightness range matches.</li>
+    <li>Check the Parade to ensure white balance is consistent.</li>
+    <li>Step through the timeline and play back to verify the clips feel like a continuous scene.</li>
+  </ol>
+
+  <h3>Step 5: Apply a Creative Grade</h3>
+  <ol>
+    <li>Add a <strong>new serial node</strong> after the correction node (<kbd>Alt</kbd>+<kbd>S</kbd>). This keeps your correction untouched and puts the creative look on a separate node.</li>
+    <li>Choose a creative direction and apply it. Some ideas:
+      <ul>
+        <li><strong>Warm cinematic:</strong> Push Gain (highlights) toward orange, Lift (shadows) toward teal. Increase Contrast slightly.</li>
+        <li><strong>Cool and moody:</strong> Push Gamma toward blue, reduce Saturation to about 35–40, increase Contrast.</li>
+        <li><strong>High-contrast film look:</strong> Create a strong S-curve in Curves. Lift the very bottom of the curve slightly (to create faded/milky blacks). Reduce Saturation a bit.</li>
+        <li><strong>Vintage / faded:</strong> Raise the low end of the Luma curve (faded blacks), reduce saturation, push Lift toward a warm or cool hue.</li>
+      </ul>
+    </li>
+    <li>Apply the same creative grade to all clips. You can <strong>copy the node</strong> and paste it onto the other clips (right-click the graded clip's thumbnail, <em>Copy</em>, then select each other clip and <em>Paste</em>).</li>
+  </ol>
+
+  <h3>Step 6: Targeted Adjustment</h3>
+  <ol>
+    <li>Pick one clip where a targeted adjustment would improve the image. For example: brighten a face, deepen the sky, or warm up skin tones.</li>
+    <li>Add a <strong>new serial node</strong> after your creative grade node.</li>
+    <li>Use a <strong>Power Window</strong> (circle or polygon) to isolate a region, or use the <strong>Qualifier</strong> eyedropper to select a color range (like the sky or skin).</li>
+    <li>Make your adjustment — raise exposure, shift color, increase saturation, etc.</li>
+    <li>Toggle the node on and off (<kbd>Ctrl</kbd>+<kbd>D</kbd>) to see the before/after of just this targeted adjustment.</li>
+  </ol>
+
+  <h3>Step 7: Save a Gallery Still</h3>
+  <ol>
+    <li>Navigate to your favorite clip with the grade applied.</li>
+    <li>Right-click the viewer and choose <strong>Grab Still</strong> (or <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>G</kbd>).</li>
+    <li>The still is saved in the Gallery on the left side of the Color page.</li>
+  </ol>
+
+  <h3>Step 8: Export a Before/After Comparison</h3>
+  <ol>
+    <li>For a before/after, you can use <strong>Bypass All Grades</strong> (<kbd>Shift</kbd>+<kbd>D</kbd>) while viewing. Take a screenshot of the "before," then toggle grades back on and screenshot the "after."</li>
+    <li>Alternatively, export the graded timeline via the <strong>Deliver</strong> page, then create a second export with all grades bypassed.</li>
+  </ol>
+
+  <h2>Checklist</h2>
+  <table>
+    <thead>
+      <tr><th>Requirement</th><th>Done?</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>3–5 clips on the timeline</td><td>☐</td></tr>
+      <tr><td>Primary correction applied to each clip (exposure + white balance)</td><td>☐</td></tr>
+      <tr><td>Shots matched for visual consistency</td><td>☐</td></tr>
+      <tr><td>Creative grade applied on a separate node</td><td>☐</td></tr>
+      <tr><td>At least 1 Power Window or Qualifier used</td><td>☐</td></tr>
+      <tr><td>Gallery Still saved</td><td>☐</td></tr>
+      <tr><td>Before/after comparison exported or captured</td><td>☐</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Tip:</strong> Color grading is highly subjective — there's no single "correct" look. The goal is to practice the tools and develop your eye. Try multiple creative grades on the same footage and see which feels right for the mood you want to convey.
+  </div>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Video Production — DaVinci Resolve</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/gimp.html" class="back-link">&larr; Back to 2D Digital Art &mdash; GIMP</a>
+    <div class="doc-header">
+    <span class="course-tag">2D Digital Art — GIMP</span>
+    <h1>Transform &amp; Paint Tools</h1>
+    <p class="subtitle">Moving, Reshaping, and Painting on Your Images</p>
+  </div>
+
+  <h2>Transform Tools</h2>
+  <p>
+    Transform tools change the position, size, or shape of layers, selections, or paths. They are essential for compositing, layout, and fine-tuning your work.
+  </p>
+
+  <h3>Move (<kbd>M</kbd>)</h3>
+  <p>
+    Click and drag to move the active layer, selection, or path. In Tool Options, you can choose whether the Move tool moves the active layer or picks whichever layer you click on.
+  </p>
+
+  <h3>Align</h3>
+  <p>
+    Aligns or distributes layers relative to each other, to the canvas, or to a selection. Click a layer on the canvas to select it as the target, then use the alignment buttons in Tool Options (align left, center, right, top, middle, bottom).
+  </p>
+
+  <h3>Crop (<kbd>Shift</kbd>+<kbd>C</kbd>)</h3>
+  <p>
+    Draws a rectangle on the canvas and trims the image to that area. Press <kbd>Enter</kbd> to apply the crop. This permanently reduces the canvas size to your selection.
+  </p>
+
+  <h3>Rotate</h3>
+  <p>
+    Rotates a layer, selection, or path by a specified angle. Click and drag on the canvas to rotate interactively, or type an exact angle in the dialog that appears. Useful for straightening crooked photos or angling design elements.
+  </p>
+
+  <h3>Scale</h3>
+  <p>
+    Resizes a layer, selection, or path. Drag the corner handles to scale. Click the chain-link icon in the scale dialog to maintain the aspect ratio (proportional scaling). Use this to enlarge or shrink individual layers without affecting the whole image.
+  </p>
+
+  <h3>Shear</h3>
+  <p>
+    Shifts one side of a layer along the horizontal or vertical axis, creating a slanting or skewing effect. Useful for creating italic-style effects or perspective adjustments.
+  </p>
+
+  <h3>Perspective</h3>
+  <p>
+    Lets you drag the four corners of a layer independently, allowing you to simulate 3D perspective — for example, making text look like it's receding into the distance on a road or wall.
+  </p>
+
+  <h3>Flip</h3>
+  <p>
+    Mirrors a layer horizontally (left-right) or vertically (top-bottom). Toggle between horizontal and vertical flip in Tool Options.
+  </p>
+
+  <h2>Paint Tools</h2>
+  <p>
+    Paint tools let you apply color, erase, blend, and clone pixels directly on the canvas. Each tool behaves differently, but they all share common settings like brush size, opacity, and hardness.
+  </p>
+
+  <h3>Paintbrush (<kbd>P</kbd>)</h3>
+  <p>
+    The primary painting tool. Applies smooth strokes using the selected brush tip. Strokes can be soft or hard depending on the brush. Adjust opacity for a subtle, semi-transparent effect.
+  </p>
+
+  <h3>Pencil (<kbd>N</kbd>)</h3>
+  <p>
+    Similar to the Paintbrush, but always draws with <strong>hard edges</strong> — no anti-aliasing or softness. Every pixel is fully on or fully off. Ideal for pixel art or when you need crisp, precise lines at the pixel level.
+  </p>
+
+  <h3>Eraser (<kbd>Shift</kbd>+<kbd>E</kbd>)</h3>
+  <p>
+    Removes pixels from the active layer. If the layer has an <strong>alpha channel</strong> (transparency), the eraser makes pixels transparent. If there is no alpha channel, it paints with the background color instead. Adjust size and opacity like any other brush tool.
+  </p>
+
+  <h3>Airbrush (<kbd>A</kbd>)</h3>
+  <p>
+    Simulates a real airbrush — it applies paint gradually and builds up color the longer you hold the mouse in one spot. Great for smooth, gradual color transitions and shading.
+  </p>
+
+  <h3>Ink</h3>
+  <p>
+    Simulates an ink pen or calligraphy brush. The stroke width changes based on speed and direction, giving a natural hand-drawn feel. Good for inking and line art.
+  </p>
+
+  <h3>Clone Stamp (<kbd>C</kbd>)</h3>
+  <p>
+    Duplicates pixels from a <strong>source point</strong> to wherever you paint. To use it:
+  </p>
+  <ol>
+    <li>Hold <kbd>Ctrl</kbd> and click to set the source point.</li>
+    <li>Release <kbd>Ctrl</kbd> and paint somewhere else — the pixels from the source area are copied.</li>
+  </ol>
+  <p>
+    The Clone Stamp is essential for removing unwanted objects, fixing blemishes, and repairing damaged areas of a photo.
+  </p>
+
+  <h3>Healing Tool (<kbd>H</kbd>)</h3>
+  <p>
+    Works like the Clone Stamp, but <strong>blends</strong> the cloned pixels with the surrounding area for a seamless result. Set the source point the same way (<kbd>Ctrl</kbd>+click). Use the Healing Tool for skin retouching, scar removal, and subtle repairs where the Clone Stamp might look too obvious.
+  </p>
+
+  <h3>Smudge (<kbd>S</kbd>)</h3>
+  <p>
+    Pushes pixels around as if dragging your finger through wet paint. Useful for blending colors together and softening edges.
+  </p>
+
+  <h3>Blur/Sharpen</h3>
+  <p>
+    Blur mode softens the area you paint over; Sharpen mode increases contrast to make details crisper. Toggle between blur and sharpen in Tool Options. Useful for subtle, targeted adjustments.
+  </p>
+
+  <h3>Bucket Fill (<kbd>Shift</kbd>+<kbd>B</kbd>)</h3>
+  <p>
+    Fills a contiguous area of similar color with the foreground color, background color, or a pattern. Adjust the <strong>Threshold</strong> to control how similar adjacent pixels must be to get filled.
+  </p>
+
+  <h3>Gradient (<kbd>G</kbd>)</h3>
+  <p>
+    Click and drag to create a smooth transition between colors (or between a color and transparency). Choose from many gradient presets or create custom ones. The direction and length of your drag determines the gradient direction and transition range.
+  </p>
+
+  <h2>Brush Settings</h2>
+  <p>
+    Most paint tools share these essential settings in Tool Options:
+  </p>
+  <ul>
+    <li><strong>Size</strong> — the diameter of the brush tip. Use <kbd>[</kbd> and <kbd>]</kbd> to quickly decrease or increase brush size.</li>
+    <li><strong>Opacity</strong> — how opaque or transparent the stroke is (100% = fully solid).</li>
+    <li><strong>Hardness</strong> — controls how soft or sharp the brush edges are (soft edges blend smoothly into the background).</li>
+  </ul>
+
+  <h2>Keyboard Shortcut Reference</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Tool</th>
+        <th>Shortcut</th>
+        <th>Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Move</td><td><kbd>M</kbd></td><td>Transform</td></tr>
+      <tr><td>Crop</td><td><kbd>Shift</kbd>+<kbd>C</kbd></td><td>Transform</td></tr>
+      <tr><td>Rotate</td><td><kbd>Shift</kbd>+<kbd>R</kbd></td><td>Transform</td></tr>
+      <tr><td>Scale</td><td><kbd>Shift</kbd>+<kbd>T</kbd></td><td>Transform</td></tr>
+      <tr><td>Flip</td><td><kbd>Shift</kbd>+<kbd>F</kbd></td><td>Transform</td></tr>
+      <tr><td>Paintbrush</td><td><kbd>P</kbd></td><td>Paint</td></tr>
+      <tr><td>Pencil</td><td><kbd>N</kbd></td><td>Paint</td></tr>
+      <tr><td>Eraser</td><td><kbd>Shift</kbd>+<kbd>E</kbd></td><td>Paint</td></tr>
+      <tr><td>Airbrush</td><td><kbd>A</kbd></td><td>Paint</td></tr>
+      <tr><td>Clone Stamp</td><td><kbd>C</kbd></td><td>Paint</td></tr>
+      <tr><td>Healing Tool</td><td><kbd>H</kbd></td><td>Paint</td></tr>
+      <tr><td>Smudge</td><td><kbd>S</kbd></td><td>Paint</td></tr>
+      <tr><td>Bucket Fill</td><td><kbd>Shift</kbd>+<kbd>B</kbd></td><td>Paint</td></tr>
+      <tr><td>Gradient</td><td><kbd>G</kbd></td><td>Paint</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Tip:</strong> You don't have to memorize every shortcut right away. Start with the ones you use most often — <kbd>P</kbd> for Paintbrush, <kbd>M</kbd> for Move, <kbd>Shift</kbd>+<kbd>E</kbd> for Eraser — and pick up the rest as you go.
+  </div>
+
+  <h2>Summary</h2>
+  <ul>
+    <li><strong>Transform tools</strong> move, resize, rotate, and reshape layers and selections.</li>
+    <li><strong>Paint tools</strong> apply or modify color directly on the canvas.</li>
+    <li>The <strong>Clone Stamp</strong> copies pixels from a source point; the <strong>Healing Tool</strong> does the same but blends seamlessly.</li>
+    <li>Adjust <strong>size</strong>, <strong>opacity</strong>, and <strong>hardness</strong> in Tool Options to control brush behavior.</li>
+    <li>Use keyboard shortcuts for faster workflow.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — 2D Digital Art — GIMP</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

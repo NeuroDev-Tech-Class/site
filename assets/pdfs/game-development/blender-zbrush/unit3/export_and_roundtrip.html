@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/blender-zbrush-mini.html" class="back-link">&larr; Back to 3D Art &mdash; Blender &amp; ZBrush</a>
+    <div class="doc-header">
+    <span class="course-tag">Blender &amp; ZBrush Mini</span>
+    <h1>Export &amp; Roundtrip</h1>
+    <p class="subtitle">Moving Your Sculpt from ZBrushCoreMini to Blender and Beyond</p>
+  </div>
+
+  <h2>Why Roundtrip?</h2>
+  <p>
+    ZBrushCoreMini is an amazing sculpting tool, but it's not designed for everything. It can't add mechanical parts
+    like pendant loops, flatten a base precisely, or prepare a model for the slicer with fine control. That's where
+    <strong>Blender</strong> comes in. By exporting from ZBrush and importing into Blender, you get the best of both
+    worlds: organic sculpting <em>and</em> precise polygon modeling.
+  </p>
+  <p>
+    This workflow — sculpt in ZBrush, refine in Blender, export for printing — is called a <strong>roundtrip</strong>,
+    and it's extremely common in the professional 3D world.
+  </p>
+
+  <h2>Step 1: Export from ZBrushCoreMini</h2>
+  <ol>
+    <li>Finish your sculpt and make sure you're happy with it (save your project first!).</li>
+    <li>Click the <strong>Printer Export icon</strong> (🖨️) in the ZBrushCoreMini interface.</li>
+    <li>Choose a save location and filename. The file will be saved as an <strong>OBJ</strong> (Wavefront Object)
+      file.</li>
+    <li>Click <strong>Save</strong>. The export includes the full mesh geometry of your sculpt.</li>
+  </ol>
+  <p>
+    <strong>Note:</strong> ZBrushCoreMini exports can only produce OBJ files. This is perfectly fine — Blender reads OBJ
+    files without any issues.
+  </p>
+
+  <h2>Step 2: Import into Blender</h2>
+  <ol>
+    <li>Open <strong>Blender</strong> and delete the default cube (or start a new file).</li>
+    <li>Go to <strong>File → Import → Wavefront (.obj)</strong>.</li>
+    <li>Navigate to the OBJ file you exported from ZBrushCoreMini and select it.</li>
+    <li>Click <strong>Import OBJ</strong>.</li>
+    <li>Your sculpt will appear in the 3D viewport. It might be very large or very small — don't worry, you'll scale it
+      in the next step.</li>
+  </ol>
+
+  <h2>About the Imported Mesh</h2>
+  <p>
+    When you import a ZBrush sculpt, you'll notice something immediately: the mesh is <strong>very dense</strong>. A
+    typical ZBrushCoreMini export might have hundreds of thousands — or even millions — of tiny triangular faces. This
+    is normal. ZBrush sculpts at very high polygon counts to capture fine surface detail, unlike Blender's low-poly
+    modeling approach.
+  </p>
+  <p>
+    For 3D printing, this high polygon count is actually fine — the slicer can handle dense meshes. But it can make
+    Blender feel sluggish. If your computer slows down significantly, you can use Blender's <strong>Decimate
+    modifier</strong> to reduce the polygon count (but be aware this may lose some fine detail).
+  </p>
+
+  <h2>Step 3: Basic Cleanup in Blender</h2>
+
+  <h3>Positioning</h3>
+  <p>
+    Your imported sculpt may not be centered or oriented correctly. Use the following to fix it:
+  </p>
+  <ul>
+    <li><strong>G key</strong> to grab and move the object. Press <strong>G</strong> then <strong>X</strong>,
+      <strong>Y</strong>, or <strong>Z</strong> to constrain movement to a specific axis.</li>
+    <li><strong>R key</strong> to rotate. Press <strong>R</strong> then an axis key to rotate around that axis.</li>
+    <li>Center the object on the origin: <strong>Right-click → Set Origin → Origin to Geometry</strong>.</li>
+  </ul>
+
+  <h3>Scaling</h3>
+  <p>
+    ZBrushCoreMini exports don't always match real-world dimensions. You'll need to scale the model to the correct
+    size for printing:
+  </p>
+  <ul>
+    <li>Press <strong>S</strong> to scale, then type a number to scale by a factor (e.g., <strong>S → 0.1</strong> to
+      shrink to 10% size).</li>
+    <li>Check dimensions in the <strong>N panel</strong> (press N to toggle the sidebar) under the
+      <strong>Item</strong> tab → <strong>Dimensions</strong>. These show the size in Blender units (which correspond
+      to millimeters if your scene is set to metric).</li>
+    <li>After scaling, apply the scale: <strong>Ctrl + A → Scale</strong>. This resets the scale values to 1.0 while
+      keeping the actual size, which prevents problems during export.</li>
+  </ul>
+
+  <h2>Step 4: Adding Geometry in Blender</h2>
+  <p>
+    This is where the roundtrip really shines. You can add precise, geometric shapes that would be difficult or
+    impossible to sculpt in ZBrush:
+  </p>
+
+  <h3>Pendant Loop</h3>
+  <p>
+    To turn your sculpt into a wearable pendant, add a torus (donut shape) at the top:
+  </p>
+  <ol>
+    <li>Press <strong>Shift + A → Mesh → Torus</strong>.</li>
+    <li>Size it appropriately — the inner hole should be large enough for a chain or cord to pass through (at least 3-4mm
+      inner diameter).</li>
+    <li>Position it so it overlaps slightly with the top of your sculpt (the two meshes should intersect).</li>
+    <li>Select both objects, then join them: <strong>Ctrl + J</strong>.</li>
+    <li>Use a <strong>Boolean modifier</strong> (Union) if you want a cleaner merge, or simply leave them intersecting —
+      for 3D printing, overlapping geometry usually prints fine.</li>
+  </ol>
+
+  <h3>Flat Base</h3>
+  <p>
+    If your sculpt needs to stand upright, add a flat base:
+  </p>
+  <ol>
+    <li>Press <strong>Shift + A → Mesh → Cylinder</strong>.</li>
+    <li>Make it short and wide (like a coin or disc).</li>
+    <li>Position it at the bottom of your sculpt so it overlaps slightly.</li>
+    <li>Join the objects with <strong>Ctrl + J</strong>.</li>
+  </ol>
+
+  <h2>Step 5: Re-Export for Printing</h2>
+  <ol>
+    <li>Select your final combined object.</li>
+    <li>Go to <strong>File → Export → STL (.stl)</strong>.</li>
+    <li>Check <strong>Selection Only</strong> in the export options.</li>
+    <li>Set the <strong>Scale</strong> to 1.0 (assuming you've already sized it correctly in Blender).</li>
+    <li>Export and open the STL file in your slicer software to prepare for printing.</li>
+  </ol>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>Export from ZBrushCoreMini using the <strong>Printer Export icon</strong> → OBJ file.</li>
+    <li>Import into Blender via <strong>File → Import → Wavefront OBJ</strong>.</li>
+    <li>The imported mesh will be <strong>very high-poly</strong> — that's normal.</li>
+    <li>Use Blender to <strong>position, scale, and add geometry</strong> (loops, bases, mechanical parts).</li>
+    <li>Re-export as <strong>STL</strong> for 3D printing.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Blender &amp; ZBrush Mini</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

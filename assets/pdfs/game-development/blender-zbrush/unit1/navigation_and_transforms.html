@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/blender-zbrush-mini.html" class="back-link">&larr; Back to 3D Art &mdash; Blender &amp; ZBrush</a>
+    <div class="doc-header">
+    <span class="course-tag">Blender &amp; ZBrush Mini</span>
+    <h1>Navigation &amp; Transforms</h1>
+    <p class="subtitle">Moving through 3D space and manipulating objects</p>
+  </div>
+
+  <h2>Navigating the Viewport</h2>
+  <p>
+    Before you can model anything, you need to be comfortable moving around the 3D viewport. Blender's navigation relies heavily on the mouse — especially the <strong>middle mouse button (MMB)</strong>. If you have a mouse with a scroll wheel that clicks, you're all set.
+  </p>
+
+  <h3>Basic Navigation Controls</h3>
+  <ul>
+    <li><strong>Zoom:</strong> Scroll the <kbd>Mouse Wheel</kbd> up to zoom in, down to zoom out</li>
+    <li><strong>Orbit:</strong> Click and drag with <kbd>MMB</kbd> (middle mouse button) to rotate the view around the scene</li>
+    <li><strong>Pan:</strong> Hold <kbd>Shift</kbd> + click and drag with <kbd>MMB</kbd> to slide the view left, right, up, or down without rotating</li>
+  </ul>
+
+  <div class="tip">
+    <strong>No middle mouse button?</strong> Go to <strong>Edit &gt; Preferences &gt; Input</strong> and check <strong>"Emulate 3 Button Mouse."</strong> This lets you use <kbd>Alt</kbd>+<kbd>Left Click</kbd> instead of MMB.
+  </div>
+
+  <h3>Numpad Views</h3>
+  <p>
+    The numpad gives you instant access to precise, aligned views. These are incredibly useful when you need to see your model from an exact angle:
+  </p>
+  <ul>
+    <li><kbd>Numpad 1</kbd> — Front view (looking down the Y axis)</li>
+    <li><kbd>Numpad 3</kbd> — Right side view (looking down the X axis)</li>
+    <li><kbd>Numpad 7</kbd> — Top view (looking down the Z axis)</li>
+    <li><kbd>Numpad 5</kbd> — Toggle between <strong>Perspective</strong> and <strong>Orthographic</strong> view</li>
+    <li><kbd>Numpad 0</kbd> — Camera view (what the camera sees for rendering)</li>
+  </ul>
+  <p>
+    Holding <kbd>Ctrl</kbd> with a numpad key gives you the opposite view. For example, <kbd>Ctrl</kbd>+<kbd>Numpad 1</kbd> gives you the <strong>Back</strong> view.
+  </p>
+
+  <div class="tip">
+    <strong>Perspective vs. Orthographic:</strong> Perspective view mimics how your eyes see the world — objects farther away look smaller. Orthographic view has no depth distortion — useful for precise alignment. Toggle with <kbd>Numpad 5</kbd>.
+  </div>
+
+  <h3>The Navigation Gizmo</h3>
+  <p>
+    In the top-right corner of the viewport, you'll see a small set of colored axes (the <strong>navigation gizmo</strong>). You can click on any axis letter (X, Y, or Z) to snap to that view. You can also click and drag the gizmo to orbit the scene. This is a helpful visual alternative to using the MMB.
+  </p>
+
+  <h2>Selecting Objects</h2>
+  <p>
+    Before you can transform an object, you need to select it. In Blender:
+  </p>
+  <ul>
+    <li><strong>Left-click</strong> an object to select it (it gets an orange outline)</li>
+    <li><strong>Shift+Left-click</strong> to add more objects to the selection</li>
+    <li>Click on empty space to deselect everything</li>
+    <li><kbd>A</kbd> — Select all objects</li>
+    <li><kbd>Alt</kbd>+<kbd>A</kbd> — Deselect all</li>
+  </ul>
+
+  <h2>Transforms: Move, Rotate, Scale</h2>
+  <p>
+    Transforms are the three fundamental operations you'll use constantly. Each one has a single-key shortcut:
+  </p>
+
+  <h3>Grab / Move — <kbd>G</kbd></h3>
+  <p>
+    Select an object and press <kbd>G</kbd> to grab it. Move your mouse to reposition the object, then <strong>left-click</strong> to confirm or <strong>right-click</strong> (or <kbd>Esc</kbd>) to cancel.
+  </p>
+
+  <h3>Rotate — <kbd>R</kbd></h3>
+  <p>
+    Select an object and press <kbd>R</kbd> to rotate it. Move your mouse to spin the object, then left-click to confirm.
+  </p>
+
+  <h3>Scale — <kbd>S</kbd></h3>
+  <p>
+    Select an object and press <kbd>S</kbd> to scale (resize) it. Move your mouse outward to enlarge or inward to shrink, then left-click to confirm.
+  </p>
+
+  <h3>Axis Locking</h3>
+  <p>
+    After pressing <kbd>G</kbd>, <kbd>R</kbd>, or <kbd>S</kbd>, you can press <kbd>X</kbd>, <kbd>Y</kbd>, or <kbd>Z</kbd> to <strong>lock the transform to a single axis</strong>. This is extremely useful for precise control:
+  </p>
+  <ul>
+    <li><kbd>G</kbd> then <kbd>Z</kbd> — Move the object only up and down</li>
+    <li><kbd>R</kbd> then <kbd>X</kbd> — Rotate only around the X axis</li>
+    <li><kbd>S</kbd> then <kbd>Y</kbd> — Scale only along the Y axis</li>
+  </ul>
+
+  <h3>Precise Input</h3>
+  <p>
+    After pressing a transform shortcut and (optionally) an axis key, you can <strong>type a number</strong> to set an exact value:
+  </p>
+  <ul>
+    <li><kbd>G</kbd> → <kbd>Z</kbd> → type <code>3</code> → <kbd>Enter</kbd> — Moves the object up exactly 3 units</li>
+    <li><kbd>R</kbd> → <kbd>X</kbd> → type <code>90</code> → <kbd>Enter</kbd> — Rotates 90° around the X axis</li>
+    <li><kbd>S</kbd> → type <code>2</code> → <kbd>Enter</kbd> — Doubles the object's size</li>
+    <li><kbd>S</kbd> → type <code>0.5</code> → <kbd>Enter</kbd> — Shrinks the object to half its size</li>
+  </ul>
+
+  <h2>Adding and Deleting Objects</h2>
+
+  <h3>Adding Objects — <kbd>Shift</kbd>+<kbd>A</kbd></h3>
+  <p>
+    Press <kbd>Shift</kbd>+<kbd>A</kbd> to open the <strong>Add menu</strong>. From here you can insert new objects into the scene:
+  </p>
+  <ul>
+    <li><strong>Mesh</strong> — Cube, Sphere, Cylinder, Plane, Cone, Torus, and more</li>
+    <li><strong>Light</strong> — Point, Sun, Spot, Area</li>
+    <li><strong>Camera</strong> — Additional cameras</li>
+    <li><strong>Empty</strong> — Invisible reference objects (advanced)</li>
+  </ul>
+  <p>
+    Objects are added at the position of the <strong>3D cursor</strong> (the small crosshair in the scene). If you want to reset the 3D cursor to the center, press <kbd>Shift</kbd>+<kbd>C</kbd>.
+  </p>
+
+  <h3>Deleting Objects</h3>
+  <p>
+    Select the object you want to remove and press the <kbd>Delete</kbd> key (or <kbd>X</kbd>). A confirmation popup will appear — click <strong>Delete</strong> to confirm.
+  </p>
+
+  <h2>Shortcut Reference Popup</h2>
+  <p>
+    Press <kbd>Shift</kbd>+<kbd>Space</kbd> to open a quick <strong>tool shortcut popup</strong> that lists available tools and their shortcuts. This is a handy reference while you're still memorizing keys.
+  </p>
+
+  <h2>Quick Reference Table</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>Shortcut</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Zoom</td>
+        <td><kbd>Mouse Wheel</kbd></td>
+      </tr>
+      <tr>
+        <td>Orbit</td>
+        <td><kbd>MMB</kbd> click + drag</td>
+      </tr>
+      <tr>
+        <td>Pan</td>
+        <td><kbd>Shift</kbd> + <kbd>MMB</kbd></td>
+      </tr>
+      <tr>
+        <td>Front view</td>
+        <td><kbd>Numpad 1</kbd></td>
+      </tr>
+      <tr>
+        <td>Right view</td>
+        <td><kbd>Numpad 3</kbd></td>
+      </tr>
+      <tr>
+        <td>Top view</td>
+        <td><kbd>Numpad 7</kbd></td>
+      </tr>
+      <tr>
+        <td>Perspective / Ortho toggle</td>
+        <td><kbd>Numpad 5</kbd></td>
+      </tr>
+      <tr>
+        <td>Camera view</td>
+        <td><kbd>Numpad 0</kbd></td>
+      </tr>
+      <tr>
+        <td>Select</td>
+        <td><kbd>Left Click</kbd></td>
+      </tr>
+      <tr>
+        <td>Select All</td>
+        <td><kbd>A</kbd></td>
+      </tr>
+      <tr>
+        <td>Deselect All</td>
+        <td><kbd>Alt</kbd> + <kbd>A</kbd></td>
+      </tr>
+      <tr>
+        <td>Grab / Move</td>
+        <td><kbd>G</kbd></td>
+      </tr>
+      <tr>
+        <td>Rotate</td>
+        <td><kbd>R</kbd></td>
+      </tr>
+      <tr>
+        <td>Scale</td>
+        <td><kbd>S</kbd></td>
+      </tr>
+      <tr>
+        <td>Lock to axis</td>
+        <td><kbd>G</kbd>/<kbd>R</kbd>/<kbd>S</kbd> then <kbd>X</kbd>/<kbd>Y</kbd>/<kbd>Z</kbd></td>
+      </tr>
+      <tr>
+        <td>Add object</td>
+        <td><kbd>Shift</kbd> + <kbd>A</kbd></td>
+      </tr>
+      <tr>
+        <td>Delete</td>
+        <td><kbd>Delete</kbd> or <kbd>X</kbd></td>
+      </tr>
+      <tr>
+        <td>Reset 3D cursor</td>
+        <td><kbd>Shift</kbd> + <kbd>C</kbd></td>
+      </tr>
+      <tr>
+        <td>Tool shortcut popup</td>
+        <td><kbd>Shift</kbd> + <kbd>Space</kbd></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Blender &amp; ZBrush Mini</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

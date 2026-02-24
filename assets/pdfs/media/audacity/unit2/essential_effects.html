@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/audacity.html" class="back-link">&larr; Back to Audio Production &mdash; Audacity</a>
+    <div class="doc-header">
+    <span class="course-tag">Audio Production — Audacity</span>
+    <h1>Essential Audio Effects</h1>
+    <p class="subtitle">Amplify, normalize, compress, equalize, fade, and transform your audio</p>
+  </div>
+
+  <h2>Overview</h2>
+  <p>Audacity comes with a large library of built-in effects. This lesson covers the effects you'll use most often in real projects. For every effect: select the audio you want to process first, then apply the effect from the <strong>Effect</strong> menu.</p>
+
+  <h2>Amplify</h2>
+  <p><strong>Effect &gt; Amplify</strong> increases or decreases the volume of the selected audio by a fixed amount.</p>
+  <ul>
+    <li><strong>Amplification (dB):</strong> Enter a positive number to make the audio louder or a negative number to make it quieter.</li>
+    <li><strong>New Peak Amplitude:</strong> Shows what the loudest peak will be after amplification.</li>
+    <li><strong>"Allow clipping" checkbox:</strong> When unchecked (default), Audacity limits the amplification so peaks don't exceed 0 dB. Check it only if you intentionally want to push past 0 dB (rarely recommended).</li>
+  </ul>
+  <p>Amplify applies a <strong>uniform</strong> volume change — every part of the selection gets louder or quieter by the same amount.</p>
+
+  <h2>Normalize</h2>
+  <p><strong>Effect &gt; Normalize</strong> adjusts the audio so its peak level reaches a specific target.</p>
+  <ul>
+    <li><strong>Normalize peak amplitude to:</strong> Sets the loudest point to a target level. A common setting is <strong>-1.0 dB</strong>, which maximizes volume while leaving a tiny bit of headroom.</li>
+    <li><strong>Remove DC offset:</strong> Fixes a common technical issue where the waveform isn't centered on the zero line. Always leave this checked.</li>
+    <li><strong>Normalize stereo channels independently:</strong> When checked, each channel is adjusted separately. When unchecked, both channels are adjusted by the same amount (preserving the stereo balance).</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> <strong>Amplify</strong> and <strong>Normalize</strong> may seem similar, but there's a key difference. Amplify lets you choose <em>how much</em> to change the volume. Normalize lets you choose <em>what the final peak level should be</em>. Normalize is generally preferred as a final step because it guarantees a consistent output level.
+  </div>
+
+  <h2>Compressor</h2>
+  <p><strong>Effect &gt; Compressor</strong> reduces the <strong>dynamic range</strong> of your audio — it makes quiet parts louder and loud parts quieter, resulting in a more consistent volume throughout.</p>
+  <p>The Compressor has several important settings:</p>
+
+  <table>
+    <thead>
+      <tr><th>Setting</th><th>What It Does</th><th>Recommended Start</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Threshold</strong></td>
+        <td>The volume level above which compression kicks in. Audio below this level is unaffected.</td>
+        <td><strong>-12 dB</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Noise Floor</strong></td>
+        <td>Audio below this level is treated as noise and not boosted.</td>
+        <td><strong>-40 dB</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Ratio</strong></td>
+        <td>How much the volume above the threshold is reduced. A 4:1 ratio means that for every 4 dB above the threshold, only 1 dB comes through.</td>
+        <td><strong>4:1</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Attack Time</strong></td>
+        <td>How quickly the compressor reacts when audio exceeds the threshold. Shorter attack catches transients; longer attack lets them through.</td>
+        <td><strong>0.2 seconds</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Release Time</strong></td>
+        <td>How quickly the compressor stops compressing after audio drops below the threshold.</td>
+        <td><strong>1.0 seconds</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Make-up gain</strong></td>
+        <td>When checked, automatically boosts the overall level after compression to compensate for the reduction.</td>
+        <td><strong>Checked</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Compression is essential for podcast and voiceover work. It makes speech easier to listen to at a consistent volume, especially on mobile devices and in noisy environments.</p>
+
+  <h2>Equalization / Filter Curve EQ</h2>
+  <p><strong>Effect &gt; Filter Curve EQ</strong> (or <strong>Graphic EQ</strong>) lets you boost or cut specific frequency ranges. This is how you shape the tone of your audio.</p>
+  <p>Common EQ adjustments:</p>
+  <ul>
+    <li><strong>High-pass filter (cut below 80 Hz):</strong> Removes low-frequency rumble from handling noise, air conditioning, and vibrations. Essential for speech recordings.</li>
+    <li><strong>Reduce muddiness (cut around 200–400 Hz):</strong> Cleans up "boxy" or muffled-sounding voice recordings.</li>
+    <li><strong>Boost presence (boost around 2–5 kHz):</strong> Makes speech clearer and more intelligible.</li>
+    <li><strong>Brighten (boost around 8–12 kHz):</strong> Adds sparkle and airiness. Use sparingly to avoid harshness.</li>
+    <li><strong>Bass boost (boost around 80–200 Hz):</strong> Adds warmth and depth to music or a deep voice.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> The golden rule of EQ: <strong>cut more than you boost</strong>. Cutting unwanted frequencies sounds more natural than boosting desired ones. Small adjustments (2–4 dB) go a long way.
+  </div>
+
+  <h2>Fade In &amp; Fade Out</h2>
+  <p>Fades smoothly ramp the volume up from silence (fade in) or down to silence (fade out). They provide clean transitions at the beginning and end of tracks or segments.</p>
+  <ul>
+    <li><strong>Fade In:</strong> Select the beginning of your audio (typically 0.5–2 seconds) and go to <strong>Effect &gt; Fade In</strong>.</li>
+    <li><strong>Fade Out:</strong> Select the end of your audio and go to <strong>Effect &gt; Fade Out</strong>.</li>
+  </ul>
+
+  <h3>Cross Fade Clips</h3>
+  <p>When two audio clips are adjacent on the same track, you can create a smooth transition between them:</p>
+  <ol>
+    <li>Make sure the two clips slightly overlap (or are directly adjacent).</li>
+    <li>Select across the transition point.</li>
+    <li>Go to <strong>Effect &gt; Cross Fade Clips</strong>.</li>
+  </ol>
+  <p>The first clip fades out while the second fades in, creating a seamless blend.</p>
+
+  <h2>Reverb</h2>
+  <p><strong>Effect &gt; Reverb</strong> adds the natural ambiance of a room to your recording. It simulates sound bouncing off walls and surfaces.</p>
+  <ul>
+    <li><strong>Room Size:</strong> Larger values simulate bigger spaces (halls, cathedrals). Smaller values simulate closets or small rooms.</li>
+    <li><strong>Reverberance:</strong> How long the reverb tail lasts.</li>
+    <li><strong>Damping:</strong> How quickly high frequencies fade in the reverb (higher damping = warmer, less bright reverb).</li>
+    <li><strong>Wet/Dry Mix:</strong> Balance between the original signal (dry) and the reverb signal (wet). For subtle room ambiance, keep the mix mostly dry.</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Warning:</strong> Reverb is easy to overuse. A small amount can make a recording feel more natural. Too much makes it sound like you're in a cave. Use sparingly, especially with speech.
+  </div>
+
+  <h2>Echo</h2>
+  <p><strong>Effect &gt; Echo</strong> creates repeating copies of the sound at a set interval.</p>
+  <ul>
+    <li><strong>Delay time:</strong> The time between each repeat (in seconds).</li>
+    <li><strong>Decay factor:</strong> How much quieter each repeat becomes (0 to 1). At 0.5, each echo is half the volume of the previous one.</li>
+  </ul>
+  <p>Echo is used more for creative/artistic effects than for everyday speech editing.</p>
+
+  <h2>Pitch, Tempo, and Speed</h2>
+  <p>Audacity offers three related but distinct effects for changing how your audio sounds in time and pitch:</p>
+
+  <table>
+    <thead>
+      <tr><th>Effect</th><th>What It Changes</th><th>What Stays the Same</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Change Pitch</strong></td>
+        <td>Pitch (higher or lower)</td>
+        <td>Tempo and duration stay the same</td>
+      </tr>
+      <tr>
+        <td><strong>Change Tempo</strong></td>
+        <td>Speed and duration (faster or slower)</td>
+        <td>Pitch stays the same</td>
+      </tr>
+      <tr>
+        <td><strong>Change Speed</strong></td>
+        <td>Both pitch <em>and</em> tempo together</td>
+        <td>Nothing — both change linked (like playing a record at the wrong speed)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ul>
+    <li><strong>Change Pitch</strong> is useful for tuning corrections or creative voice effects.</li>
+    <li><strong>Change Tempo</strong> is useful for making a recording slightly faster or slower without the "chipmunk" or "slowed-down" effect.</li>
+    <li><strong>Change Speed</strong> simulates the classic effect of speeding up or slowing down a tape.</li>
+  </ul>
+
+  <h2>Applying Effects: General Workflow</h2>
+  <ol>
+    <li>Select the audio region you want to affect (or <kbd>Ctrl</kbd>+<kbd>A</kbd> for the whole track).</li>
+    <li>Go to <strong>Effect</strong> and choose the effect.</li>
+    <li>Adjust settings in the dialog.</li>
+    <li>Click <strong>Preview</strong> to hear a sample of the result.</li>
+    <li>Click <strong>OK</strong> to apply.</li>
+    <li>If you don't like the result, press <kbd>Ctrl</kbd>+<kbd>Z</kbd> to undo and try different settings.</li>
+  </ol>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li><strong>Amplify</strong> changes volume by a set amount; <strong>Normalize</strong> sets the peak to a target level.</li>
+    <li><strong>Compressor</strong> evens out volume differences — essential for speech and podcasts.</li>
+    <li><strong>Filter Curve EQ</strong> shapes tone by boosting or cutting frequency ranges. Cut more than you boost.</li>
+    <li><strong>Fade In/Out</strong> and <strong>Cross Fade</strong> create smooth transitions.</li>
+    <li><strong>Reverb</strong> adds room ambiance (use sparingly); <strong>Echo</strong> creates repeats.</li>
+    <li><strong>Change Pitch</strong>, <strong>Change Tempo</strong>, and <strong>Change Speed</strong> each alter different aspects of the audio.</li>
+    <li>Always <strong>Preview</strong> before applying, and use <kbd>Ctrl</kbd>+<kbd>Z</kbd> freely.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Audio Production — Audacity</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

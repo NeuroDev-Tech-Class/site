@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/gimp.html" class="back-link">&larr; Back to 2D Digital Art &mdash; GIMP</a>
+    <div class="doc-header">
+    <span class="course-tag">2D Digital Art — GIMP</span>
+    <h1>The GIMP Interface</h1>
+    <p class="subtitle">Finding Your Way Around GIMP's Workspace</p>
+  </div>
+
+  <h2>Single-Window Mode vs. Multi-Window Mode</h2>
+  <p>
+    When you first open GIMP, it may launch with a single unified window or with multiple floating windows — depending on your version and settings. For beginners, <strong>Single-Window Mode</strong> is strongly recommended because it keeps everything in one organized window, similar to Photoshop.
+  </p>
+  <p>
+    To enable Single-Window Mode, go to <strong>Windows &gt; Single-Window Mode</strong> in the menu bar. A checkmark will appear next to the option when it is active. GIMP remembers this setting between sessions.
+  </p>
+
+  <div class="tip">
+    <strong>Tip:</strong> If your GIMP interface looks confusing with separate floating panels, switch to Single-Window Mode right away. It makes learning much easier.
+  </div>
+
+  <h2>Interface Overview</h2>
+  <p>
+    In Single-Window Mode, the GIMP workspace is divided into several key areas. Let's walk through each one from left to right.
+  </p>
+
+  <h3>The Toolbox (Left Panel)</h3>
+  <p>
+    The <strong>Toolbox</strong> is a vertical panel on the left side of the screen containing icons for every tool in GIMP. These tools are organized into groups:
+  </p>
+  <ul>
+    <li><strong>Selection tools</strong> — Rectangle Select, Ellipse Select, Free Select (Lasso), Fuzzy Select (Magic Wand), Select by Color, Scissors Select</li>
+    <li><strong>Paint tools</strong> — Paintbrush, Pencil, Airbrush, Ink, Eraser, Clone, Healing, Smudge, Blur/Sharpen</li>
+    <li><strong>Transform tools</strong> — Move, Align, Crop, Rotate, Scale, Shear, Perspective, Flip</li>
+    <li><strong>Other tools</strong> — Paths, Text, Gradient, Bucket Fill, Color Picker (Eyedropper), Measure, Zoom</li>
+  </ul>
+  <p>
+    Each tool icon can be clicked to activate that tool. You can also hover over any icon to see its name and keyboard shortcut.
+  </p>
+
+  <h3>Tool Options (Below the Toolbox)</h3>
+  <p>
+    Directly below the Toolbox (or docked beneath it) is the <strong>Tool Options</strong> panel. This area changes dynamically based on which tool is currently selected. For example:
+  </p>
+  <ul>
+    <li>Select the <strong>Paintbrush</strong> and Tool Options will show brush size, opacity, hardness, dynamics, and spacing.</li>
+    <li>Select the <strong>Rectangle Select</strong> and Tool Options will show options for fixed size, feathering, rounded corners, and selection mode (replace, add, subtract, intersect).</li>
+  </ul>
+  <p>
+    Always check Tool Options when a tool isn't behaving the way you expect — the answer is usually in the settings.
+  </p>
+
+  <div class="warning">
+    <strong>Warning:</strong> If the Tool Options panel is missing, go to <strong>Windows &gt; Dockable Dialogs &gt; Tool Options</strong> to bring it back.
+  </div>
+
+  <h3>The Canvas (Center)</h3>
+  <p>
+    The large center area is the <strong>Canvas</strong> — this is where your image is displayed and where you do all of your actual editing work. You can zoom in and out using the <kbd>+</kbd> and <kbd>-</kbd> keys or by holding <kbd>Ctrl</kbd> and scrolling the mouse wheel. Use the <strong>Fit Image in Window</strong> command (<kbd>Shift</kbd>+<kbd>Ctrl</kbd>+<kbd>J</kbd>) to see the entire image at once.
+  </p>
+  <p>
+    The canvas is surrounded by rulers (in pixels by default) along the top and left edges. You can drag guides from these rulers onto the canvas to help with alignment.
+  </p>
+
+  <h3>Layers Dialog (Right Panel)</h3>
+  <p>
+    The <strong>Layers</strong> dialog is typically docked in the upper-right area. It shows the <strong>layer stack</strong> — a list of all layers in your image from top to bottom. The top layer in the list is drawn on top of all others, just like stacking transparent sheets of paper.
+  </p>
+  <p>
+    From the Layers dialog, you can:
+  </p>
+  <ul>
+    <li>Create, duplicate, and delete layers</li>
+    <li>Reorder layers by dragging them up or down</li>
+    <li>Toggle layer visibility with the eye icon</li>
+    <li>Adjust layer opacity with the slider</li>
+    <li>Change the layer blend mode (Normal, Multiply, Screen, Overlay, etc.)</li>
+  </ul>
+
+  <h3>Colors Dialog</h3>
+  <p>
+    The <strong>Colors</strong> dialog (often docked as a tab near the Layers dialog) lets you select your foreground and background colors. You can choose colors using a color wheel, sliders (HSV, RGB), a color palette, or by entering a hex code directly.
+  </p>
+
+  <h3>Brushes, Patterns, and Gradients</h3>
+  <p>
+    Additional dockable dialogs let you browse and select:
+  </p>
+  <ul>
+    <li><strong>Brushes</strong> — choose from dozens of built-in brush tips or load custom ones</li>
+    <li><strong>Patterns</strong> — tileable textures you can use with the Bucket Fill or Clone tool</li>
+    <li><strong>Gradients</strong> — smooth color transitions used with the Gradient tool</li>
+  </ul>
+
+  <h2>The Menu Bar</h2>
+  <p>
+    The menu bar runs along the top of the window and provides access to every feature in GIMP. Here is what each menu contains:
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Menu</th>
+        <th>Key Contents</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>File</strong></td><td>New, Open, Save, Export, Print, Quit</td></tr>
+      <tr><td><strong>Edit</strong></td><td>Undo, Redo, Cut, Copy, Paste, Fill, Stroke, Preferences</td></tr>
+      <tr><td><strong>Select</strong></td><td>All, None, Invert, By Color, Grow, Shrink, Feather, From Path</td></tr>
+      <tr><td><strong>View</strong></td><td>Zoom, Fit Image, Show Grid, Show Guides, Snap to Grid</td></tr>
+      <tr><td><strong>Image</strong></td><td>Canvas Size, Scale Image, Crop to Selection, Flatten, Mode (RGB, Grayscale)</td></tr>
+      <tr><td><strong>Layer</strong></td><td>New Layer, Duplicate, Merge Down, Flatten Image, Layer Mask, Transparency</td></tr>
+      <tr><td><strong>Colors</strong></td><td>Levels, Curves, Brightness-Contrast, Hue-Saturation, Color Balance, Desaturate</td></tr>
+      <tr><td><strong>Tools</strong></td><td>All tools also found in the Toolbox, plus GEGL tools</td></tr>
+      <tr><td><strong>Filters</strong></td><td>Blur, Sharpen, Distort, Light and Shadow, Artistic, Noise, Edge-Detect</td></tr>
+      <tr><td><strong>Windows</strong></td><td>Single-Window Mode, list of open dialogs and images</td></tr>
+      <tr><td><strong>Help</strong></td><td>User Manual, About GIMP, Tip of the Day</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Customizing the Layout</h2>
+  <p>
+    GIMP's interface is highly customizable. You can rearrange the workspace to suit your preferences:
+  </p>
+  <ul>
+    <li><strong>Rearrange dockable dialogs</strong> — click and drag dialog tabs to move them between docks or create new docks.</li>
+    <li><strong>Add dialogs</strong> — go to <strong>Windows &gt; Dockable Dialogs</strong> to open any panel you need (Histogram, Undo History, Navigation, Fonts, etc.).</li>
+    <li><strong>Remove dialogs</strong> — close any tab you don't use to reduce clutter.</li>
+    <li><strong>Save your layout</strong> — GIMP automatically saves your window arrangement when you quit (if the option is enabled in Preferences).</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> If you ever completely mess up your layout, you can reset it by going to <strong>Edit &gt; Preferences &gt; Window Management</strong> and clicking <strong>Reset Saved Window Positions to Default Values</strong>, then restarting GIMP.
+  </div>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>Use <strong>Single-Window Mode</strong> for a clean, organized workspace.</li>
+    <li>The <strong>Toolbox</strong> holds all tools; <strong>Tool Options</strong> shows settings for the active tool.</li>
+    <li>The <strong>Canvas</strong> is your editing area; the <strong>Layers dialog</strong> manages the layer stack.</li>
+    <li>The <strong>menu bar</strong> gives access to every feature — explore each menu to learn what's available.</li>
+    <li>Customize your layout with dockable dialogs and panel arrangements.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — 2D Digital Art — GIMP</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

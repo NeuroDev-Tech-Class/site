@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>Activity: Obstacle Course</h1>
+    <p class="subtitle">Build a playable platforming level using every Blueprint mechanic from Unit 2</p>
+  </div>
+
+  <h2>Overview</h2>
+  <p>In this activity, you'll design and build a complete <strong>obstacle course level</strong> that combines all the gameplay systems you've created so far: collectible coins, jump pads, keys, doors, and checkpoints. The goal is to create a fun, challenging experience that a player can navigate from start to finish.</p>
+  <p>This is a creative project — there's no single "correct" layout. Focus on making your course <strong>playable</strong> (can the player actually reach every platform?), <strong>fair</strong> (is there always a path forward?), and <strong>fun</strong> (does it feel good to play?).</p>
+
+  <div class="tip">
+    <strong>Time estimate:</strong> This activity will take approximately 1–2 class sessions. Spend the first session on layout and placing actors; spend the second session on testing, polishing, and fixing issues.
+  </div>
+
+  <h2>Step 1: Create a New Level</h2>
+  <ol>
+    <li>Go to <code>File → New Level</code> and choose <strong>Basic</strong>.</li>
+    <li>Save immediately: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> → name it <code>ObstacleCourse</code>.</li>
+    <li>Delete the default floor if there is one — you'll build your own platforms.</li>
+    <li>Add a <strong>Player Start</strong> actor and place it where you want the player to begin.</li>
+  </ol>
+
+  <h2>Step 2: Build the Platforms</h2>
+  <ol>
+    <li>Use <strong>Static Meshes</strong> (cubes) from the StarterContent or any content pack to create platforms.</li>
+    <li>Start at the Player Start location and build outward. Create platforms at <strong>varying heights</strong> — the player should need to jump between them.</li>
+    <li>Mix up the sizes: some wide and easy, some narrow and tricky.</li>
+    <li>Leave gaps between platforms — the player should need to jump (or use jump pads) to cross them.</li>
+    <li>Create at least one section that requires the player to go <strong>upward</strong> — stacking platforms like stairs or placing them at increasing heights.</li>
+    <li>Use <kbd>Alt</kbd>+Drag to duplicate platforms quickly.</li>
+  </ol>
+
+  <div class="warning">
+    <strong>Test as you build:</strong> Don't build the entire course and then test it for the first time. After every 4–5 platforms, press Play and try jumping through the course. This helps you catch impossible jumps early.
+  </div>
+
+  <h2>Step 3: Place Collectible Coins</h2>
+  <ol>
+    <li>Drag at least <strong>10 BP_Coin</strong> actors into the level.</li>
+    <li>Scatter them across the course — some on platforms, some floating in the air between jumps (midair coins give the player visual targets and make jumps feel more rewarding).</li>
+    <li>Place a few coins in hard-to-reach spots for bonus challenge.</li>
+    <li>Make sure the player can actually reach every coin — test each one!</li>
+  </ol>
+
+  <h2>Step 4: Place Jump Pads</h2>
+  <ol>
+    <li>Drag <strong>2–3 BP_JumpPad</strong> actors into the level.</li>
+    <li>Place them where the player needs a boost to reach a high platform that normal jumping can't reach.</li>
+    <li>Test each jump pad to make sure it launches the player to the intended destination. Adjust the Launch Velocity Z value in the Blueprint if needed.</li>
+    <li>Consider placing coins along the arc of the jump pad launch for a satisfying collection path.</li>
+  </ol>
+
+  <h2>Step 5: Add the Key and Locked Door</h2>
+  <ol>
+    <li>Place one <code>BP_Key</code> somewhere in the course — ideally in a tricky or out-of-the-way location that rewards exploration.</li>
+    <li>Place one <code>BP_Door</code> blocking the path to the final section of the course. The player must find the key before they can pass through.</li>
+    <li>Make sure the player can still reach the key location from where the door is — don't accidentally create a dead end where finding the key requires passing through the door.</li>
+  </ol>
+
+  <h2>Step 6: Set Up Checkpoints</h2>
+  <ol>
+    <li>Place at least <strong>2 BP_Checkpoint</strong> actors at milestone locations along the course (e.g., one after the first major jump section, one before the door).</li>
+    <li>If you haven't created BP_Checkpoint yet, refer to the <strong>Win, Lose &amp; Checkpoints</strong> lesson to build one. At minimum, it should save the player's current location so they can respawn there.</li>
+    <li>Test that each checkpoint updates the spawn point correctly.</li>
+  </ol>
+
+  <h2>Step 7: Create the Victory Area</h2>
+  <ol>
+    <li>After the locked door, create a final area — a platform or room that represents the finish line.</li>
+    <li>Place a <code>BP_Win</code> actor here. When the player enters its collision, they should see a "You Win!" message (or a victory UI widget if you've built one).</li>
+    <li>Optionally, decorate this area to make it feel like a reward — add lights, a different material, or extra visual flair.</li>
+  </ol>
+
+  <h2>Step 8: Play-Test the Full Course</h2>
+  <ol>
+    <li>Press <strong>Play</strong> and run through the entire course from start to finish.</li>
+    <li>Check for:
+      <ul>
+        <li>Impossible jumps — can you physically reach every platform?</li>
+        <li>Missing collisions — can you walk through any platforms unexpectedly?</li>
+        <li>Coin count — does the counter increment properly for every coin?</li>
+        <li>Key/Door system — does the door block you without the key and open with it?</li>
+        <li>Checkpoints — if you fall, do you respawn at the right location?</li>
+        <li>Win condition — does the victory trigger fire at the end?</li>
+      </ul>
+    </li>
+    <li>Fix any issues and test again. A good game developer play-tests dozens of times.</li>
+  </ol>
+
+  <h2>Completion Checklist</h2>
+  <div class="activity">
+    <strong>Requirements — check off each item before submitting:</strong>
+    <table>
+      <thead>
+        <tr>
+          <th>✓</th>
+          <th>Requirement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>☐</td>
+          <td>New level created and saved as <code>ObstacleCourse</code></td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>Platforms built at varying heights with clear jump paths</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>At least 10 BP_Coin actors placed and collectible</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>At least 2 BP_JumpPad actors placed and functional</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>1 BP_Key placed in a challenging location</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>1 BP_Door blocking access to the final area — unlockable with the key</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>At least 2 BP_Checkpoint actors placed at milestone locations</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>1 BP_Win actor in the victory area that triggers a win message</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>Player Start placed at the beginning of the course</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>Full course play-tested and completable from start to finish</td>
+        </tr>
+        <tr>
+          <td>☐</td>
+          <td>Level saved (<kbd>Ctrl</kbd>+<kbd>S</kbd>)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip">
+    <strong>Going Further:</strong> If you finish early, try adding moving platforms (use a Timeline node to animate a platform's location), hazards the player must avoid, or a coin counter displayed on screen. You can also decorate your course with lights, materials, and particle effects.
+  </div>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

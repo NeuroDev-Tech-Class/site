@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/davinci-resolve.html" class="back-link">&larr; Back to Video Production &mdash; DaVinci Resolve</a>
+    <div class="doc-header">
+    <span class="course-tag">Video Production — DaVinci Resolve</span>
+    <h1>Color Correction &amp; Grading</h1>
+    <p class="subtitle">Using DaVinci Resolve's industry-standard Color page for primary corrections and creative grades</p>
+  </div>
+
+  <h2>Why Color Matters</h2>
+  <p>Color is one of the most powerful storytelling tools in video. It sets the mood, directs attention, and creates visual consistency across shots. A warm golden tone feels nostalgic; cool blue tones feel tense or clinical; desaturated images feel gritty and serious. DaVinci Resolve's Color page is the industry standard — the same toolset used on Hollywood blockbusters, Netflix originals, and music videos.</p>
+
+  <h2>Correction vs. Grading</h2>
+  <p>These two terms are often confused, but they describe different stages of the process:</p>
+
+  <table>
+    <thead>
+      <tr><th>Stage</th><th>Purpose</th><th>Examples</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Color Correction</strong></td><td>Fixing technical issues to make footage look natural and accurate</td><td>Fix white balance, correct exposure, remove color casts, match shots</td></tr>
+      <tr><td><strong>Color Grading</strong></td><td>Applying a creative look to set a visual mood or style</td><td>Warm sunset look, teal-and-orange blockbuster style, desaturated noir</td></tr>
+    </tbody>
+  </table>
+
+  <p>Always <strong>correct first, grade second</strong>. Fix the technical problems so you're working from a clean baseline, then apply your creative vision.</p>
+
+  <h2>The Color Page Layout</h2>
+  <p>Switch to the Color page by clicking its icon at the bottom of the screen (or <kbd>Shift</kbd>+<kbd>6</kbd>). The layout has several key areas:</p>
+
+  <h3>Viewer</h3>
+  <p>The large <strong>Viewer</strong> at the top center shows your current clip. As you make adjustments, you see the results in real time. You can toggle a before/after comparison by clicking the highlight/bypass button or pressing <kbd>Shift</kbd>+<kbd>D</kbd>.</p>
+
+  <h3>Node Editor</h3>
+  <p>Below the viewer is the <strong>Node Editor</strong>. DaVinci Resolve uses a node-based color pipeline — each node is like a step in your grading process. The first node might handle correction, the second might add a creative look, and a third might apply a vignette. Nodes flow from left (input) to right (output). Right-click in the Node Editor and choose <em>Add Serial Node</em> (or press <kbd>Alt</kbd>+<kbd>S</kbd>) to add a new step.</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> Use separate nodes for correction and grading. This keeps your work organized and makes it easy to adjust or disable individual steps without affecting everything else.
+  </div>
+
+  <h3>Color Wheels</h3>
+  <p>The <strong>Color Wheels</strong> panel (bottom-left area) is your primary tool for adjusting color and brightness. By default, it shows four wheels:</p>
+
+  <table>
+    <thead>
+      <tr><th>Wheel</th><th>What It Controls</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Lift</strong></td><td>The <strong>shadows</strong> (dark areas) of the image</td></tr>
+      <tr><td><strong>Gamma</strong></td><td>The <strong>midtones</strong> (middle brightness) of the image</td></tr>
+      <tr><td><strong>Gain</strong></td><td>The <strong>highlights</strong> (bright areas) of the image</td></tr>
+      <tr><td><strong>Offset</strong></td><td>The <strong>entire image</strong> uniformly</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Scopes</h3>
+  <p>The <strong>Scopes</strong> panel (usually right side) shows visual graphs of your image's color and brightness data. Scopes are essential for making accurate adjustments rather than relying on your eyes alone (which can be fooled by your monitor, ambient light, and fatigue). We'll cover these in depth in the next lesson.</p>
+
+  <h3>Gallery</h3>
+  <p>The <strong>Gallery</strong> lets you save snapshots (stills) of your grades, compare them side-by-side, and apply saved grades to other clips.</p>
+
+  <h2>Using the Color Wheels</h2>
+  <p>Each Color Wheel has two controls:</p>
+  <ul>
+    <li><strong>Center dot:</strong> Drag it toward a color to push that tonal range toward that hue. For example, dragging the Lift center toward blue adds blue to the shadows.</li>
+    <li><strong>Master wheel (ring below):</strong> Rotate (or drag the slider beneath the wheel) to adjust overall brightness for that range. Drag left to darken, right to brighten.</li>
+  </ul>
+
+  <h3>Primaries Bars Mode</h3>
+  <p>If you prefer sliders over wheels, click the bars icon at the top of the Color Wheels panel to switch to <strong>Primaries Bars</strong> mode. This gives you individual sliders for Lift, Gamma, Gain, and Offset — each with separate Y (luma), R, G, and B channels. Bars mode can be more precise for fine adjustments.</p>
+
+  <h2>Key Primary Controls</h2>
+
+  <h3>Contrast</h3>
+  <p>The <strong>Contrast</strong> slider increases the difference between lights and darks. Higher contrast makes the image more punchy; lower contrast makes it flatter. Located below the Color Wheels or in the Primaries Bars area.</p>
+
+  <h3>Pivot</h3>
+  <p><strong>Pivot</strong> controls where the contrast centers. A higher pivot pushes the contrast center toward brighter tones; a lower pivot toward darker tones. Adjusting Pivot alongside Contrast gives you more nuanced control.</p>
+
+  <h3>Saturation</h3>
+  <p><strong>Saturation</strong> controls the intensity of all colors in the image. Full left = completely desaturated (black and white). Full right = extremely vivid colors. For most footage, subtle adjustments (±10–20%) are enough.</p>
+
+  <h2>White Balance Correction</h2>
+  <p>If your footage has a color cast (too warm/orange or too cool/blue), correct it with white balance:</p>
+  <ol>
+    <li>In the Color Wheels area, find the <strong>Temperature</strong> and <strong>Tint</strong> sliders (in the Primaries Bars, or use the Offset wheel).</li>
+    <li><strong>Temperature:</strong> Drag left for cooler (blue), right for warmer (orange).</li>
+    <li><strong>Tint:</strong> Drag left for green, right for magenta.</li>
+    <li><strong>Eyedropper method:</strong> Click the eyedropper icon next to the white balance controls and click on something in the image that should be white or neutral gray. Resolve will automatically adjust.</li>
+  </ol>
+
+  <h2>Exposure Correction</h2>
+  <p>To fix an image that's too dark (underexposed) or too bright (overexposed):</p>
+  <ul>
+    <li>Use the <strong>Gain</strong> master wheel to bring down blown-out highlights.</li>
+    <li>Use the <strong>Lift</strong> master wheel to bring up crushed shadows.</li>
+    <li>Use the <strong>Gamma</strong> master wheel to adjust overall midtone brightness.</li>
+    <li>Watch the <strong>Waveform scope</strong> to ensure you're not clipping (going above 1023 or below 0).</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> Always check your scopes when correcting exposure. Your monitor may not be calibrated, but the scopes never lie.
+  </div>
+
+  <h2>Curves</h2>
+  <p>The <strong>Curves</strong> panel provides even more precise control. Click the Curves button (wave icon) in the center palette to access it.</p>
+
+  <h3>Custom Curve (Luma)</h3>
+  <p>The default curve controls overall <strong>luminance</strong> (brightness). The bottom-left of the curve represents shadows, the center represents midtones, and the top-right represents highlights. Click to add control points and drag them up (brighter) or down (darker). An S-curve (shadows pulled down, highlights pulled up) is a classic way to add contrast.</p>
+
+  <h3>Individual RGB Curves</h3>
+  <p>Switch to <strong>Red</strong>, <strong>Green</strong>, or <strong>Blue</strong> curves using the dropdown or channel buttons. These let you shift individual color channels:</p>
+  <ul>
+    <li>Lifting the <strong>Blue</strong> curve in the shadows adds blue to the darks (a popular cinematic look).</li>
+    <li>Dropping the <strong>Green</strong> curve slightly in midtones adds magenta warmth.</li>
+    <li>Combining RGB curve adjustments is how colorists create signature looks.</li>
+  </ul>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li><strong>Color Correction</strong> fixes technical issues; <strong>Color Grading</strong> adds a creative look. Always correct first.</li>
+    <li>The Color page uses a <strong>node-based</strong> pipeline — keep correction and grading on separate nodes.</li>
+    <li>Use <strong>Color Wheels</strong> (Lift, Gamma, Gain, Offset) for primary adjustments to shadows, midtones, highlights, and overall image.</li>
+    <li><strong>Contrast</strong>, <strong>Saturation</strong>, and <strong>Pivot</strong> provide quick global adjustments.</li>
+    <li>Fix <strong>white balance</strong> with Temperature/Tint sliders or the eyedropper tool.</li>
+    <li>Use <strong>Curves</strong> for precise control over luminance and individual RGB channels.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Video Production — DaVinci Resolve</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/blender-zbrush-mini.html" class="back-link">&larr; Back to 3D Art &mdash; Blender &amp; ZBrush</a>
+    <div class="doc-header">
+    <span class="course-tag">Blender &amp; ZBrush Mini</span>
+    <h1>Shading &amp; Materials</h1>
+    <p class="subtitle">Making your models look good with shading modes and surface materials</p>
+  </div>
+
+  <h2>Viewport Shading Modes</h2>
+  <p>
+    Blender's 3D viewport can display your scene in several different ways. The <strong>viewport shading mode</strong> controls how much visual detail is shown while you work. You can switch modes using the four circle icons in the top-right of the viewport header, or by pressing <kbd>Z</kbd> to open the <strong>shading pie menu</strong>.
+  </p>
+
+  <h3>Wireframe</h3>
+  <p>
+    Shows only the edges of your objects — no surfaces, no shading. Everything is see-through. This is useful for selecting geometry that's hidden behind other parts of the mesh, or for seeing the overall structure of a complex model.
+  </p>
+
+  <h3>Solid</h3>
+  <p>
+    The <strong>default mode</strong>. Objects are displayed with a plain, flat shading. You can see the shape and form of your model clearly, but materials and textures are not shown. This mode is fast and reliable — you'll spend most of your modeling time here.
+  </p>
+
+  <h3>Material Preview</h3>
+  <p>
+    Shows objects with their <strong>assigned materials</strong> applied, using a built-in HDR environment for lighting. This lets you see colors, roughness, and metallic effects in real-time without doing a full render. Great for checking how your materials look as you set them up.
+  </p>
+
+  <h3>Rendered</h3>
+  <p>
+    Displays the scene as it will appear in the final render, using the active render engine (Eevee or Cycles). This is the most accurate preview but can be slower, especially with complex scenes. Use it when you want to check final lighting and material quality.
+  </p>
+
+  <div class="tip">
+    <strong>Quick access:</strong> Press <kbd>Z</kbd> to open the shading pie menu. Move your mouse toward the mode you want and release. This is the fastest way to switch between shading modes.
+  </div>
+
+  <h2>What Are Materials?</h2>
+  <p>
+    A <strong>material</strong> defines how the surface of an object looks. Without a material, an object is just a shape with the default gray color. Materials control properties like:
+  </p>
+  <ul>
+    <li><strong>Base Color</strong> — The main color of the surface (like paint)</li>
+    <li><strong>Roughness</strong> — How shiny or matte the surface is (0 = mirror-like, 1 = completely matte)</li>
+    <li><strong>Metallic</strong> — Whether the surface behaves like a metal (0 = non-metal like plastic, 1 = fully metallic)</li>
+    <li><strong>Specular</strong> — The intensity of reflections on non-metallic surfaces</li>
+  </ul>
+  <p>
+    Combining these properties allows you to simulate a huge range of real-world surfaces — from glossy red plastic to brushed aluminum to rough stone.
+  </p>
+
+  <h2>Adding a Material</h2>
+  <p>Follow these steps to add a material to an object:</p>
+  <ol>
+    <li><strong>Select the object</strong> in Object Mode (left-click it)</li>
+    <li>Open the <strong>Properties Editor</strong> (bottom-right panel)</li>
+    <li>Click the <strong>Material Properties</strong> tab (the sphere icon)</li>
+    <li>Click the <strong>New</strong> button to create a new material</li>
+    <li>A material slot appears with a default name like "Material." You can rename it by clicking the name field.</li>
+  </ol>
+
+  <h3>Setting the Base Color</h3>
+  <p>
+    Once a material is created, you'll see a <strong>Base Color</strong> field near the top of the material settings. Click the white rectangle next to "Base Color" to open the color picker. Choose any color you like. Switch to <strong>Material Preview</strong> mode (<kbd>Z</kbd> → Material Preview) to see the color applied to your object.
+  </p>
+
+  <h3>Adjusting Roughness and Metallic</h3>
+  <p>
+    Below the Base Color, you'll find sliders for <strong>Roughness</strong> and <strong>Metallic</strong>. Experiment with these:
+  </p>
+  <ul>
+    <li>Set Metallic to <code>1.0</code> for a shiny metal look</li>
+    <li>Set Roughness to <code>0.0</code> for a mirror-smooth surface</li>
+    <li>Set Roughness to <code>1.0</code> for a completely matte, rough surface</li>
+    <li>Set Metallic to <code>0.0</code> with low Roughness for a glossy plastic look</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> You need to be in <strong>Material Preview</strong> or <strong>Rendered</strong> shading mode to see material changes in the viewport. In Solid mode, you'll only see the plain gray shading.
+  </div>
+
+  <h2>Multiple Materials on One Object</h2>
+  <p>
+    You can assign different materials to different faces of the same object:
+  </p>
+  <ol>
+    <li>Create multiple material slots by clicking the <strong>+</strong> button in the Material Properties panel</li>
+    <li>Enter Edit Mode (<kbd>Tab</kbd>)</li>
+    <li>Switch to Face select mode (<kbd>3</kbd>)</li>
+    <li>Select the faces you want to assign a specific material to</li>
+    <li>In the material list, select the material you want</li>
+    <li>Click <strong>Assign</strong></li>
+  </ol>
+  <p>
+    This is how you can have, for example, a table with a brown wooden top and black metal legs — all as a single object.
+  </p>
+
+  <h2>The Shader Editor (Advanced)</h2>
+  <p>
+    For more complex materials (textures, patterns, transparency, glow effects), Blender has a node-based <strong>Shader Editor</strong>. You can access it by switching to the <strong>Shading</strong> workspace tab at the top of the screen.
+  </p>
+  <p>
+    The Shader Editor uses a visual node system where you connect blocks (nodes) together to build complex material effects. We won't dive deep into this in Unit 1, but it's good to know it exists for when you're ready to create more advanced materials.
+  </p>
+
+  <h2>UV Unwrapping (Brief Overview)</h2>
+  <p>
+    If you want to apply an image texture (like a wood grain photo or a brick pattern) to a 3D model, you need to "unwrap" the 3D surface into a flat 2D layout. This process is called <strong>UV unwrapping</strong>. Think of it like cutting open a cardboard box and flattening it out — the flat version is the UV map, and you can paint or place images on it.
+  </p>
+  <p>
+    UV unwrapping is a more advanced topic that we'll explore later. For now, using solid colors and basic material properties is more than enough to make your models look great.
+  </p>
+
+  <h2>Quick Reference</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>How</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Open shading pie menu</td>
+        <td><kbd>Z</kbd></td>
+      </tr>
+      <tr>
+        <td>Wireframe mode</td>
+        <td><kbd>Z</kbd> → Wireframe</td>
+      </tr>
+      <tr>
+        <td>Solid mode</td>
+        <td><kbd>Z</kbd> → Solid</td>
+      </tr>
+      <tr>
+        <td>Material Preview mode</td>
+        <td><kbd>Z</kbd> → Material Preview</td>
+      </tr>
+      <tr>
+        <td>Rendered mode</td>
+        <td><kbd>Z</kbd> → Rendered</td>
+      </tr>
+      <tr>
+        <td>Add a material</td>
+        <td>Properties Editor → Material tab → New</td>
+      </tr>
+      <tr>
+        <td>Assign material to faces</td>
+        <td>Edit Mode → select faces → choose material → Assign</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Blender &amp; ZBrush Mini</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

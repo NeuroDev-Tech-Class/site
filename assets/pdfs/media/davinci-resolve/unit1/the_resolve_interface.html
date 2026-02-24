@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/davinci-resolve.html" class="back-link">&larr; Back to Video Production &mdash; DaVinci Resolve</a>
+    <div class="doc-header">
+    <span class="course-tag">Video Production — DaVinci Resolve</span>
+    <h1>The Resolve Interface</h1>
+    <p class="subtitle">Understanding DaVinci Resolve's page-based workflow and the Edit page layout</p>
+  </div>
+
+  <h2>A Page-Based Workflow</h2>
+  <p>DaVinci Resolve organizes its entire workflow into <strong>pages</strong>. Instead of cramming every tool into a single window, Resolve gives each major task its own dedicated workspace. You switch between pages using the icons at the very bottom of the screen.</p>
+  <p>This approach keeps the interface uncluttered — you only see the tools relevant to what you're doing right now. As you progress through a project, you naturally move from page to page: import media, edit, add effects, color grade, mix audio, and export.</p>
+
+  <h2>The 7 Pages</h2>
+  <p>From left to right at the bottom of the screen, you'll find these page icons:</p>
+
+  <h3>1. Media</h3>
+  <p>The <strong>Media</strong> page is where your project begins. Use it to browse your computer's file system, import footage and audio, and organize clips into bins (folders). You can preview clips, read metadata, and set up your media library before you start editing. Think of it as your project's filing cabinet.</p>
+
+  <h3>2. Cut</h3>
+  <p>The <strong>Cut</strong> page is designed for fast, efficient editing. It features a dual-timeline view — a zoomed-out overview and a zoomed-in detail view — that lets you quickly assemble a rough cut without a lot of precise navigation. It's ideal for quick turnarounds, vlogs, and social media content where speed matters more than fine-tuning.</p>
+
+  <h3>3. Edit</h3>
+  <p>The <strong>Edit</strong> page is the traditional NLE workspace and where you'll spend most of your time in this course. It provides a full-featured timeline, source/record viewer workflow, effects library, and detailed control over every clip. If you've used Premiere Pro or Final Cut, this page will feel familiar.</p>
+
+  <h3>4. Fusion</h3>
+  <p>The <strong>Fusion</strong> page is a node-based visual effects and motion graphics compositor built right into Resolve. Instead of stacking layers, you connect nodes in a flow graph to create complex effects like green screen composites, animated titles, particle effects, and 3D text. It's incredibly powerful — and we'll introduce it in Unit 2.</p>
+
+  <h3>5. Color</h3>
+  <p>The <strong>Color</strong> page is what made DaVinci Resolve famous. It's the industry standard for color correction and grading. With color wheels, curves, scopes, qualifiers, Power Windows, and a node-based grading pipeline, this page gives you Hollywood-level color control. We'll dive deep into it in Unit 2.</p>
+
+  <h3>6. Fairlight</h3>
+  <p>The <strong>Fairlight</strong> page is a full digital audio workstation (DAW) embedded in Resolve. It provides a professional mixing console, EQ, dynamics processing, audio effects, automation, and support for recording directly into your project. If your video has dialogue, music, or sound effects, Fairlight is where you polish the audio.</p>
+
+  <h3>7. Deliver</h3>
+  <p>The <strong>Deliver</strong> page is your final stop. Here you configure your export settings — format, codec, resolution, frame rate, and quality — and render your finished video. It includes presets for YouTube, Vimeo, and other platforms, or you can create fully custom export configurations. You'll use this page at the end of every project.</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> You can switch pages at any time by clicking the icons at the bottom of the screen, or by using the keyboard shortcuts <kbd>Shift</kbd>+<kbd>2</kbd> through <kbd>Shift</kbd>+<kbd>8</kbd> (Media through Deliver).
+  </div>
+
+  <h2>The Edit Page Layout</h2>
+  <p>Since the Edit page is where you'll do most of your work, let's break down its layout in detail.</p>
+
+  <h3>Media Pool (Top-Left)</h3>
+  <p>The <strong>Media Pool</strong> panel shows all the clips, audio files, and images you've imported into your project. You can organize them into <strong>bins</strong> (folders) by right-clicking and selecting <em>New Bin</em>. Drag clips from the Media Pool to the timeline or double-click to load them into the Source Viewer.</p>
+
+  <h3>Source Viewer (Top-Left)</h3>
+  <p>When you double-click a clip in the Media Pool, it opens in the <strong>Source Viewer</strong>. Here you can preview the clip before adding it to your timeline. You can set <strong>In</strong> and <strong>Out</strong> points to select just the portion you want, then insert or overwrite it into the timeline.</p>
+
+  <h3>Timeline Viewer (Top-Right)</h3>
+  <p>The <strong>Timeline Viewer</strong> (also called the Record Viewer or Program Viewer) shows what your edited sequence looks like at the current playhead position. As you play through your timeline, this viewer displays the output — exactly what your audience will see.</p>
+
+  <h3>Timeline (Bottom)</h3>
+  <p>The <strong>Timeline</strong> panel stretches across the bottom of the Edit page. This is the heart of editing — where you arrange your clips on video and audio tracks, trim them, add transitions, and build your project. Tracks are stacked vertically (V1, V2 for video; A1, A2 for audio), and time flows left to right.</p>
+
+  <h3>Inspector (Top-Right Panel)</h3>
+  <p>The <strong>Inspector</strong> appears on the right side of the screen. When you select a clip in the timeline, the Inspector shows its properties: Transform (position, zoom, rotation), Cropping, Compositing (opacity, blend mode), Speed, Stabilization, and more. It's also where you adjust text properties, transition settings, and effect parameters.</p>
+
+  <h3>Effects Library (Top-Left, Togglable)</h3>
+  <p>The <strong>Effects Library</strong> panel contains all of Resolve's built-in effects, transitions, titles, and generators. Access it from the top-left toolbar. It's organized into categories: Video Transitions, Audio Transitions, Titles, Generators, and Effects (filters). Drag any item from the Effects Library onto a clip or the timeline to apply it.</p>
+
+  <h2>Key Toolbar Buttons</h2>
+  <p>The Edit page toolbar runs along the top-left area and includes toggle buttons for showing/hiding panels:</p>
+  <ul>
+    <li><strong>Media Pool</strong> — toggle the clip browser</li>
+    <li><strong>Effects Library</strong> — toggle effects, transitions, and titles</li>
+    <li><strong>Edit Index</strong> — shows a list of all edits/markers in your timeline</li>
+    <li><strong>Sound Library</strong> — browse built-in sound effects (Fairlight Sound Library)</li>
+    <li><strong>Inspector</strong> — toggle the properties panel on the right</li>
+    <li><strong>Metadata</strong> — view and edit clip metadata</li>
+    <li><strong>Mixer</strong> — show the audio mixer within the Edit page</li>
+  </ul>
+
+  <h2>Customizing the Workspace</h2>
+  <p>DaVinci Resolve gives you flexibility to arrange the Edit page to suit your preferences:</p>
+  <ul>
+    <li><strong>Resize panels</strong> by dragging the borders between them. Make the timeline taller or give the viewers more space — whatever helps your workflow.</li>
+    <li><strong>Show/hide panels</strong> using the toolbar buttons described above. If you don't need the Effects Library, close it to gain more room.</li>
+    <li><strong>Dual-screen mode:</strong> If you have two monitors, go to <em>Workspace > Dual Screen > On</em>. Resolve will put the viewers on one screen and the timeline on the other.</li>
+    <li><strong>Full-screen viewer:</strong> Press <kbd>Shift</kbd>+<kbd>F</kbd> to expand the viewer to full screen for a better preview. Press it again to return.</li>
+    <li><strong>Save workspace layouts:</strong> Go to <em>Workspace > Layout Presets > Save Layout as Preset</em> to save your custom arrangement and recall it later.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> When starting out, keep the default layout. Once you're comfortable with where everything is, start customizing to match how you like to work.
+  </div>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>DaVinci Resolve uses a <strong>page-based workflow</strong> with 7 dedicated pages: Media, Cut, Edit, Fusion, Color, Fairlight, and Deliver.</li>
+    <li>The <strong>Edit page</strong> is your primary workspace — it contains the Media Pool, Source Viewer, Timeline Viewer, Timeline, Inspector, and Effects Library.</li>
+    <li>You can toggle panels on and off, resize them, and save custom layouts to suit your editing style.</li>
+    <li>Use the page icons at the bottom of the screen (or <kbd>Shift</kbd>+number shortcuts) to move between pages.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Video Production — DaVinci Resolve</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

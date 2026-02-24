@@ -1,0 +1,289 @@
+/* =====================================================
+   Document Page Styles — Supplements styles.css
+   Used on reading / activity pages that live inside
+   the main site shell (header, footer, theme toggle).
+   ===================================================== */
+
+/* ---------- content-specific variables ---------- */
+:root {
+  --doc-tip-bg: #eaf6fb;
+  --doc-tip-border: var(--primary-color, #4ad);
+  --doc-warn-bg: #fff8e1;
+  --doc-warn-border: #f0c040;
+  --doc-code-bg: #f0f0f0;
+  --doc-card-bg: #fff;
+  --doc-border: #ddd;
+  --doc-muted: #666;
+  --doc-radius: 0.75rem;
+}
+
+body.dark-mode {
+  --doc-tip-bg: #1a2a35;
+  --doc-warn-bg: #2a2510;
+  --doc-code-bg: #2a2a2a;
+  --doc-card-bg: #252525;
+  --doc-border: #444;
+  --doc-muted: #aaa;
+}
+
+/* ---------- Back to course link ---------- */
+.back-link {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+/* ---------- Document header ---------- */
+.doc-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 3px solid var(--primary-color, #4ad);
+}
+
+.doc-header h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--secondary-color, #228);
+  margin-bottom: 0.3rem;
+}
+
+body.dark-mode .doc-header h1 {
+  color: var(--primary-color, #4ad);
+}
+
+.doc-header .subtitle {
+  font-size: 1.1rem;
+  color: var(--doc-muted);
+  font-weight: 400;
+  max-width: none;
+}
+
+.course-tag {
+  display: inline-block;
+  background: var(--primary-color, #4ad);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ---------- remove h2 gradient underline on doc pages ---------- */
+.doc-content h2::after,
+main:has(.doc-header) h2::after {
+  display: none;
+}
+
+main:has(.doc-header) h2 {
+  padding-bottom: 0.3rem;
+  border-bottom: 2px solid var(--doc-border);
+}
+
+body.dark-mode main:has(.doc-header) h2 {
+  color: var(--tertiary-color, #fe9);
+}
+
+/* ---------- h4 for doc pages ---------- */
+main:has(.doc-header) h4 {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.2rem 0 0.4rem;
+}
+
+/* ---------- list marker accent ---------- */
+main:has(.doc-header) li::marker {
+  color: var(--primary-color, #4ad);
+}
+
+/* ---------- Code blocks ---------- */
+pre {
+  background: var(--doc-code-bg);
+  padding: 1rem 1.25rem;
+  border-radius: var(--doc-radius);
+  overflow-x: auto;
+  margin: 1rem 0;
+  border-left: 4px solid var(--primary-color, #4ad);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+  color: inherit;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--doc-card-bg);
+  border: 1px solid var(--doc-border);
+  border-radius: var(--doc-radius);
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0;
+}
+
+/* ---------- Tip / Info callouts ---------- */
+.tip {
+  background: var(--doc-tip-bg);
+  border-left: 4px solid var(--doc-tip-border);
+  padding: 1rem 1.25rem;
+  border-radius: 0 var(--doc-radius) var(--doc-radius) 0;
+  margin: 1.25rem 0;
+}
+
+.tip::before {
+  content: "\1F4A1 Tip";
+  display: block;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+  color: var(--primary-color, #4ad);
+}
+
+/* ---------- Warning / Note callouts ---------- */
+.warning {
+  background: var(--doc-warn-bg);
+  border-left: 4px solid var(--doc-warn-border);
+  padding: 1rem 1.25rem;
+  border-radius: 0 var(--doc-radius) var(--doc-radius) 0;
+  margin: 1.25rem 0;
+}
+
+.warning::before {
+  content: "\26A0\FE0F Note";
+  display: block;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+  color: #c09000;
+}
+
+/* ---------- Keyboard shortcuts ---------- */
+kbd {
+  display: inline-block;
+  background: var(--doc-card-bg);
+  border: 1px solid var(--doc-border);
+  border-radius: 4px;
+  padding: 0.1rem 0.45rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.85em;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+}
+
+/* ---------- Tables ---------- */
+main:has(.doc-header) table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+main:has(.doc-header) th,
+main:has(.doc-header) td {
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  border-bottom: 1px solid var(--doc-border);
+}
+
+main:has(.doc-header) th {
+  background: var(--primary-color, #4ad);
+  color: #fff;
+  font-weight: 600;
+}
+
+main:has(.doc-header) tr:nth-child(even) {
+  background: var(--doc-code-bg);
+}
+
+/* ---------- Two-column grid ---------- */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+@media (max-width: 700px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Activity / checkpoint boxes ---------- */
+.activity {
+  background: linear-gradient(135deg, var(--doc-tip-bg), var(--doc-card-bg));
+  border: 2px solid var(--primary-color, #4ad);
+  border-radius: var(--doc-radius);
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.activity::before {
+  content: "\1F3AF Activity";
+  display: block;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+  color: var(--secondary-color, #228);
+}
+
+body.dark-mode .activity::before {
+  color: var(--primary-color, #4ad);
+}
+
+/* ---------- Document footer ---------- */
+.doc-footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--doc-border);
+  text-align: center;
+  color: var(--doc-muted);
+  font-size: 0.85rem;
+}
+
+/* ---------- Images in doc pages ---------- */
+main:has(.doc-header) img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--doc-radius);
+  margin: 1rem 0;
+}
+
+/* ---------- Print styles ---------- */
+@media print {
+  .back-link,
+  header,
+  .footer,
+  .theme-toggle-container {
+    display: none !important;
+  }
+  main {
+    box-shadow: none !important;
+    max-width: none !important;
+  }
+  .doc-header {
+    border-color: #000;
+  }
+  .tip, .warning, .activity {
+    border-color: #999;
+    background: #f5f5f5;
+  }
+}

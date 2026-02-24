@@ -87,10 +87,17 @@ document.addEventListener("DOMContentLoaded", () => {
       else {
         const link = document.createElement("a");
         link.dataset.url = item.url;
-        link.href = isAuth ? item.url : "javascript:void(0)"; // if we’re already logged in, point href at the real URL
+        link.href = isAuth ? item.url : "javascript:void(0)";
         link.textContent = item.title;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
+
+        // External links & PDFs open in new tab; internal doc pages navigate
+        const isExternal =
+          item.url &&
+          (item.url.startsWith("http") || item.url.endsWith(".pdf"));
+        if (isExternal) {
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+        }
 
         link.addEventListener("click", function (e) {
           e.preventDefault();
@@ -109,7 +116,11 @@ document.addEventListener("DOMContentLoaded", () => {
               a.href = a.dataset.url;
             });
           }
-          window.open(this.dataset.url, "_blank");
+          if (isExternal) {
+            window.open(this.dataset.url, "_blank");
+          } else {
+            window.location.href = this.dataset.url;
+          }
         });
 
         label.appendChild(link);
