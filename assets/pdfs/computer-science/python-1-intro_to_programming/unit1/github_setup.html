@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/python-1.html" class="back-link">&larr; Back to Python I</a>
+    <div class="doc-header">
+      <span class="course-tag">Python I</span>
+      <h1>GitHub Setup</h1>
+    </div>
+
+    <p>We&rsquo;ll use GitHub to share assignments for the majority of this course. Git is a powerful tool that we&rsquo;ll cover in more depth later. For now, we just need to get your account set up and clone a repository.</p>
+
+    <h2>1. Install Git</h2>
+
+    <ul>
+      <li>Go to <a href="https://git-scm.com/downloads" target="_blank">https://git-scm.com/downloads</a>.</li>
+      <li>Download the installer for your OS and run it.</li>
+      <li>Stick with the default settings unless you know what you&rsquo;re doing.</li>
+    </ul>
+
+    <p><strong>On macOS:</strong></p>
+    <ul>
+      <li>Open Terminal (<strong>Applications &gt; Utilities &gt; Terminal</strong>).</li>
+      <li>Type <code>git</code> and press <kbd>Enter</kbd>.</li>
+      <li>Check that it&rsquo;s installed with <code>git --version</code>.</li>
+    </ul>
+
+    <h2>2. Create a GitHub Account</h2>
+
+    <ul>
+      <li>Head over to <a href="https://github.com" target="_blank">github.com</a> and click <strong>Sign up</strong> (top right).</li>
+      <li>Follow the instructions to create your account.</li>
+      <li>Choose the free plan (it&rsquo;s all you&rsquo;ll need for now).</li>
+      <li>Check your email and click on the verification link.</li>
+    </ul>
+
+    <h2>3. Generate an SSH Key</h2>
+
+    <p>This key lets your computer talk to GitHub securely without asking for your password every time.</p>
+
+    <ul>
+      <li>Open a Terminal or Command Prompt.</li>
+      <li>Enter this command (replace the email with your own):
+        <pre><code>ssh-keygen -t ed25519 -C "your_email@example.com"</code></pre>
+      </li>
+      <li>Hit <kbd>Enter</kbd> to accept the default save location.</li>
+      <li>Pick a password (optional but recommended). You won&rsquo;t see what you type; don&rsquo;t worry, that&rsquo;s normal.</li>
+    </ul>
+
+    <p>Your key will be saved in <code>C:\Users\username\.ssh\id_ed25519.pub</code> (Windows) or <code>~/.ssh/id_ed25519.pub</code> (Linux/Mac).</p>
+
+    <h2>4. Add Your SSH Key to GitHub</h2>
+
+    <ul>
+      <li>In GitHub, click your profile picture &gt; <strong>Settings</strong>.</li>
+      <li>Go to <strong>SSH and GPG keys</strong> &gt; click <strong>New SSH key</strong>.</li>
+      <li>Give it a title like &ldquo;My Laptop.&rdquo;</li>
+      <li>Open <code>id_ed25519.pub</code> in a text editor like Notepad, copy everything inside, and paste it into GitHub&rsquo;s &ldquo;Key&rdquo; box.</li>
+      <li>Click <strong>Add SSH key</strong>.</li>
+    </ul>
+
+    <p>Now your computer will be recognized by GitHub.</p>
+
+    <h2>5. Configure Git</h2>
+
+    <p>Tell Git who you are so your commits show up with your name.</p>
+
+    <ul>
+      <li>Open a terminal and enter these commands, replacing &ldquo;Your Name&rdquo; and &ldquo;your_email@example.com&rdquo; with your actual name and email address:
+        <pre><code>git config --global user.name "Your Name"
+git config --global user.email "your_email@example.com"</code></pre>
+      </li>
+    </ul>
+
+    <p>These settings will be applied to all repositories on your computer.</p>
+
+    <h2>6. Clone the Git Repository</h2>
+
+    <p>Finally, let&rsquo;s grab a copy of the code you&rsquo;ll be using for this class.</p>
+
+    <ul>
+      <li>Go to the GitHub page for the repository you want to clone. For example:
+        <a href="https://github.com/NeuroDev-Tech-Class/Python-1" target="_blank">https://github.com/NeuroDev-Tech-Class/Python-1</a>
+      </li>
+      <li>Click the green <strong>Code</strong> button &gt; <strong>SSH</strong> &gt; copy URL to clipboard.</li>
+      <li>In your terminal, navigate to the folder where you want the repo to live and then run <code>git clone</code> followed by the URL you copied:
+        <pre><code>git clone git@github.com:NeuroDev-Tech-Class/Python-1.git</code></pre>
+      </li>
+    </ul>
+
+    <p>Once that&rsquo;s done, you&rsquo;ll see a new folder with all of the repository code. You can open it in an editor like VS Code.</p>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class &mdash; Python I</p>
+    </div>
+  </main>
+  <footer></footer>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

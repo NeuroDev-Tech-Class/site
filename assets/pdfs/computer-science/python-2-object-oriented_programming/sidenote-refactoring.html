@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/python-2.html" class="back-link">&larr; Back to Python II</a>
+    <div class="doc-header">
+      <span class="course-tag">Python II</span>
+      <h1>Refactoring Strategies</h1>
+    </div>
+
+    <h2>Methods with Many Arguments</h2>
+    <ul>
+      <li><strong>Question to Ask:</strong> Can you replace arguments with a dictionary or another instance instead?</li>
+      <li><strong>Question to Ask:</strong> Are some of these arguments related? Do you use them enough that creating a new class or struct makes sense?</li>
+      <li><strong>Strategy:</strong> This is known as <strong>dependency injection</strong> and is a useful tool.</li>
+    </ul>
+
+<pre><code># Original
+def process_data(user_id, user_name, user_email, user_age):
+    # processing logic
+
+# Refactored
+class UserInfo:
+    def __init__(self, user_id, user_name, user_email, user_age):
+        self.user_id = user_id
+        self.user_name = user_name
+        self.user_email = user_email
+        self.user_age = user_age
+
+def process_data(user_info: UserInfo):
+    # processing logic</code></pre>
+
+    <h2>If Statements with Many Parameters</h2>
+    <ul>
+      <li><strong>Strategy:</strong> Try combining some conditions into another variable by giving this variable a meaningful name to make it more readable when used as part of a condition.</li>
+    </ul>
+
+<pre><code># Original
+if user.is_authenticated and user.has_permission("edit") and (user.role == "admin" or user.role == "editor"):
+    content.publish()
+
+# Refactored
+is_user_authenticated: bool = user.is_authenticated
+has_edit_permission: bool = user.has_permission("edit")
+is_admin_or_editor: bool = user.role in ["admin", "editor"]
+is_not_suspended: bool = not user.is_suspended
+is_content_draft_or_pending: bool = content.status in ["draft", "pending"]
+
+if (is_user_authenticated and has_edit_permission and is_admin_or_editor
+        and is_not_suspended and is_content_draft_or_pending):
+    content.publish()</code></pre>
+
+    <h2>Evaluating Tests</h2>
+    <ul>
+      <li><strong>Strategy:</strong> Make sure you don&rsquo;t have too many asserts in a single test. If so, it might make sense to break into multiple tests.</li>
+    </ul>
+
+<pre><code># Original
+def test_user_permissions():
+    assert user.can_edit()
+    assert user.can_view()
+    assert user.can_delete()
+
+# Refactored
+def test_user_can_edit():
+    assert user.can_edit()
+
+def test_user_can_view():
+    assert user.can_view()
+
+def test_user_can_delete():
+    assert user.can_delete()</code></pre>
+
+    <h2>Eliminating Reversed Processing</h2>
+    <ul>
+      <li><strong>Strategy:</strong> Look for any processing that gets done and then effectively reversed. Can this be eliminated or slightly modified to remove a lot of work?</li>
+    </ul>
+
+<pre><code># Original
+data = preprocess_data(raw_data)
+processed_data = reverse_preprocess_data(data)
+
+# Refactored
+data = preprocess_data(raw_data, reverse=False)</code></pre>
+
+    <h2>Sharing Information Across Code</h2>
+    <ul>
+      <li><strong>Strategy:</strong> Create a file with dictionaries or structs that contains this info and import it to the relevant files, making it easy to change and modify when needed.</li>
+    </ul>
+
+<pre><code># Original
+def process_user(user_id):
+    if user_id in [1, 2, 3]:
+        # processing logic
+
+# Refactored
+# shared_info.py
+USER_IDS = [1, 2, 3]
+
+# main.py
+from shared_info import USER_IDS
+
+def process_user(user_id):
+    if user_id in USER_IDS:
+        # processing logic</code></pre>
+
+    <h2>Type Hinting Methods</h2>
+    <ul>
+      <li><strong>Strategy:</strong> Type hint all your methods. If there is any type hint that is particularly wordy and difficult to read, use that as a hint to create new classes to pass instead.</li>
+    </ul>
+
+<pre><code># Original
+def calculate_area(length: float, width: float) -> float:
+    return length * width
+
+# Refactored
+class Dimensions:
+    def __init__(self, length: float, width: float):
+        self.length = length
+        self.width = width
+
+def calculate_area(dimensions: Dimensions) -> float:
+    return dimensions.length * dimensions.width</code></pre>
+
+    <h2>Reducing Logical Complexity</h2>
+    <ul>
+      <li><strong>Strategy:</strong> When evaluating logical statements, see if any logical equivalencies can reduce the complexity of your logic. Replace if/for nests of more than three deep with function calls.</li>
+    </ul>
+
+<pre><code># Original
+if x > 0 and x < 10:
+    if y > 0 and y < 10:
+        if z > 0 and z < 10:
+            # logic
+
+# Refactored
+def is_within_bounds(value, lower, upper):
+    return lower < value < upper
+
+if (is_within_bounds(x, 0, 10) and is_within_bounds(y, 0, 10)
+        and is_within_bounds(z, 0, 10)):
+    # logic</code></pre>
+
+    <h2>Method and Class Length</h2>
+    <ul>
+      <li><strong>Strategy:</strong> Methods longer than 20 lines or classes longer than 150 lines should be broken up into sub-methods and classes.</li>
+    </ul>
+
+<pre><code># Original
+def long_method():
+    # 30 lines of code
+
+# Refactored
+def sub_method1():
+    # 10 lines of code
+
+def sub_method2():
+    # 10 lines of code
+
+def sub_method3():
+    # 10 lines of code
+
+def long_method():
+    sub_method1()
+    sub_method2()
+    sub_method3()</code></pre>
+
+    <h2>Replace Array/Dict with Object</h2>
+    <ul>
+      <li><strong>Strategy:</strong> Replace arrays/dictionaries with various types of data with an object, and have each type of data reference a field in the object.</li>
+    </ul>
+
+<pre><code># Original
+data = {
+    "name": "John",
+    "age": 30,
+    "email": "john@example.com"
+}
+
+# Refactored
+class Person:
+    def __init__(self, name, age, email):
+        self.name = name
+        self.age = age
+        self.email = email
+
+data = Person("John", 30, "john@example.com")</code></pre>
+
+    <h2>Consolidate Similar Conditions</h2>
+    <ul>
+      <li><strong>Strategy:</strong> If you have multiple conditions that give similar or the same result, consolidate these into one condition using a method to prevent the condition from getting too large.</li>
+    </ul>
+
+<pre><code># Original
+if condition1 or condition2 or condition3:
+    perform_action()
+
+# Refactored
+def any_condition_met(*conditions):
+    return any(conditions)
+
+if any_condition_met(condition1, condition2, condition3):
+    perform_action()</code></pre>
+
+    <h2>Removing Fragments from Conditions</h2>
+    <ul>
+      <li><strong>Strategy:</strong> If all your conditional statements have some fragment, that fragment can be removed from the condition.</li>
+    </ul>
+
+<pre><code># Original
+if age > 10:
+    print(age)
+    print("too old")
+else:
+    print(age)
+    print("LETTTSSS GOOO!")
+
+# Refactored
+print(age)
+if age > 10:
+    print("too old")
+else:
+    print("LETTTSSS GOOO!")</code></pre>
+
+    <h2>Reducing Nested If Statements</h2>
+    <ul>
+      <li><strong>Strategy:</strong> When many nested if statements, we can often isolate special cases into guard clauses to reduce nesting.</li>
+    </ul>
+
+<pre><code># Original
+if x > 0:
+    if y > 0:
+        if z > 0:
+            # logic
+
+# Refactored
+if x <= 0:
+    return
+if y <= 0:
+    return
+if z <= 0:
+    return
+# logic</code></pre>
+
+    <h2>Using Polymorphism</h2>
+    <ul>
+      <li><strong>Strategy:</strong> Use polymorphism to prevent constant type checking, allowing you to check parent types for behavior instead of dozens of different things, or custom write behavior of methods for each type to avoid conditionals.</li>
+    </ul>
+
+<pre><code># Original
+if isinstance(shape, Circle):
+    shape.draw_circle()
+elif isinstance(shape, Square):
+    shape.draw_square()
+
+# Refactored
+class Shape:
+    def draw(self):
+        raise NotImplementedError
+
+class Circle(Shape):
+    def draw(self):
+        # draw circle
+
+class Square(Shape):
+    def draw(self):
+        # draw square
+
+def draw_shape(shape: Shape):
+    shape.draw()</code></pre>
+
+    <h2>Assertions for State-Specific Code</h2>
+    <ul>
+      <li><strong>Strategy:</strong> If code needs to be in a specific state for some code to run, introduce assertion statements that can serve as living documentation and help with debugging.</li>
+    </ul>
+
+<pre><code># Original
+# assume certain state
+process_data()
+
+# Refactored
+assert state == "expected_state", "State must be 'expected_state' to run this code"
+process_data()</code></pre>
+
+    <h2>Splitting Methods That Modify and Return a Value</h2>
+    <ul>
+      <li><strong>Strategy:</strong> Split a method into two&mdash;one to modify and one to return if the method modifies and returns a value.</li>
+    </ul>
+
+<pre><code># Original
+def modify_and_return(value):
+    value += 10
+    return value
+
+# Refactored
+def modify_value(value):
+    return value + 10
+
+def return_value(value):
+    return value</code></pre>
+
+    <h2>Generalizing Similar Methods</h2>
+    <ul>
+      <li><strong>Strategy:</strong> If methods do similar things, generalize these methods into a single method.</li>
+    </ul>
+
+<pre><code># Original
+def process_user_data(user):
+    # process user
+
+def process_admin_data(admin):
+    # process admin
+
+# Refactored
+def process_data(entity):
+    # process entity</code></pre>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class &mdash; Python II</p>
+    </div>
+  </main>
+  <footer></footer>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

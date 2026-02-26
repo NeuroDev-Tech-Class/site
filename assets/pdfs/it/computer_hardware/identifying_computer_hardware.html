@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/hardware.html" class="back-link">&larr; Back to Computer Hardware</a>
+    <div class="doc-header">
+      <span class="course-tag">Hardware</span>
+      <h1>Identifying Computer Hardware</h1>
+    </div>
+
+    <h2>What Is BIOS/UEFI?</h2>
+    <p><strong>BIOS</strong> (Basic Input/Output System) is the older style of firmware on many PCs. <strong>UEFI</strong> (Unified Extensible Firmware Interface) is the newer style on modern computers. They both do basically the same jobs: they wake up your computer&rsquo;s hardware before starting your OS (like Windows).</p>
+
+    <div class="warning">
+      <h3>Important</h3>
+      <ul>
+        <li><strong>Be Careful:</strong> It&rsquo;s easy to change something by accident that could stop your computer from booting normally.</li>
+        <li><strong>Write It Down:</strong> If you do change a setting, write it down or take a photo so you can switch it back if you need.</li>
+        <li><strong>Saving vs. Not Saving:</strong> Look for &ldquo;Save &amp; Exit&rdquo; vs &ldquo;Exit Without Saving&rdquo; options. If you&rsquo;re not sure about a change, pick &ldquo;Exit Without Saving&rdquo; to play it safe.</li>
+      </ul>
+    </div>
+
+    <h2>Getting Into Your BIOS/UEFI</h2>
+    <ol>
+      <li><strong>Restart or Power On</strong> your computer.</li>
+      <li>Look for a prompt on your screen (like &ldquo;Press <kbd>F2</kbd> for Setup&rdquo; or &ldquo;Press <kbd>Del</kbd> to Enter BIOS&rdquo;).</li>
+      <li><strong>Tap the Key Right Away:</strong> Common ones are <kbd>Delete</kbd>, <kbd>F2</kbd>, <kbd>F12</kbd>, <kbd>Esc</kbd>, or <kbd>F10</kbd>. Sometimes you need to hit the key multiple times. If you&rsquo;re not sure, a quick Google of your computer model can help.</li>
+    </ol>
+    <p>It might take a few tries to get the timing right.</p>
+
+    <h2>Navigating the BIOS/UEFI</h2>
+    <ul>
+      <li>On older PCs, use your <strong>arrow keys</strong> to move around, <kbd>Enter</kbd> to select, and <kbd>Esc</kbd> to go back.</li>
+      <li>On newer menus, you might be able to use your mouse.</li>
+      <li>Look for <strong>Tabs or Sections</strong> with labels like &ldquo;Main,&rdquo; &ldquo;Advanced,&rdquo; &ldquo;Boot,&rdquo; or &ldquo;Security.&rdquo;</li>
+      <li><strong>Saving Settings:</strong> Usually found under a &ldquo;Save &amp; Exit&rdquo; tab or by pressing a special key.</li>
+    </ul>
+
+    <h2>Settings You Might See</h2>
+    <ol>
+      <li><strong>Boot Priority:</strong> Controls which drive or device starts up first.</li>
+      <li><strong>Hardware Monitor:</strong> Shows things like CPU temperature and fan speeds.</li>
+      <li><strong>Security Options:</strong> Might include passwords, Secure Boot, or encryption features.</li>
+      <li><strong>Time and Date:</strong> This is where your computer&rsquo;s internal clock is set.</li>
+      <li><strong>Advanced Settings:</strong> CPU speeds, virtualization, and other performance tweaks. Proceed with caution here if you don&rsquo;t know what you&rsquo;re doing!</li>
+    </ol>
+
+    <h2>Practice</h2>
+
+    <div class="activity">
+      <h3>Activity 1: Find Your BIOS/UEFI Details</h3>
+      <ol>
+        <li>Go into the BIOS/UEFI using the steps above.</li>
+        <li>Spot the version or name of the manufacturer (like &ldquo;Dell&rdquo; or &ldquo;HP&rdquo;).</li>
+        <li>Write it down or take a photo.</li>
+        <li>Exit without saving any changes.</li>
+      </ol>
+    </div>
+
+    <div class="activity">
+      <h3>Activity 2: Check Out the Boot Order</h3>
+      <ol>
+        <li>Re-enter the BIOS/UEFI.</li>
+        <li>Go to the &ldquo;Boot&rdquo; tab or section.</li>
+        <li>Observe the order of devices (Hard Drive, USB, DVD, etc.).</li>
+        <li>Make a note (or screenshot) but don&rsquo;t change anything yet.</li>
+        <li>Exit without saving.</li>
+      </ol>
+    </div>
+
+    <div class="activity">
+      <h3>Activity 3: Look at Hardware Monitors</h3>
+      <ol>
+        <li>Get back into the BIOS/UEFI again.</li>
+        <li>Find &ldquo;Hardware Monitor,&rdquo; &ldquo;PC Health,&rdquo; or &ldquo;Status.&rdquo;</li>
+        <li>Notice the CPU temperature or fan speeds.</li>
+        <li>Write down what you see (e.g., &ldquo;CPU temp is 45 &deg;C&rdquo;).</li>
+        <li>Exit without saving.</li>
+      </ol>
+    </div>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class &mdash; Computer Hardware</p>
+    </div>
+  </main>
+  <footer></footer>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

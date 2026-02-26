@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/python-2.html" class="back-link">&larr; Back to Python II</a>
+    <div class="doc-header">
+      <span class="course-tag">Python II</span>
+      <h1>What Is Object-Oriented Programming?</h1>
+    </div>
+
+    <p><strong>Object-oriented programming (OOP)</strong> is a programming paradigm that organizes data and functions into units called <strong>objects</strong>. These objects are often instances of <strong>classes</strong>. I just threw a lot of new terms at you, so let&rsquo;s clarify them.</p>
+
+    <p>A <strong>programming paradigm</strong> is a strategy or style of programming. While some languages are geared towards a specific paradigm, others (like Python) support multiple paradigms. OOP is a paradigm which Python supports particularly well. Other paradigms include functional programming and procedural programming, which we won&rsquo;t cover in depth here, but I encourage you to research them if you&rsquo;re interested in different programming styles.</p>
+
+    <p>In OOP, an <strong>object</strong> is a fundamental building block that bundles together data (attributes) and behaviors (methods). It&rsquo;s a general term that refers to any entity created from a class.</p>
+
+    <p><strong>Classes</strong> are templates used to create objects. They define the structure for an object, like a blueprint. A class consists of <strong>attributes</strong> (data members, or properties; things we can say about the object) and <strong>methods</strong> (functions; things the object can do).</p>
+
+    <p>An object that is created from a class is called an <strong>instance</strong> of that class. Let&rsquo;s look at an example to help these concepts gel.</p>
+
+    <p>Imagine you&rsquo;re building a racing game. You might want to create a class named <code>Car</code>, which serves as a template for creating all the cars in the game. Each car in the game would be an instance of the <code>Car</code> class.</p>
+
+    <p>The <code>Car</code> class defines data members like <code>color</code> and <code>top_speed</code>, and methods like <code>accelerate</code> and <code>brake</code>. These data members and methods outline the characteristics and behaviors of a car within the game&rsquo;s context.</p>
+
+    <p>Each instance of the <code>Car</code> class might have its own unique attributes. You can create a red car object with a top speed of 160 mph, and a separate blue car object with a top speed of 145 mph. Classes enable programmers to create and manage distinct objects that behave independently while sharing the same underlying structure. This is an idea I want to really emphasize. OOP is such a powerful programming style because it allows us to write something one time and reuse it elsewhere. It supports the classic programming rule of thumb: <strong>DRY</strong> (Don&rsquo;t Repeat Yourself).</p>
+
+    <p>OOP is built on four important principles: <strong>encapsulation</strong>, <strong>inheritance</strong>, <strong>polymorphism</strong>, and <strong>abstraction</strong>. Let&rsquo;s talk about those.</p>
+
+    <h2>Encapsulation</h2>
+
+    <p>Encapsulation involves bundling related data and methods into a single box, which we call an object. This box helps keep the information safe by not letting anything outside of the box directly touch it. This way, we prevent accidental or unauthorized changes.</p>
+
+    <p>In Python, this is more of a suggestion than a strictly enforced rule. We usually mark information that should stay inside the box with one underscore (<code>_</code>) for &ldquo;protected&rdquo; attributes, and two underscores (<code>__</code>) for &ldquo;private&rdquo; attributes. Other languages like Java, C#, and C++ actually enforce encapsulation more strictly.</p>
+
+    <h2>Inheritance</h2>
+
+    <p>Inheritance allows us to create new classes (<strong>child classes</strong>) from existing ones (<strong>parent classes</strong>). The parent, or base class, acts as a blueprint for the child, derived class. This allows us to reuse relevant parts of the old class, which eliminates redundant code.</p>
+
+    <h2>Polymorphism</h2>
+
+    <p>Polymorphism allows us to use one single interface to control many different things. In some ways it&rsquo;s like a universal remote control; the same buttons do similar things on different devices. We can use operators and methods on different classes without specifying exactly what they are.</p>
+
+    <p>In Python, we call this &ldquo;duck typing&rdquo; (if it looks like a duck and quacks like a duck, we assume it must be a duck). In other words, we focus more on what an object <em>can do</em>, rather than what an object <em>is</em>.</p>
+
+    <p>Two completely different objects might both have a method with the same name, and both would be allowed to use that method without us having to specify which object it is. For example, imagine a <code>Shark</code> class and a <code>Dolphin</code> class that both have a method called <code>swim</code>. We can call the <code>swim</code> method on an instance of either class without specifying whether it&rsquo;s a Shark or a Dolphin; as long as the object can swim, we can call the method (even if both methods don&rsquo;t work exactly the same way).</p>
+
+    <h2>Abstraction</h2>
+
+    <p>Abstraction is a technique for making complicated systems easier to handle. It does this by showing only what&rsquo;s necessary to the user and hiding the complicated parts under the hood.</p>
+
+    <p>Python doesn&rsquo;t enforce this as strictly as some other languages, but it does offer a tool called the <code>abc</code> (abstract base class) module. This tool lets you create classes with &ldquo;abstract&rdquo; methods, meaning if a class uses these methods, it must define how these methods work.</p>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class &mdash; Python II</p>
+    </div>
+  </main>
+  <footer></footer>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/hardware.html" class="back-link">&larr; Back to Computer Hardware</a>
+    <div class="doc-header">
+      <span class="course-tag">Hardware</span>
+      <h1>Building a PC &#128421;&#128295;</h1>
+    </div>
+
+    <h2>Why Should I Build a PC?</h2>
+
+    <p>There are a lot of reasons to consider building your own PC.</p>
+    <ul>
+      <li><strong>Customization:</strong> By choosing each individual component, you can tailor it exactly to your needs. Whatever you build, it will be uniquely yours.</li>
+      <li><strong>Cost-effectiveness:</strong> Building a PC can be cheaper than buying a pre-built one with similar specs. This is especially true with high-end systems where the prices of pre-built options tend to skyrocket.</li>
+      <li><strong>Performance and upgrades:</strong> Custom-built PCs are usually more flexible when it comes to upgrades. Being able to easily swap in new components makes it easy to keep your system up-to-date.</li>
+      <li><strong>Fun learning experience:</strong> Building your own PC is a challenging and rewarding experience. It&rsquo;s a great way to learn about PC hardware and sharpen your problem-solving skills. And the excitement of pushing the power button and watching your build come to life for the first time makes it all totally worth it.</li>
+    </ul>
+
+    <!-- ==================== PART 1: PLANNING ==================== -->
+    <h2>Part 1: Planning</h2>
+
+    <h3>Identify the Purpose</h3>
+    <p>Before you start picking out parts, you need to figure out what you actually want to do with your PC. Different uses call for different budgets and different hardware specs. Here are some examples:</p>
+    <ul>
+      <li><strong>Casual use:</strong> If you&rsquo;re just browsing the internet, checking emails, and using spreadsheets, you won&rsquo;t need anything ridiculously powerful. An entry-level CPU with integrated graphics and about 4&ndash;8 GB of RAM should cover you.</li>
+      <li><strong>Gaming:</strong> Gamers should prioritize a high-end graphics card, a fast processor, and a good amount of RAM (16&ndash;32 GB). Consider the types of games you&rsquo;ll play. If you want an experience similar to modern game consoles like the PS5, make sure your CPU and GPU have similar or better specs. If you care a lot about visuals, invest in a nice high-resolution monitor. If you&rsquo;re into fast-paced competitive online games, you might want a gaming mouse, a high-quality keyboard, and a monitor with a high refresh rate. If you&rsquo;re planning on streaming or recording, make sure your GPU has a good hardware video encoder.</li>
+      <li><strong>Content creation:</strong> Your requirements will vary depending on the type of content you want to create. Think about what kinds of software and peripherals you&rsquo;ll need. Recording musicians will want a lot of RAM for instrument patches. Video editors will need a modest GPU, tons of RAM, and SSD storage for smooth workflow. 3D modelers would want a high-end GPU, maybe one with real-time ray tracing capabilities. Programmers will need a powerful CPU with multiple cores and sufficient RAM if they plan to work with resource-intensive development environments or virtual machines.</li>
+    </ul>
+
+    <h3>Establish a Budget</h3>
+    <p>What you can afford will determine the parts you go for and where you might want to cut corners in terms of performance or storage. As of 2023, here&rsquo;s a general idea of what you can expect at different budget levels:</p>
+    <ul>
+      <li><strong>Budget build (~$500):</strong> This will get you a basic machine for everyday stuff like surfing the web, editing word docs, and streaming music and movies. Expect an entry-level CPU, integrated graphics rather than a discrete graphics card, and a cheap hard drive. You might get more bang for your buck with a pre-built PC at this price. But if you&rsquo;re still set on building your own and money is tight, consider buying used parts (just be sure to check warranties) or start with a refurbished or &ldquo;off-lease&rdquo; PC and gradually upgrade it piece-by-piece.</li>
+      <li><strong>Mid-range build ($800&ndash;$1200):</strong> This price range will get you a PC that can handle light gaming, multimedia editing, and other more demanding tasks. You&rsquo;ll get a mid-range CPU and dedicated GPU, more memory, and a bigger hard drive or an SSD for storage.</li>
+      <li><strong>High-end build ($1500+):</strong> Users with heavy-duty workloads like high-end AAA gaming, 3D rendering, or professional video editing will need to invest in a more powerful build. That means a top-notch CPU and GPU, tons of fast RAM, and a good-sized SSD for your games and media files.</li>
+    </ul>
+    <p>Don&rsquo;t forget to factor in the cost of your operating system and peripherals like monitors, keyboards, mice, speakers, etc. And keep in mind, these price ranges are just ballpark figures. Set your expectations realistically and focus on the components that will make the biggest difference for your needs. Don&rsquo;t pay for what you don&rsquo;t need!</p>
+
+    <!-- ==================== PART 2: SHOPPING FOR PARTS ==================== -->
+    <h2>Part 2: Shopping for Parts</h2>
+
+    <h3>Processor (CPU)</h3>
+    <p>The CPU (Central Processing Unit, or processor) is the brain of the computer. If we compare a computer to an orchestra, the CPU is the conductor, leading and coordinating every task the computer performs. Because it&rsquo;s usually the most important and most expensive component (along with the GPU), the CPU is a good starting point when building a computer. Your choice of CPU will also narrow down your choice of motherboard, because different processors require specific socket types.</p>
+
+    <p>The two major desktop CPU manufacturers are <strong>Intel</strong> and <strong>AMD</strong>. Both brands offer a variety of processors with different strengths across a wide range of prices, and they continue to release new products every year. When building a PC, do some research to see which might be a better fit for your build. Remember that &ldquo;better&rdquo; is relative; it all depends on your budget and your specific needs. Be sure to check out the latest benchmarks and reviews.</p>
+
+    <p>When choosing a CPU, here are some factors to consider:</p>
+    <ol>
+      <li><strong>Clock speed:</strong> Measured in GHz, this represents how many instruction cycles the CPU can execute per second. A higher clock speed can often mean faster performance, especially for tasks that only use a single thread. However, it&rsquo;s far from the only important factor &mdash; a higher clock speed doesn&rsquo;t automatically make a processor better. The actual performance depends on many factors, including the CPU&rsquo;s architecture and its ability to execute a certain number of Instructions Per Cycle (IPC). Clock speed is mostly relevant when comparing processors within the same series (for example, two different Intel i7 processors).</li>
+      <li><strong>Core count:</strong> A CPU can juggle several tasks at once using cores and threads. Having more cores and threads allows the CPU to handle multi-threaded tasks, like video editing or 3D rendering, more efficiently. Cores are individual processing units on the CPU that can independently read and execute instructions. For everyday tasks like web browsing, a dual-core or quad-core CPU should be enough. Threads aren&rsquo;t a physical part of the CPU, but a representation of how many tasks the CPU can handle at once. Some modern CPU cores are able to work on two tasks simultaneously by quickly jumping back and forth between them. Intel calls this <strong>hyper-threading</strong>, while AMD refers to it as <strong>simultaneous multithreading</strong>.</li>
+      <li><strong>Cache memory:</strong> This is the CPU&rsquo;s built-in memory which speeds up access to the main memory (RAM). Different cache levels (L1, L2, and L3) affect this. L1 is the smallest but fastest and is often dedicated per core; L2 is a bit larger and slower and may be per core or shared; L3, the largest but slowest, is typically shared among all cores.</li>
+      <li><strong>Power usage:</strong> CPUs that use less power also generate less heat, which can make it easier to cool your system, extend the lifespan of your components, and for laptops, lengthen battery life. Your CPU&rsquo;s <strong>TDP</strong> (Thermal Design Power) indicates the amount of heat it&rsquo;s expected to generate, which affects cooling requirements.</li>
+    </ol>
+    <p>While each of these specs is important, there are still more factors to consider. Do you plan on buying a discrete graphics card or will you need a CPU with integrated graphics? Are you interested in overclocking your PC? Does the CPU come bundled with a cooler or will you need to buy one? Be sure to do your research and see how the CPU you&rsquo;ve selected will perform in the real world, specifically with the games or programs you&rsquo;ll be using.</p>
+
+    <h3>Motherboard</h3>
+    <p>Once you&rsquo;ve chosen a CPU, it&rsquo;s time to choose your motherboard. This is the central circuit board and communication hub for all of the components in your computer. It&rsquo;s like the city square where all roads converge.</p>
+
+    <p>Motherboards come with a specific chipset and a socket that supports certain CPUs, so always double-check that your CPU and motherboard are compatible. Some factors to consider:</p>
+    <ol>
+      <li><strong>Chipset:</strong> Check that it&rsquo;s compatible with your CPU and supports the features you need. Some chipsets allow overclocking, while others do not. Higher-end chipsets may offer more PCI Express lanes for graphics cards and NVMe SSDs, enhancing performance.</li>
+      <li><strong>Form factor:</strong> This refers to the size and shape of your motherboard. The most common are <strong>ATX</strong>, <strong>microATX</strong>, and <strong>mini-ITX</strong>. What you choose will depend on your case size and the number of components (like PCIe cards) you want to add. ATX motherboards usually have more expansion slots and offer more flexibility for upgrades.</li>
+      <li><strong>Socket type:</strong> This needs to match your chosen CPU&rsquo;s socket type for compatibility. For example, LGA 1200 sockets are only compatible with Intel 10th and 11th generation processors.</li>
+      <li><strong>RAM:</strong> Consider how many RAM slots you&rsquo;ll want available and whether your board should support dual-channel or quad-channel memory configurations. Also consider the type of your RAM; if you want super fast DDR5 RAM, you&rsquo;ll need a board that supports it.</li>
+      <li><strong>SATA ports:</strong> These let you connect storage drives (HDDs and SSDs) to your computer. Make sure your board has as many ports as you need. Some boards also have M.2 slots for NVMe SSDs, which provide faster data transfer rates than SATA connections.</li>
+      <li><strong>Additional features:</strong> If you plan to use multiple graphics cards, your motherboard needs multiple PCI Express (PCIe) x16 slots. If you want Wi-Fi without needing an external adapter, look for a board with a built-in Wi-Fi card. If you use lots of peripherals, make sure your board has enough USB ports.</li>
+    </ol>
+
+    <h3>Memory (RAM)</h3>
+    <p>RAM (Random Access Memory) is your computer&rsquo;s short-term memory. Think of it as a temporary workspace, like the countertop in a kitchen. When you&rsquo;re preparing a meal (or your computer is running a program), you take out ingredients (data) from your pantry (storage drive), put them on the countertop (RAM), and use them to cook (process data).</p>
+
+    <p>The more RAM you have, the more data you can use at once, which lets your programs run faster. Here are some things to keep in mind when shopping for RAM:</p>
+    <ol>
+      <li><strong>Capacity:</strong> For basic tasks like web browsing, 8 GB of RAM should be more than enough. For gaming or professional video editing, 16 GB or more is recommended.</li>
+      <li><strong>Speed:</strong> RAM speed, measured in megahertz (MHz), can affect the performance of your system. Higher speeds can enhance the performance, as long as the RAM is compatible with your board.</li>
+      <li><strong>Type:</strong> DDR4 RAM has been the standard for several years, but the newer and faster (and pricier) DDR5 is gaining traction in high-end builds. Your motherboard will determine which type you can use.</li>
+      <li><strong>Channels:</strong> RAM sticks can be installed in single, dual, or even quad channel configurations, depending on the motherboard. <strong>Dual channel</strong>, which requires installing two or four identical RAM sticks in the appropriate slots, can offer a significant performance boost over a single channel setup. That means it&rsquo;s better to buy a kit of 2 or 4 RAM sticks rather than a single stick with the same total capacity.</li>
+    </ol>
+
+    <h3>Storage (HDD / SSD)</h3>
+    <p>While RAM serves as your system&rsquo;s short-term memory, storage drives are the long-term memory &mdash; the digital pantry where all your data, including your operating system (OS), applications, and files, are stored.</p>
+
+    <p>There are two main types of storage:</p>
+    <ol>
+      <li><strong>HDD (Hard Disk Drive):</strong> Hard drives have been around for decades and use magnetic storage to read and write data. They offer larger storage capacities at a lower cost, making them a great option for storing large amounts of data like photos, videos, and documents. However, their performance is slower than SSDs due to the mechanical nature of how they read and write data. HDDs also contain moving parts, which can make them more susceptible to failure from physical shocks.</li>
+      <li><strong>SSD (Solid State Drive):</strong> SSDs are newer and faster than HDDs, offering quicker data access which significantly speeds up system boot times and program launch times. They&rsquo;re also more durable since they use flash memory and have no moving parts, but they&rsquo;re much more expensive per-gigabyte.</li>
+    </ol>
+    <p>Both drives come in both SATA and NVMe form factors. HDDs almost always use SATA, an older interface, while many SSDs nowadays use NVMe, a faster interface that connects to the motherboard&rsquo;s M.2 slot. Be sure to check which slots your motherboard supports, and how many.</p>
+    <p>For most users, a combination of both types of drives provides a good balance between cost, speed, and storage capacity. A common setup is to use an SSD as a &ldquo;boot drive&rdquo; where the OS and frequently used apps are installed, and an HDD for mass storage of lesser-used data and larger files &mdash; for example, a 512 GB SSD and a 2 TB hard drive.</p>
+
+    <h3>Graphics Card (GPU)</h3>
+    <p>A graphics card (also called a video card) is an expansion card dedicated to rendering images and processing video data. The term is often used interchangeably with &ldquo;GPU&rdquo; (Graphics Processing Unit) which technically refers to the specialized chip on the card. A GPU is similar to a CPU, but it differs in ways that allow it to handle graphics much more efficiently than a CPU would. A graphics card also includes its own RAM (called VRAM) and a cooling system.</p>
+
+    <p>A discrete (separate) graphics card is optional if your CPU has integrated graphics and you only plan on using your computer for browsing the web, but it&rsquo;s essential for gaming and other visually intensive applications.</p>
+
+    <p><strong>Nvidia</strong> and <strong>AMD</strong> are the two main manufacturers of GPUs, and both offer a range of options to suit different needs and budgets. Brands like Asus and MSI produce graphics cards using these GPUs. You&rsquo;ll often find two graphics cards from two different brands using the same GPU, but with slight variations in specs. Reviews and benchmarks can be a useful way to compare between different models and brands.</p>
+    <ol>
+      <li><strong>Video RAM (VRAM):</strong> This is the memory your GPU uses to store data. A GPU with more VRAM can handle higher resolutions and more complex textures, making it ideal for gaming or 3D rendering. But be careful; while a GPU with more onboard memory might seem better at first glance, make sure that the memory isn&rsquo;t slower in performance. Manufacturers sometimes equip entry-level or mid-range GPUs with large amounts of low-quality memory to enhance their appeal, leading to subpar performance.</li>
+      <li><strong>Core count:</strong> GPUs have hundreds or even thousands of small cores, which allow them to perform many tasks (like 3D rendering) simultaneously. However, just comparing core counts between GPUs can be misleading because different GPU architectures utilize cores differently. The efficiency and design of the cores also matters.</li>
+      <li><strong>Clock speed:</strong> This measures how quickly the GPU can perform tasks, just like with a CPU. A higher clock speed generally means faster performance, but it also means the GPU will generate more heat, which necessitates better cooling.</li>
+      <li><strong>Compatibility and size:</strong> Make sure the GPU you choose is compatible with your motherboard and can fit inside your computer case. High-performance models can be quite large. Also, make sure your power supply has enough capacity and the necessary connectors to power your GPU, as some models have high power requirements.</li>
+      <li><strong>Additional features:</strong> Remember that higher numbers don&rsquo;t always mean better performance. Research what features the card offers and read plenty of reviews. Pay attention to specific features that your games and applications might utilize, such as hardware video encoding, real-time ray tracing, Nvidia&rsquo;s DLSS, or AMD&rsquo;s FidelityFX Suite.</li>
+    </ol>
+
+    <h3>Power Supply (PSU)</h3>
+    <p>The power supply is the heart of your computer, pumping power to all of its components. It converts AC power from the wall into DC power that your computer can use. Don&rsquo;t skimp on your PSU; it&rsquo;s a good idea to choose one with a wattage 20&ndash;30% higher than your estimated needs. You can use online calculators for wattage estimates.</p>
+    <p>The PSU&rsquo;s efficiency rating, such as <strong>80 Plus</strong>, Bronze, Silver, Gold, Platinum, or Titanium, indicates its power efficiency, with higher ratings being more energy-efficient.</p>
+    <p>PSUs also come in <strong>modular</strong>, <strong>semi-modular</strong>, and <strong>non-modular</strong> designs, which can impact cable management and the neatness of your build. And of course, make sure the PSU actually fits in your case and has all the necessary connectors for your components.</p>
+
+    <h3>Cooling System</h3>
+    <p>Keeping your PC cool is crucial for smooth operation and long-lasting components. While CPUs and graphics cards have their own coolers to dissipate heat, additional fans or a liquid cooling system will help keep things cool and also keep noise levels down, because the fans won&rsquo;t have to work as hard.</p>
+    <p>Fans are generally cheaper and easier to install, while liquid coolers can offer superior cooling and much quieter operation, but are more expensive and difficult to install. If you do want to go with liquid cooling, <strong>all-in-one (AIO)</strong> cooling systems are much easier to install than custom liquid loops and only slightly less efficient.</p>
+
+    <h3>Case</h3>
+    <p>The computer case shelters your components and adds to the overall aesthetic of your system. Choose a case that&rsquo;s roomy enough to fit your motherboard, PSU, and other parts comfortably. Good airflow is important for cooling, so look for one with proper ventilation. Some cases have mesh or transparent panels, and if you want to get fancy, check out cases that support RGB lighting.</p>
+
+    <h3>Peripherals</h3>
+    <p>Peripherals are the external input and output devices that connect to your computer. These include the monitor, keyboard, mouse, speakers, headsets, webcam, printers, and more.</p>
+
+    <p>If you have a powerful GPU, it wouldn&rsquo;t make sense to pair it with a cheap monitor that doesn&rsquo;t take advantage of its features. Likewise, it wouldn&rsquo;t make sense to buy an expensive 4K monitor if your PC would struggle to perform.</p>
+
+    <p>A monitor&rsquo;s <strong>resolution</strong> refers to the number of pixels on the screen. A higher resolution means sharper and more detailed images. Common resolutions are Full HD (1080p), Quad HD (1440p), and Ultra HD (4K). A monitor&rsquo;s <strong>refresh rate</strong>, measured in Hertz (Hz), indicates how many times per second the screen is updated. Higher refresh rate monitors feel smoother. Different types of display cables such as <strong>HDMI</strong> (best for TVs and home theaters), <strong>DisplayPort</strong> (which can offer higher refresh rates and resolutions), or <strong>VGA</strong> (typically seen in older devices) are available. Make sure your PC&rsquo;s ports match with the ports on your monitor.</p>
+
+    <p>Gaming enthusiasts might be interested in a highly responsive gaming mouse and mechanical keyboard. Ergonomic mouse and keyboard designs are worth considering if you spend a lot of time typing, as they can help prevent repetitive strain injuries.</p>
+
+    <p>Headsets can be either <strong>closed-back</strong>, which are designed to isolate the user from external noise, or <strong>open-back</strong>, which allow some external sound to blend with the audio, resulting in a more natural listening experience.</p>
+
+    <p>You&rsquo;ll need a webcam if you want to do video calls or streaming. Look for one that offers high resolution (720p or 1080p), a good frame rate (30 fps or 60 fps), and maybe autofocus and light correction.</p>
+
+    <!-- ==================== PART 3: ASSEMBLING THE PC ==================== -->
+    <h2>Part 3: Assembling the PC</h2>
+
+    <h3>Safety and Preparation</h3>
+    <p>Before we dive in, let&rsquo;s go over some safety measures. One big concern is <strong>static electricity</strong>, which can harm your PC parts. A cheap antistatic wrist strap is a great investment to prevent electrostatic discharge. Alternatively, you can reduce static electricity by regularly touching a grounded metal object, like a metal desk that&rsquo;s touching the ground, or the metal part of your computer case (as long as the power supply is plugged into the wall but turned off).</p>
+
+    <p>Handle your components delicately, especially the motherboard and CPU. Hold them by the edges like a CD and avoid touching the pins and connectors. This reduces the risk of electrostatic discharge and also prevents smudging or damage.</p>
+
+    <p>As for tools, you&rsquo;ll need a long Phillips head screwdriver. If it has a magnetized tip, even better; it&rsquo;ll help with those tiny screws. Isopropyl alcohol and a microfiber cloth are helpful for cleaning off smudges and fingerprints. A flashlight will probably come in handy as well.</p>
+
+    <p>Choose a clean, bright, and roomy area for your assembly station. Spread out all your components and make sure you&rsquo;ve got plenty of space to maneuver without risking any drops or damage. And remember that these are just general steps, so when in doubt: <strong>read the manual!</strong></p>
+
+    <h3>Motherboard Unbox &amp; CPU Install</h3>
+    <p>You&rsquo;ll want to install the CPU and other components onto the motherboard while it&rsquo;s still outside of your case because it&rsquo;s a lot easier to do on a flat surface. Carefully take your motherboard out of its packaging and lay it on top of the anti-static bag it came in, on top of the box.</p>
+
+    <p>There are two types of sockets for connecting the CPU to the motherboard: <strong>LGA</strong> (&ldquo;land grid array,&rdquo; mostly used by Intel) where the pins are on the motherboard, and <strong>PGA</strong> (&ldquo;pin grid array,&rdquo; mostly used by AMD) where the pins are on the CPU itself. Give a quick check to make sure no pins are bent. If something looks wrong, don&rsquo;t be a hero. Contact your retailer or the manufacturer. Trying to fix a bent pin yourself can be a nightmare and it also might void your warranty.</p>
+
+    <h4>Intel (LGA) CPU Install Instructions</h4>
+    <ol>
+      <li>Find the CPU socket on the motherboard, which should be labeled.</li>
+      <li>Unlock the socket by pushing down and outward on the lever arm.</li>
+      <li>Lift up the bracket that covers the socket. Be very careful not to touch any of the pins.</li>
+      <li>Take your CPU out of its plastic cover. Handle the CPU by its edges and avoid touching the gold contacts underneath.</li>
+      <li>Find the corner of the CPU marked with a small triangle mark. This will line up with a mark on the motherboard socket.</li>
+      <li>Gently lower the CPU into the socket. It should sit in the socket without any force; it&rsquo;s designed to only fit in one orientation.</li>
+      <li>Once the CPU is in the socket, lower the bracket back down and lock the lever back into place. You should hear a little click.</li>
+    </ol>
+
+    <h4>AMD (PGA) CPU Install Instructions</h4>
+    <ol>
+      <li>Find the CPU socket on the motherboard, which should be labeled.</li>
+      <li>Pull up the lever on the side of the socket to unlock it.</li>
+      <li>Carefully take your CPU out of its packaging, holding it by its sides. Be extremely careful not to touch the pins on the bottom.</li>
+      <li>Find the corner of the CPU marked with a small gold triangle. This will line up with a similar triangle or dot on the motherboard socket.</li>
+      <li>Gently lower the CPU into the socket. It should sit in the socket without any force; it&rsquo;s designed to only fit in one orientation.</li>
+      <li>Drop the lever back down to secure the CPU into place.</li>
+    </ol>
+
+    <h3>RAM Install</h3>
+    <p>Find the RAM slots on your motherboard. These will be long horizontal slots located near the CPU socket. Check your motherboard&rsquo;s manual to figure out which slots you should use for your RAM sticks. For example, if you have 4 RAM slots but only 2 RAM sticks, you&rsquo;ll usually put the RAM in alternating slots (like slots 1 &amp; 3 or slots 2 &amp; 4). This arrangement is called a <strong>dual-channel memory configuration</strong> and it allows the CPU to access data from both RAM sticks simultaneously.</p>
+
+    <p>Once you know where your RAM is going, open the clips on both ends of the slots. There&rsquo;s a small notch in your RAM stick that will line up with a ridge in the slot. Hold the RAM stick by its edges, align it with the slot, and gently press down until the side clips snap back into place. It will take a bit of pressure, but don&rsquo;t force it. If it&rsquo;s not going in smoothly, double-check the alignment and try again. Rinse and repeat for each RAM stick.</p>
+
+    <h3>M.2 SSD Install</h3>
+    <p>If your build doesn&rsquo;t include an M.2 SSD, skip this step.</p>
+    <p>Your motherboard manual will tell you where the M.2 slot is. It might be hiding under a heatsink that needs to be unscrewed. Make sure your M.2 slot is compatible with your SSD type: <strong>NVMe</strong> (which uses PCIe lanes and is faster) or <strong>SATA</strong> (which is slower but cheaper). If your board has multiple M.2 slots and you have multiple SSDs, pair your fastest SSD with the slots labeled &ldquo;CPU&rdquo; and the slower ones with &ldquo;PCH&rdquo; slots.</p>
+
+    <p>Remove the heatsink (if there is one) and peel off the protective film from the thermal pad. You&rsquo;ll see the M.2 slot and a standoff screw, which might need to be moved depending on the length of your SSD.</p>
+
+    <p>Hold your SSD carefully by its edges. You&rsquo;ll see a notch that should align with a ridge in the M.2 slot. Slide the SSD into the slot at a 30&deg; angle. Once it&rsquo;s in, it should stand up by itself. Gently press it down and screw in the standoff. Make it snug, but don&rsquo;t overtighten the screw. If you removed a heatsink, screw it back into place.</p>
+
+    <h3>CPU Cooler Install</h3>
+    <p>The process might vary depending on your cooler type. Always refer to the manual. Here are the general steps for a standard air cooler:</p>
+    <ol>
+      <li>If your cooler doesn&rsquo;t already have thermal paste applied to it, dab a small amount (about the size of a pea) on the center of the CPU.</li>
+      <li>Align the cooler with the mounting holes around the motherboard&rsquo;s CPU socket. Use screws to secure it, but don&rsquo;t overtighten.</li>
+      <li>Connect the cooler&rsquo;s fan cable to the &ldquo;CPU_FAN&rdquo; header on your motherboard. If your cooler has RGB or ARGB lights, connect their cables to the respective headers on the motherboard.</li>
+    </ol>
+    <p>For liquid coolers, the process is more complex and often involves mounting a radiator to your case. Make sure to carefully follow the instructions in your cooler&rsquo;s manual.</p>
+
+    <h3>First Boot &amp; Bench Test</h3>
+    <p>Before we go ahead and put everything in the case, let&rsquo;s do an out-of-case test boot to make sure everything&rsquo;s working. You&rsquo;ll need a screwdriver, monitor, keyboard, power supply, and possibly your graphics card.</p>
+
+    <p>If your CPU has integrated graphics, skip the GPU step. If it doesn&rsquo;t, you&rsquo;ll need to install your graphics card to see anything during your test. Look for the long PCI Express x16 slot on your motherboard, make sure the retention clip is open, and gently line up your graphics card with the slot. Lightly push it in until the clip locks into place, then secure it with the provided screws.</p>
+
+    <p>Grab your power supply cables. You&rsquo;ll need the 12-volt CPU connector (usually 8 pins), a 24-pin motherboard connector, and if you&rsquo;re using a GPU, the GPU-specific power cables. To connect these cables, line up the tabs and push them in until they click into place. These power connectors aren&rsquo;t interchangeable; don&rsquo;t force anything if it doesn&rsquo;t seem to fit.</p>
+
+    <p>Next, hook up a keyboard and monitor. If you installed a graphics card, your monitor should plug into that, not your motherboard. Be sure to select the correct input on your monitor.</p>
+
+    <p>Now, for the moment of truth: it&rsquo;s time to power on your system. Make sure your PSU is plugged in, and then flip the switch. Now you need to turn on your motherboard. There probably isn&rsquo;t a power button directly on it, which is where the screwdriver comes in.</p>
+
+    <p>Find the front panel header (usually in the lower right corner) and look for the power switch pins labeled &ldquo;PWR_SW&rdquo; or something similar. Use your screwdriver to bridge these two pins carefully by touching both of them, and the system should power on.</p>
+
+    <p>When you see a boot screen, hit the setup key (usually <kbd>F2</kbd> or <kbd>Delete</kbd>) to enter the BIOS. Here, make sure that all of your components have been detected: your memory, CPU, fans, and M.2 SSDs should all be listed.</p>
+
+    <p>Let the system idle for a few minutes and do a temperature check. The temperature shouldn&rsquo;t fluctuate, even when you apply pressure to the CPU. If it does, it probably means the CPU and cooler aren&rsquo;t making proper contact. A safe range for most CPUs is between 40&ndash;65 &deg;C (104&ndash;149 &deg;F). Sustained CPU temps above 80 &deg;C (176 &deg;F) can do long-term damage.</p>
+
+    <p>If you&rsquo;re using XMP (Intel) or DOCP (AMD) compatible RAM sticks, enable the XMP/DOCP profile in the BIOS. This will automatically set the correct frequency, timings, and voltage for your RAM and give you the best memory performance.</p>
+
+    <p>If everything runs smoothly and looks normal, your system is ready to go inside its case. You can shut off the system by bridging the &ldquo;PWR_SW&rdquo; pins again, just like you did to turn it on. Wait for everything to completely shut down, turn off the power supply, and unplug it from the power outlet.</p>
+
+    <h3>Troubleshooting</h3>
+    <p>If the bench test was successful, you can skip this section. If something went wrong, now&rsquo;s the time to troubleshoot. Aren&rsquo;t you glad we caught this problem before you took the time to put everything inside the case?</p>
+
+    <p>Motherboards usually have diagnostic displays that help identify issues during the boot process. For example, Asus motherboards use color-coded LEDs with red for CPU tests, orange for memory tests, etc. Not every motherboard will have these, though. Check your manual for more info.</p>
+
+    <ul>
+      <li><strong>Power Supply Issues:</strong> If your PC doesn&rsquo;t respond when you power it on, first check if the motherboard is actually receiving power. Usually, one or two LEDs will light up when the power is switched on. If you don&rsquo;t see anything, turn off the power supply and check your cable connections. The 24-pin power connector might split into a 20-pin and a 4-pin connector, so make sure both parts are inserted. Also make sure that the 12-volt EPS connectors are correctly connected.</li>
+      <li><strong>No Video Output:</strong> Check that your display cable is connected to the right port. If your CPU doesn&rsquo;t have integrated graphics, make sure the display cable is connected to your graphics card and not the motherboard. Also check if your monitor is set to the correct input (HDMI 1, DP 1, etc.).</li>
+      <li><strong>Graphics Card or Memory Issues:</strong> If the video output isn&rsquo;t the problem, turn off the power supply and reinstall your graphics card. If you think you have a faulty RAM stick, try removing all but one of them and testing again. Repeat with the rest to see if one of them is causing an issue.</li>
+      <li><strong>CPU Issues:</strong> If you&rsquo;re still having problems but the PC at least powers on, try reinstalling your CPU. Make sure there are no bent pins or debris in the socket obstructing the connection. Some PCs might not boot or stay on if the CPU fan header is disconnected, so double-check that. If you remove the CPU, you&rsquo;ll probably need to clean and reapply thermal paste.</li>
+      <li><strong>Compatibility Issues:</strong> Certain AMD and even some Intel motherboards might need a BIOS update to support specific CPU generations. Some motherboards include a BIOS flashback function, which lets you update the BIOS without needing a CPU or RAM installed. Check your manual and contact your retailer or manufacturer for help.</li>
+    </ul>
+
+    <p>If none of these steps helped, you&rsquo;ll need to do some more advanced troubleshooting. Try using spare components or another PC to isolate and find the problem. Ask around on tech forums, reach out to customer support, and consult Google and YouTube. And don&rsquo;t hesitate to reach out to any tech-savvy friends that might be able to help.</p>
+
+    <h3>Case Setup</h3>
+    <p>Now that you&rsquo;ve double-checked that all your components are working, it&rsquo;s time to get everything into the case. Switch off the power, disconnect the cables, and set your parts aside. If you installed a graphics card for your bench test, you should also remove that now. It&rsquo;s a good idea to lay down a blanket or towel to avoid scratching your case or your workspace.</p>
+
+    <p>Keep in mind that no two cases are exactly the same. Each one will differ in layout, build quality, and ideal cable management. That said, here are some general steps:</p>
+    <ol>
+      <li>Remove the side panels. You might need a screwdriver, or they might just come off with thumb screws. Some even have a magnetic attachment for easy removal.</li>
+      <li>If your case has a hardware box tucked inside, go ahead and take it out. You&rsquo;ll be needing it later, so keep it close.</li>
+      <li>If your motherboard came with an I/O shield that isn&rsquo;t preinstalled, now&rsquo;s the time to fit it. It should fit into a cutout at the back of your case, with the flat end facing the motherboard. Don&rsquo;t worry if it needs a bit of force to snap into place.</li>
+      <li>If there are any cables inside your case, route them to the other side of the case to make room for your motherboard. This will stop them from getting squashed under the motherboard and make your life a lot easier when you&rsquo;re managing your cables later on.</li>
+    </ol>
+
+    <h3>Motherboard Standoffs</h3>
+    <p>Standoffs are little metal extensions for the screw holes on your motherboard tray. Their job is to keep your motherboard from shorting out against the tray by providing a buffer zone between the motherboard and the metal case. They screw in just like regular screws, but with a threaded hole instead of a screwhead. Your case may come with these standoffs already installed, or they might be included in the box.</p>
+
+    <p>Your motherboard should have a pattern of holes, which is where the standoffs should go. You should be able to tighten them by hand, or you can use a 5mm hex socket driver.</p>
+
+    <div class="warning">
+      <p><strong>Important:</strong> Different motherboards have different layouts, so some of the holes might go unused. It&rsquo;s okay to leave some standoff points empty, but it&rsquo;s really important <strong>not</strong> to add any extra standoffs where there aren&rsquo;t any holes. This could cause a short circuit or even damage your motherboard.</p>
+    </div>
+
+    <p>Count the number of standoffs in the case and make sure each one lines up with a hole in your motherboard. There might be a couple hiding under covers or SSD heatsinks. Check the orientation of your motherboard, then gently place it into the case and align it with the standoffs. If the holes don&rsquo;t match, readjust the standoffs and try again until everything fits.</p>
+
+    <h3>Motherboard Install</h3>
+    <p>Plug in the 8-pin EPS power cable. If you have a modular power supply, connect the cables to the motherboard side first, then feed the other end through the cable management hole. If your power supply isn&rsquo;t modular, you&rsquo;ll need to route the cables across the motherboard.</p>
+
+    <p>Then connect the front panel header to your motherboard. These are usually on the lower right corner of the motherboard, but check your manual if you can&rsquo;t find them. Keep the wires untangled and make sure they don&rsquo;t cross over any components that you&rsquo;ll need to access later.</p>
+
+    <p>Screw in your motherboard using the screws that came in the box. It&rsquo;s a good idea to start with the standoff in the center to line everything up. Don&rsquo;t tighten it all the way; leave a little bit of slack until you have all of them in. Ideally, you should have a screw in every mount point, but if you have a clearance issue and can&rsquo;t get one in, it&rsquo;s not the end of the world.</p>
+
+    <h3>SATA Storage Install</h3>
+    <p>If you have any 2.5-inch or 3.5-inch drives, let&rsquo;s install them now.</p>
+
+    <p>Many modern cases have specific trays for <strong>2.5-inch drives</strong> (usually SSDs) on the backside of the motherboard tray. These trays usually come out easily with a thumb screw. Slide out the tray, line up your SSD&rsquo;s holes with the tray&rsquo;s holes, and screw them in. Slide the tray back in and secure it with the thumb screws.</p>
+
+    <p>For <strong>3.5-inch drives</strong>, your case will probably have removable trays secured with two tabs. Squeeze the tabs and slide out the tray. Install the drive so the label faces up, with the SATA and power connectors on the side without tabs. This way, when you slide it back in, the connectors will be accessible from the open side of the case. Secure the drive using the screws provided. Some trays might use clips instead.</p>
+
+    <p>If your case has fixed mounts, angle the drive into place with the connectors facing the inside of the case. Line up the drive so you can see two mounting holes on each side through the cutouts and screw it in.</p>
+
+    <p>Your motherboard should have come with SATA data cables, usually L-shaped. Align the notch on the cable with the L-shaped slot on the drive, then connect the other end to a SATA port on your motherboard. Connect a SATA power cable from your PSU to the larger slot on your drive.</p>
+
+    <div class="tip">
+      <p><strong>Tip:</strong> SATA cables have either right-angle or straight ends. Right-angle cables are better for hard drives installed in a removable tray. Straight cables are better for flush-fitting 2.5-inch SSDs mounted behind the motherboard or where they need to be flush with the case.</p>
+    </div>
+
+    <h3>Fan Install</h3>
+    <p>If your case allows for it, you might want to install additional fans. Common locations include the front, rear, and top of the case, and sometimes on the bottom or the side panel. The sizes of fans your case can accommodate (usually 120 mm or 140 mm) will be specified in the case&rsquo;s manual.</p>
+
+    <p>For optimal airflow, it&rsquo;s recommended to go <strong>front-to-back</strong> and <strong>bottom-to-top</strong>. Fans at the front or bottom of the case should pull cool air in, while fans at the rear or top should push warm air out. Most fans have arrows printed on the side to indicate airflow direction and fan rotation.</p>
+
+    <h3>Power Supply Install</h3>
+    <p>If your PSU is plugged in, unplug it. Find the power supply cutout at the back of your case and remove any thumb screws to remove the backplate. The power supply&rsquo;s fan should ideally face downward if there&rsquo;s an intake filter at the bottom of the case. If your PC will be sitting on a carpeted floor, the fan should face upward if possible. Ultimately the fan&rsquo;s orientation doesn&rsquo;t matter too much, so don&rsquo;t stress.</p>
+
+    <p>If your power supply is modular, plug in its cables. Screw in the power supply&rsquo;s backplate, feed the wires through your case&rsquo;s power supply mount, and slide the power supply into its slot. Connect the 12-volt CPU cables to the power supply.</p>
+
+    <p>Next, connect the 24-pin ATX connector. Detach this cable from the others and route it to your motherboard&rsquo;s 24-pin connector through the nearest cable management hole. Attach it by aligning the tabs and pressing until it clicks.</p>
+
+    <p>Use the peripheral cables to power any installed drives or fan controllers. They usually fit neatly with hard drives stacked in a bay. Just align the L-shaped notch and push it in place.</p>
+
+    <h3>Graphics Card Install</h3>
+    <p>If you removed your graphics card earlier, now&rsquo;s the time to reinstall it. You&rsquo;ll need to find a PCIe x16 slot. If there are multiple x16 slots, you&rsquo;ll probably want the one closest to the CPU which is the fastest. You&rsquo;ll probably also need to remove the slot covers on the PC case.</p>
+
+    <p>Before inserting the GPU, make sure that the small plastic latch on the PCIe slot is open. Take your GPU and align the connectors at the bottom of the card with the PCIe x16 slot. Carefully insert the GPU into the slot. You should hear a click when the latch closes and the GPU is secure. Never force the card into the slot; this could damage the card or the board. The card should slide smoothly into the slot without excessive force.</p>
+
+    <p>Once the graphics card is seated, secure it to the case by screwing the metal bracket at the end of the card into the corresponding holes in the case. Make sure the fans on the GPU aren&rsquo;t blocked and that there&rsquo;s adequate airflow around the card once it&rsquo;s installed.</p>
+
+    <p>Finally, connect the power cables. Depending on your GPU, it might require one or more six-pin or eight-pin power connectors.</p>
+
+    <h3>Cable Management</h3>
+    <p>Cable management is not just about aesthetics. It&rsquo;s about improving airflow and helping your components last longer. Modern PC cases are designed with cable management in mind. Most will have small hoops or tie-down points for securing zip ties or velcro straps to anchor your cables in place.</p>
+
+    <p>The idea is to have a single main &ldquo;trunk&rdquo; of cables that branches off as needed. Avoid overlapping or tangling cables, because this can restrict airflow and make it hard to troubleshoot in the future. Many cases include zip ties or velcro straps. If not, they&rsquo;re easily available at most hardware stores. If you want to go the extra mile, consider cable management sleeves. They bunch together several cables, giving a cleaner look and feel.</p>
+
+    <p>Lead your cables along the edges of the case. This helps keep them away from fans and other components. Make sure cables aren&rsquo;t pinched, stretched too tight, or in contact with hot components. If your case has a separate space behind the motherboard tray or a back panel, use it! When in doubt, your case manual is your best friend.</p>
+
+    <h3>Final Boot &amp; Troubleshooting</h3>
+    <p>We&rsquo;re on the home stretch! Time to power on and boot up your PC again. If it doesn&rsquo;t start or there are any other issues, try the following:</p>
+    <ul>
+      <li>Double-check all power, SATA, and peripheral cables.</li>
+      <li>If there&rsquo;s no response when you hit the power button, look for potential short circuits. Sometimes, a rogue screw or piece of metal can cause shorts.</li>
+      <li>Make sure the RAM and GPU are firmly seated in their slots. If they&rsquo;re even slightly off, the system may not boot.</li>
+      <li>Plug your monitor cable into the graphics card, not the motherboard. This is a common mistake!</li>
+      <li>Use the diagnostic LEDs on the motherboard to pinpoint issues.</li>
+      <li>If the motherboard shows a &ldquo;00&rdquo; code, it&rsquo;s time to carefully reseat the CPU. Check for bent pins and, if necessary, reapply thermal paste.</li>
+      <li>If all else fails, call your retailer or parts manufacturer.</li>
+    </ul>
+
+    <p>In the UEFI or BIOS setup screen, make sure the temperature is safe (should usually be below 60 &deg;C while it&rsquo;s idling). Make sure your RAM and storage devices are being detected. Enable XMP (also called DOCP or memory overclocking) to make sure your RAM runs at the right speed. If you plan on installing Windows 11, enable TPM 2.0 and Secure Boot, and disable CSM. Most other settings can probably be left at default.</p>
+
+    <p>With that, your PC is officially built. Congratulations! Now all we have to do is install the OS and other software.</p>
+
+    <!-- ==================== PART 4: SOFTWARE INSTALLATION ==================== -->
+    <h2>Part 4: Software Installation</h2>
+
+    <h3>Operating System</h3>
+    <p>Your freshly built PC won&rsquo;t do you much good without an operating system. Here&rsquo;s the step-by-step process for installing Windows:</p>
+    <ol>
+      <li>On another computer, download the official Windows Media Creation Tool from Microsoft&rsquo;s website.</li>
+      <li>Plug a blank USB flash drive (8 GB or more) into that computer, and use the Media Creation Tool to create a bootable Windows installation drive.</li>
+      <li>Next, plug the flash drive into your new PC and power it up. Your PC should automatically boot from the USB drive. Follow the on-screen instructions to complete the installation.</li>
+    </ol>
+
+    <div class="tip">
+      <p><strong>Download links:</strong></p>
+      <ul>
+        <li><a href="https://www.microsoft.com/en-us/software-download/windows10" target="_blank" rel="noopener noreferrer">Windows 10</a></li>
+        <li><a href="https://www.microsoft.com/software-download/windows11" target="_blank" rel="noopener noreferrer">Windows 11</a></li>
+      </ul>
+    </div>
+
+    <p>The process is similar for Linux. Download your preferred Linux distro in the form of an ISO file. Then use a program like Rufus to create a bootable USB drive. From there, the process is identical to a Windows install.</p>
+
+    <p>Installing macOS is a different beast. While it is possible to run macOS on a non-Apple PC (sometimes called a &ldquo;Hackintosh&rdquo;), it&rsquo;s not very straightforward and has potential legal and compatibility issues. Generally, macOS is best suited for Apple devices.</p>
+
+    <h3>Drivers</h3>
+    <p>A <strong>driver</strong> is a specialized piece of software that acts like an interpreter between your OS and your hardware. Without the right drivers, your hardware might misbehave or not work at all.</p>
+    <ul>
+      <li><strong>Motherboard Drivers:</strong> For optimal system performance and stability, you&rsquo;ll need to download and install the correct drivers for your motherboard. These are usually available on the manufacturer&rsquo;s website. For example, if you have an ASUS motherboard, head over to the official ASUS website, go to the &ldquo;Support&rdquo; or &ldquo;Downloads&rdquo; section, and enter the model number of your motherboard.</li>
+      <li><strong>GPU Drivers:</strong> Graphics cards often have their own driver ecosystems. If you&rsquo;ve got a Nvidia card, for instance, it might come bundled with software like the GeForce Experience, which not only provides easy driver updates but also optimizes game settings for the best performance on your system and offers features like screen recording and game streaming. You can also update your graphics drivers through AMD or Nvidia&rsquo;s website.</li>
+    </ul>
+    <p>Many peripherals, like printers and WiFi adapters, come with their own drivers to enable all their features. You usually get these drivers on a CD with the device or can download them from the manufacturer&rsquo;s website. If your hardware is acting strange, drivers are a good first place to check.</p>
+
+    <h3>Software &amp; Applications</h3>
+    <p>Now we&rsquo;re ready to install our programs so we can actually use our PC. Here are some rules of thumb when installing software:</p>
+    <ul>
+      <li><strong>Use a Standard Account:</strong> Instead of using an administrator account for daily tasks, use a standard user account. This way, if you accidentally download malware, it has less power over the entire PC.</li>
+      <li><strong>Stick to Official Websites:</strong> Always download software from its official website or authorized distributors. This minimizes the risk of downloading malware.</li>
+      <li><strong>Custom Installation:</strong> During installation, some software might try to sneak in additional programs. Always opt for a &ldquo;custom&rdquo; installation and uncheck any unwanted features. You don&rsquo;t want to bog down your brand new PC with bloatware.</li>
+    </ul>
+    <p>Keep these in mind while you download a web browser (if you&rsquo;re not okay with sticking with Microsoft Edge) and any other software you might need. With a fresh new PC, you have the opportunity to keep your programs and files tidy and organized. Avoid downloading anything you don&rsquo;t need.</p>
+
+    <!-- ==================== PART 5: MAINTENANCE ==================== -->
+    <h2>Part 5: Maintenance</h2>
+
+    <h3>Cleaning</h3>
+    <p>As a general guideline, it&rsquo;s good to clean your PC every three to six months. If you live in a place with a lot of dust, you might want to clean your PC more frequently.</p>
+    <p>Before you start cleaning, disconnect the power. It&rsquo;s safer and gives you an open field to work without any worries. Opening the side panels will give you easier access to the internal components. When you&rsquo;re cleaning, be as gentle as possible to avoid causing any damage. Pay special attention to fans and heatsinks as they tend to be dust magnets.</p>
+    <p>A can of compressed air can work wonders, as it can blow out dust from those tricky nooks and crannies. Microfiber cloths are great for wiping down surfaces. Avoid vacuum cleaners because they can generate static electricity, which isn&rsquo;t good for your components.</p>
+
+    <h3>Software Maintenance Tips</h3>
+    <ol>
+      <li><strong>Update regularly.</strong> Make sure your OS, drivers, and software are always up-to-date. Remember, an up-to-date PC is a happy PC!</li>
+      <li><strong>Defragment your hard drives.</strong> If you&rsquo;re using a traditional hard drive (HDD), periodically defragmenting it can help it maintain its performance. However, don&rsquo;t defragment Solid State Drives (SSDs) as it doesn&rsquo;t benefit them and can reduce their lifespan.</li>
+      <li><strong>Check for malware.</strong> Regularly scan your PC for malware, viruses, and other malicious software. Windows comes packaged with its own antivirus software and it&rsquo;s good enough for most users, as long as you follow its advice and allow it to do regular scans.</li>
+      <li><strong>Back up your data.</strong> Always create at least one backup of all your important data. Whether you use an external drive, cloud storage, or both, you&rsquo;ll thank yourself later.</li>
+      <li><strong>Uninstall unnecessary programs.</strong> Over time, you might accumulate programs or apps that you no longer use. Periodically review and uninstall any software you don&rsquo;t need to free up space and help your PC run smoothly.</li>
+      <li><strong>Manage startup apps.</strong> Some programs set themselves to run and update at startup by default, which can slow down boot times. Steam and Discord are notorious for this. Use Task Manager or other system tools to disable these.</li>
+    </ol>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class &mdash; Computer Hardware</p>
+    </div>
+  </main>
+  <footer></footer>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

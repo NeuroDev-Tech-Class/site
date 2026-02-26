@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/ai-usage.html" class="back-link">&larr; Back to AI Prompt Engineering</a>
+    <div class="doc-header">
+      <span class="course-tag">AI Prompt Engineering</span>
+      <h1>Prompt Engineering Approaches and Strategies</h1>
+    </div>
+
+    <h2>Iterating with Increased Specificity and Restricting Output</h2>
+
+    <p>It can often be difficult to get exactly the output you want on the first try. Don&rsquo;t worry, this is normal! Make note of the parts of the output that you wanted and the parts that you didn&rsquo;t like. Convey this information to the language model and try to give a detailed explanation of how it can be improved. It can be useful to give the model <strong>partial credit</strong>.</p>
+
+    <p>Let&rsquo;s look at an example:</p>
+
+    <p>I asked ChatGPT to generate some code in Python that mimics the behavior of the <code>datetime</code> class, with the goal of teaching students about operator overloading. However, the output I got used the built-in datetime methods, which would undermine the purpose of the project.</p>
+
+    <p>Here is the prompt I used to get the desired code:</p>
+    <blockquote>
+      <p>You can&rsquo;t use the built-in date class since the point of this assignment is to replicate that functionality and introduce students to operator overloading. Redo that with manual calculations used to adjust the day, month, and year properties. Also only show me the code where you made changes.</p>
+    </blockquote>
+
+    <p>Notice a few important things here:</p>
+    <ul>
+      <li><strong>I was very specific about the issue I was having.</strong> This helps steer our model in the direction we want it to go.</li>
+      <li><strong>I gave very detailed instructions on what I wanted it to do.</strong> Giving broad or vague instructions will greatly increase the chance it will misinterpret you, so it&rsquo;s often a good exercise to spend some time thinking about how to define your problem.</li>
+    </ul>
+
+    <p>The good news is that you can use the language model to get feedback on this! Let&rsquo;s look at some examples:</p>
+
+    <h3>Example: Homepage Layout</h3>
+
+    <p>I was creating a comedic website and wanted a homepage. Here was my first prompt:</p>
+    <blockquote>
+      <p>For my homepage I want to have a picture on the left with a company description on the left. Then I want a picture below that on the right with a company mission statement on the left.</p>
+    </blockquote>
+
+    <p>This wasn&rsquo;t a very good prompt &mdash; it&rsquo;s poorly phrased. I could have one description and image pushed to the very far left and another to the very far right, leaving an ugly gap. Part of this was due to me not having a very good idea of exactly what I wanted.</p>
+
+    <p>The good news is once I saw the output, I was able to use that as feedback for myself and better express my desires on my next prompt:</p>
+    <blockquote>
+      <p>You misunderstood me. I would like effectively four quadrants. The upper right quadrant should be occupied by an image, and so should the lower left quadrant. The other two will have text.</p>
+    </blockquote>
+
+    <p>&ldquo;Quadrants&rdquo; is a much more descriptive term as it clearly states that each portion of my content should occupy an equal amount of space and gives it an absolute position relative to my homepage, which is more restrictive. This is a common theme: <strong>the more restrictive we can make our prompts, the better results we can expect.</strong></p>
+
+    <h3>Example: Fixing Whitespace</h3>
+
+    <p>Here I had a problem where there was a lot of dead white space in my webpage. Here&rsquo;s my first attempt:</p>
+    <blockquote>
+      <p>I&rsquo;m having an issue with my testimonials page where it&rsquo;s not filling the entire screen. When I zoom in to 150% I find it looks a lot better.</p>
+    </blockquote>
+
+    <p>Can you spot the issues?</p>
+    <ul>
+      <li>I don&rsquo;t give it any specific instructions on what I want &mdash; instead I vaguely allude to a problem.</li>
+      <li>I explain what a better result looks like, but not in a very useful way. So what if 150% zoom is better? How could I translate this realization into an actionable prompt?</li>
+    </ul>
+
+    <p>Here is my next attempt with several improvements:</p>
+    <blockquote>
+      <p>I think you misunderstood me. What I mean was that currently when you load the webpage there is a lot of empty space visible below the testimonials. I would like my text and testimonials to fill up the entire screen.</p>
+    </blockquote>
+
+    <p>Notice I&rsquo;m giving it a <strong>specific task</strong>: &ldquo;I want you to do X.&rdquo; I also explain what I <em>don&rsquo;t</em> like in my current version (the dead space), giving it something specific to focus on.</p>
+
+    <p>After this, it gave me a better version where the spacing between elements was consistent, eliminating the large awkward chunk of dead space at the bottom. However, it didn&rsquo;t quite give me what I wanted &mdash; now the dead space was simply spread throughout the entire page.</p>
+
+    <p>So here was my final prompt:</p>
+    <blockquote>
+      <p>So adding padding is better than the current implementation, however what I really want is for the actual text and images in the testimonial to be larger.</p>
+    </blockquote>
+
+    <p>Here I give the model <strong>partial credit</strong>, so it knows it&rsquo;s on the right track, and I specifically point out what changes need to be made to get my final output.</p>
+
+    <h2>Increasing Specificity with Numerical Instructions</h2>
+
+    <p>Using numerical values can give you a high degree of control over your desired output. Here is an example:</p>
+
+    <p>I asked ChatGPT for a product description blurb for my humorous tech website:</p>
+    <blockquote>
+      <p>I am currently making a humorous website that pokes fun of over-the-top claims that tech companies make about their products. An example could be a company that makes a slightly better blender might claim it&rsquo;s &ldquo;changing the world&rdquo; and use a lot of tech buzzwords that don&rsquo;t mean anything. I have a products page on this site where I&rsquo;m advertising my &ldquo;5G scooter&rdquo; and the image is a poorly made drawing of the scooter. I would like a product description blurb that advertises the scooter in an over-the-top fashion that clearly is not justified by the image of my scooter.</p>
+    </blockquote>
+
+    <p>I was relatively happy with the output, however, in order to fit the dimensions of the webpage it needed to be shorter. Now I could have said something like &ldquo;rewrite this again however make this prompt a bit shorter&rdquo; or &ldquo;make it a lot shorter.&rdquo; The problem with this approach is in how we define &ldquo;a lot&rdquo; or &ldquo;a bit&rdquo; &mdash; these are not very specific terms, allowing for a lot of interpretation. Instead, we can use <strong>numerical values</strong> which are much more specific and give us better control:</p>
+
+    <blockquote>
+      <p>Can you give me the product description again but make it about 40% as long.</p>
+    </blockquote>
+
+    <p>Much better! Though even here the use of the term &ldquo;about&rdquo; was a mistake, since my definition of &ldquo;about&rdquo; might not match that of ChatGPT.</p>
+
+    <h2>Improving Results with Examples</h2>
+
+    <p>A lot of the time you might have a good idea of the type of response you are looking for. In these cases, prompting your model with an example response is a very good way of improving the accuracy of your results.</p>
+
+    <p>Here is a more detailed example prompt (courtesy of Emiliano Viotti&rsquo;s <a href="https://hackernoon.com/prompt-engineering-101-i-unveiling-principles-and-techniques-of-effective-prompt-crafting" target="_blank" rel="noopener noreferrer">article on prompt engineering</a>). He wants ChatGPT to generate responses to customer reviews, so he prompts it by giving some example responses to get it on the right track:</p>
+
+    <blockquote>
+      <p><strong>Review:</strong> I am very happy with this jacket, it is worth every penny<br />
+      <strong>Response:</strong> Thank you for your review, we are very happy that you are satisfied with our products.</p>
+      <p>---</p>
+      <p><strong>Review:</strong> I normally wear Columbia size L jackets, this in L is like an XL. I reordered the M&hellip; unfortunately the blue was not longer available =(<br />
+      <strong>Response:</strong> Thank you for your review! We are continuously working to bring you a better shopping experience and innovative products that will surprise you.</p>
+      <p>---</p>
+      <p><strong>Review:</strong> Nobody is truly going to be wearing this unless you&rsquo;re in the frozen tundra&hellip; Zero mobility, way too large in length&hellip; Absolute waste&hellip;<br />
+      <strong>Response:</strong> Thank you for your review, the feedback from our users represents an invaluable asset for us that allows us to work to improve each product and bring you a better shopping experience.</p>
+      <p>Provide them in JSON format with the following keys: review, response. Where &lsquo;review&rsquo; is the first 10 words of the customer review to easily identify it and &lsquo;response&rsquo; is the generated response.</p>
+    </blockquote>
+
+    <h2>Explaining the Desired Structure</h2>
+
+    <p>Explain to your model the exact structure you want your response to follow. This may not always be possible but can significantly improve your results.</p>
+
+    <p>Going back to customer reviews, now we want the model to convey our reviews into a JSON format useful for data analytics. In this case, we have a very specific output we want and don&rsquo;t want the model to deviate from this format at all.</p>
+
+    <p>Here is the prompt Emiliano used:</p>
+    <blockquote>
+      <ol>
+        <li>Analyze the following product reviews delimited by <code>&lt;&gt;</code> and summarize each review with 1 sentence.</li>
+        <li>Categorize the opinion according to the following categories: super happy, happy, neutral, upset.</li>
+        <li>Provide an overview of the customer satisfaction, listing positive and negative aspects mentioned in the review.</li>
+        <li>Provide a personalized answer for each one, based on the content of the review.</li>
+        <li>Output a JSON list object that contains the following keys for each review: summary, category, insights, answer.</li>
+      </ol>
+    </blockquote>
+
+    <p>The model produced a well-structured JSON output with <code>summary</code>, <code>category</code>, <code>insights</code> (with <code>positive</code> and <code>negative</code> arrays), and <code>answer</code> keys.</p>
+
+    <div class="warning">
+      <p><strong>Important:</strong> Doing this will greatly reduce any type of creativity your model has, and should be used in cases where you have already decided on what your output should look like. Here it works really well since we need a specific format to play nice with some software. However, this would not be recommended in a case where you are still exploring your output space.</p>
+    </div>
+
+    <h2>Using Delimiters</h2>
+
+    <p>Delimiters are character sequences like <code>"""</code>, <code>```</code>, or <code>&lt;&gt;</code> which are used to indicate boundaries or separations between different pieces of data within the text.</p>
+
+    <p>Effective usage of delimiters usually requires some trial and error, as the model&rsquo;s response can depend heavily on the prompt and how similar structures were represented in its training data. Here are a few tips:</p>
+
+    <ol>
+      <li><strong>Consistency:</strong> If you use a delimiter in a certain way once, try to use it the same way in future prompts. This can help the model understand the context better.</li>
+      <li><strong>Clarity:</strong> Choose delimiters that clearly separate different pieces of data without confusing the model. Avoid using delimiters that are too common in normal text, as the model might not recognize them as delimiters.</li>
+      <li><strong>Context:</strong> Delimiters that are contextually relevant to the type of text you&rsquo;re working with can be helpful. For example, if you&rsquo;re prompting the model to generate HTML, using HTML-style tags as delimiters could guide the model&rsquo;s output.</li>
+    </ol>
+
+    <h3>Examples of Delimiters</h3>
+
+    <p><strong>Block of Text:</strong> Separate a large block of text for clarity using <code>"""</code>:</p>
+    <pre><code>"""
+This is a long paragraph of text that needs to be set
+apart from the rest of the prompt. It might contain
+complex information that requires extra attention.
+"""
+Now you can continue with the rest of your prompt here.</code></pre>
+
+    <p><strong>Code Snippet:</strong> The <code>```</code> delimiter is used in markdown to denote code blocks:</p>
+    <pre><code>```
+def hello_world():
+    print("Hello, world!")
+```</code></pre>
+
+    <p><strong>Creating a Dialogue:</strong> Use names as delimiters to separate speakers:</p>
+    <pre><code>Alice: Hello, how are you today?
+Bob: I'm doing well, thanks for asking. How about you?
+Alice:</code></pre>
+
+    <p><strong>Question-Answer Pairs:</strong> Use <code>Q:</code> and <code>A:</code> as delimiters:</p>
+    <pre><code>Q: What is the capital of France?
+A: Paris
+Q: What is the capital of Italy?
+A: Rome
+Q: What is the capital of Germany?
+A:</code></pre>
+
+    <p>Hopefully these tips have helped you improve your prompt engineering skills and allow you to make the most out of whatever model you end up using. Good luck!</p>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class &mdash; AI Prompt Engineering</p>
+    </div>
+  </main>
+  <footer></footer>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

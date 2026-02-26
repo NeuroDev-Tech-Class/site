@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/python-1.html" class="back-link">&larr; Back to Python I</a>
+    <div class="doc-header">
+      <span class="course-tag">Python I</span>
+      <h1>Final Project: Text Adventure Game</h1>
+    </div>
+
+    <p>Give yourself a pat on the back for making it this far! As we wrap up this course, it&rsquo;s time to show off your programming skills with a creative project. You&rsquo;ll be designing and coding a simple text-based adventure game.</p>
+
+    <p>The game will consist of a series of interconnected rooms, each filled with various items and events. The player will be given some flavor text (a description of their surroundings and the situation they&rsquo;re in) as well as a list of commands or actions they can take. They will interact with the game by entering these text commands into the terminal.</p>
+
+    <h2>Instructions</h2>
+
+    <h3>Choose a Game Concept</h3>
+
+    <p>Decide on the setting and general story of your game. It should be fairly simple. The game should involve navigating through different locations and interacting with the environment. Examples might be escaping a haunted mansion, surviving on a deserted island, or navigating through a mystical forest. The story is just an excuse for the gameplay, so don&rsquo;t overthink this part.</p>
+
+    <h3>Design the Game Map</h3>
+
+    <p>Plan out your world map, including the locations, how they connect, and what items can be found where. You may want to do this by physically sketching it out on a piece of paper. Include 6&ndash;12 unique rooms, each with their own events to interact with or items to collect. Have fun and make it interesting! Look back on the concepts you&rsquo;ve learned and think about creative ways to implement them.</p>
+
+    <h3>Implement Core Game Functions</h3>
+
+    <p>Once you&rsquo;ve finished your design, start implementing the game in Python. Reach out to the tech coach and other students for help and feedback as you work. Start by implementing the following functions.</p>
+
+    <h4><code>exposition()</code></h4>
+    <p>This function returns a string consisting of a few lines of expositional text establishing the initial game setup or story.</p>
+
+    <h4><code>create_world()</code></h4>
+    <p>This function sets up the initial state of the world. This involves initializing a dictionary called <code>world</code> that establishes the game state (whether the player is currently playing, won the game, lost the game, or quit the game), the player&rsquo;s starting location and inventory, and the world map, which is a list containing each of the rooms. Each room is a dictionary which includes a name, a description, a list of neighboring locations, and any items that can be found there. For example:</p>
+
+<pre><code>world = {"status"    : "playing",
+         "player"    : {
+                "location"  : "foyer",
+                "inventory" : []
+                   },
+         "world_map" : [
+            {
+            "location" : "foyer",
+            "about" : "You find yourself in a dimly lit foyer. A
+            grandfather clock sits in the corner, ticking away with a
+            haunting rhythm. You find a key on the ground.",
+            "neighbors" : ["hallway"],
+            "items" : ["key"],
+            },
+            {
+            "location" : "hallway",
+            # etc...
+            },
+          ]
+        }</code></pre>
+
+    <h4><code>render(world)</code></h4>
+    <p>This function takes in the current world state and returns a string that describes it to the player. This might involve finding the player&rsquo;s current location, finding that location in the world map, and looping through the player&rsquo;s inventory to determine what information needs to be rendered.</p>
+
+    <h4><code>get_options(world)</code></h4>
+    <p>This function takes in the current world state and returns a list of valid commands the player can choose at that time. This might include &ldquo;north&rdquo;, &ldquo;south&rdquo;, &ldquo;east&rdquo;, and &ldquo;west&rdquo; commands so the player can choose where to go. These are just suggestions, and you are free to use any approach that works for your game. For other commands, you might use conditional statements to see where the player is at and what items they have, among other things. For example:</p>
+
+<pre><code>if "MAP" in world["player"]["inventory"]:
+    options.append("MAP")</code></pre>
+
+    <h4><code>update(world, command)</code></h4>
+    <p>This function takes in the current world state and a command, and then updates the world based on that command. It should also return a message about what happened. For example:</p>
+
+<pre><code>loc = world["player"]["location"]
+if command == "QUIT":
+    world["status"] = "quitting"
+    return("GAME OVER. Play again soon!")
+elif world["player"]["location"] == "foyer" and command == "NORTH":
+    if "KEY" not in world["player"]["inventory"]:
+        print("\nThe door seems to be locked. It won't budge.")
+    else:
+        print("\nYou try the key. It works!")</code></pre>
+
+    <h4><code>render_ending(world)</code></h4>
+    <p>This function returns a message to be displayed at the end of the game, depending on the status of the world. If the status is &ldquo;playing&rdquo;, you should still be in a while loop and not render an ending. If the status is &ldquo;win&rdquo;, &ldquo;lose&rdquo;, or &ldquo;quitting&rdquo;, you&rsquo;ll want to give the player an appropriate ending. You might include multiple losing scenarios, and maybe a &ldquo;golden ending&rdquo; winning scenario where the player wins the game while also fulfilling certain additional conditions.</p>
+
+    <h4><code>choose(options, inventory)</code></h4>
+    <p>This function takes in a list of options and the user&rsquo;s inventory and asks them to choose an action. It should keep asking until a valid option is chosen, and then return that option. You may also want to print the player&rsquo;s inventory for their convenience.</p>
+
+<pre><code>print("COMMANDS:")
+for i in range(len(options)):
+    print(options[i])
+if inventory != []:  # if inventory is not empty
+    print("INVENTORY:")
+    for i in range(len(inventory)):
+        print(inventory[i])
+while True:
+    command = input("What do you want to do? ")
+    if command in options:
+        break
+    else:
+        print("Invalid command.")
+return command</code></pre>
+
+    <h4><code>main()</code></h4>
+    <p>This function is the main loop of the game. It should use all the other functions to create the world, get the user&rsquo;s choice, update the world, and repeat as long as the game is playing. It should look something like this:</p>
+
+<pre><code>def main():
+    print(exposition())
+    world = create_world()
+    while world["status"] == "playing":
+        print(render(world))
+        options = get_options(world)
+        inventory = world["player"]["inventory"]
+        command = choose(options, inventory)
+        print(update(world, command))
+    print(render_ending(world))
+    input("Press any key to continue.")
+    print()
+    main()</code></pre>
+
+    <h2>Criteria</h2>
+
+    <h3>Interactivity</h3>
+    <p>The game should take input from the user to navigate through the world and interact with the environment. The game should maintain a state that changes based on the user&rsquo;s actions. The game should clearly communicate the current state to the user, and the user should always know which actions are available to them. There should be a clear end point where the user either wins or loses. After the game is over, there should be an option to play again.</p>
+
+    <h3>Complexity</h3>
+    <p>The world should contain at least six rooms with unique events and there should be at least three loot items, but you are encouraged to add more if your game calls for it. Challenge yourself and implement concepts that you&rsquo;ve learned so far. There should be multiple valid sequences of actions that lead to winning the game.</p>
+
+    <h3>Error Handling</h3>
+    <p>The game should handle invalid commands gracefully. The player should not be able to crash the game by giving unexpected or invalid inputs. Test your game rigorously and try every option in every scenario to make sure your code behaves as expected. Let other people playtest your game and try to &ldquo;break&rdquo; it.</p>
+
+    <h3>Code Quality</h3>
+    <p>The code should be well-structured and easy to understand, with clear function and variable names and comments explaining anything complex. The game itself should also be easy to understand. Let other people play your game and watch how they interact with it. Don&rsquo;t tell them how to do anything while you watch them play; your game should explain how to play it.</p>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class &mdash; Python I</p>
+    </div>
+  </main>
+  <footer></footer>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/web-dev-1.html" class="back-link">&larr; Back to Web Dev I</a>
+    <div class="doc-header">
+      <span class="course-tag">Web Dev I</span>
+      <h1>Intro to HTML</h1>
+    </div>
+
+    <p>Here&rsquo;s the code for a very basic HTML file:</p>
+
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello, world!&lt;/h1&gt;
+    &lt;p&gt;This is my first web page.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <p>Let&rsquo;s break this down and explain what each line of code does.</p>
+
+    <h2>Elements</h2>
+
+    <p>An HTML file is made up of building blocks called <strong>elements</strong>. Each element is usually marked by a pair of tags: an <strong>opening tag</strong> and a <strong>closing tag</strong>. The opening tag looks like a pair of angle brackets with the tag name inside, like this: <code>&lt;body&gt;</code>, and the closing tag looks almost the same except with a forward slash, like this: <code>&lt;/body&gt;</code>.</p>
+
+    <p>Here are some of the more commonly used elements of HTML:</p>
+
+    <h3><code>&lt;!DOCTYPE html&gt;</code></h3>
+    <p>This declaration defines the document type and tells the browser how to render the page. If you don&rsquo;t include this at the beginning of your document you might run into some bugs and inconsistencies.</p>
+
+    <h3><code>&lt;html&gt;</code></h3>
+    <p>This is the root element that contains all the content of your HTML document. It contains the <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code> elements.</p>
+
+    <h3><code>&lt;head&gt;</code></h3>
+    <p>This contains information about the document, such as its title (which will appear in the tab of a web browser), links to stylesheets or scripts, and keywords for search engines.</p>
+
+    <h3><code>&lt;title&gt;</code></h3>
+    <p>This is a child element of <code>&lt;head&gt;</code> and sets the title of the web page.</p>
+
+    <h3><code>&lt;body&gt;</code></h3>
+    <p>This holds all the meat &amp; potatoes of an HTML document, such as text, images, links, etc. Almost everything goes inside the <code>&lt;body&gt;</code> element.</p>
+
+    <h3>Headings (<code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>)</h3>
+    <p>These are used to create headings, with <code>&lt;h1&gt;</code> being the highest level heading and <code>&lt;h6&gt;</code> the lowest. Don&rsquo;t confuse this with the <code>&lt;head&gt;</code> tag &mdash; they&rsquo;re very different.</p>
+
+    <h3>Paragraphs (<code>&lt;p&gt;</code>)</h3>
+    <p>This defines a paragraph of text. You can insert a line break element with the <code>&lt;br&gt;</code> tag. This will start a new line of text.</p>
+
+    <h3>Lists (<code>&lt;ol&gt;</code> and <code>&lt;ul&gt;</code>)</h3>
+    <p>This lets you define a list of items. Insert list items with the <code>&lt;li&gt;</code> tag. Ordered lists are automatically numbered, while unordered lists use bullet points.</p>
+
+    <h3><code>&lt;em&gt;</code></h3>
+    <p>Used to emphasize text, typically by italicizing it. This tag isn&rsquo;t just for styling purposes; it has <strong>semantic meaning</strong>, indicating that the text should be stressed.</p>
+
+    <h3><code>&lt;strong&gt;</code></h3>
+    <p>Used to indicate strong importance or urgency of the text inside it, usually by making the text bold. Like <code>&lt;em&gt;</code>, this tag also conveys semantic meaning beyond just styling.</p>
+
+    <h3>Anchor (<code>&lt;a&gt;</code>)</h3>
+    <p>Creates a hyperlink that connects one web page to another, or links to a specific section within the same page. For hyperlinks, the <code>&lt;a&gt;</code> tag needs an <code>href</code> attribute pointing to the destination URL. For example:</p>
+    <pre><code>&lt;a href="https://www.example.com"&gt;Visit our site&lt;/a&gt;</code></pre>
+    <p>creates a link that looks like this: <a href="https://www.example.com">Visit our site</a></p>
+
+    <h3>Image (<code>&lt;img&gt;</code>)</h3>
+    <p>Used to embed images. It&rsquo;s an <strong>empty tag</strong>, meaning it does not have a closing tag. The <code>src</code> attribute specifies the path to the image, and the <code>alt</code> attribute provides alternative text for the image if it can&rsquo;t be displayed for whatever reason. For example:</p>
+    <pre><code>&lt;img src="image.jpg" alt="My Image"&gt;</code></pre>
+    <p>inserts the linked image or the text &ldquo;My Image&rdquo; if it fails to load.</p>
+
+    <h3><code>&lt;div&gt;</code></h3>
+    <p>Short for &ldquo;division,&rdquo; a very important tool used to group together other elements. It&rsquo;s a <strong>block-level element</strong>, which means it starts on a new line and takes up the full width available. Styling and layout of the contained elements are often controlled through CSS. You might use <code>&lt;div&gt;</code> to create a navigation bar, a footer, or to group content in a specific section of your webpage.</p>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class &mdash; Web Dev I</p>
+    </div>
+  </main>
+  <footer></footer>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>
