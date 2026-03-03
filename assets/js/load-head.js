@@ -13,6 +13,7 @@ document.head.innerHTML += `
   <meta name="author" content="NeuroDev Mentoring" />
   <title>NeuroDev Tech Class</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/auth.css" />
   <link
     rel="icon"
     type="image/png"
