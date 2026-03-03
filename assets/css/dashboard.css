@@ -496,6 +496,11 @@ body.dark-mode .status-badge.old {
   font-weight: 500;
   max-width: none;
   box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  line-height: 1.2;
 }
 
 .action-btn.approve {
@@ -532,6 +537,15 @@ body.dark-mode .status-badge.old {
 
 .action-btn.toggle:hover {
   background: #757575;
+}
+
+.action-btn.delete {
+  background: #f44336;
+  color: white;
+}
+
+.action-btn.delete:hover {
+  background: #c62828;
 }
 
 .action-btn.cert {
@@ -621,6 +635,9 @@ body.dark-mode .modal-header {
   line-height: 1;
   padding: 0;
   box-shadow: none;
+  margin: 0;
+  flex-shrink: 0;
+  align-self: flex-start;
 }
 
 .modal-close:hover {
@@ -661,9 +678,37 @@ body.dark-mode .student-detail-section h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   padding: 0.75rem 0;
   border-bottom: 1px solid #e0e0e0;
   margin: 0;
+}
+
+.progress-course-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.95rem;
+}
+
+.progress-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.progress-pct {
+  font-size: 0.8rem;
+  min-width: 2.75rem;
+  text-align: right;
+  color: #666;
+}
+
+body.dark-mode .progress-pct {
+  color: #aaa;
 }
 
 body.dark-mode .progress-list li {
@@ -703,6 +748,33 @@ body.dark-mode .progress-bar-container {
   gap: 0.5rem;
   flex-wrap: wrap;
   margin-top: 1rem;
+}
+
+.cert-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+body.dark-mode .cert-item {
+  border-bottom-color: #444;
+}
+
+.cert-item:last-child {
+  border-bottom: none;
+}
+
+.cert-date {
+  font-size: 0.85rem;
+  color: #666;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+body.dark-mode .cert-date {
+  color: #aaa;
 }
 
 .cert-select {

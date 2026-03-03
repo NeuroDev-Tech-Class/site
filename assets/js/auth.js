@@ -17,8 +17,13 @@ import {
 let currentUser = null;
 let userData = null;
 
-// Initialize auth system when DOM is ready
-document.addEventListener('DOMContentLoaded', initAuth);
+// Initialize auth system - handle case where DOM is already loaded
+// (auth.js is dynamically imported so DOMContentLoaded may have already fired)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAuth);
+} else {
+  initAuth();
+}
 
 async function initAuth() {
   createAuthModal();

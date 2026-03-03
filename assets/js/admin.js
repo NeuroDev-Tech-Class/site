@@ -7,6 +7,7 @@ import {
   getDoc,
   getDocs,
   updateDoc,
+  deleteDoc,
   collection,
   query,
   where,
@@ -261,6 +262,7 @@ function renderOldTable() {
           <div class="action-buttons">
             <button class="action-btn view" onclick="viewStudent('${student.id}')">View</button>
             <button class="action-btn toggle" onclick="toggleStudentType('${student.id}', 'current')">Move to Current</button>
+            <button class="action-btn delete" onclick="deleteStudent('${student.id}')">Delete</button>
           </div>
         </td>
       </tr>
@@ -307,16 +309,13 @@ window.approveStudent = async function(studentId) {
 };
 
 window.denyStudent = async function(studentId) {
-  if (!confirm('Are you sure you want to deny this registration? This will delete their account.')) {
+  if (!confirm('Are you sure you want to deny this registration? Their account will be permanently deleted.')) {
     return;
   }
   
   try {
-    // In a production app, you'd also delete the auth user
-    // For now, just update status to 'denied'
-    await updateDoc(doc(db, 'users', studentId), {
-      status: 'denied'
-    });
+    // Delete the user document from Firestore entirely
+    await deleteDoc(doc(db, 'users', studentId));
     
     // Remove from local data
     allStudents = allStudents.filter(s => s.id !== studentId);
@@ -355,12 +354,12 @@ window.viewStudent = function(studentId) {
         
         return `
           <li>
-            <span>${metadata.name}</span>
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="progress-course-name">${metadata.name}</span>
+            <div class="progress-right">
               <div class="progress-bar-container">
                 <div class="progress-bar ${percentage >= 100 ? 'complete' : ''}" style="width: ${percentage}%"></div>
               </div>
-              <span style="font-size: 0.8rem; min-width: 3rem;">${percentage}%</span>
+              <span class="progress-pct">${percentage}%</span>
             </div>
           </li>
         `;
@@ -375,9 +374,9 @@ window.viewStudent = function(studentId) {
     certsContainer.innerHTML = '<p>No certificates yet.</p>';
   } else {
     certsContainer.innerHTML = certs.map(cert => `
-      <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #e0e0e0;">
+      <div class="cert-item">
         <span>${cert.courseName}</span>
-        <span style="font-size: 0.85rem; color: #666;">${formatDate(cert.awardedAt)}</span>
+        <span class="cert-date">${formatDate(cert.awardedAt)}</span>
       </div>
     `).join('');
   }
@@ -401,6 +400,25 @@ window.toggleStudentType = async function(studentId, newType) {
   } catch (error) {
     console.error('Error updating student type:', error);
     alert('Failed to update student. Please try again.');
+  }
+};
+
+window.deleteStudent = async function(studentId) {
+  const student = allStudents.find(s => s.id === studentId);
+  if (!student) return;
+  
+  if (!confirm(`Permanently delete ${student.firstName} ${student.lastName}'s account? This cannot be undone.`)) {
+    return;
+  }
+  
+  try {
+    await deleteDoc(doc(db, 'users', studentId));
+    allStudents = allStudents.filter(s => s.id !== studentId);
+    updateStats();
+    renderTables();
+  } catch (error) {
+    console.error('Error deleting student:', error);
+    alert('Failed to delete student. Please try again.');
   }
 };
 

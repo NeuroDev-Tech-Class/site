@@ -1,3 +1,9 @@
+// Apply theme immediately (before page paint) to prevent flash and ensure consistency
+(function () {
+  const theme = localStorage.getItem('theme') || 'dark-mode';
+  if (theme === 'dark-mode') document.body.classList.add('dark-mode');
+})();
+
 document.head.innerHTML += `
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
