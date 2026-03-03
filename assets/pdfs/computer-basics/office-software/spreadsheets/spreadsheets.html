@@ -46,7 +46,9 @@
 
     <p>You can also refer to other cells in your calculations. For example, if cell <code>A1</code> contains the number 6, and cell <code>B1</code> contains the number 8, you could type <code>=A1+B1</code> into cell <code>C1</code>. After pressing <kbd>Enter</kbd>, cell <code>C1</code> will display 14, the result of adding the values in cells <code>A1</code> and <code>B1</code>.</p>
 
-    <p>You can build more complex formulas by combining operations. For instance, the formula <code>=(A1+B1)*C1</code> first adds the values in cells <code>A1</code> and <code>B1</code>, then multiplies the result by the value in cell <code>C1</code>. Remember to use parentheses to control the order of operations in your formulas.</p>
+    
+    <img src="assets/images/office-software/spreadsheets_1.png" alt="Figure 1" />
+<p>You can build more complex formulas by combining operations. For instance, the formula <code>=(A1+B1)*C1</code> first adds the values in cells <code>A1</code> and <code>B1</code>, then multiplies the result by the value in cell <code>C1</code>. Remember to use parentheses to control the order of operations in your formulas.</p>
 
     <h2>Functions</h2>
 
@@ -72,8 +74,12 @@
     <h3>Using AutoFill to Complete a Series of Values</h3>
 
     <p>The AutoFill feature works with all sorts of patterns. Try typing &ldquo;January&rdquo; into cell <code>A1</code> and &ldquo;February&rdquo; into cell <code>A2</code>, then click and drag to highlight both cells. Hover over the bottom-right of your selection and the cursor should turn into a plus symbol. Click and drag down, and Sheets / Excel will recognize the pattern and automatically fill the cells with the corresponding months in order.</p>
+    <img src="assets/images/office-software/spreadsheets_2.png" alt="Figure 2" />
 
-    <h2>Relative vs. Absolute Reference</h2>
+
+    
+    <img src="assets/images/office-software/spreadsheets_3.png" alt="Figure 3" />
+<h2>Relative vs. Absolute Reference</h2>
 
     <p>A <strong>relative reference</strong> in a formula means that the reference to the cell will change when the formula is copied to another cell, determined by the relative position of the formula. For example, you might have a formula in cell <code>A3</code> that adds cells <code>A1</code> and <code>A2</code> together: <code>=A1+A2</code>. If you copy this formula from cell <code>A3</code> and paste it to <code>B3</code>, the references will change to <code>=B1+B2</code>. This is very useful when you want to apply the same formula to a series of cells.</p>
 
@@ -86,6 +92,8 @@
     </ul>
 
     <h2>Cell Formatting</h2>
+    <img src="assets/images/office-software/spreadsheets_4.png" alt="Figure 4" />
+
 
     <p>Cell formatting allows you to change the organization and presentation of your data. You can find these options in the bar at the top of the screen.</p>
 
@@ -96,6 +104,8 @@
     </ul>
 
     <h2>Number Formatting</h2>
+    <img src="assets/images/office-software/spreadsheets_5.png" alt="Figure 5" />
+
 
     <p>Spreadsheets let you automatically format numbers, which gives context for your data. <strong>Currency formatting</strong> is useful for financial data and automatically adds currency symbols to your numbers. Go to <strong>Format Cells &gt; Currency</strong>, or simply highlight the cell and click the &ldquo;Format as currency&rdquo; button. If you have a cell <code>A1</code> with the value <code>2500.5</code>, applying currency formatting will change it to <code>$2,500.50</code>.</p>
 
@@ -112,6 +122,8 @@
     <h2>Freezing Panes</h2>
 
     <p>The &ldquo;Freeze panes&rdquo; tool allows you to keep certain rows or columns visible no matter how far you scroll through your data. If you have headers in the first row and you want them to remain visible, go to <strong>View &gt; Freeze Panes &gt; Freeze Top Row</strong>.</p>
+    <img src="assets/images/office-software/spreadsheets_6.png" alt="Figure 6" />
+
 
     <h2>Single and Multi-Level Sorting</h2>
 
@@ -122,14 +134,20 @@
     <h2>Inserting Data Charts</h2>
 
     <p>Charts can help you quickly understand your data at a glance. Select the data range you&rsquo;d like to create a chart for. For example, you could select cells <code>A1:B10</code> if the first row contains column headers such as &ldquo;Month&rdquo; and &ldquo;Sales.&rdquo; Go to the menu and click on <strong>Insert &gt; Chart</strong> to generate your new chart.</p>
+    <img src="assets/images/office-software/spreadsheets_7.png" alt="Figure 7" />
+
 
     <p>After your chart appears, a panel will pop up on the right-hand side of the screen. This panel is loaded with customization options. You can opt for various chart types, such as line, bar, or pie charts. You can define what data goes on the X and Y axes, add legends, and set specific colors for different data points to represent categories or trends more clearly.</p>
 
-    <p>As your dataset changes, your charts will automatically adjust. If you need to make changes to the data range, click on the chart to activate the right-hand panel. From here, you can change the data range or add a new series to the chart.</p>
+    
+    <img src="assets/images/office-software/spreadsheets_8.png" alt="Figure 8" />
+<p>As your dataset changes, your charts will automatically adjust. If you need to make changes to the data range, click on the chart to activate the right-hand panel. From here, you can change the data range or add a new series to the chart.</p>
 
     <h2>Inserting, Deleting, Renaming, Moving, and Copying Worksheets</h2>
 
     <p>A single spreadsheet file can have multiple worksheet tabs. You can insert a new one by clicking the &ldquo;+&rdquo; button in the bottom left corner of the screen. Right-clicking a worksheet tab lets you delete and duplicate tabs, copy them to a different spreadsheet file, rename them, and more.</p>
+    <img src="assets/images/office-software/spreadsheets_9.png" alt="Figure 9" />
+
 
     <h2>Importing Web Data</h2>
 
@@ -138,6 +156,8 @@
     <pre><code>=IMPORTHTML("https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population", "table", 1)</code></pre>
 
     <p>This tells Google Sheets to go to that URL, look for tables, and import the first one it finds. Typing <code>2</code> after <code>"table"</code> will find the second table on the web page, etc. The imported table will update dynamically. If you don&rsquo;t want the data to update, you&rsquo;ll have to copy the data in the sheet and paste it elsewhere.</p>
+    <img src="assets/images/office-software/spreadsheets_10.png" alt="Figure 10" />
+
 
     <div class="doc-footer">
       <p>NeuroDev Tech Class &mdash; Office Software</p>

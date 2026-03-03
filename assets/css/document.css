@@ -261,10 +261,11 @@ body.dark-mode .activity::before {
 
 /* ---------- Images in doc pages ---------- */
 main:has(.doc-header) img {
-  max-width: 100%;
+  display: block;
+  max-width: min(100%, 700px);
   height: auto;
   border-radius: var(--doc-radius);
-  margin: 1rem 0;
+  margin: 1rem auto;
 }
 
 /* ---------- Print styles ---------- */
