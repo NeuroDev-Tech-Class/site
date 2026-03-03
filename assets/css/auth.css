@@ -407,6 +407,45 @@ body.dark-mode .auth-links p {
   color: var(--secondary-color);
 }
 
+/* Remember Me row */
+.form-group.remember-row {
+  margin-bottom: 8px;
+}
+
+.remember-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 400;
+}
+
+body.dark-mode .remember-label {
+  color: #aaa;
+}
+
+/* Override the generic input styles for the checkbox */
+.remember-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  padding: 0;
+  border: 1.5px solid #ccc;
+  border-radius: 3px;
+  background: #fff;
+  box-shadow: none;
+  cursor: pointer;
+  accent-color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+body.dark-mode .remember-label input[type="checkbox"] {
+  background: #2a2a2a;
+  border-color: #555;
+}
+
 /* Pending Approval State */
 .pending-icon {
   font-size: 4rem;

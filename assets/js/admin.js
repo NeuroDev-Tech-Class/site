@@ -36,6 +36,8 @@ const courseMetadata = {
 
 let allStudents = [];
 let selectedStudent = null;
+let currentUserRole = null;
+let allAdmins = [];
 
 document.addEventListener('DOMContentLoaded', () => {
   onAuthStateChanged(auth, async (user) => {
@@ -43,15 +45,27 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = 'index.html';
       return;
     }
-    
+
     const userData = await getUserData(user.uid);
-    if (!userData || userData.role !== 'admin') {
+    if (!userData || (userData.role !== 'admin' && userData.role !== 'superadmin')) {
       window.location.href = 'index.html';
       return;
     }
-    
+
+    currentUserRole = userData.role;
+
+    if (currentUserRole === 'superadmin') {
+      document.getElementById('welcome-message').textContent =
+        `Super Admin — ${userData.firstName} ${userData.lastName}`;
+      injectAdminTab();
+    }
+
     initializeDashboard();
     loadAllStudents();
+
+    if (currentUserRole === 'superadmin') {
+      loadAdmins();
+    }
   });
 });
 
@@ -69,15 +83,15 @@ async function getUserData(uid) {
 }
 
 function initializeDashboard() {
-  // Tab switching
-  document.querySelectorAll('.admin-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-      
-      tab.classList.add('active');
-      document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
-    });
+  // Tab switching — event delegation supports dynamically injected tabs
+  document.querySelector('.admin-tabs').addEventListener('click', (e) => {
+    const tab = e.target.closest('.admin-tab');
+    if (!tab) return;
+    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    const content = document.getElementById(`${tab.dataset.tab}-tab`);
+    if (content) content.classList.add('active');
   });
   
   // Modal close
@@ -477,9 +491,171 @@ function closeModal() {
 function formatDate(timestamp) {
   if (!timestamp) return 'N/A';
   const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-  return date.toLocaleDateString('en-US', { 
-    year: 'numeric', 
-    month: 'short', 
-    day: 'numeric' 
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
   });
 }
+
+// ─── Super Admin Only ─────────────────────────────────────────────────────────
+
+function injectAdminTab() {
+  // Inject "Admins" tab button into the tab bar
+  const tabsContainer = document.querySelector('.admin-tabs');
+  const tabBtn = document.createElement('button');
+  tabBtn.className = 'admin-tab';
+  tabBtn.dataset.tab = 'admins';
+  tabBtn.textContent = 'Admins';
+  tabsContainer.appendChild(tabBtn);
+
+  // Inject Admins tab content into main
+  const tabContent = document.createElement('div');
+  tabContent.id = 'admins-tab';
+  tabContent.className = 'tab-content';
+  tabContent.innerHTML = `
+    <div class="tab-section-header">
+      <h3 class="tab-section-title">Active Admins</h3>
+      <button class="action-btn approve" id="add-admin-btn">+ Add Admin</button>
+    </div>
+    <div class="students-table-container">
+      <table class="students-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Date Added</th>
+          </tr>
+        </thead>
+        <tbody id="admins-tbody">
+          <tr>
+            <td colspan="3" class="loading-state">
+              <div class="spinner"></div>
+              <p>Loading...</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `;
+  document.getElementById('main-content').appendChild(tabContent);
+
+  // Inject "Add Admin" selection modal into body
+  const addAdminModal = document.createElement('div');
+  addAdminModal.id = 'add-admin-modal';
+  addAdminModal.className = 'modal-overlay';
+  addAdminModal.innerHTML = `
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h2>Promote to Admin</h2>
+          <span class="student-email">Select a current student to grant admin access</span>
+        </div>
+        <button class="modal-close" id="add-admin-modal-close">&times;</button>
+      </div>
+      <div class="modal-body" id="add-admin-list"></div>
+    </div>
+  `;
+  document.body.appendChild(addAdminModal);
+
+  // Wire up listeners
+  document.getElementById('add-admin-btn').addEventListener('click', openAddAdminModal);
+  document.getElementById('add-admin-modal-close').addEventListener('click', closeAddAdminModal);
+  addAdminModal.addEventListener('click', (e) => {
+    if (e.target.id === 'add-admin-modal') closeAddAdminModal();
+  });
+}
+
+async function loadAdmins() {
+  try {
+    const q = query(collection(db, 'users'), where('role', '==', 'admin'));
+    const snapshot = await getDocs(q);
+    allAdmins = [];
+    snapshot.forEach(d => allAdmins.push({ id: d.id, ...d.data() }));
+    renderAdminsTable();
+  } catch (error) {
+    console.error('Error loading admins:', error);
+  }
+}
+
+function renderAdminsTable() {
+  const tbody = document.getElementById('admins-tbody');
+  if (!tbody) return;
+
+  if (allAdmins.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="3" class="empty-state">
+          <p>No other admins yet. Use <strong>+ Add Admin</strong> to promote a student.</p>
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  tbody.innerHTML = allAdmins.map(admin => `
+    <tr>
+      <td>
+        <div class="student-name">
+          <strong>${admin.firstName} ${admin.lastName}</strong>
+        </div>
+      </td>
+      <td><span class="student-email">${admin.email}</span></td>
+      <td>${formatDate(admin.createdAt)}</td>
+    </tr>
+  `).join('');
+}
+
+function openAddAdminModal() {
+  renderAddAdminList();
+  document.getElementById('add-admin-modal').classList.add('show');
+}
+
+function closeAddAdminModal() {
+  document.getElementById('add-admin-modal').classList.remove('show');
+}
+
+function renderAddAdminList() {
+  const container = document.getElementById('add-admin-list');
+  const eligible = allStudents.filter(s => s.status === 'approved' && s.studentType === 'current');
+
+  if (eligible.length === 0) {
+    container.innerHTML = `<p class="add-admin-empty">No current students available to promote.</p>`;
+    return;
+  }
+
+  container.innerHTML = eligible.map(s => `
+    <div class="add-admin-item">
+      <div class="student-name">
+        <strong>${s.firstName} ${s.lastName}</strong>
+        <span class="student-email">${s.email}</span>
+      </div>
+      <button class="action-btn approve" onclick="promoteToAdmin('${s.id}')">Make Admin</button>
+    </div>
+  `).join('');
+}
+
+window.promoteToAdmin = async function(studentId) {
+  const student = allStudents.find(s => s.id === studentId);
+  if (!student) return;
+
+  if (!confirm(`Promote ${student.firstName} ${student.lastName} to admin?\n\nThey will have full access to the admin dashboard.`)) {
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, 'users', studentId), { role: 'admin' });
+
+    // Move locally: remove from students, add to admins
+    allStudents = allStudents.filter(s => s.id !== studentId);
+    allAdmins.push({ ...student, role: 'admin' });
+
+    updateStats();
+    renderTables();
+    renderAdminsTable();
+    renderAddAdminList();
+  } catch (error) {
+    console.error('Error promoting student to admin:', error);
+    alert('Failed to promote student. Please try again.');
+  }
+};

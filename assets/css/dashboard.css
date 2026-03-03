@@ -793,6 +793,49 @@ body.dark-mode .cert-select {
   border-color: #444;
 }
 
+/* Super Admin — Admins Tab */
+.tab-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.tab-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* Add Admin Modal — list of promotable students */
+.add-admin-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.875rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+body.dark-mode .add-admin-item {
+  border-bottom-color: #444;
+}
+
+.add-admin-item:last-child {
+  border-bottom: none;
+}
+
+.add-admin-empty {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+body.dark-mode .add-admin-empty {
+  color: #aaa;
+}
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .dashboard {

@@ -17,6 +17,10 @@ import {
 let currentUser = null;
 let userData = null;
 
+// Session management
+const SESSION_KEY = 'nd_session_expiry';
+const SESSION_DURATION_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+
 // Initialize auth system - handle case where DOM is already loaded
 // (auth.js is dynamically imported so DOMContentLoaded may have already fired)
 if (document.readyState === 'loading') {
@@ -33,6 +37,13 @@ async function initAuth() {
   onAuthStateChanged(auth, async (user) => {
     currentUser = user;
     if (user) {
+      // Check session expiry (only applies when Remember Me was not used)
+      const expiry = localStorage.getItem(SESSION_KEY);
+      if (expiry && Date.now() > Number(expiry)) {
+        localStorage.removeItem(SESSION_KEY);
+        await signOut(auth);
+        return;
+      }
       // Fetch user data from Firestore
       userData = await getUserData(user.uid);
       updateUIForLoggedInUser();
@@ -65,6 +76,12 @@ function createAuthModal() {
           <div class="form-group">
             <label for="login-password">Password</label>
             <input type="password" id="login-password" required autocomplete="current-password">
+          </div>
+          <div class="form-group remember-row">
+            <label class="remember-label">
+              <input type="checkbox" id="login-remember" autocomplete="off">
+              Remember me
+            </label>
           </div>
           <div class="form-error" id="login-error"></div>
           <button type="submit" class="auth-btn primary">Sign In</button>
@@ -254,15 +271,23 @@ async function handleLogin(e) {
   e.preventDefault();
   const email = document.getElementById('login-email').value;
   const password = document.getElementById('login-password').value;
+  const rememberMe = document.getElementById('login-remember').checked;
   const errorEl = document.getElementById('login-error');
   const submitBtn = e.target.querySelector('button[type="submit"]');
-  
+
   try {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Signing in...';
-    
+
     await signInWithEmailAndPassword(auth, email, password);
-    // Auth state listener will handle the rest
+
+    // Set or clear session expiry based on Remember Me
+    if (rememberMe) {
+      localStorage.removeItem(SESSION_KEY);
+    } else {
+      localStorage.setItem(SESSION_KEY, String(Date.now() + SESSION_DURATION_MS));
+    }
+
     closeAuthModal();
   } catch (error) {
     errorEl.textContent = getAuthErrorMessage(error.code);
@@ -289,32 +314,32 @@ async function handleRegister(e) {
     return;
   }
   
-  // Check if this is the base admin email
-  const ADMIN_EMAIL = 'topher@neurodevmentoring.com';
-  const isBaseAdmin = email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
-  
+  // Check if this is the base super admin email
+  const SUPERADMIN_EMAIL = 'neurodevtechcoach@gmail.com';
+  const isSuperAdmin = email.toLowerCase() === SUPERADMIN_EMAIL.toLowerCase();
+
   try {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Creating account...';
-    
+
     // Create auth user
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    
+
     // Create user document in Firestore
     await setDoc(doc(db, 'users', userCredential.user.uid), {
       firstName,
       lastName,
       email,
-      role: isBaseAdmin ? 'admin' : 'student',
-      status: isBaseAdmin ? 'approved' : 'pending', // Admin auto-approved
+      role: isSuperAdmin ? 'superadmin' : 'student',
+      status: isSuperAdmin ? 'approved' : 'pending', // Super admin auto-approved
       studentType: 'current',
       createdAt: serverTimestamp(),
       courses: {},
       certificates: []
     });
     
-    if (isBaseAdmin) {
-      // Admin is auto-approved, close modal and continue
+    if (isSuperAdmin) {
+      // Super admin is auto-approved, close modal and continue
       closeAuthModal();
     } else {
       // Sign out since they need approval
@@ -377,7 +402,7 @@ function updateUIForLoggedInUser() {
   iconBtn.classList.add('logged-in');
   
   const isPending = userData.status === 'pending';
-  const isAdmin = userData.role === 'admin';
+  const isAdmin = userData.role === 'admin' || userData.role === 'superadmin';
   
   if (isPending) {
     // Pending user - show limited menu
@@ -430,6 +455,7 @@ function updateUIForLoggedInUser() {
   
   // Logout handler
   document.getElementById('logout-btn').addEventListener('click', async () => {
+    localStorage.removeItem(SESSION_KEY);
     await signOut(auth);
     dropdown.classList.remove('show');
   });
