@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>Collectibles, Jump Pads &amp; Movement</h1>
+    <p class="subtitle">Build coins the player can collect, pads that launch them skyward, and enable double jump</p>
+  </div>
+
+  <h2>Creating Collectible Coins (BP_Coin)</h2>
+  <p>Coins are one of the most classic game mechanics — the player walks into a coin, it disappears, and their score goes up. Let's build that as an Actor Blueprint.</p>
+
+  <h3>Setting Up the Blueprint</h3>
+  <ol>
+    <li>In the Content Browser, right-click → <strong>Blueprint Class → Actor</strong>. Name it <code>BP_Coin</code>.</li>
+    <li>Open BP_Coin and add the following components:
+      <ul>
+        <li><strong>Sphere Collision</strong> — make this the root component. Set Sphere Radius to about <code>80</code>.</li>
+        <li><strong>Static Mesh</strong> — add as a child of the Sphere Collision. Use the default <code>Sphere</code> mesh. Scale it down to around <code>(0.5, 0.5, 0.1)</code> so it looks like a flat coin, or use <code>(0.3, 0.3, 0.3)</code> for a round orb.</li>
+      </ul>
+    </li>
+    <li>Change the mesh material to something gold or bright yellow — drag a gold-colored material onto the Static Mesh in the viewport, or set it in the Details panel under <strong>Materials</strong>.</li>
+  </ol>
+
+  <h3>Optional: Make It Spin</h3>
+  <ol>
+    <li>Add a <strong>Rotating Movement</strong> component (search for it in the Add Component menu).</li>
+    <li>In its Details panel, set the <strong>Rotation Rate</strong> — for example, Z: <code>180</code> will make it spin smoothly around the vertical axis.</li>
+    <li>The coin will now rotate automatically during gameplay, no Blueprint logic needed.</li>
+  </ol>
+
+  <h3>Optional: Add a Glow</h3>
+  <ol>
+    <li>Add a <strong>Point Light</strong> or <strong>Spot Light</strong> component as a child.</li>
+    <li>Set the light color to yellow/gold and reduce the <strong>Intensity</strong> and <strong>Attenuation Radius</strong> so it creates a subtle glow around the coin rather than lighting up the whole room.</li>
+  </ol>
+
+  <h3>Coin Pickup Logic</h3>
+  <p>Now let's make the coin do something when the player touches it.</p>
+  <ol>
+    <li>Select the <strong>Sphere Collision</strong> component. Set its <strong>Collision Presets</strong> to <code>OverlapAllDynamic</code> and ensure <strong>Generate Overlap Events</strong> is checked.</li>
+    <li>Add an <strong>On Component Begin Overlap</strong> event (Details panel → Events → click +).</li>
+    <li>In the Event Graph, drag from <strong>Other Actor</strong> and add a <strong>Cast To BP_ThirdPersonCharacter</strong>.</li>
+    <li>From the character output pin, drag and search for <strong>Set CoinCount</strong>. (You'll need to add an <strong>Integer variable</strong> called <code>CoinCount</code> to your player character Blueprint first, with a default value of <code>0</code>.)</li>
+    <li>Before the Set node, add a <strong>Get CoinCount</strong> node and connect it to an <strong>Integer + Integer</strong> node. Add <code>1</code> to the current count, then wire the result into the Set node.</li>
+    <li>After the Set node, add a <strong>Destroy Actor</strong> node to remove the coin from the level.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Test it:</strong> Place a few BP_Coin actors in your level, press Play, and walk into them. Add a Print String after the Set to display the current CoinCount and verify it increments correctly.
+  </div>
+
+  <h2>Jump Pad (BP_JumpPad)</h2>
+  <p>Jump pads launch the player into the air when they land on them — perfect for reaching high platforms.</p>
+
+  <h3>Setting Up the Blueprint</h3>
+  <ol>
+    <li>Create a new Actor Blueprint named <code>BP_JumpPad</code>.</li>
+    <li>Add a <strong>Static Mesh</strong> component. Use a <code>Cylinder</code> mesh and scale it to be short and wide (e.g., Scale X: 2, Y: 2, Z: 0.2) so it looks like a platform pad.</li>
+    <li>Change its material to something eye-catching — bright green, glowing blue, or anything that says "step on me!"</li>
+    <li>Make sure the Static Mesh has <strong>Simulation Generates Hit Events</strong> enabled in the Details panel under <strong>Collision</strong>.</li>
+    <li>The collision preset should be set to <code>BlockAllDynamic</code> so the player can physically land on it.</li>
+  </ol>
+
+  <h3>Launch Logic</h3>
+  <ol>
+    <li>Select the Static Mesh component and add an <strong>On Component Hit</strong> event (Details → Events → click + next to On Component Hit).</li>
+    <li>In the Event Graph, drag from the <strong>Other Actor</strong> pin and add a <strong>Cast To Character</strong> node. (We use "Character" instead of the specific player class so it works with any character type.)</li>
+    <li>From the cast output, add a <strong>Launch Character</strong> node.</li>
+    <li>Set the <strong>Launch Velocity</strong>: X: <code>0</code>, Y: <code>0</code>, Z: <code>1000</code>. This launches the player straight up. Increase Z for a higher launch.</li>
+    <li>Make sure <strong>Override XY Velocity</strong> and <strong>Override Z Velocity</strong> are both checked — if not, the launch may not feel consistent.</li>
+    <li>Compile, save, place a BP_JumpPad in your level, and test!</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Fine-tuning:</strong> A Z value of <code>1000</code> gives a moderate launch. Try <code>1500</code> or <code>2000</code> for bigger jumps. You can also add X or Y values to create directional launchers that throw the player forward.
+  </div>
+
+  <h2>Double Jump</h2>
+  <p>Enabling double jump is surprisingly simple in Unreal Engine because the Character class already has the feature built in — you just need to enable it.</p>
+  <ol>
+    <li>Open your player character Blueprint (<code>BP_ThirdPersonCharacter</code> or whatever your character class is named).</li>
+    <li>In the <strong>Components</strong> panel, select the <strong>CharacterMovement</strong> component.</li>
+    <li>In the <strong>Details</strong> panel, search for <strong>Jump Max Count</strong>.</li>
+    <li>Change it from <code>1</code> to <code>2</code>.</li>
+    <li>Compile, save, and play — press the jump button twice to double jump!</li>
+  </ol>
+
+  <div class="warning">
+    <strong>That's it:</strong> No extra Blueprint logic needed. Unreal's Character Movement component handles multi-jump automatically. Set it to <code>3</code> for a triple jump, or even higher for testing. Just don't forget to set it back to something reasonable before your final build!
+  </div>
+
+  <h2>Summary</h2>
+  <ul>
+    <li><strong>BP_Coin</strong> — Sphere mesh + Sphere Collision. On overlap: Cast to player, increment CoinCount, Destroy Actor. Optional: Rotating Movement and Point Light for polish.</li>
+    <li><strong>BP_JumpPad</strong> — Cylinder mesh with Hit events. On hit: Cast to Character, Launch Character with a high Z velocity.</li>
+    <li><strong>Double Jump</strong> — set <code>Jump Max Count</code> to <code>2</code> on the CharacterMovement component. Done.</li>
+    <li>These mechanics are the building blocks of platformer gameplay — combine them with keys, doors, and level design to create full game experiences.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/davinci-resolve.html" class="back-link">&larr; Back to Video Production &mdash; DaVinci Resolve</a>
+    <div class="doc-header">
+    <span class="course-tag">Video Production — DaVinci Resolve</span>
+    <h1>Titles &amp; Graphics</h1>
+    <p class="subtitle">Adding text, lower thirds, compound clips, and adjustment layers to your projects</p>
+  </div>
+
+  <h2>Adding Text to Your Video</h2>
+  <p>Text overlays are essential for titles, credits, captions, labels, and lower thirds (the name/title graphics you see at the bottom of interview footage). In DaVinci Resolve, text is added through the <strong>Effects Library</strong>.</p>
+
+  <h3>Text+ Title</h3>
+  <p><strong>Text+</strong> is the primary text tool in DaVinci Resolve. It's powerful and flexible, built on the Fusion engine. To add it:</p>
+  <ol>
+    <li>Open the <strong>Effects Library</strong> on the Edit page.</li>
+    <li>Navigate to <strong>Titles</strong>.</li>
+    <li>Find <strong>Text+</strong> and drag it to a video track <strong>above</strong> your footage (e.g., V2 if your video is on V1).</li>
+    <li>Position and trim the text clip on the timeline to control when it appears and disappears.</li>
+  </ol>
+
+  <h3>Customizing Text in the Inspector</h3>
+  <p>Select the Text+ clip on the timeline, then open the <strong>Inspector</strong>. You'll find extensive customization options:</p>
+
+  <table>
+    <thead>
+      <tr><th>Property</th><th>What It Controls</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Text</strong></td><td>The actual text content — type your title here</td></tr>
+      <tr><td><strong>Font</strong></td><td>Typeface selection (any font installed on your system)</td></tr>
+      <tr><td><strong>Size</strong></td><td>Font size</td></tr>
+      <tr><td><strong>Color</strong></td><td>Text fill color</td></tr>
+      <tr><td><strong>Position (Center X/Y)</strong></td><td>Where the text appears on screen</td></tr>
+      <tr><td><strong>Tracking</strong></td><td>Spacing between individual letters</td></tr>
+      <tr><td><strong>Line Spacing</strong></td><td>Spacing between lines of multi-line text</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Drop Shadow</h3>
+  <p>A <strong>drop shadow</strong> adds a dark shadow behind your text, making it pop against any background. In the Inspector under the <strong>Shading</strong> tab, enable the shadow element and adjust offset, softness, and opacity. This is especially useful when your text sits over bright or busy footage.</p>
+
+  <h3>Outline / Stroke</h3>
+  <p>An <strong>outline</strong> (also called a stroke) draws a border around each letter. Under the <strong>Shading</strong> tab in the Inspector, you can configure separate shading layers — use one for the main fill color and another for an outline by setting the element type to "Outline." Adjust the thickness and color to your taste.</p>
+
+  <h3>Background</h3>
+  <p>Some title templates include a solid or semi-transparent <strong>background</strong> behind the text (like a colored bar). For Text+, you can add a background by enabling a shading element set to "Background" under the Shading tab. This creates a rectangular box behind the text — useful for ensuring readability.</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> Choose fonts carefully. Stick to clean, readable fonts for professional work. Sans-serif fonts like <strong>Arial</strong>, <strong>Helvetica</strong>, <strong>Montserrat</strong>, or <strong>Open Sans</strong> work well for on-screen titles.
+  </div>
+
+  <h2>Lower Thirds</h2>
+  <p>A <strong>lower third</strong> is a graphic that appears in the bottom third of the screen, typically showing a person's name and title. DaVinci Resolve includes pre-built lower third templates:</p>
+  <ol>
+    <li>In the Effects Library, go to <strong>Titles</strong>.</li>
+    <li>Look for templates labeled <strong>Lower Third</strong> (e.g., "Lower Third," "Left Lower Third," "Scroll").</li>
+    <li>Drag the template onto a track above your video.</li>
+    <li>Select it and use the Inspector to change the name, title text, colors, and animation timing.</li>
+  </ol>
+  <p>These templates come with built-in animations — the text slides in and out automatically. You can adjust the animation duration and style in the Inspector.</p>
+
+  <h2>Compound Clips</h2>
+  <p>A <strong>compound clip</strong> combines multiple timeline clips into a single container. This is useful when you have a complex arrangement (e.g., a title with a background and animation on multiple tracks) and want to treat it as one unit.</p>
+  <p>To create a compound clip:</p>
+  <ol>
+    <li>Select all the clips you want to combine (hold <kbd>Ctrl</kbd> and click each one, or drag a selection box).</li>
+    <li>Right-click and choose <strong>New Compound Clip</strong>.</li>
+    <li>Give it a name and click <em>Create</em>.</li>
+  </ol>
+  <p>The selected clips are replaced by a single compound clip on the timeline. To edit the contents later, double-click the compound clip to open it in its own timeline. Changes inside are reflected everywhere the compound clip is used.</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> Compound clips are great for reusable elements like intro sequences. Build your intro once, create a compound clip, and drop it into any timeline.
+  </div>
+
+  <h2>Adjustment Layers</h2>
+  <p>An <strong>Adjustment Clip</strong> (adjustment layer) applies effects to everything on the tracks below it. It's like placing a transparent filter over your footage.</p>
+  <ol>
+    <li>In the Effects Library, go to <strong>Effects</strong> (not Titles or Transitions).</li>
+    <li>Find <strong>Adjustment Clip</strong> and drag it to a video track <strong>above</strong> your footage.</li>
+    <li>Stretch the Adjustment Clip to cover the clips you want to affect.</li>
+    <li>Select the Adjustment Clip and apply effects through the Inspector or by dragging effects onto it.</li>
+  </ol>
+  <p>Use cases for adjustment layers:</p>
+  <ul>
+    <li>Apply a color grade or filter to multiple clips at once</li>
+    <li>Add a vignette or blur effect across an entire section</li>
+    <li>Create a letterbox (cinematic black bars) that spans your whole timeline</li>
+  </ul>
+
+  <h2>Simple Motion Graphics with Keyframes</h2>
+  <p>You can create engaging motion graphics by keyframing Text+ properties:</p>
+  <ol>
+    <li>Add a Text+ title to the timeline.</li>
+    <li>Select it and go to the Inspector.</li>
+    <li>Move the playhead to the start of the text clip.</li>
+    <li>Set <strong>Center Y</strong> to a value off-screen (e.g., below the visible frame) and click the diamond keyframe icon.</li>
+    <li>Move the playhead forward about 0.5–1 second.</li>
+    <li>Change <strong>Center Y</strong> to place the text in its final position. A new keyframe is created.</li>
+    <li>Add <strong>Ease In and Out</strong> to the keyframes for a smooth slide.</li>
+  </ol>
+  <p>This creates a text that slides up into position. You can animate any property — opacity (fade in), size (grow), tracking (letters spread apart), or rotation (spin in).</p>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>Use <strong>Text+</strong> from the Effects Library > Titles for on-screen text. Place it on a track above your video.</li>
+    <li>Customize font, size, color, position, shadow, and outline in the <strong>Inspector</strong>.</li>
+    <li><strong>Lower Third</strong> templates provide pre-animated name/title graphics for interviews and presentations.</li>
+    <li><strong>Compound Clips</strong> bundle multiple clips into one for easier management.</li>
+    <li><strong>Adjustment Clips</strong> apply effects to everything below them on the timeline.</li>
+    <li>Combine <strong>Text+ with keyframes</strong> to create simple but effective motion graphics.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Video Production — DaVinci Resolve</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

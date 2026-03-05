@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/gimp.html" class="back-link">&larr; Back to 2D Digital Art &mdash; GIMP</a>
+    <div class="doc-header">
+    <span class="course-tag">2D Digital Art — GIMP</span>
+    <h1>Layers &amp; Layer Modes</h1>
+    <p class="subtitle">Building Images with Stackable, Transparent Sheets</p>
+  </div>
+
+  <h2>What Are Layers?</h2>
+  <p>
+    Think of layers as <strong>transparent sheets of paper stacked on top of each other</strong>. Each sheet can hold a different part of your image — one might have a background photo, another might have text, and another might have a logo. Where a layer has no content, it's transparent, so you can see through to the layers below.
+  </p>
+  <p>
+    Layers are one of the most powerful concepts in image editing. They let you edit individual parts of an image independently without affecting the rest. You can move, hide, delete, or modify any layer without changing the others.
+  </p>
+
+  <h2>The Layer Stack</h2>
+  <p>
+    The <strong>Layers dialog</strong> (usually on the right side of the screen) shows all layers stacked from top to bottom. The layer at the <strong>top of the stack</strong> is drawn on top of everything below it, just like placing a sheet of paper on top of a pile:
+  </p>
+  <ul>
+    <li>If a top layer has opaque content, it will cover (hide) anything directly below it in that area.</li>
+    <li>If a top layer is transparent in some area, the layers below will show through.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> When something isn't appearing as you expect, check two things: (1) which layer is active (highlighted) in the Layers dialog, and (2) the stacking order — a layer above might be covering what you're looking for.
+  </div>
+
+  <h2>Working with Layers</h2>
+
+  <h3>Creating a New Layer</h3>
+  <p>
+    Go to <strong>Layer &gt; New Layer</strong> (or click the <strong>new layer</strong> icon at the bottom of the Layers dialog). You'll be asked to choose a name, size, and fill type (white, transparent, etc.). New layers are inserted above the currently active layer.
+  </p>
+
+  <h3>Duplicating a Layer</h3>
+  <p>
+    Right-click a layer in the Layers dialog and choose <strong>Duplicate Layer</strong>, or go to <strong>Layer &gt; Duplicate Layer</strong>. This creates an exact copy directly above the original — useful for experimenting with effects without risking your original work.
+  </p>
+
+  <h3>Deleting a Layer</h3>
+  <p>
+    Select the layer you want to remove and click the <strong>trash can</strong> icon at the bottom of the Layers dialog, or right-click and choose <strong>Delete Layer</strong>.
+  </p>
+
+  <h3>Reordering Layers</h3>
+  <p>
+    Click and drag a layer up or down in the Layers dialog to change its position in the stack. Moving a layer higher makes it appear on top of more layers; moving it lower makes it appear behind them.
+  </p>
+
+  <h2>Layer Opacity</h2>
+  <p>
+    Every layer has an <strong>Opacity</strong> slider at the top of the Layers dialog. Opacity controls how transparent the layer is:
+  </p>
+  <ul>
+    <li><strong>100%</strong> — fully opaque; the layer is completely visible.</li>
+    <li><strong>50%</strong> — semi-transparent; the layer is partially see-through.</li>
+    <li><strong>0%</strong> — fully transparent; the layer is invisible.</li>
+  </ul>
+  <p>
+    Adjusting opacity is a great way to subtly blend layers or reduce the intensity of an effect.
+  </p>
+
+  <h2>Layer Visibility</h2>
+  <p>
+    Each layer has an <strong>eye icon</strong> next to it in the Layers dialog. Click the eye to toggle that layer's visibility on or off. Hiding a layer doesn't delete it — the layer and all its content are preserved; it's just temporarily invisible.
+  </p>
+
+  <h2>Layer Modes (Blend Modes)</h2>
+  <p>
+    Layer modes (also called <strong>blend modes</strong>) control how a layer interacts with the layers below it. Instead of simply covering what's underneath, a blend mode mixes the pixel colors mathematically. The mode dropdown is at the top of the Layers dialog, next to the opacity slider.
+  </p>
+  <p>
+    Here are the most commonly used modes:
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Mode</th>
+        <th>Effect</th>
+        <th>Common Use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Normal</strong></td>
+        <td>No blending — the layer simply covers what's below.</td>
+        <td>Default mode for most layers.</td>
+      </tr>
+      <tr>
+        <td><strong>Multiply</strong></td>
+        <td>Darkens the image by multiplying colors together. White disappears.</td>
+        <td>Adding shadows, darkening an image, applying textures.</td>
+      </tr>
+      <tr>
+        <td><strong>Screen</strong></td>
+        <td>Lightens the image. Black disappears.</td>
+        <td>Adding light effects, brightening an image.</td>
+      </tr>
+      <tr>
+        <td><strong>Overlay</strong></td>
+        <td>Increases contrast — darkens darks and lightens lights.</td>
+        <td>Adding contrast, applying texture overlays.</td>
+      </tr>
+      <tr>
+        <td><strong>Soft Light</strong></td>
+        <td>Similar to Overlay but more subtle and gentle.</td>
+        <td>Subtle lighting effects, gentle color grading.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Tip:</strong> Experiment with different blend modes to see what they do — there's no single "right" mode for every situation. Try Multiply and Screen first to get comfortable, then explore the others.
+  </div>
+
+  <h2>Layer Groups</h2>
+  <p>
+    When your project has many layers, you can organize them into <strong>Layer Groups</strong> — folders that hold related layers together. To create a group:
+  </p>
+  <ol>
+    <li>Go to <strong>Layer &gt; New Layer Group</strong> (or click the folder icon at the bottom of the Layers dialog).</li>
+    <li>Drag existing layers into the group.</li>
+    <li>Rename the group by double-clicking its name.</li>
+  </ol>
+  <p>
+    Layer groups can be collapsed or expanded, making the Layers dialog much less cluttered. You can also apply opacity and blend modes to the entire group at once.
+  </p>
+
+  <h2>Flatten Image vs. Merge Down</h2>
+  <p>
+    Sometimes you need to combine layers:
+  </p>
+  <ul>
+    <li><strong>Flatten Image</strong> (<strong>Image &gt; Flatten Image</strong>) — merges <em>all</em> layers into a single background layer and removes all transparency. Use this before exporting to formats that don't support layers.</li>
+    <li><strong>Merge Down</strong> (<strong>Layer &gt; Merge Down</strong>) — merges the active layer with the layer directly below it, leaving all other layers untouched. Use this when you're done editing two related layers.</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Warning:</strong> Flattening and merging are destructive — you can't separate the layers again once merged (unless you undo). Always save an XCF copy with all layers intact before flattening.
+  </div>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>Layers are like transparent sheets stacked on top of each other.</li>
+    <li>The stack order determines what appears on top.</li>
+    <li>Use <strong>opacity</strong> to control transparency and <strong>visibility</strong> (eye icon) to show or hide layers.</li>
+    <li><strong>Blend modes</strong> (Multiply, Screen, Overlay, etc.) control how layers interact.</li>
+    <li><strong>Layer groups</strong> help organize complex projects.</li>
+    <li><strong>Flatten Image</strong> merges everything; <strong>Merge Down</strong> combines only two layers.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — 2D Digital Art — GIMP</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

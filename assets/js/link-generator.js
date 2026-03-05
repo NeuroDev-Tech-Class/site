@@ -1,12 +1,42 @@
-// Makes course assignment checkboxes pretty and consistent, with password protection for links
+// Course content generator with Firebase authentication
+// Dynamically generates course content and tracks progress in Firestore
 
-const authPassword = "love2code!";
-if (localStorage.getItem("isAuthenticated") === null) {
-  localStorage.setItem("isAuthenticated", "false");
-}
+import { 
+  auth, 
+  db,
+  onAuthStateChanged,
+  doc,
+  getDoc,
+  updateDoc,
+  setDoc
+} from './firebase-config.js';
 
+let currentUser = null;
+let userData = null;
+let courseId = null;
+
+// Initialize when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
-  const isAuth = localStorage.getItem("isAuthenticated") === "true";
+  // Get course ID from the page (use filename without extension)
+  const pathParts = window.location.pathname.split('/');
+  const filename = pathParts[pathParts.length - 1];
+  courseId = filename.replace('.html', '');
+  
+  // Listen for auth state
+  onAuthStateChanged(auth, async (user) => {
+    currentUser = user;
+    if (user) {
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      userData = userDoc.exists() ? userDoc.data() : null;
+    } else {
+      userData = null;
+    }
+    // Generate content once auth state is known
+    generateCourseContent();
+  });
+});
+
+function generateCourseContent() {
   const dataScript = document.getElementById("unit-data");
   if (!dataScript) {
     console.error("No unit data found.");
@@ -21,9 +51,27 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const container = document.getElementById("unit-sections");
+  // Create container if it doesn't exist
+  let container = document.getElementById("unit-sections");
+  if (!container) {
+    container = document.createElement("div");
+    container.id = "unit-sections";
+    const mainContent = document.getElementById("main-content");
+    if (mainContent) {
+      mainContent.appendChild(container);
+    }
+  }
+  
+  // Clear existing content
+  container.innerHTML = '';
 
-  unitData.forEach((unit) => {
+  // Check if user is authenticated and approved
+  const isApproved = userData && userData.status === 'approved';
+  
+  // Get saved progress from user data
+  const userCourseProgress = userData?.courses?.[courseId] || {};
+
+  unitData.forEach((unit, unitIndex) => {
     const section = document.createElement("section");
 
     // Unit Title and Description
@@ -36,24 +84,45 @@ document.addEventListener("DOMContentLoaded", () => {
     section.appendChild(header);
     section.appendChild(description);
 
-    unit.content.forEach((item) => {
+    unit.content.forEach((item, itemIndex) => {
       const div = document.createElement("div");
       const label = document.createElement("label");
 
-      // checkbox logic
+      // Checkbox logic
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.className = "task-checkbox";
 
-      const boxKey = `checked:${unit.title}|${item.title}`;
-      const saved = localStorage.getItem(boxKey);
-      checkbox.checked = saved === "true";
-      checkbox.addEventListener("change", () => {
-        localStorage.setItem(boxKey, checkbox.checked);
+      // Create a unique key for this item
+      const itemKey = `${unitIndex}-${itemIndex}`;
+      
+      // Load saved state
+      checkbox.checked = userCourseProgress[itemKey] === true;
+      
+      // Save checkbox changes
+      checkbox.addEventListener("change", async () => {
+        if (!currentUser) {
+          checkbox.checked = false;
+          if (window.openAuthModal) {
+            window.openAuthModal('login');
+          }
+          return;
+        }
+        
+        if (!isApproved) {
+          checkbox.checked = false;
+          if (window.showPendingMessage) {
+            window.showPendingMessage();
+          }
+          return;
+        }
+        
+        await saveProgress(itemKey, checkbox.checked);
       });
+      
       label.appendChild(checkbox);
 
-      // YouTube links
+      // YouTube videos
       if (item.type === "video") {
         label.appendChild(document.createTextNode(`Video - ${item.title}`));
         div.appendChild(label);
@@ -79,38 +148,60 @@ document.addEventListener("DOMContentLoaded", () => {
         const htmlContainer = document.createElement("span");
         htmlContainer.innerHTML = item.html;
         htmlContainer.style.display = "inline-block";
+        
+        // Add click handler to links in HTML content
+        htmlContainer.querySelectorAll('a').forEach(link => {
+          const originalHref = link.href;
+          link.addEventListener('click', (e) => {
+            if (!currentUser) {
+              e.preventDefault();
+              if (window.openAuthModal) {
+                window.openAuthModal('login');
+              }
+            } else if (!isApproved) {
+              e.preventDefault();
+              if (window.showPendingMessage) {
+                window.showPendingMessage();
+              }
+            }
+          });
+        });
+        
         label.appendChild(htmlContainer);
         div.appendChild(label);
       }
 
-      // All other link types (with password protection)
+      // All other link types (with auth protection)
       else {
         const link = document.createElement("a");
-        link.dataset.url = item.url;
-        link.href = isAuth ? item.url : "javascript:void(0)"; // if we’re already logged in, point href at the real URL
         link.textContent = item.title;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
 
-        link.addEventListener("click", function (e) {
-          e.preventDefault();
-          // if not yet logged in:
-          if (localStorage.getItem("isAuthenticated") !== "true") {
-            const entered = prompt("Please enter the Tech Class password.");
-            if (entered === null || entered === "") return; // canceled
-            if (entered !== authPassword) {
-              alert("Incorrect password.\nHint: Ask the tech coach!");
-              return;
-            }
-            localStorage.setItem("isAuthenticated", "true");
-            alert("Access granted!");
-            // flip every protected link to point at its real URL
-            document.querySelectorAll("a[data-url]").forEach((a) => {
-              a.href = a.dataset.url;
-            });
+        // External links & PDFs open in new tab
+        const isExternal =
+          item.url &&
+          (item.url.startsWith("http") || item.url.endsWith(".pdf"));
+        
+        if (isApproved) {
+          link.href = item.url;
+          if (isExternal) {
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
           }
-          window.open(this.dataset.url, "_blank");
-        });
+        } else {
+          link.href = "javascript:void(0)";
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (!currentUser) {
+              if (window.openAuthModal) {
+                window.openAuthModal('login');
+              }
+            } else {
+              if (window.showPendingMessage) {
+                window.showPendingMessage();
+              }
+            }
+          });
+        }
 
         label.appendChild(link);
         div.appendChild(label);
@@ -121,4 +212,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     container.appendChild(section);
   });
-});
+}
+
+// Save progress to Firestore
+async function saveProgress(itemKey, checked) {
+  if (!currentUser) return;
+  
+  try {
+    const userRef = doc(db, 'users', currentUser.uid);
+    const userDoc = await getDoc(userRef);
+    
+    if (userDoc.exists()) {
+      const currentCourses = userDoc.data().courses || {};
+      const currentCourseProgress = currentCourses[courseId] || {};
+      
+      currentCourseProgress[itemKey] = checked;
+      currentCourses[courseId] = currentCourseProgress;
+      
+      await updateDoc(userRef, {
+        courses: currentCourses
+      });
+    }
+  } catch (error) {
+    console.error('Error saving progress:', error);
+  }
+}
+

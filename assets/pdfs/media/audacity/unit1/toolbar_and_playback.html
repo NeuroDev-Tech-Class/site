@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/audacity.html" class="back-link">&larr; Back to Audio Production &mdash; Audacity</a>
+    <div class="doc-header">
+    <span class="course-tag">Audio Production — Audacity</span>
+    <h1>Toolbar &amp; Playback Controls</h1>
+    <p class="subtitle">Master playback, navigation, zooming, and looping with keyboard shortcuts</p>
+  </div>
+
+  <h2>Playback Essentials</h2>
+  <p>Efficient audio editing depends on being able to quickly play, pause, skip, and loop your audio. Learning the keyboard shortcuts in this lesson will dramatically speed up your workflow.</p>
+
+  <h2>Core Keyboard Shortcuts</h2>
+
+  <table>
+    <thead>
+      <tr><th>Shortcut</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><kbd>Space</kbd></td><td><strong>Play / Stop</strong> — Starts playback from the cursor. Press again to stop and return the cursor to where playback began.</td></tr>
+      <tr><td><kbd>Shift</kbd>+<kbd>Space</kbd></td><td><strong>Loop Play</strong> — Plays the selected region on repeat until you press Stop.</td></tr>
+      <tr><td><kbd>R</kbd></td><td><strong>Record</strong> — Begins recording on a new track (or appends in certain modes).</td></tr>
+      <tr><td><kbd>P</kbd></td><td><strong>Pause / Resume</strong> — Pauses playback or recording in place. Press again to continue.</td></tr>
+      <tr><td><kbd>Home</kbd></td><td><strong>Skip to Start</strong> — Moves the cursor to the very beginning of the project.</td></tr>
+      <tr><td><kbd>End</kbd></td><td><strong>Skip to End</strong> — Moves the cursor to the very end of the project.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Tip:</strong> Get into the habit of pressing <kbd>Home</kbd> then <kbd>Space</kbd> to play your project from the beginning. You'll do this constantly.
+  </div>
+
+  <h2>Play vs. Stop vs. Pause</h2>
+  <p>Understanding the difference between Stop and Pause is important:</p>
+  <ul>
+    <li><strong>Stop</strong> (<kbd>Space</kbd>) — Ends playback and returns the cursor to where it was before you pressed Play. This way you can listen to the same section again.</li>
+    <li><strong>Pause</strong> (<kbd>P</kbd>) — Freezes playback in place. The cursor stays where it stopped. Pressing Pause again (or Space) resumes from that point.</li>
+  </ul>
+  <p>Use Stop when you want to re-listen to a section. Use Pause when you want to resume from where you left off.</p>
+
+  <h2>Zoom Controls</h2>
+  <p>Zooming in and out lets you see your waveform at different levels of detail. Zoom in to make precise edits; zoom out to see the big picture.</p>
+
+  <table>
+    <thead>
+      <tr><th>Shortcut</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd></td><td><strong>Zoom In</strong> — Zooms into the waveform for more detail.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>3</kbd></td><td><strong>Zoom Out</strong> — Zooms out to see more of the timeline.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>2</kbd></td><td><strong>Zoom to Normal</strong> — Returns to the default zoom level.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>E</kbd></td><td><strong>Zoom to Selection</strong> — Zooms so the selected region fills the screen.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>F</kbd></td><td><strong>Fit Project in Window</strong> — Zooms out so the entire project is visible.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Scroll Wheel</kbd></td><td><strong>Zoom In/Out</strong> — Scroll up to zoom in, scroll down to zoom out.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Tip:</strong> <kbd>Ctrl</kbd>+<kbd>F</kbd> is incredibly useful when you've zoomed in too far and lost your place. It instantly shows your entire project.
+  </div>
+
+  <h2>Navigation</h2>
+  <p>Beyond the Home and End keys, you can navigate your project in several ways:</p>
+  <ul>
+    <li><strong>Click on the Timeline</strong> (the ruler at the top) — Positions the cursor at that point in time.</li>
+    <li><strong>Click on the Waveform</strong> (with the Selection tool active) — Places the cursor at that point in the audio.</li>
+    <li><strong>Scroll Wheel</strong> — Scrolls the view left and right along the timeline.</li>
+    <li><strong>Left/Right Arrow Keys</strong> — Nudge the cursor by a small amount. Hold <kbd>Shift</kbd> while pressing to extend the selection.</li>
+  </ul>
+
+  <h2>Looping a Section</h2>
+  <p>Looping is essential when you want to listen to a section repeatedly — for example, to decide exactly where to cut.</p>
+  <ol>
+    <li>Use the <strong>Selection tool</strong> (<kbd>F1</kbd>) to click and drag across the region you want to loop.</li>
+    <li>Press <kbd>Shift</kbd>+<kbd>Space</kbd> to begin loop playback.</li>
+    <li>The selected region will play over and over until you press <kbd>Space</kbd> to stop.</li>
+  </ol>
+  <p>You can also enable the <strong>Loop button</strong> in the Transport toolbar (the circular arrows icon). When the Loop button is active, pressing <kbd>Space</kbd> will automatically loop the selected region instead of playing through once.</p>
+
+  <h2>Transport Menu Options</h2>
+  <p>The <strong>Transport</strong> menu contains additional playback options you may find useful:</p>
+  <ul>
+    <li><strong>Play/Stop and Set Cursor</strong> — Stops playback and moves the cursor to where playback stopped (instead of snapping back).</li>
+    <li><strong>Play Cut Preview</strong> (<kbd>C</kbd>) — Plays a short preview of what the audio would sound like if you deleted the current selection. Great for checking edits before committing.</li>
+    <li><strong>Transport Options &gt; Sound Activation Level</strong> — Starts recording only when sound exceeds a threshold (useful for hands-free recording).</li>
+  </ul>
+
+  <h2>Timeline Scrubbing</h2>
+  <p>Scrubbing lets you drag through the timeline and hear audio in real time as you move the cursor, similar to "scrubbing" tape across a playback head. To scrub:</p>
+  <ol>
+    <li>Hover your cursor over the <strong>Timeline ruler</strong> at the top.</li>
+    <li>Click and drag left or right — you'll hear the audio at the speed and direction you drag.</li>
+  </ol>
+  <p>Scrubbing is helpful for finding a specific moment in a recording (like the exact start of a word) without having to play through the entire track.</p>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li><kbd>Space</kbd> is your most-used key — it toggles Play/Stop.</li>
+    <li><kbd>Shift</kbd>+<kbd>Space</kbd> loops the selected region.</li>
+    <li><kbd>Ctrl</kbd>+<kbd>1</kbd> / <kbd>Ctrl</kbd>+<kbd>3</kbd> zoom in and out; <kbd>Ctrl</kbd>+<kbd>F</kbd> fits the whole project on screen.</li>
+    <li><kbd>Home</kbd> and <kbd>End</kbd> jump to the start and end of the project.</li>
+    <li>Use <strong>scrubbing</strong> on the timeline to quickly locate specific moments in your audio.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Audio Production — Audacity</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

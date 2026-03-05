@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/linux.html" class="back-link">&larr; Back to Introduction to Linux</a>
+    <div class="doc-header">
+      <span class="course-tag">Introduction to Linux</span>
+      <h1>Bash Command Tutorial 4</h1>
+      <p class="subtitle">apt, tree</p>
+    </div>
+
+    <p>Let's learn how to manage software with <code>apt</code>. Before installing anything with <code>apt</code>, it's good practice to run <code>sudo apt update</code> first. This makes sure that you're getting the most recent version of whatever package you install.</p>
+
+    <p>Once that's done, enter:</p>
+
+    <pre><code>sudo apt install tree</code></pre>
+
+    <p>After that installs, hit the up arrow once to scroll back through your command history (this is a very handy tool that you should learn to take advantage of.) Replace "tree" with "htop" so that you're entering <code>sudo apt install htop</code>.</p>
+
+    <p>Remember, when you use <code>sudo</code> you're telling Linux to run the command as an administrator. You'll be asked for your password.</p>
+
+    <p>We've just installed two new packages.</p>
+
+    <ul>
+      <li><code>tree</code> shows folders and files as a visual tree structure.</li>
+      <li><code>htop</code> is an interactive system monitor (we'll use this one later).</li>
+    </ul>
+
+    <p>Let's practice using <code>tree</code>. Let's start by nuking the practice directory from last time with <code>rm -r practice</code>. Before we move on, I want to stress how important it is that you practice typing these commands in by hand while you're still learning. Be sure to use the <kbd>Tab</kbd> autocomplete feature to save time. Do not copy and paste! Run these commands:</p>
+
+    <pre><code>mkdir -p practice/folderA</code></pre>
+
+    <p>(make parent directory "practice" and child directory "folderA")</p>
+
+    <pre><code>cd practice</code></pre>
+
+    <p>(change into the "practice" directory)</p>
+
+    <pre><code>touch folderA/file1.txt folderA/file2.txt</code></pre>
+
+    <p>(create two empty text files inside of "folderA")</p>
+
+    <pre><code>cp -r folderA/ folderB</code></pre>
+
+    <p>(recursively copy folderA into a new directory, folderB)</p>
+
+    <p>Once you do all that, run <code>cd ..</code> to move up a directory and then run <code>tree</code>. You should see something like this:</p>
+    <img src="assets/images/linux/bash_4_1.png" alt="Figure 1" />
+
+
+    <pre><code>practice
+├── folderA
+│   ├── file1.txt
+│   └── file2.txt
+└── folderB
+    ├── file1.txt
+    └── file2.txt</code></pre>
+
+    <p>Pretty cool eh? It's nothing fancy but it's a great way to visualize the structure of your directories.</p>
+
+    <p>Most programs include a <code>--version</code> flag to show which version you're using.</p>
+
+    <pre><code>tree --version
+tree v2.1.1 © 1996 - 2023 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro
+
+htop --version
+htop 3.3.0</code></pre>
+
+    <p>You can get even more details by using <code>apt show</code>. Try <code>sudo apt show tree</code>. You should see the package name, the maintainer, installed size, description, and all sorts of other info.</p>
+
+    <pre><code>Package: tree
+Version: 2.1.1-2ubuntu3
+Priority: optional
+Section: universe/utils
+Origin: Ubuntu
+Maintainer: Ubuntu Developers &lt;ubuntu-devel-discuss@lists.ubuntu.com&gt;
+…</code></pre>
+
+    <p>And as a reminder, if you ever need to remove a package you can run <code>sudo apt remove [package]</code> (for example, <code>sudo apt remove tree</code>.)</p>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class — Introduction to Linux</p>
+    </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="assets/js/load-footer.js" defer></script>
+</body>
+</html>

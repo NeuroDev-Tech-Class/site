@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/gimp.html" class="back-link">&larr; Back to 2D Digital Art &mdash; GIMP</a>
+    <div class="doc-header">
+    <span class="course-tag">2D Digital Art — GIMP</span>
+    <h1>Logo &amp; Icon Design</h1>
+    <p class="subtitle">Designing Clean, Memorable Graphics in GIMP</p>
+  </div>
+
+  <h2>Overview</h2>
+  <p>
+    Logos and icons are the visual identity of a brand, product, or project. Unlike photos or illustrations, they must be <strong>simple</strong>, <strong>recognizable</strong>, and <strong>effective at any size</strong> — from a tiny favicon in a browser tab to a large banner on a building. GIMP can be used to design effective logos and icons, especially when you leverage the Paths tool for clean shapes.
+  </p>
+
+  <h2>Design Principles</h2>
+
+  <h3>Simplicity</h3>
+  <p>
+    The best logos are simple. They use clean shapes, limited colors, and avoid unnecessary detail. Think of iconic logos like Apple, Nike, or Target — they are all easily recognizable because they are stripped down to their essential forms. A good test: can you draw your logo from memory?
+  </p>
+
+  <h3>Scalability</h3>
+  <p>
+    A logo must look good at all sizes. It should be clear and legible when shrunk to 32 pixels (a favicon) and still look sharp when enlarged to fill a poster. Avoid tiny details that disappear at small sizes, and avoid effects (like complex gradients or shadows) that break down when scaled.
+  </p>
+
+  <h3>Memorability</h3>
+  <p>
+    A good logo is distinctive and sticks in people's minds. Use a unique shape, an unexpected color combination, or a clever visual idea (like the hidden arrow in the FedEx logo). Avoid generic clip-art shapes and overused design clichés.
+  </p>
+
+  <h3>Appropriate Style</h3>
+  <p>
+    The logo's style should match its purpose. A children's toy brand might use round, colorful, playful shapes. A law firm would use clean, professional, conservative design. A tech startup might go for modern, geometric, minimalist styling.
+  </p>
+
+  <h2>Logo Design Process</h2>
+
+  <h3>Step 1: Sketch Ideas on Paper</h3>
+  <p>
+    Before touching the computer, sketch rough ideas with pencil and paper. Draw many quick variations — don't judge them yet. This brainstorming phase is where the best ideas emerge. Aim for at least 10–15 rough sketches before choosing a direction.
+  </p>
+
+  <div class="tip">
+    <strong>Tip:</strong> Sketching on paper is faster than designing on the computer and frees you from worrying about tools and technicalities. Focus on shapes and concepts.
+  </div>
+
+  <h3>Step 2: Create in GIMP Using Paths</h3>
+  <p>
+    Once you've chosen your strongest sketch, recreate it digitally in GIMP:
+  </p>
+  <ol>
+    <li>Create a new image with a <strong>transparent background</strong> (File &gt; New, fill with transparency).</li>
+    <li>Use the <strong>Paths tool</strong> (<kbd>B</kbd>) to draw clean, smooth shapes with Bézier curves.</li>
+    <li>Convert paths to selections (<strong>Select &gt; From Path</strong>) and fill them with solid colors using the <strong>Bucket Fill</strong> tool.</li>
+    <li>Use separate layers for each shape element so you can adjust independently.</li>
+  </ol>
+  <p>
+    The Paths tool gives you much smoother edges than drawing with the Paintbrush. For logos, clean vector-style shapes are essential.
+  </p>
+
+  <h3>Step 3: Add Text</h3>
+  <p>
+    If your logo includes a company name or initials, use the <strong>Text tool</strong> (<kbd>T</kbd>):
+  </p>
+  <ul>
+    <li>Choose a font carefully — the font communicates personality. Sans-serif fonts feel modern and clean; serif fonts feel traditional and authoritative; display fonts feel creative and unique.</li>
+    <li>Adjust <strong>letter spacing</strong> (tracking) in Tool Options for a polished look.</li>
+    <li>Consider modifying a letter or two to make the wordmark unique (e.g., replacing an "O" with a custom shape).</li>
+  </ul>
+
+  <h3>Step 4: Apply Colors</h3>
+  <p>
+    Use color intentionally:
+  </p>
+  <ul>
+    <li>Start with a <strong>2–3 color palette</strong> maximum. Too many colors create visual clutter.</li>
+    <li>Make sure the logo works in <strong>black and white</strong> as well as color — logos are often printed in single-color formats.</li>
+    <li>Consider the psychology of colors: blue = trust, red = energy, green = nature, yellow = optimism, purple = creativity.</li>
+  </ul>
+
+  <h2>Working with Transparency</h2>
+  <p>
+    Logos almost always need a <strong>transparent background</strong> so they can be placed on any surface without a visible box around them.
+  </p>
+  <ul>
+    <li>Ensure the canvas layer has an <strong>alpha channel</strong> (<strong>Layer &gt; Transparency &gt; Add Alpha Channel</strong>).</li>
+    <li>Delete or hide the background layer so the logo sits on transparency (shown as a checkerboard).</li>
+    <li>Export as <strong>PNG</strong> — this format preserves transparency. Never use JPEG for logos, as JPEG doesn't support transparency and uses lossy compression that creates artifacts around sharp edges.</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Warning:</strong> If you export as JPEG, your transparent background will turn white (or whatever background you had). Always use PNG for logos and icons.
+  </div>
+
+  <h2>Icon Sizes</h2>
+  <p>
+    Icons need to be created at specific sizes depending on where they will be used:
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Use Case</th>
+        <th>Recommended Size</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Favicon (browser tab icon)</td>
+        <td>32 × 32 px</td>
+        <td>Must be extremely simple. Export as .ico or .png.</td>
+      </tr>
+      <tr>
+        <td>App icon</td>
+        <td>512 × 512 px</td>
+        <td>Design at this size and scale down as needed.</td>
+      </tr>
+      <tr>
+        <td>Social media profile picture</td>
+        <td>500 × 500 px</td>
+        <td>Will often be displayed in a circle, so keep content away from corners.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Tip:</strong> Design your icon at the largest size first (512 px), then scale it down using <strong>Image &gt; Scale Image</strong> to test how it looks at smaller sizes. Simplify any details that become unclear when small.
+  </div>
+
+  <h2>Exporting</h2>
+  <ol>
+    <li><strong>Save the XCF</strong> project file with all layers intact.</li>
+    <li><strong>Export as PNG</strong> at full size for web use (with transparency).</li>
+    <li>For icons, export at each required size as separate files (e.g., <code>logo-512.png</code>, <code>logo-32.png</code>).</li>
+    <li>Optionally export a version with a white or colored background for use cases that require it.</li>
+  </ol>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>Good logos are <strong>simple</strong>, <strong>scalable</strong>, <strong>memorable</strong>, and <strong>appropriate</strong> for their brand.</li>
+    <li><strong>Sketch first</strong> on paper, then create digitally using the <strong>Paths tool</strong> for clean shapes.</li>
+    <li>Use 2–3 colors and ensure the design works in black and white.</li>
+    <li>Always use a <strong>transparent background</strong> and export as <strong>PNG</strong>.</li>
+    <li>Design icons at the largest size, then scale down and test at all needed sizes.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — 2D Digital Art — GIMP</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

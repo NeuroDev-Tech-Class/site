@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/gimp.html" class="back-link">&larr; Back to 2D Digital Art &mdash; GIMP</a>
+    <div class="doc-header">
+    <span class="course-tag">2D Digital Art — GIMP</span>
+    <h1>Masks &amp; Compositing</h1>
+    <p class="subtitle">Non-Destructive Editing and Seamless Image Blending</p>
+  </div>
+
+  <h2>What Are Layer Masks?</h2>
+  <p>
+    A <strong>layer mask</strong> is a grayscale image attached to a layer that controls which parts of that layer are visible and which are hidden. Think of it as an invisible stencil that sits on top of the layer:
+  </p>
+  <ul>
+    <li><strong>White</strong> on the mask = the layer is <strong>fully visible</strong> in that area.</li>
+    <li><strong>Black</strong> on the mask = the layer is <strong>fully hidden</strong> (transparent) in that area.</li>
+    <li><strong>Gray</strong> on the mask = the layer is <strong>semi-transparent</strong> — the darker the gray, the more hidden.</li>
+  </ul>
+  <p>
+    The key advantage of layer masks is that they are <strong>non-destructive</strong>. You aren't erasing pixels — you're just hiding them. You can always paint white back on the mask to reveal hidden areas, or adjust the mask at any time without losing any data.
+  </p>
+
+  <h2>Adding a Layer Mask</h2>
+  <ol>
+    <li>In the Layers dialog, right-click the layer you want to mask.</li>
+    <li>Choose <strong>Add Layer Mask</strong>.</li>
+    <li>A dialog appears asking you to initialize the mask:
+      <ul>
+        <li><strong>White (full opacity)</strong> — the entire layer starts fully visible. You'll paint with black to hide areas.</li>
+        <li><strong>Black (full transparency)</strong> — the entire layer starts fully hidden. You'll paint with white to reveal areas.</li>
+        <li><strong>Layer's alpha channel</strong> — copies existing transparency into the mask.</li>
+        <li><strong>Selection</strong> — creates a mask from the current selection.</li>
+      </ul>
+    </li>
+    <li>Click <strong>Add</strong>. A mask thumbnail appears next to the layer thumbnail in the Layers dialog.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> Click on the mask thumbnail to edit the mask. Click on the layer thumbnail to edit the layer's pixels. A white border around the thumbnail indicates which one is active. Make sure you're editing the right one!
+  </div>
+
+  <h2>Painting on a Mask</h2>
+  <p>
+    With the mask selected (click its thumbnail), use any paint tool:
+  </p>
+  <ul>
+    <li>Paint with <strong>black</strong> to <strong>hide</strong> parts of the layer.</li>
+    <li>Paint with <strong>white</strong> to <strong>reveal</strong> parts of the layer.</li>
+    <li>Use a <strong>soft brush</strong> for gradual, feathered transitions between visible and hidden areas.</li>
+    <li>Use <strong>gray</strong> for partial transparency — great for subtle blending.</li>
+  </ul>
+  <p>
+    Press <kbd>X</kbd> to quickly swap between black and white foreground colors while painting on a mask.
+  </p>
+
+  <h2>The Alpha Channel</h2>
+  <p>
+    Every layer can have an <strong>alpha channel</strong>, which controls pixel-level transparency. When a layer has an alpha channel, transparent areas show as a gray checkerboard pattern. You can add an alpha channel to any layer via <strong>Layer &gt; Transparency &gt; Add Alpha Channel</strong>.
+  </p>
+  <p>
+    The difference between the alpha channel and a layer mask:
+  </p>
+  <ul>
+    <li>The <strong>alpha channel</strong> is transparency baked directly into the layer's pixels. Erasing pixels removes them permanently.</li>
+    <li>A <strong>layer mask</strong> is a separate, editable grayscale image that controls visibility non-destructively. The original pixels remain intact underneath.</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Warning:</strong> Whenever possible, use a layer mask instead of the Eraser tool. Erasing destroys pixels permanently, while masks let you undo, refine, and adjust at any point.
+  </div>
+
+  <h2>The Channels Dialog</h2>
+  <p>
+    The <strong>Channels</strong> dialog (<strong>Windows &gt; Dockable Dialogs &gt; Channels</strong>) shows the individual color channels of your image (Red, Green, Blue) plus the Alpha channel. Each channel is a grayscale image representing the intensity of that color component. Advanced users can edit individual channels for precise color and selection work.
+  </p>
+
+  <h2>Compositing Workflow</h2>
+  <p>
+    <strong>Compositing</strong> is the art of combining multiple images into a single, seamless scene. Layer masks are essential for smooth compositing. Here is a step-by-step workflow:
+  </p>
+
+  <h3>Step 1: Place the Subject on a Separate Layer</h3>
+  <p>
+    Open both the subject image and the background image in GIMP. Copy the subject (<kbd>Ctrl</kbd>+<kbd>C</kbd>) and paste it into the background image (<kbd>Ctrl</kbd>+<kbd>V</kbd>). Go to <strong>Layer &gt; To New Layer</strong> to convert the floating selection into its own layer. Use the <strong>Scale</strong> and <strong>Move</strong> tools to position and resize the subject.
+  </p>
+
+  <h3>Step 2: Add a Layer Mask</h3>
+  <p>
+    Right-click the subject layer and choose <strong>Add Layer Mask</strong>. Initialize it with <strong>White (full opacity)</strong> — the subject will be fully visible to start.
+  </p>
+
+  <h3>Step 3: Paint the Mask to Blend Edges</h3>
+  <p>
+    Select a <strong>soft, round brush</strong> and set the foreground color to <strong>black</strong>. Click on the mask thumbnail, then paint over the areas of the subject you want to hide — typically the hard edges around the subject, the original background that came with it, and any areas that should blend into the new background.
+  </p>
+  <p>
+    Use a <strong>large, soft brush</strong> along the edges for a natural fade. Zoom in and use a <strong>smaller brush</strong> for detailed areas like hair or fine edges.
+  </p>
+
+  <h3>Step 4: Adjust Opacity and Blend Mode</h3>
+  <p>
+    Fine-tune the composite by adjusting the subject layer's <strong>opacity</strong> and <strong>blend mode</strong>:
+  </p>
+  <ul>
+    <li>Lower opacity slightly if the subject looks too "pasted on."</li>
+    <li>Try blend modes like <strong>Multiply</strong>, <strong>Screen</strong>, or <strong>Soft Light</strong> for creative blending effects.</li>
+    <li>Match the lighting and color of the subject to the background using <strong>Curves</strong> or <strong>Color Balance</strong>.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> Convincing composites depend on matching <strong>lighting direction</strong>, <strong>color temperature</strong>, and <strong>perspective</strong> between the subject and background. Pay attention to where shadows fall and which direction light is coming from.
+  </div>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>Layer masks use <strong>white = visible</strong>, <strong>black = hidden</strong>, <strong>gray = semi-transparent</strong>.</li>
+    <li>Masks are <strong>non-destructive</strong> — you can always adjust them without losing pixels.</li>
+    <li>The <strong>alpha channel</strong> is built-in transparency; layer masks are separate and editable.</li>
+    <li>Use the <strong>compositing workflow</strong>: place subject → add mask → paint to blend → adjust opacity/blend mode.</li>
+    <li>Match lighting and color between layers for a seamless result.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — 2D Digital Art — GIMP</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

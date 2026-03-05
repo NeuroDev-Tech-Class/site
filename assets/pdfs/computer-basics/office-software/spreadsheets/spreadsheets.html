@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/office-software.html" class="back-link">&larr; Back to Office Software</a>
+    <div class="doc-header">
+      <span class="course-tag">Office Software</span>
+      <h1>Spreadsheets</h1>
+      <p class="subtitle">Introduction to Spreadsheets</p>
+    </div>
+
+    <p>Spreadsheets are powerful tools used for organizing, analyzing, and storing data. They use a grid of cells arranged in numbered rows and lettered columns. Spreadsheets are especially useful for numerical data and can automatically perform complex calculations, but they can be used for all sorts of tasks.</p>
+
+    <p><strong>Google Sheets</strong> is a free web-based spreadsheet program. It&rsquo;s part of Google Workspace, which includes other productivity tools like Google Docs and Google Slides. It provides functions, data visualization, and collaboration capabilities. It allows multiple users to work on the same spreadsheet simultaneously, making it ideal for collaboration.</p>
+
+    <p><strong>Microsoft Excel</strong> is a powerful spreadsheet program and part of Microsoft 365 (formerly Microsoft Office). It provides a comprehensive set of tools for creating, editing, and analyzing data. It offers formulas and functions, data visualization through charts and graphs, pivot tables for data summarization and analysis, data filtering and sorting, conditional formatting, and advanced calculations.</p>
+
+    <h2>Navigating Cells and Entering Data</h2>
+
+    <p>A <strong>cell</strong> is the smallest unit of data entry in a spreadsheet, and it looks like a small box at the intersection of a column and a row. Each cell is identified by a unique address, such as <code>A1</code>, which represents the first cell at the intersection of column A and row 1. These cells can contain different types of data such as text, numbers, dates, or formulas, and can be formatted for readability or emphasis.</p>
+
+    <p>You can navigate between cells using the mouse, as well as the arrow keys. You can also use the <kbd>Tab</kbd> key to move right, <kbd>Enter</kbd> to move down, <kbd>Shift</kbd> + <kbd>Tab</kbd> to move left, and <kbd>Shift</kbd> + <kbd>Enter</kbd> to move up. You can quickly move to the edge of the selected data region with <kbd>Ctrl</kbd> (or <kbd>Command</kbd> on a Mac) + an arrow key.</p>
+
+    <p>Entering data is straightforward; just click on a cell and start typing. Press <kbd>Enter</kbd> or click somewhere else to confirm your entry. To edit data, double-click the cell.</p>
+
+    <h2>Moving, Copying, and Pasting Data</h2>
+
+    <p>To move the data in cell <code>A1</code> to <code>B1</code>, click on <code>A1</code>, drag the contents to <code>B1</code>, and release the mouse. To copy and paste the value from cell <code>B2</code> to <code>B3</code>, click on <code>B2</code>, press <kbd>Ctrl</kbd> + <kbd>C</kbd> (<kbd>Cmd</kbd> + <kbd>C</kbd> on a Mac), click on <code>B3</code>, and press <kbd>Ctrl</kbd> + <kbd>V</kbd> (<kbd>Cmd</kbd> + <kbd>V</kbd> on a Mac). You can even copy and paste data between different spreadsheets.</p>
+
+    <h2>Inserting Rows and Columns</h2>
+
+    <p>Inserting rows and columns into a spreadsheet lets you add new data or make space for additional information. If you had a table with data in rows 1 to 5 and you wanted to insert a new row between rows 2 and 3, you can right-click on row 3 and select &ldquo;Insert Row.&rdquo; A new blank row will appear between the existing rows 2 and 3, and the data below will shift down.</p>
+
+    <p>If you need to temporarily hide a row or column, you can right-click it and choose &ldquo;hide&rdquo; to get it out of your way without deleting the data. You can unhide it by clicking on the two arrows where the hidden row or column used to be.</p>
+
+    <h2>Calculations and Formulas</h2>
+
+    <p>The ability to perform calculations within cells is one of the most powerful features of spreadsheets. Perform a calculation by typing an equal sign (<code>=</code>) followed by the math expression. For example, to add 5 and 7 together, you would type <code>=5+7</code> into a cell. After pressing <kbd>Enter</kbd>, the cell will display the result of the calculation (12).</p>
+
+    <p>You can also refer to other cells in your calculations. For example, if cell <code>A1</code> contains the number 6, and cell <code>B1</code> contains the number 8, you could type <code>=A1+B1</code> into cell <code>C1</code>. After pressing <kbd>Enter</kbd>, cell <code>C1</code> will display 14, the result of adding the values in cells <code>A1</code> and <code>B1</code>.</p>
+
+    
+    <img src="assets/images/office-software/spreadsheets_1.png" alt="Figure 1" />
+<p>You can build more complex formulas by combining operations. For instance, the formula <code>=(A1+B1)*C1</code> first adds the values in cells <code>A1</code> and <code>B1</code>, then multiplies the result by the value in cell <code>C1</code>. Remember to use parentheses to control the order of operations in your formulas.</p>
+
+    <h2>Functions</h2>
+
+    <p>Functions are ready-made formulas available in spreadsheets that simplify complex calculations. For example, if you want to calculate the average of numbers in cells <code>A1</code> to <code>A5</code>, you can use the function <code>=AVERAGE(A1:A5)</code> instead of manually adding the numbers and dividing by 5. Most functions work the same in Google Sheets and MS Excel, but sometimes they have slight differences. Here are some of the most helpful and commonly used formulas:</p>
+
+    <ul>
+      <li><strong>AVERAGE</strong> (Mean Value)
+        <br><code>=AVERAGE(A1:A5)</code> &mdash; Calculates the mean of the values in cells A1 through A5.</li>
+      <li><strong>SUM</strong> (Addition)
+        <br><code>=SUM(B1:B3)</code> &mdash; Adds the numbers in cells B1 to B3.</li>
+      <li><strong>MAX</strong> and <strong>MIN</strong> (Maximum / Minimum Value)
+        <br><code>=MAX(C1:C5)</code> &mdash; Finds the largest number in the range C1 to C5.</li>
+      <li><strong>IF</strong> (Conditional Function)
+        <br><code>=IF(F1&gt;10, "Yes", "No")</code> &mdash; Checks if the value in cell F1 is greater than 10. If true, it returns &ldquo;Yes&rdquo;; if false, it returns &ldquo;No.&rdquo;</li>
+      <li><strong>XLOOKUP</strong> (Lookup Value)
+        <br><code>=XLOOKUP(H1, A1:A5, B1:B5)</code> &mdash; Searches for the value in cell H1 within the range A1 to A5. Once it finds a match, it returns the corresponding value from the same row in the range B1 to B5. You can also specify a value to be returned if the lookup value is not found.</li>
+    </ul>
+
+    <h2>Copying Formulas and Functions with AutoFill</h2>
+
+    <p>AutoFill allows you to extend formulas in a patterned way. Let&rsquo;s say you have the numbers 1 and 2 in cells <code>A1</code> and <code>A2</code> and want to continue this sequence down to <code>A10</code>. You can type <code>=A1+1</code> in cell <code>A2</code>, and then use the AutoFill feature to copy this down to <code>A10</code>. The cells will automatically fill with the sequence 1, 2, 3, &hellip;, 10.</p>
+
+    <h3>Using AutoFill to Complete a Series of Values</h3>
+
+    <p>The AutoFill feature works with all sorts of patterns. Try typing &ldquo;January&rdquo; into cell <code>A1</code> and &ldquo;February&rdquo; into cell <code>A2</code>, then click and drag to highlight both cells. Hover over the bottom-right of your selection and the cursor should turn into a plus symbol. Click and drag down, and Sheets / Excel will recognize the pattern and automatically fill the cells with the corresponding months in order.</p>
+    <img src="assets/images/office-software/spreadsheets_2.png" alt="Figure 2" />
+
+
+    
+    <img src="assets/images/office-software/spreadsheets_3.png" alt="Figure 3" />
+<h2>Relative vs. Absolute Reference</h2>
+
+    <p>A <strong>relative reference</strong> in a formula means that the reference to the cell will change when the formula is copied to another cell, determined by the relative position of the formula. For example, you might have a formula in cell <code>A3</code> that adds cells <code>A1</code> and <code>A2</code> together: <code>=A1+A2</code>. If you copy this formula from cell <code>A3</code> and paste it to <code>B3</code>, the references will change to <code>=B1+B2</code>. This is very useful when you want to apply the same formula to a series of cells.</p>
+
+    <p>An <strong>absolute reference</strong> is a reference that remains fixed even when the formula is copied to another location. Say you have a value in cell <code>B1</code> that you want to multiply with values in <code>A1</code> to <code>A5</code>. In cell <code>C1</code>, you can type <code>=A1*$B$1</code>. Notice the dollar signs before the column and row; they make the reference to <code>B1</code> absolute. If you copy this formula down from <code>C1</code> to <code>C5</code>, the reference to <code>B1</code> stays constant. Absolute references are useful when you have a constant value, like a tax rate, that you want to apply to a series of calculations.</p>
+
+    <p>You can also use a combination of relative and absolute references, called <strong>mixed reference</strong>:</p>
+    <ul>
+      <li><strong>Column Absolute &amp; Row Relative:</strong> <code>=$A1</code> &mdash; the column reference stays fixed, while the row can change.</li>
+      <li><strong>Row Absolute &amp; Column Relative:</strong> <code>=A$1</code> &mdash; the row reference stays fixed, while the column can change.</li>
+    </ul>
+
+    <h2>Cell Formatting</h2>
+    <img src="assets/images/office-software/spreadsheets_4.png" alt="Figure 4" />
+
+
+    <p>Cell formatting allows you to change the organization and presentation of your data. You can find these options in the bar at the top of the screen.</p>
+
+    <ul>
+      <li><strong>Horizontal and Vertical Alignment:</strong> Text is aligned to the bottom-left by default. You can change this with the &ldquo;Horizontal align&rdquo; and &ldquo;Vertical align&rdquo; buttons.</li>
+      <li><strong>Text Wrapping:</strong> Sometimes the text inside a cell is too long to be displayed normally. The default &ldquo;Overflow&rdquo; option lets the text spill outside of the cell. &ldquo;Wrap&rdquo; expands the cell vertically so the text can fit onto a new line. &ldquo;Clip&rdquo; cuts off any text that doesn&rsquo;t fit inside the cell.</li>
+      <li><strong>Text Rotation:</strong> This lets you rotate the orientation of text within an individual cell.</li>
+    </ul>
+
+    <h2>Number Formatting</h2>
+    <img src="assets/images/office-software/spreadsheets_5.png" alt="Figure 5" />
+
+
+    <p>Spreadsheets let you automatically format numbers, which gives context for your data. <strong>Currency formatting</strong> is useful for financial data and automatically adds currency symbols to your numbers. Go to <strong>Format Cells &gt; Currency</strong>, or simply highlight the cell and click the &ldquo;Format as currency&rdquo; button. If you have a cell <code>A1</code> with the value <code>2500.5</code>, applying currency formatting will change it to <code>$2,500.50</code>.</p>
+
+    <p>Similarly, <strong>percentage formatting</strong> will convert decimal numbers to a percentage format. If you apply percentage formatting to the value <code>0.2</code>, it will change it to <code>20%</code>.</p>
+
+    <p>There are even more options in the &ldquo;More formats&rdquo; menu, including date, scientific, and custom number formats. Explore the menu to see what options are available and consider how they might be useful to you.</p>
+
+    <h2>Alternating Colored Rows</h2>
+
+    <p>Alternating row colors, also called &ldquo;zebra striping,&rdquo; can make large datasets much easier to read. It helps make each row distinct, which reduces eye strain and lowers the chance of misreading data.</p>
+
+    <p>Select the rows where you want to apply alternating colors. Go to <strong>Format &gt; Alternating colors</strong> and choose your color scheme. You can specify whether or not there is a header and/or a footer row, which will be a darker color.</p>
+
+    <h2>Freezing Panes</h2>
+
+    <p>The &ldquo;Freeze panes&rdquo; tool allows you to keep certain rows or columns visible no matter how far you scroll through your data. If you have headers in the first row and you want them to remain visible, go to <strong>View &gt; Freeze Panes &gt; Freeze Top Row</strong>.</p>
+    <img src="assets/images/office-software/spreadsheets_6.png" alt="Figure 6" />
+
+
+    <h2>Single and Multi-Level Sorting</h2>
+
+    <p><strong>Single-level sorting</strong> involves sorting by just one column. Click a cell in Column A, then in Google Sheets navigate to <strong>Data &gt; Sort sheet A to Z</strong>, or in Excel go to <strong>Sort &amp; Filter &gt; Sort A to Z</strong>. For instance, sorting a column by &ldquo;name&rdquo; arranges them in ascending order for easier identification.</p>
+
+    <p><strong>Multi-level sorting</strong> allows you to sort based on multiple columns. Select the data range, then go to <strong>Data &gt; Sort Range</strong> in Google Sheets or <strong>Sort &amp; Filter &gt; Custom Sort</strong> in Excel. Add your criteria and sort. For example, sorting by &ldquo;age&rdquo; and then by &ldquo;name&rdquo;. This gives you more control over how your data is organized.</p>
+
+    <h2>Inserting Data Charts</h2>
+
+    <p>Charts can help you quickly understand your data at a glance. Select the data range you&rsquo;d like to create a chart for. For example, you could select cells <code>A1:B10</code> if the first row contains column headers such as &ldquo;Month&rdquo; and &ldquo;Sales.&rdquo; Go to the menu and click on <strong>Insert &gt; Chart</strong> to generate your new chart.</p>
+    <img src="assets/images/office-software/spreadsheets_7.png" alt="Figure 7" />
+
+
+    <p>After your chart appears, a panel will pop up on the right-hand side of the screen. This panel is loaded with customization options. You can opt for various chart types, such as line, bar, or pie charts. You can define what data goes on the X and Y axes, add legends, and set specific colors for different data points to represent categories or trends more clearly.</p>
+
+    
+    <img src="assets/images/office-software/spreadsheets_8.png" alt="Figure 8" />
+<p>As your dataset changes, your charts will automatically adjust. If you need to make changes to the data range, click on the chart to activate the right-hand panel. From here, you can change the data range or add a new series to the chart.</p>
+
+    <h2>Inserting, Deleting, Renaming, Moving, and Copying Worksheets</h2>
+
+    <p>A single spreadsheet file can have multiple worksheet tabs. You can insert a new one by clicking the &ldquo;+&rdquo; button in the bottom left corner of the screen. Right-clicking a worksheet tab lets you delete and duplicate tabs, copy them to a different spreadsheet file, rename them, and more.</p>
+    <img src="assets/images/office-software/spreadsheets_9.png" alt="Figure 9" />
+
+
+    <h2>Importing Web Data</h2>
+
+    <p>You can pull data directly from lists and tables that you find on the web. This can be a big time saver, and the data you import will even update in real time. You can do this with the <code>=IMPORTHTML</code> formula. Here&rsquo;s an example:</p>
+
+    <pre><code>=IMPORTHTML("https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population", "table", 1)</code></pre>
+
+    <p>This tells Google Sheets to go to that URL, look for tables, and import the first one it finds. Typing <code>2</code> after <code>"table"</code> will find the second table on the web page, etc. The imported table will update dynamically. If you don&rsquo;t want the data to update, you&rsquo;ll have to copy the data in the sheet and paste it elsewhere.</p>
+    <img src="assets/images/office-software/spreadsheets_10.png" alt="Figure 10" />
+
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class &mdash; Office Software</p>
+    </div>
+  </main>
+  <footer></footer>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

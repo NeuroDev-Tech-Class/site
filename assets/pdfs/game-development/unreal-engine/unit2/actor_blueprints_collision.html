@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>Actor Blueprints &amp; Collision</h1>
+    <p class="subtitle">Create interactive objects with collision events and build a key-and-door system</p>
+  </div>
+
+  <h2>What Are Actor Blueprints?</h2>
+  <p>In the previous lesson, we worked in the Level Blueprint — logic that's tied to a specific level. <strong>Actor Blueprints</strong> (also called Blueprint Classes) are different: they represent self-contained, reusable objects. You design an Actor Blueprint once, and then you can place as many copies of it as you want in any level. Each copy runs its own independent logic.</p>
+  <p>Think of an Actor Blueprint as a <strong>template</strong>. A single BP_Coin Blueprint can spawn 50 coins across your level. A BP_Door Blueprint defines how all doors work. Change the Blueprint, and every instance updates automatically.</p>
+
+  <h2>Creating a New Actor Blueprint</h2>
+  <ol>
+    <li>In the <strong>Content Browser</strong>, navigate to (or create) a folder for your Blueprints (e.g., <code>Content/Blueprints/</code>).</li>
+    <li>Right-click in the folder → <strong>Blueprint Class</strong>.</li>
+    <li>In the class picker, choose <strong>Actor</strong> as the parent class. (Actor is the base class for anything that exists in the level.)</li>
+    <li>Name it something descriptive: <code>BP_Key</code>, <code>BP_Door</code>, etc.</li>
+    <li>Double-click to open it in the Blueprint Editor.</li>
+  </ol>
+
+  <h2>Adding Components</h2>
+  <p>Actors are made of <strong>components</strong> — the pieces that give them a visible shape, collision, sound, movement, and more. You add components in the <strong>Components</strong> panel (top left of the Blueprint Editor).</p>
+
+  <h3>Common Components</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Static Mesh</strong></td>
+        <td>The visible 3D shape (a sphere, cube, or imported model)</td>
+      </tr>
+      <tr>
+        <td><strong>Box Collision</strong></td>
+        <td>An invisible box that detects overlaps and hits</td>
+      </tr>
+      <tr>
+        <td><strong>Sphere Collision</strong></td>
+        <td>An invisible sphere that detects overlaps and hits</td>
+      </tr>
+      <tr>
+        <td><strong>Point Light</strong></td>
+        <td>Emits light from a single point (torch, lamp)</td>
+      </tr>
+      <tr>
+        <td><strong>Rotating Movement</strong></td>
+        <td>Automatically rotates the actor (spinning coin effect)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Component Hierarchy</h3>
+  <p>Components are arranged in a <strong>parent-child hierarchy</strong> in the Components panel. When you move or rotate a parent component, all its children move with it. The topmost component is the <strong>Root</strong> — usually a collision shape or a Scene component. Attach the Static Mesh and other components as children of the root so everything stays together.</p>
+  <p>To rearrange the hierarchy, drag a component on top of another to make it a child. If you drag it to the top level, it becomes a sibling of the root.</p>
+
+  <div class="tip">
+    <strong>Best practice:</strong> Use a collision component (Box or Sphere Collision) or a <strong>Scene</strong> component as the root, not the Static Mesh itself. This gives you more control over the collision bounds and prevents unexpected behavior when scaling.
+  </div>
+
+  <h2>Collision Events</h2>
+  <p>Collision components generate <strong>events</strong> when another actor touches or enters them. The two main events are:</p>
+
+  <h3>OnBeginOverlap</h3>
+  <p>Fires when another actor <strong>enters</strong> the collision volume. The collision component must have <strong>Generate Overlap Events</strong> enabled (check the Details panel), and its <strong>Collision Presets</strong> set to something that overlaps with the player (e.g., <code>OverlapAllDynamic</code>).</p>
+  <p>To add this event: select the collision component in the Components panel, scroll down in the Details panel to the <strong>Events</strong> section, and click the <strong>+</strong> next to <strong>On Component Begin Overlap</strong>. This adds the event node to the Event Graph.</p>
+
+  <h3>OnHit</h3>
+  <p>Fires when another actor <strong>physically collides</strong> with the component (as opposed to passing through it). The component must have <strong>Simulation Generates Hit Events</strong> enabled. This is useful for things like jump pads, where the player needs to physically land on something.</p>
+
+  <h2>The Cast To Node</h2>
+  <p>When an overlap or hit event fires, the <strong>Other Actor</strong> output pin tells you which actor triggered the event — but it only tells you it's "an Actor." If you need to access specific variables or functions on that actor (e.g., the player's <code>HasKey</code> variable), you need to <strong>Cast To</strong> the specific Blueprint class.</p>
+  <p><strong>Cast To</strong> checks: "Is this actor actually a [specific class]?" If yes (the cast succeeds), you get access to all that class's variables and functions. If no (the cast fails), nothing happens on that path.</p>
+  <p>To use it: drag from the <strong>Other Actor</strong> pin, search for <code>Cast To ThirdPersonCharacter</code> (or whatever your player class is named), and connect the execution pin. The <strong>As Third Person Character</strong> output pin now gives you full access to the player's Blueprint.</p>
+
+  <div class="warning">
+    <strong>Why Cast To matters:</strong> Without casting, you'd have no way to check if the thing that overlapped is actually the <em>player</em> versus a random physics object. The cast also lets you reach into the player's Blueprint to read or change their variables — like setting HasKey to true.
+  </div>
+
+  <h2>Building a Key/Door System</h2>
+  <p>Let's put it all together by building two Actor Blueprints: a key the player can pick up, and a door that only opens if the player has the key.</p>
+
+  <h3>Part 1: The Key (BP_Key)</h3>
+  <ol>
+    <li>Create a new Actor Blueprint and name it <code>BP_Key</code>.</li>
+    <li>Add a <strong>Sphere Collision</strong> component as the root (or make it the root by dragging it to the top of the hierarchy). Set its Sphere Radius to about <code>100</code>.</li>
+    <li>Add a <strong>Static Mesh</strong> component as a child. Set its mesh to a small shape — the default <code>Sphere</code> or <code>Cube</code> works fine. Scale it down to about <code>0.3</code> so it looks like a pickup item.</li>
+    <li>Optionally, change the mesh's material to something gold or bright so it stands out.</li>
+    <li>Select the Sphere Collision in the Components panel. In the Details panel:
+      <ul>
+        <li>Set <strong>Collision Presets</strong> to <code>OverlapAllDynamic</code>.</li>
+        <li>Make sure <strong>Generate Overlap Events</strong> is checked.</li>
+      </ul>
+    </li>
+    <li>With the Sphere Collision still selected, scroll to the <strong>Events</strong> section and click <strong>+</strong> next to <strong>On Component Begin Overlap</strong>.</li>
+    <li>In the Event Graph, you now have an <strong>OnComponentBeginOverlap</strong> event node.</li>
+    <li>Drag from the <strong>Other Actor</strong> pin and add a <strong>Cast To BP_ThirdPersonCharacter</strong> node (or your player character class). Connect the execution pin.</li>
+    <li>From the <strong>As BP Third Person Character</strong> output pin, drag and search for <strong>Set Has Key</strong> (we'll create this variable next). Set it to <strong>True</strong>.</li>
+    <li>After the Set node, add a <strong>Destroy Actor</strong> node (search for it). This removes the key from the level once collected.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Don't forget:</strong> You need to add a <strong>Boolean variable</strong> called <code>HasKey</code> to your <strong>player character Blueprint</strong> (BP_ThirdPersonCharacter), not BP_Key. The key sets the player's variable to true. Default value should be <code>false</code>.
+  </div>
+
+  <h3>Part 2: The Door (BP_Door)</h3>
+  <ol>
+    <li>Create a new Actor Blueprint named <code>BP_Door</code>.</li>
+    <li>Add a <strong>Box Collision</strong> component as the root. Scale it to roughly door-sized (you can adjust the Box Extent values in the Details panel, e.g., X: 100, Y: 50, Z: 200).</li>
+    <li>Add a <strong>Static Mesh</strong> component as a child. Use a <code>Cube</code> mesh and scale it to look like a wall or door (e.g., Scale X: 2, Y: 0.2, Z: 3).</li>
+    <li>Change its material to something that suggests "locked door" — a dark color or a brick material.</li>
+    <li>Set the Box Collision's <strong>Collision Presets</strong> to <code>OverlapAllDynamic</code> and ensure <strong>Generate Overlap Events</strong> is checked.</li>
+    <li>Add the <strong>On Component Begin Overlap</strong> event (same process as the key).</li>
+    <li>Add a <strong>Cast To BP_ThirdPersonCharacter</strong> from the Other Actor pin.</li>
+    <li>From the cast's character output, drag and add a <strong>Get Has Key</strong> node.</li>
+    <li>Add a <strong>Branch</strong> node and connect the HasKey Boolean to the Condition pin.</li>
+    <li><strong>True path:</strong> Add a <strong>Destroy Actor</strong> node — the door disappears, letting the player through.</li>
+    <li><strong>False path:</strong> Add a <strong>Print String</strong> node with the text <code>"Locked — find the key!"</code></li>
+  </ol>
+
+  <h3>Testing the System</h3>
+  <ol>
+    <li>Compile and save both Blueprints.</li>
+    <li>Go to your level and drag a <code>BP_Key</code> and a <code>BP_Door</code> into the viewport.</li>
+    <li>Press <strong>Play</strong>. Walk into the door first — you should see "Locked — find the key!" Walk into the key (it should disappear). Then walk into the door again — it should disappear, letting you through.</li>
+    <li>If something doesn't work, add <strong>Print String</strong> nodes at each step of the logic to trace where the issue is.</li>
+  </ol>
+
+  <h2>Summary</h2>
+  <ul>
+    <li><strong>Actor Blueprints</strong> are reusable, self-contained objects made of components.</li>
+    <li><strong>Components</strong> provide visuals (Static Mesh), collision detection (Box/Sphere Collision), and more.</li>
+    <li><strong>OnBeginOverlap</strong> fires when something enters a collision volume; <strong>OnHit</strong> fires on physical contact.</li>
+    <li><strong>Cast To</strong> verifies an actor's class and gives access to its variables and functions.</li>
+    <li>A <strong>key/door system</strong> combines overlap events, casting, Booleans, and Branches into a complete gameplay mechanic.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

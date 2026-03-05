@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/blender-zbrush-mini.html" class="back-link">&larr; Back to 3D Art &mdash; Blender &amp; ZBrush</a>
+    <div class="doc-header">
+    <span class="course-tag">Blender &amp; ZBrush Mini</span>
+    <h1>3D Printing Basics</h1>
+    <p class="subtitle">How FDM Printing Works — From Filament to Finished Object</p>
+  </div>
+
+  <h2>What Is 3D Printing?</h2>
+  <p>
+    3D printing (also called <strong>additive manufacturing</strong>) is the process of creating a physical object from
+    a digital 3D model. Unlike traditional manufacturing, which cuts or carves material away (subtractive), 3D printing
+    <em>adds</em> material layer by layer to build up the final shape. It's like building with microscopic layers of hot
+    glue, each one stacking on top of the last.
+  </p>
+
+  <h2>How FDM Printing Works</h2>
+  <p>
+    The type of 3D printer we'll be using is called an <strong>FDM</strong> printer — <strong>Fused Deposition
+    Modeling</strong>. Here's the basic process:
+  </p>
+  <ol>
+    <li>A spool of <strong>filament</strong> (a long, thin strand of plastic) feeds into the printer.</li>
+    <li>The filament is pushed into the <strong>extruder</strong> (also called the cold end), which grips and feeds the
+      filament forward.</li>
+    <li>The filament enters the <strong>hot end</strong> (the nozzle), which heats it to around 200°C (392°F) — hot
+      enough to melt the plastic.</li>
+    <li>The melted plastic is deposited through the tiny nozzle opening onto the <strong>build platform</strong> (the
+      flat surface at the bottom).</li>
+    <li>The nozzle moves in precise patterns, laying down one thin layer of plastic at a time.</li>
+    <li>Each new layer bonds to the one below it as the plastic cools.</li>
+    <li>The build platform moves down (or the nozzle moves up) by a tiny amount, and the next layer begins.</li>
+    <li>This process repeats — sometimes for hours — until the entire object is complete.</li>
+  </ol>
+
+  <h2>Printer Parts You Should Know</h2>
+  <ul>
+    <li><strong>Build Platform (Bed):</strong> The flat surface where your print is created. Some beds are heated to help
+      the first layer stick. The bed should be clean and level for good prints.</li>
+    <li><strong>Extruder / Cold End:</strong> The motor-driven mechanism that grabs the filament and pushes it toward the
+      hot end. Think of it as the "feeding" mechanism.</li>
+    <li><strong>Nozzle / Hot End:</strong> The heated tip where filament melts and is deposited. Standard nozzle diameter
+      is 0.4mm. <strong>⚠️ VERY HOT — do NOT touch the nozzle during or shortly after printing!</strong> It reaches
+      temperatures of 200°C or higher.</li>
+    <li><strong>Filament Spool:</strong> A roll of plastic filament, usually mounted on a holder on top of or beside the
+      printer. Filament comes in many colors and materials.</li>
+    <li><strong>Frame and Rails:</strong> The metal structure and guide rails that allow the nozzle to move precisely in
+      the X, Y, and Z directions.</li>
+  </ul>
+
+  <h2>Common Material: PLA</h2>
+  <p>
+    <strong>PLA</strong> (Polylactic Acid) is the most popular filament for beginners, and it's what we'll primarily use
+    in this class. Here's why:
+  </p>
+  <ul>
+    <li><strong>Easy to print:</strong> PLA prints at lower temperatures and doesn't warp as much as other materials.</li>
+    <li><strong>Biodegradable:</strong> PLA is made from renewable resources (like cornstarch) and is more
+      environmentally friendly than petroleum-based plastics.</li>
+    <li><strong>Low odor:</strong> Unlike some other filaments, PLA produces minimal fumes during printing.</li>
+    <li><strong>Comes in many colors:</strong> You can get PLA in nearly any color, plus specialty finishes like metallic,
+      glow-in-the-dark, and wood-fill.</li>
+    <li><strong>Rigid and detailed:</strong> PLA holds fine detail well, making it great for figurines, decorative
+      objects, and prototypes.</li>
+  </ul>
+  <p>
+    <em>Limitations:</em> PLA is not heat-resistant (it softens around 60°C / 140°F) and is relatively brittle compared
+    to materials like PETG or ABS.
+  </p>
+
+  <h2>Layer Height and Quality</h2>
+  <p>
+    <strong>Layer height</strong> is one of the most important settings in 3D printing. It controls how thick each
+    individual layer of plastic is.
+  </p>
+  <ul>
+    <li><strong>Thinner layers (0.1 - 0.15mm):</strong> Produce smoother surfaces with less visible layer lines. The
+      print looks more detailed and refined. However, thinner layers mean <em>more layers total</em>, so printing takes
+      significantly longer.</li>
+    <li><strong>Thicker layers (0.2 - 0.3mm):</strong> Print much faster but have more visible "staircase" lines on
+      curved or angled surfaces. Good for prototypes or objects where appearance isn't critical.</li>
+  </ul>
+  <p>
+    Think of it like resolution on a screen: more pixels (thinner layers) = sharper image, but more data to process.
+  </p>
+
+  <h2>Overhangs and the 45-Degree Rule</h2>
+  <p>
+    Since FDM printing builds layer by layer from the bottom up, each layer needs something underneath it to rest on.
+    When part of a model extends outward with nothing below it, that's called an <strong>overhang</strong>.
+  </p>
+  <p>
+    The general rule of thumb is the <strong>45-degree rule</strong>: if a surface angles outward at less than 45 degrees
+    from vertical, it can usually print fine — each new layer extends just slightly beyond the one below it, and the
+    plastic is stiff enough to hold. But if the angle exceeds 45 degrees (approaching horizontal), the plastic has
+    nothing to grip onto and will sag, droop, or fall — creating a messy print.
+  </p>
+
+  <h2>Supports</h2>
+  <p>
+    When your model has steep overhangs or floating sections, you need <strong>supports</strong> — temporary structures
+    that the printer builds underneath overhanging areas to hold them up during printing. You remove them after the print
+    finishes.
+  </p>
+  <h3>Types of Supports</h3>
+  <ul>
+    <li><strong>Linear (Grid/Lines):</strong> Traditional support style. Creates a dense grid of thin walls under
+      overhangs. Reliable and strong, but can be harder to remove and may leave marks on the surface.</li>
+    <li><strong>Tree Supports:</strong> Branch-like structures that grow upward and reach out to support overhangs.
+      They use less material, are often easier to remove, and leave fewer marks. Many modern slicers support this
+      option.</li>
+  </ul>
+
+  <h2>Bed Adhesion: Raft vs. Brim</h2>
+  <p>
+    Getting the first layer to stick to the build platform is crucial. If it doesn't stick, the entire print can shift or
+    fail. Two common helpers:
+  </p>
+  <ul>
+    <li><strong>Brim:</strong> A thin, flat border of extra material printed around the base of your object. It increases
+      the contact area with the bed, helping the object stick. After printing, you peel the brim off. Best for most
+      situations.</li>
+    <li><strong>Raft:</strong> A thick platform of material printed <em>underneath</em> your entire object. The object
+      is then printed on top of the raft. Rafts provide excellent adhesion but use more material and can affect the
+      bottom surface quality. Use a raft when your object has a very small footprint or you're having persistent
+      sticking problems.</li>
+  </ul>
+
+  <h2>Safety Tips</h2>
+  <ul>
+    <li><strong>🔥 Never touch the nozzle</strong> during or shortly after printing. It's hot enough to cause serious
+      burns.</li>
+    <li><strong>Don't reach into the printer</strong> while it's moving. The motors are strong and the moving parts can
+      pinch.</li>
+    <li><strong>Ventilation:</strong> While PLA is low-odor, it's still a good idea to use the printer in a
+      well-ventilated area.</li>
+    <li><strong>Use tools</strong> (scraper, tweezers) to remove prints and supports from the bed — don't use your
+      fingers near hot surfaces.</li>
+    <li><strong>Supervise prints:</strong> Don't start a long print and leave it completely unattended. Check on it
+      periodically.</li>
+    <li><strong>Keep filament dry:</strong> Moisture can cause printing problems. Store unused filament in a sealed bag
+      with desiccant packets.</li>
+  </ul>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>FDM printers build objects <strong>layer by layer</strong> from melted plastic filament.</li>
+    <li><strong>PLA</strong> is the best filament for beginners — easy, safe, and eco-friendly.</li>
+    <li><strong>Layer height</strong> trades quality for speed — thinner is smoother but slower.</li>
+    <li>Keep the <strong>45-degree rule</strong> in mind when designing your models.</li>
+    <li>Use <strong>supports</strong> for overhangs and <strong>brims/rafts</strong> for bed adhesion.</li>
+    <li><strong>Safety first</strong> — the nozzle is extremely hot, and moving parts can pinch.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Blender &amp; ZBrush Mini</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

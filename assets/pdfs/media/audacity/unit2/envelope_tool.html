@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/audacity.html" class="back-link">&larr; Back to Audio Production &mdash; Audacity</a>
+    <div class="doc-header">
+    <span class="course-tag">Audio Production — Audacity</span>
+    <h1>The Envelope Tool</h1>
+    <p class="subtitle">Control volume changes over time with precision and flexibility</p>
+  </div>
+
+  <h2>What Is the Envelope Tool?</h2>
+  <p>The <strong>Envelope tool</strong> (<kbd>F2</kbd>) lets you control the volume of a track at different points in time — directly on the waveform. Unlike Amplify or Normalize (which apply a uniform volume change to the entire selection), the Envelope tool allows you to make volume changes that vary from one moment to the next.</p>
+  <p>Think of it like drawing a volume automation curve on top of your audio. You can smoothly raise or lower the volume at any point, creating custom fade-ins, fade-outs, and volume dips — all without cutting or splitting the track.</p>
+
+  <h2>How to Use the Envelope Tool</h2>
+
+  <h3>Activating the Tool</h3>
+  <p>Press <kbd>F2</kbd> or click the <strong>Envelope tool</strong> button in the Tools toolbar (it looks like a line with control points). When the tool is active, you'll notice a thin <strong>blue line</strong> along the top and bottom edges of each track — these are the <strong>envelope lines</strong>, and they represent the volume boundary.</p>
+
+  <h3>Creating Envelope Points</h3>
+  <ol>
+    <li>With the Envelope tool active, click anywhere on the waveform to create a <strong>control point</strong>.</li>
+    <li>A small dot appears at that spot on the envelope line.</li>
+    <li>Click at another location to create a second control point.</li>
+    <li>You now have two anchor points — the volume will transition smoothly between them.</li>
+  </ol>
+
+  <h3>Adjusting Volume</h3>
+  <ol>
+    <li>Click and drag a control point <strong>up</strong> to increase the volume at that point.</li>
+    <li>Click and drag a control point <strong>down</strong> to decrease the volume at that point.</li>
+    <li>The blue envelope lines move in or out, showing the new volume boundary. The waveform display adjusts accordingly — a compressed waveform means lower volume.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> You can create as many control points as you need. Place them close together for sharp volume changes or far apart for gradual transitions.
+  </div>
+
+  <h3>Removing Envelope Points</h3>
+  <p>To remove a control point you no longer want:</p>
+  <ul>
+    <li>Click and drag the point <strong>outside the track boundary</strong> (above the top edge or below the bottom edge of the track). The point will be deleted.</li>
+  </ul>
+  <p>To reset the entire envelope and return to a flat (uniform) volume, you can undo your changes (<kbd>Ctrl</kbd>+<kbd>Z</kbd>) or remove all points one by one.</p>
+
+  <h2>Visual Guide</h2>
+  <p>When the Envelope tool is active, the track display changes to show the envelope:</p>
+  <ul>
+    <li><strong>Blue lines</strong> run along the top and bottom edges of the waveform. These represent the volume boundary.</li>
+    <li><strong>Control points</strong> appear as small dots on the blue lines.</li>
+    <li>When you lower the volume at a point, the blue lines squeeze inward, and the waveform shrinks proportionally.</li>
+    <li>When you raise the volume, the blue lines expand outward (up to the maximum).</li>
+  </ul>
+  <p>The visual feedback makes it easy to see exactly where your volume changes are and how dramatic they are.</p>
+
+  <h2>Envelope Tool vs. Amplify / Normalize</h2>
+  <p>It's important to understand when to use each approach:</p>
+
+  <table>
+    <thead>
+      <tr><th>Method</th><th>How It Works</th><th>Best For</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Amplify / Normalize</strong></td>
+        <td>Applies a <em>uniform</em> volume change to the entire selection. Every part gets louder or quieter by the same amount.</td>
+        <td>Making an entire track or section consistently louder or quieter. Final leveling.</td>
+      </tr>
+      <tr>
+        <td><strong>Envelope Tool</strong></td>
+        <td>Allows <em>per-point</em> volume changes that vary over time. You control exactly where and how the volume changes.</td>
+        <td>Volume automation: ducking, custom fades, dynamic volume adjustments within a track.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Common Use Cases</h2>
+
+  <h3>Custom Fade-In / Fade-Out</h3>
+  <p>While Audacity has built-in Fade In and Fade Out effects, the Envelope tool gives you more control over the shape and duration of the fade:</p>
+  <ol>
+    <li>At the beginning of the track, create a control point and drag it all the way down (silence).</li>
+    <li>A few seconds later, create another control point at full volume.</li>
+    <li>The volume ramps up gradually between the two points — a custom fade-in.</li>
+    <li>Repeat at the end of the track for a fade-out.</li>
+  </ol>
+
+  <h3>Ducking Background Music Under Narration</h3>
+  <p>This is the most common real-world use of the Envelope tool. "Ducking" means lowering the volume of one track (usually music) whenever another track (usually voice) is playing.</p>
+  <ol>
+    <li>Select the <strong>Envelope tool</strong> (<kbd>F2</kbd>).</li>
+    <li>Click on the <strong>music track</strong> (not the voice track).</li>
+    <li>At the point where narration begins, create <strong>two control points</strong> close together:
+      <ul>
+        <li>The first point stays at full volume (just before speech starts).</li>
+        <li>The second point is dragged down to a much lower volume (where the speech begins).</li>
+      </ul>
+    </li>
+    <li>Keep the music low for the duration of the speech.</li>
+    <li>Where the speech ends, create two more points:
+      <ul>
+        <li>The first stays at the low volume (end of speech).</li>
+        <li>The second is brought back up to full volume (after the speech ends).</li>
+      </ul>
+    </li>
+    <li>The music smoothly dips under the narration and comes back up after.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> For natural-sounding ducks, don't bring the music down to silence — just reduce it to about <strong>20–30%</strong> of its original volume. The music should support the voice, not disappear completely.
+  </div>
+
+  <h3>Balancing Uneven Sections</h3>
+  <p>If parts of a recording are naturally louder or quieter than others (for example, the speaker moved closer to or farther from the mic), you can use the Envelope tool to manually even out the volume, bringing quiet sections up and loud sections down.</p>
+
+  <h2>Tips for Working with Envelopes</h2>
+  <ul>
+    <li>Place control points in pairs (one at the old level, one at the new level) to create clean, predictable transitions.</li>
+    <li>Zoom in (<kbd>Ctrl</kbd>+<kbd>1</kbd>) for more precision when placing points.</li>
+    <li>Play back frequently to check your changes sound natural.</li>
+    <li>The Envelope tool adjustments are preserved when you save the project and when you export.</li>
+  </ul>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>The <strong>Envelope tool</strong> (<kbd>F2</kbd>) creates per-point volume changes over time directly on the waveform.</li>
+    <li>Click to create control points; drag up/down to adjust volume at each point.</li>
+    <li>Use it for <strong>custom fades</strong>, <strong>ducking music under narration</strong>, and <strong>balancing uneven recordings</strong>.</li>
+    <li>Unlike Amplify/Normalize, the Envelope tool lets you make volume changes that vary across the track.</li>
+    <li>Remove points by dragging them outside the track boundary.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Audio Production — Audacity</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

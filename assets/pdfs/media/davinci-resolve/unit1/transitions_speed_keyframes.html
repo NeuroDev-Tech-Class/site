@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/davinci-resolve.html" class="back-link">&larr; Back to Video Production &mdash; DaVinci Resolve</a>
+    <div class="doc-header">
+    <span class="course-tag">Video Production — DaVinci Resolve</span>
+    <h1>Transitions, Speed Changes &amp; Keyframes</h1>
+    <p class="subtitle">Adding polish with transitions, controlling playback speed, and animating properties with keyframes</p>
+  </div>
+
+  <h2>Adding Transitions</h2>
+  <p>A <strong>transition</strong> is a visual effect that bridges two clips together. Instead of a hard cut (an instant switch from one clip to another), a transition gradually blends, wipes, or fades between them.</p>
+
+  <h3>Where to Find Transitions</h3>
+  <p>Open the <strong>Effects Library</strong> on the Edit page (toggle it from the top-left toolbar). Expand <strong>Video Transitions</strong> to see categories like Dissolve, Iris, Motion, Shape, and Wipe.</p>
+
+  <h3>Cross Dissolve</h3>
+  <p>The <strong>Cross Dissolve</strong> is the most commonly used transition. One clip gradually fades out while the next fades in, creating a smooth blend. To apply it:</p>
+  <ol>
+    <li>Find <em>Cross Dissolve</em> under <em>Video Transitions > Dissolve</em>.</li>
+    <li>Drag it onto the <strong>edit point</strong> (the cut) between two clips on the timeline.</li>
+    <li>The transition appears as a small bar spanning both clips.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> For a quick Cross Dissolve, select the edit point between two clips and press <kbd>Ctrl</kbd>+<kbd>T</kbd>. This applies the default transition instantly.
+  </div>
+
+  <h3>Dip to Black</h3>
+  <p><strong>Dip to Black</strong> fades the first clip to a black screen, then fades up to the second clip. It's effective for signaling a passage of time or a major scene change. Find it under <em>Video Transitions > Dissolve > Dip to Color Dissolve</em>.</p>
+
+  <h3>Other Transitions</h3>
+  <p>Resolve includes dozens of built-in transitions:</p>
+  <ul>
+    <li><strong>Wipe</strong> — one clip slides or pushes the other off screen</li>
+    <li><strong>Iris</strong> — a shape (circle, diamond, etc.) opens or closes to reveal the next clip</li>
+    <li><strong>Motion</strong> — zoom, spin, or slide transitions</li>
+    <li><strong>Shape</strong> — geometric shapes mask the transition</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Warning:</strong> Fancy transitions can be distracting. In professional work, the vast majority of transitions are simple <strong>cuts</strong> (no transition at all) or <strong>Cross Dissolves</strong>. Use other transitions sparingly and with purpose.
+  </div>
+
+  <h3>Adjusting Transition Duration</h3>
+  <p>After placing a transition, you can change its length:</p>
+  <ul>
+    <li><strong>Drag the edges:</strong> Hover over the left or right edge of the transition bar on the timeline and drag to make it shorter or longer.</li>
+    <li><strong>Inspector:</strong> Select the transition and open the <strong>Inspector</strong> to set an exact duration (e.g., 1.0 seconds) and adjust other properties like alignment (start on cut, center on cut, or end on cut).</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> Transitions need <strong>handle frames</strong> — extra footage beyond the In/Out points of each clip. If a clip is trimmed to its absolute start or end, there may not be enough media for a smooth transition. Resolve will warn you if handles are insufficient.
+  </div>
+
+  <h2>Speed Changes</h2>
+  <p>Changing the speed of a clip can add dramatic effect — slow motion for emphasis, fast motion for time-lapses, or freeze frames for impact.</p>
+
+  <h3>Change Clip Speed</h3>
+  <ol>
+    <li>Right-click the clip on the timeline.</li>
+    <li>Select <strong>Change Clip Speed…</strong> (or press <kbd>R</kbd>).</li>
+    <li>Enter a <strong>percentage</strong>: 100% is normal speed, 50% is half speed (slow motion), 200% is double speed (fast forward).</li>
+    <li>Check <strong>Ripple Timeline</strong> if you want the timeline to adjust its length to accommodate the speed change.</li>
+  </ol>
+
+  <h3>Freeze Frame</h3>
+  <p>A <strong>freeze frame</strong> pauses a single frame of video. To create one:</p>
+  <ol>
+    <li>Move the playhead to the frame you want to freeze.</li>
+    <li>Right-click the clip and select <strong>Change Clip Speed…</strong></li>
+    <li>Check <strong>Freeze Frame</strong>.</li>
+  </ol>
+  <p>Alternatively, you can split the clip at the desired frame with <kbd>Ctrl</kbd>+<kbd>B</kbd>, then change the speed of the second piece to 0% (freeze).</p>
+
+  <h3>Speed Ramp</h3>
+  <p>A <strong>speed ramp</strong> smoothly transitions between different speeds within a single clip — for example, starting at normal speed, slowing to 25%, then ramping back up. To create one:</p>
+  <ol>
+    <li>Right-click the clip and choose <strong>Retime Controls</strong> (or press <kbd>Ctrl</kbd>+<kbd>R</kbd>).</li>
+    <li>A speed bar appears above the clip. Click the dropdown arrow and choose <strong>Add Speed Point</strong> to create control points.</li>
+    <li>Each segment between speed points can have a different speed percentage.</li>
+    <li>Click the dropdown on any segment to set its speed.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> Speed ramps work best with footage shot at a high frame rate (60 fps or higher). If you slow down 30 fps footage too much, it will look choppy because there aren't enough frames. Resolve can use optical flow interpolation (<em>Change Clip Speed > Speed Change > Optical Flow</em>) to generate in-between frames for smoother results.
+  </div>
+
+  <h2>Keyframes</h2>
+  <p><strong>Keyframes</strong> let you animate any property over time. Instead of a property being one static value for the entire clip, you set specific values at specific points in time, and Resolve smoothly transitions between them.</p>
+
+  <h3>How Keyframes Work</h3>
+  <p>Every property in the Inspector — position, zoom, rotation, opacity, and more — can be keyframed. The concept is simple:</p>
+  <ol>
+    <li>Move the playhead to the <strong>starting</strong> point.</li>
+    <li>In the Inspector, click the <strong>diamond icon</strong> (◆) next to the property you want to animate. This sets the first keyframe with the current value.</li>
+    <li>Move the playhead to the <strong>ending</strong> point.</li>
+    <li>Change the property value. Resolve automatically creates a second keyframe.</li>
+    <li>Play back to see the smooth animation between the two values.</li>
+  </ol>
+
+  <h3>Example: Simple Zoom-In Animation</h3>
+  <p>Let's create a slow zoom-in effect on a clip:</p>
+  <ol>
+    <li>Select the clip on the timeline and open the <strong>Inspector</strong>.</li>
+    <li>Move the playhead to the beginning of the clip.</li>
+    <li>Under <em>Transform</em>, find <strong>Zoom</strong>. It should be at <code>1.000</code> (100%).</li>
+    <li>Click the <strong>diamond icon</strong> next to Zoom to set a keyframe.</li>
+    <li>Move the playhead to the end of the clip (or wherever you want the zoom to finish).</li>
+    <li>Change Zoom to <code>1.200</code> (120%). A second keyframe is automatically created.</li>
+    <li>Play the clip — you'll see it slowly zoom in from 100% to 120%.</li>
+  </ol>
+
+  <h3>Navigating Between Keyframes</h3>
+  <p>Once you set keyframes, small arrow buttons appear next to the diamond icon in the Inspector. Use these to jump the playhead forward or backward between keyframes. This makes it easy to find and adjust existing keyframes.</p>
+
+  <h3>Ease In / Ease Out</h3>
+  <p>By default, keyframe animations move at a constant speed (linear interpolation). This can look robotic. <strong>Ease In</strong> and <strong>Ease Out</strong> make the animation start slowly and/or end slowly, creating a much more natural feel.</p>
+  <p>To add easing, open the <strong>Keyframe Editor</strong> in the timeline (click the diamond icon on the clip or expand the keyframe area). Right-click a keyframe and choose <strong>Ease In</strong>, <strong>Ease Out</strong>, or <strong>Ease In and Out</strong>.</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> Easing makes almost every animation look better. As a rule of thumb, always add at least <strong>Ease In and Out</strong> to your keyframed animations unless you specifically want a sharp, mechanical motion.
+  </div>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li><strong>Cross Dissolve</strong> (<kbd>Ctrl</kbd>+<kbd>T</kbd>) is the most-used transition — keep fancy transitions to a minimum.</li>
+    <li>Adjust transition duration by dragging its edges or using the Inspector.</li>
+    <li>Change clip speed via right-click > <em>Change Clip Speed</em> (<kbd>R</kbd>). Use <strong>Retime Controls</strong> for speed ramps.</li>
+    <li><strong>Keyframes</strong> animate properties over time: set a keyframe, move the playhead, change the value.</li>
+    <li>Use <strong>Ease In/Out</strong> on keyframes for smooth, natural-looking animations.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Video Production — DaVinci Resolve</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

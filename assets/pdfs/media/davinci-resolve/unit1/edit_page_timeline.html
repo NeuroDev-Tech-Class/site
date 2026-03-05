@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/davinci-resolve.html" class="back-link">&larr; Back to Video Production &mdash; DaVinci Resolve</a>
+    <div class="doc-header">
+    <span class="course-tag">Video Production — DaVinci Resolve</span>
+    <h1>The Edit Page &amp; Timeline</h1>
+    <p class="subtitle">Building your project on the timeline — tracks, editing modes, tools, and navigation</p>
+  </div>
+
+  <h2>Creating a Timeline</h2>
+  <p>A <strong>timeline</strong> is the sequence where you arrange your clips from start to finish. To create your first timeline, simply drag a clip from the Media Pool into the empty timeline area at the bottom of the Edit page. Resolve will automatically create a new timeline and place the clip on it.</p>
+  <p>You can also create a timeline manually: go to <em>File > New Timeline</em> (or <kbd>Ctrl</kbd>+<kbd>N</kbd>). This lets you name it, set the number of starting tracks, and configure settings. You can have multiple timelines in a single project — useful for organizing different scenes or versions.</p>
+
+  <h2>Understanding Timeline Tracks</h2>
+  <p>The timeline is made up of horizontal <strong>tracks</strong> stacked vertically. There are two types:</p>
+
+  <h3>Video Tracks (V1, V2, V3…)</h3>
+  <p>Video tracks stack from bottom to top. <strong>V1</strong> is the base layer, <strong>V2</strong> sits above it, <strong>V3</strong> above that, and so on. A clip on a higher-numbered track <strong>covers</strong> (obscures) anything on the tracks below it — just like stacking papers on a desk. This layering is how you create picture-in-picture effects, overlay titles, and composite multiple elements together.</p>
+
+  <h3>Audio Tracks (A1, A2, A3…)</h3>
+  <p>Audio tracks work differently — they <strong>mix together</strong> rather than covering each other. A1 might hold your main dialogue, A2 your background music, and A3 your sound effects. All three play simultaneously, and you control their relative volume with the track faders.</p>
+
+  <p>To add more tracks, right-click in the track header area (the left edge of the timeline) and choose <em>Add Track</em>. You can add video or audio tracks above or below existing ones.</p>
+
+  <h2>Adding Clips to the Timeline</h2>
+  <p>There are several ways to place a clip on the timeline, each with different behavior:</p>
+
+  <table>
+    <thead>
+      <tr><th>Method</th><th>Shortcut</th><th>Behavior</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Insert</strong></td><td><kbd>F9</kbd></td><td>Places the clip at the playhead and pushes everything to the right to make room. The timeline gets longer.</td></tr>
+      <tr><td><strong>Overwrite</strong></td><td><kbd>F10</kbd></td><td>Places the clip at the playhead and replaces whatever was there. The timeline length stays the same.</td></tr>
+      <tr><td><strong>Place on Top</strong></td><td><kbd>F12</kbd></td><td>Places the clip on the next available track above, aligned to the playhead. Doesn't disturb existing clips.</td></tr>
+      <tr><td><strong>Append to End</strong></td><td><kbd>Shift</kbd>+<kbd>F12</kbd></td><td>Adds the clip at the very end of the timeline, after all existing content.</td></tr>
+    </tbody>
+  </table>
+
+  <p>You can also simply <strong>drag clips</strong> from the Media Pool directly onto the timeline and position them wherever you like.</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> When quickly assembling a rough cut, <strong>Append to End</strong> is your best friend. Load clips in the Source Viewer, set In/Out points for the best parts, and press <kbd>Shift</kbd>+<kbd>F12</kbd> to stack them up one after another.
+  </div>
+
+  <h2>The Source/Record Workflow</h2>
+  <p>Professional editors use a <strong>Source/Record</strong> (or Source/Program) workflow for precise editing:</p>
+  <ol>
+    <li><strong>Load a clip</strong> — double-click a clip in the Media Pool to open it in the <strong>Source Viewer</strong> (left viewer).</li>
+    <li><strong>Preview and mark</strong> — play through the clip and press <kbd>I</kbd> to set an <strong>In point</strong> (where the selection starts) and <kbd>O</kbd> to set an <strong>Out point</strong> (where it ends). This selects just the portion you want.</li>
+    <li><strong>Position the playhead</strong> — in the timeline, move the playhead to where you want the clip to go.</li>
+    <li><strong>Insert or Overwrite</strong> — press <kbd>F9</kbd> (Insert) or <kbd>F10</kbd> (Overwrite) to place the marked selection into the timeline.</li>
+  </ol>
+  <p>The <strong>Timeline Viewer</strong> (right viewer) always shows the current state of your timeline at the playhead. This lets you see the result of your edits in real time.</p>
+
+  <h2>Essential Editing Tools</h2>
+  <p>The Edit page toolbar (above the timeline) provides several tools. The three you'll use most often:</p>
+
+  <h3>Selection Tool — <kbd>A</kbd></h3>
+  <p>The default tool. Click to select clips, drag to move them, drag the edges of a clip to trim it (shorten or extend). Hold <kbd>Ctrl</kbd> and click to select multiple clips. This is the tool you'll have active 90% of the time.</p>
+
+  <h3>Trim Tool — <kbd>T</kbd></h3>
+  <p>The Trim tool enables advanced trimming directly on the timeline. Depending on where you click on a clip edge, you get different behaviors:</p>
+  <ul>
+    <li><strong>Ripple Trim:</strong> Click on a single edge — extends or shortens the clip and shifts everything else to compensate. The timeline length changes.</li>
+    <li><strong>Roll Trim:</strong> Click on the edit point between two adjacent clips — moves the cut point without changing the overall timeline length. One clip gets longer, the other gets shorter.</li>
+  </ul>
+
+  <h3>Blade Tool — <kbd>B</kbd></h3>
+  <p>Click anywhere on a clip to <strong>split</strong> (cut) it into two pieces at that point. This is useful when you want to remove a section from the middle of a clip or apply different effects to different parts. After splitting, switch back to the Selection tool (<kbd>A</kbd>) to select and delete or move the pieces.</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> You can split a clip without switching to the Blade tool by placing the playhead where you want the cut and pressing <kbd>Ctrl</kbd>+<kbd>B</kbd>. This works with the Selection tool active.
+  </div>
+
+  <h2>Ripple Delete</h2>
+  <p>When you delete a clip from the timeline (select it and press <kbd>Delete</kbd>), it leaves a <strong>gap</strong> — an empty space where the clip used to be. To delete a clip <em>and</em> close the gap in one step, select it and press <kbd>Shift</kbd>+<kbd>Delete</kbd> (or right-click > <em>Ripple Delete</em>). Everything after the clip slides left to fill the space.</p>
+  <p>You can also select an empty gap on the timeline and press <kbd>Delete</kbd> to close it.</p>
+
+  <h2>Snapping</h2>
+  <p>When <strong>snapping</strong> is enabled, clips magnetically "snap" to the playhead, to the edges of other clips, and to markers as you drag them. This makes it easy to align clips precisely without gaps or overlaps.</p>
+  <p>Toggle snapping on and off with <kbd>N</kbd>. A magnet icon in the toolbar indicates whether snapping is active. Keep snapping on most of the time — turn it off temporarily when you need to position a clip freely.</p>
+
+  <h2>Timeline Navigation</h2>
+  <p>Navigating the timeline efficiently is key to a smooth editing workflow:</p>
+
+  <table>
+    <thead>
+      <tr><th>Action</th><th>How</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Scroll left/right</strong></td><td>Scroll wheel (horizontal) or <kbd>Shift</kbd>+scroll wheel, or middle-click and drag</td></tr>
+      <tr><td><strong>Zoom in/out</strong></td><td><kbd>Ctrl</kbd>+scroll wheel, or <kbd>Ctrl</kbd>+<kbd>+</kbd> / <kbd>Ctrl</kbd>+<kbd>-</kbd></td></tr>
+      <tr><td><strong>Zoom to fit entire timeline</strong></td><td><kbd>Shift</kbd>+<kbd>Z</kbd></td></tr>
+      <tr><td><strong>Move playhead</strong></td><td>Click on the timeline ruler (top bar), or use <kbd>←</kbd> / <kbd>→</kbd> arrow keys (frame by frame)</td></tr>
+      <tr><td><strong>Jump to start</strong></td><td><kbd>Home</kbd></td></tr>
+      <tr><td><strong>Jump to end</strong></td><td><kbd>End</kbd></td></tr>
+      <tr><td><strong>Go to next/previous edit</strong></td><td><kbd>↑</kbd> / <kbd>↓</kbd></td></tr>
+    </tbody>
+  </table>
+
+  <h3>J/K/L Playback</h3>
+  <p>The <kbd>J</kbd>, <kbd>K</kbd>, and <kbd>L</kbd> keys give you powerful playback control:</p>
+  <ul>
+    <li><kbd>L</kbd> — Play forward. Press again to increase speed (2×, 4×, 8×).</li>
+    <li><kbd>J</kbd> — Play in reverse. Press again to increase reverse speed.</li>
+    <li><kbd>K</kbd> — Stop/pause playback.</li>
+    <li><kbd>K</kbd>+<kbd>L</kbd> (hold both) — Slow forward (frame by frame while held).</li>
+    <li><kbd>K</kbd>+<kbd>J</kbd> (hold both) — Slow reverse.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> The J/K/L keys are used across nearly every professional NLE. Build the habit of using them now — they're much faster than clicking play/pause and dragging the playhead.
+  </div>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>Create a timeline by dragging a clip to the timeline area or using <kbd>Ctrl</kbd>+<kbd>N</kbd>.</li>
+    <li>Video tracks stack (higher covers lower); audio tracks mix together.</li>
+    <li>Use <strong>Insert</strong> (<kbd>F9</kbd>) to push clips right, <strong>Overwrite</strong> (<kbd>F10</kbd>) to replace, or <strong>Append</strong> (<kbd>Shift</kbd>+<kbd>F12</kbd>) to add at the end.</li>
+    <li>The <strong>Selection</strong> (<kbd>A</kbd>), <strong>Trim</strong> (<kbd>T</kbd>), and <strong>Blade</strong> (<kbd>B</kbd>) tools handle most editing operations.</li>
+    <li>Use <kbd>Shift</kbd>+<kbd>Delete</kbd> for <strong>Ripple Delete</strong> to remove a clip and close the gap.</li>
+    <li>Master <kbd>J</kbd>/<kbd>K</kbd>/<kbd>L</kbd> playback and <kbd>Ctrl</kbd>+scroll to zoom for fast navigation.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Video Production — DaVinci Resolve</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>Lighting &amp; Atmosphere</h1>
+    <p class="subtitle">Set the mood of your world with lights, sky, fog, and post-processing effects</p>
+  </div>
+
+  <h2>Why Lighting Matters</h2>
+  <p>Lighting is one of the single biggest factors that determines how your game <em>feels</em>. The same environment can look like a cheerful meadow under bright daylight or a foreboding wasteland under overcast skies — all depending on how you set up your lights. UE5's lighting system is incredibly powerful, and it starts with just a handful of key actors.</p>
+
+  <h2>The Core Light Actors</h2>
+
+  <h3>Directional Light (The Sun)</h3>
+  <p>The <strong>Directional Light</strong> simulates a light source that is infinitely far away — like the sun. Its rays are parallel, and it illuminates the entire scene from a single direction.</p>
+  <ul>
+    <li><strong>Rotation</strong> controls the time of day — rotate it to change the angle of the sun. A low angle creates long shadows (sunrise/sunset), while a high angle creates short shadows (noon).</li>
+    <li><strong>Intensity</strong> controls brightness (measured in <em>lux</em>).</li>
+    <li><strong>Light Color</strong> lets you tint the sunlight — warm orange for golden hour, cool blue for overcast.</li>
+    <li>Enable <strong>Atmosphere Sun Light</strong> in the Details Panel to make this light drive the sky color (golden sky at sunset, blue at noon).</li>
+  </ul>
+
+  <h3>Sky Light</h3>
+  <p>The <strong>Sky Light</strong> captures the environment around your level and uses it to fill in <strong>ambient lighting</strong> — the soft, indirect light that reaches shaded areas. Without a Sky Light, shadows would be completely black.</p>
+  <ul>
+    <li>Set the <strong>Source Type</strong> to <code>SLS Captured Scene</code> so it automatically uses the current sky as its light source.</li>
+    <li>After making changes to the sky or Directional Light, click <strong>Recapture Sky</strong> in the Sky Light's Details Panel to update the ambient lighting.</li>
+    <li>Adjust the <strong>Intensity Scale</strong> to make ambient light brighter or darker.</li>
+  </ul>
+
+  <h3>Sky Atmosphere</h3>
+  <p>The <strong>Sky Atmosphere</strong> actor renders a physically accurate sky model. It simulates Rayleigh and Mie scattering — the real-world physics that make the sky blue during the day and orange at sunset.</p>
+  <ul>
+    <li>It works in conjunction with the Directional Light — as you rotate the sun, the sky colors update automatically.</li>
+    <li>You can tweak scattering parameters to create alien-looking skies (e.g., a green atmosphere for a sci-fi planet).</li>
+  </ul>
+
+  <h3>Volumetric Clouds</h3>
+  <p>UE5 includes a <strong>Volumetric Cloud</strong> actor that renders realistic, fully 3D clouds. These aren't just flat skybox images — they have depth, catch light from the sun, and cast shadows on the ground.</p>
+  <ul>
+    <li>Adjust <strong>Layer Bottom Altitude</strong> and <strong>Layer Height</strong> to control where clouds appear.</li>
+    <li>Customize cloud density and shape through the cloud material settings.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> Most template projects already include a Directional Light, Sky Light, Sky Atmosphere, and Volumetric Clouds. Check the <strong>Outliner</strong> before adding new ones — having duplicates can cause visual artifacts.
+  </div>
+
+  <h3>Exponential Height Fog</h3>
+  <p><strong>Exponential Height Fog</strong> adds atmospheric haze that becomes denser closer to the ground and thinner at higher altitudes. It's essential for creating distance, depth, and mood.</p>
+  <ul>
+    <li><strong>Fog Density</strong> controls overall thickness.</li>
+    <li><strong>Fog Height Falloff</strong> controls how quickly the fog fades as altitude increases.</li>
+    <li><strong>Inscattering Color</strong> sets the fog color — match it to your sky for a cohesive look.</li>
+    <li>Enable <strong>Volumetric Fog</strong> (checkbox in the Details Panel) for light shafts (god rays) when sunlight pierces through the fog.</li>
+  </ul>
+
+  <h2>Lumen: Real-Time Global Illumination</h2>
+  <p>One of UE5's headline features is <strong>Lumen</strong>, a fully dynamic global illumination and reflection system. In previous Unreal versions, realistic lighting required long <em>bake</em> times — pre-computing how light bounces off surfaces. Lumen does this in <strong>real time</strong>.</p>
+
+  <p>What this means for you:</p>
+  <ul>
+    <li>Move a wall, and the light that bounces off it updates instantly.</li>
+    <li>Place a bright red carpet in a white room, and the walls will pick up a subtle red tint from bounced light.</li>
+    <li>Reflections on shiny surfaces show the actual surrounding scene, not just a static capture.</li>
+    <li><strong>No baking required</strong> — iterate faster and see results immediately.</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Hardware Note:</strong> Lumen requires a relatively modern GPU to run at full quality. If your frame rate drops in the editor, you can switch the Global Illumination method back to <code>Screen Space</code> or <code>None</code> under <code>Project Settings → Engine → Rendering → Global Illumination</code>. You can also lower Lumen quality in <code>Engine Scalability Settings</code>.
+  </div>
+
+  <h2>Static vs. Dynamic Lighting</h2>
+  <p>Every light actor has a <strong>Mobility</strong> setting in the Details Panel:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Mobility</th>
+        <th>Description</th>
+        <th>Best For</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Static</strong></td>
+        <td>Pre-baked. Cannot change at runtime. Highest quality shadows but requires baking.</td>
+        <td>Indoor scenes with fixed lighting on lower-end hardware</td>
+      </tr>
+      <tr>
+        <td><strong>Stationary</strong></td>
+        <td>Baked indirect light, real-time direct light. Can change intensity/color at runtime.</td>
+        <td>Sun lights that shift gradually (day/night cycle)</td>
+      </tr>
+      <tr>
+        <td><strong>Movable</strong></td>
+        <td>Fully dynamic. Lumen handles the indirect bounce. Most flexible, higher GPU cost.</td>
+        <td>Default for UE5 projects using Lumen</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Tip:</strong> When using Lumen, set your lights to <strong>Movable</strong>. Lumen is designed around fully dynamic lights and works best that way. You only need Static lights if you're targeting very low-end hardware or mobile platforms.
+  </div>
+
+  <h2>Post Process Volume</h2>
+  <p>A <strong>Post Process Volume</strong> applies screen-space effects to the camera — these are finishing touches applied <em>after</em> the scene is rendered, like filters on a photo.</p>
+
+  <p>Common post-process settings:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Effect</th>
+        <th>What It Does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Bloom</strong></td>
+        <td>Makes bright areas glow softly — mimics how real cameras behave</td>
+      </tr>
+      <tr>
+        <td><strong>Exposure (Auto/Manual)</strong></td>
+        <td>Controls how the camera adapts to brightness — important for indoor/outdoor transitions</td>
+      </tr>
+      <tr>
+        <td><strong>Color Grading</strong></td>
+        <td>Adjust contrast, saturation, tint, shadows, highlights — like color correction in film</td>
+      </tr>
+      <tr>
+        <td><strong>Ambient Occlusion</strong></td>
+        <td>Adds soft shadows in crevices and corners for added depth</td>
+      </tr>
+      <tr>
+        <td><strong>Vignette</strong></td>
+        <td>Darkens the edges of the screen for a cinematic feel</td>
+      </tr>
+      <tr>
+        <td><strong>Depth of Field</strong></td>
+        <td>Blurs distant or close objects to simulate camera focus</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>To use a Post Process Volume:</p>
+  <ol>
+    <li>Add one from <code>+ → Visual Effects → Post Process Volume</code>.</li>
+    <li>In the Details Panel, check <strong>Infinite Extent (Unbound)</strong> to apply the effect globally, or leave it unchecked to only affect the player when they're inside the volume's box.</li>
+    <li>Adjust settings to taste — start subtle and build up.</li>
+  </ol>
+
+  <h2>Performance Tips</h2>
+  <ul>
+    <li><strong>One Directional Light is enough</strong> — multiple directional lights are expensive and rarely needed.</li>
+    <li><strong>Use Movable lights with Lumen</strong> — mixing Static and Movable lights in the same scene with Lumen can cause inconsistencies.</li>
+    <li><strong>Lower the Volumetric Cloud quality</strong> in scalability settings if you're experiencing frame drops.</li>
+    <li><strong>Turn off Volumetric Fog</strong> on Exponential Height Fog if you don't need god rays — it's one of the more expensive effects.</li>
+    <li><strong>Post Process effects stack up.</strong> Each effect adds to the GPU cost. On older hardware, disable Depth of Field and reduce Bloom intensity.</li>
+  </ul>
+
+  <div class="activity">
+    <strong>Practice:</strong>
+    <ol>
+      <li>Open a project and locate the Directional Light in the Outliner.</li>
+      <li>Rotate it with the Rotate tool (<kbd>E</kbd>) to simulate different times of day. Watch how the Sky Atmosphere updates.</li>
+      <li>Select the Exponential Height Fog and enable <strong>Volumetric Fog</strong>. Observe the god rays.</li>
+      <li>Add a <strong>Post Process Volume</strong>, set it to Infinite Extent, and experiment with Bloom, Color Grading, and Vignette.</li>
+      <li>Try changing the Directional Light color to a warm orange and setting the exposure manually for a sunset look.</li>
+    </ol>
+  </div>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

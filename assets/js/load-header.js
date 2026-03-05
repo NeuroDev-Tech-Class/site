@@ -10,3 +10,11 @@ document.querySelector("header").innerHTML = `
     <a href="resources.html">Resources</a>
   </nav>
 `;
+
+// Determine correct path for auth module based on environment
+const isLocalDev = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+const basePath = isLocalDev && !window.location.pathname.includes('/site/') ? '' : '/site/';
+const authPath = basePath + 'assets/js/auth.js';
+
+// Load auth module after header is ready
+import(authPath).catch(err => console.error('Failed to load auth module:', err));

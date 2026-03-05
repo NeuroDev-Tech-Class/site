@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/linux.html" class="back-link">&larr; Back to Introduction to Linux</a>
+    <div class="doc-header">
+      <span class="course-tag">Introduction to Linux</span>
+      <h1>Bash Command Tutorial 2</h1>
+      <p class="subtitle">rm, rmdir, touch, echo, cat, nano, mv</p>
+    </div>
+
+    <p>Now we'll learn how to manipulate files and directories.</p>
+
+    <p><code>rm</code> means "remove." For example:</p>
+
+    <ul>
+      <li><code>rm &lt;file&gt;</code> — delete a file</li>
+      <li><code>rmdir &lt;folder&gt;</code> — delete a directory (only works if it's empty)</li>
+      <li><code>rm -r &lt;folder&gt;</code> — delete a non-empty directory and everything inside of it</li>
+    </ul>
+
+    <p>Start by deleting the "practice" directory from the last exercise. Run this:</p>
+
+    <pre><code>rmdir practice</code></pre>
+
+    <p>And then run <code>ls</code> to check that it's gone.</p>
+
+    <p>The <code>touch</code> command is used to create new empty files. Run these:</p>
+
+    <pre><code>touch apple.txt banana.txt</code></pre>
+
+    <p>If you run <code>ls</code> again you should see this:</p>
+
+    <pre><code>apple.txt  banana.txt</code></pre>
+
+    <p>Now delete one, and then check that it's actually gone.</p>
+
+    <pre><code>rm banana.txt</code></pre>
+
+    <div class="tip">
+      <p>Bash has a helpful autocomplete feature. You can type <code>rm b</code> and then hit <kbd>Tab</kbd>, and it'll automatically fill in <code>rm banana.txt</code> for you.</p>
+    </div>
+
+    <p>The <code>echo</code> command lets you write text into a file. Run this:</p>
+
+    <pre><code>echo "I like apples" > apple.txt</code></pre>
+
+    <p>Then check the contents of the file with the <code>cat</code> command.</p>
+
+    <pre><code>cat apple.txt</code></pre>
+
+    <p>You should see <code>I like apples</code>.</p>
+
+    <p>Do you feel like a hacker yet? Buckle up, it only gets more exciting from here.</p>
+
+    <p><code>nano</code> is a simple command-line text editor built into most Linux systems, including Ubuntu. Run this:</p>
+
+    <pre><code>nano apple.txt</code></pre>
+
+    
+    <img src="assets/images/linux/bash_2_1.png" alt="Figure 1" />
+<p>You'll be taken into a fullscreen editor. At the bottom of the screen, you see a list of keyboard shortcuts. The <code>^</code> symbol means "hold Control." Write a few lines of whatever text you want.</p>
+    <img src="assets/images/linux/bash_2_2.png" alt="Figure 2" />
+
+
+    <p>Then press <kbd>Ctrl</kbd>+<kbd>O</kbd> to save the file, <kbd>Enter</kbd> to confirm, and <kbd>Ctrl</kbd>+<kbd>X</kbd> to exit. You'll be taken back to the terminal.</p>
+
+    <p>Now you can <code>cat apple.txt</code> and it should print the entire file. Cool, huh?</p>
+
+    <p>Now make another directory:</p>
+
+    <pre><code>mkdir fruits</code></pre>
+
+    <p>And some more text files:</p>
+
+    <pre><code>touch cherry.txt kiwi.txt orange.txt</code></pre>
+
+    <p>Move files into a directory with <code>mv</code>.</p>
+
+    <pre><code>mv apple.txt fruits</code></pre>
+
+    <p>You can automatically move ALL the text files into a directory like this:</p>
+
+    <pre><code>mv *.txt fruits</code></pre>
+
+    <p>If you check with <code>ls</code> you should only see the fruits directory. Then <code>cd</code> into fruits and <code>ls</code> again to check that all your files were successfully moved there.</p>
+    <img src="assets/images/linux/bash_2_3.png" alt="Figure 3" />
+
+
+    <p>Run <code>cd ..</code> to go back up a level. Now we're back in the home directory.</p>
+
+    <p>Now it's time to erase all your hard work. Run this:</p>
+
+    <pre><code>rm -r fruits</code></pre>
+
+    <p>You've successfully deleted the fruits directory and everything inside of it. The <code>-r</code> stands for "recursive." When you see a dash and a letter (like <code>-r</code>), you're passing a "flag" to the command. Flags modify how a command works.</p>
+
+    <div class="warning">
+      <p>Be careful with commands like <code>rm -r</code>. Linux gives you great power, and with that comes great responsibility. There is no "undo" button, so make sure you know what you're doing before entering a command!</p>
+    </div>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class — Introduction to Linux</p>
+    </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="assets/js/load-footer.js" defer></script>
+</body>
+</html>

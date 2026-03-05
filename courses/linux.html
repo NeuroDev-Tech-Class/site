@@ -7,8 +7,8 @@
 
   <body>
     <header></header>
-    <script src="/site/assets/js/load-header.js" defer></script>
-    <script src="/site/assets/js/link-generator.js"></script>
+    <script src="/site/assets/js/load-header.js" type="module"></script>
+    <script src="/site/assets/js/link-generator.js" type="module"></script>
 
     <main id="main-content">
       <h1>Introduction to Linux</h1>
@@ -57,7 +57,12 @@
               {
                 "type": "doc",
                 "title": "Reading - What is Linux?",
-                "url": "assets/pdfs/it/linux/what_is_linux.pdf"
+                "url": "assets/pdfs/it/linux/what_is_linux.html"
+              },
+              {
+                "type": "doc",
+                "title": "Reading - Why Learn the Command Line?",
+                "url": "assets/pdfs/it/linux/why_learn_the_command_line_.html"
               },
               {
                 "type": "html",
@@ -92,22 +97,22 @@
               {
                 "type": "doc",
                 "title": "Reading - Intro to WSL",
-                "url": "assets/pdfs/it/linux/intro_to_WSL.pdf"
+                "url": "assets/pdfs/it/linux/intro_to_WSL.html"
               },
               {
                 "type": "doc",
                 "title": "Bash Command Tutorial 1 - mkdir, ls, pwd, cd, clear",
-                "url": "assets/pdfs/it/linux/bash_1.pdf"
+                "url": "assets/pdfs/it/linux/bash_1.html"
               },
               {
                 "type": "doc",
                 "title": "Bash Command Tutorial 2 - rm, rmdir, touch, echo, cat, nano, mv",
-                "url": "assets/pdfs/it/linux/bash_2.pdf"
+                "url": "assets/pdfs/it/linux/bash_2.html"
               },
               {
                 "type": "doc",
                 "title": "Bash Command Tutorial 3 - wget, head, tail, less, grep, cp, |, >, >>",
-                "url": "assets/pdfs/it/linux/bash_3.pdf"
+                "url": "assets/pdfs/it/linux/bash_3.html"
               },
               {
                 "type": "doc",
@@ -117,55 +122,120 @@
               {
                 "type": "doc",
                 "title": "Reading - Package Managers",
-                "url": "assets/pdfs/it/linux/package_managers.pdf"
+                "url": "assets/pdfs/it/linux/package_managers.html"
               },
               {
                 "type": "doc",
                 "title": "Bash Command Tutorial 4 - apt, tree",
-                "url": "assets/pdfs/it/linux/bash_4.pdf"
+                "url": "assets/pdfs/it/linux/bash_4.html"
               },
               {
                 "type": "html",
                 "html": "Unit 1 Lab - Create hello.sh with #!/bin/bash and echo 'Hello Linux!' Practice chmod +x hello.sh and run with ./hello.sh"
               }
             ]
-          }
-        ]
-      </script>
-
-      <!--         {
+          },
+          {
             "title": "Unit 2: Full Linux Environment",
             "description": "Explore Linux GUI and system tools using a Virtual Machine (Ubuntu Desktop).",
             "content": [
-                { "type": "html", "html": "Install VirtualBox on your system (guided walkthrough)" },
-                { "type": "html", "html": "Download the Ubuntu ISO and install it in VirtualBox" },
-                { "type": "html", "html": "Configure VM settings (RAM, CPU, disk size)" },
-                { "type": "doc", "title": "Reading - Absolute vs Relative Paths", "url": "link" },
-                { "type": "html", "html": "Exercise: Create, move, and delete files/folders" },
-                { "type": "doc", "title": "Reading - File Permissions and Ownership", "url": "link" },
-                { "type": "html", "html": "Exercise: Modify file permissions (hands-on)" },
-                { "type": "html", "html": "Exercise: Create and edit a config file" },
-                { "type": "html", "html": "Reflection: CLI vs GUI — When to use which?" },
-                { "type": "doc", "title": "Quiz - Unit 2 Review", "url": "link" }
+              {
+                "type": "html",
+                "html": "<strong>Step 1:</strong> Download and install <a href='https://www.virtualbox.org/wiki/Downloads' target='_blank'>VirtualBox</a> for your operating system. Run the installer and follow the prompts."
+              },
+              {
+                "type": "html",
+                "html": "<strong>Step 2:</strong> Download the latest <a href='https://ubuntu.com/download/desktop' target='_blank'>Ubuntu Desktop ISO</a>. Save it somewhere you can easily find it (like your Downloads folder)."
+              },
+              {
+                "type": "html",
+                "html": "<strong>Step 3:</strong> Open VirtualBox and click <em>New</em>. Name your VM (e.g. 'Ubuntu Desktop'), select <em>Type: Linux</em> and <em>Version: Ubuntu (64-bit)</em>. Allocate at least <strong>4 GB RAM</strong> (4096 MB), <strong>2 CPU cores</strong>, and create a virtual hard disk with at least <strong>25 GB</strong> of space."
+              },
+              {
+                "type": "html",
+                "html": "<strong>Step 4:</strong> Before starting the VM, go to <em>Settings → Storage</em>. Click the empty disc icon under Controller: IDE, then click the disc icon on the right and choose your downloaded Ubuntu ISO file. Click OK."
+              },
+              {
+                "type": "html",
+                "html": "<strong>Step 5:</strong> Start the VM and install Ubuntu. Choose <em>Install Ubuntu</em>, select your language and keyboard, choose <em>Normal installation</em>, and select <em>Erase disk and install Ubuntu</em> (this only erases the virtual disk, not your real one!). Create your user account and let the installation finish."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - Absolute vs Relative Paths",
+                "url": "assets/pdfs/it/linux/abs_vs_rel_paths.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise:</strong> In your VM, open the Terminal app. Create a directory structure: <code>mkdir -p ~/practice/{docs,images,scripts}</code>. Navigate between them using both absolute and relative paths. Use <code>pwd</code> to verify your location after each <code>cd</code> command."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - File Permissions and Ownership",
+                "url": "assets/pdfs/it/linux/file_permissions.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise:</strong> Create a file with <code>touch ~/practice/secret.txt</code>. Check its permissions with <code>ls -l</code>. Remove all permissions for others: <code>chmod o-rwx secret.txt</code>. Make a script executable: <code>echo '#!/bin/bash' > ~/practice/scripts/test.sh && chmod u+x ~/practice/scripts/test.sh</code>. Verify with <code>ls -l</code>."
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise:</strong> Open a config file with <code>nano ~/.bashrc</code>. Scroll to the bottom and add a custom alias: <code>alias ll='ls -la'</code>. Save with Ctrl+O, exit with Ctrl+X. Run <code>source ~/.bashrc</code> to apply, then test by typing <code>ll</code>."
+              },
+              {
+                "type": "html",
+                "html": "<strong>Reflection:</strong> CLI vs GUI — When to use which? The GUI is great for browsing the web, editing documents, and visual tasks. The CLI is faster for file management, automation, and remote server access. Most Linux professionals use both! Write a short paragraph about a task where CLI would be better than GUI, and vice versa."
+              }
             ]
-        },
-        {
+          },
+          {
             "title": "Unit 3: Real-World Linux Use",
-            "description": "Use a Live USB to experience Ubuntu Desktop on real hardware and practice troubleshooting systems.",
+            "description": "Practice system monitoring, user management, and troubleshooting on a Linux system.",
             "content": [
-                { "type": "html", "html": "Instructor distributes bootable Ubuntu Desktop Live USBs" },
-                { "type": "html", "html": "Boot into Ubuntu Desktop from a Live USB (no installation required)" },
-                { "type": "html", "html": "Walkthrough: Navigating a Linux desktop environment" },
-                { "type": "doc", "title": "Reading - System Monitoring Tools (top, htop)", "url": "link" },
-                { "type": "html", "html": "Exercise: Kill a process using the terminal" },
-                { "type": "doc", "title": "Reading - User and Group Management", "url": "link" },
-                { "type": "html", "html": "Exercise: Create a new user and switch users" },
-                { "type": "doc", "title": "Reading - Basic Troubleshooting Techniques", "url": "link" },
-                { "type": "doc", "title": "Slideshow - I Broke It — Now What?", "url": "link" },
-                { "type": "doc", "title": "Final Project - Linux Task Challenge", "url": "link" },
-                { "type": "doc", "title": "Quiz - Unit 3 Review", "url": "link" }
+              {
+                "type": "html",
+                "html": "<strong>Live USB Experience:</strong> Your instructor will distribute bootable Ubuntu Desktop Live USBs. To boot from one: plug it in, restart your computer, and press <kbd>F12</kbd> (or <kbd>F2</kbd>/<kbd>Esc</kbd>/<kbd>Del</kbd> depending on your system) to open the boot menu. Select the USB drive. Choose <em>Try Ubuntu</em> — this runs Ubuntu directly from the USB without installing anything!"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Walkthrough:</strong> Explore the Ubuntu Desktop. Find the application launcher (bottom-left or press the Super/Windows key). Open the file manager (Files), the web browser (Firefox), the text editor, and the Terminal. Try right-clicking the desktop and exploring the Settings app."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - System Monitoring Tools (top, htop)",
+                "url": "assets/pdfs/it/linux/system_monitoring.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise:</strong> Open a terminal and run <code>top</code>. Press <kbd>M</kbd> to sort by memory usage. Press <kbd>q</kbd> to quit. Then install and run <code>htop</code>. Try the tree view (<kbd>F5</kbd>) and search (<kbd>F3</kbd>). Finally, start a background process with <code>sleep 300 &</code>, find its PID, and kill it."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - User and Group Management",
+                "url": "assets/pdfs/it/linux/user_group_management.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise:</strong> Create a new user with <code>sudo adduser labuser</code>. Create a group with <code>sudo addgroup labteam</code>. Add the user to the group: <code>sudo usermod -aG labteam labuser</code>. Switch to the new user with <code>su - labuser</code>, run <code>whoami</code> and <code>groups</code>, then type <code>exit</code> to return. Clean up with <code>sudo deluser --remove-home labuser</code> and <code>sudo delgroup labteam</code>."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - Basic Troubleshooting Techniques",
+                "url": "assets/pdfs/it/linux/troubleshooting.html"
+              },
+              {
+                "type": "doc",
+                "title": "Guide - I Broke It — Now What?",
+                "url": "assets/pdfs/it/linux/i_broke_it.html"
+              },
+              {
+                "type": "doc",
+                "title": "Final Project - Linux Task Challenge",
+                "url": "assets/pdfs/it/linux/final_project.html"
+              }
             ]
-        } -->
+          }
+        ]
+      </script>
 
       <!-- Generate Content -->
       <div id="unit-sections"></div>

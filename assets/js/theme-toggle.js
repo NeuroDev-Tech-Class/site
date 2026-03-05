@@ -5,9 +5,9 @@ const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
 let currentTheme = storedTheme;
 
-// Determine the initial theme
+// Determine the initial theme — default to dark if not previously set
 if (!currentTheme) {
-  currentTheme = prefersDarkScheme.matches ? "dark-mode" : "light-mode";
+  currentTheme = "dark-mode";
 }
 
 // Apply the initial theme

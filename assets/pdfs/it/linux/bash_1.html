@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/linux.html" class="back-link">&larr; Back to Introduction to Linux</a>
+    <div class="doc-header">
+      <span class="course-tag">Introduction to Linux</span>
+      <h1>Bash Command Tutorial 1</h1>
+      <p class="subtitle">mkdir, ls, pwd, cd, clear</p>
+    </div>
+
+    <p>When you open Ubuntu (WSL) you'll see a prompt that looks like this:</p>
+
+    <pre><code>[your_name]@[your_computer]:~$</code></pre>
+
+    <p>For example, mine looks like this:</p>
+
+    <pre><code>hayden@Hayden-KatanaGF76:~$</code></pre>
+
+    <p>Let's break that down:</p>
+
+    <ul>
+      <li><code>hayden</code> — This is your UNIX username, which you created when you first set up Ubuntu.</li>
+      <li><code>@</code> — This is the "at" symbol. It just separates your UNIX username from your machine's hostname.</li>
+      <li><code>Hayden-KatanaGF76</code> — This is the hostname of your machine or Linux environment.</li>
+      <li><code>:</code> — The colon is a separator between the hostname and your current directory. A directory is equivalent to a folder in Windows.</li>
+      <li><code>~</code> — The tilde is a symbolic shortcut to your home directory, which is the default directory when you open up a Linux terminal. <code>~</code> shortcuts to <code>/home/[username]</code>. This means that <code>hayden@Hayden-KatanaGF76:~$</code> is equivalent to <code>hayden@Hayden-KatanaGF76:/home/hayden$</code>.</li>
+      <li><code>$</code> — The dollar sign is the prompt symbol for a normal user. If you are a root (administrator) user, you see a <code>#</code> instead.</li>
+    </ul>
+
+    <p>So, <code>hayden@Hayden-KatanaGF76:~$</code> means "the user hayden on the machine Hayden-KatanaGF76 is currently in the home directory, and the terminal is ready for the next command."</p>
+
+    <p>That's a lot to remember, but you'll get the hang of it if you keep practicing! Let's practice some commands. Type this and hit Enter:</p>
+
+    <pre><code>mkdir practice</code></pre>
+
+    <p><code>mkdir</code> stands for "make directory". A directory is like a folder in Windows. <code>mkdir practice</code> means "make a new directory named 'practice'".</p>
+
+    <p>Next we want to check that our command actually worked. Enter this:</p>
+
+    <pre><code>ls</code></pre>
+
+    <p><code>ls</code> stands for "list". It shows all the contents of the directory you're currently in. Since you just made a directory named 'practice' you should see this:</p>
+
+    <pre><code>practice</code></pre>
+
+    <p>The next command we want to practice is <code>pwd</code>. That stands for "print working directory". In other words, "where are we right now?" Running that command should show <code>/home/[your_name]</code>.</p>
+
+    <p>Next, enter <code>cd practice/</code> and then <code>pwd</code> again. <code>cd</code> is "change directory", so <code>cd practice/</code> means "move into the directory named 'practice'". Once you're there, <code>pwd</code> should tell you that you successfully moved into that new directory.</p>
+
+    
+    <img src="assets/images/linux/bash_1_1.png" alt="Figure 1" />
+<p>Make sure everything looks right before you move on. Then return to your home directory with <code>cd ..</code> (that's two dots). In Linux, a dot <code>.</code> represents the current directory and two dots <code>..</code> represents one level above the current directory. To go up multiple levels, you'd enter <code>cd ../..</code>, <code>cd ../../..</code>, and so on.</p>
+
+    <p>Once you're back in the home directory you can enter <code>clear</code> to wipe the terminal history. It doesn't undo your commands or reset the terminal, it just gives you a clean slate so you can focus on what you're doing next.</p>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class — Introduction to Linux</p>
+    </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="assets/js/load-footer.js" defer></script>
+</body>
+</html>

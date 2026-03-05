@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>Landscapes &amp; Terrain</h1>
+    <p class="subtitle">Create, sculpt, and paint realistic outdoor terrain using Unreal Engine's Landscape system</p>
+  </div>
+
+  <h2>Why Use Landscapes?</h2>
+  <p>While you <em>could</em> build terrain out of static meshes (flat planes, ramps, cubes), Unreal Engine's <strong>Landscape</strong> system is purpose-built for large outdoor environments. It provides a single, continuous terrain surface that you can sculpt like digital clay and paint with multiple surface types — grass, dirt, rock, sand — all blending together seamlessly.</p>
+
+  <h2>Step 1: Prepare Your Level</h2>
+  <p>If your level already has a floor mesh (like the default floor plane in the Third Person template), you'll want to remove it first so it doesn't intersect with your landscape.</p>
+  <ol>
+    <li>Click the existing floor in the Viewport (or find it in the <strong>Outliner</strong> — it's usually named <code>Floor</code> or <code>SM_Floor</code>).</li>
+    <li>Press <kbd>Delete</kbd> to remove it.</li>
+  </ol>
+
+  <h2>Step 2: Enter Landscape Mode</h2>
+  <ol>
+    <li>In the <strong>Modes</strong> dropdown on the left side of the toolbar, select <strong>Landscape</strong> (or use the <strong>Shift</strong>+<kbd>3</kbd> shortcut).</li>
+    <li>The Landscape panel will appear, showing three tabs: <strong>Manage</strong>, <strong>Sculpt</strong>, and <strong>Paint</strong>.</li>
+    <li>On the <strong>Manage</strong> tab, you'll see a preview grid in the Viewport showing where your landscape will be created.</li>
+  </ol>
+
+  <h3>Configuring the Landscape</h3>
+  <p>Before clicking <strong>Create</strong>, you can adjust the size:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Setting</th>
+        <th>What It Controls</th>
+        <th>Recommendation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Section Size</strong></td>
+        <td>Resolution of each landscape section</td>
+        <td><code>63×63</code> for smaller maps, <code>127×127</code> for larger</td>
+      </tr>
+      <tr>
+        <td><strong>Sections Per Component</strong></td>
+        <td>How many sections make up one component</td>
+        <td><code>1×1</code> is fine for most cases</td>
+      </tr>
+      <tr>
+        <td><strong>Number of Components</strong></td>
+        <td>Overall size of the landscape grid</td>
+        <td><code>8×8</code> for a small scene, <code>16×16</code> or more for large worlds</td>
+      </tr>
+      <tr>
+        <td><strong>Overall Resolution</strong></td>
+        <td>Total vertex count (auto-calculated)</td>
+        <td>Keep it reasonable to maintain good performance</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Tip:</strong> For this course, the default settings work well. Don't worry about making the landscape too large — you can always expand it later. A good starting size is around <strong>505×505</strong> overall resolution.
+  </div>
+
+  <p>Click the green <strong>Create</strong> button. A flat landscape will appear in your level.</p>
+
+  <h2>Step 3: Sculpt the Terrain</h2>
+  <p>Switch to the <strong>Sculpt</strong> tab in the Landscape panel. You now have access to several sculpting tools:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tool</th>
+        <th>What It Does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Sculpt</strong></td>
+        <td>The primary tool. Click and drag to <strong>raise</strong> terrain. Hold <kbd>Shift</kbd> and drag to <strong>lower</strong> it.</td>
+      </tr>
+      <tr>
+        <td><strong>Smooth</strong></td>
+        <td>Blends sharp edges and evens out bumpy areas</td>
+      </tr>
+      <tr>
+        <td><strong>Flatten</strong></td>
+        <td>Brings terrain to a uniform height (great for building flat areas for structures)</td>
+      </tr>
+      <tr>
+        <td><strong>Erosion</strong></td>
+        <td>Simulates natural erosion for realistic weathered terrain</td>
+      </tr>
+      <tr>
+        <td><strong>Noise</strong></td>
+        <td>Adds random variation for organic-looking terrain</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Adjust the <strong>Brush Size</strong> and <strong>Brush Strength</strong> sliders to control how large an area is affected and how much terrain moves per stroke. Start with a large brush and low strength for broad shapes, then switch to a smaller brush for fine details.</p>
+
+  <div class="tip">
+    <strong>Sculpting Workflow:</strong>
+    <ol>
+      <li><strong>Block out major shapes</strong> — Use a large brush to create hills, valleys, and ridges.</li>
+      <li><strong>Refine with medium brush</strong> — Shape slopes, create cliffs, carve paths.</li>
+      <li><strong>Smooth everything</strong> — Switch to the Smooth tool to remove harsh edges.</li>
+      <li><strong>Add micro-detail</strong> — Small brush + Noise tool for natural-looking surface variation.</li>
+    </ol>
+  </div>
+
+  <h2>Step 4: Create a Landscape Material</h2>
+  <p>A bare landscape is just gray geometry. To make it look like real terrain, you need a <strong>Landscape Material</strong> that supports multiple layers (e.g., grass, dirt, rock) and blends between them based on how you paint.</p>
+
+  <h3>Creating the Material</h3>
+  <ol>
+    <li>In the Content Browser, right-click → <code>Material</code> → name it <code>M_Landscape</code>.</li>
+    <li>Double-click to open the <strong>Material Editor</strong>.</li>
+    <li>Right-click in the graph and add a <strong>LandscapeLayerBlend</strong> node. This is the key node that lets you mix multiple texture layers.</li>
+    <li>In the LandscapeLayerBlend details, click the <strong>+</strong> button to add layers. Create one for each surface type:
+      <ul>
+        <li><code>Grass</code></li>
+        <li><code>Dirt</code></li>
+        <li><code>Rock</code></li>
+      </ul>
+    </li>
+    <li>Set the <strong>Blend Type</strong> for each layer to <code>LB Weight Blend</code>.</li>
+  </ol>
+
+  <h3>Adding Textures</h3>
+  <ol>
+    <li>For each layer, add a <strong>Texture Sample</strong> node and assign an appropriate texture (find grass, dirt, and rock textures in your StarterContent or imported assets).</li>
+    <li>Connect each Texture Sample's output to the corresponding layer input on the LandscapeLayerBlend node.</li>
+    <li>Connect the LandscapeLayerBlend output to the <strong>Base Color</strong> input on the main material node.</li>
+  </ol>
+
+  <h3>Setting Up UVs (Tiling)</h3>
+  <p>Landscape textures need to tile properly. Without adjusting UVs, textures will appear stretched across the massive landscape surface.</p>
+  <ol>
+    <li>Add a <strong>LandscapeLayerCoords</strong> node for each texture layer.</li>
+    <li>Set the <strong>Mapping Scale</strong> to control tiling — a value like <code>0.01</code> to <code>0.05</code> usually works well (smaller = more tiling = less stretching).</li>
+    <li>Connect the LandscapeLayerCoords output to the <strong>UVs</strong> input on the corresponding Texture Sample.</li>
+  </ol>
+
+  <p>Click <strong>Apply</strong> and <strong>Save</strong> in the Material Editor.</p>
+
+  <h3>Assigning the Material</h3>
+  <ol>
+    <li>Select the Landscape actor in the Viewport or Outliner.</li>
+    <li>In the <strong>Details Panel</strong>, find the <strong>Landscape Material</strong> slot and assign your <code>M_Landscape</code> material.</li>
+  </ol>
+
+  <h2>Step 5: Paint Layers on the Landscape</h2>
+  <ol>
+    <li>Switch to the <strong>Paint</strong> tab in the Landscape panel.</li>
+    <li>You should see your layers listed (Grass, Dirt, Rock). If prompted to <strong>create layer info</strong>, click the <strong>+</strong> next to each layer and choose <code>Weight-Blended Layer (Normal)</code>. Save them to your project's Content folder.</li>
+    <li>Select a layer (e.g., Grass), then click and drag on the landscape in the Viewport to paint it.</li>
+    <li>Switch layers and paint different areas — dirt for paths, rock for cliff faces, grass for meadows.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> Use <strong>Brush Falloff</strong> for smooth blending between layers. A soft falloff creates natural-looking transitions, while a hard falloff creates sharp borders (useful for paths or road edges).
+  </div>
+
+  <div class="warning">
+    <strong>Performance Note:</strong> Landscapes with many layers and high-resolution textures can be expensive to render. For this course, 3–4 layers is plenty. If your editor starts to lag, reduce the landscape resolution or texture sizes.
+  </div>
+
+  <h2>Tips for Realistic Terrain</h2>
+  <ul>
+    <li><strong>Reference real geography.</strong> Look at photos of the environment you're recreating — notice how grass grows on flat areas, dirt appears on slopes, and rock is exposed on steep cliffs.</li>
+    <li><strong>Vary the height.</strong> Perfectly flat terrain looks artificial. Even a "flat" meadow has subtle rolls and dips.</li>
+    <li><strong>Use the Erosion tool</strong> to simulate natural weathering on mountain slopes.</li>
+    <li><strong>Layer painting follows landscape.</strong> Paint rock on steep areas and grass on flat — this mimics how real terrain layers naturally form.</li>
+    <li><strong>Don't over-sculpt.</strong> Subtle is almost always better. Real terrain changes gradually over large distances.</li>
+  </ul>
+
+  <div class="activity">
+    <strong>Practice:</strong>
+    <ol>
+      <li>Create a new landscape using the default settings.</li>
+      <li>Sculpt a valley surrounded by hills — use the Sculpt tool to raise terrain on the edges and lower it in the center.</li>
+      <li>Create a basic Landscape Material with at least two layers (Grass and Dirt).</li>
+      <li>Paint grass in the valley and dirt on the hilltops.</li>
+      <li>Place a Player Start in the valley and press Play to walk around your terrain.</li>
+    </ol>
+  </div>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

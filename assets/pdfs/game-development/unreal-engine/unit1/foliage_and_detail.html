@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>Foliage &amp; Detail</h1>
+    <p class="subtitle">Quickly populate your world with trees, grass, rocks, and other environmental details</p>
+  </div>
+
+  <h2>The Foliage Tool</h2>
+  <p>Placing trees, bushes, and grass one at a time would take forever. Unreal Engine's <strong>Foliage tool</strong> lets you <em>paint</em> large quantities of static meshes onto surfaces with a brush — like spray-painting nature onto your landscape. In seconds, you can transform a barren terrain into a lush forest or a windswept meadow.</p>
+
+  <h2>Getting Started</h2>
+
+  <h3>1. Enter Foliage Mode</h3>
+  <p>Switch to <strong>Foliage Mode</strong> from the <strong>Modes</strong> dropdown in the toolbar (or press <kbd>Shift</kbd>+<kbd>4</kbd>). The Foliage panel will appear on the left side of the editor.</p>
+
+  <h3>2. Add Meshes to the Foliage Palette</h3>
+  <p>Before you can paint, you need to tell the tool <em>what</em> to paint:</p>
+  <ol>
+    <li>In the Foliage panel, click the <strong>+ Add Foliage Type</strong> button (or drag static meshes from the Content Browser directly into the panel).</li>
+    <li>Select one or more static meshes — trees, bushes, grass clumps, rocks, flowers, etc.</li>
+    <li>Each mesh appears as a thumbnail in the palette with a <strong>checkbox</strong>. Only checked meshes will be painted.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip — Free Assets:</strong> Check the <strong>Epic Games Marketplace</strong> for free content packs. Epic regularly gives away asset packs — search for "free" in the Marketplace, or look for packs like <em>Open World Demo Collection</em>, <em>Megascans Trees</em>, or <em>Stylized Nature Pack</em>. These include high-quality foliage meshes ready to use.
+  </div>
+
+  <h3>3. Configure Brush Settings</h3>
+  <p>At the top of the Foliage panel, adjust your brush:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Setting</th>
+        <th>What It Controls</th>
+        <th>Recommended Start</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Brush Size</strong></td>
+        <td>Radius of the paint area</td>
+        <td>Start medium (~2000–5000)</td>
+      </tr>
+      <tr>
+        <td><strong>Paint Density</strong></td>
+        <td>How many instances are placed per stroke</td>
+        <td>Start low (~0.1–0.3) and increase as needed</td>
+      </tr>
+      <tr>
+        <td><strong>Erase Density</strong></td>
+        <td>How aggressively <kbd>Shift</kbd>+Paint removes foliage</td>
+        <td>Default is fine</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>4. Paint!</h3>
+  <ul>
+    <li><strong>Left-click and drag</strong> on your landscape (or any surface) to paint foliage.</li>
+    <li>Hold <kbd>Shift</kbd> and drag to <strong>erase</strong> foliage.</li>
+    <li>Instances are randomly scattered within the brush radius, creating a natural look automatically.</li>
+  </ul>
+
+  <h2>Per-Mesh Settings</h2>
+  <p>Click on a mesh thumbnail in the palette to expand its individual settings. These let you fine-tune how each foliage type is placed:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Setting</th>
+        <th>What It Does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Scale Min / Max</strong></td>
+        <td>Randomizes each instance's size within a range. E.g., set to <code>0.8 – 1.2</code> for subtle variety, or <code>0.5 – 1.5</code> for dramatic variation.</td>
+      </tr>
+      <tr>
+        <td><strong>Random Yaw</strong></td>
+        <td>Randomly rotates each instance around the vertical axis so they don't all face the same direction.</td>
+      </tr>
+      <tr>
+        <td><strong>Align to Normal</strong></td>
+        <td>Tilts instances to match the slope of the surface they're painted on.</td>
+      </tr>
+      <tr>
+        <td><strong>Ground Slope Angle</strong></td>
+        <td>Limits placement to surfaces within a certain slope range — prevents trees from appearing on sheer cliffs.</td>
+      </tr>
+      <tr>
+        <td><strong>Radius</strong></td>
+        <td>Minimum distance between instances. Higher values = more spread out, lower = more dense.</td>
+      </tr>
+      <tr>
+        <td><strong>Cull Distance</strong></td>
+        <td>The maximum distance at which this foliage type is visible. Faraway grass can be culled for better performance.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Tip for Natural-Looking Foliage:</strong>
+    <ul>
+      <li><strong>Layer different sizes:</strong> Paint large trees first (sparse), then medium bushes, then dense grass last.</li>
+      <li><strong>Vary the scale:</strong> Even a ±20% size variation makes a huge difference in breaking up the uniformity.</li>
+      <li><strong>Don't overdo it:</strong> In nature, plants cluster in groups with open space between them. Avoid painting everything at maximum density.</li>
+      <li><strong>Mix mesh types:</strong> Check multiple different meshes in the palette and paint them together for natural variety.</li>
+    </ul>
+  </div>
+
+  <h2>Performance Considerations</h2>
+  <p>Foliage can add up fast. Thousands of mesh instances — especially complex trees — can significantly impact frame rate. Keep these guidelines in mind:</p>
+  <ul>
+    <li><strong>Start with low density</strong> and increase only where needed.</li>
+    <li><strong>Use Cull Distance</strong> to hide distant small foliage (grass, flowers) — the player won't notice they're missing at range.</li>
+    <li><strong>Use LODs</strong> (Levels of Detail) if your meshes support them — simpler versions render at a distance.</li>
+    <li><strong>Nanite</strong> can help with foliage meshes — enable it on meshes in their asset settings for automatic LOD handling.</li>
+    <li><strong>Check your frame rate</strong> regularly. Press <kbd>`</kbd> (backtick) to open the console, type <code>stat fps</code>, and press <kbd>Enter</kbd> to display the frame rate counter.</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Warning:</strong> Dense grass foliage is one of the most performance-heavy things in any game. If your editor becomes sluggish after painting grass, reduce Paint Density and increase the Cull Distance Start value to remove grass at shorter distances.
+  </div>
+
+  <div class="activity">
+    <strong>Practice:</strong>
+    <ol>
+      <li>Enter Foliage Mode (<kbd>Shift</kbd>+<kbd>4</kbd>).</li>
+      <li>Add two or three different static meshes to the palette (trees and/or bushes from your Starter Content or a Marketplace pack).</li>
+      <li>Set the Scale range to <code>0.8 – 1.2</code> for natural variety.</li>
+      <li>Paint a cluster of trees on your landscape.</li>
+      <li>Hold <kbd>Shift</kbd> and erase a clearing in the middle.</li>
+      <li>Press <strong>Play</strong> and walk through your forest.</li>
+    </ol>
+  </div>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

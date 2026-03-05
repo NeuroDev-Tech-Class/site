@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/linux.html" class="back-link">&larr; Back to Introduction to Linux</a>
+    <div class="doc-header">
+      <span class="course-tag">Introduction to Linux</span>
+      <h1>What is a Package Manager?</h1>
+
+    </div>
+<img src="assets/images/linux/package_managers_1.png" alt="Figure 1" />
+
+    <p>Installing software on Linux works a little differently than on Windows or macOS. Instead of downloading an installer file from a website and running it, on Linux you use something called a <strong>package manager</strong>.</p>
+
+    <p>A package manager is a tool that lets you install, update, and remove software from the command line. It pulls software from online sources called <strong>repositories</strong> and handles some of the messy work, like installing dependencies (other files that the program needs in order to work).</p>
+
+    <p>If you've ever installed an app from the App Store or the Microsoft Store, a package manager is kind of like that, but faster and with more control.</p>
+
+    <p>There are a few different package managers, and the one you use depends on your distribution. Here are the ones we're concerned with right now:</p>
+
+    <h2>APT (Advanced Package Tool)</h2>
+
+    <p>Default package manager for Debian-based distros like Ubuntu and Linux Mint (which means it's the one we care most about right now.)</p>
+
+    <p><code>apt</code> is very beginner-friendly. Some commands you need to know:</p>
+
+    <pre><code>sudo apt update              # Refresh list of available packages
+sudo apt install [package]    # Install a package
+sudo apt remove [package]     # Uninstall a package
+apt search [package]          # Search for a package
+apt show [package]            # Show info about a package</code></pre>
+
+    <p>By the way, you'll need to type <code>sudo</code> before most of these commands in order to give yourself permission to install system software. <code>sudo</code> stands for "super-user do" and it allows you to temporarily run commands with elevated privileges without switching to a different user. It's the equivalent of "Run as administrator" on Windows.</p>
+
+    <h2>Snap</h2>
+
+    <p>Also installed on Ubuntu-based distros by default. Snap packages are sandboxed, meaning they are self-contained and isolated from the rest of your system. They're also (mostly) portable meaning the app should work on any distro that also supports Snap. The caveat is that they tend to be slower to start and might use more disk space.</p>
+
+    <pre><code>sudo snap install [package]
+sudo snap remove [package]</code></pre>
+
+    <h2>Flatpak</h2>
+
+    <p>Another universal sandbox-style format, similar to Snap. So, why would you need one if you have the other? Well, different package managers have their own separate repositories. Flatpak's is called Flathub. Apps from Flathub are sometimes more up-to-date than the ones on Snap. Some apps aren't available at all in apt or Snap, but are on Flathub (or vice versa).</p>
+
+    <p>To use Flatpak, you might need to install it first:</p>
+
+    <pre><code>sudo apt install flatpak</code></pre>
+
+    <p>And then you can install and run packages like this:</p>
+
+    <pre><code>flatpak install flathub [package]    # Install from Flathub
+flatpak run [package]                # Launch the app</code></pre>
+
+    <h2>AppImage</h2>
+
+    <p>AppImage isn't actually a package manager itself, but a portable app format. An <code>.AppImage</code> file bundles the app and all its dependencies into a single executable file, almost like a .zip file that you can run without needing to extract anything.</p>
+
+    <p>You download a <code>.AppImage</code> file (from a website, for example) and then make it executable with this command:</p>
+
+    <pre><code>chmod +x [appImage]    # Make the executable
+./[appImage]           # Run it</code></pre>
+
+    <h2>Summary</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Sandboxed</th>
+          <th>Portable</th>
+          <th>Uses a repo</th>
+          <th>Installation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>APT</strong></td>
+          <td>No</td>
+          <td>No</td>
+          <td>Yes (apt repos)</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td><strong>Snap</strong></td>
+          <td>Yes</td>
+          <td>Mostly</td>
+          <td>Yes (Snap store)</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td><strong>Flatpak</strong></td>
+          <td>Yes</td>
+          <td>Mostly</td>
+          <td>Yes (Flathub)</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td><strong>AppImage</strong></td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>No</td>
+          <td>No; just run</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>There are plenty of other package managers, but we'll call this good for now. The point is that there are many different methods of installing software on Linux and there's no need to panic if you come across one you've never seen. It's all part of the learning curve.</p>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class — Introduction to Linux</p>
+    </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="assets/js/load-footer.js" defer></script>
+</body>
+</html>

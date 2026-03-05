@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/gimp.html" class="back-link">&larr; Back to 2D Digital Art &mdash; GIMP</a>
+    <div class="doc-header">
+    <span class="course-tag">2D Digital Art — GIMP</span>
+    <h1>Activity: Photo Restoration</h1>
+    <p class="subtitle">Bringing an Old or Damaged Photo Back to Life</p>
+  </div>
+
+  <h2>Overview</h2>
+  <p>
+    In this activity, you will take an old, damaged, or faded photograph and restore it using the color correction and retouching tools you've learned. By the end, you'll have a clean, corrected image and experience with a real-world image editing workflow.
+  </p>
+
+  <h2>What You'll Need</h2>
+  <ul>
+    <li>An old or damaged photo. You can scan a family photo, download a public-domain vintage image, or use a practice image provided by your instructor. Look for photos with common damage: <strong>scratches</strong>, <strong>fading</strong>, <strong>discoloration</strong> (yellow or blue color casts), <strong>dust spots</strong>, or <strong>torn areas</strong>.</li>
+    <li>GIMP installed and open.</li>
+  </ul>
+
+  <h2>Step-by-Step Instructions</h2>
+
+  <h3>Step 1: Open and Duplicate</h3>
+  <p>
+    Open your photo in GIMP (<strong>File &gt; Open</strong>). Immediately duplicate the background layer (<strong>Layer &gt; Duplicate Layer</strong>) so you always have the original to compare against. Rename the duplicate something like "Restoration" by double-clicking its name in the Layers dialog.
+  </p>
+
+  <div class="tip">
+    <strong>Tip:</strong> Save the project as an XCF file right away (<kbd>Ctrl</kbd>+<kbd>S</kbd>) so you don't lose your work.
+  </div>
+
+  <h3>Step 2: Crop to Remove Borders</h3>
+  <p>
+    If the scanned photo has white borders, ragged edges, or excess background, use the <strong>Crop</strong> tool (<kbd>Shift</kbd>+<kbd>C</kbd>) to trim the image to just the photo itself. Click and drag to define the crop area, then press <kbd>Enter</kbd> to apply.
+  </p>
+
+  <h3>Step 3: Fix Contrast and Brightness with Levels</h3>
+  <p>
+    Go to <strong>Colors &gt; Levels</strong>. Look at the histogram:
+  </p>
+  <ol>
+    <li>Drag the <strong>black-point slider</strong> (left) to where the histogram data begins — this deepens the shadows.</li>
+    <li>Drag the <strong>white-point slider</strong> (right) to where the data ends — this brightens the highlights.</li>
+    <li>Adjust the <strong>midtone slider</strong> (center) left or right to fine-tune overall brightness.</li>
+  </ol>
+  <p>
+    Click <strong>OK</strong> when the image looks more balanced.
+  </p>
+
+  <h3>Step 4: Remove Color Casts with Color Balance</h3>
+  <p>
+    Old photos often have a yellow, sepia, or blue color cast. Go to <strong>Colors &gt; Color Balance</strong>:
+  </p>
+  <ul>
+    <li>If the photo looks <strong>too yellow</strong>, push the Yellow–Blue slider toward <strong>Blue</strong> in the Midtones range.</li>
+    <li>If the photo looks <strong>too red or warm</strong>, push the Cyan–Red slider toward <strong>Cyan</strong>.</li>
+    <li>Adjust Shadows and Highlights separately if needed.</li>
+  </ul>
+  <p>
+    The goal is to make the colors look natural. If the original photo is black and white, you can skip this step or use <strong>Colors &gt; Desaturate</strong> to ensure it's truly neutral gray.
+  </p>
+
+  <h3>Step 5: Repair Scratches and Damage</h3>
+  <p>
+    This is where the real restoration happens. Use these tools to fix physical damage:
+  </p>
+  <ul>
+    <li><strong>Clone Stamp</strong> (<kbd>C</kbd>) — <kbd>Ctrl</kbd>+click on a clean area near the damage to set the source, then paint over the damaged area. The clean pixels are copied to replace the damage.</li>
+    <li><strong>Healing Tool</strong> (<kbd>H</kbd>) — works the same way as Clone Stamp but blends the result with the surrounding area. Preferred for skin and smooth surfaces because it creates seamless repairs.</li>
+  </ul>
+  <p>
+    Work at a zoomed-in level for precision. Use a small brush size for fine details and a larger brush for broad areas. Take your time — this step requires patience.
+  </p>
+
+  <div class="tip">
+    <strong>Tip:</strong> Frequently change your source point (<kbd>Ctrl</kbd>+click) to avoid creating visible repeating patterns. Sample from areas that match the texture and brightness of the damaged spot.
+  </div>
+
+  <h3>Step 6: Sharpen the Image</h3>
+  <p>
+    Old scanned photos are often slightly soft or blurry. Apply gentle sharpening to bring back detail:
+  </p>
+  <ol>
+    <li>Go to <strong>Filters &gt; Enhance &gt; Unsharp Mask</strong>.</li>
+    <li>Start with these settings: <strong>Amount: 0.3–0.5</strong>, <strong>Radius: 2–3 px</strong>, <strong>Threshold: 0</strong>.</li>
+    <li>Check the preview and adjust as needed. Don't over-sharpen — the image should look crisper, not grainy.</li>
+  </ol>
+
+  <div class="warning">
+    <strong>Warning:</strong> Over-sharpening creates ugly halos and noise. If you've gone too far, undo (<kbd>Ctrl</kbd>+<kbd>Z</kbd>) and try again with lower settings.
+  </div>
+
+  <h3>Step 7: Export Your Finished Image</h3>
+  <p>
+    Once you're happy with the restoration:
+  </p>
+  <ol>
+    <li><strong>Save</strong> the XCF project file (<kbd>Ctrl</kbd>+<kbd>S</kbd>).</li>
+    <li><strong>Export as PNG</strong> (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd>) for highest quality.</li>
+    <li><strong>Export as JPEG</strong> (use quality 85–95) for a smaller file suitable for sharing or printing.</li>
+  </ol>
+
+  <h2>Activity Checklist</h2>
+  <div class="activity">
+    <ul>
+      <li>☐ Opened an old or damaged photo in GIMP</li>
+      <li>☐ Duplicated the original layer before editing</li>
+      <li>☐ Cropped to remove unnecessary borders</li>
+      <li>☐ Used <strong>Levels</strong> to fix contrast and brightness</li>
+      <li>☐ Used <strong>Color Balance</strong> to remove color casts</li>
+      <li>☐ Used <strong>Clone Stamp</strong> and/or <strong>Healing Tool</strong> to repair damage</li>
+      <li>☐ Applied <strong>Unsharp Mask</strong> to sharpen the image slightly</li>
+      <li>☐ Saved the XCF project file</li>
+      <li>☐ Exported as both PNG and JPEG</li>
+    </ul>
+  </div>
+
+  <h2>Reflection</h2>
+  <p>
+    After completing the restoration, compare your finished version with the original side by side (toggle the original layer's visibility). Consider: What damage was hardest to fix? Which tool was most useful? What would you do differently next time?
+  </p>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — 2D Digital Art — GIMP</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/web-dev-2.html" class="back-link">&larr; Back to Web Dev II</a>
+    <div class="doc-header">
+      <span class="course-tag">Web Dev II</span>
+      <h1>Windows Setup: Node.js, npm &amp; Jest</h1>
+      <p class="subtitle">PowerShell &mdash; A student-friendly guide</p>
+    </div>
+
+    <p>A student-friendly guide to set up testing for your JavaScript assignments &mdash; no WSL required.</p>
+
+    <h2>What You&rsquo;ll Do</h2>
+    <p>In about 10&ndash;15 minutes, you will:</p>
+    <ul>
+      <li>Install a modern version of Node.js using <strong>nvm-windows</strong> (a simple version manager).</li>
+      <li>Set up a single shared Jest install for all your assignment folders.</li>
+      <li>Run tests from PowerShell with a single command: <code>npm test</code>.</li>
+      <li>Optionally use VS Code to run individual tests from the editor.</li>
+    </ul>
+
+    <div class="tip">
+      <p><strong>Why not WSL?</strong> You don&rsquo;t need Linux/WSL for this course. PowerShell + Node is perfect for web dev and Jest-based testing. You can always add WSL later if you start doing Linux shell scripting.</p>
+    </div>
+
+    <h2>A) Install Node the Clean Way (nvm-windows)</h2>
+    <p>We&rsquo;ll use <strong>nvm-windows</strong> so you can easily install and switch Node versions without admin headaches.</p>
+
+    <h3>1) Install nvm-windows</h3>
+    <p>Open PowerShell and run:</p>
+    <pre><code>winget install CoreyButler.NVMforWindows</code></pre>
+    <p>Close and reopen PowerShell after the installer finishes.</p>
+
+    <h3>2) Install and select Node 20 (recommended LTS)</h3>
+    <pre><code>nvm install 20
+nvm use 20
+node -v
+npm -v</code></pre>
+    <p>You should see Node v20.x and a modern npm (9 or 10).</p>
+
+    <h2>B) One Shared Jest for All Assignments</h2>
+    <p>Keep all your assignments under a single parent folder and install Jest once at the top level.</p>
+
+    <pre><code>NeuroDev\
+├── WebDev-II-Assignments\
+│   ├── package.json          &lt;-- Jest lives here (devDependency)
+│   ├── node_modules\
+│   ├── WebDev-II-2.3-Loops\
+│   │   ├── practice.js
+│   │   └── __tests__\loops.test.js
+│   └── WebDev-II-2.4-NextLesson\ ...</code></pre>
+
+    <p>From PowerShell, at the parent folder:</p>
+    <pre><code>cd path\to\NeuroDev\WebDev-II-Assignments
+npm init -y
+npm install --save-dev jest</code></pre>
+
+    <p>Add a root test script in <code>WebDev-II-Assignments/package.json</code>:</p>
+    <pre><code>{
+  "name": "webdev-ii-assignments",
+  "private": true,
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}</code></pre>
+
+    <p>Now you can run tests:</p>
+    <pre><code># Run all tests under the parent folder
+npm test
+
+# Run tests for one lesson folder
+npm test -- WebDev-II-2.3-Loops</code></pre>
+
+    <h3>Per-Folder Shortcut (Optional)</h3>
+    <p>If you want to run <code>npm test</code> from inside a lesson folder without installing Jest there, point the script to the root Jest:</p>
+    <p>In <code>WebDev-II-2.3-Loops/package.json</code>:</p>
+    <pre><code>{
+  "name": "WebDev-II-2.3-Loops",
+  "scripts": {
+    "test": "node ../../node_modules/jest/bin/jest.js"
+  }
+}</code></pre>
+    <p>Then inside that lesson folder:</p>
+    <pre><code>npm run test</code></pre>
+
+    <h3>Bonus: npm Workspaces (Optional)</h3>
+    <p>Workspaces let the parent manage multiple subprojects. At the root <code>package.json</code>:</p>
+    <pre><code>{
+  "name": "webdev-ii-assignments",
+  "private": true,
+  "workspaces": ["WebDev-II-2.3-Loops", "WebDev-II-2.4-NextLesson"],
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}</code></pre>
+    <p>Then you can:</p>
+    <pre><code># Run all workspace tests
+npm test
+
+# Run tests in one workspace
+npm test -w WebDev-II-2.3-Loops</code></pre>
+
+    <h2>C) VS Code: Run Tests from the Editor</h2>
+    <p>Install one of these extensions for a smoother workflow:</p>
+    <ul>
+      <li><strong>Jest (Orta):</strong> runs tests and shows inline results</li>
+      <li><strong>Jest Runner:</strong> right-click a test or <code>describe()</code> &rarr; Run/Debug</li>
+    </ul>
+
+    <div class="tip">
+      <p><strong>Tip:</strong> Make sure VS Code is using the same Node version you set with nvm-windows.</p>
+    </div>
+
+    <h2>D) Alternatives (Use if You Prefer)</h2>
+
+    <h3>1) Global Jest (simple, but less reproducible)</h3>
+    <pre><code>npm install -g jest
+jest --version
+# In any folder with tests
+npm test    # if your package.json has "test": "jest"</code></pre>
+    <p><strong>Pro:</strong> one-time install. <strong>Con:</strong> global versions can drift between machines.</p>
+
+    <h3>2) On-Demand with npx (zero local install)</h3>
+    <pre><code>npx jest
+# Pin a major version
+npx jest@30</code></pre>
+    <p><strong>Pro:</strong> no install per project. <strong>Con:</strong> needs internet the first time.</p>
+
+    <h3>3) WSL (optional)</h3>
+    <p>You don&rsquo;t need WSL for this course. Consider it only if you later do Linux shell scripting or packages that assume Linux. For web dev + Jest, Windows + PowerShell is perfect.</p>
+
+    <h2>E) Troubleshooting Cheatsheet</h2>
+
+    <h3>&ldquo;jest: not found&rdquo;</h3>
+    <p>Install Jest at the parent (<code>npm i -D jest</code>) or globally (<code>npm i -g jest</code>). If using a per-folder script, verify the path to <code>../../node_modules/jest/bin/jest.js</code>.</p>
+
+    <h3>Node is too old</h3>
+    <p>Run <code>node -v</code>. If it&rsquo;s &lt; 18, install a modern Node:</p>
+    <pre><code>nvm install 20
+nvm use 20</code></pre>
+
+    <h3>PowerShell can&rsquo;t see nvm or node</h3>
+    <p>Close and reopen PowerShell so your PATH updates, then run <code>nvm use 20</code> again.</p>
+
+    <h3>Run tests for a single file or folder</h3>
+    <pre><code>npm test -- WebDev-II-2.3-Loops
+npx jest path\to\file.test.js</code></pre>
+
+    <h2>Quick Reference</h2>
+    <pre><code># Install Node 20 (Windows)
+winget install CoreyButler.NVMforWindows
+nvm install 20
+nvm use 20
+
+# One shared Jest at the assignments root
+cd path\to\NeuroDev\WebDev-II-Assignments
+npm init -y
+npm install --save-dev jest
+
+# Run tests
+npm test                           # all tests
+npm test -- WebDev-II-2.3-Loops    # one folder
+npx jest                           # on demand (no local install)</code></pre>
+
+    <p>You&rsquo;re set! If you get stuck, check the Troubleshooting section or ask your mentor.</p>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class &mdash; Web Dev II</p>
+    </div>
+  </main>
+  <footer></footer>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

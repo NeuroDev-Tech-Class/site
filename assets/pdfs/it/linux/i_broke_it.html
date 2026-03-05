@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+
+  <main id="main-content">
+    <a href="courses/linux.html" class="back-link">&larr; Back to Introduction to Linux</a>
+
+    <div class="doc-header">
+      <span class="course-tag">Introduction to Linux</span>
+      <h1>I Broke It — Now What?</h1>
+      <p class="subtitle">A survival guide for when things go wrong in Linux</p>
+    </div>
+
+    <h2>First: Don't Panic</h2>
+    <p>Breaking things is a <strong>normal</strong> part of learning Linux. Every experienced Linux user has accidentally deleted important files, corrupted a config, or locked themselves out of their system at some point. The good news? Most things are fixable, and every mistake teaches you something valuable.</p>
+
+    <div class="tip">
+      <strong>Golden Rule:</strong> If you don't know what a command does, <em>don't run it with sudo</em>. Research it first!
+    </div>
+
+    <h2>Scenario 1: "I Deleted Something Important"</h2>
+    <h3>The Problem</h3>
+    <p>You ran <code>rm</code> on a file you actually needed.</p>
+    <h3>What to Do</h3>
+    <ul>
+      <li><strong>Stop immediately.</strong> The more you use the system, the harder recovery becomes.</li>
+      <li>Unlike Windows, Linux doesn't have a Recycle Bin in the terminal. Files removed with <code>rm</code> are gone.</li>
+      <li>If using a GUI file manager, check the Trash folder first.</li>
+      <li>For WSL users: if the file was in your Windows filesystem (<code>/mnt/c/</code>), check the Windows Recycle Bin.</li>
+    </ul>
+    <h3>How to Prevent It</h3>
+    <pre><code># Use -i (interactive) flag — asks before each deletion
+rm -i important_file.txt
+
+# Use -I (capital i) for bulk deletions — asks once for confirmation
+rm -I *.txt
+
+# Never use rm -rf / or rm -rf * without double-checking your location
+pwd  # Always check where you are first!</code></pre>
+
+    <div class="warning">
+      <strong>The Scariest Linux Command:</strong> <code>sudo rm -rf /</code> would attempt to delete your entire filesystem. Never run this! Modern Linux systems have safeguards against it, but variations of this command can still cause serious damage.
+    </div>
+
+    <h2>Scenario 2: "I Edited a Config File and Now Things Are Broken"</h2>
+    <h3>The Problem</h3>
+    <p>You changed a system configuration file (like <code>/etc/fstab</code>, <code>/etc/hosts</code>, or <code>~/.bashrc</code>) and now something doesn't work.</p>
+    <h3>What to Do</h3>
+    <pre><code># If you made a backup first (good practice!), restore it:
+sudo cp /etc/hosts.bak /etc/hosts
+
+# If you messed up .bashrc and your terminal is acting weird:
+# Open the file and fix it, or reset to default:
+cp /etc/skel/.bashrc ~/.bashrc
+source ~/.bashrc
+
+# If you can't even open a terminal, try:
+# 1. Press Ctrl+Alt+F2 to get a text-only console
+# 2. Log in
+# 3. Fix the broken file</code></pre>
+    <h3>How to Prevent It</h3>
+    <pre><code># ALWAYS make a backup before editing system files!
+sudo cp /etc/hosts /etc/hosts.bak
+
+# Then edit the file
+sudo nano /etc/hosts</code></pre>
+
+    <h2>Scenario 3: "I Can't Install Anything"</h2>
+    <h3>The Problem</h3>
+    <p>Running <code>sudo apt install</code> gives errors.</p>
+    <h3>What to Do</h3>
+    <pre><code># Step 1: Update your package list
+sudo apt update
+
+# Step 2: Fix broken packages
+sudo apt --fix-broken install
+
+# Step 3: Clean and retry
+sudo apt clean
+sudo apt update
+sudo apt install [package-name]
+
+# Step 4: If there's a lock file error, check for running processes
+ps aux | grep apt
+# Wait for them to finish, or if they're stuck, remove the lock:
+sudo rm /var/lib/dpkg/lock-frontend
+sudo dpkg --configure -a</code></pre>
+
+    <h2>Scenario 4: "My Terminal Is Acting Strange"</h2>
+    <h3>The Problem</h3>
+    <p>Your terminal looks weird — garbled text, no color, or commands aren't working right.</p>
+    <h3>What to Do</h3>
+    <pre><code># Reset the terminal display
+reset
+
+# If that doesn't help, try:
+stty sane
+
+# If your shell prompt looks wrong, reload your shell config:
+source ~/.bashrc
+
+# If nothing works, close and reopen your terminal</code></pre>
+
+    <h2>Scenario 5: "I Forgot My Password"</h2>
+    <h3>The Problem</h3>
+    <p>You can't remember your Linux password.</p>
+    <h3>What to Do</h3>
+    <p><strong>For WSL users:</strong></p>
+    <pre><code># Open PowerShell (not WSL) and run:
+wsl -u root
+
+# Now you're root — reset your password:
+passwd your_username
+
+# Type the new password (nothing will appear — that's normal)
+# Exit and restart WSL
+exit</code></pre>
+
+    <p><strong>For VM or desktop users:</strong></p>
+    <ul>
+      <li>Reboot the system</li>
+      <li>Hold <kbd>Shift</kbd> during boot to access the GRUB menu</li>
+      <li>Select "Advanced options" → "Recovery mode"</li>
+      <li>Choose "root — Drop to root shell prompt"</li>
+      <li>Run <code>passwd your_username</code></li>
+      <li>Reboot normally</li>
+    </ul>
+
+    <h2>Scenario 6: "The System Won't Boot" (VM Only)</h2>
+    <h3>The Problem</h3>
+    <p>Your virtual machine won't start or gets stuck.</p>
+    <h3>What to Do</h3>
+    <ul>
+      <li><strong>Try restarting the VM</strong> — Power off and start fresh</li>
+      <li><strong>Boot into recovery mode</strong> — Hold Shift at boot, select recovery options</li>
+      <li><strong>Check VM settings</strong> — Make sure RAM and CPU allocation are reasonable</li>
+      <li><strong>Take snapshots before experiments</strong> — You can restore to a known-good state</li>
+    </ul>
+
+    <div class="tip">
+      <strong>VirtualBox Snapshots are your best friend!</strong> Before making any major changes, take a snapshot of your VM. You can always restore it if things go wrong. Go to Machine → Take Snapshot in VirtualBox.
+    </div>
+
+    <h2>Emergency Keyboard Shortcuts</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Shortcut</th>
+          <th>What It Does</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd> + <kbd>C</kbd></td><td>Cancel the current running command</td></tr>
+        <tr><td><kbd>Ctrl</kbd> + <kbd>Z</kbd></td><td>Suspend the current process (resume with <code>fg</code>)</td></tr>
+        <tr><td><kbd>Ctrl</kbd> + <kbd>D</kbd></td><td>Send end-of-input / logout from current shell</td></tr>
+        <tr><td><kbd>Ctrl</kbd> + <kbd>L</kbd></td><td>Clear the terminal screen</td></tr>
+        <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F2</kbd></td><td>Switch to a text console (if GUI is broken)</td></tr>
+        <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F7</kbd></td><td>Switch back to the graphical desktop</td></tr>
+        <tr><td>Type <code>reset</code></td><td>Reset a garbled terminal</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Best Practices to Avoid Disasters</h2>
+    <div class="card">
+      <h3>Before You Act</h3>
+      <ul>
+        <li><strong>Always back up</strong> config files before editing them (<code>cp file file.bak</code>)</li>
+        <li><strong>Use VM snapshots</strong> before major changes</li>
+        <li><strong>Read error messages completely</strong> — they usually tell you what's wrong</li>
+        <li><strong>Use <code>pwd</code></strong> before destructive commands to confirm your location</li>
+        <li><strong>Use <code>ls</code></strong> before <code>rm</code> to verify what you're about to delete</li>
+        <li><strong>Don't blindly copy-paste</strong> commands from the internet — understand what they do first</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Good Habits</h3>
+      <ul>
+        <li>Run <code>sudo apt update &amp;&amp; sudo apt upgrade</code> regularly to keep your system current</li>
+        <li>Use <code>history</code> to review recent commands if you need to trace what you did</li>
+        <li>Keep notes on changes you make to the system</li>
+        <li>Learn to use <code>man</code> pages and <code>--help</code> flags</li>
+        <li>Experiment in a VM or WSL — it's a safe sandbox for learning</li>
+      </ul>
+    </div>
+
+    <h2>Key Takeaway</h2>
+    <p>Breaking things is part of the process. The goal isn't to avoid mistakes — it's to develop the skills to <strong>fix them</strong> and the habits to <strong>minimize damage</strong>. Every error you troubleshoot makes you a more capable Linux user.</p>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class — Introduction to Linux</p>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="assets/js/load-footer.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/python-1.html" class="back-link">&larr; Back to Python I</a>
+    <div class="doc-header">
+      <span class="course-tag">Python I</span>
+      <h1>What Is Control Flow?</h1>
+    </div>
+
+    <p>Control flow refers to methods of executing code blocks in a certain order based on specific conditions or criteria. These methods include <strong>branching</strong> and <strong>looping</strong>.</p>
+
+    <p>Control flow is important in programming because it allows developers to control the behavior of their programs and make them more efficient and flexible.</p>
+
+    <h2>Conditional Statements (Branching)</h2>
+
+    <p>Conditional statements allow the execution of different code paths based on certain conditions. The most common type of conditional statement is the <code>if</code> statement, which executes a block of code if a given condition is true, and otherwise executes another block of code within an <code>else</code> statement, or does nothing. This enables programmers to make their programs more responsive to different scenarios. <code>if</code> statements can be nested (an <code>if</code> statement within another <code>if</code> statement).</p>
+    <img src="assets/images/python-1/what_is_control_flow_1.png" alt="Figure 1" />
+
+
+    <h2>Loops</h2>
+    <img src="assets/images/python-1/what_is_control_flow_2.png" alt="Figure 2" />
+
+
+    <p>Loops are used in programming to repeatedly execute a set of instructions. They let the programmer automate repetitive tasks and iterate over collections of data. There are two commonly used types of loops:</p>
+
+    <ul>
+      <li><strong>For loops</strong> &mdash; used to iterate once per every item in a sequence of values.</li>
+      <li><strong>While loops</strong> &mdash; used to repeatedly execute code until a certain condition is met.</li>
+    </ul>
+
+    <h2>Exception Handling</h2>
+
+    <p>Exception handling allows programmers to handle errors that would otherwise crash the program. When an exception occurs, the program can &ldquo;catch&rdquo; it and take appropriate actions, such as displaying an error message or executing alternate code to handle the situation.</p>
+
+    <p>In Python, exception handling is done with <code>try</code> and <code>except</code> statements. If a block of code within a <code>try</code> statement would normally crash, the code execution is redirected to the corresponding <code>except</code> statement, which can handle the exception and take appropriate actions. For example, if a program attempts to divide by zero inside of a <code>try</code> block, the <code>except</code> block could display an error message instead of crashing.</p>
+
+    <h2>Functions</h2>
+
+    <p>Functions are blocks of code that perform a specific task, and can be called multiple times throughout a program. They help to break down large programs into smaller, more manageable parts. Functions easily allow for code reuse, since the same function can be called from different parts of a program with different inputs resulting in different outputs.</p>
+
+    <p>In Python, functions are defined using the <code>def</code> keyword, followed by the function name and any necessary parameters (variables which need to be filled with arguments when the function is called). This is followed by the body code, which is indented. Everything inside the body will execute every time the function is called, substituting any parameter placeholders with whatever arguments were passed into the function call.</p>
+
+    <p>Functions may or may not take one or more inputs (called <strong>arguments</strong>) and may or may not return an output value. In this example, the function <code>add_numbers</code> receives two arguments (<code>x</code> and <code>y</code>) and returns a value (<code>sum</code>):</p>
+
+<pre><code># Defining the function
+def add_numbers(x, y):
+    sum = x + y
+    return sum
+
+# Calling the function
+result = add_numbers(5, 7)</code></pre>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class &mdash; Python I</p>
+    </div>
+  </main>
+  <footer></footer>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

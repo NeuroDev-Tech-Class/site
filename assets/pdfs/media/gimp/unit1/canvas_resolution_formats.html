@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/gimp.html" class="back-link">&larr; Back to 2D Digital Art &mdash; GIMP</a>
+    <div class="doc-header">
+    <span class="course-tag">2D Digital Art — GIMP</span>
+    <h1>Canvas, Resolution &amp; File Formats</h1>
+    <p class="subtitle">Setting Up Your Image and Saving It the Right Way</p>
+  </div>
+
+  <h2>Creating a New Image</h2>
+  <p>
+    To create a new, blank image in GIMP, go to <strong>File &gt; New</strong> (or press <kbd>Ctrl</kbd>+<kbd>N</kbd>). A dialog will appear where you configure the most important properties of your image before you start working.
+  </p>
+
+  <h3>Canvas Size</h3>
+  <p>
+    The <strong>canvas size</strong> is the width and height of your image, measured in <strong>pixels</strong> by default. Pixels are the tiny dots that make up a digital image. A few common starting sizes:
+  </p>
+  <ul>
+    <li><strong>1920 × 1080 px</strong> — Full HD screen resolution, great for desktop wallpapers and web graphics</li>
+    <li><strong>1080 × 1080 px</strong> — square format, commonly used for social media posts</li>
+    <li><strong>2550 × 3300 px</strong> — US Letter size at 300 DPI (8.5 × 11 inches), great for print</li>
+  </ul>
+  <p>
+    You can always change the canvas size later using <strong>Image &gt; Canvas Size</strong> or scale the entire image with <strong>Image &gt; Scale Image</strong>.
+  </p>
+
+  <h3>Resolution (DPI / PPI)</h3>
+  <p>
+    Resolution refers to how many pixels fit into one inch of printed output. It is measured in <strong>DPI</strong> (dots per inch) or <strong>PPI</strong> (pixels per inch) — for our purposes, these terms mean the same thing.
+  </p>
+  <ul>
+    <li><strong>72 DPI</strong> — the standard for web and screen display. Screens display images by pixel count, so DPI doesn't change how the image looks on screen, but it keeps the file size manageable.</li>
+    <li><strong>300 DPI</strong> — the standard for high-quality print. If you plan to print a poster, flyer, or photo, use 300 DPI so the result is sharp and detailed.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> If your image is only going to be viewed on a screen (website, social media, presentation), 72 DPI is perfectly fine. Use 300 DPI only when the final output is physical print.
+  </div>
+
+  <h3>Color Space</h3>
+  <p>
+    GIMP works in the <strong>RGB</strong> color space by default — <strong>R</strong>ed, <strong>G</strong>reen, <strong>B</strong>lue. This is the standard for screens and digital images. Each pixel's color is defined by mixing different amounts of red, green, and blue light.
+  </p>
+
+  <h3>Fill Options</h3>
+  <p>
+    When creating a new image, GIMP asks what the background should be filled with:
+  </p>
+  <ul>
+    <li><strong>White</strong> — a solid white background (most common)</li>
+    <li><strong>Foreground Color</strong> — fills with whatever your current foreground color is</li>
+    <li><strong>Background Color</strong> — fills with your current background color</li>
+    <li><strong>Transparency</strong> — no background at all (shown as a gray checkerboard pattern). Use this when you're creating graphics like logos or icons that need a see-through background.</li>
+  </ul>
+
+  <h2>File Formats</h2>
+  <p>
+    Different file formats serve different purposes. Understanding when to use each format is an essential skill.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Format</th>
+        <th>Extension</th>
+        <th>Use Case</th>
+        <th>Key Features</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>XCF</strong></td>
+        <td>.xcf</td>
+        <td>GIMP project file</td>
+        <td>Preserves all layers, masks, paths, and channels. Always save a copy in XCF while working.</td>
+      </tr>
+      <tr>
+        <td><strong>PNG</strong></td>
+        <td>.png</td>
+        <td>Web graphics, icons, logos</td>
+        <td>Lossless compression (no quality loss). Supports transparency. Larger file size than JPEG.</td>
+      </tr>
+      <tr>
+        <td><strong>JPEG</strong></td>
+        <td>.jpg / .jpeg</td>
+        <td>Photos, web images</td>
+        <td>Lossy compression (some quality lost to reduce file size). No transparency support. Great for photographs.</td>
+      </tr>
+      <tr>
+        <td><strong>TIFF</strong></td>
+        <td>.tif / .tiff</td>
+        <td>Print, archival</td>
+        <td>Lossless compression. Very large file sizes. Preferred by print shops and professional workflows.</td>
+      </tr>
+      <tr>
+        <td><strong>GIF</strong></td>
+        <td>.gif</td>
+        <td>Simple animations, small web graphics</td>
+        <td>Supports animation and transparency. Limited to 256 colors. Not suitable for photos.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Save vs. Export</h2>
+  <p>
+    GIMP makes an important distinction between <strong>saving</strong> and <strong>exporting</strong>:
+  </p>
+  <ul>
+    <li><strong>File &gt; Save</strong> (or <kbd>Ctrl</kbd>+<kbd>S</kbd>) — saves your project in GIMP's native <strong>XCF</strong> format. This preserves all layers, masks, paths, and editing history. Always save an XCF copy of your work.</li>
+    <li><strong>File &gt; Export As</strong> (or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd>) — exports your image to any other format (PNG, JPEG, TIFF, GIF, etc.). Exporting flattens your image into a single layer and may discard some data depending on the format.</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Warning:</strong> If you only export as JPEG or PNG and never save the XCF file, you will lose all of your layers and non-destructive edits. Always <strong>Save</strong> the XCF file first, then <strong>Export</strong> a copy in the final format you need.
+  </div>
+
+  <h2>Workflow Summary</h2>
+  <ol>
+    <li>Create a new image with <strong>File &gt; New</strong>, choosing the right canvas size and resolution for your project.</li>
+    <li>Work on your image using layers, tools, and filters.</li>
+    <li><strong>Save</strong> your project as an XCF file regularly (<kbd>Ctrl</kbd>+<kbd>S</kbd>).</li>
+    <li>When finished, <strong>Export As</strong> the appropriate format (PNG for graphics with transparency, JPEG for photos, TIFF for print).</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> After exporting, GIMP's title bar will show the exported filename. Don't be confused — your working file is still the XCF. Use <kbd>Ctrl</kbd>+<kbd>S</kbd> to continue saving the XCF version.
+  </div>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — 2D Digital Art — GIMP</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

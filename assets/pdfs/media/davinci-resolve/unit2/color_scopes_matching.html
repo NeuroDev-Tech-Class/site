@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/davinci-resolve.html" class="back-link">&larr; Back to Video Production &mdash; DaVinci Resolve</a>
+    <div class="doc-header">
+    <span class="course-tag">Video Production — DaVinci Resolve</span>
+    <h1>Color Scopes &amp; Shot Matching</h1>
+    <p class="subtitle">Reading scopes for precise color decisions and making multiple shots look consistent</p>
+  </div>
+
+  <h2>Why Use Scopes?</h2>
+  <p>Your eyes are unreliable when it comes to judging color and brightness. The ambient light in your room, the calibration of your monitor, and even how tired you are can all affect your perception. <strong>Scopes</strong> are objective, visual graphs that show you the actual data in your image — brightness levels, color balance, and saturation. Professional colorists rely on scopes to make accurate decisions.</p>
+  <p>To open scopes on the Color page, click the <strong>Scopes</strong> button in the bottom-right area (or go to <em>Workspace > Video Scopes</em>). You can display one scope at a time or view multiple scopes simultaneously.</p>
+
+  <h2>Waveform</h2>
+  <p>The <strong>Waveform</strong> monitor is the most commonly used scope. It shows the <strong>brightness distribution</strong> of your image from left to right — the left edge of the waveform corresponds to the left side of your image, and the right edge to the right side.</p>
+  <ul>
+    <li>The vertical axis represents brightness: <strong>0</strong> at the bottom (pure black) and <strong>1023</strong> at the top (pure white).</li>
+    <li>A properly exposed image typically fills the range from just above 0 to just below 1023, with most content in the middle.</li>
+    <li>If the waveform is bunched up near the bottom, the image is <strong>underexposed</strong> (too dark).</li>
+    <li>If it's pushed against the top, the image is <strong>overexposed</strong> (too bright) and highlights are <strong>clipping</strong> — detail is lost.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> A good workflow habit: the darkest thing in your shot should sit just above 0, and the brightest just below 1023 (unless there's a creative reason to clip, like a bright light source). This ensures you're using the full brightness range.
+  </div>
+
+  <h2>Parade</h2>
+  <p>The <strong>Parade</strong> scope is similar to the waveform but separates the image into its <strong>Red</strong>, <strong>Green</strong>, and <strong>Blue</strong> channels, displayed side by side. This is incredibly useful for checking <strong>white balance</strong>:</p>
+  <ul>
+    <li>If the image is perfectly white-balanced, the three channels should have roughly the same shape and height in the highlights.</li>
+    <li>If the Red channel is noticeably higher in the highlights than Green and Blue, the whites have a warm (orange/yellow) cast.</li>
+    <li>If Blue is higher, the image has a cool cast.</li>
+    <li>Use the Color Wheels or Temperature/Tint sliders to balance the channels.</li>
+  </ul>
+
+  <h2>Vectorscope</h2>
+  <p>The <strong>Vectorscope</strong> is a circular display that shows the <strong>hue and saturation</strong> of your image:</p>
+  <ul>
+    <li><strong>Direction from center</strong> = the hue (color). Targets around the edge are labeled for specific colors: Red, Magenta, Blue, Cyan, Green, Yellow.</li>
+    <li><strong>Distance from center</strong> = the saturation (intensity). Content near the center is desaturated (gray), while content reaching toward the edge is vivid.</li>
+    <li>For skin tones, look for a concentration of data along the <strong>skin tone line</strong> — a diagonal line between the Red and Yellow targets (roughly the 10 o'clock position). If skin tones drift away from this line, they may look unnatural.</li>
+  </ul>
+
+  <h2>Histogram</h2>
+  <p>The <strong>Histogram</strong> shows the overall <strong>tonal distribution</strong> of the image. The horizontal axis goes from dark (left) to bright (right), and the height shows how many pixels fall at each brightness level.</p>
+  <ul>
+    <li>A balanced image typically has data spread across most of the histogram.</li>
+    <li>A spike at the far right means highlights are clipping.</li>
+    <li>A spike at the far left means shadows are crushed (detail lost in blacks).</li>
+    <li>The histogram gives a quick overview but is less precise than the waveform for making corrections.</li>
+  </ul>
+
+  <h2>Reading Scopes: Common Problems</h2>
+
+  <table>
+    <thead>
+      <tr><th>Problem</th><th>What You See on Scopes</th><th>How to Fix</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Clipping (overexposure)</strong></td><td>Waveform hits the top (1023) and flattens — data is being cut off</td><td>Lower Gain or reduce Offset</td></tr>
+      <tr><td><strong>Crushed blacks</strong></td><td>Waveform hits the bottom (0) and flattens</td><td>Raise Lift to recover shadow detail</td></tr>
+      <tr><td><strong>Color cast</strong></td><td>Parade channels are uneven in highlights or shadows</td><td>Adjust Temperature/Tint or use Gain/Lift color wheels</td></tr>
+      <tr><td><strong>Flat / low contrast</strong></td><td>Waveform is a narrow band in the middle, not reaching top or bottom</td><td>Increase Contrast or use Curves to expand range</td></tr>
+      <tr><td><strong>Oversaturated</strong></td><td>Vectorscope data reaches far from center, possibly hitting edges</td><td>Reduce Saturation slider</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Shot Matching</h2>
+  <p>When editing a scene, you often cut between multiple shots taken at different times or with different camera settings. Even if they're shot in the same location, differences in exposure, white balance, and color can make them look mismatched. <strong>Shot matching</strong> is the process of making all the clips in a scene look visually consistent.</p>
+
+  <h3>Manual Matching</h3>
+  <ol>
+    <li>Pick your <strong>hero shot</strong> — the clip that looks the best or is used the most. Grade it first.</li>
+    <li>Move to the next clip. Open your scopes and compare the waveform shape to the hero shot.</li>
+    <li>Adjust Lift, Gamma, and Gain to match the brightness range.</li>
+    <li>Check the Parade to match white balance across RGB channels.</li>
+    <li>Compare side-by-side using the <strong>Image Wipe</strong> or <strong>Split Screen</strong> modes (click the viewer mode buttons on the Color page).</li>
+  </ol>
+
+  <h3>Color Match Tool</h3>
+  <p>DaVinci Resolve includes an automatic <strong>Color Match</strong> tool that can help speed things up:</p>
+  <ol>
+    <li>Select the clip you want to adjust.</li>
+    <li>Go to <em>Color > Color Match</em> (or find it in the Color Wheels panel dropdown).</li>
+    <li>The tool will analyze a reference clip or chart and attempt to match the current clip to it.</li>
+  </ol>
+  <p>Auto-matching is a good starting point, but it usually needs manual refinement.</p>
+
+  <h2>Gallery Stills</h2>
+  <p>The <strong>Gallery</strong> (left side of the Color page) lets you save and reuse grades:</p>
+  <ol>
+    <li>Grade a clip to your liking.</li>
+    <li>Right-click the viewer and choose <strong>Grab Still</strong> (or press <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>G</kbd>). This saves a snapshot of the current grade.</li>
+    <li>To apply the saved grade to another clip, select the new clip, then right-click the still in the Gallery and choose <strong>Apply Grade</strong>.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> You can also <strong>copy and paste grades</strong> directly. Right-click a graded clip in the Color page thumbnail strip and choose <em>Copy</em>. Select the target clip(s), right-click, and choose <em>Paste</em>. This copies all node settings.
+  </div>
+
+  <h2>PowerWindows &amp; Qualifiers</h2>
+  <p>Sometimes you need to adjust color in only <strong>part</strong> of the frame, not the entire image.</p>
+
+  <h3>PowerWindows</h3>
+  <p><strong>PowerWindows</strong> are shapes (circles, rectangles, polygons, gradients) that isolate a region of the image. For example, you might brighten just a person's face or darken the sky:</p>
+  <ol>
+    <li>Add a new node for the targeted adjustment.</li>
+    <li>Open the <strong>Window</strong> panel (diamond icon in the center palette).</li>
+    <li>Choose a shape (circle, square, polygon, gradient, or curve).</li>
+    <li>Position and size the window over the area you want to affect.</li>
+    <li>Adjust the softness to create a smooth falloff edge.</li>
+    <li>Now any color adjustments on this node only affect the area inside (or outside) the window.</li>
+  </ol>
+
+  <h3>Qualifiers</h3>
+  <p><strong>Qualifiers</strong> (also called secondary color selections) let you select a specific color range. For example, you can select the blue sky and make it deeper, or select skin tones and warm them:</p>
+  <ol>
+    <li>Add a new node.</li>
+    <li>Open the <strong>Qualifier</strong> panel (eyedropper icon in the center palette).</li>
+    <li>Use the eyedropper to click on the color you want to select in the viewer.</li>
+    <li>Adjust the Hue, Saturation, and Luminance ranges to refine your selection.</li>
+    <li>Toggle <strong>Highlight</strong> on the viewer to see what's selected (highlighted).</li>
+    <li>Make adjustments — they'll only affect the qualified color range.</li>
+  </ol>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>Use <strong>scopes</strong> (Waveform, Parade, Vectorscope, Histogram) for objective color decisions — don't rely on your eyes alone.</li>
+    <li>The <strong>Waveform</strong> shows brightness distribution; the <strong>Parade</strong> separates RGB for white balance; the <strong>Vectorscope</strong> shows hue/saturation.</li>
+    <li><strong>Shot matching</strong> ensures consistency across clips — start with a hero shot and match others to it.</li>
+    <li><strong>Gallery Stills</strong> let you save, compare, and apply grades across clips.</li>
+    <li>Use <strong>PowerWindows</strong> for area-based adjustments and <strong>Qualifiers</strong> for color-based selections.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Video Production — DaVinci Resolve</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

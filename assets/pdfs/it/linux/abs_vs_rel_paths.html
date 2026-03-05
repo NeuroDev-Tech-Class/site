@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+
+  <main id="main-content">
+    <a href="courses/linux.html" class="back-link">&larr; Back to Introduction to Linux</a>
+
+    <div class="doc-header">
+      <span class="course-tag">Introduction to Linux</span>
+      <h1>Absolute vs. Relative Paths</h1>
+      <p class="subtitle">Understanding how Linux locates files and directories</p>
+    </div>
+
+    <h2>What Is a Path?</h2>
+    <p>A <strong>path</strong> is the address of a file or directory in the Linux filesystem. Every file on your system has a unique path that describes exactly where it lives. Think of it like a mailing address — it tells the system how to find something.</p>
+    <p>There are two ways to express a path in Linux: <strong>absolute paths</strong> and <strong>relative paths</strong>.</p>
+
+    <h2>The Linux Filesystem Tree</h2>
+    <p>Before we dive in, let's understand the structure. Linux organizes everything in a tree-like hierarchy. The very top of the tree is called the <strong>root directory</strong>, and it's represented by a single forward slash: <code>/</code></p>
+    <p>Everything branches out from there:</p>
+    <pre><code>/
+├── home/
+│   ├── alice/
+│   │   ├── Documents/
+│   │   │   └── essay.txt
+│   │   └── Downloads/
+│   └── bob/
+├── etc/
+├── var/
+└── usr/</code></pre>
+
+    <h2>Absolute Paths</h2>
+    <p>An <strong>absolute path</strong> always starts from the root directory (<code>/</code>). It spells out the complete route from the very top of the filesystem tree to the target file or directory. No matter where you currently are in the filesystem, an absolute path will always point to the same location.</p>
+
+    <div class="tip">
+      <strong>Key Rule:</strong> If a path starts with <code>/</code>, it's an absolute path.
+    </div>
+
+    <h3>Examples</h3>
+    <pre><code># The full path to alice's essay
+/home/alice/Documents/essay.txt
+
+# The full path to the system configuration directory
+/etc
+
+# The full path to alice's home directory
+/home/alice</code></pre>
+
+    <p>It doesn't matter if you're currently in <code>/var</code>, <code>/tmp</code>, or <code>/home/bob</code>. The command below will always open <code>essay.txt</code> in alice's Documents folder:</p>
+    <pre><code>cat /home/alice/Documents/essay.txt</code></pre>
+
+    <h2>Relative Paths</h2>
+    <p>A <strong>relative path</strong> describes how to get to a file or directory <em>from where you currently are</em>. It does <strong>not</strong> start with <code>/</code>. Instead, it uses the current working directory as the starting point.</p>
+
+    <div class="tip">
+      <strong>Key Rule:</strong> If a path does <em>not</em> start with <code>/</code>, it's a relative path.
+    </div>
+
+    <h3>Examples</h3>
+    <p>Suppose your current working directory is <code>/home/alice</code>:</p>
+    <pre><code># These two commands do the same thing:
+cat /home/alice/Documents/essay.txt    # absolute
+cat Documents/essay.txt                # relative</code></pre>
+    <p>The relative path <code>Documents/essay.txt</code> only works because you're already in <code>/home/alice</code>. If you were in <code>/home/bob</code>, that relative path would look for <code>/home/bob/Documents/essay.txt</code> instead — which may not exist!</p>
+
+    <h2>Special Path Symbols</h2>
+    <p>Linux provides several shortcut symbols to make navigating the filesystem easier:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Meaning</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>.</code></td>
+          <td>Current directory</td>
+          <td><code>./script.sh</code> (run a script in the current directory)</td>
+        </tr>
+        <tr>
+          <td><code>..</code></td>
+          <td>Parent directory (one level up)</td>
+          <td><code>cd ..</code> (go up one folder)</td>
+        </tr>
+        <tr>
+          <td><code>~</code></td>
+          <td>Home directory of the current user</td>
+          <td><code>cd ~</code> (go to your home directory)</td>
+        </tr>
+        <tr>
+          <td><code>-</code></td>
+          <td>Previous directory (with <code>cd</code>)</td>
+          <td><code>cd -</code> (go back to where you were)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Using <code>..</code> to Navigate Up</h3>
+    <p>The <code>..</code> symbol is one of the most useful navigation tools. You can chain them together to move up multiple levels:</p>
+    <pre><code># Currently in /home/alice/Documents/Projects
+cd ..          # Now in /home/alice/Documents
+cd ../..       # Now in /home/alice (went up two levels)
+cd ../../bob   # Now in /home/bob (up two, then into bob)</code></pre>
+
+    <h3>Using <code>~</code> as a Shortcut</h3>
+    <p>The tilde (<code>~</code>) is a convenient shortcut for your home directory:</p>
+    <pre><code># These do the same thing (if you're user "alice"):
+cd /home/alice
+cd ~
+
+# Access a file in your home directory from anywhere:
+cat ~/Documents/essay.txt</code></pre>
+
+    <h2>Checking Your Current Location</h2>
+    <p>Use the <kbd>pwd</kbd> command (<strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory) to find out where you are at any time:</p>
+    <pre><code>$ pwd
+/home/alice/Documents</code></pre>
+    <p>This is especially helpful when you're using relative paths and want to confirm your starting point.</p>
+
+    <h2>When to Use Which?</h2>
+
+    <div class="card">
+      <h3>Use Absolute Paths When...</h3>
+      <ul>
+        <li>Writing scripts that need to work no matter where they're run from</li>
+        <li>Referencing system files like <code>/etc/hosts</code> or <code>/var/log/syslog</code></li>
+        <li>You want to be 100% certain you're targeting the right file</li>
+        <li>Giving someone a path to follow (documentation, instructions)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Use Relative Paths When...</h3>
+      <ul>
+        <li>You're already close to the file you want to access</li>
+        <li>Navigating between nearby directories (<code>cd ../sibling-folder</code>)</li>
+        <li>Working inside a project where file locations are consistent</li>
+        <li>You want shorter, more convenient commands</li>
+      </ul>
+    </div>
+
+    <h2>Practice Examples</h2>
+    <p>Given this directory tree:</p>
+    <pre><code>/home/student/
+├── Music/
+│   └── song.mp3
+├── Projects/
+│   ├── app/
+│   │   └── main.py
+│   └── notes.txt
+└── Downloads/
+    └── file.zip</code></pre>
+
+    <p>If your current directory is <code>/home/student/Projects/app</code>:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Target</th>
+          <th>Absolute Path</th>
+          <th>Relative Path</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>main.py</td>
+          <td><code>/home/student/Projects/app/main.py</code></td>
+          <td><code>main.py</code> or <code>./main.py</code></td>
+        </tr>
+        <tr>
+          <td>notes.txt</td>
+          <td><code>/home/student/Projects/notes.txt</code></td>
+          <td><code>../notes.txt</code></td>
+        </tr>
+        <tr>
+          <td>song.mp3</td>
+          <td><code>/home/student/Music/song.mp3</code></td>
+          <td><code>../../Music/song.mp3</code></td>
+        </tr>
+        <tr>
+          <td>file.zip</td>
+          <td><code>/home/student/Downloads/file.zip</code></td>
+          <td><code>../../Downloads/file.zip</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="activity">
+      <h3>Try It Yourself</h3>
+      <ol>
+        <li>Open your terminal and run <code>pwd</code> to see where you are.</li>
+        <li>Use <code>cd</code> with an absolute path to navigate to <code>/tmp</code>.</li>
+        <li>Run <code>pwd</code> again to confirm.</li>
+        <li>Use <code>cd ~</code> to jump back to your home directory.</li>
+        <li>Navigate to a subfolder using a relative path, then use <code>cd ..</code> to come back.</li>
+        <li>Use <code>cd -</code> to toggle between your last two locations.</li>
+      </ol>
+    </div>
+
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li><strong>Absolute paths</strong> start with <code>/</code> and always point to the same location.</li>
+      <li><strong>Relative paths</strong> depend on your current working directory.</li>
+      <li>Use <code>pwd</code> to check where you are.</li>
+      <li>Use <code>..</code> to move up, <code>~</code> to jump home, and <code>-</code> to go back.</li>
+      <li>Both types of paths are useful — choose the one that fits the situation.</li>
+    </ul>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class — Introduction to Linux</p>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="assets/js/load-footer.js" defer></script>
+</body>
+</html>

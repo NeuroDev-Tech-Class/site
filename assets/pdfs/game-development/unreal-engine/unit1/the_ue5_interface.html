@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>The UE5 Interface</h1>
+    <p class="subtitle">A complete walkthrough of every major panel in the Unreal Engine 5 editor</p>
+  </div>
+
+  <h2>First Launch</h2>
+  <p>When you open a project in Unreal Engine 5, you're greeted by the <strong>Level Editor</strong> — the main workspace where you build, test, and iterate on your game. At first glance it can feel overwhelming: there are panels, menus, and buttons everywhere. Don't worry. By the end of this lesson, you'll know exactly what each piece does and how to make the editor work for you.</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> If you ever accidentally close a panel, you can reopen it from the <strong>Window</strong> menu in the top menu bar. You can also reset the entire layout to the default by going to <code>Window → Load Layout → Default Editor Layout</code>.
+  </div>
+
+  <h2>The Core Panels</h2>
+
+  <h3>1. The Viewport</h3>
+  <p>The <strong>Viewport</strong> is the large 3D view that dominates the center of the screen. This is your window into the game world — it shows you exactly what your level looks like in real time. You can fly around, select objects, move things, and even preview lighting and effects right here.</p>
+  <p>Key things to know about the Viewport:</p>
+  <ul>
+    <li>It renders in <strong>real time</strong>, so changes you make are instantly visible.</li>
+    <li>The top-left corner has a dropdown for <strong>view modes</strong> (Lit, Unlit, Wireframe, etc.) that let you see your level in different ways — useful for debugging lighting or performance issues.</li>
+    <li>You can have <strong>multiple viewports</strong> by clicking the viewport options menu (small arrow in the top-left) and selecting a multi-viewport layout.</li>
+    <li>The small icons in the top-left also let you toggle things like <strong>real-time rendering</strong>, <strong>grid snapping</strong>, and <strong>camera speed</strong>.</li>
+  </ul>
+
+  <h3>2. The Content Browser</h3>
+  <p>The <strong>Content Browser</strong> (sometimes called the <strong>Content Drawer</strong> in UE5) is essentially a file manager for your project. Every asset your project uses — 3D models (meshes), textures, materials, sounds, Blueprints, animations, particle effects — lives in the Content Browser.</p>
+  <ul>
+    <li>Open it with <kbd>Ctrl</kbd>+<kbd>Space</kbd> (Content Drawer) or find it under <code>Window → Content Browser</code>.</li>
+    <li>Assets are organized into <strong>folders</strong>, just like files on your computer.</li>
+    <li>You can <strong>drag and drop</strong> assets directly from the Content Browser into the Viewport to place them in your level.</li>
+    <li>Right-click inside it to <strong>create new assets</strong> like materials, Blueprints, and folders.</li>
+    <li>Use the <strong>search bar</strong> at the top to quickly find assets by name.</li>
+    <li>The <strong>Filters</strong> button lets you narrow results to specific asset types (e.g., show only Static Meshes or only Materials).</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> If you're using a template project, check the <code>StarterContent</code> folder — it comes packed with free meshes, materials, textures, and props you can use right away.
+  </div>
+
+  <h3>3. The Details Panel</h3>
+  <p>When you select any object (called an <strong>Actor</strong>) in the Viewport or Outliner, its properties appear in the <strong>Details Panel</strong>, typically located on the right side of the editor. This is where you fine-tune everything about that object:</p>
+  <ul>
+    <li><strong>Transform</strong> — Position (Location), Rotation, and Scale values. You can type exact numbers here for precision placement.</li>
+    <li><strong>Materials</strong> — Which material(s) are applied to the mesh.</li>
+    <li><strong>Mobility</strong> — Whether the actor is <em>Static</em> (never moves), <em>Stationary</em> (stays put but can change), or <em>Movable</em> (fully dynamic).</li>
+    <li><strong>Physics</strong> — Enable or disable physics simulation, set mass, gravity, etc.</li>
+    <li><strong>Components</strong> — Every actor is made up of components (mesh, collision, audio, etc.). You can add, remove, and configure them here.</li>
+    <li><strong>Tags &amp; Layers</strong> — Organize actors with tags for use in gameplay logic.</li>
+  </ul>
+  <p>The Details Panel is <strong>context-sensitive</strong>: it changes based on what you have selected. Select a light and you'll see light-specific settings like intensity and color. Select a sound and you'll see audio settings.</p>
+
+  <h3>4. The Outliner</h3>
+  <p>The <strong>Outliner</strong> (usually in the upper-right corner) is a hierarchical list of <em>every single actor</em> in your current level. Think of it as a table of contents for your scene.</p>
+  <ul>
+    <li>Click an actor's name to <strong>select</strong> it (it will also highlight in the Viewport).</li>
+    <li>Use the <strong>search bar</strong> to find actors by name.</li>
+    <li>You can <strong>drag actors onto other actors</strong> to create parent-child relationships (attaching objects together).</li>
+    <li>Click the <strong>eye icon</strong> next to an actor to toggle its visibility in the editor (this does not affect the game).</li>
+    <li>Right-click actors to rename, duplicate, group, or delete them.</li>
+    <li>Keep your Outliner <strong>organized</strong> by creating <strong>folders</strong> — right-click and choose <code>Create Folder</code>.</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Warning:</strong> A messy Outliner will slow you down as your project grows. Get into the habit of naming your actors descriptively (e.g., "CastleWall_Left_01" instead of "SM_Wall3") and organizing them into folders early.
+  </div>
+
+  <h3>5. The Toolbar</h3>
+  <p>The <strong>Toolbar</strong> runs along the top of the editor and contains the most frequently used actions:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Button</th>
+        <th>What It Does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Save Current</strong></td>
+        <td>Saves the current level (<kbd>Ctrl</kbd>+<kbd>S</kbd>)</td>
+      </tr>
+      <tr>
+        <td><strong>Save All</strong></td>
+        <td>Saves all modified assets</td>
+      </tr>
+      <tr>
+        <td><strong>Play</strong></td>
+        <td>Launches the game in the viewport for testing (<kbd>Alt</kbd>+<kbd>P</kbd>)</td>
+      </tr>
+      <tr>
+        <td><strong>Blueprints</strong></td>
+        <td>Quick access to the Level Blueprint and other Blueprint editors</td>
+      </tr>
+      <tr>
+        <td><strong>Build</strong></td>
+        <td>Bakes lighting, navigation meshes, and other pre-computed data</td>
+      </tr>
+      <tr>
+        <td><strong>Settings</strong></td>
+        <td>Project Settings, World Settings, and editor preferences</td>
+      </tr>
+      <tr>
+        <td><strong>Platforms</strong></td>
+        <td>Configure and package your game for different platforms</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>6. The Modes Panel</h3>
+  <p>The <strong>Modes Panel</strong> (accessed via the selection mode dropdown on the left side of the toolbar, or the icons on the left edge) switches the editor between different editing modes:</p>
+  <ul>
+    <li><strong>Select Mode</strong> — The default. Select and move actors in the Viewport.</li>
+    <li><strong>Landscape Mode</strong> — Create and sculpt terrain.</li>
+    <li><strong>Foliage Mode</strong> — Paint trees, grass, and other foliage onto surfaces.</li>
+    <li><strong>Mesh Paint Mode</strong> — Paint vertex colors directly onto meshes.</li>
+    <li><strong>Modeling Mode</strong> — Edit and create geometry directly in the editor.</li>
+  </ul>
+  <p>We'll explore Landscape and Foliage modes in detail in later lessons.</p>
+
+  <h2>Understanding Actors</h2>
+  <p>In Unreal Engine, <strong>everything you place in a level is an Actor</strong>. A cube? Actor. A light? Actor. A sound emitter? Actor. A camera? Actor. Even the Player Start (the spot where the player spawns) is an Actor.</p>
+  <p>Actors are made up of <strong>Components</strong>. A typical mesh actor has:</p>
+  <ul>
+    <li>A <strong>Static Mesh Component</strong> — the visible 3D shape</li>
+    <li>A <strong>Collision Component</strong> — the invisible shape used for physics/overlap detection</li>
+    <li>A <strong>Scene Component</strong> (Root) — defines the actor's position in 3D space</li>
+  </ul>
+  <p>This component-based design is extremely flexible. Want a lamp that emits light and plays a buzzing sound? Add a Point Light component and an Audio component to a mesh actor. No coding required.</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> You can customize the editor layout to fit your workflow. Drag panel tabs to rearrange them, dock panels side-by-side, or pop them out into separate windows. Once you have a layout you like, save it via <code>Window → Save Layout</code> so you can restore it anytime.
+  </div>
+
+  <h2>Recap</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Panel</th>
+        <th>Purpose</th>
+        <th>Quick Access</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Viewport</td>
+        <td>3D view of your level</td>
+        <td>Always visible (center)</td>
+      </tr>
+      <tr>
+        <td>Content Browser</td>
+        <td>File manager for project assets</td>
+        <td><kbd>Ctrl</kbd>+<kbd>Space</kbd></td>
+      </tr>
+      <tr>
+        <td>Details</td>
+        <td>Properties of the selected actor</td>
+        <td>Right side (auto-shows on selection)</td>
+      </tr>
+      <tr>
+        <td>Outliner</td>
+        <td>List of all actors in the level</td>
+        <td>Upper-right corner</td>
+      </tr>
+      <tr>
+        <td>Toolbar</td>
+        <td>Save, Play, Build, Settings</td>
+        <td>Top of editor</td>
+      </tr>
+      <tr>
+        <td>Modes</td>
+        <td>Switch editing modes</td>
+        <td>Left side of toolbar</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="activity">
+    <strong>Try It:</strong> Open your project and spend a few minutes exploring each panel. Select different actors in the Viewport and watch the Details Panel update. Search for an asset in the Content Browser and drag it into the level. Click the <strong>Play</strong> button to walk around your scene, then press <kbd>Esc</kbd> to stop.
+  </div>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

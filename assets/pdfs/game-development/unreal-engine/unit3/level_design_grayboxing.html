@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>Level Design &amp; Grayboxing</h1>
+    <p class="subtitle">Prototype your level layout with simple shapes before adding any detail</p>
+  </div>
+
+  <h2>What Is Level Design?</h2>
+  <p><strong>Level design</strong> is the art of creating the spaces that players move through. A level designer decides where the player starts, where they go, what they encounter along the way, and where the level ends. Good level design guides the player, challenges them, and rewards them — all through the layout and pacing of the environment.</p>
+  <p>Level design is not the same as environment art. A beautifully detailed forest doesn't matter if the player can't figure out which way to go. The <em>layout</em> comes first; the visuals come later.</p>
+
+  <h2>What Is Grayboxing?</h2>
+  <p><strong>Grayboxing</strong> (also called blockout or whiteboxing) is the process of building a level using <strong>simple, untextured shapes</strong> — cubes, cylinders, ramps — to rapidly prototype the layout. No fancy materials, no lighting polish, no decorative props. Just gray boxes.</p>
+  <p>Why? Because building a detailed level takes a long time. If you spend 10 hours making a beautiful room and then discover the layout doesn't work, you've wasted most of that time. Grayboxing lets you test and iterate on the layout in minutes instead of hours.</p>
+
+  <div class="tip">
+    <strong>Every professional game studio grayboxes.</strong> Even AAA games with thousand-person teams start as gray boxes. The level must be fun to walk around in <em>before</em> any art goes in.
+  </div>
+
+  <h3>Tools for Grayboxing in Unreal</h3>
+  <ul>
+    <li><strong>Basic meshes</strong> — cubes, spheres, cylinders, cones from the StarterContent or the Place Actors panel. Scale and stretch them to create walls, floors, platforms, and ramps.</li>
+    <li><strong>BSP Brushes</strong> — Unreal's built-in geometry tools (<code>Place Actors → Geometry → Box/Cylinder/etc.</code>). These are great for quick blocking but should be converted to static meshes for the final level.</li>
+    <li><strong>Modeling Mode</strong> — UE5's built-in modeling tools let you create and edit shapes directly in the viewport. Useful for custom shapes but more advanced.</li>
+  </ul>
+
+  <h2>Planning Your Level</h2>
+  <p>Before you place a single shape, answer these five questions:</p>
+
+  <h3>1. Who is the audience?</h3>
+  <p>Are you designing for beginners who need gentle tutorials, or experienced players who want a challenge? Your audience affects everything: difficulty, complexity, pacing, and visual clarity.</p>
+
+  <h3>2. What is the objective?</h3>
+  <p>What is the player trying to accomplish? "Get from start to finish," "find all 10 coins," "defeat the boss," "escape the building." A clear objective gives the level purpose.</p>
+
+  <h3>3. How long should it take?</h3>
+  <p>A 2-minute sprint level plays very differently from a 15-minute exploration level. Decide the target play time before you start building — it determines how large the level needs to be.</p>
+
+  <h3>4. What is the theme?</h3>
+  <p>Even in a graybox, knowing the theme helps you make layout decisions. A dungeon feels different from an open field. A spaceship has corridors; a forest has winding paths. The shapes may be gray, but the <em>feel</em> should already be there.</p>
+
+  <h3>5. What is the difficulty?</h3>
+  <p>Easy levels have wide platforms, clear paths, and generous checkpoints. Hard levels have narrow platforms, multiple paths (some of which are dead ends), and fewer checkpoints. Set the difficulty before building.</p>
+
+  <h2>Flow and Pacing</h2>
+  <p>Great level design follows a rhythm — a pattern of <strong>teach → challenge → reward</strong> that repeats throughout the level.</p>
+
+  <h3>Teach</h3>
+  <p>Introduce a new mechanic or obstacle in a <strong>safe, low-risk</strong> environment. The player should encounter the new thing and have a chance to learn how it works without being punished for failure. Example: place a single jump pad in a flat area with no consequences for missing the jump.</p>
+
+  <h3>Challenge</h3>
+  <p>Now use that same mechanic in a <strong>harder context</strong>. Combine it with other mechanics, add time pressure, or place it over a pit. The player must apply what they just learned under more demanding conditions. Example: a series of jump pads over a gap, where missing means falling.</p>
+
+  <h3>Reward</h3>
+  <p>After a challenge, give the player something <strong>positive</strong>: a checkpoint, a cluster of coins, a new area to explore, a beautiful view, or a moment of calm. This emotional payoff motivates them to continue.</p>
+
+  <div class="warning">
+    <strong>Avoid monotony:</strong> If every section of your level is the same difficulty, the player gets bored. If every section is hard, they get frustrated. Vary the intensity — easy, medium, hard, then a breather. This wave-like pacing keeps players engaged.
+  </div>
+
+  <h2>Playtesting</h2>
+  <p>The most important step in level design is <strong>watching other people play your level</strong>. You know where everything is and how everything works — a fresh player doesn't.</p>
+  <ul>
+    <li><strong>Watch silently.</strong> Don't give hints or explain things. If the player gets stuck, that's valuable information — the level design needs to communicate better.</li>
+    <li><strong>Note where they get confused.</strong> Do they go the wrong way? Miss a pickup? Not notice a jump pad? These are design problems, not player problems.</li>
+    <li><strong>Note where they get frustrated.</strong> If they die in the same spot 5 times, the difficulty spike is too steep.</li>
+    <li><strong>Note where they smile or say "cool."</strong> Those are the moments to build more of.</li>
+  </ul>
+
+  <h2>Design Tips</h2>
+
+  <h3>Readable Paths</h3>
+  <p>The player should always be able to look around and understand where to go next. Use <strong>visual cues</strong>: wider openings for the correct path, coins or lights leading the way, height differences that suggest "go up" or "go down." If the player has to guess where to go, the design needs work.</p>
+
+  <h3>Height Variation</h3>
+  <p>Flat levels are boring. Use <strong>elevation changes</strong> — ramps, stairs, cliffs, pits, tall platforms — to create visual variety and gameplay challenges. Vertical space is just as important as horizontal space.</p>
+
+  <h3>Lighting as a Guide</h3>
+  <p>Even in a graybox, light and dark can guide the player. Brighter areas attract attention — light up the path you want them to follow. Darker areas suggest danger or optional/hidden content. In the final level, lighting becomes one of your most powerful design tools.</p>
+
+  <h3>Dead Ends with Rewards</h3>
+  <p>If you create a side path that doesn't lead to the main objective, put <strong>something there</strong> — a coin, a key, a secret. Empty dead ends frustrate players; rewarding dead ends encourage exploration.</p>
+
+  <h2>Summary</h2>
+  <ul>
+    <li><strong>Level design</strong> is about creating spaces that guide, challenge, and reward the player.</li>
+    <li><strong>Grayboxing</strong> uses simple shapes to prototype layout before adding detail — always graybox first.</li>
+    <li>Plan your level by defining <strong>audience, objective, duration, theme, and difficulty</strong>.</li>
+    <li>Follow the <strong>teach → challenge → reward</strong> pacing cycle.</li>
+    <li><strong>Playtest</strong> with other people and observe where they get confused, frustrated, or excited.</li>
+    <li>Use <strong>readable paths</strong>, <strong>height variation</strong>, and <strong>lighting</strong> to guide the player.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

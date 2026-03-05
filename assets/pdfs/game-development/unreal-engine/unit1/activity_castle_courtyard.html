@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>Activity: Castle Courtyard</h1>
+    <p class="subtitle">Build a complete 3D environment by combining everything you've learned in Unit 1</p>
+  </div>
+
+  <h2>Overview</h2>
+  <p>In this guided activity, you'll create a <strong>castle courtyard</strong> environment from scratch. This project brings together landscapes, meshes, materials, lighting, and foliage — all the skills from Unit 1. By the end, you'll have a playable scene you can walk around in.</p>
+
+  <div class="tip">
+    <strong>Before You Start:</strong> Make sure you have a content pack with architectural meshes (walls, pillars, arches). Good free options from the Epic Marketplace include <em>Medieval Dungeon</em>, <em>Infinity Blade: Castle</em>, or <em>Soul: Cave</em>. You can also use the default StarterContent architecture pieces — they won't look medieval, but the process is the same.
+  </div>
+
+  <h2>Step 1: Create a New Level</h2>
+  <ol>
+    <li>Go to <code>File → New Level</code>.</li>
+    <li>Choose <strong>Open World</strong> or <strong>Basic</strong> (either works — Open World includes sky and lighting by default).</li>
+    <li>Save the level immediately: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> and name it <code>CastleCourtyard</code>.</li>
+  </ol>
+
+  <h2>Step 2: Create &amp; Sculpt the Landscape</h2>
+  <ol>
+    <li>Delete any existing floor mesh.</li>
+    <li>Enter <strong>Landscape Mode</strong> (<kbd>Shift</kbd>+<kbd>3</kbd>).</li>
+    <li>Use the default settings and click <strong>Create</strong>.</li>
+    <li>Switch to the <strong>Sculpt</strong> tab.</li>
+    <li>Use a <strong>large brush</strong> with <strong>medium strength</strong> to raise terrain around the edges, creating a <strong>valley or basin</strong> in the center. This valley will be your courtyard area.</li>
+    <li>Create some gentle slopes and hills around the exterior — avoid perfectly uniform walls of terrain.</li>
+    <li>Use the <strong>Smooth</strong> tool to soften any harsh edges.</li>
+    <li>Optionally, use the <strong>Flatten</strong> tool on the center area to create a nice flat surface for building.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> The courtyard floor doesn't need to be perfectly flat — a tiny bit of variation looks more natural. But it should be level enough that walls and structures sit flush on it.
+  </div>
+
+  <h2>Step 3: Build the Castle Walls</h2>
+  <ol>
+    <li>Switch back to <strong>Select Mode</strong> (press <kbd>Shift</kbd>+<kbd>1</kbd> or click the cursor icon).</li>
+    <li>Open the <strong>Content Browser</strong> (<kbd>Ctrl</kbd>+<kbd>Space</kbd>) and navigate to your architectural mesh assets.</li>
+    <li>Drag <strong>wall segments</strong> into the Viewport. Position them along the edge of the valley to form the outer walls of your castle.</li>
+    <li>Use <strong>Grid Snap</strong> to align wall pieces edge-to-edge — no gaps.</li>
+    <li>Duplicate walls with <kbd>Alt</kbd>+Drag to speed up the process.</li>
+    <li>Add <strong>corner pieces</strong> or <strong>towers</strong> at the corners. Rotate them as needed (<kbd>E</kbd>).</li>
+    <li>Leave an opening in one wall for the <strong>main gate / entrance</strong>.</li>
+    <li>Optionally add pillars, arches, stairs, or a central fountain inside the courtyard.</li>
+  </ol>
+
+  <div class="warning">
+    <strong>Keep It Organized:</strong> As you add meshes, name them in the Outliner (double-click to rename). Create folders like "Walls", "Props", "Towers" to keep things tidy. A messy Outliner makes editing much harder later.
+  </div>
+
+  <h2>Step 4: Paint the Landscape</h2>
+  <ol>
+    <li>Create a <strong>Landscape Material</strong> with at least 2–3 layers:
+      <ul>
+        <li><strong>Grass</strong> — for the courtyard interior and surrounding meadows</li>
+        <li><strong>Dirt / Stone</strong> — for paths, around walls, and high-traffic areas</li>
+        <li><strong>Rock</strong> (optional) — for steep hill areas and cliff faces</li>
+      </ul>
+    </li>
+    <li>Assign the material to your landscape in the Details Panel.</li>
+    <li>Enter <strong>Landscape Mode → Paint</strong> and create layer info for each layer.</li>
+    <li>Paint <strong>grass inside the courtyard</strong> and on the gentle hills.</li>
+    <li>Paint <strong>dirt/stone around the walls</strong>, along pathways, and at the gate entrance.</li>
+    <li>Paint <strong>rock on steep slopes</strong> if applicable.</li>
+  </ol>
+
+  <h2>Step 5: Add Foliage</h2>
+  <ol>
+    <li>Enter <strong>Foliage Mode</strong> (<kbd>Shift</kbd>+<kbd>4</kbd>).</li>
+    <li>Add tree and bush meshes to the foliage palette.</li>
+    <li>Paint trees and bushes on the <strong>exterior</strong> hills — around the outside of the castle walls.</li>
+    <li>Add a few trees or decorative bushes <strong>inside the courtyard</strong> for life.</li>
+    <li>Use <strong>Shift + paint to erase</strong> any foliage that clips through walls or appears in unwanted spots.</li>
+    <li>Set scale variation to <code>0.8 – 1.3</code> for natural variety.</li>
+  </ol>
+
+  <h2>Step 6: Set Up Lighting</h2>
+  <p>Create a warm, sunset atmosphere:</p>
+  <ol>
+    <li>Select the <strong>Directional Light</strong> and rotate it so the sun sits low on the horizon (around 15–25° above the ground plane).</li>
+    <li>Set the <strong>Light Color</strong> to a warm orange tone (e.g., R: 255, G: 200, B: 140).</li>
+    <li>Adjust <strong>Intensity</strong> to your liking — slightly lower than default for a golden-hour feel.</li>
+    <li>Select the <strong>Exponential Height Fog</strong> and set its <strong>Inscattering Color</strong> to a complementary warm tone. Enable <strong>Volumetric Fog</strong> for god rays through the gate.</li>
+    <li>Add a <strong>Post Process Volume</strong> (set to Infinite Extent) and subtly increase:
+      <ul>
+        <li><strong>Bloom</strong> — slight glow around bright areas</li>
+        <li><strong>Vignette</strong> — gentle darkening at screen edges</li>
+        <li><strong>Color Grading</strong> — slightly boost Saturation and add a warm tint to the shadows</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h2>Step 7: Place the Player Start</h2>
+  <ol>
+    <li>Add a <strong>Player Start</strong> actor (<code>+ → Basic → Player Start</code>).</li>
+    <li>Place it <strong>inside the courtyard</strong> on a flat surface.</li>
+    <li>Point the blue arrow toward something interesting — the gate, a fountain, or down a path.</li>
+    <li>Make sure the Player Start is <strong>not clipping into any geometry</strong> (the icon should be green, not red).</li>
+  </ol>
+
+  <h2>Step 8: Play-Test!</h2>
+  <ol>
+    <li>Press <strong>Play</strong> (<kbd>Alt</kbd>+<kbd>P</kbd>) to enter the game.</li>
+    <li>Walk around the courtyard. Look for:
+      <ul>
+        <li>Gaps between wall pieces</li>
+        <li>Foliage clipping through walls</li>
+        <li>Areas where the player can fall through the landscape</li>
+        <li>Lighting and atmosphere — does it feel right?</li>
+      </ul>
+    </li>
+    <li>Press <kbd>Esc</kbd> to stop play-testing.</li>
+    <li>Go back and fix any issues you noticed.</li>
+  </ol>
+
+  <h2>Completion Checklist</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>✓</th>
+        <th>Requirement</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>☐</td>
+        <td>Landscape created with sculpted terrain (valley/hills)</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td>Castle walls placed around the courtyard with at least one entrance</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td>Landscape painted with at least 2 layers (grass + dirt/stone)</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td>Foliage painted on exterior terrain (trees, bushes)</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td>Lighting set to a warm sunset atmosphere</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td>Post Process Volume with at least one visible effect</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td>Player Start placed inside the courtyard</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td>Play-tested and walked through the level successfully</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td>Outliner is organized with named actors and/or folders</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td>Level saved (<kbd>Ctrl</kbd>+<kbd>S</kbd>)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Going Further:</strong> If you finish early, try adding interior details: banners on the walls, torches with Point Lights, a well or fountain in the center, or crates and barrels near the gate. The more detail you add, the more immersive the environment becomes.
+  </div>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

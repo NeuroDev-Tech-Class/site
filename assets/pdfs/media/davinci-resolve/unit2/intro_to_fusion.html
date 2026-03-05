@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/davinci-resolve.html" class="back-link">&larr; Back to Video Production &mdash; DaVinci Resolve</a>
+    <div class="doc-header">
+    <span class="course-tag">Video Production — DaVinci Resolve</span>
+    <h1>Introduction to Fusion</h1>
+    <p class="subtitle">An overview of DaVinci Resolve's node-based compositing and visual effects engine</p>
+  </div>
+
+  <h2>What Is Compositing?</h2>
+  <p><strong>Compositing</strong> is the process of combining multiple visual elements into a single image or sequence. Every time you see a superhero flying through a city, a weather map behind a news anchor, or an explosion added to a movie scene — that's compositing. Elements from different sources (live-action footage, CGI renders, still images, text, effects) are layered and blended together to create a seamless final result.</p>
+  <p>DaVinci Resolve includes <strong>Fusion</strong>, a professional-grade compositing application, built right into the software. Fusion has been used on feature films and high-end commercials for decades, and you get it for free.</p>
+
+  <h2>Node-Based vs. Layer-Based</h2>
+  <p>If you've used After Effects or the timeline in the Edit page, you're familiar with <strong>layer-based</strong> compositing — you stack elements on top of each other, and the top layer covers the ones below. It's intuitive for simple work.</p>
+  <p><strong>Node-based</strong> compositing (used by Fusion) works differently. Instead of layers, you have a flow graph of connected <strong>nodes</strong>. Each node performs one operation (bring in media, merge two elements, apply a blur, add text, etc.), and you connect them with lines to define the data flow. The output of one node flows into the input of the next.</p>
+
+  <h3>Why Nodes?</h3>
+  <ul>
+    <li><strong>Non-destructive:</strong> You can insert, remove, or rearrange operations at any point without rebuilding everything.</li>
+    <li><strong>Reusable:</strong> You can branch a single output to multiple inputs, processing the same source in different ways simultaneously.</li>
+    <li><strong>Scalable:</strong> Complex compositions with dozens of elements remain organized and readable — much cleaner than a 50-layer stack.</li>
+    <li><strong>Flexible:</strong> Any property on any node can be animated or connected to expressions and modifiers.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> The node-based approach may feel unfamiliar at first, but once you understand the flow (left to right, source to output), it becomes very logical. Give it time — it's worth learning.
+  </div>
+
+  <h2>Accessing Fusion</h2>
+  <p>There are two ways to work with Fusion:</p>
+  <ul>
+    <li><strong>Fusion page:</strong> Click the Fusion icon at the bottom of the screen (or press <kbd>Shift</kbd>+<kbd>5</kbd>). This opens the full Fusion workspace for the clip currently under the playhead on the Edit page timeline.</li>
+    <li><strong>Fusion Composition:</strong> On the Edit page, go to <em>Effects Library > Effects > Fusion Composition</em> and drag it onto the timeline. This creates a blank Fusion comp you can build from scratch.</li>
+  </ul>
+
+  <h2>The Fusion Interface</h2>
+
+  <h3>Node Editor (Flow Graph)</h3>
+  <p>The <strong>Node Editor</strong> is the large central panel. This is where you build your composition by adding nodes and connecting them. Each node appears as a small rectangle with input and output triangles. Lines between nodes show the flow of data.</p>
+
+  <h3>Viewers</h3>
+  <p>Fusion has two viewers (left and right) at the top. You can assign any node to either viewer to preview its output. Click a node and press <kbd>1</kbd> to send it to the left viewer, or <kbd>2</kbd> for the right. This lets you compare two stages of your composition side by side.</p>
+
+  <h3>Inspector / Controls</h3>
+  <p>Select any node, and the <strong>Inspector</strong> panel on the right shows that node's properties. You can adjust parameters, keyframe values, and connect modifiers here — just like the Inspector on the Edit page.</p>
+
+  <h3>Spline Editor &amp; Keyframe Editor</h3>
+  <p>Below the Node Editor, you can open the <strong>Spline Editor</strong> (for animation curves) or the <strong>Keyframe Editor</strong> (for managing keyframes over time). These work like animation curve editors in other software.</p>
+
+  <h2>Essential Nodes</h2>
+  <p>Here are the nodes you'll encounter most often:</p>
+
+  <table>
+    <thead>
+      <tr><th>Node</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>MediaIn</strong></td><td>Brings your timeline clip into the Fusion composition. This is always the starting point — it represents the footage on your Edit page timeline.</td></tr>
+      <tr><td><strong>MediaOut</strong></td><td>Sends the final result back to the Edit page timeline. Whatever is connected to MediaOut is what appears in your edited video.</td></tr>
+      <tr><td><strong>Background</strong></td><td>Generates a solid color, gradient, or transparent background. Useful as a base layer for motion graphics.</td></tr>
+      <tr><td><strong>Merge</strong></td><td>Combines two inputs — a <strong>foreground</strong> and a <strong>background</strong>. This is how you layer elements together (similar to putting one clip above another on the timeline).</td></tr>
+      <tr><td><strong>Text+</strong></td><td>The same Text+ you use on the Edit page, but with access to Fusion's full animation and effects system. Much more powerful in this context.</td></tr>
+      <tr><td><strong>Transform</strong></td><td>Moves, scales, or rotates the image. Connect it between nodes to reposition elements.</td></tr>
+      <tr><td><strong>Mask</strong> (Rectangle, Ellipse, Polygon, B-Spline)</td><td>Creates a shape that can be used to mask (show/hide) parts of an image.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>The Basic Flow: MediaIn → Merge → MediaOut</h2>
+  <p>Every Fusion composition follows this fundamental pattern:</p>
+  <ol>
+    <li><strong>MediaIn</strong> brings in your footage.</li>
+    <li>A <strong>Merge</strong> node combines the footage with another element (like text or a background).</li>
+    <li><strong>MediaOut</strong> sends the result back to the timeline.</li>
+  </ol>
+  <p>When you first open the Fusion page for a clip, you'll see <code>MediaIn1</code> connected directly to <code>MediaOut1</code>. To add something on top of the footage, insert a Merge node between them, then connect your new element (text, image, shape) to the Merge's foreground input.</p>
+
+  <h2>Creating a Simple Composition</h2>
+  <p>Let's create a text overlay on your footage:</p>
+  <ol>
+    <li>On the Edit page, place the playhead on a clip and switch to the <strong>Fusion</strong> page.</li>
+    <li>You'll see <code>MediaIn1 → MediaOut1</code>.</li>
+    <li>Add a <strong>Text+</strong> node: press <kbd>Shift</kbd>+<kbd>Space</kbd> to open the tool search, type "Text," and select <strong>Text+</strong>.</li>
+    <li>Add a <strong>Merge</strong> node: press <kbd>Shift</kbd>+<kbd>Space</kbd>, type "Merge," and select it.</li>
+    <li>Connect the nodes: drag from <code>MediaIn1</code>'s output to the <strong>background input</strong> (yellow triangle) of <code>Merge1</code>. Drag from <code>Text1</code>'s output to the <strong>foreground input</strong> (green triangle) of <code>Merge1</code>. Finally, connect <code>Merge1</code>'s output to <code>MediaOut1</code>'s input.</li>
+    <li>Select <code>Text1</code> and type your text in the Inspector. Adjust font, size, and position.</li>
+    <li>Press <kbd>2</kbd> on <code>MediaOut1</code> to preview the final result in the right viewer.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> You can also connect nodes by dragging one node directly onto the line between two connected nodes. Fusion will automatically insert it into the flow and create a Merge node if needed.
+  </div>
+
+  <h2>Tracking: Planar Tracker</h2>
+  <p><strong>Tracking</strong> allows you to attach elements to moving objects in your footage. The <strong>Planar Tracker</strong> node analyzes a flat surface (like a sign, screen, or wall) in your video and calculates its motion over time. You can then lock text, images, or effects to that surface so they move naturally with the footage.</p>
+  <p>To use the Planar Tracker:</p>
+  <ol>
+    <li>Add a <strong>Planar Tracker</strong> node after <code>MediaIn</code>.</li>
+    <li>In the Inspector, draw a shape around the surface you want to track.</li>
+    <li>Click <strong>Track</strong> (forward and/or reverse). Fusion analyzes the motion.</li>
+    <li>Set the operation mode (e.g., Corner Pin) and connect your overlay element.</li>
+  </ol>
+
+  <h2>Green Screen Keying: Delta Keyer</h2>
+  <p>If you have footage shot on a <strong>green screen</strong> (or blue screen), you can remove the background color and replace it with anything:</p>
+  <ol>
+    <li>Add a <strong>Delta Keyer</strong> node after <code>MediaIn</code>.</li>
+    <li>In the Inspector, use the eyedropper to click on the green area in the viewer. The green should become transparent.</li>
+    <li>Refine the key using the <strong>Matte</strong> controls: Clean Black, Clean White, and edge softness.</li>
+    <li>Use a <strong>Merge</strong> node to place the keyed footage over a new background.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> Good keying starts with good footage. Even lighting on the green screen, no wrinkles, and the subject far enough from the backdrop all make a huge difference in how clean your key will be.
+  </div>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li><strong>Fusion</strong> is DaVinci Resolve's built-in compositing engine, using a <strong>node-based</strong> workflow instead of layers.</li>
+    <li>The fundamental flow is <strong>MediaIn → Merge → MediaOut</strong>.</li>
+    <li>Key nodes: <strong>Background</strong> (solid color), <strong>Merge</strong> (combine elements), <strong>Text+</strong> (text), <strong>Transform</strong> (move/scale/rotate).</li>
+    <li>Use the <strong>Planar Tracker</strong> to attach elements to moving surfaces and the <strong>Delta Keyer</strong> for green screen removal.</li>
+    <li>Nodes can feel unfamiliar at first, but they offer more power and flexibility than layer-based systems.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Video Production — DaVinci Resolve</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

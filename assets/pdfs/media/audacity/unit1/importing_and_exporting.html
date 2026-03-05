@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/audacity.html" class="back-link">&larr; Back to Audio Production &mdash; Audacity</a>
+    <div class="doc-header">
+    <span class="course-tag">Audio Production — Audacity</span>
+    <h1>Importing &amp; Exporting Audio</h1>
+    <p class="subtitle">Bring audio into your project and save it in the right format for any purpose</p>
+  </div>
+
+  <h2>Opening vs. Importing</h2>
+  <p>There are two different ways to bring an audio file into Audacity, and they behave differently:</p>
+
+  <table>
+    <thead>
+      <tr><th>Method</th><th>What Happens</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>File &gt; Open</strong></td><td>Opens the audio file in a <em>brand-new</em> Audacity project window. Use this when you want to work on a single file by itself.</td></tr>
+      <tr><td><strong>File &gt; Import &gt; Audio</strong></td><td>Adds the audio file to your <em>current</em> project as a new track. Use this when you want to combine multiple audio files (e.g., voice + music).</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Importing Multiple Files</h3>
+  <p>You can import several files at once:</p>
+  <ol>
+    <li>Go to <strong>File &gt; Import &gt; Audio</strong>.</li>
+    <li>In the file browser, hold <kbd>Ctrl</kbd> and click to select multiple files (or hold <kbd>Shift</kbd> to select a range).</li>
+    <li>Click <strong>Open</strong>.</li>
+    <li>Each file appears as its own track in the project.</li>
+  </ol>
+
+  <h3>Drag and Drop</h3>
+  <p>You can also drag audio files directly from your file explorer into the Audacity window. Each dragged file is imported as a new track in the current project — the same behavior as <strong>File &gt; Import &gt; Audio</strong>.</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> Audacity can import WAV, MP3, OGG, FLAC, and many other formats. If a format isn't supported, you may need to install the <strong>FFmpeg library</strong> (Audacity will prompt you with instructions).
+  </div>
+
+  <h2>Exporting Audio</h2>
+  <p>When your project is finished, you need to <strong>export</strong> it as a standard audio file that any media player can open. This is different from saving the project (more on that below).</p>
+  <ol>
+    <li>Go to <strong>File &gt; Export Audio</strong> (or press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd>).</li>
+    <li>Choose a file name and location.</li>
+    <li>Select the <strong>format</strong> from the dropdown.</li>
+    <li>Configure format-specific settings (e.g., bitrate for MP3).</li>
+    <li>Click <strong>Export</strong>.</li>
+    <li>A <strong>Metadata</strong> dialog may appear — fill in tags or click OK to skip.</li>
+  </ol>
+
+  <h2>Export Formats</h2>
+
+  <h3>WAV (Waveform Audio File)</h3>
+  <ul>
+    <li><strong>Type:</strong> Uncompressed</li>
+    <li><strong>Quality:</strong> Full quality — no data is lost.</li>
+    <li><strong>File size:</strong> Large (about 10 MB per minute of stereo audio at 44.1 kHz / 16-bit).</li>
+    <li><strong>Best for:</strong> Editing, archiving, and when quality matters most.</li>
+  </ul>
+
+  <h3>MP3 (MPEG Audio Layer III)</h3>
+  <ul>
+    <li><strong>Type:</strong> Lossy compressed</li>
+    <li><strong>Quality:</strong> Good to excellent, depending on bitrate. Some audio data is permanently removed.</li>
+    <li><strong>File size:</strong> Small (about 1 MB per minute at 128 kbps).</li>
+    <li><strong>Bitrate options:</strong>
+      <ul>
+        <li><strong>128 kbps</strong> — Acceptable for spoken word and casual listening.</li>
+        <li><strong>192 kbps</strong> — Good balance of quality and size. Recommended for podcasts.</li>
+        <li><strong>256 kbps</strong> — High quality for music sharing.</li>
+        <li><strong>320 kbps</strong> — Highest MP3 quality. Nearly indistinguishable from the original.</li>
+      </ul>
+    </li>
+    <li><strong>Best for:</strong> Sharing online, uploading to websites, distributing to listeners.</li>
+  </ul>
+
+  <h3>OGG Vorbis</h3>
+  <ul>
+    <li><strong>Type:</strong> Lossy compressed (open-source)</li>
+    <li><strong>Quality:</strong> Similar to or slightly better than MP3 at the same bitrate.</li>
+    <li><strong>File size:</strong> Small, comparable to MP3.</li>
+    <li><strong>Best for:</strong> Open-source projects, game audio, situations where patent-free formats are preferred.</li>
+  </ul>
+
+  <h3>FLAC (Free Lossless Audio Codec)</h3>
+  <ul>
+    <li><strong>Type:</strong> Lossless compressed</li>
+    <li><strong>Quality:</strong> Perfect — identical to the original. No data is lost.</li>
+    <li><strong>File size:</strong> Moderate (about 50–70% the size of WAV).</li>
+    <li><strong>Best for:</strong> Archiving when you want smaller files without losing quality.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> A good workflow is: save your project as an Audacity project (.aup3) for editing, export a WAV for archiving, and export an MP3 for sharing.
+  </div>
+
+  <h2>Export Selected Audio</h2>
+  <p>Sometimes you only want to export a portion of your project. To do this:</p>
+  <ol>
+    <li>Use the Selection tool to highlight the region you want to export.</li>
+    <li>Go to <strong>File &gt; Export Audio</strong>.</li>
+    <li>In the export dialog, look for the option <strong>"Current Selection"</strong> (or use <strong>File &gt; Export Selected Audio</strong> in older versions).</li>
+    <li>Choose your format and click Export.</li>
+  </ol>
+  <p>Only the selected audio will be written to the file.</p>
+
+  <h2>Metadata Tags</h2>
+  <p>When exporting, Audacity may show a <strong>Metadata Tags</strong> dialog. These tags are embedded in the audio file and provide information about the content:</p>
+  <ul>
+    <li><strong>Title</strong> — The name of the recording or track.</li>
+    <li><strong>Artist</strong> — Who created the recording.</li>
+    <li><strong>Album</strong> — The album or project name.</li>
+    <li><strong>Track Number</strong> — Useful for multi-episode podcasts.</li>
+    <li><strong>Year</strong> — The year of creation.</li>
+    <li><strong>Genre</strong> — The category (Podcast, Music, Speech, etc.).</li>
+    <li><strong>Comments</strong> — Any additional notes.</li>
+  </ul>
+  <p>Media players (like Windows Media Player, VLC, or Spotify) display these tags. Filling them in keeps your files organized and professional.</p>
+
+  <h2>Saving Projects vs. Exporting Audio</h2>
+  <p>This is a critical distinction that trips up many beginners:</p>
+
+  <table>
+    <thead>
+      <tr><th>Action</th><th>What It Does</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>File &gt; Save Project</strong> (<kbd>Ctrl</kbd>+<kbd>S</kbd>)</td><td>Saves an <strong>.aup3</strong> file — Audacity's project format. This preserves all tracks, edits, undo history, and effects settings. Only Audacity can open this file.</td></tr>
+      <tr><td><strong>File &gt; Export Audio</strong></td><td>Creates a standard audio file (WAV, MP3, etc.) that <em>any</em> media player can open. All tracks are mixed down to a single stereo (or mono) file.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warning">
+    <strong>Warning:</strong> Saving a project (<kbd>Ctrl</kbd>+<kbd>S</kbd>) does <strong>not</strong> create an audio file you can share or play in other apps. You must <strong>Export</strong> to create a playable audio file. Always do both: save the project for future editing <em>and</em> export the final audio.
+  </div>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li><strong>File &gt; Open</strong> opens in a new project; <strong>File &gt; Import &gt; Audio</strong> adds to the current project.</li>
+    <li>Export with <strong>File &gt; Export Audio</strong> — choose WAV for quality/archiving, MP3 for sharing.</li>
+    <li>Fill in <strong>metadata tags</strong> to keep your files organized.</li>
+    <li><strong>Save Project</strong> (.aup3) preserves your editable work; <strong>Export</strong> creates a shareable audio file. Do both.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Audio Production — Audacity</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

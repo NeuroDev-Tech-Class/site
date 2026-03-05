@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/gimp.html" class="back-link">&larr; Back to 2D Digital Art &mdash; GIMP</a>
+    <div class="doc-header">
+    <span class="course-tag">2D Digital Art — GIMP</span>
+    <h1>Selection Tools</h1>
+    <p class="subtitle">Isolating Parts of Your Image for Editing</p>
+  </div>
+
+  <h2>What Are Selections?</h2>
+  <p>
+    A <strong>selection</strong> defines a specific area of your image that you want to work on. When a selection is active, any edits you make — painting, filling, filtering, deleting — will only affect the selected area. The boundary of a selection is shown as animated dashed lines, often called <strong>marching ants</strong>.
+  </p>
+  <p>
+    Mastering selection tools is fundamental to image editing. They let you isolate subjects, cut out objects, apply effects to specific regions, and create precise compositions.
+  </p>
+
+  <h2>Selection Tools Reference</h2>
+
+  <h3>Rectangle Select (<kbd>R</kbd>)</h3>
+  <p>
+    Draws a rectangular selection. Click and drag to define the rectangle. Hold <kbd>Shift</kbd> after you start dragging to constrain the selection to a perfect square. In Tool Options you can enable <strong>Fixed</strong> aspect ratio, fixed size, or rounded corners.
+  </p>
+
+  <h3>Ellipse Select (<kbd>E</kbd>)</h3>
+  <p>
+    Draws an elliptical (oval) selection. Click and drag to define the ellipse. Hold <kbd>Shift</kbd> after starting the drag to constrain to a perfect circle. Works similarly to the Rectangle Select with the same Tool Options.
+  </p>
+
+  <h3>Free Select / Lasso (<kbd>F</kbd>)</h3>
+  <p>
+    Lets you draw a freehand selection by clicking and dragging, or click point-by-point to create a polygonal selection. Press <kbd>Enter</kbd> or double-click to close the selection. This tool is useful for irregular shapes that don't fit neatly into rectangles or ellipses.
+  </p>
+
+  <h3>Fuzzy Select / Magic Wand (<kbd>U</kbd>)</h3>
+  <p>
+    Selects a contiguous region of similar colors. Click on a pixel, and GIMP will select all connected pixels that are similar in color. The <strong>Threshold</strong> setting in Tool Options controls how similar a color must be to be included — a low threshold selects only very similar colors, while a high threshold selects a broader range.
+  </p>
+
+  <div class="tip">
+    <strong>Tip:</strong> The Fuzzy Select tool works best on images with solid or clearly defined color areas. For photos with subtle color gradients, try Select by Color instead.
+  </div>
+
+  <h3>Select by Color (<kbd>Shift</kbd>+<kbd>O</kbd>)</h3>
+  <p>
+    Similar to Fuzzy Select, but it selects <em>all</em> pixels of a similar color across the entire image — not just the ones connected to where you clicked. This is great for selecting all instances of a background color, even if they're separated by other objects.
+  </p>
+
+  <h2>Selection Modifiers</h2>
+  <p>
+    You can combine selections to build complex shapes. These modifiers work with any selection tool:
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Modifier</th>
+        <th>Key</th>
+        <th>Effect</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Replace</strong></td>
+        <td>(default)</td>
+        <td>Replaces any existing selection with the new one.</td>
+      </tr>
+      <tr>
+        <td><strong>Add</strong></td>
+        <td><kbd>Shift</kbd></td>
+        <td>Adds the new selection area to the existing selection.</td>
+      </tr>
+      <tr>
+        <td><strong>Subtract</strong></td>
+        <td><kbd>Ctrl</kbd></td>
+        <td>Removes the new selection area from the existing selection.</td>
+      </tr>
+      <tr>
+        <td><strong>Intersect</strong></td>
+        <td><kbd>Shift</kbd>+<kbd>Ctrl</kbd></td>
+        <td>Keeps only the area where the old and new selections overlap.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Feathering</h2>
+  <p>
+    <strong>Feathering</strong> softens the edges of a selection by gradually fading it out over a specified number of pixels. Instead of a hard, sharp boundary, a feathered selection creates a smooth transition. This is useful for blending composited elements so they don't look like they were cut out with scissors.
+  </p>
+  <p>
+    You can enable feathering in the Tool Options before making a selection, or apply it afterward with <strong>Select &gt; Feather</strong>.
+  </p>
+
+  <h2>Select Menu Commands</h2>
+  <p>
+    The <strong>Select</strong> menu provides additional powerful operations:
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Command</th>
+        <th>Shortcut</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Select All</strong></td>
+        <td><kbd>Ctrl</kbd>+<kbd>A</kbd></td>
+        <td>Selects the entire canvas.</td>
+      </tr>
+      <tr>
+        <td><strong>Select None</strong></td>
+        <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd></td>
+        <td>Removes all selections (deselects everything).</td>
+      </tr>
+      <tr>
+        <td><strong>Invert Selection</strong></td>
+        <td><kbd>Ctrl</kbd>+<kbd>I</kbd></td>
+        <td>Selects everything that was not selected, and deselects what was.</td>
+      </tr>
+      <tr>
+        <td><strong>Grow</strong></td>
+        <td>—</td>
+        <td>Expands the selection boundary outward by a specified number of pixels.</td>
+      </tr>
+      <tr>
+        <td><strong>Shrink</strong></td>
+        <td>—</td>
+        <td>Contracts the selection boundary inward.</td>
+      </tr>
+      <tr>
+        <td><strong>Border</strong></td>
+        <td>—</td>
+        <td>Converts the selection into a border (ring) of a specified width.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Quick Mask Mode</h2>
+  <p>
+    <strong>Quick Mask</strong> is an advanced selection method that lets you <em>paint</em> your selection instead of drawing it with selection tools. To toggle Quick Mask mode, press <kbd>Shift</kbd>+<kbd>Q</kbd> or click the small square at the bottom-left corner of the canvas.
+  </p>
+  <p>
+    When Quick Mask is active, the canvas shows a red overlay on unselected areas. You can then use any paint tool:
+  </p>
+  <ul>
+    <li>Paint with <strong>black</strong> to <em>remove</em> from the selection (adds red overlay)</li>
+    <li>Paint with <strong>white</strong> to <em>add</em> to the selection (removes red overlay)</li>
+    <li>Paint with <strong>gray</strong> to create a partially selected (feathered) area</li>
+  </ul>
+  <p>
+    When you're done painting, press <kbd>Shift</kbd>+<kbd>Q</kbd> again to convert the mask back into a standard marching-ants selection.
+  </p>
+
+  <div class="tip">
+    <strong>Tip:</strong> Quick Mask is excellent for making detailed selections around hair, fur, or other complex edges where standard selection tools struggle.
+  </div>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>Use <strong>Rectangle</strong> and <strong>Ellipse Select</strong> for geometric selections.</li>
+    <li>Use <strong>Free Select</strong> for irregular hand-drawn selections.</li>
+    <li>Use <strong>Fuzzy Select</strong> and <strong>Select by Color</strong> for color-based selections.</li>
+    <li>Combine selections with <kbd>Shift</kbd> (add), <kbd>Ctrl</kbd> (subtract), and <kbd>Shift</kbd>+<kbd>Ctrl</kbd> (intersect).</li>
+    <li>Use <strong>Feathering</strong> for soft-edged selections.</li>
+    <li>Use <strong>Quick Mask</strong> to paint precise selections with a brush.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — 2D Digital Art — GIMP</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

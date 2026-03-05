@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/davinci-resolve.html" class="back-link">&larr; Back to Video Production &mdash; DaVinci Resolve</a>
+    <div class="doc-header">
+    <span class="course-tag">Video Production — DaVinci Resolve</span>
+    <h1>Activity: Highlight Reel</h1>
+    <p class="subtitle">Put your Unit 1 skills together by building a polished 60–90 second highlight reel</p>
+  </div>
+
+  <h2>Overview</h2>
+  <p>In this activity you will create a <strong>highlight reel</strong> — a short, visually engaging montage that showcases a variety of clips set to music. This is a staple of video editing: music videos, travel montages, sports highlights, and showreels all follow this format.</p>
+  <p>You'll use every skill covered in Unit 1: importing and organizing media, editing on the timeline, adding transitions, creating titles, changing speed, and animating with keyframes.</p>
+
+  <h2>Finding Footage</h2>
+  <p>You can use your own footage (phone recordings, screen captures, camera footage) or download royalty-free clips from these sources:</p>
+  <ul>
+    <li><strong>Pexels Videos</strong> — <code>pexels.com/videos</code> — free stock video, no attribution required</li>
+    <li><strong>Pixabay Videos</strong> — <code>pixabay.com/videos</code> — free stock video</li>
+    <li><strong>Coverr</strong> — <code>coverr.co</code> — free cinematic stock footage</li>
+  </ul>
+  <p>For royalty-free music:</p>
+  <ul>
+    <li><strong>Pixabay Music</strong> — <code>pixabay.com/music</code></li>
+    <li><strong>Free Music Archive</strong> — <code>freemusicarchive.org</code></li>
+    <li><strong>YouTube Audio Library</strong> — available inside YouTube Studio</li>
+  </ul>
+
+  <div class="warning">
+    <strong>Warning:</strong> Never use copyrighted music or video in your projects without permission. Stick to royalty-free sources listed above.
+  </div>
+
+  <h2>Requirements</h2>
+  <p>Your highlight reel must meet <strong>all</strong> of the following requirements:</p>
+  <ul>
+    <li><strong>Duration:</strong> 60–90 seconds</li>
+    <li><strong>Clips:</strong> At least <strong>8 different clips</strong></li>
+    <li><strong>Transitions:</strong> At least <strong>3 transitions</strong> (at least one must be a Cross Dissolve)</li>
+    <li><strong>Title Text:</strong> A title at the <strong>beginning</strong> of the video (using Text+)</li>
+    <li><strong>End Card:</strong> A closing screen with credits or a "thank you" message</li>
+    <li><strong>Background Music:</strong> At least <strong>1 royalty-free music track</strong> on an audio track</li>
+    <li><strong>Speed Change:</strong> At least <strong>1 clip</strong> with a speed change (slow motion or fast forward)</li>
+    <li><strong>Keyframe Animation:</strong> At least <strong>1 keyframed animation</strong> (zoom, pan, rotation, or opacity fade)</li>
+  </ul>
+
+  <h2>Step-by-Step Instructions</h2>
+
+  <h3>Step 1: Download Your Clips</h3>
+  <p>Visit the stock video sites above and download at least 8–10 clips. Choose a cohesive theme if possible (nature, city life, sports, technology, etc.). Download at 1080p or higher. Also download a music track that fits the mood.</p>
+
+  <h3>Step 2: Create a Project &amp; Import Media</h3>
+  <ol>
+    <li>Open DaVinci Resolve and create a <strong>new project</strong>.</li>
+    <li>Open <strong>Project Settings</strong> (gear icon) and set Timeline Resolution to <strong>1920×1080</strong> and Timeline Frame Rate to match your footage (usually <strong>30 fps</strong>).</li>
+    <li>Go to the <strong>Media</strong> page and import all your clips and the music file.</li>
+    <li>Create bins to organize your media: <code>Video</code>, <code>Audio</code>.</li>
+  </ol>
+
+  <h3>Step 3: Create Your Timeline</h3>
+  <ol>
+    <li>Switch to the <strong>Edit</strong> page.</li>
+    <li>Drag your first clip to the timeline area to create a timeline.</li>
+    <li>Continue adding clips using <strong>Append to End</strong> (<kbd>Shift</kbd>+<kbd>F12</kbd>) or by dragging them to the timeline.</li>
+  </ol>
+
+  <h3>Step 4: Arrange and Trim Clips</h3>
+  <ol>
+    <li>Rearrange clips by dragging them on the timeline until the order feels right.</li>
+    <li>Trim each clip to show only the best parts — aim for 5–15 seconds per clip.</li>
+    <li>Use the <strong>Blade tool</strong> (<kbd>B</kbd>) to cut away unwanted sections and <strong>Ripple Delete</strong> to close gaps.</li>
+    <li>Ensure total duration is between 60 and 90 seconds.</li>
+  </ol>
+
+  <h3>Step 5: Add Transitions</h3>
+  <ol>
+    <li>Add a <strong>Cross Dissolve</strong> between at least one pair of clips (<kbd>Ctrl</kbd>+<kbd>T</kbd> at the edit point).</li>
+    <li>Add at least 2 more transitions of your choice from the Effects Library.</li>
+    <li>Open a <strong>Dip to Black</strong> at the very end of the timeline for a clean fade-out.</li>
+  </ol>
+
+  <h3>Step 6: Add Title and End Card</h3>
+  <ol>
+    <li>Drag <strong>Text+</strong> from Effects Library > Titles onto <strong>V2</strong> at the very beginning.</li>
+    <li>In the Inspector, type your video's title. Choose a clean font and adjust size, color, and position.</li>
+    <li>Create an end card: add another Text+ at the end with credits or a closing message. Optionally place it over a Dip to Black or a final still frame.</li>
+  </ol>
+
+  <h3>Step 7: Add Background Music</h3>
+  <ol>
+    <li>Drag your music file from the Media Pool to audio track <strong>A2</strong> (keep clip audio on A1 if applicable).</li>
+    <li>Trim the music to fit the length of your video.</li>
+    <li>If the music needs to fade out at the end, select the clip, go to the Inspector, and keyframe the <strong>Volume</strong> — or drag the audio fade handle at the end of the clip.</li>
+  </ol>
+
+  <h3>Step 8: Adjust Audio Levels</h3>
+  <ol>
+    <li>If your video clips have audio you want to keep, adjust the balance so music doesn't overpower it.</li>
+    <li>If you're using only music (no dialogue), mute the original clip audio by right-clicking each clip and choosing <em>Unlink</em>, then deleting the audio portion — or simply lower clip audio volume to minimum.</li>
+    <li>Ensure music volume is at a comfortable level (around <strong>-12 dB to -6 dB</strong> on the meters).</li>
+  </ol>
+
+  <h3>Step 9: Add Speed Change &amp; Keyframe Animation</h3>
+  <ol>
+    <li>Pick one clip and apply a <strong>speed change</strong> — try slowing it to 50% for a dramatic slow-motion moment that matches the music.</li>
+    <li>Pick one clip (or the title) and add a <strong>keyframe animation</strong>: a slow zoom-in, a pan across the frame, or a fade-in using opacity keyframes.</li>
+    <li>Add <strong>Ease In and Out</strong> to the keyframes for a polished feel.</li>
+  </ol>
+
+  <h3>Step 10: Export</h3>
+  <ol>
+    <li>Go to the <strong>Deliver</strong> page.</li>
+    <li>Select the <strong>YouTube</strong> preset (or set Format to MP4, Codec to H.264, Resolution 1920×1080).</li>
+    <li>Choose a file name and destination.</li>
+    <li>Click <strong>Add to Render Queue</strong>, then <strong>Start Render</strong>.</li>
+  </ol>
+
+  <h2>Checklist</h2>
+  <table>
+    <thead>
+      <tr><th>Requirement</th><th>Done?</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>60–90 seconds long</td><td>☐</td></tr>
+      <tr><td>At least 8 clips</td><td>☐</td></tr>
+      <tr><td>At least 3 transitions (including Cross Dissolve)</td><td>☐</td></tr>
+      <tr><td>Title text at the beginning</td><td>☐</td></tr>
+      <tr><td>End card / credits</td><td>☐</td></tr>
+      <tr><td>Background music (royalty-free)</td><td>☐</td></tr>
+      <tr><td>Speed change on at least 1 clip</td><td>☐</td></tr>
+      <tr><td>At least 1 keyframed animation</td><td>☐</td></tr>
+      <tr><td>Media Pool organized with bins</td><td>☐</td></tr>
+      <tr><td>Exported as MP4 at 1080p</td><td>☐</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Tip:</strong> Watch your highlight reel from start to finish before exporting. Pay attention to pacing — do any clips drag on too long? Does the music sync well with the cuts? Small tweaks make a big difference.
+  </div>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Video Production — DaVinci Resolve</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

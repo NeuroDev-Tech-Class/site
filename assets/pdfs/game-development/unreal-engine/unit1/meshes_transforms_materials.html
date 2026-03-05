@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>Meshes, Transforms &amp; Materials</h1>
+    <p class="subtitle">Learn how to place 3D objects, position them precisely, and control how their surfaces look</p>
+  </div>
+
+  <h2>Static Meshes</h2>
+  <p>A <strong>Static Mesh</strong> is a pre-made 3D model that doesn't have a skeleton or built-in animation — think walls, floors, rocks, crates, pillars, and furniture. "Static" doesn't mean it can't move at runtime (physics can move it), it just means the geometry itself doesn't deform like a character would.</p>
+
+  <p>Static Meshes are the fundamental building blocks of every environment in Unreal Engine. A typical game level might contain hundreds or even thousands of them.</p>
+
+  <h3>Finding Meshes in the Content Browser</h3>
+  <p>To find meshes you can use:</p>
+  <ol>
+    <li>Open the <strong>Content Browser</strong> (<kbd>Ctrl</kbd>+<kbd>Space</kbd>).</li>
+    <li>Navigate to a folder that contains meshes — if you're using a template project, check <code>Content → StarterContent → Props</code> or <code>Content → StarterContent → Architecture</code>.</li>
+    <li>Use the <strong>Filters</strong> button and select <code>Static Mesh</code> to only show mesh assets.</li>
+    <li>You can also type a name in the <strong>search bar</strong> (e.g., "wall" or "rock").</li>
+  </ol>
+
+  <h3>Placing Meshes in the Level</h3>
+  <p>There are two ways to add a mesh to your level:</p>
+  <ul>
+    <li><strong>Drag and Drop:</strong> Click a mesh in the Content Browser and drag it directly into the Viewport. Release the mouse button to place it.</li>
+    <li><strong>Quick Add:</strong> Click the <strong>+</strong> (Quick Add) button in the toolbar, or right-click in the Viewport → <code>Place Actors</code> to browse a catalog of common actors.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> When you drag a mesh into the Viewport, it will automatically snap to the surface below your cursor. If you want to place it at a specific height, hold <kbd>Shift</kbd> before releasing or manually set the Z position in the Details Panel afterward.
+  </div>
+
+  <h2>Transform Tools</h2>
+  <p>Once an actor is in the level, you'll need to position, rotate, and size it. Unreal provides three transform tools, each activated by a single key:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tool</th>
+        <th>Key</th>
+        <th>Use Case</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Move</strong></td>
+        <td><kbd>W</kbd></td>
+        <td>Slide the actor along X, Y, or Z axes</td>
+      </tr>
+      <tr>
+        <td><strong>Rotate</strong></td>
+        <td><kbd>E</kbd></td>
+        <td>Spin the actor around an axis</td>
+      </tr>
+      <tr>
+        <td><strong>Scale</strong></td>
+        <td><kbd>R</kbd></td>
+        <td>Stretch or shrink the actor along one or more axes</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>You can also type <strong>exact values</strong> in the <strong>Details Panel</strong> under the <em>Transform</em> section. This is essential when you need pixel-perfect alignment — for example, setting a wall's X position to exactly <code>500.0</code> or rotating a pillar exactly <code>90°</code>.</p>
+
+  <h3>Snapping for Precision</h3>
+  <p>Enable <strong>Grid Snap</strong> in the Viewport toolbar (the magnet icon) to force objects to move in fixed increments. Common grid sizes:</p>
+  <ul>
+    <li><strong>10 units</strong> — Good for general layout and rough placement.</li>
+    <li><strong>5 units</strong> — Tighter alignment for architectural pieces.</li>
+    <li><strong>1 unit</strong> — Fine adjustments.</li>
+    <li><strong>100 units</strong> — Quick, large-scale building (each unit ≈ 1 cm, so 100 = 1 meter).</li>
+  </ul>
+
+  <p>Similarly, enable <strong>Rotation Snap</strong> (default 10°) to keep angles consistent, and <strong>Scale Snap</strong> for uniform sizing.</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> Remember that <kbd>Alt</kbd> + Drag (with the Move tool active) <strong>duplicates</strong> the selected actor. This is the fastest way to build a row of identical objects — duplicate one, then duplicate the duplicate, and so on.
+  </div>
+
+  <h2>Materials</h2>
+  <p>A <strong>Material</strong> defines how a surface looks — its color, roughness, shininess, transparency, and more. Without materials, every mesh would be a featureless gray blob. Materials are what make stone look like stone, metal look like metal, and glass look like glass.</p>
+
+  <h3>How Materials Work</h3>
+  <p>In Unreal Engine, materials are built from a combination of:</p>
+  <ul>
+    <li><strong>Textures</strong> — 2D images that provide color (diffuse/albedo), surface detail (normal maps), and other surface information.</li>
+    <li><strong>Parameters</strong> — Numeric values that control properties like roughness (how shiny vs. matte the surface is), metallic (metal vs. non-metal), and emissive (does it glow?).</li>
+    <li><strong>Shader logic</strong> — Nodes in the Material Editor that define how all of this data is combined.</li>
+  </ul>
+
+  <h3>Applying Materials to Meshes</h3>
+  <p>There are several ways to apply a material:</p>
+  <ol>
+    <li><strong>Drag and drop:</strong> Find a material in the Content Browser, then drag it directly onto a mesh in the Viewport. The mesh will update immediately.</li>
+    <li><strong>Details Panel:</strong> Select a mesh, then in the Details Panel scroll down to the <strong>Materials</strong> section. Each <em>Element</em> slot represents a material applied to a different part of the mesh. Click the dropdown or the browse button to choose a different material.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> Some meshes have <strong>multiple material slots</strong> (elements). For example, a table might have one slot for the wood surface and another for the metal legs. You can assign different materials to each slot.
+  </div>
+
+  <h3>The Material Editor (Preview)</h3>
+  <p>For custom materials, you'll use the <strong>Material Editor</strong> — a node-based visual editor where you connect texture samples, math nodes, and parameter nodes to build exactly the look you want. To open it, double-click any material asset in the Content Browser.</p>
+  <p>We'll explore the Material Editor in depth in a later unit. For now, focus on using the pre-made materials that come with your project or content packs.</p>
+
+  <div class="warning">
+    <strong>Note:</strong> If a mesh appears with a black-and-white checkerboard pattern, that means it's missing its material. Drag a material onto it or assign one through the Details Panel.
+  </div>
+
+  <h2>The Player Start Actor</h2>
+  <p>The <strong>Player Start</strong> actor is a special actor that determines where the player spawns when you press <strong>Play</strong>. Every playable level needs one.</p>
+  <ul>
+    <li>Find it in the Quick Add menu (<code>+ → Basic → Player Start</code>) or search for "Player Start" in the Content Browser's Place Actors panel.</li>
+    <li>Position it where you want the player to appear — typically on a flat surface with enough room to stand.</li>
+    <li>The blue arrow on the Player Start shows the <strong>direction the player will face</strong> when the game begins.</li>
+    <li>If the Player Start icon appears as a red icon with a warning, it means it's colliding with something or is stuck inside geometry — move it to open space.</li>
+  </ul>
+
+  <div class="activity">
+    <strong>Practice:</strong> In your project, do the following:
+    <ol>
+      <li>Open the Content Browser and find a static mesh (a wall, pillar, or prop).</li>
+      <li>Drag it into the Viewport and position it using the Move tool (<kbd>W</kbd>).</li>
+      <li>Rotate it 45° using the Rotate tool (<kbd>E</kbd>).</li>
+      <li>Scale it up to 2x using the Scale tool (<kbd>R</kbd>) or by setting Scale to <code>2.0, 2.0, 2.0</code> in the Details Panel.</li>
+      <li>Find a material and drag it onto the mesh to change its appearance.</li>
+      <li>Place a <strong>Player Start</strong> near the mesh, press <strong>Play</strong>, and walk up to your object.</li>
+    </ol>
+  </div>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

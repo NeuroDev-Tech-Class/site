@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/python-2.html" class="back-link">&larr; Back to Python II</a>
+    <div class="doc-header">
+      <span class="course-tag">Python II</span>
+      <h1>DRY &ndash; Don&rsquo;t Repeat Yourself</h1>
+    </div>
+
+    <p><strong>DRY</strong> stands for &ldquo;Don&rsquo;t Repeat Yourself&rdquo; and it&rsquo;s a fundamental concept in software development. The idea is to make sure that every piece of logic is represented in one single place in the codebase. There are a few reasons for this:</p>
+
+    <ul>
+      <li><strong>Maintainability:</strong> When code is duplicated, any change or bug fix needs to be made in multiple places, increasing the risk of errors. DRY code centralizes the logic, so updates and fixes are only made in one place.</li>
+      <li><strong>Reusability:</strong> Modular, DRY code is easier to reuse across different parts of a program or even in different projects.</li>
+      <li><strong>Readability:</strong> DRY code is cleaner and easier to read.</li>
+    </ul>
+
+    <h2>Implementing DRY Code</h2>
+
+    <h3>Functions</h3>
+    <p>Encapsulate repeated code into functions that can be reused. Functions help to abstract away details and promote reuse.</p>
+
+<pre><code># Before DRY
+print("Welcome, Alice!")
+print("You have 3 new messages.")
+print("Welcome, Bob!")
+print("You have 5 new messages.")
+
+# After DRY
+def welcome_user(name, message_count):
+    print(f"Welcome, {name}!")
+    print(f"You have {message_count} new messages.")
+
+welcome_user("Alice", 3)
+welcome_user("Bob", 5)</code></pre>
+
+    <h3>Classes</h3>
+    <p>Use classes to define common behaviors and attributes for objects. This allows for creating reusable and modular code.</p>
+
+<pre><code># Before DRY
+car1_brand = "Toyota"
+car1_model = "Camry"
+car1_year = 2018
+car1_color = "Blue"
+
+car2_brand = "Honda"
+car2_model = "Accord"
+car2_year = 2020
+car2_color = "Red"
+
+# After DRY
+class Car:
+    def __init__(self, brand, model, year, color):
+        self.brand = brand
+        self.model = model
+        self.year = year
+        self.color = color
+
+car1 = Car("Toyota", "Camry", 2018, "Blue")
+car2 = Car("Honda", "Accord", 2020, "Red")</code></pre>
+
+    <h3>Modules</h3>
+    <p>Organize code into modules to promote reuse across different parts of a program. Modules encapsulate related code into a single file, making it easier to manage and reuse.</p>
+
+<pre><code># my_module.py
+def greet(name):
+    return f"Hello, {name}!"
+
+def add(a, b):
+    return a + b
+
+# main.py
+import my_module
+
+print(my_module.greet("Alice"))
+print(my_module.add(5, 3))</code></pre>
+
+    <h3>Inheritance</h3>
+    <p>Use inheritance in object-oriented programming to share common functionality among related classes, avoiding duplication.</p>
+
+<pre><code>class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        raise NotImplementedError("Subclasses must implement this method")
+
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} says 'Woof'"
+
+class Cat(Animal):
+    def speak(self):
+        return f"{self.name} says 'Meow'"
+
+my_dog = Dog("Rex")
+my_cat = Cat("Whiskers")
+print(my_dog.speak())
+print(my_cat.speak())</code></pre>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class &mdash; Python II</p>
+    </div>
+  </main>
+  <footer></footer>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

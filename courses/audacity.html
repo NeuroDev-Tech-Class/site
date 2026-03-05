@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/site/" />
+    <script src="assets/js/load-head.js" defer></script>
+  </head>
+
+  <body>
+    <header></header>
+    <script src="/site/assets/js/load-header.js" type="module"></script>
+    <script src="/site/assets/js/link-generator.js" type="module"></script>
+
+    <main id="main-content">
+      <h1>Audio Software &mdash; Audacity</h1>
+
+      <section>
+        <h3>Course Overview</h3>
+        <p>
+          This course teaches students how to record, edit, and produce audio
+          using <strong>Audacity</strong>, a free and open-source digital
+          audio workstation. Students will learn to record voiceovers, edit
+          and clean up audio, apply effects, mix multiple tracks, and export
+          finished projects. Whether you want to make a podcast, edit music,
+          create sound effects, or improve audio quality, Audacity is a
+          powerful starting point.
+        </p>
+      </section>
+
+      <section>
+        <h3>Course Objectives</h3>
+        <ul>
+          <li>Install Audacity and configure audio devices for recording and playback.</li>
+          <li>Record audio from a microphone and import existing audio files.</li>
+          <li>Perform fundamental edits: cut, copy, paste, trim, split, and join clips.</li>
+          <li>Apply effects like noise reduction, equalization, compression, and reverb.</li>
+          <li>Work with multiple tracks to create layered audio mixes.</li>
+          <li>Export finished projects in multiple formats (WAV, MP3, FLAC, OGG).</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>System Requirements</h3>
+        <p>
+          <strong>Audacity 3.7</strong> runs on Windows, macOS, and Linux.
+          It is completely free and open-source. A USB microphone or built-in
+          mic is recommended for recording exercises, but not strictly required
+          (you can practice with downloaded sample audio).
+        </p>
+      </section>
+
+      <script id="unit-data" type="application/json">
+        [
+          {
+            "title": "Getting Started",
+            "description": "Install Audacity, configure your audio settings, and learn the basic interface.",
+            "content": [
+              {
+                "type": "doc",
+                "title": "Reading - What Is Digital Audio?",
+                "url": "assets/pdfs/media/audacity/unit1/what_is_digital_audio.html"
+              },
+              {
+                "type": "html",
+                "html": "Download and install <a href=\"https://www.audacityteam.org/download/\" target=\"_blank\" rel=\"noopener noreferrer\">Audacity</a> (free, open source). Choose the installer for your operating system."
+              },
+              {
+                "type": "html",
+                "html": "Optional: Install the <a href=\"https://support.audacityteam.org/basics/installing-ffmpeg\" target=\"_blank\" rel=\"noopener noreferrer\">FFmpeg library</a> to enable import/export of MP3, AAC, WMA, and other formats."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - The Audacity Interface",
+                "url": "assets/pdfs/media/audacity/unit1/the_audacity_interface.html"
+              },
+              {
+                "type": "video",
+                "title": "Audacity Tutorial for Beginners",
+                "url": "https://www.youtube.com/embed/yzJ2VyYkmaA"
+              }
+            ]
+          },
+          {
+            "title": "Unit 1: Recording & Basic Editing",
+            "description": "Learn to record audio, navigate waveforms, and perform essential editing tasks.",
+            "content": [
+              {
+                "type": "doc",
+                "title": "Reading - Setting Up Your Microphone",
+                "url": "assets/pdfs/media/audacity/unit1/setting_up_microphone.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 1.1:</strong> Connect a microphone (or use your built-in mic). In Edit &rarr; Preferences &rarr; Audio Settings, select your input device. Record yourself introducing your name and a fun fact. Save the project."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - The Toolbar & Playback Controls",
+                "url": "assets/pdfs/media/audacity/unit1/toolbar_and_playback.html"
+              },
+              {
+                "type": "doc",
+                "title": "Reading - Selection, Cutting & Trimming",
+                "url": "assets/pdfs/media/audacity/unit1/selection_cutting_trimming.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 1.2:</strong> Open your recording. Use the Selection tool to highlight awkward pauses or mistakes, then delete them. Trim silence from the beginning and end."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - Importing & Exporting Audio",
+                "url": "assets/pdfs/media/audacity/unit1/importing_and_exporting.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 1.3:</strong> Import an MP3 song file. Practice splitting clips (<code>Ctrl+I</code>), moving them on the timeline, and joining clips. Export the result as a WAV file."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - Audio Concepts: Sample Rate, Bit Depth & Channels",
+                "url": "assets/pdfs/media/audacity/unit1/audio_concepts.html"
+              },
+              {
+                "type": "doc",
+                "title": "Unit 1 Activity - Record a 60-Second Introduction",
+                "url": "assets/pdfs/media/audacity/unit1/activity_60sec_intro.html"
+              }
+            ]
+          },
+          {
+            "title": "Unit 2: Effects, Mixing & Projects",
+            "description": "Apply audio effects, work with multiple tracks, and complete real-world audio projects.",
+            "content": [
+              {
+                "type": "doc",
+                "title": "Reading - Noise Reduction & Cleanup",
+                "url": "assets/pdfs/media/audacity/unit2/noise_reduction_cleanup.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 2.1:</strong> Open a recording with background noise. Select a few seconds of pure noise &rarr; Effect &rarr; Noise Reduction &rarr; Get Noise Profile. Then select the full track and apply Noise Reduction."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - Essential Effects Guide",
+                "url": "assets/pdfs/media/audacity/unit2/essential_effects.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 2.2:</strong> Practice applying Amplify, Normalize, Fade In/Out, Equalization, Compressor, and Reverb to audio clips. Listen to how each effect changes the sound."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - Multi-Track Mixing",
+                "url": "assets/pdfs/media/audacity/unit2/multi_track_mixing.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 2.3:</strong> Create a multi-track project: import background music on one track, record narration on a second track, and add a sound effect on a third. Adjust volume levels and panning so they blend well."
+              },
+              {
+                "type": "doc",
+                "title": "Reading - The Envelope Tool & Automation",
+                "url": "assets/pdfs/media/audacity/unit2/envelope_tool.html"
+              },
+              {
+                "type": "html",
+                "html": "<strong>Exercise 2.4:</strong> Use the Envelope Tool to duck the background music volume down during narration, then bring it back up during pauses."
+              },
+              {
+                "type": "doc",
+                "title": "Final Project - Produce a Mini Podcast Episode",
+                "url": "assets/pdfs/media/audacity/unit2/final_project_podcast.html"
+              }
+            ]
+          }
+        ]
+      </script>
+
+      <div id="unit-sections"></div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="assets/js/load-footer.js" defer></script>
+  </body>
+</html>

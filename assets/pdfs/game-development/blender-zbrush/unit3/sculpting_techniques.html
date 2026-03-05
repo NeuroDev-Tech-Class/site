@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/blender-zbrush-mini.html" class="back-link">&larr; Back to 3D Art &mdash; Blender &amp; ZBrush</a>
+    <div class="doc-header">
+    <span class="course-tag">Blender &amp; ZBrush Mini</span>
+    <h1>Sculpting Techniques</h1>
+    <p class="subtitle">A Detailed Guide to Every Brush in ZBrushCoreMini</p>
+  </div>
+
+  <h2>The Sculpting Mindset</h2>
+  <p>
+    Sculpting in ZBrushCoreMini is very different from modeling in Blender. Instead of placing individual vertices and
+    edges, you're <em>painting</em> on a surface — pushing clay outward, carving grooves inward, smoothing rough areas,
+    and pulling forms into shape. Every brush has a specific behavior, and knowing when to use each one is the key to
+    efficient sculpting.
+  </p>
+  <p>
+    Remember: for every brush, holding <strong>Alt</strong> reverses its effect (add becomes carve, inflate becomes
+    deflate, etc.). And holding <strong>Shift</strong> at any time temporarily switches to the <strong>Smooth</strong>
+    brush.
+  </p>
+
+  <h2>Brush-by-Brush Guide</h2>
+
+  <h3>Standard Brush</h3>
+  <p>
+    The <strong>Standard</strong> brush is your all-purpose tool. It adds soft, rounded buildup to the surface — imagine
+    pressing your thumb gently into clay to raise a bump. The stroke creates a smooth dome shape wherever you paint.
+  </p>
+  <ul>
+    <li><strong>Normal use:</strong> Adds material (raises the surface).</li>
+    <li><strong>Alt + stroke:</strong> Carves into the surface (subtracts material).</li>
+    <li><strong>Best for:</strong> General detail work, adding subtle bumps and dips, refining surfaces.</li>
+    <li><strong>Tip:</strong> Use a medium draw size and moderate Z-Intensity (25-40) for controlled, gradual buildup.</li>
+  </ul>
+
+  <h3>ClayBuildup Brush</h3>
+  <p>
+    The <strong>ClayBuildup</strong> brush adds material in a rough, square-edged fashion — like pressing strips of flat
+    clay onto the surface. Unlike the Standard brush's soft dome, ClayBuildup creates more defined, angular forms. It
+    builds up more aggressively and is great for establishing large forms quickly.
+  </p>
+  <ul>
+    <li><strong>Normal use:</strong> Adds thick, flat-topped buildup.</li>
+    <li><strong>Alt + stroke:</strong> Removes material in flat planes.</li>
+    <li><strong>Best for:</strong> Building up medium-scale forms — muscles, cheekbones, brow ridges, armor plates.
+      This is a workhorse brush for the "rough-in" phase.</li>
+    <li><strong>Tip:</strong> Use overlapping strokes to build forms gradually. The square-edged deposits blend together
+      nicely when smoothed afterward.</li>
+  </ul>
+
+  <h3>Inflate Brush</h3>
+  <p>
+    The <strong>Inflate</strong> brush pushes every polygon outward along its own normal direction — like inflating a
+    balloon. Instead of building in one direction, it puffs the surface outward evenly in all directions at the stroke
+    point.
+  </p>
+  <ul>
+    <li><strong>Normal use:</strong> Bulges the surface outward.</li>
+    <li><strong>Alt + stroke:</strong> Deflates — pushes the surface inward, creating sunken areas.</li>
+    <li><strong>Best for:</strong> Puffing out rounded areas like cheeks, lips, eyelids, or swollen/puffy effects.
+      Also great for making organic shapes look more full and alive.</li>
+    <li><strong>Tip:</strong> Use with low Z-Intensity (15-25) — Inflate can quickly distort your mesh if applied too
+      heavily.</li>
+  </ul>
+
+  <h3>Pinch Brush</h3>
+  <p>
+    The <strong>Pinch</strong> brush pulls nearby vertices <em>toward the center of the stroke</em>, creating sharp
+    creases, ridges, and tight edges. It's like pinching clay between your fingers to create a sharp ridge.
+  </p>
+  <ul>
+    <li><strong>Normal use:</strong> Creates sharp creases and defined edges by pulling geometry together.</li>
+    <li><strong>Alt + stroke:</strong> Spreads geometry apart, creating a shallow groove or softening a crease.</li>
+    <li><strong>Best for:</strong> Defining sharp features — eyelids, nostrils, lip lines, wrinkles, armor edges, or
+      any place where two forms meet at a defined edge.</li>
+    <li><strong>Tip:</strong> Use after the Standard or ClayBuildup brush to sharpen up transitions between forms. A
+      tiny bit of pinch goes a long way.</li>
+  </ul>
+
+  <h3>Move Brush</h3>
+  <p>
+    The <strong>Move</strong> brush grabs a section of the mesh and <em>shifts it</em> in the direction you drag. It
+    doesn't add or remove material — it simply repositions the existing geometry. Think of grabbing a lump of clay and
+    pushing it to the side.
+  </p>
+  <ul>
+    <li><strong>Normal use:</strong> Shifts geometry in the direction of your stroke.</li>
+    <li><strong>Best for:</strong> Blockout phase — establishing the major proportions and silhouette of your sculpt.
+      Moving the nose forward, pushing the chin out, repositioning ears, adjusting the overall shape.</li>
+    <li><strong>Tip:</strong> Use a large draw size for big, sweeping adjustments early on. The Move brush is your best
+      friend during the first 20% of any sculpt — get the big shapes right before worrying about detail.</li>
+  </ul>
+
+  <h3>SnakeHook Brush</h3>
+  <p>
+    The <strong>SnakeHook</strong> brush pulls long, tentacle-like extensions out of the surface. Drag it outward and
+    the mesh stretches dramatically, creating horns, tendrils, spikes, or flowing shapes.
+  </p>
+  <ul>
+    <li><strong>Normal use:</strong> Pulls long extensions from the surface.</li>
+    <li><strong>Best for:</strong> Creating horns, tentacles, flowing hair shapes, decorative swoops, or any elongated
+      organic form.</li>
+    <li><strong>⚠️ Caution for 3D printing:</strong> SnakeHook can create very thin, delicate extensions that may be too
+      fragile to print successfully. If you plan to 3D print your sculpt, keep SnakeHook extensions reasonably thick,
+      or be prepared for them to break easily.</li>
+    <li><strong>Tip:</strong> Use with Symmetry on to create matching pairs of horns, antennae, or wing-like shapes.</li>
+  </ul>
+
+  <h3>Slash3 Brush</h3>
+  <p>
+    The <strong>Slash3</strong> brush carves stylized indent lines into the surface — like dragging a knife or chisel
+    across clay. It creates clean, defined grooves with a consistent depth.
+  </p>
+  <ul>
+    <li><strong>Normal use:</strong> Carves a defined groove into the surface.</li>
+    <li><strong>Best for:</strong> Decorative lines, battle scars, panel lines on armor, stylized wrinkles, or any
+      linear detail you want to engrave into the surface.</li>
+    <li><strong>Tip:</strong> Use confident, single strokes rather than going over the same line multiple times. Long,
+      smooth strokes produce the cleanest results.</li>
+  </ul>
+
+  <h3>hPolish Brush</h3>
+  <p>
+    The <strong>hPolish</strong> (Horizontal Polish) brush <em>flattens</em> areas of the mesh, creating planar
+    surfaces. It pushes high points down and pulls low points up until the surface is level.
+  </p>
+  <ul>
+    <li><strong>Normal use:</strong> Flattens the surface under the brush stroke.</li>
+    <li><strong>Best for:</strong> Creating flat bases for printing, flattening the bottom of a figurine so it stands
+      upright, polishing rough areas into clean planes, creating hard-surface looks (mechanical or architectural
+      shapes).</li>
+    <li><strong>Tip:</strong> Great for making a sculpt look more "designed" and intentional. After roughing in organic
+      forms, hPolish certain surfaces to imply machined or manufactured areas (like flat armor plates).</li>
+  </ul>
+
+  <h3>Smooth Brush (Shift)</h3>
+  <p>
+    The <strong>Smooth</strong> brush averages out the surface, softening bumps, ridges, and rough areas. You don't need
+    to select it from the brush menu — simply hold <strong>Shift</strong> while stroking to temporarily smooth at any
+    time, regardless of which brush is currently active.
+  </p>
+  <ul>
+    <li><strong>Normal use:</strong> Smooths and softens the surface.</li>
+    <li><strong>Best for:</strong> Blending rough strokes together, eliminating unwanted bumps, creating smooth skin or
+      polished surfaces, cleaning up after aggressive brush strokes.</li>
+    <li><strong>Tip:</strong> Sculpting is a constant back-and-forth between adding/carving and smoothing. Build up a
+      form, smooth it, add more detail, smooth again. This iterative process is how professional sculptors work.</li>
+  </ul>
+
+  <h2>Recommended Workflow Order</h2>
+  <p>
+    Here's a suggested order for tackling a sculpt, using the brushes above:
+  </p>
+  <ol>
+    <li><strong>Blockout (Move brush):</strong> Start with the Move brush at a large Draw Size. Push and pull the mesh
+      into the rough overall shape. Get proportions and silhouette right. Spend time here — a strong blockout makes
+      everything easier.</li>
+    <li><strong>Primary forms (ClayBuildup):</strong> Switch to ClayBuildup to add medium-scale volume — muscles,
+      clothing folds, major surface features. Build up material where you need it, carve away where you don't.
+      Smooth frequently.</li>
+    <li><strong>Secondary detail (Standard + Pinch):</strong> Reduce your Draw Size and use the Standard brush for
+      smaller bumps, dents, and surface variation. Use Pinch to sharpen edges where forms meet — around eyes, along
+      jaw lines, at armor seams.</li>
+    <li><strong>Fine detail (Slash3, Standard at small size):</strong> At the smallest brush sizes, add wrinkles, pores,
+      scratches, decorative patterns, and other surface texture.</li>
+    <li><strong>Polish (hPolish + Smooth):</strong> Clean up any areas that need flattening. Do a final smooth pass over
+      areas that should be sleek.</li>
+  </ol>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li><strong>Alt reverses</strong> any brush (add ↔ carve, inflate ↔ deflate).</li>
+    <li><strong>Shift smooths</strong> at any time, regardless of the active brush.</li>
+    <li><strong>Start big, go small:</strong> Move → ClayBuildup → Standard/Pinch → Slash3/Fine detail → Polish.</li>
+    <li>Rotate your model constantly to check all angles.</li>
+    <li>Sculpting is iterative — build, smooth, refine, repeat.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Blender &amp; ZBrush Mini</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

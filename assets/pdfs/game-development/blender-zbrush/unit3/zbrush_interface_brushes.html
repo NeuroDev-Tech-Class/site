@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/blender-zbrush-mini.html" class="back-link">&larr; Back to 3D Art &mdash; Blender &amp; ZBrush</a>
+    <div class="doc-header">
+    <span class="course-tag">Blender &amp; ZBrush Mini</span>
+    <h1>ZBrush Interface &amp; Brushes</h1>
+    <p class="subtitle">Getting Around ZBrushCoreMini — Tools, Navigation, and Controls</p>
+  </div>
+
+  <h2>Welcome to ZBrushCoreMini</h2>
+  <p>
+    <strong>ZBrushCoreMini</strong> is a free, simplified version of ZBrush — the industry-standard digital sculpting
+    software used in movies, games, and product design. Unlike Blender's polygon-based modeling (working with vertices,
+    edges, and faces), ZBrush is all about <strong>sculpting</strong>. You push, pull, carve, and smooth a digital ball
+    of clay using brushes, just like sculpting with your hands — but with a stylus and tablet.
+  </p>
+  <p>
+    The interface looks very different from Blender, but don't worry — ZBrushCoreMini is intentionally stripped down to
+    the essentials. Once you learn where the tools are, it's surprisingly intuitive.
+  </p>
+
+  <h2>Interface Overview — Tool Icons</h2>
+  <p>
+    ZBrushCoreMini's interface uses a clean row of icons along the top and sides. Here's what each one does:
+  </p>
+
+  <h3>Top Toolbar</h3>
+  <ul>
+    <li><strong>📂↓ Open Project (Folder-Down icon):</strong> Opens a previously saved ZBrushCoreMini project file. Use
+      this to continue working on a project from a previous session.</li>
+    <li><strong>📂↑ Save Project (Folder-Up icon):</strong> Saves your current project. Save frequently! ZBrushCoreMini
+      project files use the <code>.ZPR</code> format.</li>
+    <li><strong>🖌️ Brush Menu:</strong> Opens the brush selector, showing all available sculpting brushes. Click a brush
+      to select it. We'll cover each brush in detail in the next lesson.</li>
+    <li><strong>➕ Create New Mesh:</strong> Starts a new sculpt from a fresh base shape (sphere, cube, etc.). This
+      replaces your current mesh, so save first!</li>
+    <li><strong>🔄 Symmetry Toggle:</strong> Turns symmetry on or off. When symmetry is on (default), everything you
+      sculpt on one side is automatically mirrored on the other side. This is perfect for faces, creatures, and any
+      symmetrical design.</li>
+  </ul>
+
+  <h3>Brush Controls</h3>
+  <ul>
+    <li><strong>Draw Size:</strong> Controls how large the brush is. A bigger draw size affects a wider area of the mesh.
+      Drag the slider or type a number. Start large for broad forms, then decrease for fine detail.</li>
+    <li><strong>Z Intensity:</strong> Controls how strong each brush stroke is — how much it pushes, pulls, or carves
+      with each stroke. Higher intensity = more dramatic effect. Lower intensity = subtle changes. A value around
+      25-50 is a good starting range.</li>
+  </ul>
+
+  <h3>Mesh Resolution</h3>
+  <ul>
+    <li><strong>Poly Size (Low / Med / High):</strong> This sets how many polygons your base mesh starts with. More
+      polygons means more detail potential but a heavier file.
+      <ul>
+        <li><strong>Low:</strong> Fewer polygons. Good for rough blockouts and practice.</li>
+        <li><strong>Med:</strong> A balanced starting point for most sculpts.</li>
+        <li><strong>High:</strong> Maximum polygon density. Use this when you know you'll need very fine detail (wrinkles,
+          scales, tiny patterns).</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Export</h3>
+  <ul>
+    <li><strong>🖨️ Printer Export:</strong> Exports your sculpt as an <strong>OBJ file</strong> suitable for 3D printing.
+      This is how you get your ZBrush creation into Blender or into a slicer for printing. We'll use this extensively
+      in later lessons.</li>
+  </ul>
+
+  <h2>Navigation — Using a Tablet</h2>
+  <p>
+    ZBrushCoreMini is designed to be used with a <strong>graphics tablet</strong> (like a Wacom or Huion tablet). The
+    tablet's pen pressure affects brush behavior — pressing harder creates a stronger stroke. Here's how to navigate the
+    3D viewport:
+  </p>
+
+  <h3>Rotate the View</h3>
+  <p>
+    <strong>Click and drag outside the mesh</strong> (on the empty background area) to rotate around your sculpt. This
+    lets you view it from any angle. Practice this until it feels natural — you'll be rotating constantly.
+  </p>
+
+  <h3>Pan (Move the View)</h3>
+  <p>
+    <strong>Alt + click and drag</strong> anywhere to pan the viewport, sliding the view left, right, up, or down
+    without rotating.
+  </p>
+
+  <h3>Zoom</h3>
+  <p>
+    <strong>Ctrl + click and drag outside the mesh</strong> to zoom in and out. Drag upward to zoom in, downward to
+    zoom out. You can also use the scroll wheel if your tablet or mouse has one.
+  </p>
+
+  <h3>Navigation Summary Table</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>Control</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Rotate</td><td>Drag on empty background</td></tr>
+      <tr><td>Pan</td><td>Alt + drag</td></tr>
+      <tr><td>Zoom</td><td>Ctrl + drag on empty background</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Other Important Controls</h2>
+
+  <h3>Lighting</h3>
+  <p>
+    <strong>Light icon:</strong> Click and drag the light icon to change the direction the light comes from. Adjusting
+    the lighting helps you see surface detail — shadows reveal bumps, ridges, and grooves that might be invisible under
+    flat lighting. Move the light around as you sculpt to check your work from different lighting angles.
+  </p>
+
+  <h3>Undo / Redo</h3>
+  <p>
+    <strong>Ctrl + Z</strong> to undo your last stroke. You can undo many steps back. <strong>Ctrl + Shift + Z</strong>
+    to redo (bring back something you just undid). Use undo liberally — sculpting is an experimental process, and
+    undoing a stroke you don't like is completely normal.
+  </p>
+
+  <h2>Tips for Getting Started</h2>
+  <ul>
+    <li><strong>Save often.</strong> There's no auto-save. Get in the habit of pressing the Save icon every few
+      minutes.</li>
+    <li><strong>Start with symmetry on.</strong> It's much easier to get balanced, professional-looking results when
+      both sides match.</li>
+    <li><strong>Rotate constantly.</strong> Always spin your model around to check how it looks from every angle. A
+      detail that looks great from the front might look wrong from the side.</li>
+    <li><strong>Start big, then go small.</strong> Block out the major forms first with big brushes and high intensity,
+      then decrease your brush size and intensity for finer and finer detail.</li>
+    <li><strong>Relax your grip.</strong> Let the tablet pen pressure do the work. A light touch with high Z-Intensity
+      gives you more control than pressing hard with low intensity.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Blender &amp; ZBrush Mini</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

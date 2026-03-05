@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/gimp.html" class="back-link">&larr; Back to 2D Digital Art &mdash; GIMP</a>
+    <div class="doc-header">
+    <span class="course-tag">2D Digital Art — GIMP</span>
+    <h1>Filters &amp; Effects</h1>
+    <p class="subtitle">Transforming Your Images with GIMP's Built-In Filters</p>
+  </div>
+
+  <h2>Overview</h2>
+  <p>
+    GIMP includes a massive library of <strong>filters</strong> — automated effects that modify the pixels of your image in creative or corrective ways. Filters can blur, sharpen, distort, add lighting, simulate artistic media, and much more. They are all found under the <strong>Filters</strong> menu in the menu bar.
+  </p>
+
+  <div class="warning">
+    <strong>Warning:</strong> Most filters are <strong>destructive</strong> — they permanently alter the pixels of the layer they are applied to. Always <strong>duplicate your layer</strong> before applying a filter so you can easily undo or compare the result with the original.
+  </div>
+
+  <h2>Blur Filters</h2>
+  <p>
+    Blur filters soften an image by reducing detail and contrast between neighboring pixels.
+  </p>
+
+  <h3>Gaussian Blur</h3>
+  <p>
+    <strong>Filters &gt; Blur &gt; Gaussian Blur</strong> is the most commonly used blur. It applies a smooth, even blur across the selected area. The <strong>Size</strong> parameter controls how strong the blur is — a higher value creates a more noticeable blur. Uses include:
+  </p>
+  <ul>
+    <li>Softening backgrounds to simulate depth of field</li>
+    <li>Smoothing skin in portrait retouching</li>
+    <li>Reducing noise in a photo</li>
+  </ul>
+
+  <h3>Motion Blur</h3>
+  <p>
+    <strong>Filters &gt; Blur &gt; Motion Blur</strong> blurs the image in a single direction, simulating the look of a moving camera or a fast-moving subject. You can set the <strong>angle</strong> and <strong>length</strong> of the blur. Great for creating a sense of speed or movement.
+  </p>
+
+  <h3>Pixelize</h3>
+  <p>
+    <strong>Filters &gt; Blur &gt; Pixelize</strong> divides the image into blocks of solid color, creating a mosaic or retro pixel-art effect. Adjust the block size to control the intensity. Commonly used to censor or anonymize areas, or as a stylistic effect.
+  </p>
+
+  <h2>Enhance Filters</h2>
+  <p>
+    Enhance filters improve image quality by sharpening detail or reducing unwanted noise.
+  </p>
+
+  <h3>Unsharp Mask (Sharpen)</h3>
+  <p>
+    <strong>Filters &gt; Enhance &gt; Unsharp Mask</strong> is the primary sharpening tool. Despite the confusing name, it <em>sharpens</em> images by increasing contrast along edges. Key settings:
+  </p>
+  <ul>
+    <li><strong>Amount</strong> — how much sharpening to apply (start around 0.3–0.5).</li>
+    <li><strong>Radius</strong> — how many pixels around each edge are affected (2–3 px for most photos).</li>
+    <li><strong>Threshold</strong> — how different pixels must be to be sharpened (set to 0 or a low value for general sharpening).</li>
+  </ul>
+
+  <h3>Noise Reduction</h3>
+  <p>
+    <strong>Filters &gt; Enhance &gt; Noise Reduction</strong> smooths out digital noise (graininess) that often appears in photos taken in low light or at high ISO settings. Increase the strength carefully — too much noise reduction can make the image look soft and plastic.
+  </p>
+
+  <h2>Distort Filters</h2>
+  <p>
+    Distort filters warp, twist, and reshape the pixels in creative ways.
+  </p>
+
+  <h3>IWarp (Interactive Warp)</h3>
+  <p>
+    <strong>Filters &gt; Distort &gt; IWarp</strong> lets you push, pull, grow, shrink, and swirl pixels interactively by painting directly on the preview. This is great for caricatures, fun effects, or subtle reshaping.
+  </p>
+
+  <h3>Spherize</h3>
+  <p>
+    <strong>Filters &gt; Distort &gt; Spherize</strong> wraps the image around a sphere, making the center bulge outward. Useful for creating globe or bubble effects.
+  </p>
+
+  <h3>Ripple</h3>
+  <p>
+    <strong>Filters &gt; Distort &gt; Ripple</strong> creates a wavy, rippling effect as if the image were reflected in water. You can control the amplitude (wave height), wavelength, and direction.
+  </p>
+
+  <h3>Whirl and Pinch</h3>
+  <p>
+    <strong>Filters &gt; Distort &gt; Whirl and Pinch</strong> twists the image around a central point (whirl) and/or pinches or expands the center. Combining both creates dramatic spiral effects.
+  </p>
+
+  <h2>Light and Shadow</h2>
+  <p>
+    These filters add realistic or dramatic lighting and shadow effects.
+  </p>
+
+  <h3>Drop Shadow</h3>
+  <p>
+    <strong>Filters &gt; Light and Shadow &gt; Drop Shadow</strong> adds a soft shadow behind the active layer, giving the appearance that the layer is floating above the background. Configure the shadow's <strong>offset</strong> (X/Y distance), <strong>blur radius</strong>, <strong>color</strong>, and <strong>opacity</strong>.
+  </p>
+
+  <h3>Lighting Effects</h3>
+  <p>
+    <strong>Filters &gt; Light and Shadow &gt; Lighting Effects</strong> simulates a light source shining on the image. You can position the light, adjust its intensity and color, and even use a bump map to simulate 3D texture on the surface. This creates realistic illumination effects.
+  </p>
+
+  <h3>Lens Flare</h3>
+  <p>
+    <strong>Filters &gt; Light and Shadow &gt; Lens Flare</strong> adds a simulated camera lens flare — the bright streak and circles you see when pointing a camera toward a light source. Position the flare center on the canvas for the best result.
+  </p>
+
+  <h2>Artistic Filters</h2>
+  <p>
+    Artistic filters simulate traditional art media and styles.
+  </p>
+
+  <h3>Oilify</h3>
+  <p>
+    <strong>Filters &gt; Distort &gt; Oilify</strong> makes the image look like an oil painting by smoothing details while preserving color variation. Adjust the <strong>Mask Size</strong> to control the effect intensity.
+  </p>
+
+  <h3>Cartoon</h3>
+  <p>
+    <strong>Filters &gt; Distort &gt; Cartoon</strong> emphasizes edges and simplifies colors, making the image look like a cartoon or comic-book illustration.
+  </p>
+
+  <h3>Canvas</h3>
+  <p>
+    <strong>Filters &gt; Light and Shadow &gt; Apply Canvas</strong> overlays a canvas texture on the image, making it look like it was painted on a textured surface. Adjust depth and direction for different canvas effects.
+  </p>
+
+  <h2>Best Practices</h2>
+  <div class="tip">
+    <strong>Tip:</strong> Follow these rules when working with filters:
+  </div>
+  <ol>
+    <li><strong>Always duplicate the layer first.</strong> Apply the filter to the copy so the original remains untouched.</li>
+    <li><strong>Use the preview.</strong> Most filter dialogs have a preview checkbox — enable it to see the effect before committing.</li>
+    <li><strong>Start with subtle settings.</strong> You can always apply the filter again for a stronger effect, but you can't easily reduce an overdone application.</li>
+    <li><strong>Combine filters.</strong> Many striking effects come from layering multiple subtle filters rather than one heavy-handed one.</li>
+    <li><strong>Experiment freely.</strong> Undo (<kbd>Ctrl</kbd>+<kbd>Z</kbd>) is always available. Try different filters to see what they do — there's no better way to learn.</li>
+  </ol>
+
+  <h2>Summary</h2>
+  <ul>
+    <li><strong>Blur</strong>: Gaussian Blur (smooth), Motion Blur (directional), Pixelize (mosaic).</li>
+    <li><strong>Enhance</strong>: Unsharp Mask (sharpen), Noise Reduction.</li>
+    <li><strong>Distort</strong>: IWarp, Spherize, Ripple, Whirl and Pinch.</li>
+    <li><strong>Light and Shadow</strong>: Drop Shadow, Lighting Effects, Lens Flare.</li>
+    <li><strong>Artistic</strong>: Oilify, Cartoon, Canvas texture.</li>
+    <li>Always duplicate your layer before applying destructive filters.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — 2D Digital Art — GIMP</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

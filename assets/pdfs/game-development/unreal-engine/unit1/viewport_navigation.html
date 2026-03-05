@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>Viewport Navigation</h1>
+    <p class="subtitle">Master the controls for moving around 3D space and manipulating objects in the Unreal Editor</p>
+  </div>
+
+  <h2>Moving Through the Viewport</h2>
+  <p>The Viewport is your window into the 3D world. Learning to navigate it quickly and confidently is one of the most important skills you'll develop — everything you do in Unreal starts here. The controls may feel unfamiliar at first, but after a few minutes of practice they'll become second nature.</p>
+
+  <h3>Camera Controls</h3>
+  <p>The Viewport camera has several movement modes. The most common is <strong>Fly Mode</strong>, which works like a first-person camera:</p>
+  <ul>
+    <li>Hold <kbd>Right Mouse Button</kbd> (RMB) and <strong>drag</strong> to look around (rotate the camera).</li>
+    <li>While still holding <kbd>RMB</kbd>, use <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to fly forward, left, backward, and right.</li>
+    <li>While holding <kbd>RMB</kbd>, use <kbd>Q</kbd> to move down and <kbd>E</kbd> to move up.</li>
+    <li>Scroll the <strong>Mouse Wheel</strong> to zoom in and out (dolly the camera forward/back).</li>
+    <li>Hold <kbd>Middle Mouse Button</kbd> (MMB) and <strong>drag</strong> to pan the camera (slide left/right/up/down without rotating).</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip — Camera Speed:</strong> If you feel like you're moving too slowly (or flying through walls), adjust the camera speed. Look at the top-right corner of the Viewport for a small speed slider, or hold <kbd>RMB</kbd> and scroll the <strong>Mouse Wheel</strong> to change speed on the fly.
+  </div>
+
+  <h3>Orbit Controls (Maya-Style)</h3>
+  <p>If you prefer orbiting around a point (like rotating around a model you're inspecting), Unreal supports an orbit mode using the <kbd>Alt</kbd> key:</p>
+  <ul>
+    <li><kbd>Alt</kbd> + <kbd>Left Mouse Button</kbd> — <strong>Orbit</strong> (rotate around the focus point)</li>
+    <li><kbd>Alt</kbd> + <kbd>Right Mouse Button</kbd> — <strong>Dolly</strong> (zoom toward/away from focus point)</li>
+    <li><kbd>Alt</kbd> + <kbd>Middle Mouse Button</kbd> — <strong>Pan</strong> (slide the view)</li>
+  </ul>
+
+  <h3>Focus on Selection</h3>
+  <p>One of the most useful shortcuts: select any actor and press <kbd>F</kbd> to <strong>focus</strong> the camera on it. The Viewport will snap to frame the selected object, and orbit controls will now rotate around it. This is invaluable when you lose track of a small object in a large scene.</p>
+
+  <h2>Camera Controls — Quick Reference</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>Shortcut</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Look around</td>
+        <td><kbd>RMB</kbd> + Drag</td>
+      </tr>
+      <tr>
+        <td>Fly (WASD)</td>
+        <td>Hold <kbd>RMB</kbd> + <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></td>
+      </tr>
+      <tr>
+        <td>Fly up / down</td>
+        <td>Hold <kbd>RMB</kbd> + <kbd>E</kbd> / <kbd>Q</kbd></td>
+      </tr>
+      <tr>
+        <td>Zoom</td>
+        <td>Mouse Wheel</td>
+      </tr>
+      <tr>
+        <td>Pan</td>
+        <td><kbd>MMB</kbd> + Drag</td>
+      </tr>
+      <tr>
+        <td>Orbit</td>
+        <td><kbd>Alt</kbd> + <kbd>LMB</kbd> + Drag</td>
+      </tr>
+      <tr>
+        <td>Dolly (orbit zoom)</td>
+        <td><kbd>Alt</kbd> + <kbd>RMB</kbd> + Drag</td>
+      </tr>
+      <tr>
+        <td>Pan (orbit)</td>
+        <td><kbd>Alt</kbd> + <kbd>MMB</kbd> + Drag</td>
+      </tr>
+      <tr>
+        <td>Focus selected</td>
+        <td><kbd>F</kbd></td>
+      </tr>
+      <tr>
+        <td>Adjust camera speed</td>
+        <td>Hold <kbd>RMB</kbd> + Scroll Wheel</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Transform Gizmos</h2>
+  <p>When you select an actor in the Viewport, a colorful <strong>transform gizmo</strong> appears on it. This gizmo lets you move, rotate, or scale the object. You switch between the three modes with keyboard shortcuts:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tool</th>
+        <th>Shortcut</th>
+        <th>Gizmo Appearance</th>
+        <th>What It Does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Move</strong></td>
+        <td><kbd>W</kbd></td>
+        <td>Three arrows (red = X, green = Y, blue = Z)</td>
+        <td>Drag an arrow to slide the actor along that axis</td>
+      </tr>
+      <tr>
+        <td><strong>Rotate</strong></td>
+        <td><kbd>E</kbd></td>
+        <td>Three colored rings</td>
+        <td>Drag a ring to rotate around that axis</td>
+      </tr>
+      <tr>
+        <td><strong>Scale</strong></td>
+        <td><kbd>R</kbd></td>
+        <td>Three lines with cubes on the ends</td>
+        <td>Drag a handle to stretch or shrink along that axis</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Tip:</strong> You can also drag the small colored <strong>planes</strong> between axes (the squares near the center of the Move gizmo) to move along two axes at once — for example, dragging on the XY plane keeps the object at the same height.
+  </div>
+
+  <h2>Snapping</h2>
+  <p>Snapping forces movements to fixed increments, making it easy to align objects precisely. The snapping controls are in the Viewport toolbar:</p>
+  <ul>
+    <li><strong>Grid Snap</strong> (the magnet icon) — toggle on/off. When enabled, objects move in set increments (e.g., 10 units at a time). Click the dropdown next to it to choose the grid size.</li>
+    <li><strong>Rotation Snap</strong> — Rotations snap to fixed angles (e.g., every 10°).</li>
+    <li><strong>Scale Snap</strong> — Scale changes snap to fixed increments.</li>
+  </ul>
+  <p>You can quickly toggle snapping on and off while working — leave it on for architecture and level layout (walls, floors, pillars) and turn it off for organic placement (rocks, foliage, decorations).</p>
+
+  <h2>Essential Object Shortcuts</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>Shortcut</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Duplicate selected actor</td>
+        <td><kbd>Alt</kbd> + Drag (with Move tool)</td>
+      </tr>
+      <tr>
+        <td>Duplicate (in place)</td>
+        <td><kbd>Ctrl</kbd>+<kbd>D</kbd></td>
+      </tr>
+      <tr>
+        <td>Delete selected actor</td>
+        <td><kbd>Delete</kbd></td>
+      </tr>
+      <tr>
+        <td>Group selected actors</td>
+        <td><kbd>Ctrl</kbd>+<kbd>G</kbd></td>
+      </tr>
+      <tr>
+        <td>Ungroup</td>
+        <td><kbd>Shift</kbd>+<kbd>Ctrl</kbd>+<kbd>G</kbd></td>
+      </tr>
+      <tr>
+        <td>Undo</td>
+        <td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td>
+      </tr>
+      <tr>
+        <td>Redo</td>
+        <td><kbd>Ctrl</kbd>+<kbd>Y</kbd></td>
+      </tr>
+      <tr>
+        <td>Select all</td>
+        <td><kbd>Ctrl</kbd>+<kbd>A</kbd></td>
+      </tr>
+      <tr>
+        <td>Deselect all</td>
+        <td><kbd>Esc</kbd></td>
+      </tr>
+      <tr>
+        <td>Toggle world/local space</td>
+        <td><kbd>~</kbd> (tilde) on the gizmo cycle, or click the globe icon in the toolbar</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="warning">
+    <strong>Heads Up:</strong> <kbd>Alt</kbd> + Drag to duplicate only works when the <strong>Move</strong> tool (<kbd>W</kbd>) is active. If you're in Rotate or Scale mode, <kbd>Alt</kbd> + Drag will perform orbit or other actions instead.
+  </div>
+
+  <h2>World Space vs. Local Space</h2>
+  <p>By default, the transform gizmo is aligned to <strong>World Space</strong> — the X, Y, and Z axes stay fixed no matter how an object is rotated. You can switch to <strong>Local Space</strong> to align the gizmo to the object's own orientation. This is essential when you want to push a rotated wall "forward" along its own face instead of along the world grid. Toggle between them using the globe/cube icon in the Viewport toolbar.</p>
+
+  <div class="activity">
+    <strong>Practice:</strong> Open a project and try the following:
+    <ol>
+      <li>Fly around the scene using <kbd>RMB</kbd> + <kbd>WASD</kbd>. Adjust the camera speed until it feels comfortable.</li>
+      <li>Select an actor and press <kbd>F</kbd> to focus on it. Orbit around it with <kbd>Alt</kbd> + <kbd>LMB</kbd>.</li>
+      <li>Switch between Move (<kbd>W</kbd>), Rotate (<kbd>E</kbd>), and Scale (<kbd>R</kbd>). Move an object, rotate it 45°, and scale it up.</li>
+      <li>Duplicate an object with <kbd>Alt</kbd> + Drag.</li>
+      <li>Enable grid snapping and place four cubes in a perfect row.</li>
+    </ol>
+  </div>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

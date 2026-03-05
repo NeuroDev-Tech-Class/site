@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+
+  <main id="main-content">
+    <a href="courses/linux.html" class="back-link">&larr; Back to Introduction to Linux</a>
+
+    <div class="doc-header">
+      <span class="course-tag">Introduction to Linux</span>
+      <h1>System Monitoring Tools</h1>
+      <p class="subtitle">Keeping an eye on your system with top, htop, and friends</p>
+    </div>
+
+    <h2>Why Monitor Your System?</h2>
+    <p>Just like a car dashboard shows you speed, fuel, and engine temperature, Linux has tools that show you what's happening inside your computer. System monitoring helps you:</p>
+    <ul>
+      <li>Find out which programs are using the most CPU or memory</li>
+      <li>Identify processes that are frozen or misbehaving</li>
+      <li>Check how much RAM and swap space are in use</li>
+      <li>Understand system load and performance</li>
+      <li>Troubleshoot slowdowns and high resource usage</li>
+    </ul>
+
+    <h2>Processes: The Basics</h2>
+    <p>Every program running on your Linux system is called a <strong>process</strong>. Each process has:</p>
+    <ul>
+      <li><strong>PID</strong> — Process ID, a unique number identifying the process</li>
+      <li><strong>User</strong> — The user account running the process</li>
+      <li><strong>CPU %</strong> — How much of the processor it's using</li>
+      <li><strong>MEM %</strong> — How much memory (RAM) it's using</li>
+      <li><strong>Command</strong> — The name of the program or command</li>
+    </ul>
+
+    <h2><code>top</code> — The Classic System Monitor</h2>
+    <p>The <kbd>top</kbd> command is the built-in, real-time system monitor. It's available on virtually every Linux system.</p>
+    <pre><code>top</code></pre>
+    <p>When you run <code>top</code>, you'll see a screen like this:</p>
+    <pre><code>top - 14:30:22 up 3 days,  2:15,  1 user,  load average: 0.52, 0.38, 0.41
+Tasks: 203 total,   1 running, 202 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  5.2 us,  1.8 sy,  0.0 ni, 92.3 id,  0.5 wa,  0.0 hi,  0.2 si
+MiB Mem :  7864.5 total,  2134.2 free,  3512.8 used,  2217.5 buff/cache
+MiB Swap:  2048.0 total,  2048.0 free,     0.0 used.  4012.3 avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+ 1234 alice     20   0  512340  85432  42316 S   8.3   1.1   2:15.42 firefox
+ 5678 root      20   0   45672  12344   8932 S   2.1   0.2   0:45.18 systemd
+ 9012 alice     20   0  234560  42188  18720 S   1.4   0.5   1:02.33 code</code></pre>
+
+    <h3>Understanding the Header</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Line</th>
+          <th>What It Shows</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>top</strong></td>
+          <td>Current time, uptime, number of users, and load average</td>
+        </tr>
+        <tr>
+          <td><strong>Tasks</strong></td>
+          <td>Total processes and their states (running, sleeping, stopped, zombie)</td>
+        </tr>
+        <tr>
+          <td><strong>%Cpu(s)</strong></td>
+          <td>CPU usage breakdown (us=user, sy=system, id=idle, wa=waiting)</td>
+        </tr>
+        <tr>
+          <td><strong>MiB Mem</strong></td>
+          <td>Physical RAM usage (total, free, used, cached)</td>
+        </tr>
+        <tr>
+          <td><strong>MiB Swap</strong></td>
+          <td>Swap space usage (disk space used as backup memory)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Useful Keyboard Shortcuts in <code>top</code></h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Key</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><kbd>q</kbd></td><td>Quit top</td></tr>
+        <tr><td><kbd>M</kbd></td><td>Sort by memory usage</td></tr>
+        <tr><td><kbd>P</kbd></td><td>Sort by CPU usage (default)</td></tr>
+        <tr><td><kbd>k</kbd></td><td>Kill a process (it will ask for the PID)</td></tr>
+        <tr><td><kbd>h</kbd></td><td>Show help</td></tr>
+        <tr><td><kbd>1</kbd></td><td>Toggle individual CPU core display</td></tr>
+      </tbody>
+    </table>
+
+    <h2><code>htop</code> — The Improved System Monitor</h2>
+    <p><kbd>htop</kbd> is a more user-friendly and colorful version of <code>top</code>. It provides the same information but with a much nicer interface.</p>
+
+    <h3>Installing htop</h3>
+    <pre><code>sudo apt install htop</code></pre>
+
+    <h3>Running htop</h3>
+    <pre><code>htop</code></pre>
+
+    <h3>What Makes htop Better?</h3>
+    <ul>
+      <li><strong>Color-coded</strong> — CPU and memory bars use colors to show usage at a glance</li>
+      <li><strong>Mouse support</strong> — You can click on columns to sort, click on processes to select them</li>
+      <li><strong>Scrolling</strong> — Use arrow keys to scroll through all processes (top only shows what fits on screen)</li>
+      <li><strong>Tree view</strong> — Press <kbd>F5</kbd> to see processes organized by parent/child relationships</li>
+      <li><strong>Easy kill</strong> — Select a process and press <kbd>F9</kbd> to send it a signal</li>
+      <li><strong>Search</strong> — Press <kbd>F3</kbd> to search for a process by name</li>
+      <li><strong>Filter</strong> — Press <kbd>F4</kbd> to filter the process list</li>
+    </ul>
+
+    <div class="tip">
+      <strong>htop Keyboard Guide:</strong> The bottom of the htop screen always shows the available function key shortcuts (F1–F10), making it very beginner-friendly!
+    </div>
+
+    <h2>Other Useful Monitoring Commands</h2>
+
+    <h3><code>free</code> — Check Memory Usage</h3>
+    <p>A quick way to see how much RAM is being used:</p>
+    <pre><code>$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           7.7Gi       3.4Gi       2.1Gi       256Mi       2.2Gi       3.9Gi
+Swap:          2.0Gi          0B       2.0Gi</code></pre>
+    <p>The <code>-h</code> flag shows values in human-readable format (GB, MB instead of bytes).</p>
+
+    <h3><code>df</code> — Check Disk Space</h3>
+    <p>See how much storage space is used on each drive:</p>
+    <pre><code>$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1        50G   22G   26G  46% /
+tmpfs           3.9G  1.2M  3.9G   1% /dev/shm</code></pre>
+
+    <h3><code>du</code> — Check Directory Size</h3>
+    <p>Find out how much space a specific directory is using:</p>
+    <pre><code># Show the total size of a directory
+du -sh ~/Documents
+# 1.2G    /home/alice/Documents
+
+# Show sizes of all subdirectories
+du -h --max-depth=1 ~/Documents</code></pre>
+
+    <h3><code>uptime</code> — How Long Has the System Been Running?</h3>
+    <pre><code>$ uptime
+ 14:30:22 up 3 days,  2:15,  1 user,  load average: 0.52, 0.38, 0.41</code></pre>
+    <p>The three load average numbers represent system load over the last 1, 5, and 15 minutes. For a single-core CPU, a load of 1.0 means it's fully utilized.</p>
+
+    <h2>Killing Processes</h2>
+    <p>Sometimes a program freezes or uses too many resources. You can stop it using the <kbd>kill</kbd> command:</p>
+    <pre><code># First, find the process ID (PID)
+ps aux | grep firefox
+
+# Kill it gracefully (asks it to close)
+kill 1234
+
+# Force kill it (immediately terminate)
+kill -9 1234</code></pre>
+
+    <p>You can also use <kbd>killall</kbd> to kill processes by name:</p>
+    <pre><code># Kill all instances of firefox
+killall firefox</code></pre>
+
+    <div class="warning">
+      <strong>Use <code>kill -9</code> as a last resort!</strong> The <code>-9</code> flag (SIGKILL) forces a process to stop immediately without giving it a chance to save data or clean up. Always try a regular <code>kill</code> (SIGTERM) first, and only use <code>-9</code> if the process refuses to stop.
+    </div>
+
+    <h2>Quick Reference</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>top</code></td><td>Real-time system monitor (built-in)</td></tr>
+        <tr><td><code>htop</code></td><td>Enhanced system monitor (install with <code>apt</code>)</td></tr>
+        <tr><td><code>free -h</code></td><td>Check memory usage</td></tr>
+        <tr><td><code>df -h</code></td><td>Check disk space</td></tr>
+        <tr><td><code>du -sh [dir]</code></td><td>Check directory size</td></tr>
+        <tr><td><code>uptime</code></td><td>System uptime and load average</td></tr>
+        <tr><td><code>ps aux</code></td><td>List all running processes</td></tr>
+        <tr><td><code>kill [PID]</code></td><td>Stop a process gracefully</td></tr>
+        <tr><td><code>kill -9 [PID]</code></td><td>Force stop a process</td></tr>
+        <tr><td><code>killall [name]</code></td><td>Stop all processes with a given name</td></tr>
+      </tbody>
+    </table>
+
+    <div class="activity">
+      <h3>Try It Yourself</h3>
+      <ol>
+        <li>Run <code>top</code> and observe the output. Press <kbd>M</kbd> to sort by memory, then <kbd>q</kbd> to quit.</li>
+        <li>Install htop: <code>sudo apt install htop</code></li>
+        <li>Run <code>htop</code> and explore the interface. Try pressing <kbd>F5</kbd> for tree view.</li>
+        <li>Run <code>free -h</code> to see your current memory usage.</li>
+        <li>Run <code>df -h</code> to see your disk space.</li>
+        <li>Open a second terminal tab, run <code>sleep 300 &amp;</code> to create a background process, then find and kill it using <code>ps aux | grep sleep</code> and <code>kill</code>.</li>
+      </ol>
+    </div>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class — Introduction to Linux</p>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="assets/js/load-footer.js" defer></script>
+</body>
+</html>

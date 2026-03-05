@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/blender-zbrush-mini.html" class="back-link">&larr; Back to 3D Art &mdash; Blender &amp; ZBrush</a>
+    <div class="doc-header">
+    <span class="course-tag">Blender &amp; ZBrush Mini</span>
+    <h1>Edit Mode &amp; Mesh Elements</h1>
+    <p class="subtitle">Understanding vertices, edges, faces, and how meshes work</p>
+  </div>
+
+  <h2>Entering Edit Mode</h2>
+  <p>
+    In the previous lessons, we worked in <strong>Object Mode</strong>, where we can select and transform entire objects. To shape the actual geometry of an object — to move individual points, reshape edges, and delete or add faces — we need to switch to <strong>Edit Mode</strong>.
+  </p>
+  <p>
+    To enter Edit Mode:
+  </p>
+  <ol>
+    <li>Select the object you want to edit (left-click it so it has an orange outline)</li>
+    <li>Press <kbd>Tab</kbd></li>
+  </ol>
+  <p>
+    The object will change appearance — you'll see its wireframe structure overlaid on the surface, and the mode indicator at the top-left of the viewport will switch from "Object Mode" to "Edit Mode."
+  </p>
+  <p>
+    Press <kbd>Tab</kbd> again to return to Object Mode. You'll go back and forth between these two modes constantly while modeling.
+  </p>
+
+  <div class="warning">
+    <strong>Remember:</strong> You must have an object selected before pressing <kbd>Tab</kbd>. Edit Mode works on one object at a time.
+  </div>
+
+  <h2>The Three Mesh Elements</h2>
+  <p>
+    Every 3D mesh is made up of three fundamental building blocks. Understanding these is the key to understanding 3D modeling:
+  </p>
+
+  <h3>Vertices (Points)</h3>
+  <p>
+    A <strong>vertex</strong> (plural: <strong>vertices</strong>) is a single point in 3D space. It has an X, Y, and Z position. By itself, a vertex is just a dot — it has no size or shape. But vertices are the foundation that everything else is built on.
+  </p>
+  <p>
+    A cube has <strong>8 vertices</strong> — one at each corner.
+  </p>
+
+  <h3>Edges (Lines)</h3>
+  <p>
+    An <strong>edge</strong> is a straight line connecting two vertices. Edges define the outline and wireframe of your model. They have length but no surface area.
+  </p>
+  <p>
+    A cube has <strong>12 edges</strong> — the lines you see along every side of the cube.
+  </p>
+
+  <h3>Faces (Surfaces)</h3>
+  <p>
+    A <strong>face</strong> is a flat surface enclosed by three or more edges. Faces are what you actually <em>see</em> when you look at a 3D model — they catch light, display colors and textures, and make the object look solid.
+  </p>
+  <p>
+    A cube has <strong>6 faces</strong> — one for each side (top, bottom, front, back, left, right).
+  </p>
+
+  <div class="tip">
+    <strong>Think of it like this:</strong> Vertices are dots. Connect two dots and you get an edge (a line). Connect three or more edges in a loop and you get a face (a surface). A 3D mesh is just a collection of connected vertices, edges, and faces.
+  </div>
+
+  <h2>Selection Modes</h2>
+  <p>
+    Once you're in Edit Mode, you need to choose <strong>which type of element</strong> you want to select and manipulate. There are three selection modes, toggled with the number keys (not numpad):
+  </p>
+  <ul>
+    <li><kbd>1</kbd> — <strong>Vertex select mode</strong> — click to select individual vertices</li>
+    <li><kbd>2</kbd> — <strong>Edge select mode</strong> — click to select individual edges</li>
+    <li><kbd>3</kbd> — <strong>Face select mode</strong> — click to select individual faces</li>
+  </ul>
+  <p>
+    You can also switch modes by clicking the three icons in the header bar at the top of the viewport (they look like a dot, a line, and a square).
+  </p>
+
+  <h2>Selection Techniques</h2>
+  <p>Being able to quickly select exactly what you need is a core modeling skill. Here are the most important selection methods:</p>
+
+  <h3>Basic Selection</h3>
+  <ul>
+    <li><strong>Left-click</strong> — Select a single element (deselects everything else)</li>
+    <li><kbd>Shift</kbd>+<strong>Left-click</strong> — Add to selection (select multiple elements one by one)</li>
+    <li><kbd>Alt</kbd>+<kbd>A</kbd> — Deselect all</li>
+    <li><kbd>A</kbd> — Select all</li>
+  </ul>
+
+  <h3>Box Select — <kbd>B</kbd></h3>
+  <p>
+    Press <kbd>B</kbd>, then click and drag to draw a rectangle. Everything inside the rectangle gets selected. This is great for selecting a group of nearby elements quickly.
+  </p>
+
+  <h3>Circle Select — <kbd>C</kbd></h3>
+  <p>
+    Press <kbd>C</kbd> to enter circle select mode. A circle appears around your cursor — click and drag to "paint" a selection over elements. Scroll the mouse wheel to change the circle size. Press <kbd>Esc</kbd> or right-click to exit circle select mode.
+  </p>
+
+  <h3>Loop Select — <kbd>Alt</kbd>+Click</h3>
+  <p>
+    Hold <kbd>Alt</kbd> and click on an edge or face to select an entire <strong>loop</strong> — a ring of connected elements that goes all the way around the mesh. This is extremely useful and you'll use it all the time once you start adding loop cuts.
+  </p>
+
+  <h3>Select Linked — <kbd>Ctrl</kbd>+<kbd>L</kbd></h3>
+  <p>
+    With at least one element selected, press <kbd>Ctrl</kbd>+<kbd>L</kbd> to select all elements that are <strong>connected</strong> to the current selection. This is handy when you have multiple separate meshes inside the same object and want to select just one of them.
+  </p>
+
+  <h2>How Meshes Are Built</h2>
+  <p>
+    When you model in Blender, you're essentially sculpting a mesh by adding, removing, and rearranging vertices, edges, and faces. All modeling tools in Blender operate on these three elements.
+  </p>
+  <p>
+    A well-constructed mesh uses primarily <strong>quads</strong> — faces made of exactly 4 vertices and 4 edges. Quads are preferred because they subdivide cleanly, deform well for animation, and produce predictable shading. Triangles (3-sided faces, called <strong>tris</strong>) are sometimes unavoidable, but too many triangles can cause shading artifacts. Faces with 5 or more sides (<strong>n-gons</strong>) should generally be avoided.
+  </p>
+
+  <div class="tip">
+    <strong>Beginner rule of thumb:</strong> Try to keep your faces as quads (4 sides). Don't worry about this too much right now — just be aware that quad-based meshes are cleaner and easier to work with.
+  </div>
+
+  <h2>Normals</h2>
+  <p>
+    Every face has a <strong>normal</strong> — an invisible arrow pointing outward from the face, perpendicular to its surface. Normals determine which direction a face "points." This matters because:
+  </p>
+  <ul>
+    <li>Faces are usually only visible from the side their normal points toward</li>
+    <li>Lighting calculations use normals to determine how bright or dark a face appears</li>
+    <li>Flipped normals (pointing inward instead of outward) can make faces appear invisible or shaded incorrectly</li>
+  </ul>
+  <p>
+    If parts of your model look dark, transparent, or inside-out, you might have flipped normals. To fix them:
+  </p>
+  <ol>
+    <li>Enter Edit Mode</li>
+    <li>Select all with <kbd>A</kbd></li>
+    <li>Go to <strong>Mesh &gt; Normals &gt; Recalculate Outside</strong> (or press <kbd>Shift</kbd>+<kbd>N</kbd>)</li>
+  </ol>
+
+  <h2>Quick Reference</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>Shortcut</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Toggle Edit Mode</td>
+        <td><kbd>Tab</kbd></td>
+      </tr>
+      <tr>
+        <td>Vertex select mode</td>
+        <td><kbd>1</kbd></td>
+      </tr>
+      <tr>
+        <td>Edge select mode</td>
+        <td><kbd>2</kbd></td>
+      </tr>
+      <tr>
+        <td>Face select mode</td>
+        <td><kbd>3</kbd></td>
+      </tr>
+      <tr>
+        <td>Multi-select</td>
+        <td><kbd>Shift</kbd> + click</td>
+      </tr>
+      <tr>
+        <td>Box select</td>
+        <td><kbd>B</kbd></td>
+      </tr>
+      <tr>
+        <td>Circle select</td>
+        <td><kbd>C</kbd></td>
+      </tr>
+      <tr>
+        <td>Loop select</td>
+        <td><kbd>Alt</kbd> + click</td>
+      </tr>
+      <tr>
+        <td>Select linked</td>
+        <td><kbd>Ctrl</kbd> + <kbd>L</kbd></td>
+      </tr>
+      <tr>
+        <td>Select all</td>
+        <td><kbd>A</kbd></td>
+      </tr>
+      <tr>
+        <td>Deselect all</td>
+        <td><kbd>Alt</kbd> + <kbd>A</kbd></td>
+      </tr>
+      <tr>
+        <td>Recalculate normals</td>
+        <td><kbd>Shift</kbd> + <kbd>N</kbd></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Blender &amp; ZBrush Mini</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

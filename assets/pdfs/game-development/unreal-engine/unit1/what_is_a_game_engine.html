@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>What Is a Game Engine?</h1>
+    <p class="subtitle">Understanding the software that powers modern games — and why Unreal Engine 5 is an industry leader</p>
+  </div>
+
+  <h2>The Big Picture</h2>
+  <p>Imagine trying to build a house completely from scratch — mining your own iron for nails, felling trees for lumber, mixing sand into glass for the windows. You <em>could</em> do it, but it would take a lifetime. A <strong>game engine</strong> is like a fully stocked workshop with power tools, blueprints, and pre-cut materials. It handles the heavy, repetitive technical work so that you can focus on what makes your game unique: the ideas, the art, and the fun.</p>
+
+  <h2>What Does a Game Engine Actually Do?</h2>
+  <p>At its core, a game engine is a collection of interconnected systems that work together every single frame — often 60 times per second or more. Here are the major systems you'll find in any modern engine:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>System</th>
+        <th>What It Does</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Rendering</strong></td>
+        <td>Draws 3D models, textures, and lighting to the screen</td>
+        <td>Displaying a detailed castle with realistic shadows</td>
+      </tr>
+      <tr>
+        <td><strong>Physics</strong></td>
+        <td>Simulates gravity, collisions, and object interactions</td>
+        <td>A ball rolling down a ramp and bouncing off a wall</td>
+      </tr>
+      <tr>
+        <td><strong>Input</strong></td>
+        <td>Reads player actions from keyboard, mouse, or controller</td>
+        <td>Pressing <kbd>W</kbd> to move forward</td>
+      </tr>
+      <tr>
+        <td><strong>Audio</strong></td>
+        <td>Plays sounds and music with spatial positioning</td>
+        <td>Footsteps getting louder as a character walks closer</td>
+      </tr>
+      <tr>
+        <td><strong>Scripting / Logic</strong></td>
+        <td>Lets creators define rules, behaviors, and game states</td>
+        <td>"When the player picks up a key, unlock the door"</td>
+      </tr>
+      <tr>
+        <td><strong>Animation</strong></td>
+        <td>Moves characters and objects smoothly over time</td>
+        <td>A character's walk cycle blending into a run</td>
+      </tr>
+      <tr>
+        <td><strong>Networking</strong></td>
+        <td>Synchronizes game state across multiple players online</td>
+        <td>An online battle royale with 100 players</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Without an engine, a developer would have to write all of these systems from the ground up for every single project. Engines let entire teams — or solo creators — skip that work and jump straight into building their game.</p>
+
+  <h2>A Brief History of Game Engines</h2>
+  <p>The concept of a reusable game engine emerged in the early 1990s:</p>
+  <ul>
+    <li><strong>id Tech (1993):</strong> John Carmack's engine powered <em>Doom</em> and <em>Quake</em>. id Software licensed the engine to other studios, popularizing the idea that one engine could power many different games.</li>
+    <li><strong>Unreal Engine (1998):</strong> Epic Games released the original <em>Unreal</em> and began licensing the Unreal Engine. It has since evolved through five major versions and powers hundreds of AAA titles.</li>
+    <li><strong>Unity (2005):</strong> Unity democratized game development by offering a free tier and targeting a wide range of platforms. It became especially popular for mobile and indie games.</li>
+    <li><strong>Godot (2014):</strong> A free, open-source engine that has grown rapidly, favored by hobbyists and small teams.</li>
+  </ul>
+  <p>Today, Unreal Engine and Unity dominate the industry, but Unreal has a particular stronghold in high-fidelity, large-scale projects.</p>
+
+  <h2>Why Unreal Engine 5?</h2>
+  <p>We chose Unreal Engine 5 (UE5) for this course for several compelling reasons:</p>
+
+  <h3>1. It's Free for Education and Learning</h3>
+  <p>Epic Games provides Unreal Engine completely free to download and use. You only pay royalties if you ship a commercial product that earns over $1 million in revenue — so for students and hobbyists, it's 100% free.</p>
+
+  <h3>2. Blueprint Visual Scripting</h3>
+  <p>UE5 includes <strong>Blueprints</strong>, a powerful visual scripting system that lets you create game logic by connecting nodes on a graph instead of writing code line by line. This makes Unreal approachable for beginners while still being powerful enough for professional studios.</p>
+
+  <h3>3. Industry Standard</h3>
+  <p>Unreal Engine powers some of the most successful games ever made, including <em>Fortnite</em>, <em>Rocket League</em>, the <em>Final Fantasy VII Remake</em> series, and many more. Learning UE5 means learning the same tool that professional developers use every day.</p>
+
+  <h3>4. Beyond Games</h3>
+  <p>Unreal Engine isn't just for games anymore. It's widely used in:</p>
+  <ul>
+    <li><strong>Film &amp; TV</strong> — Virtual production stages (like those used for <em>The Mandalorian</em>)</li>
+    <li><strong>Architecture</strong> — Interactive walkthroughs of buildings before they're built</li>
+    <li><strong>Automotive</strong> — Virtual car configurators and showrooms</li>
+    <li><strong>Simulation &amp; Training</strong> — Military, medical, and flight simulators</li>
+  </ul>
+
+  <h3>5. Next-Gen Technology</h3>
+  <p>UE5 introduced two groundbreaking systems:</p>
+  <ul>
+    <li><strong>Nanite</strong> — Virtualized geometry that lets you import film-quality 3D assets with millions of polygons, and the engine intelligently decides how much detail to render based on distance and screen size. No more painstakingly creating low-poly versions of your models.</li>
+    <li><strong>Lumen</strong> — A fully dynamic global illumination system. Light bounces realistically off surfaces in real time, without the need to pre-bake lighting. Move a wall, and the lighting updates instantly.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tip:</strong> You download and manage Unreal Engine through the <strong>Epic Games Launcher</strong>. The Launcher also gives you access to the <strong>Marketplace</strong>, where you can find free assets, plugins, and starter content every month.
+  </div>
+
+  <h2>What Will You Build?</h2>
+  <p>Throughout this course, you'll go from navigating the editor for the first time to building complete 3D environments and interactive experiences. By the end, you'll have a solid foundation in level design, materials, lighting, Blueprints, and more — skills that transfer directly to game studios, film production, and beyond.</p>
+
+  <div class="activity">
+    <strong>Quick Check:</strong> Before moving on, make sure you have the <strong>Epic Games Launcher</strong> installed and <strong>Unreal Engine 5</strong> (latest version) downloaded. Launch it and create a new <em>Third Person</em> template project so you're ready for the next lesson.
+  </div>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

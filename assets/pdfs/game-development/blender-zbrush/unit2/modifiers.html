@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/blender-zbrush-mini.html" class="back-link">&larr; Back to 3D Art &mdash; Blender &amp; ZBrush</a>
+    <div class="doc-header">
+    <span class="course-tag">Blender &amp; ZBrush Mini</span>
+    <h1>Modifiers</h1>
+    <p class="subtitle">Non-Destructive Tools That Transform Your Mesh</p>
+  </div>
+
+  <h2>What Are Modifiers?</h2>
+  <p>
+    <strong>Modifiers</strong> are powerful, non-destructive operations that change how a mesh looks and behaves
+    <em>without permanently altering the original geometry</em>. Think of them like Instagram filters for 3D models —
+    you can stack them, reorder them, adjust their settings, and remove them at any time. The underlying mesh stays
+    untouched until you choose to "apply" the modifier, making the change permanent.
+  </p>
+  <p>
+    This non-destructive workflow is one of Blender's greatest strengths. It lets you experiment freely without worrying
+    about ruining your model. You can always go back and tweak settings or remove a modifier entirely.
+  </p>
+
+  <h3>How to Add a Modifier</h3>
+  <ol>
+    <li>Select your object in <strong>Object Mode</strong>.</li>
+    <li>Open the <strong>Properties panel</strong> on the right side of the screen.</li>
+    <li>Click the <strong>wrench icon</strong> (🔧) — this is the <strong>Modifier Properties</strong> tab.</li>
+    <li>Click <strong>Add Modifier</strong> and choose from the list.</li>
+  </ol>
+  <p>
+    You can also use the shortcut <strong>Ctrl + 1</strong> through <strong>Ctrl + 5</strong> to quickly add a
+    <strong>Subdivision Surface</strong> modifier at the corresponding level.
+  </p>
+
+  <h2>The Three Key Modifiers</h2>
+
+  <h3>1. Subdivision Surface</h3>
+  <p>
+    The <strong>Subdivision Surface</strong> (often called "Subsurf") modifier smooths your mesh by subdividing each
+    face into smaller faces. It takes a blocky, low-polygon model and makes it look smooth and organic — like inflating
+    a balloon inside your wireframe.
+  </p>
+  <h4>Key Settings</h4>
+  <ul>
+    <li><strong>Levels Viewport:</strong> How many times to subdivide in the 3D viewport (what you see while working).
+      A value of 1-2 is usually enough. Higher values slow down your computer.</li>
+    <li><strong>Render:</strong> How many times to subdivide in the final render. You can set this higher (2-3) for a
+      smoother result in your finished image without slowing down your workflow.</li>
+    <li><strong>Optimal Display:</strong> Check this option to show a cleaner wireframe in the viewport. It hides the
+      subdivided edges, showing only your original edges.</li>
+  </ul>
+  <h4>Important Notes</h4>
+  <ul>
+    <li>Subdivision Surface works best on <strong>quad-based topology</strong>. N-gons and triangles will produce
+      pinching and uneven smoothing.</li>
+    <li>Each subdivision level <strong>quadruples</strong> the face count. Level 1 turns 1 face into 4. Level 2 turns it
+      into 16. Level 3 turns it into 64. Be careful — high levels can make your scene very slow.</li>
+    <li>Use <strong>edge creases</strong> (Shift+E in Edit Mode) to keep certain edges sharp even with subdivision.</li>
+  </ul>
+
+  <h3>2. Mirror</h3>
+  <p>
+    The <strong>Mirror</strong> modifier lets you model only <em>half</em> of a symmetrical object, and Blender
+    automatically creates the other half as a mirror image. This is a massive time-saver for anything symmetrical —
+    characters, vehicles, furniture, jewelry, and more.
+  </p>
+  <h4>Key Settings</h4>
+  <ul>
+    <li><strong>Axis:</strong> Choose which axis to mirror across — X, Y, Z, or any combination. For most characters and
+      objects, you'll mirror across the <strong>X axis</strong> (left-to-right).</li>
+    <li><strong>Clipping:</strong> <em>Enable this!</em> When Clipping is on, vertices at the center line (the mirror
+      boundary) can't cross over to the other side. This prevents gaps from opening up at the seam. It's one of the most
+      important settings to turn on.</li>
+    <li><strong>Merge:</strong> Automatically merges vertices that are close to the center line, ensuring a seamless
+      join.</li>
+  </ul>
+  <h4>Workflow Tip</h4>
+  <p>
+    Start by deleting half of your mesh (select half the vertices in Edit Mode, then delete). Add the Mirror modifier,
+    enable Clipping, and now you only need to model one side. Every change is instantly reflected on the other side.
+  </p>
+
+  <h3>3. Bevel</h3>
+  <p>
+    The <strong>Bevel</strong> modifier rounds off (chamfers) the edges of your mesh. In real life, almost nothing has
+    perfectly sharp 90-degree edges — there's always a slight rounding. Adding a bevel makes your models look
+    significantly more realistic by catching light along the edges.
+  </p>
+  <h4>Key Settings</h4>
+  <ul>
+    <li><strong>Width:</strong> How wide the bevel is (how far it rounds from the original edge). Start small — a little
+      bevel goes a long way.</li>
+    <li><strong>Segments:</strong> How many subdivisions the bevel has. 1 segment creates a simple chamfer (flat cut). 2-3
+      segments create a smooth curve. More segments = smoother rounding, but more geometry.</li>
+    <li><strong>Limit Method:</strong> Controls which edges get beveled. "Angle" is a popular choice — it only bevels
+      edges sharper than a certain angle, leaving flat areas alone.</li>
+  </ul>
+
+  <h2>Modifier Stack Order</h2>
+  <p>
+    When you add multiple modifiers, they form a <strong>stack</strong> — and the <em>order matters</em>. Modifiers are
+    applied from <strong>top to bottom</strong>. Changing the order can produce very different results.
+  </p>
+  <p>
+    For example, consider a common setup:
+  </p>
+  <ol>
+    <li><strong>Mirror</strong> (first/top) — mirrors the mesh.</li>
+    <li><strong>Subdivision Surface</strong> (second/bottom) — smooths the mirrored result.</li>
+  </ol>
+  <p>
+    If you reversed the order (Subdivision first, then Mirror), Blender would subdivide your half-mesh first, then try
+    to mirror it. The result would be different and likely not what you want.
+  </p>
+  <p>
+    You can drag modifiers up and down in the stack by clicking the grip dots on the left side of each modifier panel,
+    or using the dropdown menu arrow.
+  </p>
+
+  <h2>Applying a Modifier</h2>
+  <p>
+    While modifiers are active, the original mesh underneath hasn't changed. When you're happy with a modifier's effect
+    and want to make it permanent, you <strong>apply</strong> it:
+  </p>
+  <ol>
+    <li>Hover over the modifier in the Properties panel.</li>
+    <li>Click the <strong>dropdown arrow</strong> (▼) on the modifier header.</li>
+    <li>Select <strong>Apply</strong>.</li>
+  </ol>
+  <p>
+    After applying, the modifier's effect becomes part of the actual mesh geometry. You can no longer adjust its
+    settings. Apply modifiers when you're finished tweaking and ready to move on — for example, before exporting to a
+    game engine or 3D printer.
+  </p>
+  <p>
+    <strong>Warning:</strong> Applying a modifier is permanent (unless you undo immediately with Ctrl+Z). Save your
+    file before applying, just in case.
+  </p>
+
+  <h2>Other Useful Modifiers (Brief Overview)</h2>
+  <p>
+    Blender has dozens of modifiers. Here are a few more you'll encounter:
+  </p>
+  <ul>
+    <li><strong>Array:</strong> Creates copies of your object in a row, grid, or circle. Great for fences, chains,
+      columns, or any repeating pattern. Set the count and offset to control spacing.</li>
+    <li><strong>Boolean:</strong> Combines two meshes using set operations — <em>Union</em> (join together),
+      <em>Difference</em> (cut one from the other), or <em>Intersect</em> (keep only the overlapping area). Powerful
+      but often creates messy topology that needs cleanup.</li>
+    <li><strong>Solidify:</strong> Adds thickness to a flat surface. If you model a thin shell (like a bowl or a helmet),
+      Solidify gives it real wall thickness so it's no longer paper-thin. Essential for 3D printing, where every object
+      needs actual volume.</li>
+  </ul>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>Modifiers are <strong>non-destructive</strong> — experiment freely and adjust settings anytime.</li>
+    <li><strong>Subdivision Surface</strong> smooths your mesh — keep your base mesh simple and let the modifier do the
+      work.</li>
+    <li><strong>Mirror</strong> saves time on symmetrical objects — always enable Clipping.</li>
+    <li><strong>Bevel</strong> adds realism by rounding edges.</li>
+    <li><strong>Stack order matters</strong> — modifiers apply top to bottom.</li>
+    <li><strong>Apply</strong> a modifier only when you're done adjusting it.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Blender &amp; ZBrush Mini</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

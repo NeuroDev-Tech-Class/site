@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/audacity.html" class="back-link">&larr; Back to Audio Production &mdash; Audacity</a>
+    <div class="doc-header">
+    <span class="course-tag">Audio Production — Audacity</span>
+    <h1>Multi-Track Mixing</h1>
+    <p class="subtitle">Combine voice, music, and sound effects into a polished mix</p>
+  </div>
+
+  <h2>What Is Multi-Track Editing?</h2>
+  <p>So far, you've mostly worked with a single audio track. But real-world audio projects — podcasts, videos, presentations — almost always use <strong>multiple tracks</strong> that play at the same time. For example, a podcast might have:</p>
+  <ul>
+    <li><strong>Track 1:</strong> Your voice (narration)</li>
+    <li><strong>Track 2:</strong> Background music</li>
+    <li><strong>Track 3:</strong> Sound effects (transition swooshes, notification dings, etc.)</li>
+  </ul>
+  <p>Each track is independent — you can edit, move, adjust volume, and apply effects to each one without affecting the others. When you play the project, all tracks play simultaneously and are heard together.</p>
+
+  <h2>Adding New Tracks</h2>
+  <p>There are several ways to get multiple tracks into your project:</p>
+
+  <h3>Add an Empty Track</h3>
+  <ol>
+    <li>Go to <strong>Tracks &gt; Add New &gt; Mono Track</strong> (or Stereo Track).</li>
+    <li>A new, empty track appears below your existing tracks.</li>
+    <li>You can now record directly into this track or paste audio into it.</li>
+  </ol>
+
+  <h3>Record on a New Track</h3>
+  <p>By default, pressing <kbd>R</kbd> in Audacity creates a new track and starts recording on it. This means you can record multiple takes or layers without overwriting your existing audio.</p>
+
+  <div class="tip">
+    <strong>Tip:</strong> If you want to record onto an <em>existing</em> track (appending to the end), hold <kbd>Shift</kbd> and click the Record button (or press <kbd>Shift</kbd>+<kbd>R</kbd>). This is called <strong>Append Record</strong>.
+  </div>
+
+  <h3>Import Audio to a New Track</h3>
+  <ol>
+    <li>Go to <strong>File &gt; Import &gt; Audio</strong>.</li>
+    <li>Select the audio file (music, sound effect, etc.).</li>
+    <li>It automatically appears as a new track in your project.</li>
+  </ol>
+  <p>You can also <strong>drag and drop</strong> files from your file explorer directly into the Audacity window.</p>
+
+  <h2>The Time Shift Tool (Clip Dragging)</h2>
+  <p>In recent versions of Audacity, you can move clips along the timeline by simply clicking and dragging the clip's header bar or by using the <strong>Time Shift tool</strong> (press <kbd>F5</kbd> in older versions).</p>
+  <p>This lets you precisely position audio in time. For example:</p>
+  <ul>
+    <li>Slide background music so it starts 3 seconds into the project (during your intro).</li>
+    <li>Position a sound effect at exactly the moment you want it to play.</li>
+    <li>Stagger multiple voice clips across the timeline.</li>
+  </ul>
+  <ol>
+    <li>Hover over the clip you want to move. Your cursor should change to a hand or a move icon.</li>
+    <li>Click and drag the clip left or right along the timeline.</li>
+    <li>Release when the clip is in the desired position.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tip:</strong> Watch the <strong>Timeline ruler</strong> at the top of the screen to see exact time positions. You can also use the <strong>Selection Toolbar</strong> to see precise start times for your clips.
+  </div>
+
+  <h2>Track Controls</h2>
+  <p>Each track has a <strong>Track Control Panel</strong> on the left side with several important controls:</p>
+
+  <h3>Mute and Solo</h3>
+  <ul>
+    <li><strong>Mute</strong> — Silences this track during playback. The track is still there; you just won't hear it. Great for isolating problems or previewing how the mix sounds without a particular element.</li>
+    <li><strong>Solo</strong> — Plays <em>only</em> this track, silencing all others. Useful for checking one track in isolation.</li>
+  </ul>
+  <p>You can Mute or Solo multiple tracks at the same time. For example, Solo both the voice and music tracks to hear their balance without sound effects.</p>
+
+  <h3>Gain Slider</h3>
+  <p>The <strong>Gain slider</strong> (labeled with a + and – or a dB scale) adjusts the overall volume of that track. Slide it left to make the track quieter, right to make it louder.</p>
+  <p>This is the primary tool for balancing your mix. For example, you'll usually want your background music much quieter than your voice.</p>
+
+  <h3>Pan Slider</h3>
+  <p>The <strong>Pan slider</strong> (labeled L and R) positions the track's audio in the stereo field:</p>
+  <ul>
+    <li><strong>Center</strong> — Audio plays equally from both speakers (default).</li>
+    <li><strong>Left</strong> — Audio plays more (or entirely) from the left speaker.</li>
+    <li><strong>Right</strong> — Audio plays more (or entirely) from the right speaker.</li>
+  </ul>
+  <p>For most projects, keep your main voice centered. You might pan music or sound effects slightly left or right to create a wider, more immersive sound.</p>
+
+  <h2>Mixing Down</h2>
+  <p>When you have multiple tracks and want to combine them into a single track, you can mix them down:</p>
+  <ol>
+    <li>Select all tracks (<kbd>Ctrl</kbd>+<kbd>A</kbd>).</li>
+    <li>Go to <strong>Tracks &gt; Mix &gt; Mix and Render</strong>.</li>
+    <li>All tracks are combined into a single track, with all volume, pan, and timing settings applied.</li>
+  </ol>
+
+  <div class="warning">
+    <strong>Warning:</strong> Mixing down is <strong>destructive</strong> — your individual tracks are gone and replaced by a single mixed track. Only do this when you're confident the mix is final, or save a copy of your project before mixing down.
+  </div>
+
+  <p>When you <strong>Export</strong> audio (File &gt; Export Audio), Audacity automatically mixes all tracks together — you don't need to manually mix down before exporting. The Mix and Render option is mainly useful when you want to continue editing the mixed result within Audacity.</p>
+
+  <h2>Building a Multi-Track Project: Walkthrough</h2>
+  <p>Here's a practical example of creating a simple multi-track project with voice, music, and a sound effect:</p>
+
+  <h3>1. Record Your Voiceover</h3>
+  <ol>
+    <li>Set up your microphone and press <kbd>R</kbd> to record.</li>
+    <li>Speak your narration, then press <kbd>Space</kbd> to stop.</li>
+    <li>Edit the voiceover: remove mistakes, trim silence, apply Noise Reduction and Normalize.</li>
+  </ol>
+
+  <h3>2. Import Background Music</h3>
+  <ol>
+    <li>Go to <strong>File &gt; Import &gt; Audio</strong> and select a royalty-free music file.</li>
+    <li>The music appears as a new track below your voiceover.</li>
+    <li>Use the gain slider to lower the music volume significantly — it should sit well <strong>below</strong> your voice (try -12 to -18 dB on the gain slider).</li>
+  </ol>
+
+  <h3>3. Add a Sound Effect</h3>
+  <ol>
+    <li>Import a sound effect file (e.g., a transition swoosh).</li>
+    <li>Drag the clip to the exact moment you want it to play.</li>
+    <li>Adjust its volume with the gain slider so it blends naturally.</li>
+  </ol>
+
+  <h3>4. Balance and Preview</h3>
+  <ol>
+    <li>Press <kbd>Home</kbd> then <kbd>Space</kbd> to play from the beginning.</li>
+    <li>Listen to the balance: Can you clearly hear the voice over the music? Is the sound effect too loud or too quiet?</li>
+    <li>Adjust gain sliders until everything sits well together.</li>
+    <li>Use <strong>Mute</strong> and <strong>Solo</strong> to check individual tracks.</li>
+  </ol>
+
+  <h3>5. Export</h3>
+  <ol>
+    <li>When you're happy with the mix, go to <strong>File &gt; Export Audio</strong>.</li>
+    <li>Choose your format (e.g., MP3 at 192 kbps).</li>
+    <li>All tracks are automatically mixed together in the exported file.</li>
+  </ol>
+
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>Use multiple tracks to layer voice, music, and effects independently.</li>
+    <li>Drag clips along the timeline to position them at the right moment.</li>
+    <li><strong>Mute</strong> and <strong>Solo</strong> let you isolate tracks for checking.</li>
+    <li>Use the <strong>Gain slider</strong> on each track to balance volume levels.</li>
+    <li>Audacity automatically mixes all tracks when you <strong>Export</strong>.</li>
+    <li><strong>Tracks &gt; Mix &gt; Mix and Render</strong> combines tracks within the project (destructive).</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Audio Production — Audacity</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>

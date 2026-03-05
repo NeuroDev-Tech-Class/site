@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/unreal-engine.html" class="back-link">&larr; Back to Game Development &mdash; Unreal Engine</a>
+    <div class="doc-header">
+    <span class="course-tag">Intro to Unreal Engine</span>
+    <h1>UMG Widgets &amp; HUD</h1>
+    <p class="subtitle">Create on-screen UI elements using Unreal Motion Graphics and display a live coin counter</p>
+  </div>
+
+  <h2>What Is UMG?</h2>
+  <p><strong>UMG</strong> stands for <strong>Unreal Motion Graphics</strong> — it's Unreal Engine's built-in system for creating user interfaces. Anything the player sees on screen that isn't part of the 3D world — health bars, score displays, menus, dialogue boxes, inventory screens — is built with UMG.</p>
+  <p>UMG uses <strong>Widget Blueprints</strong>, which are a special type of Blueprint designed specifically for UI. Instead of an Event Graph with 3D actors, you work with a visual designer where you drag and drop 2D elements like text labels, images, buttons, and progress bars.</p>
+
+  <h2>Creating a Widget Blueprint</h2>
+  <ol>
+    <li>In the Content Browser, right-click → <strong>User Interface → Widget Blueprint</strong>.</li>
+    <li>Name it <code>HUD_Coin</code> (this widget will display the player's coin count).</li>
+    <li>Double-click to open it. You'll see the <strong>UMG Designer</strong> — a preview screen that represents the player's view.</li>
+  </ol>
+
+  <h2>The Canvas Panel</h2>
+  <p>Every Widget Blueprint starts with a <strong>Canvas Panel</strong> as the root element. The Canvas Panel is a container that lets you position child widgets anywhere on screen using <strong>anchors</strong>. Think of it as the "page" your UI elements sit on.</p>
+  <p>You should see the Canvas Panel listed in the <strong>Hierarchy</strong> panel on the left. All your UI elements will be children of this Canvas Panel.</p>
+
+  <h2>Adding UI Elements</h2>
+  <p>The <strong>Palette</strong> panel (usually on the left side) contains all available UI widgets. Drag them into the Designer viewport or into the Hierarchy panel to add them.</p>
+
+  <h3>Common UI Elements</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Widget</th>
+        <th>Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Text</strong></td>
+        <td>Displays text on screen — labels, scores, messages</td>
+      </tr>
+      <tr>
+        <td><strong>Image</strong></td>
+        <td>Displays a 2D image — icons, backgrounds, frames</td>
+      </tr>
+      <tr>
+        <td><strong>Horizontal Box</strong></td>
+        <td>Arranges child widgets in a horizontal row</td>
+      </tr>
+      <tr>
+        <td><strong>Vertical Box</strong></td>
+        <td>Arranges child widgets in a vertical column</td>
+      </tr>
+      <tr>
+        <td><strong>Progress Bar</strong></td>
+        <td>A fill bar — great for health, stamina, loading</td>
+      </tr>
+      <tr>
+        <td><strong>Button</strong></td>
+        <td>A clickable element for menus and interaction</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Anchoring Widgets</h2>
+  <p>Every widget on a Canvas Panel has an <strong>anchor</strong> — this controls where the widget is positioned relative to the screen. Anchors are critical because players have different screen sizes and resolutions.</p>
+  <ul>
+    <li><strong>Top-Left anchor:</strong> The widget stays near the top-left corner regardless of screen size. Great for score counters and health bars.</li>
+    <li><strong>Center anchor:</strong> The widget stays centered on screen. Good for "Game Over" text or crosshairs.</li>
+    <li><strong>Bottom-Center anchor:</strong> Good for ability bars or quick-use slots.</li>
+  </ul>
+  <p>To set an anchor: select the widget, and in the <strong>Details</strong> panel look for the <strong>Anchors</strong> dropdown (it shows a visual grid). Click the anchor position you want. A flower-shaped icon appears in the Designer showing the anchor point.</p>
+
+  <div class="tip">
+    <strong>Rule of thumb:</strong> Always anchor your widgets to the corner or edge they're closest to. A coin counter in the top-left should be anchored to the top-left. If you don't, your UI will look correct on your screen but may be off-screen or misplaced on a different resolution.
+  </div>
+
+  <h2>Building the HUD_Coin Widget</h2>
+  <p>Let's create a simple HUD that shows "Coins: 5" (or whatever the current count is) in the top-left corner of the screen.</p>
+
+  <h3>Step 1: Layout</h3>
+  <ol>
+    <li>Open your <code>HUD_Coin</code> Widget Blueprint.</li>
+    <li>From the Palette, drag a <strong>Horizontal Box</strong> onto the Canvas Panel. This will hold our label and number side by side.</li>
+    <li>Set the Horizontal Box's anchor to <strong>Top-Left</strong>.</li>
+    <li>Position it with some padding from the edges (e.g., Position X: <code>20</code>, Position Y: <code>20</code>).</li>
+    <li>Inside the Horizontal Box, add two <strong>Text</strong> widgets:
+      <ul>
+        <li>First Text: set its text to <code>Coins: </code> (with a space after the colon). This is the static label.</li>
+        <li>Second Text: leave it as the default "Text Block" for now — we'll bind it to the coin count dynamically.</li>
+      </ul>
+    </li>
+    <li>Style the text: in the Details panel for each Text widget, set the <strong>Font Size</strong> to <code>24</code> or larger, and optionally change the <strong>Color</strong> to gold or white so it's easily readable.</li>
+  </ol>
+
+  <h3>Step 2: Binding the Coin Count</h3>
+  <p>The second Text widget needs to display the player's current <code>CoinCount</code> value — and it needs to update dynamically as coins are collected.</p>
+  <ol>
+    <li>Select the second Text widget in the Hierarchy.</li>
+    <li>In the Details panel, find the <strong>Text</strong> property. Next to it, click the <strong>Bind</strong> dropdown → <strong>Create Binding</strong>.</li>
+    <li>This creates a new function (it opens automatically). This function runs every frame and whatever it returns becomes the displayed text.</li>
+    <li>Inside the binding function:
+      <ul>
+        <li>Add a <strong>Get Player Character</strong> node (this returns the player).</li>
+        <li>Drag from the output and add a <strong>Cast To BP_ThirdPersonCharacter</strong>.</li>
+        <li>From the cast output, drag and add a <strong>Get CoinCount</strong> node.</li>
+        <li>The CoinCount is an Integer, but the text binding expects a <strong>Text</strong> type. Drag from the integer pin to the <strong>Return Value</strong> pin — Unreal will automatically add a conversion node.</li>
+      </ul>
+    </li>
+    <li>Compile and save the widget.</li>
+  </ol>
+
+  <div class="warning">
+    <strong>Performance note:</strong> Bindings run every frame, which can be expensive if you have many of them. For a simple coin counter this is perfectly fine. In larger projects, you may want to use <strong>event-driven</strong> updates instead (only update the text when a coin is actually collected).
+  </div>
+
+  <h2>Adding the Widget to the Viewport</h2>
+  <p>Creating the widget isn't enough — you need to tell the game to actually display it on screen. We'll do this in the player character Blueprint on <strong>BeginPlay</strong>.</p>
+  <ol>
+    <li>Open your player character Blueprint (<code>BP_ThirdPersonCharacter</code>).</li>
+    <li>In the Event Graph, find or add an <strong>Event BeginPlay</strong> node.</li>
+    <li>Drag from the execution pin and add a <strong>Create Widget</strong> node. In the <strong>Class</strong> dropdown, select <code>HUD_Coin</code>.</li>
+    <li>Drag from the <strong>Return Value</strong> output and add an <strong>Add To Viewport</strong> node.</li>
+    <li>Connect the execution pins: BeginPlay → Create Widget → Add To Viewport.</li>
+    <li>Compile and save.</li>
+  </ol>
+  <p>Now when you press Play, the coin counter appears in the top-left corner and updates live as you collect coins!</p>
+
+  <div class="tip">
+    <strong>Troubleshooting:</strong> If the widget doesn't appear, make sure the Create Widget's <strong>Owning Player</strong> pin is connected (drag off BeginPlay's output and get <strong>Get Owning Player</strong>, or leave it as default for single-player games). Also verify you selected the correct widget class in the dropdown.
+  </div>
+
+  <h2>Summary</h2>
+  <ul>
+    <li><strong>UMG</strong> (Unreal Motion Graphics) is the system for creating 2D user interfaces.</li>
+    <li><strong>Widget Blueprints</strong> let you design UI elements visually using a Canvas Panel.</li>
+    <li>Common widgets: <strong>Text</strong>, <strong>Image</strong>, <strong>Horizontal/Vertical Box</strong>, Progress Bar, Button.</li>
+    <li><strong>Anchors</strong> control where widgets appear relative to the screen — always match the anchor to the widget's position.</li>
+    <li>Use <strong>Bindings</strong> to make text display dynamic data like coin counts.</li>
+    <li>Display a widget with <strong>Create Widget → Add To Viewport</strong> on BeginPlay.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p>NeuroDev Tech Class — Intro to Unreal Engine</p>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>
