@@ -37,6 +37,7 @@ const courseMetadata = {
 
 let allStudents = [];
 let selectedStudent = null;
+let selectedCourseId = null;
 let currentUserRole = null;
 let allAdmins = [];
 
@@ -98,6 +99,9 @@ function initializeDashboard() {
   // Student view — back button and award cert
   document.getElementById('sv-back-btn').addEventListener('click', closeStudentView);
   document.getElementById('sv-award-cert-btn').addEventListener('click', awardCertificate);
+
+  // Test results view — back button
+  document.getElementById('tr-back-btn').addEventListener('click', closeTestResultsView);
 
   // Populate course select in student view
   const select = document.getElementById('sv-cert-select');
@@ -415,10 +419,11 @@ function renderStudentView() {
       return b.pct - a.pct;
     });
     coursesContainer.innerHTML = courseData.map(c => `
-      <div class="course-card ${c.pct >= 100 ? 'completed' : ''}">
+      <div class="course-card ${c.pct >= 100 ? 'completed' : ''} clickable" onclick="viewCourseResults('${c.id}')">
         <div class="course-info">
           <h3>${c.name}</h3>
           <span class="course-tasks">${c.completed} / ${c.total} tasks</span>
+          <span class="view-results-hint">View test results →</span>
         </div>
         <div class="progress-ring-container">
           <svg class="progress-ring" viewBox="0 0 36 36">
@@ -470,6 +475,74 @@ function closeStudentView() {
   document.getElementById('student-view').classList.remove('active');
   document.getElementById('dashboard-view').style.display = '';
   selectedStudent = null;
+}
+
+// ─── Test Results View ─────────────────────────────────────────────────────────
+
+window.viewCourseResults = function(courseId) {
+  if (!selectedStudent) return;
+  selectedCourseId = courseId;
+  const meta = courseMetadata[courseId];
+  document.getElementById('tr-course-name').textContent = meta ? meta.name : courseId;
+  document.getElementById('tr-student-name').textContent =
+    `${selectedStudent.firstName} ${selectedStudent.lastName}`;
+  renderTestResultsContent(courseId);
+  document.getElementById('student-view').classList.remove('active');
+  document.getElementById('test-results-view').classList.add('active');
+};
+
+function renderTestResultsContent(courseId) {
+  const container = document.getElementById('tr-content');
+  const testResults = selectedStudent.testResults?.[courseId];
+
+  if (!testResults || Object.keys(testResults).length === 0) {
+    container.innerHTML = `
+      <div class="empty-state" style="padding:3rem 0;">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H6v-2h6v2zm4-4H6v-2h10v2zm0-4H6V7h10v2z"/>
+        </svg>
+        <p>No test results for this course yet.</p>
+      </div>
+    `;
+    return;
+  }
+
+  const units = Object.entries(testResults).sort(([a], [b]) => a.localeCompare(b));
+
+  container.innerHTML = units.map(([unitKey, result]) => {
+    const scorePct = result.total > 0 ? Math.round((result.score / result.total) * 100) : 0;
+    const answers = result.answers || {};
+    const unitLabel = unitKey.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+    return `
+      <div class="test-result-card">
+        <div class="test-result-header">
+          <h3>${unitLabel}</h3>
+          <div class="test-result-meta">
+            <span class="test-score ${scorePct >= 70 ? 'pass' : 'fail'}">${result.score} / ${result.total} &nbsp;(${scorePct}%)</span>
+            <span class="test-date">${formatDate(result.submittedAt)}</span>
+          </div>
+        </div>
+        ${Object.keys(answers).length > 0 ? `
+          <div class="test-answers">
+            <h4>Answers</h4>
+            ${Object.entries(answers).map(([q, a]) => `
+              <div class="answer-row">
+                <span class="answer-question">${q}</span>
+                <span class="answer-value">${a}</span>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+function closeTestResultsView() {
+  document.getElementById('test-results-view').classList.remove('active');
+  document.getElementById('student-view').classList.add('active');
+  selectedCourseId = null;
 }
 
 window.toggleStudentType = async function(studentId, newType) {
