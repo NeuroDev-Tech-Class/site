@@ -793,6 +793,60 @@ body.dark-mode .cert-select {
   border-color: #444;
 }
 
+/* ── Inline Student Profile View ──────────────────────────────────────── */
+.student-view {
+  display: none;
+}
+
+.student-view.active {
+  display: block;
+}
+
+.student-view-header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 0.25rem 0;
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-btn {
+  position: absolute;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  background: transparent;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  color: var(--text-color);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  box-shadow: none;
+  max-width: none;
+}
+
+.back-btn:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+body.dark-mode .back-btn {
+  border-color: #555;
+}
+
+.student-view-header > div {
+  text-align: center;
+}
+
 /* Super Admin — Admins Tab */
 .tab-section-header {
   display: flex;

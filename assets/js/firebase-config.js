@@ -10,12 +10,13 @@ import {
   sendPasswordResetEmail,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { 
+import {
   getFirestore,
   doc,
   setDoc,
   getDoc,
   getDocs,
+  addDoc,
   updateDoc,
   deleteDoc,
   collection,
@@ -42,8 +43,8 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 // Export for use in other modules
-export { 
-  auth, 
+export {
+  auth,
   db,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -54,6 +55,7 @@ export {
   setDoc,
   getDoc,
   getDocs,
+  addDoc,
   updateDoc,
   deleteDoc,
   collection,
