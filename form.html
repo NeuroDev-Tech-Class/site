@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/site/" />
+    <script src="assets/js/load-head.js" defer></script>
+  </head>
+
+  <body>
+    <header></header>
+    <script src="/site/assets/js/load-header.js" type="module"></script>
+
+    <main id="main-content" class="embed-page">
+      <div class="embed-page-header">
+        <button class="embed-back-btn" onclick="history.back()">← Back to Course</button>
+        <h1 id="embed-title" class="embed-page-title"></h1>
+      </div>
+      <div class="form-frame-container">
+        <iframe id="form-iframe" loading="lazy"></iframe>
+      </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="assets/js/load-footer.js" defer></script>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const url = params.get('url') || '';
+      const title = params.get('title') || 'Test';
+
+      document.getElementById('embed-title').textContent = title;
+      document.title = title + ' — NeuroDev';
+
+      if (url) {
+        const base = url.split('?')[0];
+        document.getElementById('form-iframe').src = base + '?embedded=true';
+      }
+    </script>
+  </body>
+</html>

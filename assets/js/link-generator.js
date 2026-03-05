@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
 function generateCourseContent() {
   const dataScript = document.getElementById("unit-data");
   if (!dataScript) {
@@ -171,6 +172,48 @@ function generateCourseContent() {
         div.appendChild(label);
       }
 
+      // Google Slides — opens in slides.html wrapper
+      else if (item.url && item.url.includes('docs.google.com/presentation')) {
+        const link = document.createElement('a');
+        link.textContent = item.title;
+        if (isApproved) {
+          link.href = `slides.html?url=${encodeURIComponent(item.url)}&title=${encodeURIComponent(item.title)}`;
+        } else {
+          link.href = 'javascript:void(0)';
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!currentUser) {
+              if (window.openAuthModal) window.openAuthModal('login');
+            } else {
+              if (window.showPendingMessage) window.showPendingMessage();
+            }
+          });
+        }
+        label.appendChild(link);
+        div.appendChild(label);
+      }
+
+      // Google Forms — opens in form.html wrapper
+      else if (item.url && item.url.includes('docs.google.com/forms')) {
+        const link = document.createElement('a');
+        link.textContent = item.title;
+        if (isApproved) {
+          link.href = `form.html?url=${encodeURIComponent(item.url)}&title=${encodeURIComponent(item.title)}`;
+        } else {
+          link.href = 'javascript:void(0)';
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!currentUser) {
+              if (window.openAuthModal) window.openAuthModal('login');
+            } else {
+              if (window.showPendingMessage) window.showPendingMessage();
+            }
+          });
+        }
+        label.appendChild(link);
+        div.appendChild(label);
+      }
+
       // All other link types (with auth protection)
       else {
         const link = document.createElement("a");
@@ -180,7 +223,7 @@ function generateCourseContent() {
         const isExternal =
           item.url &&
           (item.url.startsWith("http") || item.url.endsWith(".pdf"));
-        
+
         if (isApproved) {
           link.href = item.url;
           if (isExternal) {

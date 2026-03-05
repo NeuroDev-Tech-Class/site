@@ -793,6 +793,60 @@ body.dark-mode .cert-select {
   border-color: #444;
 }
 
+/* ── Inline Student Profile View ──────────────────────────────────────── */
+.student-view {
+  display: none;
+}
+
+.student-view.active {
+  display: block;
+}
+
+.student-view-header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 0.25rem 0;
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-btn {
+  position: absolute;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  background: transparent;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  color: var(--text-color);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  box-shadow: none;
+  max-width: none;
+}
+
+.back-btn:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+body.dark-mode .back-btn {
+  border-color: #555;
+}
+
+.student-view-header > div {
+  text-align: center;
+}
+
 /* Super Admin — Admins Tab */
 .tab-section-header {
   display: flex;
@@ -834,6 +888,148 @@ body.dark-mode .add-admin-item {
 
 body.dark-mode .add-admin-empty {
   color: #aaa;
+}
+
+/* Clickable course cards in admin student view */
+#sv-courses-container .course-card.clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#sv-courses-container .course-card.clickable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+}
+
+.view-results-hint {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--primary-color);
+  margin-top: 0.35rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+#sv-courses-container .course-card.clickable:hover .view-results-hint {
+  opacity: 1;
+}
+
+/* ── Test Results View ─────────────────────────────────────────────────── */
+.test-result-card {
+  background: var(--background-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.test-result-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.test-result-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.test-result-header h3::after {
+  display: none;
+}
+
+.test-result-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.test-score {
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+
+.test-score.pass {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.test-score.fail {
+  background: #fce4ec;
+  color: #c62828;
+}
+
+body.dark-mode .test-score.pass {
+  background: rgba(27, 94, 32, 0.25);
+  color: #81c784;
+}
+
+body.dark-mode .test-score.fail {
+  background: rgba(183, 28, 28, 0.25);
+  color: #ef9a9a;
+}
+
+.test-date {
+  font-size: 0.82rem;
+  color: #888;
+}
+
+.test-answers {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 1rem;
+}
+
+body.dark-mode .test-answers {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.test-answers h4 {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #999;
+  font-weight: 600;
+}
+
+.test-answers h4::after {
+  display: none;
+}
+
+.answer-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem 1.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  font-size: 0.9rem;
+}
+
+.answer-row:last-child {
+  border-bottom: none;
+}
+
+.answer-question {
+  color: #666;
+}
+
+.answer-value {
+  font-weight: 500;
+}
+
+body.dark-mode .answer-question {
+  color: #aaa;
+}
+
+body.dark-mode .answer-row {
+  border-bottom-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Mobile Styles */

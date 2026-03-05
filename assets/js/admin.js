@@ -1,11 +1,12 @@
 // Admin Dashboard - Student management and certificate awarding
-import { 
-  auth, 
+import {
+  auth,
   db,
   onAuthStateChanged,
   doc,
   getDoc,
   getDocs,
+  addDoc,
   updateDoc,
   deleteDoc,
   collection,
@@ -36,6 +37,7 @@ const courseMetadata = {
 
 let allStudents = [];
 let selectedStudent = null;
+let selectedCourseId = null;
 let currentUserRole = null;
 let allAdmins = [];
 
@@ -93,24 +95,22 @@ function initializeDashboard() {
     const content = document.getElementById(`${tab.dataset.tab}-tab`);
     if (content) content.classList.add('active');
   });
-  
-  // Modal close
-  document.getElementById('modal-close').addEventListener('click', closeModal);
-  document.getElementById('student-modal').addEventListener('click', (e) => {
-    if (e.target.id === 'student-modal') closeModal();
-  });
-  
-  // Populate course select
-  const select = document.getElementById('cert-course-select');
+
+  // Student view — back button and award cert
+  document.getElementById('sv-back-btn').addEventListener('click', closeStudentView);
+  document.getElementById('sv-award-cert-btn').addEventListener('click', awardCertificate);
+
+  // Test results view — back button
+  document.getElementById('tr-back-btn').addEventListener('click', closeTestResultsView);
+
+  // Populate course select in student view
+  const select = document.getElementById('sv-cert-select');
   Object.entries(courseMetadata).forEach(([id, data]) => {
     const option = document.createElement('option');
     option.value = id;
     option.textContent = data.name;
     select.appendChild(option);
   });
-  
-  // Award certificate button
-  document.getElementById('award-cert-btn').addEventListener('click', awardCertificate);
 }
 
 async function loadAllStudents() {
@@ -304,18 +304,39 @@ function calculateOverallProgress(student) {
 
 // Global functions for onclick handlers
 window.approveStudent = async function(studentId) {
+  const student = allStudents.find(s => s.id === studentId);
+  if (!student) return;
+
   try {
     await updateDoc(doc(db, 'users', studentId), {
       status: 'approved',
       approvedAt: serverTimestamp()
     });
-    
-    // Update local data
-    const student = allStudents.find(s => s.id === studentId);
-    if (student) student.status = 'approved';
-    
+
+    student.status = 'approved';
     updateStats();
     renderTables();
+
+    // Queue approval email via Firebase Trigger Email extension
+    const siteUrl = window.location.origin + '/site/';
+    await addDoc(collection(db, 'mail'), {
+      to: student.email,
+      message: {
+        subject: 'Your NeuroDev Account Has Been Approved!',
+        html: `
+          <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#222;">
+            <h2 style="color:#44aadd;margin-top:0;">Welcome to NeuroDev, ${student.firstName}!</h2>
+            <p>Great news — your account has been approved. You can now log in and access your student dashboard to track your course progress and certificates.</p>
+            <a href="${siteUrl}profile.html"
+               style="display:inline-block;background:#44aadd;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;margin:20px 0;">
+              Go to My Dashboard
+            </a>
+            <p style="color:#666;font-size:0.9rem;">If you have any questions, feel free to reach out to your tech coach.</p>
+            <p style="color:#666;font-size:0.9rem;">— The NeuroDev Team</p>
+          </div>
+        `
+      }
+    });
   } catch (error) {
     console.error('Error approving student:', error);
     alert('Failed to approve student. Please try again.');
@@ -345,59 +366,184 @@ window.denyStudent = async function(studentId) {
 window.viewStudent = function(studentId) {
   selectedStudent = allStudents.find(s => s.id === studentId);
   if (!selectedStudent) return;
-  
-  document.getElementById('modal-student-name').textContent = 
-    `${selectedStudent.firstName} ${selectedStudent.lastName}`;
-  document.getElementById('modal-student-email').textContent = 
-    selectedStudent.email;
-  
-  // Render progress
-  const progressList = document.getElementById('modal-progress-list');
-  const courses = selectedStudent.courses || {};
-  const courseEntries = Object.entries(courses);
-  
-  if (courseEntries.length === 0) {
-    progressList.innerHTML = '<li>No courses started yet.</li>';
-  } else {
-    progressList.innerHTML = courseEntries
-      .filter(([courseId]) => courseMetadata[courseId])
-      .map(([courseId, progress]) => {
-        const metadata = courseMetadata[courseId];
-        const completed = Object.values(progress).filter(v => v === true).length;
-        const percentage = Math.round((completed / metadata.totalItems) * 100);
-        
-        return `
-          <li>
-            <span class="progress-course-name">${metadata.name}</span>
-            <div class="progress-right">
-              <div class="progress-bar-container">
-                <div class="progress-bar ${percentage >= 100 ? 'complete' : ''}" style="width: ${percentage}%"></div>
-              </div>
-              <span class="progress-pct">${percentage}%</span>
-            </div>
-          </li>
-        `;
-      }).join('');
+  renderStudentView();
+  document.getElementById('dashboard-view').style.display = 'none';
+  document.getElementById('student-view').classList.add('active');
+};
+
+function renderStudentView() {
+  const s = selectedStudent;
+
+  document.getElementById('sv-student-name').textContent = `${s.firstName} ${s.lastName}`;
+  document.getElementById('sv-student-email').textContent = s.email;
+
+  // Compute stats
+  const courseProgress = s.courses || {};
+  const certificates = s.certificates || [];
+  let coursesStarted = 0, coursesCompleted = 0, tasksCompleted = 0;
+  const courseData = [];
+
+  for (const [courseId, progress] of Object.entries(courseProgress)) {
+    const meta = courseMetadata[courseId];
+    if (!meta) continue;
+    const completed = Object.values(progress).filter(v => v === true).length;
+    const pct = Math.round((completed / meta.totalItems) * 100);
+    if (completed > 0) {
+      coursesStarted++;
+      tasksCompleted += completed;
+      courseData.push({ id: courseId, name: meta.name, completed, total: meta.totalItems, pct });
+      if (pct >= 100) coursesCompleted++;
+    }
   }
-  
-  // Render certificates
-  const certsContainer = document.getElementById('modal-certificates');
-  const certs = selectedStudent.certificates || [];
-  
-  if (certs.length === 0) {
-    certsContainer.innerHTML = '<p>No certificates yet.</p>';
+
+  document.getElementById('sv-courses-started').textContent = coursesStarted;
+  document.getElementById('sv-courses-completed').textContent = coursesCompleted;
+  document.getElementById('sv-certs-earned').textContent = certificates.length;
+  document.getElementById('sv-tasks-completed').textContent = tasksCompleted;
+
+  // Courses grid
+  const coursesContainer = document.getElementById('sv-courses-container');
+  if (courseData.length === 0) {
+    coursesContainer.innerHTML = `
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
+          <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+        </svg>
+        <p>No courses started yet.</p>
+      </div>
+    `;
   } else {
-    certsContainer.innerHTML = certs.map(cert => `
-      <div class="cert-item">
-        <span>${cert.courseName}</span>
-        <span class="cert-date">${formatDate(cert.awardedAt)}</span>
+    courseData.sort((a, b) => {
+      if (a.pct >= 100 && b.pct < 100) return 1;
+      if (b.pct >= 100 && a.pct < 100) return -1;
+      return b.pct - a.pct;
+    });
+    coursesContainer.innerHTML = courseData.map(c => `
+      <div class="course-card ${c.pct >= 100 ? 'completed' : ''} clickable" onclick="viewCourseResults('${c.id}')">
+        <div class="course-info">
+          <h3>${c.name}</h3>
+          <span class="course-tasks">${c.completed} / ${c.total} tasks</span>
+          <span class="view-results-hint">View test results →</span>
+        </div>
+        <div class="progress-ring-container">
+          <svg class="progress-ring" viewBox="0 0 36 36">
+            <path class="progress-ring-bg"
+              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+              fill="none" stroke-width="3"/>
+            <path class="progress-ring-fill"
+              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+              fill="none" stroke-width="3" stroke-dasharray="${c.pct}, 100"/>
+          </svg>
+          <span class="progress-text">${c.pct}%</span>
+        </div>
       </div>
     `).join('');
   }
-  
-  // Show modal
-  document.getElementById('student-modal').classList.add('show');
+
+  // Certificates grid
+  const certsContainer = document.getElementById('sv-certs-container');
+  if (certificates.length === 0) {
+    certsContainer.innerHTML = `
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        <p>No certificates earned yet.</p>
+      </div>
+    `;
+  } else {
+    certsContainer.innerHTML = certificates.map(cert => `
+      <div class="certificate-card">
+        <div class="certificate-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+        </div>
+        <div class="certificate-info">
+          <h3>${cert.courseName}</h3>
+          <span class="certificate-date">Awarded ${formatDate(cert.awardedAt)}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Reset cert select
+  document.getElementById('sv-cert-select').value = '';
+}
+
+function closeStudentView() {
+  document.getElementById('student-view').classList.remove('active');
+  document.getElementById('dashboard-view').style.display = '';
+  selectedStudent = null;
+}
+
+// ─── Test Results View ─────────────────────────────────────────────────────────
+
+window.viewCourseResults = function(courseId) {
+  if (!selectedStudent) return;
+  selectedCourseId = courseId;
+  const meta = courseMetadata[courseId];
+  document.getElementById('tr-course-name').textContent = meta ? meta.name : courseId;
+  document.getElementById('tr-student-name').textContent =
+    `${selectedStudent.firstName} ${selectedStudent.lastName}`;
+  renderTestResultsContent(courseId);
+  document.getElementById('student-view').classList.remove('active');
+  document.getElementById('test-results-view').classList.add('active');
 };
+
+function renderTestResultsContent(courseId) {
+  const container = document.getElementById('tr-content');
+  const testResults = selectedStudent.testResults?.[courseId];
+
+  if (!testResults || Object.keys(testResults).length === 0) {
+    container.innerHTML = `
+      <div class="empty-state" style="padding:3rem 0;">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H6v-2h6v2zm4-4H6v-2h10v2zm0-4H6V7h10v2z"/>
+        </svg>
+        <p>No test results for this course yet.</p>
+      </div>
+    `;
+    return;
+  }
+
+  const units = Object.entries(testResults).sort(([a], [b]) => a.localeCompare(b));
+
+  container.innerHTML = units.map(([unitKey, result]) => {
+    const scorePct = result.total > 0 ? Math.round((result.score / result.total) * 100) : 0;
+    const answers = result.answers || {};
+    const unitLabel = unitKey.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+    return `
+      <div class="test-result-card">
+        <div class="test-result-header">
+          <h3>${unitLabel}</h3>
+          <div class="test-result-meta">
+            <span class="test-score ${scorePct >= 70 ? 'pass' : 'fail'}">${result.score} / ${result.total} &nbsp;(${scorePct}%)</span>
+            <span class="test-date">${formatDate(result.submittedAt)}</span>
+          </div>
+        </div>
+        ${Object.keys(answers).length > 0 ? `
+          <div class="test-answers">
+            <h4>Answers</h4>
+            ${Object.entries(answers).map(([q, a]) => `
+              <div class="answer-row">
+                <span class="answer-question">${q}</span>
+                <span class="answer-value">${a}</span>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+function closeTestResultsView() {
+  document.getElementById('test-results-view').classList.remove('active');
+  document.getElementById('student-view').classList.add('active');
+  selectedCourseId = null;
+}
 
 window.toggleStudentType = async function(studentId, newType) {
   try {
@@ -438,54 +584,42 @@ window.deleteStudent = async function(studentId) {
 
 async function awardCertificate() {
   if (!selectedStudent) return;
-  
-  const courseId = document.getElementById('cert-course-select').value;
+
+  const courseId = document.getElementById('sv-cert-select').value;
   if (!courseId) {
     alert('Please select a course.');
     return;
   }
-  
+
   const courseName = courseMetadata[courseId].name;
-  
-  // Check if already has this certificate
   const existingCerts = selectedStudent.certificates || [];
+
   if (existingCerts.some(c => c.courseId === courseId)) {
     alert('This student already has a certificate for this course.');
     return;
   }
-  
+
   try {
     const newCert = {
       courseId,
       courseName,
       awardedAt: new Date().toISOString()
     };
-    
+
     await updateDoc(doc(db, 'users', selectedStudent.id), {
       certificates: [...existingCerts, newCert]
     });
-    
-    // Update local data
+
     selectedStudent.certificates = [...existingCerts, newCert];
-    
-    // Update modal
-    window.viewStudent(selectedStudent.id);
-    
-    // Update stats
+    renderStudentView();
     updateStats();
     renderTables();
-    
+
     alert(`Certificate awarded for ${courseName}!`);
   } catch (error) {
     console.error('Error awarding certificate:', error);
     alert('Failed to award certificate. Please try again.');
   }
-}
-
-function closeModal() {
-  document.getElementById('student-modal').classList.remove('show');
-  selectedStudent = null;
-  document.getElementById('cert-course-select').value = '';
 }
 
 function formatDate(timestamp) {
@@ -538,7 +672,7 @@ function injectAdminTab() {
       </table>
     </div>
   `;
-  document.getElementById('main-content').appendChild(tabContent);
+  document.getElementById('dashboard-view').appendChild(tabContent);
 
   // Inject "Add Admin" selection modal into body
   const addAdminModal = document.createElement('div');
