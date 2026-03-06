@@ -288,16 +288,18 @@ function calculateOverallProgress(student) {
   const courses = student.courses || {};
   let totalCompleted = 0;
   let totalItems = 0;
-  
+
   Object.entries(courses).forEach(([courseId, progress]) => {
     const metadata = courseMetadata[courseId];
     if (metadata) {
-      const completed = Object.values(progress).filter(v => v === true).length;
+      const completed = Object.entries(progress)
+        .filter(([k, v]) => !k.startsWith('_') && v === true).length;
+      const total = progress._total || metadata.totalItems;
       totalCompleted += completed;
-      totalItems += metadata.totalItems;
+      totalItems += total;
     }
   });
-  
+
   if (totalItems === 0) return 0;
   return Math.round((totalCompleted / totalItems) * 100);
 }
@@ -312,12 +314,17 @@ window.approveStudent = async function(studentId) {
       status: 'approved',
       approvedAt: serverTimestamp()
     });
-
     student.status = 'approved';
     updateStats();
     renderTables();
+  } catch (error) {
+    console.error('Error approving student:', error);
+    alert('Failed to approve student. Please try again.');
+    return;
+  }
 
-    // Queue approval email via Firebase Trigger Email extension
+  // Queue approval email — runs after approval succeeds
+  try {
     const siteUrl = window.location.origin + '/site/';
     await addDoc(collection(db, 'mail'), {
       to: student.email,
@@ -337,9 +344,8 @@ window.approveStudent = async function(studentId) {
         `
       }
     });
-  } catch (error) {
-    console.error('Error approving student:', error);
-    alert('Failed to approve student. Please try again.');
+  } catch (emailError) {
+    console.warn('Approval email failed to queue:', emailError);
   }
 };
 
@@ -363,9 +369,29 @@ window.denyStudent = async function(studentId) {
   }
 };
 
-window.viewStudent = function(studentId) {
-  selectedStudent = allStudents.find(s => s.id === studentId);
-  if (!selectedStudent) return;
+window.viewStudent = async function(studentId) {
+  try {
+    const snap = await getDoc(doc(db, 'users', studentId));
+    if (!snap.exists()) return;
+    selectedStudent = { id: studentId, ...snap.data() };
+    const idx = allStudents.findIndex(s => s.id === studentId);
+    if (idx >= 0) allStudents[idx] = selectedStudent;
+  } catch (error) {
+    console.error('Error loading student data:', error);
+    selectedStudent = allStudents.find(s => s.id === studentId);
+    if (!selectedStudent) return;
+  }
+
+  // Fetch test results from separate collection keyed by email
+  if (selectedStudent.email) {
+    try {
+      const trSnap = await getDoc(doc(db, 'testResults', selectedStudent.email));
+      selectedStudent.testResults = trSnap.exists() ? trSnap.data() : {};
+    } catch (e) {
+      selectedStudent.testResults = {};
+    }
+  }
+
   renderStudentView();
   document.getElementById('dashboard-view').style.display = 'none';
   document.getElementById('student-view').classList.add('active');
@@ -386,12 +412,14 @@ function renderStudentView() {
   for (const [courseId, progress] of Object.entries(courseProgress)) {
     const meta = courseMetadata[courseId];
     if (!meta) continue;
-    const completed = Object.values(progress).filter(v => v === true).length;
-    const pct = Math.round((completed / meta.totalItems) * 100);
+    const completed = Object.entries(progress)
+      .filter(([k, v]) => !k.startsWith('_') && v === true).length;
+    const total = progress._total || meta.totalItems;
+    const pct = Math.round((completed / total) * 100);
     if (completed > 0) {
       coursesStarted++;
       tasksCompleted += completed;
-      courseData.push({ id: courseId, name: meta.name, completed, total: meta.totalItems, pct });
+      courseData.push({ id: courseId, name: meta.name, completed, total, pct });
       if (pct >= 100) coursesCompleted++;
     }
   }
@@ -493,9 +521,16 @@ window.viewCourseResults = function(courseId) {
 
 function renderTestResultsContent(courseId) {
   const container = document.getElementById('tr-content');
-  const testResults = selectedStudent.testResults?.[courseId];
+  const testResults = selectedStudent.testResults || {};
 
-  if (!testResults || Object.keys(testResults).length === 0) {
+  // Results are stored as flat keys: "courseId_unitKey"
+  const prefix = courseId + '_';
+  const unitResults = Object.entries(testResults)
+    .filter(([k]) => k.startsWith(prefix))
+    .map(([k, v]) => [k.slice(prefix.length), v])
+    .sort(([a], [b]) => a.localeCompare(b));
+
+  if (unitResults.length === 0) {
     container.innerHTML = `
       <div class="empty-state" style="padding:3rem 0;">
         <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
@@ -507,10 +542,11 @@ function renderTestResultsContent(courseId) {
     return;
   }
 
-  const units = Object.entries(testResults).sort(([a], [b]) => a.localeCompare(b));
-
-  container.innerHTML = units.map(([unitKey, result]) => {
-    const scorePct = result.total > 0 ? Math.round((result.score / result.total) * 100) : 0;
+  container.innerHTML = unitResults.map(([unitKey, result]) => {
+    const scorePct = result.total > 0 ? Math.round((result.score / result.total) * 100) : null;
+    const scoreDisplay = result.score != null
+      ? (result.total ? `${result.score} / ${result.total} &nbsp;(${scorePct}%)` : `${result.score} pts`)
+      : 'Not graded';
     const answers = result.answers || {};
     const unitLabel = unitKey.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 
@@ -519,7 +555,7 @@ function renderTestResultsContent(courseId) {
         <div class="test-result-header">
           <h3>${unitLabel}</h3>
           <div class="test-result-meta">
-            <span class="test-score ${scorePct >= 70 ? 'pass' : 'fail'}">${result.score} / ${result.total} &nbsp;(${scorePct}%)</span>
+            <span class="test-score ${scorePct === null ? '' : scorePct >= 70 ? 'pass' : 'fail'}">${scoreDisplay}</span>
             <span class="test-date">${formatDate(result.submittedAt)}</span>
           </div>
         </div>

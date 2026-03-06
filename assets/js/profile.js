@@ -87,8 +87,9 @@ function displayDashboard(userData) {
     const metadata = courseMetadata[courseId];
     if (!metadata) continue;
     
-    const completedItems = Object.values(progress).filter(v => v === true).length;
-    const totalItems = metadata.totalItems;
+    const completedItems = Object.entries(progress)
+      .filter(([k, v]) => !k.startsWith('_') && v === true).length;
+    const totalItems = progress._total || metadata.totalItems;
     const percentage = Math.round((completedItems / totalItems) * 100);
     
     if (completedItems > 0) {

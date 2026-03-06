@@ -255,6 +255,24 @@ function generateCourseContent() {
 
     container.appendChild(section);
   });
+
+  // Save actual item count so progress displays use the real total
+  if (isApproved) {
+    const actualTotal = unitData.reduce((sum, unit) => sum + unit.content.length, 0);
+    saveCourseTotal(actualTotal);
+  }
+}
+
+// Store actual course total so profile/admin can use it instead of hardcoded values
+async function saveCourseTotal(total) {
+  if (!currentUser) return;
+  try {
+    await updateDoc(doc(db, 'users', currentUser.uid), {
+      [`courses.${courseId}._total`]: total
+    });
+  } catch (e) {
+    // Non-critical — progress display will fall back to hardcoded value
+  }
 }
 
 // Save progress to Firestore
