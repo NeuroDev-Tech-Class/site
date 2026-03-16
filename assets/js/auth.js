@@ -1,11 +1,12 @@
 // Authentication System for Tech Class
-import { 
-  auth, 
+import {
+  auth,
   db,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
+  sendEmailVerification,
   onAuthStateChanged,
   doc,
   setDoc,
@@ -159,6 +160,19 @@ function createAuthModal() {
         <p>You'll receive an email once your account has been approved. In the meantime, you can browse our course catalog.</p>
         <button type="button" class="auth-btn secondary" id="pending-ok">Got it</button>
       </div>
+
+      <!-- Verify Email Message -->
+      <div id="verify-email-form" class="auth-form">
+        <h2>Check Your Email</h2>
+        <div class="pending-icon">📧</div>
+        <p class="auth-subtitle">We sent a verification link to:</p>
+        <p><strong id="verify-email-address"></strong></p>
+        <p style="font-size:0.9rem;color:#666;">Click the link in that email to verify your account. Check your spam folder if you don't see it.</p>
+        <p style="font-size:0.85rem;color:#888;">Once verified, sign in and your account will be reviewed for approval.</p>
+        <div class="auth-links">
+          <button type="button" class="link-btn" id="back-to-login-from-verify">Back to Sign In</button>
+        </div>
+      </div>
     </div>
   `;
   
@@ -222,6 +236,7 @@ function setupModalListeners() {
   document.getElementById('show-forgot').addEventListener('click', () => showForm('forgot'));
   document.getElementById('back-to-login').addEventListener('click', () => showForm('login'));
   document.getElementById('pending-ok').addEventListener('click', closeAuthModal);
+  document.getElementById('back-to-login-from-verify').addEventListener('click', () => showForm('login'));
   
   // Form submissions
   document.getElementById('login-form-element').addEventListener('submit', handleLogin);
@@ -279,7 +294,16 @@ async function handleLogin(e) {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Signing in...';
 
-    await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+    // Block unverified users — resend verification email and show prompt
+    if (!userCredential.user.emailVerified) {
+      await sendEmailVerification(userCredential.user);
+      await signOut(auth);
+      document.getElementById('verify-email-address').textContent = email;
+      showForm('verify-email');
+      return;
+    }
 
     // Set or clear session expiry based on Remember Me
     if (rememberMe) {
@@ -339,12 +363,15 @@ async function handleRegister(e) {
     });
     
     if (isSuperAdmin) {
-      // Super admin is auto-approved, close modal and continue
+      // Super admin is auto-approved — still send verification for security
+      await sendEmailVerification(userCredential.user);
       closeAuthModal();
     } else {
-      // Sign out since they need approval
+      // Send verification email, then sign out pending admin approval
+      await sendEmailVerification(userCredential.user);
       await signOut(auth);
-      showForm('pending');
+      document.getElementById('verify-email-address').textContent = email;
+      showForm('verify-email');
     }
   } catch (error) {
     errorEl.textContent = getAuthErrorMessage(error.code);

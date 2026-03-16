@@ -618,6 +618,54 @@ window.deleteStudent = async function(studentId) {
   }
 };
 
+// ─── Certificate PDF Generation ──────────────────────────────────────────────
+
+async function generateCertificatePdf(studentName, courseName, awardDate) {
+  const { PDFDocument, StandardFonts, rgb } = await import('https://esm.sh/pdf-lib@1.17.1');
+
+  const templateBytes = await fetch('assets/pdfs/Certificate-Template.docx.pdf')
+    .then(r => r.arrayBuffer());
+  const pdfDoc = await PDFDocument.load(templateBytes);
+  const page = pdfDoc.getPages()[0];
+  const { width, height } = page.getSize();
+
+  const boldFont    = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+  const regularFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+  // Adjust the y values below to match where blank lines appear in your template.
+  // y=0 is the bottom edge; y=height is the top. Landscape letter: width≈792, height≈612.
+
+  const nameSize = 38;
+  const nameW = boldFont.widthOfTextAtSize(studentName, nameSize);
+  page.drawText(studentName, {
+    x: (width - nameW) / 2,
+    y: height * 0.47,   // ← move up/down to hit the name line
+    size: nameSize, font: boldFont, color: rgb(0.08, 0.08, 0.08)
+  });
+
+  const courseSize = 22;
+  const courseW = regularFont.widthOfTextAtSize(courseName, courseSize);
+  page.drawText(courseName, {
+    x: (width - courseW) / 2,
+    y: height * 0.36,   // ← move up/down to hit the course line
+    size: courseSize, font: regularFont, color: rgb(0.2, 0.2, 0.2)
+  });
+
+  const dateSize = 14;
+  const dateW = regularFont.widthOfTextAtSize(awardDate, dateSize);
+  page.drawText(awardDate, {
+    x: (width - dateW) / 2,
+    y: height * 0.27,   // ← move up/down to hit the date line
+    size: dateSize, font: regularFont, color: rgb(0.35, 0.35, 0.35)
+  });
+
+  const pdfBytes = await pdfDoc.save();
+  let binary = '';
+  const bytes = new Uint8Array(pdfBytes);
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary);
+}
+
 async function awardCertificate() {
   if (!selectedStudent) return;
 
@@ -635,26 +683,60 @@ async function awardCertificate() {
     return;
   }
 
+  const btn = document.getElementById('sv-award-cert-btn');
+  btn.disabled = true;
+  btn.textContent = 'Awarding...';
+
   try {
-    const newCert = {
-      courseId,
-      courseName,
-      awardedAt: new Date().toISOString()
-    };
+    const awardDate = new Date().toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+    const newCert = { courseId, courseName, awardedAt: new Date().toISOString() };
 
     await updateDoc(doc(db, 'users', selectedStudent.id), {
       certificates: [...existingCerts, newCert]
     });
-
     selectedStudent.certificates = [...existingCerts, newCert];
+
+    // Generate certificate PDF and email it
+    try {
+      btn.textContent = 'Generating PDF...';
+      const studentName = `${selectedStudent.firstName} ${selectedStudent.lastName}`;
+      const pdfBase64 = await generateCertificatePdf(studentName, courseName, awardDate);
+
+      await addDoc(collection(db, 'mail'), {
+        to: selectedStudent.email,
+        message: {
+          subject: `Your NeuroDev Certificate — ${courseName}`,
+          html: `
+            <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#222;">
+              <h2 style="color:#44aadd;margin-top:0;">Congratulations, ${selectedStudent.firstName}!</h2>
+              <p>You've earned a certificate of completion for <strong>${courseName}</strong>.</p>
+              <p>Your certificate is attached to this email. You can save or print it for your records.</p>
+              <p style="color:#666;font-size:0.9rem;">Keep up the great work — The NeuroDev Team</p>
+            </div>
+          `,
+          attachments: [{
+            filename: `NeuroDev-Certificate-${courseId}.pdf`,
+            content: pdfBase64,
+            encoding: 'base64'
+          }]
+        }
+      });
+    } catch (emailError) {
+      console.warn('Certificate email failed:', emailError);
+    }
+
     renderStudentView();
     updateStats();
     renderTables();
-
-    alert(`Certificate awarded for ${courseName}!`);
+    alert(`Certificate awarded for ${courseName}! An email has been sent to ${selectedStudent.email}.`);
   } catch (error) {
     console.error('Error awarding certificate:', error);
     alert('Failed to award certificate. Please try again.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Award Certificate';
   }
 }
 
