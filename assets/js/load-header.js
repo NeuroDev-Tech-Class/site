@@ -14,10 +14,12 @@ document.querySelector("header").innerHTML = `
 // Determine correct path for auth module based on environment
 const isLocalDev = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
 const basePath = isLocalDev && !window.location.pathname.includes('/site/') ? '' : '/site/';
-const authPath = basePath + 'assets/js/auth.js';
+
+// Build absolute URLs so dynamic imports never produce bare specifiers
+const authModuleUrl = new URL(basePath + 'assets/js/auth.js', document.baseURI).toString();
 
 // Load auth module after header is ready
-import(authPath).catch(err => console.error('Failed to load auth module:', err));
+import(authModuleUrl).catch(err => console.error('Failed to load auth module:', err));
 
 // Protect reading material pages — block content until approval is confirmed
 if (window.location.pathname.includes('/assets/pdfs/')) {
@@ -34,7 +36,8 @@ if (window.location.pathname.includes('/assets/pdfs/')) {
   overlay.textContent = 'Verifying access\u2026';
   document.body.appendChild(overlay);
 
-  import(basePath + 'assets/js/content-guard.js')
+  const contentGuardUrl = new URL(basePath + 'assets/js/content-guard.js', document.baseURI).toString();
+  import(contentGuardUrl)
     .then(({ requireApproval }) => requireApproval())
     .catch(() => window.location.replace(basePath + 'index.html'));
 }

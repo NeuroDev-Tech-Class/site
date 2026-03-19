@@ -14,8 +14,9 @@ import { auth, db, doc, getDoc, onAuthStateChanged } from './firebase-config.js'
  * @param {Function} [onApproved] - Optional callback run once access is confirmed.
  */
 export function requireApproval(onApproved) {
-  onAuthStateChanged(auth, async (user) => {
+  const unsubscribe = onAuthStateChanged(auth, async (user) => {
     if (!user) {
+      unsubscribe();
       window.location.replace('index.html');
       return;
     }
@@ -23,15 +24,18 @@ export function requireApproval(onApproved) {
     try {
       const snap = await getDoc(doc(db, 'users', user.uid));
       if (!snap.exists() || snap.data().status !== 'approved') {
+        unsubscribe();
         window.location.replace('index.html');
         return;
       }
     } catch {
+      unsubscribe();
       window.location.replace('index.html');
       return;
     }
 
-    // Access confirmed — reveal content
+    // Access confirmed — stop listening and reveal content
+    unsubscribe();
     document.getElementById('auth-guard-overlay')?.remove();
     if (onApproved) onApproved();
   });

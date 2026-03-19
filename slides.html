@@ -22,7 +22,7 @@
     <div id="footer-placeholder"></div>
     <script src="assets/js/load-footer.js" defer></script>
     <script type="module">
-      import { requireApproval } from 'assets/js/content-guard.js';
+      import { requireApproval } from '/site/assets/js/content-guard.js';
 
       const params = new URLSearchParams(window.location.search);
       const url   = params.get('url')   || '';
