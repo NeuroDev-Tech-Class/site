@@ -21,18 +21,28 @@
 
     <div id="footer-placeholder"></div>
     <script src="assets/js/load-footer.js" defer></script>
-    <script>
+    <script type="module">
+      import { requireApproval } from '/site/assets/js/content-guard.js';
+
       const params = new URLSearchParams(window.location.search);
-      const url = params.get('url') || '';
+      const url   = params.get('url')  || '';
       const title = params.get('title') || 'Test';
 
       document.getElementById('embed-title').textContent = title;
       document.title = title + ' — NeuroDev';
 
-      if (url) {
-        const base = url.split('?')[0];
-        document.getElementById('form-iframe').src = base + '?embedded=true';
-      }
+      // Iframe src is only set once the user is confirmed approved
+      requireApproval(() => {
+        if (!url) return;
+        let parsed;
+        try { parsed = new URL(url); } catch (e) { return; }
+        // Only allow Google Forms over HTTPS
+        if (parsed.protocol !== 'https:' ||
+            parsed.hostname !== 'docs.google.com' ||
+            !parsed.pathname.startsWith('/forms/')) return;
+        document.getElementById('form-iframe').src =
+          parsed.origin + parsed.pathname + '?embedded=true';
+      });
     </script>
   </body>
 </html>

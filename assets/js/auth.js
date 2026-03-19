@@ -6,7 +6,6 @@ import {
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
-  sendEmailVerification,
   onAuthStateChanged,
   doc,
   setDoc,
@@ -294,16 +293,7 @@ async function handleLogin(e) {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Signing in...';
 
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-
-    // Block unverified users — resend verification email and show prompt
-    if (!userCredential.user.emailVerified) {
-      await sendEmailVerification(userCredential.user);
-      await signOut(auth);
-      document.getElementById('verify-email-address').textContent = email;
-      showForm('verify-email');
-      return;
-    }
+    await signInWithEmailAndPassword(auth, email, password);
 
     // Set or clear session expiry based on Remember Me
     if (rememberMe) {
@@ -363,15 +353,11 @@ async function handleRegister(e) {
     });
     
     if (isSuperAdmin) {
-      // Super admin is auto-approved — still send verification for security
-      await sendEmailVerification(userCredential.user);
       closeAuthModal();
     } else {
-      // Send verification email, then sign out pending admin approval
-      await sendEmailVerification(userCredential.user);
+      // Sign out and show pending approval message
       await signOut(auth);
-      document.getElementById('verify-email-address').textContent = email;
-      showForm('verify-email');
+      showForm('pending');
     }
   } catch (error) {
     errorEl.textContent = getAuthErrorMessage(error.code);

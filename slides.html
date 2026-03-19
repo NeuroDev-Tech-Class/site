@@ -21,21 +21,26 @@
 
     <div id="footer-placeholder"></div>
     <script src="assets/js/load-footer.js" defer></script>
-    <script>
+    <script type="module">
+      import { requireApproval } from '/site/assets/js/content-guard.js';
+
       const params = new URLSearchParams(window.location.search);
-      const url = params.get('url') || '';
+      const url   = params.get('url')   || '';
       const title = params.get('title') || 'Slideshow';
 
       document.getElementById('embed-title').textContent = title;
       document.title = title + ' — NeuroDev';
 
-      if (url) {
-        const match = url.match(/\/presentation\/(?:u\/\d+\/)?d\/([a-zA-Z0-9_-]+)/);
-        if (match) {
-          document.getElementById('slides-iframe').src =
-            `https://docs.google.com/presentation/d/${match[1]}/embed?start=false&loop=false&delayms=5000`;
+      // Iframe src is only set once the user is confirmed approved
+      requireApproval(() => {
+        if (url) {
+          const match = url.match(/\/presentation\/(?:u\/\d+\/)?d\/([a-zA-Z0-9_-]+)/);
+          if (match) {
+            document.getElementById('slides-iframe').src =
+              `https://docs.google.com/presentation/d/${match[1]}/embed?start=false&loop=false&delayms=5000`;
+          }
         }
-      }
+      });
     </script>
   </body>
 </html>
