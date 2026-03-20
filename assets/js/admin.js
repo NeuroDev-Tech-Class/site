@@ -216,9 +216,9 @@ function renderCurrentTable() {
   tbody.innerHTML = current.map(student => {
     const progress = calculateOverallProgress(student);
     const certs = (student.certificates || []).length;
-    
+
     return `
-      <tr data-id="${student.id}">
+      <tr data-id="${student.id}" class="clickable-row" tabindex="0" role="button" aria-label="View ${student.firstName} ${student.lastName}" onclick="viewStudent('${student.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewStudent('${student.id}');}">
         <td>
           <div class="student-name">
             <strong>${student.firstName} ${student.lastName}</strong>
@@ -234,8 +234,7 @@ function renderCurrentTable() {
         <td>${certs} certificate${certs !== 1 ? 's' : ''}</td>
         <td>
           <div class="action-buttons">
-            <button class="action-btn view" onclick="viewStudent('${student.id}')">View</button>
-            <button class="action-btn toggle" onclick="toggleStudentType('${student.id}', 'old')">Move to Old</button>
+            <button class="action-btn toggle" onclick="event.stopPropagation(); toggleStudentType('${student.id}', 'old')">Move to Old</button>
           </div>
         </td>
       </tr>
@@ -262,9 +261,9 @@ function renderOldTable() {
   
   tbody.innerHTML = old.map(student => {
     const certs = (student.certificates || []).length;
-    
+
     return `
-      <tr data-id="${student.id}">
+      <tr data-id="${student.id}" class="clickable-row" tabindex="0" role="button" aria-label="View ${student.firstName} ${student.lastName}" onclick="viewStudent('${student.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewStudent('${student.id}');}">
         <td>
           <div class="student-name">
             <strong>${student.firstName} ${student.lastName}</strong>
@@ -274,9 +273,8 @@ function renderOldTable() {
         <td>${certs} certificate${certs !== 1 ? 's' : ''}</td>
         <td>
           <div class="action-buttons">
-            <button class="action-btn view" onclick="viewStudent('${student.id}')">View</button>
-            <button class="action-btn toggle" onclick="toggleStudentType('${student.id}', 'current')">Move to Current</button>
-            <button class="action-btn delete" onclick="deleteStudent('${student.id}')">Delete</button>
+            <button class="action-btn toggle" onclick="event.stopPropagation(); toggleStudentType('${student.id}', 'current')">Move to Current</button>
+            <button class="action-btn delete" onclick="event.stopPropagation(); deleteStudent('${student.id}')">Delete</button>
           </div>
         </td>
       </tr>
@@ -514,10 +512,73 @@ window.viewCourseResults = function(courseId) {
   document.getElementById('tr-course-name').textContent = meta ? meta.name : courseId;
   document.getElementById('tr-student-name').textContent =
     `${selectedStudent.firstName} ${selectedStudent.lastName}`;
-  renderTestResultsContent(courseId);
   document.getElementById('student-view').classList.remove('active');
   document.getElementById('test-results-view').classList.add('active');
+
+  // Clear stale content immediately then render test results without waiting for fetch
+  document.getElementById('tr-checklist').innerHTML = '';
+  document.getElementById('tr-content').innerHTML = '';
+  renderTestResultsContent(courseId);
+
+  // Fetch course structure in parallel; populate checklist when ready
+  fetchCourseStructure(courseId).then(unitData => {
+    if (!unitData || selectedCourseId !== courseId || !selectedStudent) return;
+    renderCourseChecklist(unitData, selectedStudent.courses?.[courseId] || {});
+  }).catch(() => {});
 };
+
+async function fetchCourseStructure(courseId) {
+  try {
+    const res = await fetch(new URL('courses/' + courseId + '.html', window.location.href));
+    if (!res.ok) return null;
+    const html = await res.text();
+    const parser = new DOMParser();
+    const parsed = parser.parseFromString(html, 'text/html');
+    const scriptEl = parsed.getElementById('unit-data');
+    if (!scriptEl) return null;
+    return JSON.parse(scriptEl.textContent);
+  } catch (e) {
+    return null;
+  }
+}
+
+function getItemType(item) {
+  if (item.type === 'video') return 'Video';
+  if (item.type === 'html') return 'Reading';
+  if (item.url?.includes('presentation')) return 'Slides';
+  if (item.url?.includes('/forms/')) return 'Test';
+  return 'Reading';
+}
+
+function renderCourseChecklist(unitData, progress) {
+  const container = document.getElementById('tr-checklist');
+  if (!unitData) { container.innerHTML = ''; return; }
+
+  container.innerHTML = `
+    <section class="dashboard-section checklist-section">
+      <h2>Course Items</h2>
+      ${unitData.map((unit, unitIndex) => `
+        <div class="checklist-unit">
+          <h3>${unit.title}</h3>
+          <div class="checklist-items">
+            ${unit.content.map((item, itemIndex) => {
+              const key = `${unitIndex}-${itemIndex}`;
+              const checked = progress[key] === true;
+              const type = getItemType(item);
+              return `
+                <div class="checklist-item ${checked ? 'checked' : ''}">
+                  <span class="checklist-status">${checked ? '✓' : '○'}</span>
+                  <span class="checklist-type-badge">${type}</span>
+                  <span class="checklist-title">${item.title}</span>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `).join('')}
+    </section>
+  `;
+}
 
 function renderTestResultsContent(courseId) {
   const container = document.getElementById('tr-content');
