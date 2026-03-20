@@ -1032,6 +1032,104 @@ body.dark-mode .answer-row {
   border-bottom-color: rgba(255, 255, 255, 0.05);
 }
 
+/* Clickable table rows */
+.students-table tbody tr.clickable-row {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.students-table tbody tr.clickable-row:hover {
+  background: rgba(68, 170, 221, 0.06);
+}
+
+body.dark-mode .students-table tbody tr.clickable-row:hover {
+  background: rgba(68, 170, 221, 0.1);
+}
+
+/* Course items checklist in test results view */
+.checklist-section {
+  margin-bottom: 2rem;
+}
+
+.checklist-unit {
+  margin-bottom: 1.5rem;
+}
+
+.checklist-unit h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #444;
+  margin: 0 0 0.5rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #eee;
+}
+
+body.dark-mode .checklist-unit h3 {
+  color: #ccc;
+  border-color: #333;
+}
+
+.checklist-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+body.dark-mode .checklist-item {
+  color: #aaa;
+}
+
+.checklist-item.checked {
+  color: #333;
+}
+
+body.dark-mode .checklist-item.checked {
+  color: #ddd;
+}
+
+.checklist-status {
+  font-size: 1rem;
+  width: 1.2rem;
+  text-align: center;
+  flex-shrink: 0;
+  color: #bbb;
+}
+
+.checklist-item.checked .checklist-status {
+  color: #2ecc71;
+}
+
+.checklist-type-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background: #eee;
+  color: #666;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+body.dark-mode .checklist-type-badge {
+  background: #333;
+  color: #aaa;
+}
+
+.checklist-title {
+  flex: 1;
+}
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .dashboard {
