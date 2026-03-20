@@ -218,7 +218,7 @@ function renderCurrentTable() {
     const certs = (student.certificates || []).length;
 
     return `
-      <tr data-id="${student.id}" class="clickable-row" onclick="viewStudent('${student.id}')">
+      <tr data-id="${student.id}" class="clickable-row" tabindex="0" role="button" aria-label="View ${student.firstName} ${student.lastName}" onclick="viewStudent('${student.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewStudent('${student.id}');}">
         <td>
           <div class="student-name">
             <strong>${student.firstName} ${student.lastName}</strong>
@@ -263,7 +263,7 @@ function renderOldTable() {
     const certs = (student.certificates || []).length;
 
     return `
-      <tr data-id="${student.id}" class="clickable-row" onclick="viewStudent('${student.id}')">
+      <tr data-id="${student.id}" class="clickable-row" tabindex="0" role="button" aria-label="View ${student.firstName} ${student.lastName}" onclick="viewStudent('${student.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewStudent('${student.id}');}">
         <td>
           <div class="student-name">
             <strong>${student.firstName} ${student.lastName}</strong>
@@ -505,7 +505,7 @@ function closeStudentView() {
 
 // ─── Test Results View ─────────────────────────────────────────────────────────
 
-window.viewCourseResults = async function(courseId) {
+window.viewCourseResults = function(courseId) {
   if (!selectedStudent) return;
   selectedCourseId = courseId;
   const meta = courseMetadata[courseId];
@@ -515,9 +515,16 @@ window.viewCourseResults = async function(courseId) {
   document.getElementById('student-view').classList.remove('active');
   document.getElementById('test-results-view').classList.add('active');
 
-  const unitData = await fetchCourseStructure(courseId);
-  renderCourseChecklist(unitData, selectedStudent.courses?.[courseId] || {});
+  // Clear stale content immediately then render test results without waiting for fetch
+  document.getElementById('tr-checklist').innerHTML = '';
+  document.getElementById('tr-content').innerHTML = '';
   renderTestResultsContent(courseId);
+
+  // Fetch course structure in parallel; populate checklist when ready
+  fetchCourseStructure(courseId).then(unitData => {
+    if (!unitData || selectedCourseId !== courseId || !selectedStudent) return;
+    renderCourseChecklist(unitData, selectedStudent.courses?.[courseId] || {});
+  }).catch(() => {});
 };
 
 async function fetchCourseStructure(courseId) {
