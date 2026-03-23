@@ -537,24 +537,21 @@ window.downloadCertificate = async function(certIndex) {
   try {
     const studentName = `${selectedStudent.firstName} ${selectedStudent.lastName}`;
     const certDate = cert.awardedAt ? new Date(cert.awardedAt) : new Date();
-    const awardDate = certDate.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
+    const fileName = buildCertificateFileName(cert.courseName, studentName);
+    const mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    const fileBase64 = await generateCertificateDocx(studentName, cert.courseName, certDate);
 
-    const pdfBase64 = await generateCertificatePdf(studentName, cert.courseName, awardDate);
-    const binary = atob(pdfBase64);
+    const binary = atob(fileBase64);
     const bytes = new Uint8Array(binary.length);
     for (let i = 0; i < binary.length; i++) {
       bytes[i] = binary.charCodeAt(i);
     }
 
-    const blob = new Blob([bytes], { type: 'application/pdf' });
+    const blob = new Blob([bytes], { type: mimeType });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `NeuroDev-Certificate-${cert.courseId || 'course'}.pdf`;
+    link.download = fileName;
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -860,6 +857,252 @@ window.deleteStudent = async function(studentId) {
 
 // ─── Certificate PDF Generation ──────────────────────────────────────────────
 
+function getOrdinalSuffix(day) {
+  const mod100 = day % 100;
+  if (mod100 >= 11 && mod100 <= 13) return 'th';
+  const mod10 = day % 10;
+  if (mod10 === 1) return 'st';
+  if (mod10 === 2) return 'nd';
+  if (mod10 === 3) return 'rd';
+  return 'th';
+}
+
+function formatCertificateDatePhrase(date) {
+  const day = date.getDate();
+  const month = date.toLocaleString('en-US', { month: 'long' });
+  const year = date.getFullYear();
+  return `Given this ${day}${getOrdinalSuffix(day)} day of ${month}, ${year},`;
+}
+
+function xmlEscape(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+function uint8ToBase64(bytes) {
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary);
+}
+
+function sanitizeFilePart(value) {
+  return String(value || '')
+    .trim()
+    .replace(/[\\/:*?"<>|]+/g, '')
+    .replace(/\s+/g, '_');
+}
+
+function buildCertificateFileName(courseName, studentName) {
+  const coursePart = sanitizeFilePart(courseName);
+  const studentPart = sanitizeFilePart(studentName);
+  return `Neurodev-${coursePart}-${studentPart}.docx`;
+}
+
+function base64ToUint8(base64) {
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return bytes;
+}
+
+async function generateCertificateDocx(studentName, courseName, awardDateObj) {
+  const { default: JSZip } = await import('https://esm.sh/jszip@3.10.1');
+
+  const templateBytes = await fetch('assets/pdfs/Certificate-Template.docx').then(r => {
+    if (!r.ok) throw new Error('DOCX template not found');
+    return r.arrayBuffer();
+  });
+
+  const zip = await JSZip.loadAsync(templateBytes);
+  const documentXmlFile = zip.file('word/document.xml');
+  if (!documentXmlFile) {
+    throw new Error('Invalid DOCX template: missing word/document.xml');
+  }
+
+  let documentXml = await documentXmlFile.async('string');
+  const day = awardDateObj.getDate();
+  const month = awardDateObj.toLocaleString('en-US', { month: 'long' });
+  const year = awardDateObj.getFullYear();
+  const ordinalDay = `${day}${getOrdinalSuffix(day)}`;
+
+  documentXml = documentXml.replace(/\[STUDENT NAME\]/g, xmlEscape(studentName));
+  documentXml = documentXml.replace(/\[COURSE\]/g, xmlEscape(courseName));
+  documentXml = documentXml.replace(
+    /Given this XXth day of Month,\s*20XX,/g,
+    xmlEscape(formatCertificateDatePhrase(awardDateObj))
+  );
+
+  // Fallback replacements in case date text is split differently.
+  documentXml = documentXml.replace(/XXth/g, xmlEscape(ordinalDay));
+  documentXml = documentXml.replace(/\bMonth\b/g, xmlEscape(month));
+  documentXml = documentXml.replace(/20XX/g, xmlEscape(String(year)));
+
+  zip.file('word/document.xml', documentXml);
+  const outputBytes = await zip.generateAsync({ type: 'uint8array' });
+  return uint8ToBase64(outputBytes);
+}
+
+async function generateCertificatePdfFromDocx(studentName, courseName, awardDateObj) {
+  const docxBase64 = await generateCertificateDocx(studentName, courseName, awardDateObj);
+  const docxBytes = base64ToUint8(docxBase64);
+
+  const [{ renderAsync }, html2canvasModule, { PDFDocument }] = await Promise.all([
+    import('https://esm.sh/docx-preview@0.3.3'),
+    import('https://esm.sh/html2canvas@1.4.1'),
+    import('https://esm.sh/pdf-lib@1.17.1')
+  ]);
+
+  const html2canvas = html2canvasModule.default || html2canvasModule;
+
+  const renderHost = document.createElement('div');
+  renderHost.style.position = 'fixed';
+  renderHost.style.left = '-100000px';
+  renderHost.style.top = '0';
+  renderHost.style.width = 'auto';
+  renderHost.style.background = '#ffffff';
+  renderHost.style.zIndex = '-1';
+  document.body.appendChild(renderHost);
+
+  try {
+    await renderAsync(docxBytes.buffer, renderHost, undefined, {
+      breakPages: true,
+      ignoreWidth: false,
+      ignoreHeight: false
+    });
+
+    const forceCenterLines = ['This certifies that', 'Executive Director'];
+    const signatureTitlePattern = /(director|instructor|coach|teacher|administrator|manager|president)/i;
+    const textNodes = renderHost.querySelectorAll('p, span, div');
+    textNodes.forEach(node => {
+      const text = node.textContent?.replace(/\s+/g, ' ').trim() || '';
+      if (!text) return;
+
+      if (text.includes('Executive Director') && text.includes('Lead Tech Coach')) {
+        node.textContent = '';
+        const left = document.createElement('span');
+        left.textContent = 'Executive Director';
+        left.style.textAlign = 'center';
+        left.style.width = '42%';
+
+        const right = document.createElement('span');
+        right.textContent = 'Lead Tech Coach';
+        right.style.textAlign = 'center';
+        right.style.width = '42%';
+
+        node.style.setProperty('display', 'flex', 'important');
+        node.style.setProperty('justify-content', 'space-between', 'important');
+        node.style.setProperty('align-items', 'center', 'important');
+        node.style.setProperty('width', '100%', 'important');
+        node.style.setProperty('gap', '2%', 'important');
+        node.appendChild(left);
+        node.appendChild(right);
+        return;
+      }
+
+      const isForcedLine = forceCenterLines.some(target => text.includes(target));
+      const isSignatureTitle = text.length <= 48 && signatureTitlePattern.test(text);
+      if (!isForcedLine && !isSignatureTitle) return;
+
+      node.style.setProperty('text-align', 'center', 'important');
+      node.style.setProperty('width', '100%', 'important');
+      node.style.setProperty('display', 'block', 'important');
+      node.style.setProperty('margin-left', 'auto', 'important');
+      node.style.setProperty('margin-right', 'auto', 'important');
+
+      const parent = node.parentElement;
+      if (parent) {
+        parent.style.setProperty('text-align', 'center', 'important');
+        parent.style.setProperty('justify-content', 'center', 'important');
+        parent.style.setProperty('width', '100%', 'important');
+      }
+    });
+
+    const renderTarget =
+      renderHost.querySelector('.docx-page') ||
+      renderHost.querySelector('.docx') ||
+      renderHost.firstElementChild ||
+      renderHost;
+
+    const targetWidth = Math.max(
+      Math.ceil(renderTarget.scrollWidth || 0),
+      Math.ceil(renderTarget.clientWidth || 0),
+      900
+    );
+    const targetHeight = Math.max(
+      Math.ceil(renderTarget.scrollHeight || 0),
+      Math.ceil(renderTarget.clientHeight || 0),
+      1200
+    );
+
+    renderHost.style.width = `${targetWidth}px`;
+    renderHost.style.minHeight = `${targetHeight}px`;
+    renderTarget.style.width = `${targetWidth}px`;
+    renderTarget.style.minHeight = `${targetHeight}px`;
+    renderTarget.style.background = '#ffffff';
+
+    await new Promise(resolve => requestAnimationFrame(resolve));
+
+    const canvas = await html2canvas(renderHost, {
+      scale: 1,
+      width: targetWidth,
+      height: targetHeight,
+      windowWidth: targetWidth,
+      windowHeight: targetHeight,
+      scrollX: 0,
+      scrollY: 0,
+      backgroundColor: '#ffffff',
+      useCORS: true,
+      logging: false
+    });
+
+    const tryEncode = (mime, quality) => {
+      try {
+        return canvas.toDataURL(mime, quality);
+      } catch {
+        return '';
+      }
+    };
+
+    let imageDataUrl = tryEncode('image/jpeg', 0.95);
+    let dataUrlMatch = imageDataUrl.match(/^data:(image\/(png|jpeg));base64,(.+)$/i);
+
+    if (!dataUrlMatch) {
+      imageDataUrl = tryEncode('image/png');
+      dataUrlMatch = imageDataUrl.match(/^data:(image\/(png|jpeg));base64,(.+)$/i);
+    }
+
+    if (!dataUrlMatch) {
+      throw new Error(`Certificate image encoding produced unexpected data format (canvas ${canvas.width}x${canvas.height}).`);
+    }
+    const imageMime = dataUrlMatch[1].toLowerCase();
+    const imageBytes = base64ToUint8(dataUrlMatch[3]);
+
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage([canvas.width, canvas.height]);
+    const embedded = imageMime === 'image/png'
+      ? await pdfDoc.embedPng(imageBytes)
+      : await pdfDoc.embedJpg(imageBytes);
+
+    page.drawImage(embedded, {
+      x: 0,
+      y: 0,
+      width: canvas.width,
+      height: canvas.height
+    });
+
+    const pdfBytes = await pdfDoc.save();
+    return uint8ToBase64(new Uint8Array(pdfBytes));
+  } finally {
+    renderHost.remove();
+  }
+}
+
 async function generateCertificatePdf(studentName, courseName, awardDate) {
   const { PDFDocument, StandardFonts, rgb } = await import('https://esm.sh/pdf-lib@1.17.1');
 
@@ -872,38 +1115,79 @@ async function generateCertificatePdf(studentName, courseName, awardDate) {
   const boldFont    = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
   const regularFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-  // Adjust the y values below to match where blank lines appear in your template.
-  // y=0 is the bottom edge; y=height is the top. Landscape letter: width≈792, height≈612.
+  const fitFontSize = (font, text, preferredSize, minSize, maxWidth) => {
+    let size = preferredSize;
+    while (size > minSize && font.widthOfTextAtSize(text, size) > maxWidth) {
+      size -= 1;
+    }
+    return size;
+  };
 
-  const nameSize = 38;
-  const nameW = boldFont.widthOfTextAtSize(studentName, nameSize);
-  page.drawText(studentName, {
-    x: (width - nameW) / 2,
-    y: height * 0.47,   // ← move up/down to hit the name line
-    size: nameSize, font: boldFont, color: rgb(0.08, 0.08, 0.08)
-  });
+  const drawCentered = (text, font, size, y, color) => {
+    const textWidth = font.widthOfTextAtSize(text, size);
+    page.drawText(text, {
+      x: (width - textWidth) / 2,
+      y,
+      size,
+      font,
+      color
+    });
+  };
 
-  const courseSize = 22;
-  const courseW = regularFont.widthOfTextAtSize(courseName, courseSize);
-  page.drawText(courseName, {
-    x: (width - courseW) / 2,
-    y: height * 0.36,   // ← move up/down to hit the course line
-    size: courseSize, font: regularFont, color: rgb(0.2, 0.2, 0.2)
-  });
+  const fillPdfFormFieldsIfAvailable = () => {
+    try {
+      const form = pdfDoc.getForm();
+      const fields = form.getFields();
+      if (!fields.length) return false;
 
-  const dateSize = 14;
-  const dateW = regularFont.widthOfTextAtSize(awardDate, dateSize);
-  page.drawText(awardDate, {
-    x: (width - dateW) / 2,
-    y: height * 0.27,   // ← move up/down to hit the date line
-    size: dateSize, font: regularFont, color: rgb(0.35, 0.35, 0.35)
-  });
+      const assignText = (patterns, value) => {
+        for (const field of fields) {
+          const fieldName = field.getName().toLowerCase();
+          if (!patterns.some(pattern => fieldName.includes(pattern))) continue;
+          if (typeof field.setText === 'function') {
+            field.setText(value);
+          }
+        }
+      };
+
+      assignText(['name', 'student'], studentName);
+      assignText(['course', 'class'], courseName);
+      assignText(['date', 'awarded', 'issued'], awardDate);
+
+      form.updateFieldAppearances(regularFont);
+      form.flatten();
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const usedFormFields = fillPdfFormFieldsIfAvailable();
+
+  if (!usedFormFields) {
+    // Fallback for non-editable templates: remove placeholder text zones, then place final values.
+    // This avoids visible placeholders while keeping output deterministic.
+    const nameBandY = height * 0.445;
+    const courseBandY = height * 0.34;
+    const dateBandY = height * 0.255;
+    const bandX = width * 0.12;
+    const bandW = width * 0.76;
+
+    page.drawRectangle({ x: bandX, y: nameBandY, width: bandW, height: 56, color: rgb(1, 1, 1) });
+    page.drawRectangle({ x: bandX, y: courseBandY, width: bandW, height: 40, color: rgb(1, 1, 1) });
+    page.drawRectangle({ x: bandX, y: dateBandY, width: bandW, height: 24, color: rgb(1, 1, 1) });
+
+    const nameSize = fitFontSize(boldFont, studentName, 38, 24, width * 0.72);
+    const courseSize = fitFontSize(regularFont, courseName, 22, 14, width * 0.72);
+    const dateSize = fitFontSize(regularFont, awardDate, 14, 11, width * 0.72);
+
+    drawCentered(studentName, boldFont, nameSize, height * 0.462, rgb(0.08, 0.08, 0.08));
+    drawCentered(courseName, regularFont, courseSize, height * 0.355, rgb(0.2, 0.2, 0.2));
+    drawCentered(awardDate, regularFont, dateSize, height * 0.265, rgb(0.35, 0.35, 0.35));
+  }
 
   const pdfBytes = await pdfDoc.save();
-  let binary = '';
-  const bytes = new Uint8Array(pdfBytes);
-  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
-  return btoa(binary);
+  return uint8ToBase64(new Uint8Array(pdfBytes));
 }
 
 async function awardCertificate() {
@@ -928,9 +1212,7 @@ async function awardCertificate() {
   btn.textContent = 'Awarding...';
 
   try {
-    const awardDate = new Date().toLocaleDateString('en-US', {
-      year: 'numeric', month: 'long', day: 'numeric'
-    });
+    const awardDateObj = new Date();
     const newCert = { courseId, courseName, awardedAt: new Date().toISOString() };
 
     await updateDoc(doc(db, 'users', selectedStudent.id), {
@@ -938,34 +1220,31 @@ async function awardCertificate() {
     });
     selectedStudent.certificates = [...existingCerts, newCert];
 
-    // Generate certificate PDF and email it
-    try {
-      btn.textContent = 'Generating PDF...';
-      const studentName = `${selectedStudent.firstName} ${selectedStudent.lastName}`;
-      const pdfBase64 = await generateCertificatePdf(studentName, courseName, awardDate);
+    // Generate certificate attachment and queue email
+    btn.textContent = 'Generating Certificate...';
+    const studentName = `${selectedStudent.firstName} ${selectedStudent.lastName}`;
+    const attachmentName = buildCertificateFileName(courseName, studentName);
+    const attachmentBase64 = await generateCertificateDocx(studentName, courseName, awardDateObj);
 
-      await addDoc(collection(db, 'mail'), {
-        to: selectedStudent.email,
-        message: {
-          subject: `Your NeuroDev Certificate — ${courseName}`,
-          html: `
-            <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#222;">
-              <h2 style="color:#44aadd;margin-top:0;">Congratulations, ${selectedStudent.firstName}!</h2>
-              <p>You've earned a certificate of completion for <strong>${courseName}</strong>.</p>
-              <p>Your certificate is attached to this email. You can save or print it for your records.</p>
-              <p style="color:#666;font-size:0.9rem;">Keep up the great work — The NeuroDev Team</p>
-            </div>
-          `,
-          attachments: [{
-            filename: `NeuroDev-Certificate-${courseId}.pdf`,
-            content: pdfBase64,
-            encoding: 'base64'
-          }]
-        }
-      });
-    } catch (emailError) {
-      console.warn('Certificate email failed:', emailError);
-    }
+    await addDoc(collection(db, 'mail'), {
+      to: selectedStudent.email,
+      message: {
+        subject: `Your NeuroDev Certificate — ${courseName}`,
+        html: `
+          <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#222;">
+            <h2 style="color:#44aadd;margin-top:0;">Congratulations, ${selectedStudent.firstName}!</h2>
+            <p>You've earned a certificate of completion for <strong>${courseName}</strong>.</p>
+            <p>Your certificate is attached to this email. You can save or print it for your records.</p>
+            <p style="color:#666;font-size:0.9rem;">Keep up the great work — The NeuroDev Team</p>
+          </div>
+        `,
+        attachments: [{
+          filename: attachmentName,
+          content: attachmentBase64,
+          encoding: 'base64'
+        }]
+      }
+    });
 
     renderStudentView();
     updateStats();
@@ -973,7 +1252,7 @@ async function awardCertificate() {
     alert(`Certificate awarded for ${courseName}! An email has been sent to ${selectedStudent.email}.`);
   } catch (error) {
     console.error('Error awarding certificate:', error);
-    alert('Failed to award certificate. Please try again.');
+    alert('Certificate generation/email failed. Please try again.');
   } finally {
     btn.disabled = false;
     btn.textContent = 'Award Certificate';
