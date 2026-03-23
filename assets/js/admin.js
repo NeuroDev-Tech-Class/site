@@ -7,6 +7,7 @@ import {
   getDoc,
   getDocs,
   addDoc,
+  setDoc,
   updateDoc,
   deleteDoc,
   collection,
@@ -413,11 +414,20 @@ function renderStudentView() {
     const completed = Object.entries(progress)
       .filter(([k, v]) => !k.startsWith('_') && v === true).length;
     const total = progress._total || meta.totalItems;
-    const pct = Math.round((completed / total) * 100);
+    const ungradedTests = countUngradedTestsForCourse(courseId, s.testResults || {});
+    const adjustedCompleted = Math.max(0, completed - ungradedTests);
+    const pct = total > 0 ? Math.round((adjustedCompleted / total) * 100) : 0;
     if (completed > 0) {
       coursesStarted++;
-      tasksCompleted += completed;
-      courseData.push({ id: courseId, name: meta.name, completed, total, pct });
+      tasksCompleted += adjustedCompleted;
+      courseData.push({
+        id: courseId,
+        name: meta.name,
+        completed: adjustedCompleted,
+        total,
+        pct,
+        ungradedTests
+      });
       if (pct >= 100) coursesCompleted++;
     }
   }
@@ -449,6 +459,7 @@ function renderStudentView() {
         <div class="course-info">
           <h3>${c.name}</h3>
           <span class="course-tasks">${c.completed} / ${c.total} tasks</span>
+          ${c.ungradedTests > 0 ? `<span class="course-grading-note">${c.ungradedTests} test${c.ungradedTests === 1 ? '' : 's'} still need grading</span>` : ''}
           <span class="view-results-hint">View test results →</span>
         </div>
         <div class="progress-ring-container">
@@ -478,7 +489,7 @@ function renderStudentView() {
       </div>
     `;
   } else {
-    certsContainer.innerHTML = certificates.map(cert => `
+    certsContainer.innerHTML = certificates.map((cert, index) => `
       <div class="certificate-card">
         <div class="certificate-badge">
           <svg viewBox="0 0 24 24" fill="currentColor">
@@ -488,6 +499,9 @@ function renderStudentView() {
         <div class="certificate-info">
           <h3>${cert.courseName}</h3>
           <span class="certificate-date">Awarded ${formatDate(cert.awardedAt)}</span>
+          <div class="certificate-actions">
+            <button class="action-btn cert certificate-download-btn" data-cert-index="${index}" onclick="downloadCertificate(${index})">Download / Print</button>
+          </div>
         </div>
       </div>
     `).join('');
@@ -502,6 +516,52 @@ function closeStudentView() {
   document.getElementById('dashboard-view').style.display = '';
   selectedStudent = null;
 }
+
+window.downloadCertificate = async function(certIndex) {
+  if (!selectedStudent) return;
+
+  const certificates = selectedStudent.certificates || [];
+  const cert = certificates[certIndex];
+  if (!cert) {
+    alert('Certificate not found.');
+    return;
+  }
+
+  const button = document.querySelector(`.certificate-download-btn[data-cert-index="${certIndex}"]`);
+  const originalText = button?.textContent;
+  if (button) {
+    button.disabled = true;
+    button.textContent = 'Preparing...';
+  }
+
+  try {
+    const studentName = `${selectedStudent.firstName} ${selectedStudent.lastName}`;
+    const certDate = cert.awardedAt ? new Date(cert.awardedAt) : new Date();
+    const fileName = buildCertificateFileName(cert.courseName, studentName);
+    const mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    const fileBase64 = await generateCertificateDocx(studentName, cert.courseName, certDate);
+
+    const bytes = base64ToUint8(fileBase64);
+
+    const blob = new Blob([bytes], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  } catch (error) {
+    console.error('Error downloading certificate:', error);
+    alert('Failed to download certificate. Please try again.');
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.textContent = originalText || 'Download / Print';
+    }
+  }
+};
 
 // ─── Test Results View ─────────────────────────────────────────────────────────
 
@@ -550,9 +610,43 @@ function getItemType(item) {
   return 'Reading';
 }
 
+function extractPlainTextFromHtml(html) {
+  if (!html || typeof html !== 'string') return '';
+  const temp = document.createElement('div');
+  temp.innerHTML = html;
+  return (temp.textContent || temp.innerText || '').replace(/\s+/g, ' ').trim();
+}
+
+function getChecklistItemTitle(item) {
+  if (typeof item?.title === 'string' && item.title.trim()) {
+    return item.title.trim();
+  }
+  if (item?.type === 'html') {
+    const plainText = extractPlainTextFromHtml(item.html);
+    if (plainText) return plainText;
+  }
+  return 'Untitled Task';
+}
+
+function countUngradedTestsForCourse(courseId, testResults) {
+  if (!courseId || !testResults) return 0;
+  const prefix = `${courseId}_`;
+  return Object.entries(testResults).filter(([key, result]) => {
+    if (!key.startsWith(prefix)) return false;
+    return result?.score === null || result?.score === undefined || result?.score === '';
+  }).length;
+}
+
 function renderCourseChecklist(unitData, progress) {
   const container = document.getElementById('tr-checklist');
   if (!unitData) { container.innerHTML = ''; return; }
+
+  const escapeHtml = (value) => String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 
   container.innerHTML = `
     <section class="dashboard-section checklist-section">
@@ -565,11 +659,13 @@ function renderCourseChecklist(unitData, progress) {
               const key = `${unitIndex}-${itemIndex}`;
               const checked = progress[key] === true;
               const type = getItemType(item);
+              const taskTitle = getChecklistItemTitle(item);
+              const safeTaskTitle = escapeHtml(taskTitle);
               return `
                 <div class="checklist-item ${checked ? 'checked' : ''}">
                   <span class="checklist-status">${checked ? '✓' : '○'}</span>
                   <span class="checklist-type-badge">${type}</span>
-                  <span class="checklist-title">${item.title}</span>
+                  <span class="checklist-title">${safeTaskTitle}</span>
                 </div>
               `;
             }).join('')}
@@ -588,8 +684,12 @@ function renderTestResultsContent(courseId) {
   const prefix = courseId + '_';
   const unitResults = Object.entries(testResults)
     .filter(([k]) => k.startsWith(prefix))
-    .map(([k, v]) => [k.slice(prefix.length), v])
-    .sort(([a], [b]) => a.localeCompare(b));
+    .map(([k, v]) => ({
+      fullKey: k,
+      unitKey: k.slice(prefix.length),
+      result: v
+    }))
+    .sort((a, b) => a.unitKey.localeCompare(b.unitKey));
 
   if (unitResults.length === 0) {
     container.innerHTML = `
@@ -603,13 +703,20 @@ function renderTestResultsContent(courseId) {
     return;
   }
 
-  container.innerHTML = unitResults.map(([unitKey, result]) => {
-    const scorePct = result.total > 0 ? Math.round((result.score / result.total) * 100) : null;
-    const scoreDisplay = result.score != null
-      ? (result.total ? `${result.score} / ${result.total} &nbsp;(${scorePct}%)` : `${result.score} pts`)
+  container.innerHTML = unitResults.map(({ fullKey, unitKey, result }) => {
+    const rawScore = result.score;
+    const hasScore = rawScore !== null && rawScore !== undefined && rawScore !== '';
+    const totalValue = Number.isFinite(Number(result.total)) ? Number(result.total) : null;
+    const scorePct = hasScore && totalValue > 0
+      ? Math.round((Number(rawScore) / totalValue) * 100)
+      : null;
+    const scoreDisplay = hasScore
+      ? (totalValue ? `${rawScore} / ${totalValue} &nbsp;(${scorePct}%)` : `${rawScore} pts`)
       : 'Not graded';
     const answers = result.answers || {};
     const unitLabel = unitKey.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    const scoreInputValue = hasScore && Number.isFinite(Number(rawScore)) ? Number(rawScore) : '';
+    const scoreInputId = `score-${fullKey.replace(/[^a-zA-Z0-9_-]/g, '-')}`;
 
     return `
       <div class="test-result-card">
@@ -618,6 +725,22 @@ function renderTestResultsContent(courseId) {
           <div class="test-result-meta">
             <span class="test-score ${scorePct === null ? '' : scorePct >= 70 ? 'pass' : 'fail'}">${scoreDisplay}</span>
             <span class="test-date">${formatDate(result.submittedAt)}</span>
+          </div>
+        </div>
+        <div class="grade-editor">
+          <label class="grade-label" for="${scoreInputId}">Grade</label>
+          <div class="grade-input-row">
+            <input
+              id="${scoreInputId}"
+              class="grade-input"
+              type="number"
+              min="0"
+              ${totalValue != null ? `max="${totalValue}"` : ''}
+              step="1"
+              value="${scoreInputValue}"
+            />
+            <span class="grade-total">${totalValue != null ? `/ ${totalValue}` : 'points'}</span>
+            <button class="action-btn approve grade-save-btn" data-test-key="${fullKey}">Save Score</button>
           </div>
         </div>
         ${Object.keys(answers).length > 0 ? `
@@ -634,10 +757,71 @@ function renderTestResultsContent(courseId) {
       </div>
     `;
   }).join('');
+
+  container.querySelectorAll('.grade-save-btn').forEach(btn => {
+    btn.addEventListener('click', () => saveTestScore(btn.dataset.testKey, btn));
+  });
+}
+
+async function saveTestScore(resultKey, buttonEl) {
+  if (!selectedStudent?.email || !resultKey) return;
+
+  const currentResult = selectedStudent.testResults?.[resultKey] || {};
+  const card = buttonEl.closest('.test-result-card');
+  const input = card?.querySelector('.grade-input');
+  if (!input) return;
+
+  const parsedScore = Number(input.value);
+  if (!Number.isFinite(parsedScore) || parsedScore < 0) {
+    alert('Enter a valid score of 0 or higher.');
+    input.focus();
+    return;
+  }
+
+  const total = Number(currentResult.total);
+  if (Number.isFinite(total) && parsedScore > total) {
+    alert(`Score cannot be higher than ${total}.`);
+    input.focus();
+    return;
+  }
+
+  const updatedResult = {
+    ...currentResult,
+    score: parsedScore,
+    gradedAt: new Date().toISOString(),
+    gradedBy: auth.currentUser?.uid || null
+  };
+
+  buttonEl.disabled = true;
+  const originalText = buttonEl.textContent;
+  buttonEl.textContent = 'Saving...';
+
+  try {
+    await setDoc(
+      doc(db, 'testResults', selectedStudent.email),
+      { [resultKey]: updatedResult },
+      { merge: true }
+    );
+
+    selectedStudent.testResults = {
+      ...(selectedStudent.testResults || {}),
+      [resultKey]: updatedResult
+    };
+
+    renderTestResultsContent(selectedCourseId);
+  } catch (error) {
+    console.error('Error saving test score:', error);
+    alert('Failed to save test score. Please try again.');
+    buttonEl.disabled = false;
+    buttonEl.textContent = originalText;
+  }
 }
 
 function closeTestResultsView() {
   document.getElementById('test-results-view').classList.remove('active');
+  if (selectedStudent) {
+    renderStudentView();
+  }
   document.getElementById('student-view').classList.add('active');
   selectedCourseId = null;
 }
@@ -681,6 +865,97 @@ window.deleteStudent = async function(studentId) {
 
 // ─── Certificate PDF Generation ──────────────────────────────────────────────
 
+function getOrdinalSuffix(day) {
+  const mod100 = day % 100;
+  if (mod100 >= 11 && mod100 <= 13) return 'th';
+  const mod10 = day % 10;
+  if (mod10 === 1) return 'st';
+  if (mod10 === 2) return 'nd';
+  if (mod10 === 3) return 'rd';
+  return 'th';
+}
+
+function formatCertificateDatePhrase(date) {
+  const day = date.getDate();
+  const month = date.toLocaleString('en-US', { month: 'long' });
+  const year = date.getFullYear();
+  return `Given this ${day}${getOrdinalSuffix(day)} day of ${month}, ${year},`;
+}
+
+function xmlEscape(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+function uint8ToBase64(bytes) {
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary);
+}
+
+function sanitizeFilePart(value) {
+  return String(value || '')
+    .trim()
+    .replace(/[\\/:*?"<>|]+/g, '')
+    .replace(/\s+/g, '_');
+}
+
+function buildCertificateFileName(courseName, studentName) {
+  const coursePart = sanitizeFilePart(courseName);
+  const studentPart = sanitizeFilePart(studentName);
+  return `NeuroDev-${coursePart}-${studentPart}.docx`;
+}
+
+function base64ToUint8(base64) {
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return bytes;
+}
+
+async function generateCertificateDocx(studentName, courseName, awardDateObj) {
+  const { default: JSZip } = await import('https://esm.sh/jszip@3.10.1');
+
+  const templateBytes = await fetch('assets/pdfs/Certificate-Template.docx').then(r => {
+    if (!r.ok) throw new Error('DOCX template not found');
+    return r.arrayBuffer();
+  });
+
+  const zip = await JSZip.loadAsync(templateBytes);
+  const documentXmlFile = zip.file('word/document.xml');
+  if (!documentXmlFile) {
+    throw new Error('Invalid DOCX template: missing word/document.xml');
+  }
+
+  let documentXml = await documentXmlFile.async('string');
+  const day = awardDateObj.getDate();
+  const month = awardDateObj.toLocaleString('en-US', { month: 'long' });
+  const year = awardDateObj.getFullYear();
+  const ordinalDay = `${day}${getOrdinalSuffix(day)}`;
+
+  documentXml = documentXml.replace(/\[STUDENT NAME\]/g, xmlEscape(studentName));
+  documentXml = documentXml.replace(/\[COURSE\]/g, xmlEscape(courseName));
+  documentXml = documentXml.replace(
+    /Given this XXth day of Month,\s*20XX,/g,
+    xmlEscape(formatCertificateDatePhrase(awardDateObj))
+  );
+
+  // Fallback replacements in case date text is split differently.
+  documentXml = documentXml.replace(/XXth/g, xmlEscape(ordinalDay));
+  documentXml = documentXml.replace(/\bMonth\b/g, xmlEscape(month));
+  documentXml = documentXml.replace(/20XX/g, xmlEscape(String(year)));
+
+  zip.file('word/document.xml', documentXml);
+  const outputBytes = await zip.generateAsync({ type: 'uint8array' });
+  return uint8ToBase64(outputBytes);
+}
+
 async function generateCertificatePdf(studentName, courseName, awardDate) {
   const { PDFDocument, StandardFonts, rgb } = await import('https://esm.sh/pdf-lib@1.17.1');
 
@@ -693,38 +968,79 @@ async function generateCertificatePdf(studentName, courseName, awardDate) {
   const boldFont    = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
   const regularFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-  // Adjust the y values below to match where blank lines appear in your template.
-  // y=0 is the bottom edge; y=height is the top. Landscape letter: width≈792, height≈612.
+  const fitFontSize = (font, text, preferredSize, minSize, maxWidth) => {
+    let size = preferredSize;
+    while (size > minSize && font.widthOfTextAtSize(text, size) > maxWidth) {
+      size -= 1;
+    }
+    return size;
+  };
 
-  const nameSize = 38;
-  const nameW = boldFont.widthOfTextAtSize(studentName, nameSize);
-  page.drawText(studentName, {
-    x: (width - nameW) / 2,
-    y: height * 0.47,   // ← move up/down to hit the name line
-    size: nameSize, font: boldFont, color: rgb(0.08, 0.08, 0.08)
-  });
+  const drawCentered = (text, font, size, y, color) => {
+    const textWidth = font.widthOfTextAtSize(text, size);
+    page.drawText(text, {
+      x: (width - textWidth) / 2,
+      y,
+      size,
+      font,
+      color
+    });
+  };
 
-  const courseSize = 22;
-  const courseW = regularFont.widthOfTextAtSize(courseName, courseSize);
-  page.drawText(courseName, {
-    x: (width - courseW) / 2,
-    y: height * 0.36,   // ← move up/down to hit the course line
-    size: courseSize, font: regularFont, color: rgb(0.2, 0.2, 0.2)
-  });
+  const fillPdfFormFieldsIfAvailable = () => {
+    try {
+      const form = pdfDoc.getForm();
+      const fields = form.getFields();
+      if (!fields.length) return false;
 
-  const dateSize = 14;
-  const dateW = regularFont.widthOfTextAtSize(awardDate, dateSize);
-  page.drawText(awardDate, {
-    x: (width - dateW) / 2,
-    y: height * 0.27,   // ← move up/down to hit the date line
-    size: dateSize, font: regularFont, color: rgb(0.35, 0.35, 0.35)
-  });
+      const assignText = (patterns, value) => {
+        for (const field of fields) {
+          const fieldName = field.getName().toLowerCase();
+          if (!patterns.some(pattern => fieldName.includes(pattern))) continue;
+          if (typeof field.setText === 'function') {
+            field.setText(value);
+          }
+        }
+      };
+
+      assignText(['name', 'student'], studentName);
+      assignText(['course', 'class'], courseName);
+      assignText(['date', 'awarded', 'issued'], awardDate);
+
+      form.updateFieldAppearances(regularFont);
+      form.flatten();
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const usedFormFields = fillPdfFormFieldsIfAvailable();
+
+  if (!usedFormFields) {
+    // Fallback for non-editable templates: remove placeholder text zones, then place final values.
+    // This avoids visible placeholders while keeping output deterministic.
+    const nameBandY = height * 0.445;
+    const courseBandY = height * 0.34;
+    const dateBandY = height * 0.255;
+    const bandX = width * 0.12;
+    const bandW = width * 0.76;
+
+    page.drawRectangle({ x: bandX, y: nameBandY, width: bandW, height: 56, color: rgb(1, 1, 1) });
+    page.drawRectangle({ x: bandX, y: courseBandY, width: bandW, height: 40, color: rgb(1, 1, 1) });
+    page.drawRectangle({ x: bandX, y: dateBandY, width: bandW, height: 24, color: rgb(1, 1, 1) });
+
+    const nameSize = fitFontSize(boldFont, studentName, 38, 24, width * 0.72);
+    const courseSize = fitFontSize(regularFont, courseName, 22, 14, width * 0.72);
+    const dateSize = fitFontSize(regularFont, awardDate, 14, 11, width * 0.72);
+
+    drawCentered(studentName, boldFont, nameSize, height * 0.462, rgb(0.08, 0.08, 0.08));
+    drawCentered(courseName, regularFont, courseSize, height * 0.355, rgb(0.2, 0.2, 0.2));
+    drawCentered(awardDate, regularFont, dateSize, height * 0.265, rgb(0.35, 0.35, 0.35));
+  }
 
   const pdfBytes = await pdfDoc.save();
-  let binary = '';
-  const bytes = new Uint8Array(pdfBytes);
-  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
-  return btoa(binary);
+  return uint8ToBase64(new Uint8Array(pdfBytes));
 }
 
 async function awardCertificate() {
@@ -749,9 +1065,7 @@ async function awardCertificate() {
   btn.textContent = 'Awarding...';
 
   try {
-    const awardDate = new Date().toLocaleDateString('en-US', {
-      year: 'numeric', month: 'long', day: 'numeric'
-    });
+    const awardDateObj = new Date();
     const newCert = { courseId, courseName, awardedAt: new Date().toISOString() };
 
     await updateDoc(doc(db, 'users', selectedStudent.id), {
@@ -759,34 +1073,31 @@ async function awardCertificate() {
     });
     selectedStudent.certificates = [...existingCerts, newCert];
 
-    // Generate certificate PDF and email it
-    try {
-      btn.textContent = 'Generating PDF...';
-      const studentName = `${selectedStudent.firstName} ${selectedStudent.lastName}`;
-      const pdfBase64 = await generateCertificatePdf(studentName, courseName, awardDate);
+    // Generate certificate attachment and queue email
+    btn.textContent = 'Generating Certificate...';
+    const studentName = `${selectedStudent.firstName} ${selectedStudent.lastName}`;
+    const attachmentName = buildCertificateFileName(courseName, studentName);
+    const attachmentBase64 = await generateCertificateDocx(studentName, courseName, awardDateObj);
 
-      await addDoc(collection(db, 'mail'), {
-        to: selectedStudent.email,
-        message: {
-          subject: `Your NeuroDev Certificate — ${courseName}`,
-          html: `
-            <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#222;">
-              <h2 style="color:#44aadd;margin-top:0;">Congratulations, ${selectedStudent.firstName}!</h2>
-              <p>You've earned a certificate of completion for <strong>${courseName}</strong>.</p>
-              <p>Your certificate is attached to this email. You can save or print it for your records.</p>
-              <p style="color:#666;font-size:0.9rem;">Keep up the great work — The NeuroDev Team</p>
-            </div>
-          `,
-          attachments: [{
-            filename: `NeuroDev-Certificate-${courseId}.pdf`,
-            content: pdfBase64,
-            encoding: 'base64'
-          }]
-        }
-      });
-    } catch (emailError) {
-      console.warn('Certificate email failed:', emailError);
-    }
+    await addDoc(collection(db, 'mail'), {
+      to: selectedStudent.email,
+      message: {
+        subject: `Your NeuroDev Certificate — ${courseName}`,
+        html: `
+          <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#222;">
+            <h2 style="color:#44aadd;margin-top:0;">Congratulations, ${selectedStudent.firstName}!</h2>
+            <p>You've earned a certificate of completion for <strong>${courseName}</strong>.</p>
+            <p>Your certificate is attached to this email. You can save or print it for your records.</p>
+            <p style="color:#666;font-size:0.9rem;">Keep up the great work — The NeuroDev Team</p>
+          </div>
+        `,
+        attachments: [{
+          filename: attachmentName,
+          content: attachmentBase64,
+          encoding: 'base64'
+        }]
+      }
+    });
 
     renderStudentView();
     updateStats();
@@ -794,7 +1105,7 @@ async function awardCertificate() {
     alert(`Certificate awarded for ${courseName}! An email has been sent to ${selectedStudent.email}.`);
   } catch (error) {
     console.error('Error awarding certificate:', error);
-    alert('Failed to award certificate. Please try again.');
+    alert('Certificate generation/email failed. Please try again.');
   } finally {
     btn.disabled = false;
     btn.textContent = 'Award Certificate';
@@ -838,11 +1149,12 @@ function injectAdminTab() {
             <th>Name</th>
             <th>Email</th>
             <th>Date Added</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody id="admins-tbody">
           <tr>
-            <td colspan="3" class="loading-state">
+            <td colspan="4" class="loading-state">
               <div class="spinner"></div>
               <p>Loading...</p>
             </td>
@@ -898,7 +1210,7 @@ function renderAdminsTable() {
   if (allAdmins.length === 0) {
     tbody.innerHTML = `
       <tr>
-        <td colspan="3" class="empty-state">
+        <td colspan="4" class="empty-state">
           <p>No other admins yet. Use <strong>+ Add Admin</strong> to promote a student.</p>
         </td>
       </tr>
@@ -915,6 +1227,9 @@ function renderAdminsTable() {
       </td>
       <td><span class="student-email">${admin.email}</span></td>
       <td>${formatDate(admin.createdAt)}</td>
+      <td>
+        <button class="action-btn deny" onclick="removeAdmin('${admin.id}')">Remove Admin</button>
+      </td>
     </tr>
   `).join('');
 }
@@ -970,5 +1285,41 @@ window.promoteToAdmin = async function(studentId) {
   } catch (error) {
     console.error('Error promoting student to admin:', error);
     alert('Failed to promote student. Please try again.');
+  }
+};
+
+window.removeAdmin = async function(adminId) {
+  const admin = allAdmins.find(a => a.id === adminId);
+  if (!admin) return;
+
+  if (!confirm(`Remove admin access for ${admin.firstName} ${admin.lastName}?\n\nThey will become a student account.`)) {
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, 'users', adminId), {
+      role: 'student',
+      status: admin.status || 'approved',
+      studentType: admin.studentType || 'current'
+    });
+
+    allAdmins = allAdmins.filter(a => a.id !== adminId);
+
+    if (!allStudents.some(s => s.id === adminId)) {
+      allStudents.push({
+        ...admin,
+        role: 'student',
+        status: admin.status || 'approved',
+        studentType: admin.studentType || 'current'
+      });
+    }
+
+    updateStats();
+    renderTables();
+    renderAdminsTable();
+    renderAddAdminList();
+  } catch (error) {
+    console.error('Error removing admin access:', error);
+    alert('Failed to remove admin access. Please try again.');
   }
 };
