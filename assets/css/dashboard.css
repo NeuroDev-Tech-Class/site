@@ -173,7 +173,18 @@ body.dark-mode .stat-label {
   color: #666;
 }
 
+.course-grading-note {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.78rem;
+  color: #666;
+}
+
 body.dark-mode .course-tasks {
+  color: #aaa;
+}
+
+body.dark-mode .course-grading-note {
   color: #aaa;
 }
 
@@ -266,6 +277,11 @@ body.dark-mode .certificate-card {
   color: var(--text-color);
 }
 
+.certificate-info {
+  flex: 1;
+  min-width: 0;
+}
+
 .certificate-date {
   font-size: 0.85rem;
   color: #666;
@@ -273,6 +289,14 @@ body.dark-mode .certificate-card {
 
 body.dark-mode .certificate-date {
   color: #aaa;
+}
+
+.certificate-actions {
+  margin-top: 0.75rem;
+}
+
+.certificate-download-btn {
+  width: auto;
 }
 
 /* Empty State */
@@ -979,6 +1003,50 @@ body.dark-mode .test-score.fail {
 .test-date {
   font-size: 0.82rem;
   color: #888;
+}
+
+.grade-editor {
+  margin-bottom: 1rem;
+}
+
+.grade-label {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  font-size: 0.82rem;
+  color: #666;
+}
+
+body.dark-mode .grade-label {
+  color: #aaa;
+}
+
+.grade-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.grade-input {
+  width: 90px;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+body.dark-mode .grade-input {
+  border-color: #444;
+}
+
+.grade-total {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+body.dark-mode .grade-total {
+  color: #aaa;
 }
 
 .test-answers {

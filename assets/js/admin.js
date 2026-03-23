@@ -7,6 +7,7 @@ import {
   getDoc,
   getDocs,
   addDoc,
+  setDoc,
   updateDoc,
   deleteDoc,
   collection,
@@ -413,11 +414,20 @@ function renderStudentView() {
     const completed = Object.entries(progress)
       .filter(([k, v]) => !k.startsWith('_') && v === true).length;
     const total = progress._total || meta.totalItems;
-    const pct = Math.round((completed / total) * 100);
+    const ungradedTests = countUngradedTestsForCourse(courseId, s.testResults || {});
+    const adjustedCompleted = Math.max(0, completed - ungradedTests);
+    const pct = total > 0 ? Math.round((adjustedCompleted / total) * 100) : 0;
     if (completed > 0) {
       coursesStarted++;
-      tasksCompleted += completed;
-      courseData.push({ id: courseId, name: meta.name, completed, total, pct });
+      tasksCompleted += adjustedCompleted;
+      courseData.push({
+        id: courseId,
+        name: meta.name,
+        completed: adjustedCompleted,
+        total,
+        pct,
+        ungradedTests
+      });
       if (pct >= 100) coursesCompleted++;
     }
   }
@@ -449,6 +459,7 @@ function renderStudentView() {
         <div class="course-info">
           <h3>${c.name}</h3>
           <span class="course-tasks">${c.completed} / ${c.total} tasks</span>
+          ${c.ungradedTests > 0 ? `<span class="course-grading-note">${c.ungradedTests} test${c.ungradedTests === 1 ? '' : 's'} still need grading</span>` : ''}
           <span class="view-results-hint">View test results →</span>
         </div>
         <div class="progress-ring-container">
@@ -478,7 +489,7 @@ function renderStudentView() {
       </div>
     `;
   } else {
-    certsContainer.innerHTML = certificates.map(cert => `
+    certsContainer.innerHTML = certificates.map((cert, index) => `
       <div class="certificate-card">
         <div class="certificate-badge">
           <svg viewBox="0 0 24 24" fill="currentColor">
@@ -488,6 +499,9 @@ function renderStudentView() {
         <div class="certificate-info">
           <h3>${cert.courseName}</h3>
           <span class="certificate-date">Awarded ${formatDate(cert.awardedAt)}</span>
+          <div class="certificate-actions">
+            <button class="action-btn cert certificate-download-btn" data-cert-index="${index}" onclick="downloadCertificate(${index})">Download / Print</button>
+          </div>
         </div>
       </div>
     `).join('');
@@ -502,6 +516,59 @@ function closeStudentView() {
   document.getElementById('dashboard-view').style.display = '';
   selectedStudent = null;
 }
+
+window.downloadCertificate = async function(certIndex) {
+  if (!selectedStudent) return;
+
+  const certificates = selectedStudent.certificates || [];
+  const cert = certificates[certIndex];
+  if (!cert) {
+    alert('Certificate not found.');
+    return;
+  }
+
+  const button = document.querySelector(`.certificate-download-btn[data-cert-index="${certIndex}"]`);
+  const originalText = button?.textContent;
+  if (button) {
+    button.disabled = true;
+    button.textContent = 'Preparing...';
+  }
+
+  try {
+    const studentName = `${selectedStudent.firstName} ${selectedStudent.lastName}`;
+    const certDate = cert.awardedAt ? new Date(cert.awardedAt) : new Date();
+    const awardDate = certDate.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    const pdfBase64 = await generateCertificatePdf(studentName, cert.courseName, awardDate);
+    const binary = atob(pdfBase64);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+
+    const blob = new Blob([bytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `NeuroDev-Certificate-${cert.courseId || 'course'}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  } catch (error) {
+    console.error('Error downloading certificate:', error);
+    alert('Failed to download certificate. Please try again.');
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.textContent = originalText || 'Download / Print';
+    }
+  }
+};
 
 // ─── Test Results View ─────────────────────────────────────────────────────────
 
@@ -550,6 +617,33 @@ function getItemType(item) {
   return 'Reading';
 }
 
+function extractPlainTextFromHtml(html) {
+  if (!html || typeof html !== 'string') return '';
+  const temp = document.createElement('div');
+  temp.innerHTML = html;
+  return (temp.textContent || temp.innerText || '').replace(/\s+/g, ' ').trim();
+}
+
+function getChecklistItemTitle(item) {
+  if (typeof item?.title === 'string' && item.title.trim()) {
+    return item.title.trim();
+  }
+  if (item?.type === 'html') {
+    const plainText = extractPlainTextFromHtml(item.html);
+    if (plainText) return plainText;
+  }
+  return 'Untitled Task';
+}
+
+function countUngradedTestsForCourse(courseId, testResults) {
+  if (!courseId || !testResults) return 0;
+  const prefix = `${courseId}_`;
+  return Object.entries(testResults).filter(([key, result]) => {
+    if (!key.startsWith(prefix)) return false;
+    return result?.score === null || result?.score === undefined || result?.score === '';
+  }).length;
+}
+
 function renderCourseChecklist(unitData, progress) {
   const container = document.getElementById('tr-checklist');
   if (!unitData) { container.innerHTML = ''; return; }
@@ -565,11 +659,12 @@ function renderCourseChecklist(unitData, progress) {
               const key = `${unitIndex}-${itemIndex}`;
               const checked = progress[key] === true;
               const type = getItemType(item);
+              const taskTitle = getChecklistItemTitle(item);
               return `
                 <div class="checklist-item ${checked ? 'checked' : ''}">
                   <span class="checklist-status">${checked ? '✓' : '○'}</span>
                   <span class="checklist-type-badge">${type}</span>
-                  <span class="checklist-title">${item.title}</span>
+                  <span class="checklist-title">${taskTitle}</span>
                 </div>
               `;
             }).join('')}
@@ -588,8 +683,12 @@ function renderTestResultsContent(courseId) {
   const prefix = courseId + '_';
   const unitResults = Object.entries(testResults)
     .filter(([k]) => k.startsWith(prefix))
-    .map(([k, v]) => [k.slice(prefix.length), v])
-    .sort(([a], [b]) => a.localeCompare(b));
+    .map(([k, v]) => ({
+      fullKey: k,
+      unitKey: k.slice(prefix.length),
+      result: v
+    }))
+    .sort((a, b) => a.unitKey.localeCompare(b.unitKey));
 
   if (unitResults.length === 0) {
     container.innerHTML = `
@@ -603,13 +702,16 @@ function renderTestResultsContent(courseId) {
     return;
   }
 
-  container.innerHTML = unitResults.map(([unitKey, result]) => {
+  container.innerHTML = unitResults.map(({ fullKey, unitKey, result }) => {
     const scorePct = result.total > 0 ? Math.round((result.score / result.total) * 100) : null;
     const scoreDisplay = result.score != null
       ? (result.total ? `${result.score} / ${result.total} &nbsp;(${scorePct}%)` : `${result.score} pts`)
       : 'Not graded';
     const answers = result.answers || {};
     const unitLabel = unitKey.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    const scoreInputValue = Number.isFinite(Number(result.score)) ? Number(result.score) : '';
+    const totalValue = Number.isFinite(Number(result.total)) ? Number(result.total) : null;
+    const scoreInputId = `score-${fullKey.replace(/[^a-zA-Z0-9_-]/g, '-')}`;
 
     return `
       <div class="test-result-card">
@@ -618,6 +720,22 @@ function renderTestResultsContent(courseId) {
           <div class="test-result-meta">
             <span class="test-score ${scorePct === null ? '' : scorePct >= 70 ? 'pass' : 'fail'}">${scoreDisplay}</span>
             <span class="test-date">${formatDate(result.submittedAt)}</span>
+          </div>
+        </div>
+        <div class="grade-editor">
+          <label class="grade-label" for="${scoreInputId}">Grade</label>
+          <div class="grade-input-row">
+            <input
+              id="${scoreInputId}"
+              class="grade-input"
+              type="number"
+              min="0"
+              ${totalValue != null ? `max="${totalValue}"` : ''}
+              step="1"
+              value="${scoreInputValue}"
+            />
+            <span class="grade-total">${totalValue != null ? `/ ${totalValue}` : 'points'}</span>
+            <button class="action-btn approve grade-save-btn" data-test-key="${fullKey}">Save Score</button>
           </div>
         </div>
         ${Object.keys(answers).length > 0 ? `
@@ -634,10 +752,71 @@ function renderTestResultsContent(courseId) {
       </div>
     `;
   }).join('');
+
+  container.querySelectorAll('.grade-save-btn').forEach(btn => {
+    btn.addEventListener('click', () => saveTestScore(btn.dataset.testKey, btn));
+  });
+}
+
+async function saveTestScore(resultKey, buttonEl) {
+  if (!selectedStudent?.email || !resultKey) return;
+
+  const currentResult = selectedStudent.testResults?.[resultKey] || {};
+  const card = buttonEl.closest('.test-result-card');
+  const input = card?.querySelector('.grade-input');
+  if (!input) return;
+
+  const parsedScore = Number(input.value);
+  if (!Number.isFinite(parsedScore) || parsedScore < 0) {
+    alert('Enter a valid score of 0 or higher.');
+    input.focus();
+    return;
+  }
+
+  const total = Number(currentResult.total);
+  if (Number.isFinite(total) && parsedScore > total) {
+    alert(`Score cannot be higher than ${total}.`);
+    input.focus();
+    return;
+  }
+
+  const updatedResult = {
+    ...currentResult,
+    score: parsedScore,
+    gradedAt: new Date().toISOString(),
+    gradedBy: auth.currentUser?.uid || null
+  };
+
+  buttonEl.disabled = true;
+  const originalText = buttonEl.textContent;
+  buttonEl.textContent = 'Saving...';
+
+  try {
+    await setDoc(
+      doc(db, 'testResults', selectedStudent.email),
+      { [resultKey]: updatedResult },
+      { merge: true }
+    );
+
+    selectedStudent.testResults = {
+      ...(selectedStudent.testResults || {}),
+      [resultKey]: updatedResult
+    };
+
+    renderTestResultsContent(selectedCourseId);
+  } catch (error) {
+    console.error('Error saving test score:', error);
+    alert('Failed to save test score. Please try again.');
+    buttonEl.disabled = false;
+    buttonEl.textContent = originalText;
+  }
 }
 
 function closeTestResultsView() {
   document.getElementById('test-results-view').classList.remove('active');
+  if (selectedStudent) {
+    renderStudentView();
+  }
   document.getElementById('student-view').classList.add('active');
   selectedCourseId = null;
 }
@@ -838,11 +1017,12 @@ function injectAdminTab() {
             <th>Name</th>
             <th>Email</th>
             <th>Date Added</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody id="admins-tbody">
           <tr>
-            <td colspan="3" class="loading-state">
+            <td colspan="4" class="loading-state">
               <div class="spinner"></div>
               <p>Loading...</p>
             </td>
@@ -898,7 +1078,7 @@ function renderAdminsTable() {
   if (allAdmins.length === 0) {
     tbody.innerHTML = `
       <tr>
-        <td colspan="3" class="empty-state">
+        <td colspan="4" class="empty-state">
           <p>No other admins yet. Use <strong>+ Add Admin</strong> to promote a student.</p>
         </td>
       </tr>
@@ -915,6 +1095,9 @@ function renderAdminsTable() {
       </td>
       <td><span class="student-email">${admin.email}</span></td>
       <td>${formatDate(admin.createdAt)}</td>
+      <td>
+        <button class="action-btn deny" onclick="removeAdmin('${admin.id}')">Remove Admin</button>
+      </td>
     </tr>
   `).join('');
 }
@@ -970,5 +1153,41 @@ window.promoteToAdmin = async function(studentId) {
   } catch (error) {
     console.error('Error promoting student to admin:', error);
     alert('Failed to promote student. Please try again.');
+  }
+};
+
+window.removeAdmin = async function(adminId) {
+  const admin = allAdmins.find(a => a.id === adminId);
+  if (!admin) return;
+
+  if (!confirm(`Remove admin access for ${admin.firstName} ${admin.lastName}?\n\nThey will become a student account.`)) {
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, 'users', adminId), {
+      role: 'student',
+      status: admin.status || 'approved',
+      studentType: admin.studentType || 'current'
+    });
+
+    allAdmins = allAdmins.filter(a => a.id !== adminId);
+
+    if (!allStudents.some(s => s.id === adminId)) {
+      allStudents.push({
+        ...admin,
+        role: 'student',
+        status: admin.status || 'approved',
+        studentType: admin.studentType || 'current'
+      });
+    }
+
+    updateStats();
+    renderTables();
+    renderAdminsTable();
+    renderAddAdminList();
+  } catch (error) {
+    console.error('Error removing admin access:', error);
+    alert('Failed to remove admin access. Please try again.');
   }
 };
