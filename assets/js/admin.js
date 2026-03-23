@@ -541,11 +541,7 @@ window.downloadCertificate = async function(certIndex) {
     const mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
     const fileBase64 = await generateCertificateDocx(studentName, cert.courseName, certDate);
 
-    const binary = atob(fileBase64);
-    const bytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) {
-      bytes[i] = binary.charCodeAt(i);
-    }
+    const bytes = base64ToUint8(fileBase64);
 
     const blob = new Blob([bytes], { type: mimeType });
     const url = URL.createObjectURL(blob);
@@ -645,6 +641,13 @@ function renderCourseChecklist(unitData, progress) {
   const container = document.getElementById('tr-checklist');
   if (!unitData) { container.innerHTML = ''; return; }
 
+  const escapeHtml = (value) => String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
   container.innerHTML = `
     <section class="dashboard-section checklist-section">
       <h2>Course Items</h2>
@@ -657,11 +660,12 @@ function renderCourseChecklist(unitData, progress) {
               const checked = progress[key] === true;
               const type = getItemType(item);
               const taskTitle = getChecklistItemTitle(item);
+              const safeTaskTitle = escapeHtml(taskTitle);
               return `
                 <div class="checklist-item ${checked ? 'checked' : ''}">
                   <span class="checklist-status">${checked ? '✓' : '○'}</span>
                   <span class="checklist-type-badge">${type}</span>
-                  <span class="checklist-title">${taskTitle}</span>
+                  <span class="checklist-title">${safeTaskTitle}</span>
                 </div>
               `;
             }).join('')}
@@ -700,14 +704,18 @@ function renderTestResultsContent(courseId) {
   }
 
   container.innerHTML = unitResults.map(({ fullKey, unitKey, result }) => {
-    const scorePct = result.total > 0 ? Math.round((result.score / result.total) * 100) : null;
-    const scoreDisplay = result.score != null
-      ? (result.total ? `${result.score} / ${result.total} &nbsp;(${scorePct}%)` : `${result.score} pts`)
+    const rawScore = result.score;
+    const hasScore = rawScore !== null && rawScore !== undefined && rawScore !== '';
+    const totalValue = Number.isFinite(Number(result.total)) ? Number(result.total) : null;
+    const scorePct = hasScore && totalValue > 0
+      ? Math.round((Number(rawScore) / totalValue) * 100)
+      : null;
+    const scoreDisplay = hasScore
+      ? (totalValue ? `${rawScore} / ${totalValue} &nbsp;(${scorePct}%)` : `${rawScore} pts`)
       : 'Not graded';
     const answers = result.answers || {};
     const unitLabel = unitKey.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-    const scoreInputValue = Number.isFinite(Number(result.score)) ? Number(result.score) : '';
-    const totalValue = Number.isFinite(Number(result.total)) ? Number(result.total) : null;
+    const scoreInputValue = hasScore && Number.isFinite(Number(rawScore)) ? Number(rawScore) : '';
     const scoreInputId = `score-${fullKey.replace(/[^a-zA-Z0-9_-]/g, '-')}`;
 
     return `
@@ -899,7 +907,7 @@ function sanitizeFilePart(value) {
 function buildCertificateFileName(courseName, studentName) {
   const coursePart = sanitizeFilePart(courseName);
   const studentPart = sanitizeFilePart(studentName);
-  return `Neurodev-${coursePart}-${studentPart}.docx`;
+  return `NeuroDev-${coursePart}-${studentPart}.docx`;
 }
 
 function base64ToUint8(base64) {
@@ -946,161 +954,6 @@ async function generateCertificateDocx(studentName, courseName, awardDateObj) {
   zip.file('word/document.xml', documentXml);
   const outputBytes = await zip.generateAsync({ type: 'uint8array' });
   return uint8ToBase64(outputBytes);
-}
-
-async function generateCertificatePdfFromDocx(studentName, courseName, awardDateObj) {
-  const docxBase64 = await generateCertificateDocx(studentName, courseName, awardDateObj);
-  const docxBytes = base64ToUint8(docxBase64);
-
-  const [{ renderAsync }, html2canvasModule, { PDFDocument }] = await Promise.all([
-    import('https://esm.sh/docx-preview@0.3.3'),
-    import('https://esm.sh/html2canvas@1.4.1'),
-    import('https://esm.sh/pdf-lib@1.17.1')
-  ]);
-
-  const html2canvas = html2canvasModule.default || html2canvasModule;
-
-  const renderHost = document.createElement('div');
-  renderHost.style.position = 'fixed';
-  renderHost.style.left = '-100000px';
-  renderHost.style.top = '0';
-  renderHost.style.width = 'auto';
-  renderHost.style.background = '#ffffff';
-  renderHost.style.zIndex = '-1';
-  document.body.appendChild(renderHost);
-
-  try {
-    await renderAsync(docxBytes.buffer, renderHost, undefined, {
-      breakPages: true,
-      ignoreWidth: false,
-      ignoreHeight: false
-    });
-
-    const forceCenterLines = ['This certifies that', 'Executive Director'];
-    const signatureTitlePattern = /(director|instructor|coach|teacher|administrator|manager|president)/i;
-    const textNodes = renderHost.querySelectorAll('p, span, div');
-    textNodes.forEach(node => {
-      const text = node.textContent?.replace(/\s+/g, ' ').trim() || '';
-      if (!text) return;
-
-      if (text.includes('Executive Director') && text.includes('Lead Tech Coach')) {
-        node.textContent = '';
-        const left = document.createElement('span');
-        left.textContent = 'Executive Director';
-        left.style.textAlign = 'center';
-        left.style.width = '42%';
-
-        const right = document.createElement('span');
-        right.textContent = 'Lead Tech Coach';
-        right.style.textAlign = 'center';
-        right.style.width = '42%';
-
-        node.style.setProperty('display', 'flex', 'important');
-        node.style.setProperty('justify-content', 'space-between', 'important');
-        node.style.setProperty('align-items', 'center', 'important');
-        node.style.setProperty('width', '100%', 'important');
-        node.style.setProperty('gap', '2%', 'important');
-        node.appendChild(left);
-        node.appendChild(right);
-        return;
-      }
-
-      const isForcedLine = forceCenterLines.some(target => text.includes(target));
-      const isSignatureTitle = text.length <= 48 && signatureTitlePattern.test(text);
-      if (!isForcedLine && !isSignatureTitle) return;
-
-      node.style.setProperty('text-align', 'center', 'important');
-      node.style.setProperty('width', '100%', 'important');
-      node.style.setProperty('display', 'block', 'important');
-      node.style.setProperty('margin-left', 'auto', 'important');
-      node.style.setProperty('margin-right', 'auto', 'important');
-
-      const parent = node.parentElement;
-      if (parent) {
-        parent.style.setProperty('text-align', 'center', 'important');
-        parent.style.setProperty('justify-content', 'center', 'important');
-        parent.style.setProperty('width', '100%', 'important');
-      }
-    });
-
-    const renderTarget =
-      renderHost.querySelector('.docx-page') ||
-      renderHost.querySelector('.docx') ||
-      renderHost.firstElementChild ||
-      renderHost;
-
-    const targetWidth = Math.max(
-      Math.ceil(renderTarget.scrollWidth || 0),
-      Math.ceil(renderTarget.clientWidth || 0),
-      900
-    );
-    const targetHeight = Math.max(
-      Math.ceil(renderTarget.scrollHeight || 0),
-      Math.ceil(renderTarget.clientHeight || 0),
-      1200
-    );
-
-    renderHost.style.width = `${targetWidth}px`;
-    renderHost.style.minHeight = `${targetHeight}px`;
-    renderTarget.style.width = `${targetWidth}px`;
-    renderTarget.style.minHeight = `${targetHeight}px`;
-    renderTarget.style.background = '#ffffff';
-
-    await new Promise(resolve => requestAnimationFrame(resolve));
-
-    const canvas = await html2canvas(renderHost, {
-      scale: 1,
-      width: targetWidth,
-      height: targetHeight,
-      windowWidth: targetWidth,
-      windowHeight: targetHeight,
-      scrollX: 0,
-      scrollY: 0,
-      backgroundColor: '#ffffff',
-      useCORS: true,
-      logging: false
-    });
-
-    const tryEncode = (mime, quality) => {
-      try {
-        return canvas.toDataURL(mime, quality);
-      } catch {
-        return '';
-      }
-    };
-
-    let imageDataUrl = tryEncode('image/jpeg', 0.95);
-    let dataUrlMatch = imageDataUrl.match(/^data:(image\/(png|jpeg));base64,(.+)$/i);
-
-    if (!dataUrlMatch) {
-      imageDataUrl = tryEncode('image/png');
-      dataUrlMatch = imageDataUrl.match(/^data:(image\/(png|jpeg));base64,(.+)$/i);
-    }
-
-    if (!dataUrlMatch) {
-      throw new Error(`Certificate image encoding produced unexpected data format (canvas ${canvas.width}x${canvas.height}).`);
-    }
-    const imageMime = dataUrlMatch[1].toLowerCase();
-    const imageBytes = base64ToUint8(dataUrlMatch[3]);
-
-    const pdfDoc = await PDFDocument.create();
-    const page = pdfDoc.addPage([canvas.width, canvas.height]);
-    const embedded = imageMime === 'image/png'
-      ? await pdfDoc.embedPng(imageBytes)
-      : await pdfDoc.embedJpg(imageBytes);
-
-    page.drawImage(embedded, {
-      x: 0,
-      y: 0,
-      width: canvas.width,
-      height: canvas.height
-    });
-
-    const pdfBytes = await pdfDoc.save();
-    return uint8ToBase64(new Uint8Array(pdfBytes));
-  } finally {
-    renderHost.remove();
-  }
 }
 
 async function generateCertificatePdf(studentName, courseName, awardDate) {
