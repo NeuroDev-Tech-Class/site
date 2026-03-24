@@ -249,6 +249,23 @@ body.dark-mode .activity::before {
   color: var(--primary-color, #4ad);
 }
 
+/* ---------- Embedded video blocks ---------- */
+.video-embed {
+  width: 100%;
+  margin: 1rem 0 1.25rem;
+  border: 1px solid var(--doc-border);
+  border-radius: var(--doc-radius);
+  overflow: hidden;
+  background: var(--doc-card-bg);
+}
+
+.video-embed iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
 /* ---------- Document footer ---------- */
 .doc-footer {
   margin-top: 3rem;
