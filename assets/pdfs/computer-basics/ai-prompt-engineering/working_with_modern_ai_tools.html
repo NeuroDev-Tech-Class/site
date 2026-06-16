@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/site/" />
+  <script src="assets/js/load-head.js" defer></script>
+  <link rel="stylesheet" href="assets/css/document.css" />
+</head>
+<body>
+  <header></header>
+  <script src="/site/assets/js/load-header.js" defer></script>
+  <main id="main-content">
+    <a href="courses/ai-usage.html" class="back-link">&larr; Back to AI Usage &amp; Prompt Engineering</a>
+    <div class="doc-header">
+      <span class="course-tag">AI Prompt Engineering</span>
+      <h1>Working with Modern AI Tools</h1>
+      <p class="subtitle">Beyond the chat box: multimodal input, your own documents, custom assistants, and AI agents.</p>
+    </div>
+
+    <p>When most people picture an AI assistant, they imagine typing a question and reading a text answer. That&rsquo;s still the heart of it &mdash; but tools like ChatGPT, Gemini, and Claude can now do a great deal more. Knowing what they&rsquo;re capable of helps you reach for the right feature instead of fighting to describe everything in words. This reading is a quick tour of the most useful ones.</p>
+
+    <h2>Multimodal AI: More Than Just Text</h2>
+
+    <p>&ldquo;Multimodal&rdquo; simply means a model can work with more than one <em>kind</em> of information &mdash; not just text, but also images, audio, and files. In practice, that means you can:</p>
+
+    <ul>
+      <li><strong>Show it a picture.</strong> Upload a photo of a broken appliance, a math problem, a plant, or a screenshot of an error message, and ask the model what it sees or how to fix it.</li>
+      <li><strong>Talk to it.</strong> Most assistant apps now have a voice mode, so you can have a spoken back-and-forth conversation instead of typing.</li>
+      <li><strong>Hand it a document.</strong> Upload a PDF, slideshow, or spreadsheet and ask the model to summarize it, pull out key points, or answer questions about it.</li>
+      <li><strong>Have it create images.</strong> The same assistant can often <em>generate</em> pictures too, so you don&rsquo;t need a separate art tool for a quick image.</li>
+    </ul>
+
+    <div class="tip">
+      <p>A picture is often worth a thousand words of prompt. If something is hard to describe &mdash; a layout, a diagram, a weird-looking bug &mdash; it&rsquo;s usually faster to show the model than to explain it.</p>
+    </div>
+
+    <h2>&ldquo;Chat With Your Documents&rdquo;</h2>
+
+    <p>One of the most practical uses of AI for a student is feeding it material you&rsquo;re already working with. Instead of asking the model to recall facts from memory (where it can <strong>hallucinate</strong>), you give it the actual source and ask questions <em>about that source</em>. For example:</p>
+
+    <blockquote>
+      <p>Here are my lecture notes (attached). Quiz me on the five most important concepts, one question at a time, and tell me if I get them right.</p>
+    </blockquote>
+
+    <p>Because the answer comes from the document you provided, it&rsquo;s far more reliable than asking the model to remember your textbook on its own. This same idea &mdash; giving a model trusted source material to work from &mdash; is the foundation of many professional AI tools.</p>
+
+    <h2>Custom Assistants</h2>
+
+    <p>If you find yourself giving the model the same instructions over and over (&ldquo;you are my study coach, explain things simply, quiz me at the end&hellip;&rdquo;), you can save that setup once and reuse it. Each major tool has its own version of this:</p>
+
+    <ul>
+      <li><strong>ChatGPT</strong> &mdash; &ldquo;Custom GPTs&rdquo; and &ldquo;Projects&rdquo;</li>
+      <li><strong>Gemini</strong> &mdash; &ldquo;Gems&rdquo;</li>
+      <li><strong>Claude</strong> &mdash; &ldquo;Projects&rdquo;</li>
+    </ul>
+
+    <p>A custom assistant is just a normal AI assistant with a saved role, saved instructions, and sometimes saved reference files. It&rsquo;s the &ldquo;system instruction&rdquo; idea from the prompt-engineering reading, made permanent and reusable.</p>
+
+    <h2>AI Agents: From Answering to Doing</h2>
+
+    <p>So far everything we&rsquo;ve described <em>answers</em> you. An <strong>AI agent</strong> goes a step further: it can take <em>actions</em> to accomplish a goal, often across several steps, with less hand-holding. Rather than just telling you how to do something, an agent can use <strong>tools</strong> &mdash; searching the web, running code, filling out a form, or using other apps &mdash; to actually get it done.</p>
+
+    <p>For example, instead of &ldquo;list some flights to Chicago,&rdquo; an agent might be asked to &ldquo;find the cheapest non-stop flight to Chicago next Friday and put the options in a table,&rdquo; then go search, compare, and report back on its own.</p>
+
+    <div class="warning">
+      <p>Agents are powerful but not magic. They can make mistakes mid-task and confidently head in the wrong direction. Always review what an agent did before trusting or acting on the result &mdash; especially anything involving money, accounts, or sending messages on your behalf.</p>
+    </div>
+
+    <div class="activity">
+      <h2>Try It Out</h2>
+      <p>Pick <strong>two</strong> of the features below and try each one with ChatGPT, Gemini, or Claude:</p>
+      <ol>
+        <li><strong>Image input:</strong> Take a photo of something around you (a label, a plant, a puzzle, a chart) and ask the AI to explain or analyze it.</li>
+        <li><strong>Chat with a document:</strong> Upload a PDF or your own notes and ask the AI to summarize it or quiz you on it.</li>
+        <li><strong>Voice mode:</strong> Have a short spoken conversation and notice how it differs from typing.</li>
+        <li><strong>Custom assistant:</strong> Create a simple Custom GPT, Gem, or Project with a saved role (for example, a tutor for one of your classes).</li>
+      </ol>
+      <p>Write a few sentences about what worked well, what surprised you, and where the AI got something wrong. Email your notes to the tech coach at <a href="mailto:neurodevtechcoach@gmail.com">neurodevtechcoach@gmail.com</a>.</p>
+    </div>
+
+    <div class="doc-footer">
+      <p>NeuroDev Tech Class &mdash; AI Prompt Engineering</p>
+    </div>
+  </main>
+  <footer></footer>
+  <script src="/site/assets/js/load-footer.js" defer></script>
+</body>
+</html>
