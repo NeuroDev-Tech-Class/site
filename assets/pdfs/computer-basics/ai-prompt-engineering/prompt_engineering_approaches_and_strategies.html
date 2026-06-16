@@ -9,7 +9,7 @@
   <header></header>
   <script src="/site/assets/js/load-header.js" defer></script>
   <main id="main-content">
-    <a href="courses/ai-usage.html" class="back-link">&larr; Back to AI Prompt Engineering</a>
+    <a href="courses/ai-usage.html" class="back-link">&larr; Back to AI Usage &amp; Prompt Engineering</a>
     <div class="doc-header">
       <span class="course-tag">AI Prompt Engineering</span>
       <h1>Prompt Engineering Approaches and Strategies</h1>
@@ -97,6 +97,44 @@
     </blockquote>
 
     <p>Much better! Though even here the use of the term &ldquo;about&rdquo; was a mistake, since my definition of &ldquo;about&rdquo; might not match that of ChatGPT.</p>
+
+    <h2>Role &amp; Persona Prompting</h2>
+
+    <p>One of the most powerful things you can do is tell the model <strong>who it should be</strong>. By assigning it a role or persona, you steer its tone, vocabulary, and the kind of details it focuses on &mdash; all without having to spell out those preferences one by one. Models have &ldquo;seen&rdquo; how experts in countless fields write, so asking it to take on a role pulls its responses toward that style.</p>
+
+    <p>Compare these two prompts:</p>
+    <blockquote>
+      <p>Explain why my sourdough didn&rsquo;t rise.</p>
+    </blockquote>
+    <blockquote>
+      <p>You are a professional baker with 20 years of experience teaching beginners. Explain why my sourdough didn&rsquo;t rise, in plain language, and give me three things to check next time.</p>
+    </blockquote>
+
+    <p>The second version sets a <strong>role</strong> (&ldquo;professional baker&hellip; teaching beginners&rdquo;), a <strong>tone</strong> (&ldquo;plain language&rdquo;), and a <strong>structure</strong> (&ldquo;three things to check&rdquo;). You&rsquo;ll get a friendlier, more focused, and more actionable answer.</p>
+
+    <p>A good role prompt usually answers three questions:</p>
+    <ul>
+      <li><strong>Who is the model?</strong> &mdash; &ldquo;You are a patient math tutor,&rdquo; &ldquo;Act as a recruiter reviewing my r&eacute;sum&eacute;,&rdquo; &ldquo;You are a skeptical editor.&rdquo;</li>
+      <li><strong>Who is the audience?</strong> &mdash; &ldquo;Explain this to a 12-year-old,&rdquo; &ldquo;Write for someone who has never coded before.&rdquo;</li>
+      <li><strong>What should the response look like?</strong> &mdash; tone, length, and format (combine this with the specificity and structure tips above).</li>
+    </ul>
+
+    <p>Role prompting pairs naturally with the other techniques in this reading: give the model a role, then iterate, add examples, and restrict the output until it&rsquo;s exactly what you want.</p>
+
+    <h3>Asking the Model to Think Step by Step</h3>
+
+    <p>For anything involving reasoning &mdash; math, logic puzzles, planning, debugging &mdash; you&rsquo;ll often get better answers simply by adding a phrase like <strong>&ldquo;think step by step&rdquo;</strong> or &ldquo;show your reasoning before giving the final answer.&rdquo; This is called <strong>chain-of-thought</strong> prompting. Working through the problem out loud helps the model catch its own mistakes instead of blurting out the first answer that comes to mind.</p>
+    <blockquote>
+      <p>A store sells pencils in packs of 12. If I need 100 pencils, how many packs should I buy? Think step by step before giving your final answer.</p>
+    </blockquote>
+
+    <p>Many modern AI tools now have a dedicated <strong>&ldquo;reasoning&rdquo; or &ldquo;thinking&rdquo; mode</strong> that does this automatically for hard problems. It&rsquo;s slower but more accurate &mdash; reach for it when a quick answer keeps coming out wrong.</p>
+
+    <h3>System vs. User Instructions</h3>
+
+    <p>When you chat with a tool like ChatGPT, Gemini, or Claude, there are really two layers of instruction. The <strong>system instruction</strong> is the standing context &mdash; the overall job, rules, and personality you want the model to keep in mind for the <em>whole</em> conversation. Your individual messages are <strong>user instructions</strong> &mdash; the specific requests you make turn by turn.</p>
+
+    <p>Most chat apps let you set this standing context once instead of repeating it every message: ChatGPT&rsquo;s &ldquo;Custom Instructions,&rdquo; Gemini&rsquo;s &ldquo;Saved info,&rdquo; or a project&rsquo;s instructions. Putting your role and preferences there (&ldquo;You are my study coach. Always explain things simply and quiz me at the end.&rdquo;) means every reply follows those rules without you having to restate them.</p>
 
     <h2>Improving Results with Examples</h2>
 
