@@ -297,7 +297,7 @@ main:where(:has(.doc-header)) img {
 
 .img-side {
   float: right;
-  width: min(40%, 320px);
+  max-width: min(40%, 320px);
   max-height: none;
   margin: 0.25rem 0 1rem 1.5rem;
 }
@@ -305,6 +305,20 @@ main:where(:has(.doc-header)) img {
 .img-side.left {
   float: left;
   margin: 0.25rem 1.5rem 1rem 0;
+}
+
+.img-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.img-row img {
+  max-width: 220px;
+  max-height: 220px;
+  margin: 0;
 }
 
 main:has(.doc-header) :is(h2, h3, .doc-footer, .video-embed, .tip, .warning, .activity) {
@@ -315,7 +329,6 @@ main:has(.doc-header) :is(h2, h3, .doc-footer, .video-embed, .tip, .warning, .ac
   .img-side,
   .img-side.left {
     float: none;
-    width: auto;
     max-width: min(100%, 320px);
     margin: 1rem auto;
   }
