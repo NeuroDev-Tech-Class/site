@@ -1,0 +1,58 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function callerRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+
+    function isAdmin() {
+      return signedIn() && callerRole() in ['admin', 'superadmin'];
+    }
+
+    function isSuperAdmin() {
+      return signedIn() && callerRole() == 'superadmin';
+    }
+
+    function roleUnchanged() {
+      return request.resource.data.role == resource.data.role;
+    }
+
+    match /users/{userId} {
+      allow read: if signedIn() && request.auth.uid == userId;
+      allow read: if isAdmin();
+
+      allow create: if signedIn() &&
+                       request.auth.uid == userId && (
+                         (request.resource.data.role == 'student' &&
+                          request.resource.data.status == 'pending') ||
+                         (request.resource.data.role == 'superadmin' &&
+                          request.auth.token.email == 'neurodevtechcoach@gmail.com')
+                       );
+
+      // Students may only change their own course progress
+      allow update: if signedIn() &&
+                       request.auth.uid == userId &&
+                       request.resource.data.diff(resource.data).affectedKeys().hasOnly(['courses']);
+
+      allow update: if isAdmin() && roleUnchanged();
+      allow update: if isSuperAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Written by the Google Forms Apps Script without auth; read and graded by admins
+    match /testResults/{email} {
+      allow read: if isAdmin();
+      allow write: if true;
+    }
+
+    // Queued by admins for the Trigger Email extension
+    match /mail/{docId} {
+      allow create: if isAdmin();
+    }
+  }
+}
