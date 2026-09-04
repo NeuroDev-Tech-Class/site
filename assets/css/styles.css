@@ -191,6 +191,21 @@ ul {
   color: var(--h2-color);
 }
 
+ol {
+  margin-left: 0.9rem;
+  padding-left: 1.6rem;
+}
+
+ul,
+ol {
+  margin-bottom: 1rem;
+}
+
+li > ul,
+li > ol {
+  margin-bottom: 0;
+}
+
 li {
   display: list-item;
   list-style-position: outside;
@@ -451,10 +466,6 @@ footer p {
 a:focus {
   outline: 2px solid var(--tertiary-color);
   outline-offset: 2px;
-}
-
-ol {
-  margin-left: 4vh;
 }
 
 /* Mobile */
