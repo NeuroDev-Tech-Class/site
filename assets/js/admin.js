@@ -846,7 +846,7 @@ window.deleteStudent = async function(studentId) {
   }
 };
 
-// ─── Certificate PDF Generation ──────────────────────────────────────────────
+// ─── Certificate DOCX Generation ────────────────────────────────────────────
 
 function getOrdinalSuffix(day) {
   const mod100 = day % 100;
@@ -903,7 +903,8 @@ function base64ToUint8(base64) {
 }
 
 async function generateCertificateDocx(studentName, courseName, awardDateObj) {
-  const { default: JSZip } = await import('https://esm.sh/jszip@3.10.1');
+  const JSZip = window.JSZip;
+  if (!JSZip) throw new Error('JSZip failed to load');
 
   const templateBytes = await fetch('assets/pdfs/Certificate-Template.docx').then(r => {
     if (!r.ok) throw new Error('DOCX template not found');
