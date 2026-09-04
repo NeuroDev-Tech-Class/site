@@ -16,25 +16,8 @@ import {
   orderBy,
   serverTimestamp
 } from './firebase-config.js';
-
-// Course metadata for progress calculation
-const courseMetadata = {
-  'digital-literacy': { name: 'Digital Literacy', totalItems: 45 },
-  'ai-usage': { name: 'AI Usage & Prompt Engineering', totalItems: 15 },
-  'office-software': { name: 'Office Software', totalItems: 30 },
-  'python-1': { name: 'Python I - Programming Fundamentals', totalItems: 50 },
-  'python-2': { name: 'Python II - Object-Oriented Programming', totalItems: 35 },
-  'hardware': { name: 'Computer Hardware', totalItems: 20 },
-  'linux': { name: 'Introduction to Linux', totalItems: 40 },
-  'web-dev-1': { name: 'Web Development I - HTML & CSS', totalItems: 45 },
-  'web-dev-2': { name: 'Web Development II - JavaScript', totalItems: 40 },
-  'web-dev-3': { name: 'Web Development III - Web Apps', totalItems: 35 },
-  'unreal-engine': { name: 'Intro to Unreal Engine', totalItems: 50 },
-  'blender-zbrush-mini': { name: 'Intro to Blender & ZBrush', totalItems: 45 },
-  'gimp': { name: '2D Digital Art - GIMP', totalItems: 40 },
-  'audacity': { name: 'Audio Software - Audacity', totalItems: 30 },
-  'davinci-resolve': { name: 'Video Software - DaVinci Resolve', totalItems: 35 }
-};
+import { courseMetadata } from './course-metadata.js';
+import { formatName, fullName, isAdmin } from './utils.js';
 
 let allStudents = [];
 let selectedStudent = null;
@@ -50,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const userData = await getUserData(user.uid);
-    if (!userData || (userData.role !== 'admin' && userData.role !== 'superadmin')) {
+    if (!isAdmin(userData)) {
       window.location.href = 'index.html';
       return;
     }
@@ -59,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (currentUserRole === 'superadmin') {
       document.getElementById('welcome-message').textContent =
-        `Super Admin — ${userData.firstName} ${userData.lastName}`;
+        `Super Admin — ${fullName(userData)}`;
       injectAdminTab();
     }
 
@@ -182,7 +165,7 @@ function renderPendingTable() {
     <tr data-id="${student.id}">
       <td>
         <div class="student-name">
-          <strong>${student.firstName} ${student.lastName}</strong>
+          <strong>${fullName(student)}</strong>
           <span class="student-email">${student.email}</span>
         </div>
       </td>
@@ -219,10 +202,10 @@ function renderCurrentTable() {
     const certs = (student.certificates || []).length;
 
     return `
-      <tr data-id="${student.id}" class="clickable-row" tabindex="0" role="button" aria-label="View ${student.firstName} ${student.lastName}" onclick="viewStudent('${student.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewStudent('${student.id}');}">
+      <tr data-id="${student.id}" class="clickable-row" tabindex="0" role="button" aria-label="View ${fullName(student)}" onclick="viewStudent('${student.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewStudent('${student.id}');}">
         <td>
           <div class="student-name">
-            <strong>${student.firstName} ${student.lastName}</strong>
+            <strong>${fullName(student)}</strong>
             <span class="student-email">${student.email}</span>
           </div>
         </td>
@@ -264,10 +247,10 @@ function renderOldTable() {
     const certs = (student.certificates || []).length;
 
     return `
-      <tr data-id="${student.id}" class="clickable-row" tabindex="0" role="button" aria-label="View ${student.firstName} ${student.lastName}" onclick="viewStudent('${student.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewStudent('${student.id}');}">
+      <tr data-id="${student.id}" class="clickable-row" tabindex="0" role="button" aria-label="View ${fullName(student)}" onclick="viewStudent('${student.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewStudent('${student.id}');}">
         <td>
           <div class="student-name">
-            <strong>${student.firstName} ${student.lastName}</strong>
+            <strong>${fullName(student)}</strong>
             <span class="student-email">${student.email}</span>
           </div>
         </td>
@@ -331,7 +314,7 @@ window.approveStudent = async function(studentId) {
         subject: 'Your NeuroDev Account Has Been Approved!',
         html: `
           <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#222;">
-            <h2 style="color:#44aadd;margin-top:0;">Welcome to NeuroDev, ${student.firstName}!</h2>
+            <h2 style="color:#44aadd;margin-top:0;">Welcome to NeuroDev, ${formatName(student.firstName)}!</h2>
             <p>Great news — your account has been approved. You can now log in and access your student dashboard to track your course progress and certificates.</p>
             <a href="${siteUrl}profile.html"
                style="display:inline-block;background:#44aadd;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;margin:20px 0;">
@@ -399,7 +382,7 @@ window.viewStudent = async function(studentId) {
 function renderStudentView() {
   const s = selectedStudent;
 
-  document.getElementById('sv-student-name').textContent = `${s.firstName} ${s.lastName}`;
+  document.getElementById('sv-student-name').textContent = fullName(s);
   document.getElementById('sv-student-email').textContent = s.email;
 
   // Compute stats
@@ -535,7 +518,7 @@ window.downloadCertificate = async function(certIndex) {
   }
 
   try {
-    const studentName = `${selectedStudent.firstName} ${selectedStudent.lastName}`;
+    const studentName = fullName(selectedStudent);
     const certDate = cert.awardedAt ? new Date(cert.awardedAt) : new Date();
     const fileName = buildCertificateFileName(cert.courseName, studentName);
     const mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
@@ -571,7 +554,7 @@ window.viewCourseResults = function(courseId) {
   const meta = courseMetadata[courseId];
   document.getElementById('tr-course-name').textContent = meta ? meta.name : courseId;
   document.getElementById('tr-student-name').textContent =
-    `${selectedStudent.firstName} ${selectedStudent.lastName}`;
+    fullName(selectedStudent);
   document.getElementById('student-view').classList.remove('active');
   document.getElementById('test-results-view').classList.add('active');
 
@@ -848,7 +831,7 @@ window.deleteStudent = async function(studentId) {
   const student = allStudents.find(s => s.id === studentId);
   if (!student) return;
   
-  if (!confirm(`Permanently delete ${student.firstName} ${student.lastName}'s account? This cannot be undone.`)) {
+  if (!confirm(`Permanently delete ${fullName(student)}'s account? This cannot be undone.`)) {
     return;
   }
   
@@ -863,7 +846,7 @@ window.deleteStudent = async function(studentId) {
   }
 };
 
-// ─── Certificate PDF Generation ──────────────────────────────────────────────
+// ─── Certificate DOCX Generation ────────────────────────────────────────────
 
 function getOrdinalSuffix(day) {
   const mod100 = day % 100;
@@ -920,7 +903,8 @@ function base64ToUint8(base64) {
 }
 
 async function generateCertificateDocx(studentName, courseName, awardDateObj) {
-  const { default: JSZip } = await import('https://esm.sh/jszip@3.10.1');
+  const JSZip = window.JSZip;
+  if (!JSZip) throw new Error('JSZip failed to load');
 
   const templateBytes = await fetch('assets/pdfs/Certificate-Template.docx').then(r => {
     if (!r.ok) throw new Error('DOCX template not found');
@@ -956,93 +940,6 @@ async function generateCertificateDocx(studentName, courseName, awardDateObj) {
   return uint8ToBase64(outputBytes);
 }
 
-async function generateCertificatePdf(studentName, courseName, awardDate) {
-  const { PDFDocument, StandardFonts, rgb } = await import('https://esm.sh/pdf-lib@1.17.1');
-
-  const templateBytes = await fetch('assets/pdfs/Certificate-Template.docx.pdf')
-    .then(r => r.arrayBuffer());
-  const pdfDoc = await PDFDocument.load(templateBytes);
-  const page = pdfDoc.getPages()[0];
-  const { width, height } = page.getSize();
-
-  const boldFont    = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-  const regularFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
-
-  const fitFontSize = (font, text, preferredSize, minSize, maxWidth) => {
-    let size = preferredSize;
-    while (size > minSize && font.widthOfTextAtSize(text, size) > maxWidth) {
-      size -= 1;
-    }
-    return size;
-  };
-
-  const drawCentered = (text, font, size, y, color) => {
-    const textWidth = font.widthOfTextAtSize(text, size);
-    page.drawText(text, {
-      x: (width - textWidth) / 2,
-      y,
-      size,
-      font,
-      color
-    });
-  };
-
-  const fillPdfFormFieldsIfAvailable = () => {
-    try {
-      const form = pdfDoc.getForm();
-      const fields = form.getFields();
-      if (!fields.length) return false;
-
-      const assignText = (patterns, value) => {
-        for (const field of fields) {
-          const fieldName = field.getName().toLowerCase();
-          if (!patterns.some(pattern => fieldName.includes(pattern))) continue;
-          if (typeof field.setText === 'function') {
-            field.setText(value);
-          }
-        }
-      };
-
-      assignText(['name', 'student'], studentName);
-      assignText(['course', 'class'], courseName);
-      assignText(['date', 'awarded', 'issued'], awardDate);
-
-      form.updateFieldAppearances(regularFont);
-      form.flatten();
-      return true;
-    } catch {
-      return false;
-    }
-  };
-
-  const usedFormFields = fillPdfFormFieldsIfAvailable();
-
-  if (!usedFormFields) {
-    // Fallback for non-editable templates: remove placeholder text zones, then place final values.
-    // This avoids visible placeholders while keeping output deterministic.
-    const nameBandY = height * 0.445;
-    const courseBandY = height * 0.34;
-    const dateBandY = height * 0.255;
-    const bandX = width * 0.12;
-    const bandW = width * 0.76;
-
-    page.drawRectangle({ x: bandX, y: nameBandY, width: bandW, height: 56, color: rgb(1, 1, 1) });
-    page.drawRectangle({ x: bandX, y: courseBandY, width: bandW, height: 40, color: rgb(1, 1, 1) });
-    page.drawRectangle({ x: bandX, y: dateBandY, width: bandW, height: 24, color: rgb(1, 1, 1) });
-
-    const nameSize = fitFontSize(boldFont, studentName, 38, 24, width * 0.72);
-    const courseSize = fitFontSize(regularFont, courseName, 22, 14, width * 0.72);
-    const dateSize = fitFontSize(regularFont, awardDate, 14, 11, width * 0.72);
-
-    drawCentered(studentName, boldFont, nameSize, height * 0.462, rgb(0.08, 0.08, 0.08));
-    drawCentered(courseName, regularFont, courseSize, height * 0.355, rgb(0.2, 0.2, 0.2));
-    drawCentered(awardDate, regularFont, dateSize, height * 0.265, rgb(0.35, 0.35, 0.35));
-  }
-
-  const pdfBytes = await pdfDoc.save();
-  return uint8ToBase64(new Uint8Array(pdfBytes));
-}
-
 async function awardCertificate() {
   if (!selectedStudent) return;
 
@@ -1075,7 +972,7 @@ async function awardCertificate() {
 
     // Generate certificate attachment and queue email
     btn.textContent = 'Generating Certificate...';
-    const studentName = `${selectedStudent.firstName} ${selectedStudent.lastName}`;
+    const studentName = fullName(selectedStudent);
     const attachmentName = buildCertificateFileName(courseName, studentName);
     const attachmentBase64 = await generateCertificateDocx(studentName, courseName, awardDateObj);
 
@@ -1085,7 +982,7 @@ async function awardCertificate() {
         subject: `Your NeuroDev Certificate — ${courseName}`,
         html: `
           <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#222;">
-            <h2 style="color:#44aadd;margin-top:0;">Congratulations, ${selectedStudent.firstName}!</h2>
+            <h2 style="color:#44aadd;margin-top:0;">Congratulations, ${formatName(selectedStudent.firstName)}!</h2>
             <p>You've earned a certificate of completion for <strong>${courseName}</strong>.</p>
             <p>Your certificate is attached to this email. You can save or print it for your records.</p>
             <p style="color:#666;font-size:0.9rem;">Keep up the great work — The NeuroDev Team</p>
@@ -1222,7 +1119,7 @@ function renderAdminsTable() {
     <tr>
       <td>
         <div class="student-name">
-          <strong>${admin.firstName} ${admin.lastName}</strong>
+          <strong>${fullName(admin)}</strong>
         </div>
       </td>
       <td><span class="student-email">${admin.email}</span></td>
@@ -1255,7 +1152,7 @@ function renderAddAdminList() {
   container.innerHTML = eligible.map(s => `
     <div class="add-admin-item">
       <div class="student-name">
-        <strong>${s.firstName} ${s.lastName}</strong>
+        <strong>${fullName(s)}</strong>
         <span class="student-email">${s.email}</span>
       </div>
       <button class="action-btn approve" onclick="promoteToAdmin('${s.id}')">Make Admin</button>
@@ -1267,7 +1164,7 @@ window.promoteToAdmin = async function(studentId) {
   const student = allStudents.find(s => s.id === studentId);
   if (!student) return;
 
-  if (!confirm(`Promote ${student.firstName} ${student.lastName} to admin?\n\nThey will have full access to the admin dashboard.`)) {
+  if (!confirm(`Promote ${fullName(student)} to admin?\n\nThey will have full access to the admin dashboard.`)) {
     return;
   }
 
@@ -1292,7 +1189,7 @@ window.removeAdmin = async function(adminId) {
   const admin = allAdmins.find(a => a.id === adminId);
   if (!admin) return;
 
-  if (!confirm(`Remove admin access for ${admin.firstName} ${admin.lastName}?\n\nThey will become a student account.`)) {
+  if (!confirm(`Remove admin access for ${fullName(admin)}?\n\nThey will become a student account.`)) {
     return;
   }
 

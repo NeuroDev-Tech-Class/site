@@ -27,13 +27,11 @@ if (window.location.pathname.includes('/assets/pdfs/')) {
   overlay.id = 'auth-guard-overlay';
   overlay.style.cssText = [
     'position:fixed', 'inset:0',
-    'background:var(--bg-color,#0e1117)',
+    'background:var(--background-color,#252b31)',
     'z-index:9998',
-    'display:flex', 'align-items:center', 'justify-content:center',
-    'font-family:sans-serif', 'font-size:0.875rem',
-    'color:#888', 'letter-spacing:0.04em'
+    'display:flex', 'align-items:center', 'justify-content:center'
   ].join(';');
-  overlay.textContent = 'Verifying access\u2026';
+  overlay.innerHTML = '<div class="spinner"></div>';
   document.body.appendChild(overlay);
 
   const contentGuardUrl = new URL(basePath + 'assets/js/content-guard.js', document.baseURI).toString();

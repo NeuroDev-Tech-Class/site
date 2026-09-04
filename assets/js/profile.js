@@ -6,25 +6,8 @@ import {
   doc,
   getDoc
 } from './firebase-config.js';
-
-// Course metadata for progress calculation
-const courseMetadata = {
-  'digital-literacy': { name: 'Digital Literacy', totalItems: 45 },
-  'ai-usage': { name: 'AI Usage & Prompt Engineering', totalItems: 15 },
-  'office-software': { name: 'Office Software', totalItems: 30 },
-  'python-1': { name: 'Python I - Programming Fundamentals', totalItems: 50 },
-  'python-2': { name: 'Python II - Object-Oriented Programming', totalItems: 35 },
-  'hardware': { name: 'Computer Hardware', totalItems: 20 },
-  'linux': { name: 'Introduction to Linux', totalItems: 40 },
-  'web-dev-1': { name: 'Web Development I - HTML & CSS', totalItems: 45 },
-  'web-dev-2': { name: 'Web Development II - JavaScript', totalItems: 40 },
-  'web-dev-3': { name: 'Web Development III - Web Apps', totalItems: 35 },
-  'unreal-engine': { name: 'Intro to Unreal Engine', totalItems: 50 },
-  'blender-zbrush-mini': { name: 'Intro to Blender & ZBrush', totalItems: 45 },
-  'gimp': { name: '2D Digital Art - GIMP', totalItems: 40 },
-  'audacity': { name: 'Audio Software - Audacity', totalItems: 30 },
-  'davinci-resolve': { name: 'Video Software - DaVinci Resolve', totalItems: 35 }
-};
+import { courseMetadata } from './course-metadata.js';
+import { formatName, isAdmin } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   onAuthStateChanged(auth, async (user) => {
@@ -47,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Check if admin - redirect to admin dashboard
-    if (userData.role === 'admin') {
+    if (isAdmin(userData)) {
       window.location.href = 'admin.html';
       return;
     }
@@ -72,7 +55,7 @@ async function getUserData(uid) {
 function displayDashboard(userData) {
   // Update welcome message
   document.getElementById('welcome-message').textContent = 
-    `Welcome back, ${userData.firstName}!`;
+    `Welcome back, ${formatName(userData.firstName)}!`;
   
   // Calculate stats
   const courseProgress = userData.courses || {};

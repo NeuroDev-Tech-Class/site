@@ -15,7 +15,8 @@
         <h1 id="embed-title" class="embed-page-title"></h1>
       </div>
       <div class="slides-frame-container">
-        <iframe id="slides-iframe" allowfullscreen loading="lazy"></iframe>
+        <iframe id="slides-iframe" allowfullscreen></iframe>
+        <div class="spinner-overlay"><div class="spinner"></div></div>
       </div>
     </main>
 
@@ -31,12 +32,17 @@
       document.getElementById('embed-title').textContent = title;
       document.title = title + ' — NeuroDev';
 
+      const iframe = document.getElementById('slides-iframe');
+      const hideSpinner = () => document.querySelector('.spinner-overlay')?.remove();
+
       // Iframe src is only set once the user is confirmed approved
       requireApproval(() => {
+        setTimeout(hideSpinner, 10000);
         if (url) {
           const match = url.match(/\/presentation\/(?:u\/\d+\/)?d\/([a-zA-Z0-9_-]+)/);
           if (match) {
-            document.getElementById('slides-iframe').src =
+            iframe.addEventListener('load', hideSpinner, { once: true });
+            iframe.src =
               `https://docs.google.com/presentation/d/${match[1]}/embed?start=false&loop=false&delayms=5000`;
           }
         }

@@ -12,6 +12,7 @@ import {
   getDoc,
   serverTimestamp
 } from './firebase-config.js';
+import { formatName, fullName, isAdmin } from './utils.js';
 
 // User state
 let currentUser = null;
@@ -314,8 +315,8 @@ async function handleLogin(e) {
 // Handle registration
 async function handleRegister(e) {
   e.preventDefault();
-  const firstName = document.getElementById('register-firstname').value.trim();
-  const lastName = document.getElementById('register-lastname').value.trim();
+  const firstName = formatName(document.getElementById('register-firstname').value);
+  const lastName = formatName(document.getElementById('register-lastname').value);
   const email = document.getElementById('register-email').value;
   const password = document.getElementById('register-password').value;
   const confirm = document.getElementById('register-confirm').value;
@@ -415,14 +416,14 @@ function updateUIForLoggedInUser() {
   iconBtn.classList.add('logged-in');
   
   const isPending = userData.status === 'pending';
-  const isAdmin = userData.role === 'admin' || userData.role === 'superadmin';
+  const admin = isAdmin(userData);
   
   if (isPending) {
     // Pending user - show limited menu
     iconBtn.classList.add('pending');
     dropdown.innerHTML = `
       <div class="user-info">
-        <span class="user-name">${userData.firstName} ${userData.lastName}</span>
+        <span class="user-name">${fullName(userData)}</span>
         <span class="user-email">${userData.email}</span>
       </div>
       <div class="dropdown-divider"></div>
@@ -442,12 +443,12 @@ function updateUIForLoggedInUser() {
   } else {
     // Approved user - show full menu
     iconBtn.classList.remove('pending');
-    const dashboardLink = isAdmin ? 'admin.html' : 'profile.html';
-    const dashboardText = isAdmin ? 'Dashboard' : 'Profile';
+    const dashboardLink = admin ? 'admin.html' : 'profile.html';
+    const dashboardText = admin ? 'Dashboard' : 'Profile';
     
     dropdown.innerHTML = `
       <div class="user-info">
-        <span class="user-name">${userData.firstName} ${userData.lastName}</span>
+        <span class="user-name">${fullName(userData)}</span>
         <span class="user-email">${userData.email}</span>
       </div>
       <div class="dropdown-divider"></div>

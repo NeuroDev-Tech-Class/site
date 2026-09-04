@@ -81,7 +81,6 @@ body.dark-mode .doc-header h1 {
 }
 
 /* ---------- remove h2 gradient underline on doc pages ---------- */
-.doc-content h2::after,
 main:has(.doc-header) h2::after {
   display: none;
 }
@@ -276,13 +275,67 @@ body.dark-mode .activity::before {
   font-size: 0.85rem;
 }
 
+/* ---------- Paragraphs beside floated images ---------- */
+main:has(.doc-header) p {
+  text-wrap: pretty;
+}
+
 /* ---------- Images in doc pages ---------- */
-main:has(.doc-header) img {
+main:where(:has(.doc-header)) img {
   display: block;
   max-width: min(100%, 700px);
+  max-height: 450px;
+  width: auto;
   height: auto;
   border-radius: var(--doc-radius);
   margin: 1rem auto;
+}
+
+.img-small {
+  max-width: min(100%, 320px);
+}
+
+.img-side {
+  float: right;
+  max-width: min(40%, 320px);
+  max-height: none;
+  margin: 0.25rem 0 1rem 1.5rem;
+}
+
+.img-side.left {
+  float: left;
+  margin: 0.25rem 1.5rem 1rem 0;
+}
+
+.img-side.img-small {
+  max-width: min(30%, 200px);
+}
+
+.img-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.img-row img {
+  max-width: 220px;
+  max-height: 220px;
+  margin: 0;
+}
+
+main:has(.doc-header) :is(h2, h3, .doc-footer, .video-embed, .tip, .warning, .activity) {
+  clear: both;
+}
+
+@media (max-width: 700px) {
+  .img-side,
+  .img-side.left {
+    float: none;
+    max-width: min(100%, 320px);
+    margin: 1rem auto;
+  }
 }
 
 /* ---------- Print styles ---------- */
