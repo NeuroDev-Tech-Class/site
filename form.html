@@ -15,7 +15,8 @@
         <h1 id="embed-title" class="embed-page-title"></h1>
       </div>
       <div class="form-frame-container">
-        <iframe id="form-iframe" loading="lazy"></iframe>
+        <iframe id="form-iframe"></iframe>
+        <div class="spinner-overlay"><div class="spinner"></div></div>
       </div>
     </main>
 
@@ -31,8 +32,12 @@
       document.getElementById('embed-title').textContent = title;
       document.title = title + ' — NeuroDev';
 
+      const iframe = document.getElementById('form-iframe');
+      const hideSpinner = () => document.querySelector('.spinner-overlay')?.remove();
+
       // Iframe src is only set once the user is confirmed approved
       requireApproval(() => {
+        setTimeout(hideSpinner, 10000);
         if (!url) return;
         let parsed;
         try { parsed = new URL(url); } catch (e) { return; }
@@ -40,8 +45,8 @@
         if (parsed.protocol !== 'https:' ||
             parsed.hostname !== 'docs.google.com' ||
             !parsed.pathname.startsWith('/forms/')) return;
-        document.getElementById('form-iframe').src =
-          parsed.origin + parsed.pathname + '?embedded=true';
+        iframe.addEventListener('load', hideSpinner, { once: true });
+        iframe.src = parsed.origin + parsed.pathname + '?embedded=true';
       });
     </script>
   </body>

@@ -21,7 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const pathParts = window.location.pathname.split('/');
   const filename = pathParts[pathParts.length - 1];
   courseId = filename.replace('.html', '');
-  
+
+  getContainer().innerHTML = '<div class="spinner"></div>';
+
   // Listen for auth state
   onAuthStateChanged(auth, async (user) => {
     currentUser = user;
@@ -36,6 +38,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+function getContainer() {
+  let container = document.getElementById("unit-sections");
+  if (!container) {
+    container = document.createElement("div");
+    container.id = "unit-sections";
+    document.getElementById("main-content")?.appendChild(container);
+  }
+  return container;
+}
 
 function generateCourseContent() {
   const dataScript = document.getElementById("unit-data");
@@ -52,18 +64,7 @@ function generateCourseContent() {
     return;
   }
 
-  // Create container if it doesn't exist
-  let container = document.getElementById("unit-sections");
-  if (!container) {
-    container = document.createElement("div");
-    container.id = "unit-sections";
-    const mainContent = document.getElementById("main-content");
-    if (mainContent) {
-      mainContent.appendChild(container);
-    }
-  }
-  
-  // Clear existing content
+  const container = getContainer();
   container.innerHTML = '';
 
   // Check if user is authenticated and approved
