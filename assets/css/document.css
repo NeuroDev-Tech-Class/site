@@ -81,7 +81,6 @@ body.dark-mode .doc-header h1 {
 }
 
 /* ---------- remove h2 gradient underline on doc pages ---------- */
-.doc-content h2::after,
 main:has(.doc-header) h2::after {
   display: none;
 }
