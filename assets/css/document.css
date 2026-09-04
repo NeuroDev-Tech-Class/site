@@ -307,6 +307,10 @@ main:where(:has(.doc-header)) img {
   margin: 0.25rem 1.5rem 1rem 0;
 }
 
+.img-side.img-small {
+  max-width: min(30%, 200px);
+}
+
 .img-row {
   display: flex;
   flex-wrap: wrap;
