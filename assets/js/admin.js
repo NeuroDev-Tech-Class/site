@@ -13,11 +13,11 @@ import {
   collection,
   query,
   where,
-  orderBy,
   serverTimestamp
 } from './firebase-config.js';
 import { courseMetadata } from './course-metadata.js';
 import { formatName, fullName, isAdmin } from './utils.js';
+import { escapeHtml } from './lib/escape-html.js';
 
 let allStudents = [];
 let selectedStudent = null;
@@ -165,8 +165,8 @@ function renderPendingTable() {
     <tr data-id="${student.id}">
       <td>
         <div class="student-name">
-          <strong>${fullName(student)}</strong>
-          <span class="student-email">${student.email}</span>
+          <strong>${escapeHtml(fullName(student))}</strong>
+          <span class="student-email">${escapeHtml(student.email)}</span>
         </div>
       </td>
       <td>${formatDate(student.createdAt)}</td>
@@ -202,11 +202,11 @@ function renderCurrentTable() {
     const certs = (student.certificates || []).length;
 
     return `
-      <tr data-id="${student.id}" class="clickable-row" tabindex="0" role="button" aria-label="View ${fullName(student)}" onclick="viewStudent('${student.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewStudent('${student.id}');}">
+      <tr data-id="${student.id}" class="clickable-row" tabindex="0" role="button" aria-label="View ${escapeHtml(fullName(student))}" onclick="viewStudent('${student.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewStudent('${student.id}');}">
         <td>
           <div class="student-name">
-            <strong>${fullName(student)}</strong>
-            <span class="student-email">${student.email}</span>
+            <strong>${escapeHtml(fullName(student))}</strong>
+            <span class="student-email">${escapeHtml(student.email)}</span>
           </div>
         </td>
         <td>
@@ -247,11 +247,11 @@ function renderOldTable() {
     const certs = (student.certificates || []).length;
 
     return `
-      <tr data-id="${student.id}" class="clickable-row" tabindex="0" role="button" aria-label="View ${fullName(student)}" onclick="viewStudent('${student.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewStudent('${student.id}');}">
+      <tr data-id="${student.id}" class="clickable-row" tabindex="0" role="button" aria-label="View ${escapeHtml(fullName(student))}" onclick="viewStudent('${student.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewStudent('${student.id}');}">
         <td>
           <div class="student-name">
-            <strong>${fullName(student)}</strong>
-            <span class="student-email">${student.email}</span>
+            <strong>${escapeHtml(fullName(student))}</strong>
+            <span class="student-email">${escapeHtml(student.email)}</span>
           </div>
         </td>
         <td>${certs} certificate${certs !== 1 ? 's' : ''}</td>
@@ -314,7 +314,7 @@ window.approveStudent = async function(studentId) {
         subject: 'Your NeuroDev Account Has Been Approved!',
         html: `
           <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#222;">
-            <h2 style="color:#44aadd;margin-top:0;">Welcome to NeuroDev, ${formatName(student.firstName)}!</h2>
+            <h2 style="color:#44aadd;margin-top:0;">Welcome to NeuroDev, ${escapeHtml(formatName(student.firstName))}!</h2>
             <p>Great news — your account has been approved. You can now log in and access your student dashboard to track your course progress and certificates.</p>
             <a href="${siteUrl}profile.html"
                style="display:inline-block;background:#44aadd;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;margin:20px 0;">
@@ -440,7 +440,7 @@ function renderStudentView() {
     coursesContainer.innerHTML = courseData.map(c => `
       <div class="course-card ${c.pct >= 100 ? 'completed' : ''} clickable" onclick="viewCourseResults('${c.id}')">
         <div class="course-info">
-          <h3>${c.name}</h3>
+          <h3>${escapeHtml(c.name)}</h3>
           <span class="course-tasks">${c.completed} / ${c.total} tasks</span>
           ${c.ungradedTests > 0 ? `<span class="course-grading-note">${c.ungradedTests} test${c.ungradedTests === 1 ? '' : 's'} still need grading</span>` : ''}
           <span class="view-results-hint">View test results →</span>
@@ -480,7 +480,7 @@ function renderStudentView() {
           </svg>
         </div>
         <div class="certificate-info">
-          <h3>${cert.courseName}</h3>
+          <h3>${escapeHtml(cert.courseName)}</h3>
           <span class="certificate-date">Awarded ${formatDate(cert.awardedAt)}</span>
           <div class="certificate-actions">
             <button class="action-btn cert certificate-download-btn" data-cert-index="${index}" onclick="downloadCertificate(${index})">Download / Print</button>
@@ -624,19 +624,12 @@ function renderCourseChecklist(unitData, progress) {
   const container = document.getElementById('tr-checklist');
   if (!unitData) { container.innerHTML = ''; return; }
 
-  const escapeHtml = (value) => String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-
   container.innerHTML = `
     <section class="dashboard-section checklist-section">
       <h2>Course Items</h2>
       ${unitData.map((unit, unitIndex) => `
         <div class="checklist-unit">
-          <h3>${unit.title}</h3>
+          <h3>${escapeHtml(unit.title)}</h3>
           <div class="checklist-items">
             ${unit.content.map((item, itemIndex) => {
               const key = `${unitIndex}-${itemIndex}`;
@@ -694,7 +687,7 @@ function renderTestResultsContent(courseId) {
       ? Math.round((Number(rawScore) / totalValue) * 100)
       : null;
     const scoreDisplay = hasScore
-      ? (totalValue ? `${rawScore} / ${totalValue} &nbsp;(${scorePct}%)` : `${rawScore} pts`)
+      ? (totalValue ? `${escapeHtml(rawScore)} / ${totalValue} &nbsp;(${scorePct}%)` : `${escapeHtml(rawScore)} pts`)
       : 'Not graded';
     const answers = result.answers || {};
     const unitLabel = unitKey.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
@@ -704,7 +697,7 @@ function renderTestResultsContent(courseId) {
     return `
       <div class="test-result-card">
         <div class="test-result-header">
-          <h3>${unitLabel}</h3>
+          <h3>${escapeHtml(unitLabel)}</h3>
           <div class="test-result-meta">
             <span class="test-score ${scorePct === null ? '' : scorePct >= 70 ? 'pass' : 'fail'}">${scoreDisplay}</span>
             <span class="test-date">${formatDate(result.submittedAt)}</span>
@@ -723,7 +716,7 @@ function renderTestResultsContent(courseId) {
               value="${scoreInputValue}"
             />
             <span class="grade-total">${totalValue != null ? `/ ${totalValue}` : 'points'}</span>
-            <button class="action-btn approve grade-save-btn" data-test-key="${fullKey}">Save Score</button>
+            <button class="action-btn approve grade-save-btn" data-test-key="${escapeHtml(fullKey)}">Save Score</button>
           </div>
         </div>
         ${Object.keys(answers).length > 0 ? `
@@ -731,8 +724,8 @@ function renderTestResultsContent(courseId) {
             <h4>Answers</h4>
             ${Object.entries(answers).map(([q, a]) => `
               <div class="answer-row">
-                <span class="answer-question">${q}</span>
-                <span class="answer-value">${a}</span>
+                <span class="answer-question">${escapeHtml(q)}</span>
+                <span class="answer-value">${escapeHtml(a)}</span>
               </div>
             `).join('')}
           </div>
@@ -982,7 +975,7 @@ async function awardCertificate() {
         subject: `Your NeuroDev Certificate — ${courseName}`,
         html: `
           <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#222;">
-            <h2 style="color:#44aadd;margin-top:0;">Congratulations, ${formatName(selectedStudent.firstName)}!</h2>
+            <h2 style="color:#44aadd;margin-top:0;">Congratulations, ${escapeHtml(formatName(selectedStudent.firstName))}!</h2>
             <p>You've earned a certificate of completion for <strong>${courseName}</strong>.</p>
             <p>Your certificate is attached to this email. You can save or print it for your records.</p>
             <p style="color:#666;font-size:0.9rem;">Keep up the great work — The NeuroDev Team</p>
@@ -1119,10 +1112,10 @@ function renderAdminsTable() {
     <tr>
       <td>
         <div class="student-name">
-          <strong>${fullName(admin)}</strong>
+          <strong>${escapeHtml(fullName(admin))}</strong>
         </div>
       </td>
-      <td><span class="student-email">${admin.email}</span></td>
+      <td><span class="student-email">${escapeHtml(admin.email)}</span></td>
       <td>${formatDate(admin.createdAt)}</td>
       <td>
         <button class="action-btn deny" onclick="removeAdmin('${admin.id}')">Remove Admin</button>
@@ -1152,8 +1145,8 @@ function renderAddAdminList() {
   container.innerHTML = eligible.map(s => `
     <div class="add-admin-item">
       <div class="student-name">
-        <strong>${fullName(s)}</strong>
-        <span class="student-email">${s.email}</span>
+        <strong>${escapeHtml(fullName(s))}</strong>
+        <span class="student-email">${escapeHtml(s.email)}</span>
       </div>
       <button class="action-btn approve" onclick="promoteToAdmin('${s.id}')">Make Admin</button>
     </div>

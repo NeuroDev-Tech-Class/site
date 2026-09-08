@@ -7,8 +7,7 @@ import {
   onAuthStateChanged,
   doc,
   getDoc,
-  updateDoc,
-  setDoc
+  updateDoc
 } from './firebase-config.js';
 
 let currentUser = null;

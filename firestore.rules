@@ -44,10 +44,11 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // Written by the Google Forms Apps Script without auth; read and graded by admins
+    // Legacy Google Forms scores. Admins grade existing rows; nothing creates new ones.
     match /testResults/{email} {
       allow read: if isAdmin();
-      allow write: if true;
+      allow update: if isAdmin();
+      allow create, delete: if false;
     }
 
     // Queued by admins for the Trigger Email extension
