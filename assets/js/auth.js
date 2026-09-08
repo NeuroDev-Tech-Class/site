@@ -14,6 +14,7 @@ import {
 } from './firebase-config.js';
 import { formatName, fullName, isAdmin } from './utils.js';
 import { escapeHtml } from './lib/escape-html.js';
+import { refreshTokenIfStale } from './lib/claims-refresh.js';
 
 // User state
 let currentUser = null;
@@ -48,6 +49,9 @@ async function initAuth() {
       }
       // Fetch user data from Firestore
       userData = await getUserData(user.uid);
+      if (userData) {
+        refreshTokenIfStale(user, userData).catch(err => console.warn('Token refresh failed:', err));
+      }
       updateUIForLoggedInUser();
     } else {
       userData = null;

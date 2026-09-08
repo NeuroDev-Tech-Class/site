@@ -49,6 +49,7 @@ export async function createRulesEnv(suite) {
   return {
     anon: () => env.unauthenticatedContext().firestore(),
     signedInNoDoc: uid => env.authenticatedContext(uid, { email: `${uid}@example.com` }).firestore(),
+    withClaims: (uid, claims) => env.authenticatedContext(uid, { email: `${uid}@example.com`, ...claims }).firestore(),
     asSuperadminEmail: uid => env.authenticatedContext(uid, { email: SUPERADMIN_EMAIL }).firestore(),
     asPendingStudent: uid => asUser(uid, 'student', 'pending'),
     asStudent: uid => asUser(uid, 'student', 'approved'),

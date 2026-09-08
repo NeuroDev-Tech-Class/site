@@ -302,33 +302,8 @@ window.approveStudent = async function(studentId) {
   } catch (error) {
     console.error('Error approving student:', error);
     alert('Failed to approve student. Please try again.');
-    return;
   }
-
-  // Queue approval email — runs after approval succeeds
-  try {
-    const siteUrl = window.location.origin + '/site/';
-    await addDoc(collection(db, 'mail'), {
-      to: student.email,
-      message: {
-        subject: 'Your NeuroDev Account Has Been Approved!',
-        html: `
-          <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#222;">
-            <h2 style="color:#44aadd;margin-top:0;">Welcome to NeuroDev, ${escapeHtml(formatName(student.firstName))}!</h2>
-            <p>Great news — your account has been approved. You can now log in and access your student dashboard to track your course progress and certificates.</p>
-            <a href="${siteUrl}profile.html"
-               style="display:inline-block;background:#44aadd;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;margin:20px 0;">
-              Go to My Dashboard
-            </a>
-            <p style="color:#666;font-size:0.9rem;">If you have any questions, feel free to reach out to your tech coach.</p>
-            <p style="color:#666;font-size:0.9rem;">— The NeuroDev Team</p>
-          </div>
-        `
-      }
-    });
-  } catch (emailError) {
-    console.warn('Approval email failed to queue:', emailError);
-  }
+  // The approval email is queued by the onUserWrite Cloud Function
 };
 
 window.denyStudent = async function(studentId) {

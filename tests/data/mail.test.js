@@ -28,12 +28,14 @@ test('certificate mail carries the subject, course name and base64 attachment', 
   assert.deepEqual(mail.message.attachments, [{ filename: 'NeuroDev-Python_I-Jane_Doe.docx', content: 'QUJD', encoding: 'base64' }]);
 });
 
-test('queueApproval and queueCertificate add documents to the mail collection', async () => {
+test('queueCertificate adds a document to the mail collection', async () => {
   const fs = createFakeFirestore();
   const mail = mailRepo(fs);
-  await mail.queueApproval(student, siteUrl);
   await mail.queueCertificate(student, 'Linux', { filename: 'x.docx', content: 'QUJD' });
-  assert.deepEqual(fs.writes.map(w => [w.type, w.path.split('/')[0]]), [['add', 'mail'], ['add', 'mail']]);
-  assert.equal(fs.get(fs.writes[0].path).message.subject, 'Your NeuroDev Account Has Been Approved!');
-  assert.equal(fs.get(fs.writes[1].path).message.subject, 'Your NeuroDev Certificate — Linux');
+  assert.deepEqual(fs.writes.map(w => [w.type, w.path.split('/')[0]]), [['add', 'mail']]);
+  assert.equal(fs.get(fs.writes[0].path).message.subject, 'Your NeuroDev Certificate — Linux');
+});
+
+test('the browser repo has no approval sender; that lives in the onUserWrite function', () => {
+  assert.equal(mailRepo(createFakeFirestore()).queueApproval, undefined);
 });
