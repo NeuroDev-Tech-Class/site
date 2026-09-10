@@ -6,16 +6,17 @@ service cloud.firestore {
       return request.auth != null;
     }
 
-    function callerRole() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    // Role and status live in custom auth claims, synced from users/{uid} by the onUserWrite function
+    function role() {
+      return request.auth.token.get('role', '');
     }
 
     function isAdmin() {
-      return signedIn() && callerRole() in ['admin', 'superadmin'];
+      return signedIn() && role() in ['admin', 'superadmin'];
     }
 
     function isSuperAdmin() {
-      return signedIn() && callerRole() == 'superadmin';
+      return signedIn() && role() == 'superadmin';
     }
 
     function roleUnchanged() {
@@ -44,15 +45,20 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // Written by the Google Forms Apps Script without auth; read and graded by admins
+    // Legacy Google Forms scores. Admins grade existing rows; nothing creates new ones.
     match /testResults/{email} {
       allow read: if isAdmin();
-      allow write: if true;
+      allow update: if isAdmin();
+      allow create, delete: if false;
     }
 
-    // Queued by admins for the Trigger Email extension
+    // Certificate emails are queued by admins; approval emails come from onUserWrite
     match /mail/{docId} {
       allow create: if isAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }

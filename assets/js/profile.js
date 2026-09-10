@@ -8,6 +8,7 @@ import {
 } from './firebase-config.js';
 import { courseMetadata } from './course-metadata.js';
 import { formatName, isAdmin } from './utils.js';
+import { escapeHtml } from './lib/escape-html.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   onAuthStateChanged(auth, async (user) => {
@@ -131,7 +132,7 @@ function displayCourses(courseData) {
   container.innerHTML = courseData.map(course => `
     <a href="courses/${course.id}.html" class="course-card ${course.percentage >= 100 ? 'completed' : ''}">
       <div class="course-info">
-        <h3>${course.name}</h3>
+        <h3>${escapeHtml(course.name)}</h3>
         <span class="course-tasks">${course.completed} / ${course.total} tasks</span>
       </div>
       <div class="progress-ring-container">
@@ -181,7 +182,7 @@ function displayCertificates(certificates) {
         </svg>
       </div>
       <div class="certificate-info">
-        <h3>${cert.courseName}</h3>
+        <h3>${escapeHtml(cert.courseName)}</h3>
         <span class="certificate-date">Awarded ${formatDate(cert.awardedAt)}</span>
       </div>
     </div>

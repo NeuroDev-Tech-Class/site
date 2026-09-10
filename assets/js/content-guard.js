@@ -5,6 +5,7 @@
 //   - form.html       (gates the quiz iframe)
 
 import { auth, db, doc, getDoc, onAuthStateChanged } from './firebase-config.js';
+import { refreshTokenIfStale } from './lib/claims-refresh.js';
 
 // Derive the site root from this module's URL (module is at {siteRoot}/assets/js/content-guard.js)
 const siteRoot = new URL('../../', import.meta.url).href;
@@ -31,6 +32,7 @@ export function requireApproval(onApproved) {
         window.location.replace(siteRoot + 'index.html');
         return;
       }
+      await refreshTokenIfStale(user, snap.data());
     } catch {
       unsubscribe();
       window.location.replace(siteRoot + 'index.html');

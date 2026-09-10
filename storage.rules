@@ -1,0 +1,15 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isAdmin() {
+      return request.auth != null &&
+             request.auth.token.get('role', '') in ['admin', 'superadmin'];
+    }
+
+    // Student uploads open in Phase 3. Until then only admins can read and nothing writes.
+    match /{allPaths=**} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+  }
+}

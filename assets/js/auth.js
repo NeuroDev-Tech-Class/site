@@ -13,6 +13,8 @@ import {
   serverTimestamp
 } from './firebase-config.js';
 import { formatName, fullName, isAdmin } from './utils.js';
+import { escapeHtml } from './lib/escape-html.js';
+import { refreshTokenIfStale } from './lib/claims-refresh.js';
 
 // User state
 let currentUser = null;
@@ -47,6 +49,9 @@ async function initAuth() {
       }
       // Fetch user data from Firestore
       userData = await getUserData(user.uid);
+      if (userData) {
+        refreshTokenIfStale(user, userData).catch(err => console.warn('Token refresh failed:', err));
+      }
       updateUIForLoggedInUser();
     } else {
       userData = null;
@@ -423,8 +428,8 @@ function updateUIForLoggedInUser() {
     iconBtn.classList.add('pending');
     dropdown.innerHTML = `
       <div class="user-info">
-        <span class="user-name">${fullName(userData)}</span>
-        <span class="user-email">${userData.email}</span>
+        <span class="user-name">${escapeHtml(fullName(userData))}</span>
+        <span class="user-email">${escapeHtml(userData.email)}</span>
       </div>
       <div class="dropdown-divider"></div>
       <div class="dropdown-item pending-status">
@@ -448,8 +453,8 @@ function updateUIForLoggedInUser() {
     
     dropdown.innerHTML = `
       <div class="user-info">
-        <span class="user-name">${fullName(userData)}</span>
-        <span class="user-email">${userData.email}</span>
+        <span class="user-name">${escapeHtml(fullName(userData))}</span>
+        <span class="user-email">${escapeHtml(userData.email)}</span>
       </div>
       <div class="dropdown-divider"></div>
       <a href="${dashboardLink}" class="dropdown-item">
