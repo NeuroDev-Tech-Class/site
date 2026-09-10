@@ -4,7 +4,7 @@ const GLOBALS = ['document', 'HTMLElement', 'DOMParser', 'Event', 'KeyboardEvent
 
 export function setupDom() {
   const dom = new JSDOM(
-    '<!doctype html><main id="main-content" class="dashboard"><div id="app"></div></main>',
+    '<!doctype html><main id="main-content" class="dashboard admin-layout"><nav id="admin-nav"></nav><div id="app"></div></main>',
     { url: 'http://localhost/site/admin.html' }
   );
   const { window } = dom;

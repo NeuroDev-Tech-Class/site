@@ -1252,3 +1252,195 @@ body.dark-mode .checklist-type-badge {
     flex-direction: row;
   }
 }
+
+/* Admin shell: sidebar at 900px and up, horizontal bar below */
+.admin-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.admin-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.admin-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.15s ease;
+}
+
+.admin-nav-link svg {
+  flex-shrink: 0;
+}
+
+.admin-nav-link:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+body.dark-mode .admin-nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.admin-nav-link[aria-current='page'] {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.nav-badge {
+  margin-left: auto;
+  min-width: 1.6rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: #c9302c;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.admin-nav-link[aria-current='page'] .nav-badge {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+@media (min-width: 900px) {
+  .admin-layout {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+
+  .admin-nav {
+    flex-direction: column;
+    position: sticky;
+    top: 1rem;
+  }
+
+  .admin-nav-link {
+    width: 100%;
+  }
+}
+
+/* Today: needs-your-attention list */
+.attention-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+body.dark-mode .attention-item {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.attention-item:last-child {
+  border-bottom: none;
+}
+
+.attention-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.attention-detail {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+body.dark-mode .attention-detail {
+  color: #aaa;
+}
+
+/* Grading queue */
+.queue-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.queue-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.queue-filter select,
+.queue-filter input {
+  min-height: 44px;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+body.dark-mode .queue-filter select,
+body.dark-mode .queue-filter input {
+  border-color: #555;
+}
+
+/* Grade screen */
+.grade-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-width: 640px;
+}
+
+.grade-outof-label {
+  font-weight: 600;
+}
+
+.grade-feedback {
+  padding: 0.6rem 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: var(--background-color);
+  color: var(--text-color);
+  font: inherit;
+  resize: vertical;
+}
+
+body.dark-mode .grade-feedback {
+  border-color: #555;
+}
+
+.grade-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+#grade-message {
+  font-weight: 600;
+  color: #2e7d32;
+}
+
+body.dark-mode #grade-message {
+  color: #81c784;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-nav-link,
+  .stat-card {
+    transition: none;
+  }
+}

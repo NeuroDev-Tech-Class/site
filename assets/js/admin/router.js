@@ -1,6 +1,9 @@
-const DEFAULT_HASH = '#/students';
+const DEFAULT_HASH = '#/today';
 
 const PATTERNS = [
+  { name: 'today', re: /^\/today$/, keys: [] },
+  { name: 'queue', re: /^\/queue$/, keys: [] },
+  { name: 'grade', re: /^\/grade\/([^/?]+)$/, keys: ['id'] },
   { name: 'results', re: /^\/students\/([^/?]+)\/results\/([^/?]+)$/, keys: ['uid', 'courseId'] },
   { name: 'student', re: /^\/students\/([^/?]+)$/, keys: ['uid'] },
   { name: 'students', re: /^\/students$/, keys: [] }
@@ -18,7 +21,7 @@ export function parseRoute(hash) {
 }
 
 // Views implement mount(root, route, ctx) and return { dispose, ready }.
-export function createRouter({ window, root, routes, ctx }) {
+export function createRouter({ window, root, routes, ctx, onRoute }) {
   let current = null;
   let renderedHash = null;
   let pending = Promise.resolve();
@@ -29,11 +32,21 @@ export function createRouter({ window, root, routes, ctx }) {
       window.history.replaceState(null, '', DEFAULT_HASH);
       route = parseRoute(DEFAULT_HASH);
     }
+    if (route.name === 'results') {
+      window.history.replaceState(null, '', `#/students/${encodeURIComponent(route.params.uid)}`);
+      route = parseRoute(window.location.hash);
+    }
     if (window.location.hash === renderedHash) return pending;
     renderedHash = window.location.hash;
     current?.dispose?.();
     root.innerHTML = '';
     current = routes[route.name].mount(root, route, ctx) || {};
+    const heading = root.querySelector('h1');
+    if (heading) {
+      heading.setAttribute('tabindex', '-1');
+      heading.focus();
+    }
+    onRoute?.(route);
     pending = Promise.resolve(current.ready);
     return pending;
   }
