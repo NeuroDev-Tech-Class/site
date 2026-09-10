@@ -39,9 +39,24 @@ function setPath(obj, path, value) {
   cursor[keys.at(-1)] = value;
 }
 
+const sortValue = value => {
+  if (value instanceof Date) return value.getTime();
+  if (typeof value?.toDate === 'function') return value.toDate().getTime();
+  return value;
+};
+
+const compare = (a, b) => {
+  const x = sortValue(a);
+  const y = sortValue(b);
+  return x < y ? -1 : x > y ? 1 : 0;
+};
+
+const parentOf = path => path.slice(0, path.lastIndexOf('/'));
+
 export function createFakeFirestore({ now = new Date('2026-09-08T12:00:00Z'), seed = {} } = {}) {
   const store = new Map(Object.entries(seed).map(([path, data]) => [path, clone(data)]));
   const writes = [];
+  const listeners = new Set();
   let autoId = 0;
 
   const db = { fake: true };
@@ -56,7 +71,9 @@ export function createFakeFirestore({ now = new Date('2026-09-08T12:00:00Z'), se
     path: [...segmentsOf(parent), ...segments].join('/')
   });
   const where = (field, op, value) => ({ type: 'where', field, op, value });
-  const query = (col, ...constraints) => ({ type: 'query', path: col.path, constraints });
+  const orderBy = (field, direction = 'asc') => ({ type: 'orderBy', field, direction });
+  const limit = n => ({ type: 'limit', n });
+  const query = (col, ...constraints) => ({ type: 'query', path: col.path, constraints: [...(col.constraints || []), ...constraints] });
   const serverTimestamp = () => SERVER_TIMESTAMP;
 
   const snapshotOf = ref => {
@@ -77,18 +94,57 @@ export function createFakeFirestore({ now = new Date('2026-09-08T12:00:00Z'), se
     throw new Error(`fake firestore: unsupported operator ${c.op}`);
   };
 
+  // Firestore drops documents that lack an orderBy field; the fake does the same.
+  function runQuery(q) {
+    const constraints = q.constraints || [];
+    const unknown = constraints.find(c => !['where', 'orderBy', 'limit'].includes(c.type));
+    if (unknown) throw new Error(`fake firestore: unsupported constraint ${unknown.type}`);
+    const wheres = constraints.filter(c => c.type === 'where');
+    const orders = constraints.filter(c => c.type === 'orderBy');
+    const cap = constraints.find(c => c.type === 'limit');
+    let rows = [];
+    for (const [path, data] of store) {
+      if (parentOf(path) !== q.path) continue;
+      if (!wheres.every(c => matches(data, c))) continue;
+      if (orders.some(o => getPath(data, o.field) === undefined)) continue;
+      rows.push({ path, data });
+    }
+    for (const o of [...orders].reverse()) {
+      const sign = o.direction === 'desc' ? -1 : 1;
+      rows.sort((a, b) => sign * compare(getPath(a.data, o.field), getPath(b.data, o.field)));
+    }
+    if (cap) rows = rows.slice(0, cap.n);
+    const docs = rows.map(({ path }) => snapshotOf({ path, id: path.split('/').at(-1) }));
+    return { docs, size: docs.length, empty: docs.length === 0, forEach: fn => docs.forEach(fn) };
+  }
+
+  function schedule(entry) {
+    if (entry.pending) return;
+    entry.pending = true;
+    queueMicrotask(() => {
+      entry.pending = false;
+      if (listeners.has(entry)) entry.onNext(runQuery(entry.q));
+    });
+  }
+
+  function notify(path) {
+    const parent = parentOf(path);
+    for (const entry of listeners) if (entry.q.path === parent) schedule(entry);
+  }
+
+  function onSnapshot(q, onNext) {
+    const entry = { q, onNext, pending: false };
+    listeners.add(entry);
+    schedule(entry);
+    return () => listeners.delete(entry);
+  }
+
   async function getDoc(ref) {
     return snapshotOf(ref);
   }
 
   async function getDocs(q) {
-    const constraints = q.constraints || [];
-    const docs = [];
-    for (const [path, data] of store) {
-      if (path.slice(0, path.lastIndexOf('/')) !== q.path) continue;
-      if (constraints.every(c => matches(data, c))) docs.push(snapshotOf({ path, id: path.split('/').at(-1) }));
-    }
-    return { docs, size: docs.length, empty: docs.length === 0, forEach: fn => docs.forEach(fn) };
+    return runQuery(q);
   }
 
   async function setDoc(ref, data, options = {}) {
@@ -96,6 +152,7 @@ export function createFakeFirestore({ now = new Date('2026-09-08T12:00:00Z'), se
     const existing = store.get(ref.path);
     store.set(ref.path, options.merge && existing ? deepMerge(existing, resolved) : clone(resolved));
     writes.push({ type: 'set', path: ref.path, data: resolved, options });
+    notify(ref.path);
   }
 
   async function updateDoc(ref, patch) {
@@ -105,11 +162,13 @@ export function createFakeFirestore({ now = new Date('2026-09-08T12:00:00Z'), se
     for (const [fieldPath, value] of Object.entries(resolved)) setPath(target, fieldPath, value);
     store.set(ref.path, target);
     writes.push({ type: 'update', path: ref.path, data: resolved });
+    notify(ref.path);
   }
 
   async function deleteDoc(ref) {
     store.delete(ref.path);
     writes.push({ type: 'delete', path: ref.path });
+    notify(ref.path);
   }
 
   async function addDoc(col, data) {
@@ -120,10 +179,12 @@ export function createFakeFirestore({ now = new Date('2026-09-08T12:00:00Z'), se
   }
 
   return {
-    db, doc, collection, query, where, getDoc, getDocs, setDoc, updateDoc, deleteDoc, addDoc, serverTimestamp,
+    db, doc, collection, query, where, orderBy, limit, onSnapshot,
+    getDoc, getDocs, setDoc, updateDoc, deleteDoc, addDoc, serverTimestamp,
     writes,
     now,
     get: path => (store.has(path) ? clone(store.get(path)) : undefined),
-    has: path => store.has(path)
+    has: path => store.has(path),
+    listenerCount: () => listeners.size
   };
 }

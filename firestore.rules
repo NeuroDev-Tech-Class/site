@@ -57,6 +57,34 @@ service cloud.firestore {
       allow create: if isAdmin();
     }
 
+    // A grade may change only the grading fields; totalScore, passed and provisional are
+    // written by onSubmissionWrite, which bypasses these rules.
+    function validGrade() {
+      let data = request.resource.data;
+      return data.diff(resource.data).affectedKeys()
+               .hasOnly(['manualScore', 'totalMax', 'feedback', 'status', 'gradedAt', 'gradedBy', 'updatedAt']) &&
+             data.status == 'graded' &&
+             data.manualScore is number && data.manualScore >= 0 &&
+             (data.get('totalMax', null) == null ||
+               (data.totalMax is number && data.totalMax > 0 && data.manualScore <= data.totalMax)) &&
+             data.get('feedback', '') is string && data.get('feedback', '').size() <= 5000 &&
+             data.gradedBy == request.auth.uid &&
+             data.gradedAt == request.time;
+    }
+
+    // Created by the migration tool now and by students from Phase 3; students read their own.
+    match /submissions/{id} {
+      allow read: if isAdmin();
+      allow read: if signedIn() && resource.data.studentUid == request.auth.uid;
+      allow update: if isAdmin() && validGrade();
+      allow create, delete: if false;
+    }
+
+    // testResults rows whose email matched no user, written by the migration tool
+    match /legacyOrphans/{email} {
+      allow read: if isAdmin();
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

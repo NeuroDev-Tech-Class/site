@@ -4,6 +4,7 @@ import { getFirestore, FieldValue } from 'firebase-admin/firestore';
 import { setGlobalOptions } from 'firebase-functions/v2';
 import { onDocumentWritten } from 'firebase-functions/v2/firestore';
 import { handleUserWrite } from './lib/user-write.js';
+import { handleSubmissionWrite } from './lib/submission-write.js';
 
 const SITE_URL = 'https://neurodev-tech-class.github.io/site/';
 
@@ -15,4 +16,10 @@ export const onUserWrite = onDocumentWritten('users/{uid}', async event => {
   const after = event.data?.after?.exists ? event.data.after.data() : null;
   const deps = { auth: getAuth(), db: getFirestore(), FieldValue, siteUrl: SITE_URL };
   await handleUserWrite(deps, event.params.uid, before, after);
+});
+
+export const onSubmissionWrite = onDocumentWritten('submissions/{id}', async event => {
+  const before = event.data?.before?.exists ? event.data.before.data() : null;
+  const after = event.data?.after?.exists ? event.data.after.data() : null;
+  await handleSubmissionWrite({ db: getFirestore() }, event.params.id, before, after);
 });

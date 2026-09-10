@@ -38,6 +38,52 @@ test('setDoc with merge deep-merges nested maps; without merge it replaces', asy
   assert.deepEqual(fs.get('testResults/e'), { only: true });
 });
 
+const dated = {
+  'subs/a': { status: 'graded', submittedAt: new Date('2026-06-03T00:00:00Z') },
+  'subs/b': { status: 'needs_grading', submittedAt: new Date('2026-06-01T00:00:00Z') },
+  'subs/c': { status: 'needs_grading', submittedAt: new Date('2026-06-02T00:00:00Z') },
+  'subs/d': { status: 'needs_grading' }
+};
+
+test('getDocs honours orderBy in both directions and limit, dropping docs without the field', async () => {
+  const fs = createFakeFirestore({ seed: dated });
+  const col = fs.collection(fs.db, 'subs');
+  const asc = await fs.getDocs(fs.query(col, fs.orderBy('submittedAt', 'asc')));
+  assert.deepEqual(asc.docs.map(d => d.id), ['b', 'c', 'a']);
+  const desc = await fs.getDocs(fs.query(col, fs.orderBy('submittedAt', 'desc'), fs.limit(2)));
+  assert.deepEqual(desc.docs.map(d => d.id), ['a', 'c']);
+  const filtered = await fs.getDocs(fs.query(col, fs.where('status', 'in', ['needs_grading']), fs.orderBy('submittedAt')));
+  assert.deepEqual(filtered.docs.map(d => d.id), ['b', 'c']);
+});
+
+test('onSnapshot delivers asynchronously, then again after writes that change the result set', async () => {
+  const fs = createFakeFirestore({ seed: dated });
+  const q = fs.query(fs.collection(fs.db, 'subs'), fs.where('status', '==', 'needs_grading'), fs.orderBy('submittedAt'));
+  const deliveries = [];
+  const unsubscribe = fs.onSnapshot(q, snap => deliveries.push(snap.docs.map(d => d.id)));
+  assert.deepEqual(deliveries, []);
+  await Promise.resolve();
+  assert.deepEqual(deliveries, [['b', 'c']]);
+
+  await fs.updateDoc(fs.doc(fs.db, 'subs', 'b'), { status: 'graded' });
+  await fs.setDoc(fs.doc(fs.db, 'subs', 'e'), { status: 'needs_grading', submittedAt: new Date('2026-05-30T00:00:00Z') });
+  await Promise.resolve();
+  assert.deepEqual(deliveries.at(-1), ['e', 'c']);
+
+  const afterWrites = deliveries.length;
+  await fs.setDoc(fs.doc(fs.db, 'other', 'x'), { status: 'needs_grading' });
+  await Promise.resolve();
+  assert.equal(deliveries.length, afterWrites);
+
+  assert.equal(fs.listenerCount(), 1);
+  unsubscribe();
+  assert.equal(fs.listenerCount(), 0);
+  const before = deliveries.length;
+  await fs.deleteDoc(fs.doc(fs.db, 'subs', 'c'));
+  await Promise.resolve();
+  assert.equal(deliveries.length, before);
+});
+
 test('addDoc generates an id and logs an add write', async () => {
   const fs = createFakeFirestore();
   const ref = await fs.addDoc(fs.collection(fs.db, 'mail'), { to: 'x' });
