@@ -1,6 +1,6 @@
 # NeuroDev Tech Class LMS Roadmap
 
-Status: planning approved Sep 8 2026. Nothing below is implemented yet.
+Status: planning approved Sep 8 2026. **Phase 0 (Foundations) done Sep 10 2026**; see the decisions log and the Phase 0 note under section 9. Phases 1 to 8 are not started.
 Companion document: [CHECKPOINT-DELIVERABLES.md](CHECKPOINT-DELIVERABLES.md) lists every checkpoint and the form fields it gets.
 
 Vocabulary: Topher says "certificate" for what the code calls a course. This document says **certificate (course)** where it matters; identifiers in code stay `courseId`.
@@ -21,13 +21,23 @@ We want one system: admins are notified when students finish things, progress is
 | Notifications | **In-app only.** Live feed and badges. No new email. The existing approval and certificate emails stay. |
 | Checkpoints | Replace Google Docs and Forms with in-site forms: a text area per question plus URL, file, image, code, checklist and mentor sign-off field types. |
 
+### Decisions log
+
+| Date | Decision | Choice |
+|---|---|---|
+| Sep 8 2026 | Google Forms results after the `testResults` write hole closed | **Not preserved.** Rules deny all client writes; no quizzes are taken until Phase 4 replaces the Forms. Existing rows stay readable and gradable by admins until Phase 1 migrates them. |
+| Sep 8 2026 | Where rules, indexes, storage rules and functions deploy from | **GitHub Actions on push to `main`** (`.github/workflows/ci.yml`), authenticated with the `FIREBASE_SERVICE_ACCOUNT` secret. Manual `firebase deploy` only for first-time API enablement. |
+| Sep 8 2026 | Rules tests | **Local and CI**, against the Firestore emulator (Java 21). |
+| Sep 8 2026 | Branching for Phase 0 | All work on `ui`, one commit per step, PR to `main` at the end. |
+| Sep 10 2026 | Role checks | **Custom claims** (`role`, `status`) synced by `onUserWrite`; rules read `request.auth.token`, never a `users` document. The client forces a token refresh when its document is ahead of its token. |
+
 ## Facts from the audit that shape the plan
 
 - All 13 quizzes are Google Forms. Their question banks exist only inside Google Forms and must be re-authored (owner task; an import format is provided below).
 - 36 checkpoint-style lesson pages: 7 fit plain text, 10 need a file upload, 5 an image upload, 4 a URL field, 8 a live mentor sign-off, 2 a code field. Many are a mix. See the companion document.
 - 58 GitHub Classroom links (python-1: 21, python-2: 14, web-dev-2: 17, web-dev-3: 6). Their content is recoverable: `NeuroDev/tech-class-courses/` holds local clones with `lesson.md`, `exercise.py` and `tests/` for Python I (20/18/16) and Python II (14/15/14), and `README.md` plus starter files for Web Dev I, II and III.
 - Lesson HTML uses a small fixed vocabulary: classes `tip warning activity card grid-2 img-row img-side img-small video-embed subtitle`, plus tables (106), `pre` (157), `code` (1041) and YouTube iframes (21). The largest file is 58 KB, under Firestore's 1 MB document limit.
-- Security hole live now: `testResults` has `allow write: if true`, and admin.js renders those answers into innerHTML unescaped. That is a stored-XSS path into the admin session. It is fixed in Phase 0 regardless of anything else.
+- Security hole found in the audit: `testResults` had `allow write: if true`, and admin.js rendered those answers into innerHTML unescaped, a stored-XSS path into the admin session. **Closed Sep 8 2026** (Phase 0 step 1): client writes denied, every admin renderer escapes.
 - Content bugs found: `identifying_computer_hardware.html` is a byte-for-byte copy of `navigating_the_bios_uefi.html`; lesson text uses two different submission emails; two Web Dev II instruction PDFs are referenced but missing; `web-dev-1.html` has six `https://url` placeholders and a visible `TODO:` line.
 
 ## 1. Goals
@@ -115,15 +125,15 @@ Rules matrix:
 
 Realtime listener budget for an open admin tab: five (inbox, counters, queue, pending users, activity). All are `limit()`-bounded and all are disposed on navigation.
 
-## 4. Cloud Functions (Node 20, `functions/`)
+## 4. Cloud Functions (Node 22, `functions/`)
 
 | Function | Trigger | Does |
 |---|---|---|
 | `onSubmissionWrite` | `submissions/*` write | Auto-grades mc/tf/multi from `answerKeys`, sets status and the provisional flag, marks the progress item done when graded, fans out inbox notifications to admins and the student, bumps counters, logs activity. |
-| `onUserWrite` | `users/*` write | Syncs role and status into custom claims. On approval queues the approval `mail` document (moves that HTML out of admin.js). |
+| `onUserWrite` | `users/*` write | **Deployed (Phase 0).** Syncs role and status into custom claims. On approval queues the approval `mail` document (moved out of admin.js). Stamps `claimsUpdatedAt`. |
 | `onProgressWrite` | `users/*/progress/*` write | Recomputes `users.summary`, debounced 60 seconds. |
 | `publishCourse` | callable (admin) | Validates the course tree, writes `published/current`, bumps version. |
-| `awardCertificate` | callable (admin) | Renders the DOCX server-side (port of `generateCertificateDocx`, admin.js lines 851-941), stores it, creates the certificate document, queues the mail, notifies the student. |
+| `awardCertificate` | callable (admin) | Renders the DOCX server-side (port of `admin/certificate-docx.js`), stores it, creates the certificate document, queues the mail, notifies the student. |
 | `setUserRole` | callable (superadmin) | The only path to role changes. |
 | `cleanupOrphans` | scheduled weekly, optional | Deletes Storage objects with no owning document, trims old activity. |
 
@@ -173,7 +183,7 @@ tools/              extract-courses, extract-lessons, import-classroom, import, 
 tests/              node --test suites, helpers/fake-firestore.js, helpers/dom.js
 ```
 
-Reuse: `utils.js` (formatName, fullName, isAdmin), `content-guard.js` `requireApproval`, `dashboard.css` stat cards, progress rings and modal styles, `document.css`, the DOCX generator and date-phrase helpers in `admin.js` lines 851-941, the checklist renderer in `admin.js` lines 623-660, and the `auth.js` globals `openAuthModal` and `showPendingMessage`.
+Reuse: `lib/format.js` (formatName, fullName, isAdmin, formatDate; `utils.js` re-exports it), `content-guard.js` `requireApproval`, `dashboard.css` stat cards, progress rings and modal styles, `document.css`, the DOCX generator and date-phrase helpers in `admin/certificate-docx.js`, the checklist renderer in `admin/views/test-results.js`, the progress maths in `admin/progress.js`, and the `auth.js` globals `openAuthModal` and `showPendingMessage`.
 
 Rich editor (recommended): vendor **TinyMCE 6.8 (MIT)** for the admin-only lesson editor. It supports tables, code samples, custom block formats for `div.tip`, `div.warning`, `div.activity` and `div.card`, an image upload hook, and a `valid_elements` allowlist that mirrors `sanitize-html.js`. The sanitizer still runs on save and on render. Alternative if size matters: Toast UI Editor (markdown-based). Do not build a general contenteditable editor from scratch.
 
@@ -225,7 +235,7 @@ Sizes for one developer: S under a week, M one to two weeks, L two to four, XL f
 
 | # | Phase | Size | Needs | Delivers |
 |---|---|---|---|---|
-| 0 | Foundations | M | Blaze (done) | Budget alert. Storage and Functions initialised and deployed from the repo. **`testResults` write hole closed and answers escaped on render (hotfix, first PR).** Custom claims and rules rewrite. Test harness, fake Firestore, rules emulator suite, CI. `lib/` and `ui/` primitives. `admin.js` split into `admin/` with the router and the three current views ported one to one: no visible change, no `window.*` globals, no unescaped innerHTML. |
+| 0 | Foundations | M | Blaze (done) | **Done Sep 10 2026.** Budget alert. Storage and Functions initialised and deployed from the repo. **`testResults` write hole closed and answers escaped on render (hotfix, first PR).** Custom claims and rules rewrite. Test harness, fake Firestore, rules emulator suite, CI. `lib/` and `ui/` primitives. `admin.js` split into `admin/` with the router and the three current views ported one to one: no visible change, no `window.*` globals, no unescaped innerHTML. |
 | 1 | Submissions and Grading Queue | L | 0 | `submissions`, indexes, `onSubmissionWrite`. Queue and Grade views. Student "Recent work". `migrate-test-results` so the queue opens with history. **First shippable win.** |
 | 2 | Notifications and Activity | S/M | 1 | Inbox, counters, activity feed, header bell, sidebar badge. |
 | 3 | Checkpoints | L | 1, 2 | `checkpoints`, Storage uploads and rules, `checkpoint.html`, grade view field types, all 36 pages and 58 Classroom items converted via `import-classroom`. Ends emailed Word documents. |
@@ -236,6 +246,16 @@ Sizes for one developer: S under a week, M one to two weeks, L two to four, XL f
 | 8 | Certificates, settings, cleanup | M | all | Template editor, server-side `awardCertificate`, student download, Settings view, `cleanupOrphans`, drop legacy fields, delete `testResults`. |
 
 Phases 3 and 4 can run in parallel. Phases 0 to 2 are worth shipping even if nothing else happens.
+
+### Phase 0 as delivered (Sep 10 2026)
+
+- `firestore.rules`, `firestore.indexes.json`, `storage.rules` and `functions/` live in the repo and deploy from CI on push to `main`. Pasting rules into the console is over.
+- `onUserWrite` (`functions/lib/user-write.js`) mirrors `role` and `status` into custom claims, queues the approval email and stamps `claimsUpdatedAt`. The claims backfill (`tools/backfill-claims.mjs`) ran once against production.
+- Rules read only the token. A catch-all denies anything without a rule. `testResults` is admin read and update only.
+- Harness: `tests/` with the fake Firestore, jsdom helpers, the rules matrix against the emulator, function tests and one end-to-end run of the real function. `npm test` is 139 tests; CI runs it plus `test:e2e`.
+- `assets/js/lib/` (escape-html, html, format, claims-refresh), `assets/js/data/` (users, test-results, mail), `assets/js/ui/table-row.js`.
+- `assets/js/admin.js` is gone. `assets/js/admin/` holds `main.js`, `router.js` (hash routes `#/students`, `#/students/:uid`, `#/students/:uid/results/:courseId`), `store.js`, `progress.js`, `certificate-docx.js`, `course-structure.js`, `icons.js` and `views/`. No `window.*` handlers; every interpolation goes through `html`.
+- Not done in Phase 0, carried to Phase 1: Firebase client SDK upgrade from 10.8.0 (needed for `onSnapshot` and Storage imports), `link-generator.js` whole-map overwrite of `courses`.
 
 ## 10. Open decisions
 
@@ -256,7 +276,7 @@ Defaults let work start. Confirm or change each one.
 
 ## 11. Risks and guardrails
 
-- **Live write hole and stored XSS in `testResults`**: close in the first Phase 0 PR.
+- **Live write hole and stored XSS in `testResults`**: closed in Phase 0 (Sep 8 2026); `tests/rules/test-results.test.js` and the jsdom XSS tests keep it closed.
 - **Progress remap errors**: `legacyKey` on every item, dry-run report, `users.courses` preserved until Phase 8, idempotent re-run.
 - **Lesson content loss**: the repo remains the source of truth until Phase 7 is verified. Strip-diff report, nightly export to git, files become stubs and are never deleted.
 - **Stored XSS from lesson HTML**: sanitize on save and on render from one allowlist module, fixture tests, CSP meta on lesson pages.
