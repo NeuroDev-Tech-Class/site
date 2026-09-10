@@ -7,7 +7,7 @@
   },
   "scripts": {
     "test": "firebase emulators:exec --only firestore --project demo-neurodev \"node --test 'tests/**/*.test.js'\"",
-    "test:unit": "node --test 'tests/lib/**/*.test.js' 'tests/data/**/*.test.js' 'tests/helpers/**/*.test.js' 'tests/functions/**/*.test.js'",
+    "test:unit": "node --test 'tests/lib/**/*.test.js' 'tests/data/**/*.test.js' 'tests/helpers/**/*.test.js' 'tests/ui/**/*.test.js' 'tests/functions/**/*.test.js'",
     "sync-shared": "node tools/sync-shared.mjs",
     "test:rules": "firebase emulators:exec --only firestore --project demo-neurodev \"node --test 'tests/rules/**/*.test.js'\"",
     "test:e2e": "FUNCTIONS_DISCOVERY_TIMEOUT=120 firebase emulators:exec --only firestore,auth,functions --project demo-neurodev \"node --test 'tests/emulator/**/*.e2e.js'\"",

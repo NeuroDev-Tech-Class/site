@@ -11,7 +11,7 @@
       "source": "functions",
       "codebase": "default",
       "runtime": "nodejs22",
-      "predeploy": ["node tools/sync-shared.mjs --check", "npm --prefix \"$RESOURCE_DIR\" test"]
+      "predeploy": ["node tools/sync-shared.mjs --check", "npm run test:unit"]
     }
   ],
   "emulators": {
