@@ -168,3 +168,16 @@ test('dispose stops the view from reacting to clicks', async () => {
   await settle();
   assert.equal(fs.get('users/p1').status, 'pending');
 });
+
+test('tables and the add-admin list contain only their items, with no stray text between them', async () => {
+  await mount({ role: 'superadmin' });
+  click(dom.root.querySelector('[data-action="open-add-admin"]'));
+  const strayText = container => [...container.childNodes]
+    .filter(node => node.nodeType === 3 && node.textContent.trim() !== '')
+    .map(node => node.textContent.trim());
+  for (const id of ['current-tbody', 'pending-tbody', 'old-tbody', 'admins-tbody', 'add-admin-list']) {
+    assert.deepEqual(strayText(dom.root.querySelector(`#${id}`)), [], id);
+  }
+  assert.equal(rows('current').length, 2);
+  assert.equal(dom.root.querySelectorAll('#add-admin-list .add-admin-item').length, 2);
+});
