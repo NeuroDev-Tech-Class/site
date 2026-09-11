@@ -1,6 +1,6 @@
 # NeuroDev Tech Class LMS Roadmap
 
-Status: planning approved Sep 8 2026. **Phase 0 (Foundations) done Sep 10 2026**; see the decisions log and the Phase 0 note under section 9. Phases 1 to 8 are not started.
+Status: planning approved Sep 8 2026. **Phase 0 (Foundations) done Sep 10 2026. Phase 1 (Submissions and Grading Queue) done Sep 10 2026**; see the decisions log and the "as delivered" notes under section 9. Phases 2 to 8 are not started.
 Companion document: [CHECKPOINT-DELIVERABLES.md](CHECKPOINT-DELIVERABLES.md) lists every checkpoint and the form fields it gets.
 
 Vocabulary: Topher says "certificate" for what the code calls a course. This document says **certificate (course)** where it matters; identifiers in code stay `courseId`.
@@ -30,6 +30,16 @@ We want one system: admins are notified when students finish things, progress is
 | Sep 8 2026 | Rules tests | **Local and CI**, against the Firestore emulator (Java 21). |
 | Sep 8 2026 | Branching for Phase 0 | All work on `ui`, one commit per step, PR to `main` at the end. |
 | Sep 10 2026 | Role checks | **Custom claims** (`role`, `status`) synced by `onUserWrite`; rules read `request.auth.token`, never a `users` document. The client forces a token refresh when its document is ahead of its token. |
+| Sep 10 2026 | Admin shell for Phase 1 | Sidebar with **Today** (landing), **Grading Queue [n]** and **Students** now; later phases append entries. Today has three tiles and one "Needs your attention" list. |
+| Sep 10 2026 | Per-course results screen (`#/students/:uid/results/:courseId`) | **Retired.** Student detail gets a Submissions table whose rows open the Grade view, and each course card gets a "Show checklist" toggle. Old links redirect to the student. |
+| Sep 10 2026 | Firebase client SDK | **Upgraded 10.8.0 to 12.18.0** as the first step of Phase 1, matching the `firebase` devDependency. |
+| Sep 10 2026 | Queue data | **Live** `onSnapshot`, one listener held in the page store, `limit(200)`, disposed on sign-out. Course and student filters run client-side over that bounded list. |
+| Sep 10 2026 | Feedback storage | Plain text in `feedback`, rendered escaped. `feedbackHtml` waits for the rich editor in Phase 7. |
+| Sep 10 2026 | Grade screen actions | One primary button, **Mark graded** (**Update grade** on a graded submission). "Return for revision" and "Save draft" arrive with checkpoints in Phase 3. **Grade next (n left)** is a button shown after a save, not an automatic advance. |
+| Sep 10 2026 | Today's third tile | **Certificates this month.** "Active this week" needs `lastActiveAt`, which does not exist until Phase 5. |
+| Sep 10 2026 | Legacy rows with no `total` | Migrated with `totalMax: null` and `passed: null`; the score shows as points. The grade screen forces an "out of" value when an admin grades or re-grades such a row. |
+| Sep 10 2026 | Migrated item ids | `legacyKey` is the `itemId` until Phase 5 remaps it; the document id `{uid}__{legacyKey}__1` never changes. |
+| Sep 10 2026 | `testResults` after migration | **Deny-all** in rules. Dead data kept until Phase 8. Unmatched emails live in `legacyOrphans/{email}`. |
 
 ## Facts from the audit that shape the plan
 
@@ -92,7 +102,8 @@ checkpoints/{cpId}                 courseId, unitId, itemId, title, instructions
 submissions/{uid__itemId__attempt} kind test|checkpoint, student, course and item denormalized,
                                    refId, status draft|submitted|auto_graded|needs_grading|
                                    graded|returned, answers{}, perItem{}, autoScore, manualScore,
-                                   totalScore, totalMax, provisional, passed, feedbackHtml,
+                                   totalScore, totalMax, provisional, passed, feedback (plain
+                                   text until Phase 7; then feedbackHtml),
                                    gradedBy, gradedAt, mentorSignOff{}, legacy
 users/{uid}                        existing fields plus summary{overallPercent, coursesStarted,
                                    coursesCompleted, certCount, pendingSubmissions, lastActiveAt}
@@ -120,7 +131,7 @@ Rules matrix:
 - Admins read everything, grade, approve, and edit content when `settings.contentEditorRole` allows.
 - Superadmin changes roles only through the `setUserRole` function.
 - `answerKeys` denies read to everyone except functions.
-- `testResults` becomes deny-all.
+- `testResults` is deny-all (since Phase 1).
 - Storage: students write only under their own uid with size and MIME caps; admins read all.
 
 Realtime listener budget for an open admin tab: five (inbox, counters, queue, pending users, activity). All are `limit()`-bounded and all are disposed on navigation.
@@ -143,7 +154,7 @@ Grading logic is one pure module, `assets/js/lib/grade.js`, copied to `functions
 
 Single `admin.html` shell with **hash routing**. GitHub Pages has no rewrites, and one shell means one auth check and one set of listeners. Per-view `import()` gives code splitting with no bundler.
 
-Sidebar, always icon plus label, fixed order: **Today, Grading Queue [n], Students, Content, Certificates, Activity, Settings**.
+Sidebar, always icon plus label, fixed order: **Today, Grading Queue [n], Students, Content, Certificates, Activity, Settings**. Today, Grading Queue and Students exist since Phase 1; the rest append as their phases land.
 
 - **Today**: four stat tiles (awaiting grading, pending approvals, active this week, certificates this month) and one "Needs your attention" list merging approvals and the oldest submissions, one button each.
 - **Grading Queue**: table of Student, Certificate, Item, Type, Waiting (days, as text), Auto score. Filters by course, type, student, needs-sign-off. Oldest first. A **Grade next** button opens the oldest and advances on save. Bulk "mark complete" for sign-off-only items.
@@ -236,7 +247,7 @@ Sizes for one developer: S under a week, M one to two weeks, L two to four, XL f
 | # | Phase | Size | Needs | Delivers |
 |---|---|---|---|---|
 | 0 | Foundations | M | Blaze (done) | **Done Sep 10 2026.** Budget alert. Storage and Functions initialised and deployed from the repo. **`testResults` write hole closed and answers escaped on render (hotfix, first PR).** Custom claims and rules rewrite. Test harness, fake Firestore, rules emulator suite, CI. `lib/` and `ui/` primitives. `admin.js` split into `admin/` with the router and the three current views ported one to one: no visible change, no `window.*` globals, no unescaped innerHTML. |
-| 1 | Submissions and Grading Queue | L | 0 | `submissions`, indexes, `onSubmissionWrite`. Queue and Grade views. Student "Recent work". `migrate-test-results` so the queue opens with history. **First shippable win.** |
+| 1 | Submissions and Grading Queue | L | 0 | **Done Sep 10 2026.** `submissions`, indexes, `onSubmissionWrite`. Sidebar, Today, Queue and Grade views. Student "Recent work". `migrate-test-results` so the queue opens with history. **First shippable win.** |
 | 2 | Notifications and Activity | S/M | 1 | Inbox, counters, activity feed, header bell, sidebar badge. |
 | 3 | Checkpoints | L | 1, 2 | `checkpoints`, Storage uploads and rules, `checkpoint.html`, grade view field types, all 36 pages and 58 Classroom items converted via `import-classroom`. Ends emailed Word documents. |
 | 4 | Tests | L | 1 | `tests`, `questions`, `answerKeys`, auto-grading, `test.html`, provisional scoring, markdown import. Retires `form.html` and the Apps Script. Owner re-authors the 13 Forms. |
@@ -257,6 +268,21 @@ Phases 3 and 4 can run in parallel. Phases 0 to 2 are worth shipping even if not
 - `assets/js/admin.js` is gone. `assets/js/admin/` holds `main.js`, `router.js` (hash routes `#/students`, `#/students/:uid`, `#/students/:uid/results/:courseId`), `store.js`, `progress.js`, `certificate-docx.js`, `course-structure.js`, `icons.js` and `views/`. No `window.*` handlers; every interpolation goes through `html`.
 - Not done in Phase 0, carried to Phase 1: Firebase client SDK upgrade from 10.8.0 (needed for `onSnapshot` and Storage imports), `link-generator.js` whole-map overwrite of `courses`.
 
+### Phase 1 as delivered (Sep 10 2026)
+
+Shipped as two merges from one branch. Merge A (steps 1 to 4) was additive: SDK upgrade, `submissions` rules and indexes, the function, the migration tool; then the migration ran against production. Merge B (steps 5 to 8) shipped the UI, retired the old grading screen and flipped `testResults` to deny-all.
+
+- Firebase client SDK 12.18.0; `firebase-config.js` exports `onSnapshot` and `limit`. The fake Firestore supports `orderBy`, `limit` and `onSnapshot` (microtask delivery, `listenerCount()` for dispose checks).
+- `assets/js/lib/grade.js` (`PASS_THRESHOLD` 70, `deriveTotals`, `sameDerived`, `percent`; synced into `functions/shared`), `lib/submissions.js` (ids, `parseLegacyKey`, `statusLabel`, `scoreLabel`, `isUngraded`), `lib/legacy-results.js` (pure migration planner), `data/submissions.js` (`subscribeQueue`, `listForStudent`, `get`, `grade`).
+- Rules: `submissions` admin read, student read of own rows, admin update restricted to the grading keys with `gradedBy == uid` and `gradedAt == request.time`; `legacyOrphans` admin read; `testResults` deny-all. Indexes `(status, submittedAt asc)` and `(studentUid, submittedAt desc)`.
+- `onSubmissionWrite` (`functions/lib/submission-write.js`): `submitted` becomes `needs_grading`; a graded write gets `totalScore`, `passed` and `provisional` derived once, with no timestamp, so the second invocation is a no-op.
+- `tools/migrate-test-results.mjs`: `testResults/{email}` rows become `submissions/{uid}__{legacyKey}__1` with `legacy: true`; `create()` so reruns never clobber a grade; orphans to `legacyOrphans`.
+- Admin shell: `admin/nav.js` sidebar (Today, Grading Queue with live badge, Students), `views/today.js`, `views/queue.js` (course and student filters in the query string, Grade next), `views/grade.js` (answers escaped, score, optional out-of, feedback, Saved receipt with Grade next (n left)). `store.js` holds the live queue listener. Routes `#/today` (default), `#/queue`, `#/grade/:id`; `#/students/:uid/results/:courseId` redirects to the student.
+- Student detail: Submissions table (newest first, rows open the grade screen) and a Show checklist toggle per course (`admin/checklist.js`). `views/test-results.js` and `data/test-results.js` deleted.
+- Student profile: "Recent Work" section (`assets/js/student/recent-work.js`: ten newest, status word, score, feedback).
+- `npm test` is 234 tests; `test:e2e` covers `onUserWrite` and `onSubmissionWrite`.
+- Not in this phase: nothing lets a student create a submission (checkpoints in Phase 3, tests in Phase 4); notifications and counters (Phase 2); `link-generator.js` whole-map overwrite of `courses` (Phase 5).
+
 ## 10. Open decisions
 
 Defaults let work start. Confirm or change each one.
@@ -276,7 +302,7 @@ Defaults let work start. Confirm or change each one.
 
 ## 11. Risks and guardrails
 
-- **Live write hole and stored XSS in `testResults`**: closed in Phase 0 (Sep 8 2026); `tests/rules/test-results.test.js` and the jsdom XSS tests keep it closed.
+- **Live write hole and stored XSS in `testResults`**: closed in Phase 0 (Sep 8 2026); deny-all since Phase 1. `tests/rules/test-results.test.js` and the jsdom XSS tests in the grade, queue and recent-work suites keep it closed.
 - **Progress remap errors**: `legacyKey` on every item, dry-run report, `users.courses` preserved until Phase 8, idempotent re-run.
 - **Lesson content loss**: the repo remains the source of truth until Phase 7 is verified. Strip-diff report, nightly export to git, files become stubs and are never deleted.
 - **Stored XSS from lesson HTML**: sanitize on save and on render from one allowlist module, fixture tests, CSP meta on lesson pages.

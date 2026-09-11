@@ -1,16 +1,19 @@
 import * as fs from '../firebase-config.js';
 import { usersRepo } from '../data/users.js';
-import { testResultsRepo } from '../data/test-results.js';
+import { submissionsRepo } from '../data/submissions.js';
 import { mailRepo } from '../data/mail.js';
 import { isAdmin } from '../lib/format.js';
 import { refreshTokenIfStale } from '../lib/claims-refresh.js';
 import { createStore } from './store.js';
 import { createRouter } from './router.js';
+import { mountNav } from './nav.js';
 import { generateCertificateDocx } from './certificate-docx.js';
 import { fetchCourseStructure } from './course-structure.js';
+import { todayView } from './views/today.js';
+import { queueView } from './views/queue.js';
+import { gradeView } from './views/grade.js';
 import { studentsView } from './views/students.js';
 import { studentDetailView } from './views/student-detail.js';
-import { testResultsView } from './views/test-results.js';
 
 const TEMPLATE_URL = 'assets/pdfs/Certificate-Template.docx';
 const DOCX_MIME = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
@@ -36,9 +39,13 @@ function download(fileName, bytes) {
 
 const leave = () => { window.location.href = 'index.html'; };
 let started = false;
+let activeStore = null;
 
 fs.onAuthStateChanged(fs.auth, async user => {
-  if (!user) return leave();
+  if (!user) {
+    activeStore?.disposeQueue();
+    return leave();
+  }
   if (started) return;
   started = true;
 
@@ -47,13 +54,17 @@ fs.onAuthStateChanged(fs.auth, async user => {
   if (!isAdmin(me)) return leave();
   await refreshTokenIfStale(user, me);
 
+  const store = createStore();
+  activeStore = store;
+  const submissions = submissionsRepo(fs);
+
   const ctx = {
     me,
     currentUid: user.uid,
     users,
-    testResults: testResultsRepo(fs),
+    submissions,
     mail: mailRepo(fs),
-    store: createStore(),
+    store,
     confirm: message => window.confirm(message),
     alert: message => window.alert(message),
     generateCertificate,
@@ -61,6 +72,21 @@ fs.onAuthStateChanged(fs.auth, async user => {
     fetchCourseStructure,
     now: () => new Date()
   };
-  const routes = { students: studentsView, student: studentDetailView, results: testResultsView };
-  createRouter({ window, root: document.getElementById('app'), routes, ctx }).start();
+
+  store.subscribeQueue(submissions);
+  const nav = mountNav(document.getElementById('admin-nav'), store);
+  const routes = {
+    today: todayView,
+    queue: queueView,
+    grade: gradeView,
+    students: studentsView,
+    student: studentDetailView
+  };
+  createRouter({
+    window,
+    root: document.getElementById('app'),
+    routes,
+    ctx,
+    onRoute: nav.setRoute
+  }).start();
 });

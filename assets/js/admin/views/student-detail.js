@@ -1,21 +1,23 @@
 import { html } from '../../lib/html.js';
 import { fullName, formatDate, toDate } from '../../lib/format.js';
 import { courseMetadata } from '../../course-metadata.js';
+import { statusLabel, scoreLabel } from '../../lib/submissions.js';
 import { statCard, icon, emptyState } from '../icons.js';
 import { courseSummaries } from '../progress.js';
+import { checklist } from '../checklist.js';
 import { buildCertificateFileName, base64ToUint8 } from '../certificate-docx.js';
 
 const RING = 'M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831';
 
 const courseCard = c => html`
-  <div class="course-card ${c.pct >= 100 ? 'completed' : ''} clickable" data-action="view-results" data-course-id="${c.id}">
+  <div class="course-card ${c.pct >= 100 ? 'completed' : ''}">
     <div class="course-info">
       <h3>${c.name}</h3>
       <span class="course-tasks">${c.completed} / ${c.total} tasks</span>
       ${c.ungradedTests > 0
         ? html`<span class="course-grading-note">${c.ungradedTests} test${c.ungradedTests === 1 ? '' : 's'} still need grading</span>`
         : ''}
-      <span class="view-results-hint">View test results →</span>
+      <button class="action-btn checklist-toggle" data-action="toggle-checklist" data-course-id="${c.id}">Show checklist</button>
     </div>
     <div class="progress-ring-container">
       <svg class="progress-ring" viewBox="0 0 36 36">
@@ -24,7 +26,36 @@ const courseCard = c => html`
       </svg>
       <span class="progress-text">${c.pct}%</span>
     </div>
+    <div class="course-checklist" data-checklist="${c.id}" hidden></div>
   </div>
+`;
+
+const submissionRow = sub => html`
+  <tr data-id="${sub.id}" class="clickable-row" tabindex="0" role="button" aria-label="Open ${sub.itemTitle}">
+    <td>${sub.itemTitle}</td>
+    <td>${sub.courseName}</td>
+    <td>${formatDate(sub.submittedAt, { fallback: 'N/A' })}</td>
+    <td>${statusLabel(sub)}</td>
+    <td>${scoreLabel(sub)}</td>
+    <td><span class="open-hint">Open →</span></td>
+  </tr>
+`;
+
+const submissionsSection = submissions => html`
+  <section class="dashboard-section">
+    <h2>Submissions</h2>
+    <div id="sv-submissions">
+      ${submissions.length
+        ? html`
+          <div class="students-table-container">
+            <table class="students-table">
+              <thead><tr><th>Item</th><th>Certificate</th><th>Submitted</th><th>Status</th><th>Score</th><th></th></tr></thead>
+              <tbody>${submissions.map(submissionRow)}</tbody>
+            </table>
+          </div>`
+        : emptyState('tasks', 'No work submitted yet.')}
+    </div>
+  </section>
 `;
 
 const certificateCard = (cert, index) => html`
@@ -40,7 +71,7 @@ const certificateCard = (cert, index) => html`
   </div>
 `;
 
-const view = (student, summary) => {
+const view = (student, summary, submissions) => {
   const certificates = student.certificates || [];
   return html`
     <div class="student-view active">
@@ -63,6 +94,7 @@ const view = (student, summary) => {
           ${summary.courses.length ? summary.courses.map(courseCard) : emptyState('courses', 'No courses started yet.')}
         </div>
       </section>
+      ${submissionsSection(submissions)}
       <section class="dashboard-section">
         <h2>Certificates Earned</h2>
         <div id="sv-certs-container" class="certificates-grid">
@@ -98,11 +130,11 @@ export const studentDetailView = {
     const { users, mail, store } = ctx;
     let alive = true;
     let student = null;
-    let results = {};
+    let submissions = [];
 
     function render() {
-      const summary = courseSummaries(student, results);
-      root.innerHTML = String(view(student, summary));
+      const summary = courseSummaries(student, submissions);
+      root.innerHTML = String(view(student, summary, submissions));
       root.querySelector('#sv-courses-started').textContent = summary.started;
       root.querySelector('#sv-courses-completed').textContent = summary.completed;
       root.querySelector('#sv-certs-earned').textContent = (student.certificates || []).length;
@@ -125,7 +157,37 @@ export const studentDetailView = {
 
     const actions = {
       back() { ctx.navigate(`#/students?tab=${store.tab}`); },
-      'view-results'(button) { ctx.navigate(`#/students/${uid}/results/${button.dataset.courseId}`); },
+
+      async 'toggle-checklist'(button) {
+        const { courseId } = button.dataset;
+        const box = root.querySelector(`[data-checklist="${courseId}"]`);
+        if (!box) return;
+        if (!box.hidden) {
+          box.hidden = true;
+          button.textContent = 'Show checklist';
+          return;
+        }
+        if (!box.dataset.loaded) {
+          const label = button.textContent;
+          button.disabled = true;
+          button.textContent = 'Loading...';
+          try {
+            const structure = await ctx.fetchCourseStructure(courseId);
+            if (!alive) return;
+            box.innerHTML = String(checklist(structure || [], student.courses?.[courseId] || {}));
+            box.dataset.loaded = 'true';
+          } catch (error) {
+            console.error('Error loading course structure:', error);
+            ctx.alert('Failed to load the course checklist. Please try again.');
+            return;
+          } finally {
+            button.disabled = false;
+            button.textContent = label;
+          }
+        }
+        box.hidden = false;
+        button.textContent = 'Hide checklist';
+      },
 
       async 'download-cert'(button) {
         const cert = (student.certificates || [])[Number(button.dataset.index)];
@@ -174,15 +236,26 @@ export const studentDetailView = {
 
     function onClick(event) {
       const button = event.target.closest('[data-action]');
-      if (button) actions[button.dataset.action]?.(button);
+      if (button) return actions[button.dataset.action]?.(button);
+      const row = event.target.closest('tr.clickable-row');
+      if (row) ctx.navigate(`#/grade/${row.dataset.id}`);
     }
+
+    function onKeydown(event) {
+      const row = event.target.closest('tr.clickable-row');
+      if (!row || (event.key !== 'Enter' && event.key !== ' ')) return;
+      event.preventDefault();
+      ctx.navigate(`#/grade/${row.dataset.id}`);
+    }
+
     root.addEventListener('click', onClick);
+    root.addEventListener('keydown', onKeydown);
 
     const ready = (async () => {
       student = await loadStudent(ctx, uid);
       if (!alive) return;
       if (!student) return ctx.navigate('#/students');
-      results = await ctx.testResults.getForEmail(student.email).catch(() => ({}));
+      submissions = await ctx.submissions.listForStudent(uid).catch(() => []);
       if (!alive) return;
       store.upsertStudent(student);
       render();
@@ -193,6 +266,7 @@ export const studentDetailView = {
       dispose() {
         alive = false;
         root.removeEventListener('click', onClick);
+        root.removeEventListener('keydown', onKeydown);
       }
     };
   }

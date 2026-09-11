@@ -1,16 +1,15 @@
 // Firebase Configuration for Tech Class
 // Using CDN imports for compatibility with static hosting
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
-  sendEmailVerification,
   onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 import {
   getFirestore,
   doc,
@@ -24,8 +23,10 @@ import {
   query,
   where,
   orderBy,
+  limit,
+  onSnapshot,
   serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -51,7 +52,6 @@ export {
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
-  sendEmailVerification,
   onAuthStateChanged,
   doc,
   setDoc,
@@ -64,5 +64,7 @@ export {
   query,
   where,
   orderBy,
+  limit,
+  onSnapshot,
   serverTimestamp
 };

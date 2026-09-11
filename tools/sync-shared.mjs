@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 
-export const SHARED_FILES = ['lib/escape-html.js', 'lib/html.js', 'lib/format.js', 'data/mail.js'];
+export const SHARED_FILES = ['lib/escape-html.js', 'lib/html.js', 'lib/format.js', 'lib/grade.js', 'data/mail.js'];
 
 export const sourcePath = rel => join(root, 'assets', 'js', rel);
 export const targetPath = rel => join(root, 'functions', 'shared', rel);

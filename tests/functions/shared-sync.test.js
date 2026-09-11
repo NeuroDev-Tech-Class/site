@@ -6,7 +6,7 @@ import { approvalMailDoc as clientApproval } from '../../assets/js/data/mail.js'
 import { approvalMailDoc as functionsApproval } from '../../functions/shared/data/mail.js';
 
 test('every shared file has an identical copy under functions/shared', () => {
-  assert.ok(SHARED_FILES.length >= 4);
+  assert.ok(SHARED_FILES.includes('lib/grade.js'), 'grade.js must be shared with onSubmissionWrite');
   for (const rel of SHARED_FILES) {
     const target = targetPath(rel);
     assert.ok(existsSync(target), `missing copy for ${rel}; run: node tools/sync-shared.mjs`);

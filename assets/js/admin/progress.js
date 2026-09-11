@@ -1,11 +1,10 @@
 import { courseMetadata } from '../course-metadata.js';
+import { isUngraded } from '../lib/submissions.js';
 
 const completedCount = progress =>
   Object.entries(progress).filter(([key, value]) => !key.startsWith('_') && value === true).length;
 
 const totalFor = (courseId, progress) => progress._total || courseMetadata[courseId].totalItems;
-
-const hasNoScore = result => result?.score === null || result?.score === undefined || result?.score === '';
 
 export function calculateOverallProgress(student) {
   let completed = 0;
@@ -18,14 +17,13 @@ export function calculateOverallProgress(student) {
   return total === 0 ? 0 : Math.round((completed / total) * 100);
 }
 
-export function countUngradedTests(courseId, testResults) {
-  if (!courseId || !testResults) return 0;
-  const prefix = `${courseId}_`;
-  return Object.entries(testResults).filter(([key, result]) => key.startsWith(prefix) && hasNoScore(result)).length;
+export function countUngradedTests(courseId, submissions) {
+  if (!courseId || !submissions) return 0;
+  return submissions.filter(sub => sub.courseId === courseId && isUngraded(sub)).length;
 }
 
 // Ungraded tests count as incomplete until an admin scores them.
-export function courseSummaries(student, testResults = {}) {
+export function courseSummaries(student, submissions = []) {
   const summary = { started: 0, completed: 0, tasks: 0, courses: [] };
   for (const [id, progress] of Object.entries(student.courses || {})) {
     const meta = courseMetadata[id];
@@ -33,7 +31,7 @@ export function courseSummaries(student, testResults = {}) {
     const done = completedCount(progress);
     if (done === 0) continue;
     const total = totalFor(id, progress);
-    const ungradedTests = countUngradedTests(id, testResults);
+    const ungradedTests = countUngradedTests(id, submissions);
     const completed = Math.max(0, done - ungradedTests);
     const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
     summary.started++;

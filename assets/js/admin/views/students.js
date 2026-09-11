@@ -162,7 +162,7 @@ export const studentsView = {
     const findStudent = id => store.students.find(s => s.id === id);
 
     function renderList(tbodyId, list, rowFor, colspan, emptyMessage) {
-      el(tbodyId).innerHTML = String(list.length ? list.map(rowFor) : emptyRow(colspan, emptyMessage));
+      el(tbodyId).innerHTML = String(list.length ? html`${list.map(rowFor)}` : emptyRow(colspan, emptyMessage));
     }
 
     function refresh() {
@@ -179,7 +179,7 @@ export const studentsView = {
         html`No other admins yet. Use <strong>+ Add Admin</strong> to promote a student.`);
       const eligible = store.students.filter(isCurrent);
       el('add-admin-list').innerHTML = String(eligible.length
-        ? eligible.map(addAdminItem)
+        ? html`${eligible.map(addAdminItem)}`
         : html`<p class="add-admin-empty">No current students available to promote.</p>`);
     }
 

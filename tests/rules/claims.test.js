@@ -9,20 +9,20 @@ after(() => env.cleanup());
 beforeEach(async () => {
   await env.clear();
   await env.seed('users/target', env.userDoc('target', 'student', 'approved'));
-  await env.seed('testResults/target@example.com', { 'python-1_unit-1': { score: null } });
+  await env.seed('legacyOrphans/target@example.com', { reason: 'no-user', keys: [] });
 });
 
 test('an admin token with no user document is still an admin', async () => {
   const db = env.withClaims('ghost-admin', { role: 'admin', status: 'approved' });
   await assertSucceeds(db.doc('users/target').get());
-  await assertSucceeds(db.doc('testResults/target@example.com').get());
+  await assertSucceeds(db.doc('legacyOrphans/target@example.com').get());
 });
 
 test('a student token is a student even if the user document claims admin', async () => {
   await env.seed('users/liar', env.userDoc('liar', 'admin', 'approved'));
   const db = env.withClaims('liar', { role: 'student', status: 'approved' });
   await assertFails(db.doc('users/target').get());
-  await assertFails(db.doc('testResults/target@example.com').get());
+  await assertFails(db.doc('legacyOrphans/target@example.com').get());
 });
 
 test('a token without a role claim gets no admin access regardless of the document', async () => {
