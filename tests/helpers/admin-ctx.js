@@ -1,6 +1,5 @@
 import { createFakeFirestore } from './fake-firestore.js';
 import { usersRepo } from '../../assets/js/data/users.js';
-import { testResultsRepo } from '../../assets/js/data/test-results.js';
 import { submissionsRepo } from '../../assets/js/data/submissions.js';
 import { mailRepo } from '../../assets/js/data/mail.js';
 import { createStore } from '../../assets/js/admin/store.js';
@@ -29,14 +28,6 @@ export const seed = () => ({
   'users/a1': {
     firstName: 'ada', lastName: 'admin', email: 'ada@x.com', role: 'admin', status: 'approved',
     studentType: 'current', createdAt: '2026-07-01T12:00:00.000Z'
-  },
-  'testResults/cee@x.com': {
-    'python-1_unit-1-test': {
-      score: 8, total: 10, submittedAt: '2026-06-01T12:00:00.000Z',
-      answers: { 'What is a list?': '<b>bold</b>', 'Second question': 'Second answer' }
-    },
-    'python-1_unit-2-test': { score: null, total: 10, submittedAt: '2026-06-05T12:00:00.000Z', answers: {} },
-    'linux_unit-1-test': { score: 5, total: 5, submittedAt: '2026-04-01T12:00:00.000Z' }
   },
   'submissions/c1__python-1_unit-1-test__1': {
     kind: 'test', studentUid: 'c1', studentName: 'Cee Current', studentEmail: 'cee@x.com',
@@ -83,7 +74,6 @@ export function makeCtx({ role = 'admin', confirm = () => true, courseStructure 
     me: { id: 'me', firstName: 'coach', lastName: 'x', email: 'coach@x.com', role, status: 'approved' },
     currentUid: 'me',
     users: usersRepo(fs),
-    testResults: testResultsRepo(fs),
     submissions: submissionsRepo(fs),
     mail: mailRepo(fs),
     store: createStore(),

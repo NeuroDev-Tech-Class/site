@@ -1,14 +1,12 @@
 // Profile Dashboard - Shows user progress and certificates
-import { 
-  auth, 
-  db,
-  onAuthStateChanged,
-  doc,
-  getDoc
-} from './firebase-config.js';
+import * as fs from './firebase-config.js';
 import { courseMetadata } from './course-metadata.js';
-import { formatName, isAdmin } from './utils.js';
+import { formatName, isAdmin, formatDate } from './lib/format.js';
 import { escapeHtml } from './lib/escape-html.js';
+import { submissionsRepo } from './data/submissions.js';
+import { renderRecentWork } from './student/recent-work.js';
+
+const { auth, db, onAuthStateChanged, doc, getDoc } = fs;
 
 document.addEventListener('DOMContentLoaded', () => {
   onAuthStateChanged(auth, async (user) => {
@@ -37,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     displayDashboard(userData);
+    displayRecentWork(user.uid);
   });
 });
 
@@ -105,6 +104,17 @@ function displayDashboard(userData) {
   
   // Display certificates
   displayCertificates(certificates);
+}
+
+async function displayRecentWork(uid) {
+  const container = document.getElementById('recent-work');
+  let submissions = [];
+  try {
+    submissions = await submissionsRepo(fs).listForStudent(uid, 10);
+  } catch (error) {
+    console.error('Error loading recent work:', error);
+  }
+  renderRecentWork(container, submissions);
 }
 
 function displayCourses(courseData) {
@@ -183,18 +193,8 @@ function displayCertificates(certificates) {
       </div>
       <div class="certificate-info">
         <h3>${escapeHtml(cert.courseName)}</h3>
-        <span class="certificate-date">Awarded ${formatDate(cert.awardedAt)}</span>
+        <span class="certificate-date">Awarded ${formatDate(cert.awardedAt, { month: 'long' })}</span>
       </div>
     </div>
   `).join('');
-}
-
-function formatDate(timestamp) {
-  if (!timestamp) return '';
-  const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-  return date.toLocaleDateString('en-US', { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
-  });
 }

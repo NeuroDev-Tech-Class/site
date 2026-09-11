@@ -45,13 +45,6 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // Legacy Google Forms scores. Admins grade existing rows; nothing creates new ones.
-    match /testResults/{email} {
-      allow read: if isAdmin();
-      allow update: if isAdmin();
-      allow create, delete: if false;
-    }
-
     // Certificate emails are queued by admins; approval emails come from onUserWrite
     match /mail/{docId} {
       allow create: if isAdmin();

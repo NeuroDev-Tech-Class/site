@@ -1,6 +1,5 @@
 import * as fs from '../firebase-config.js';
 import { usersRepo } from '../data/users.js';
-import { testResultsRepo } from '../data/test-results.js';
 import { submissionsRepo } from '../data/submissions.js';
 import { mailRepo } from '../data/mail.js';
 import { isAdmin } from '../lib/format.js';
@@ -64,7 +63,6 @@ fs.onAuthStateChanged(fs.auth, async user => {
     currentUid: user.uid,
     users,
     submissions,
-    testResults: testResultsRepo(fs),
     mail: mailRepo(fs),
     store,
     confirm: message => window.confirm(message),

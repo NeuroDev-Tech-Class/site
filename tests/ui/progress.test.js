@@ -16,12 +16,15 @@ test('calculateOverallProgress ignores unknown courses and returns 0 with nothin
   assert.equal(calculateOverallProgress({}), 0);
 });
 
-test('countUngradedTests counts results under the course prefix with no score', () => {
-  const results = {
-    'python-1_a': { score: null }, 'python-1_b': { score: '' }, 'python-1_c': {}, 'python-1_d': { score: 0 },
-    'linux_a': { score: null }
-  };
-  assert.equal(countUngradedTests('python-1', results), 3);
+test('countUngradedTests counts submitted and needs_grading submissions for the course', () => {
+  const submissions = [
+    { courseId: 'python-1', status: 'needs_grading' },
+    { courseId: 'python-1', status: 'submitted' },
+    { courseId: 'python-1', status: 'graded' },
+    { courseId: 'python-1', status: 'returned' },
+    { courseId: 'linux', status: 'needs_grading' }
+  ];
+  assert.equal(countUngradedTests('python-1', submissions), 2);
   assert.equal(countUngradedTests('python-1', undefined), 0);
 });
 
@@ -33,7 +36,7 @@ test('courseSummaries subtracts ungraded tests, sorts unfinished first and skips
       'linux': { '0-0': false }
     }
   };
-  const summary = courseSummaries(student, { 'python-1_test': { score: null } });
+  const summary = courseSummaries(student, [{ courseId: 'python-1', status: 'needs_grading' }]);
   assert.deepEqual(summary.courses.map(c => [c.id, c.completed, c.total, c.pct, c.ungradedTests]), [
     ['python-1', 1, 4, 25, 1],
     ['web-dev-3', 8, 8, 100, 0]

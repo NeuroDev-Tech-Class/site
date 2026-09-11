@@ -38,12 +38,14 @@ Loading `functions/index.js` from a `/mnt/c` path takes about 16 seconds, longer
 ### Layout
 
 ```
-assets/js/lib/      pure helpers: escape-html, html (escaping tagged template), format, claims-refresh
-assets/js/data/     one repo per collection (users, test-results, mail); the only files that call Firestore
+assets/js/lib/      pure helpers: escape-html, html (escaping tagged template), format, claims-refresh,
+                    grade (pass threshold, derived totals), submissions (ids, labels), legacy-results
+assets/js/data/     one repo per collection (users, submissions, mail); the only files that call Firestore
 assets/js/ui/       shared markup fragments
-assets/js/admin/    admin dashboard: main.js, router.js, store.js, views/
-functions/          Cloud Functions; functions/shared/ is a generated copy of browser modules
-tools/              sync-shared.mjs, backfill-claims.mjs
+assets/js/admin/    admin dashboard: main.js, router.js, store.js, nav.js, checklist.js, views/
+assets/js/student/  profile pieces: recent-work.js
+functions/          Cloud Functions (onUserWrite, onSubmissionWrite); functions/shared/ is a generated copy of browser modules
+tools/              sync-shared.mjs, backfill-claims.mjs, migrate-test-results.mjs
 tests/              node --test suites; helpers/fake-firestore.js, helpers/dom.js, helpers/rules-env.js
 firestore.rules  firestore.indexes.json  storage.rules  firebase.json
 ```
@@ -89,3 +91,16 @@ GOOGLE_APPLICATION_CREDENTIALS=~/keys/github-deploy.json node tools/backfill-cla
 ```
 
 The dry run prints one row per user and exits non-zero if any user lacks `role` or `status`. Never publish claims-based rules to a project whose users have no claims yet: run the backfill first.
+
+### Legacy test results
+
+Google Forms scores used to land in `testResults/{email}`. The Phase 1 migration copied every row into `submissions/{uid}__{legacyKey}__1` (`legacy: true`) and the rules now deny `testResults` to every client. The collection is dead data, kept until Phase 8 deletes it. Rows whose email matched no user are listed in `legacyOrphans/{email}` (admin read only).
+
+The migration is idempotent; rerun it if a new orphan is resolved:
+
+```
+GOOGLE_APPLICATION_CREDENTIALS=~/keys/github-deploy.json node tools/migrate-test-results.mjs --project tech-certificates-af7c3 --dry-run
+GOOGLE_APPLICATION_CREDENTIALS=~/keys/github-deploy.json node tools/migrate-test-results.mjs --project tech-certificates-af7c3
+```
+
+Each row prints as `create`, `skip` (already migrated), `orphan` or `conflict`. A second dry run after the real run must show only `skip`. Existing submissions are never overwritten, so grades entered after the migration survive a rerun. `--strict` exits non-zero when orphans exist.
