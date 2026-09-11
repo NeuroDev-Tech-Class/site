@@ -136,7 +136,8 @@ test('award stores the certificate, generates the docx, queues the email and re-
 
   const certs = fs.get('users/c1').certificates;
   assert.equal(certs.length, 2);
-  assert.deepEqual(certs[1], { courseId: 'gimp', courseName: '2D Digital Art - GIMP', awardedAt: NOW.toISOString() });
+  assert.deepEqual(certs[1],
+    { courseId: 'gimp', courseName: '2D Digital Art - GIMP', awardedAt: NOW.toISOString(), awardedBy: 'me' });
   assert.deepEqual(calls.certificates, [['Cee Current', '2D Digital Art - GIMP', NOW]]);
 
   const mail = fs.writes.find(w => w.type === 'add' && w.path.startsWith('mail/')).data;

@@ -150,3 +150,56 @@ test('markup in a name is carried through as plain text, to be escaped at render
   assert.match(entry.summary, /<img src=x onerror=1>/);
   assert.equal(entry.subjectName, '<img src=x onerror=1>');
 });
+
+// Firestore rejects undefined in any field, so no builder may pass one through.
+const noUndefined = obj => {
+  for (const [key, value] of Object.entries(obj)) {
+    assert.notEqual(value, undefined, `${key} must not be undefined`);
+  }
+  return obj;
+};
+
+test('a sparse submission still builds a complete, readable notification', () => {
+  const sparse = { id: 'c1__x__1', studentUid: 'c1', status: 'graded', gradedAt: GRADED_AT };
+
+  const notif = noUndefined(gradedNotification(sparse, coach));
+  assert.equal(notif.title, 'Your work graded');
+  assert.equal(notif.body, 'you scored Not graded. Graded.');
+
+  const entry = noUndefined(gradedActivity(sparse, coach));
+  assert.equal(entry.summary, "Topher graded A student's work (Not graded)");
+  assert.equal(entry.subjectName, 'A student');
+  assert.equal(entry.courseId, '');
+  assert.equal(entry.courseName, '');
+});
+
+test('a sparse submitted row names no course and no student without emitting undefined', () => {
+  const sparse = { id: 'c1__x__1', studentUid: 'c1', status: 'submitted' };
+
+  const notif = noUndefined(receivedNotification(sparse));
+  assert.equal(notif.body, 'A student submitted their work.');
+  assert.equal(notif.actorName, '');
+
+  const entry = noUndefined(receivedActivity(sparse));
+  assert.equal(entry.summary, 'A student submitted their work');
+  assert.equal(entry.subjectName, 'A student');
+});
+
+test('a user document with no name still reads as somebody', () => {
+  noUndefined(approvedNotification('c1', {}));
+  const entry = noUndefined(approvedActivity('c1', {}, {}));
+  assert.equal(entry.summary, 'An admin approved A student');
+
+  const reg = noUndefined(registrationNotification('c1', {}));
+  assert.equal(reg.body, 'A student signed up and is waiting for approval.');
+  noUndefined(registrationActivity('c1', {}));
+});
+
+test('a certificate with no course name is still readable, and one with no id builds nothing', () => {
+  const entry = noUndefined(certificateActivity('c1', student, { courseId: 'gimp' }, coach));
+  assert.equal(entry.summary, 'Topher awarded Jane Doe a certificate');
+  assert.equal(noUndefined(certificateNotification({ courseId: 'gimp' }, coach)).title, 'Certificate awarded');
+
+  assert.equal(certificateNotification({}, coach), null);
+  assert.equal(certificateActivity('c1', student, {}, coach), null);
+});

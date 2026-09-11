@@ -95,3 +95,93 @@ test('a document whose auth user is gone is left alone', async () => {
   assert.deepEqual(auth.calls, []);
   assert.deepEqual(db.updates, []);
 });
+
+const admins = {
+  'users/adm1': { firstName: 'topher', lastName: 'stubbs', role: 'admin', status: 'approved' },
+  'users/sup1': { firstName: 'the', lastName: 'coach', role: 'superadmin', status: 'approved' }
+};
+
+function seeded(authUsers, docs) {
+  const auth = fakeAuth(authUsers);
+  const db = fakeAdminDb(docs);
+  return { auth, db, ctx: { auth, db, FieldValue: fakeFieldValue, siteUrl } };
+}
+
+test('a new pending registration notifies every admin and logs one line', async () => {
+  const { db, ctx } = seeded({ c9: { customClaims: undefined } }, admins);
+  await handleUserWrite(ctx, 'c9', null, student);
+
+  assert.deepEqual(db.creates.map(([path]) => path), [
+    'users/adm1/inbox/signup__c9',
+    'users/sup1/inbox/signup__c9',
+    'activity/signup__c9'
+  ]);
+  const notif = db.get('users/adm1/inbox/signup__c9');
+  assert.equal(notif.title, 'New registration');
+  assert.equal(notif.body, 'Jane Doe signed up and is waiting for approval.');
+  assert.equal(notif.link, 'admin.html#/students?tab=pending');
+  assert.equal(notif.read, false);
+  assert.equal(db.get('activity/signup__c9').summary, 'Jane Doe signed up');
+});
+
+test('approval notifies the student and names who approved them', async () => {
+  const { db, ctx } = seeded({ c9: { customClaims: { role: 'student', status: 'pending' } } }, admins);
+  await handleUserWrite(ctx, 'c9', student, { ...student, status: 'approved', approvedBy: 'adm1' });
+
+  assert.deepEqual(db.creates.map(([path]) => path), ['users/c9/inbox/approved__c9', 'activity/approved__c9']);
+  assert.equal(db.get('users/c9/inbox/approved__c9').title, 'Your account is approved');
+  assert.equal(db.get('users/c9/inbox/approved__c9').actorName, 'Topher Stubbs');
+  assert.equal(db.get('activity/approved__c9').summary, 'Topher Stubbs approved Jane Doe');
+});
+
+test('approval with no recorded approver still notifies, with a neutral actor', async () => {
+  const { db, ctx } = seeded({ c9: { customClaims: { role: 'student', status: 'pending' } } }, admins);
+  await handleUserWrite(ctx, 'c9', student, { ...student, status: 'approved' });
+  assert.equal(db.get('activity/approved__c9').summary, 'An admin approved Jane Doe');
+  assert.equal(db.get('users/c9/inbox/approved__c9').actorName, '');
+});
+
+test('awarding a certificate notifies the student once per new course', async () => {
+  const approved = { ...student, status: 'approved', certificates: [] };
+  const { db, ctx } = seeded({ c9: { customClaims: { role: 'student', status: 'approved' } } }, admins);
+  const cert = { courseId: 'python-1', courseName: 'Python I', awardedAt: '2026-09-11T18:00:00Z', awardedBy: 'adm1' };
+  await handleUserWrite(ctx, 'c9', approved, { ...approved, certificates: [cert] });
+
+  assert.deepEqual(db.creates.map(([path]) => path), ['users/c9/inbox/cert__python-1', 'activity/cert__c9__python-1']);
+  assert.equal(db.get('users/c9/inbox/cert__python-1').title, 'Python I certificate awarded');
+  assert.equal(db.get('activity/cert__c9__python-1').summary, 'Topher Stubbs awarded Jane Doe the Python I certificate');
+  assert.equal(db.get('activity/cert__c9__python-1').courseId, 'python-1');
+});
+
+test('a second certificate notifies only about the new one', async () => {
+  const first = { courseId: 'python-1', courseName: 'Python I', awardedAt: '2026-09-01T00:00:00Z' };
+  const second = { courseId: 'web-dev-1', courseName: 'Web Dev I', awardedAt: '2026-09-11T00:00:00Z' };
+  const approved = { ...student, status: 'approved', certificates: [first] };
+  const { db, ctx } = seeded({ c9: { customClaims: { role: 'student', status: 'approved' } } }, admins);
+  await handleUserWrite(ctx, 'c9', approved, { ...approved, certificates: [first, second] });
+
+  assert.deepEqual(db.creates.map(([path]) => path), ['users/c9/inbox/cert__web-dev-1', 'activity/cert__c9__web-dev-1']);
+});
+
+test('an unrelated edit notifies nobody', async () => {
+  const approved = { ...student, status: 'approved', certificates: [] };
+  const { db, ctx } = seeded({ c9: { customClaims: { role: 'student', status: 'approved' } } }, admins);
+  await handleUserWrite(ctx, 'c9', approved, { ...approved, studentType: 'old' });
+  assert.deepEqual(db.creates, []);
+});
+
+test('deleting a user notifies nobody', async () => {
+  const { db, ctx } = seeded({ c9: { customClaims: { role: 'student', status: 'approved' } } }, admins);
+  await handleUserWrite(ctx, 'c9', { ...student, status: 'approved' }, null);
+  assert.deepEqual(db.creates, []);
+});
+
+test('the claimsUpdatedAt re-trigger notifies nobody a second time', async () => {
+  const { db, ctx } = seeded({ c9: { customClaims: { role: 'student', status: 'approved' } } }, admins);
+  const approvedDoc = { ...student, status: 'approved', approvedBy: 'adm1' };
+  await handleUserWrite(ctx, 'c9', student, approvedDoc);
+  const afterFirst = db.creates.length;
+
+  await handleUserWrite(ctx, 'c9', approvedDoc, { ...approvedDoc, claimsUpdatedAt: 'SERVER_TIMESTAMP' });
+  assert.equal(db.creates.length, afterFirst);
+});

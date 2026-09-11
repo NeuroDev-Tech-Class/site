@@ -24,12 +24,18 @@ test('listByRole returns only matching users with ids', async () => {
   assert.deepEqual((await users.listByRole('admin')).map(u => u.id), ['a1']);
 });
 
-test('approve sets status and a server-side approvedAt', async () => {
-  await users.approve('s1');
+test('approve sets status, a server-side approvedAt and who approved', async () => {
+  await users.approve('s1', 'a1');
   const stored = fs.get('users/s1');
   assert.equal(stored.status, 'approved');
   assert.equal(stored.approvedAt.getTime(), fs.now.getTime());
+  assert.equal(stored.approvedBy, 'a1');
   assert.deepEqual(fs.writes.map(w => [w.type, w.path]), [['update', 'users/s1']]);
+});
+
+test('approve records an empty approver rather than undefined when none is given', async () => {
+  await users.approve('s1');
+  assert.equal(fs.get('users/s1').approvedBy, '');
 });
 
 test('remove deletes the document', async () => {
