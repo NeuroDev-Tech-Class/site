@@ -123,17 +123,20 @@ export function createFakeFirestore({ now = new Date('2026-09-08T12:00:00Z'), se
     entry.pending = true;
     queueMicrotask(() => {
       entry.pending = false;
-      if (listeners.has(entry)) entry.onNext(runQuery(entry.q));
+      if (listeners.has(entry)) entry.onNext(entry.isDoc ? snapshotOf(entry.target) : runQuery(entry.target));
     });
   }
 
   function notify(path) {
     const parent = parentOf(path);
-    for (const entry of listeners) if (entry.q.path === parent) schedule(entry);
+    for (const entry of listeners) {
+      if (entry.isDoc ? entry.target.path === path : entry.target.path === parent) schedule(entry);
+    }
   }
 
-  function onSnapshot(q, onNext) {
-    const entry = { q, onNext, pending: false };
+  // Takes a query or a single doc ref, like the real onSnapshot.
+  function onSnapshot(target, onNext) {
+    const entry = { target, onNext, isDoc: target.type === 'doc', pending: false };
     listeners.add(entry);
     schedule(entry);
     return () => listeners.delete(entry);

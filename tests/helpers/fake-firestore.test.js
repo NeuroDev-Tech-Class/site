@@ -91,3 +91,43 @@ test('addDoc generates an id and logs an add write', async () => {
   assert.equal(fs.writes.at(-1).type, 'add');
   assert.equal(fs.get(ref.path).to, 'x');
 });
+
+test('onSnapshot on a doc ref delivers that document and re-delivers when it is written', async () => {
+  const fs = createFakeFirestore({ seed: { 'users/a/meta/counters': { unread: 2 } } });
+  const ref = fs.doc(fs.db, 'users', 'a', 'meta', 'counters');
+  const deliveries = [];
+  const unsubscribe = fs.onSnapshot(ref, snap => deliveries.push(snap.exists() ? snap.data().unread : null));
+
+  assert.deepEqual(deliveries, []);
+  await Promise.resolve();
+  assert.deepEqual(deliveries, [2]);
+
+  await fs.setDoc(ref, { unread: 5 });
+  await Promise.resolve();
+  assert.deepEqual(deliveries.at(-1), 5);
+
+  const afterWrites = deliveries.length;
+  await fs.setDoc(fs.doc(fs.db, 'users', 'a', 'meta', 'other'), { unread: 99 });
+  await Promise.resolve();
+  assert.equal(deliveries.length, afterWrites);
+
+  assert.equal(fs.listenerCount(), 1);
+  unsubscribe();
+  assert.equal(fs.listenerCount(), 0);
+  await fs.setDoc(ref, { unread: 7 });
+  await Promise.resolve();
+  assert.equal(deliveries.length, afterWrites);
+});
+
+test('a doc listener reports a missing document and then its creation', async () => {
+  const fs = createFakeFirestore();
+  const ref = fs.doc(fs.db, 'users', 'b', 'meta', 'counters');
+  const deliveries = [];
+  fs.onSnapshot(ref, snap => deliveries.push(snap.exists()));
+  await Promise.resolve();
+  assert.deepEqual(deliveries, [false]);
+
+  await fs.setDoc(ref, { unread: 1 });
+  await Promise.resolve();
+  assert.deepEqual(deliveries.at(-1), true);
+});
