@@ -36,3 +36,22 @@ export function formatDate(value, { month = 'short', fallback = '' } = {}) {
   if (!date) return fallback;
   return date.toLocaleDateString('en-US', { year: 'numeric', month, day: 'numeric' });
 }
+
+const MINUTE = 60000;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+
+const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'} ago`;
+
+// Relative wording for feeds. A clock running ahead of the stored time reads as "just now".
+export function timeAgo(value, now = new Date()) {
+  const date = toDate(value);
+  if (!date) return '';
+  const elapsed = toDate(now).getTime() - date.getTime();
+  if (elapsed < MINUTE) return 'just now';
+  if (elapsed < HOUR) return plural(Math.floor(elapsed / MINUTE), 'minute');
+  if (elapsed < DAY) return plural(Math.floor(elapsed / HOUR), 'hour');
+  if (elapsed < 2 * DAY) return 'yesterday';
+  if (elapsed < 7 * DAY) return plural(Math.floor(elapsed / DAY), 'day');
+  return formatDate(date);
+}
