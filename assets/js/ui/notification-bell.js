@@ -91,8 +91,8 @@ export function mountBell(header, { uid, repo, now = () => new Date(), navigate 
     }
   }
 
-  function onButtonClick(event) {
-    event.stopPropagation();
+  // The click must reach document so the user menu's own outside-click check can close it.
+  function onButtonClick() {
     setOpen(!panel.classList.contains('show'));
   }
 

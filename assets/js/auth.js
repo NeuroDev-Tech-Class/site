@@ -215,11 +215,11 @@ function createUserMenu() {
   const iconBtn = document.getElementById('user-icon-btn');
   const dropdown = document.getElementById('user-dropdown');
   
-  iconBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
+  // No stopPropagation: the click must reach document so the notification bell can close itself
+  iconBtn.addEventListener('click', () => {
     dropdown.classList.toggle('show');
   });
-  
+
   // Close dropdown when clicking outside
   document.addEventListener('click', (e) => {
     if (!userMenu.contains(e.target)) {

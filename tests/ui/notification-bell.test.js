@@ -112,6 +112,29 @@ test('the panel opens on the bell, closes on an outside click, and reports its s
   assert.equal(panel().classList.contains('show'), false, 'the bell toggles');
 });
 
+test('clicking the bell does not swallow the click, so a sibling menu can close itself', async () => {
+  await mount();
+  const seen = [];
+  const spy = event => seen.push(event.target);
+  dom.document.addEventListener('click', spy);
+  try {
+    click(button());
+  } finally {
+    dom.document.removeEventListener('click', spy);
+  }
+  assert.deepEqual(seen, [button()]);
+  assert.equal(panel().classList.contains('show'), true, 'the panel still opened');
+});
+
+test('a click on another header control closes the panel', async () => {
+  await mount();
+  const other = dom.document.createElement('button');
+  header.appendChild(other);
+  click(button());
+  click(other);
+  assert.equal(panel().classList.contains('show'), false);
+});
+
 test('clicking an unread row marks it read, then follows its link', async () => {
   await mount();
   click(button());
