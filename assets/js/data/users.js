@@ -15,7 +15,12 @@ export function usersRepo(fs) {
       return snap.docs.map(d => ({ id: d.id, ...d.data() }));
     },
 
-    approve: uid => updateDoc(ref(uid), { status: 'approved', approvedAt: serverTimestamp() }),
+    // approvedBy names the actor in the activity feed; Firestore rejects an undefined field.
+    approve: (uid, approvedBy = '') => updateDoc(ref(uid), {
+      status: 'approved',
+      approvedAt: serverTimestamp(),
+      approvedBy
+    }),
 
     remove: uid => deleteDoc(ref(uid)),
 

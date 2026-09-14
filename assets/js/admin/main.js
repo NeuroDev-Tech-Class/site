@@ -2,6 +2,7 @@ import * as fs from '../firebase-config.js';
 import { usersRepo } from '../data/users.js';
 import { submissionsRepo } from '../data/submissions.js';
 import { mailRepo } from '../data/mail.js';
+import { activityRepo } from '../data/activity.js';
 import { isAdmin } from '../lib/format.js';
 import { refreshTokenIfStale } from '../lib/claims-refresh.js';
 import { createStore } from './store.js';
@@ -14,6 +15,7 @@ import { queueView } from './views/queue.js';
 import { gradeView } from './views/grade.js';
 import { studentsView } from './views/students.js';
 import { studentDetailView } from './views/student-detail.js';
+import { activityView } from './views/activity.js';
 
 const TEMPLATE_URL = 'assets/pdfs/Certificate-Template.docx';
 const DOCX_MIME = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
@@ -64,6 +66,7 @@ fs.onAuthStateChanged(fs.auth, async user => {
     users,
     submissions,
     mail: mailRepo(fs),
+    activity: activityRepo(fs),
     store,
     confirm: message => window.confirm(message),
     alert: message => window.alert(message),
@@ -80,7 +83,8 @@ fs.onAuthStateChanged(fs.auth, async user => {
     queue: queueView,
     grade: gradeView,
     students: studentsView,
-    student: studentDetailView
+    student: studentDetailView,
+    activity: activityView
   };
   createRouter({
     window,

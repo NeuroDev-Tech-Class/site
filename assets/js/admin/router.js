@@ -6,7 +6,8 @@ const PATTERNS = [
   { name: 'grade', re: /^\/grade\/([^/?]+)$/, keys: ['id'] },
   { name: 'results', re: /^\/students\/([^/?]+)\/results\/([^/?]+)$/, keys: ['uid', 'courseId'] },
   { name: 'student', re: /^\/students\/([^/?]+)$/, keys: ['uid'] },
-  { name: 'students', re: /^\/students$/, keys: [] }
+  { name: 'students', re: /^\/students$/, keys: [] },
+  { name: 'activity', re: /^\/activity$/, keys: [] }
 ];
 
 export function parseRoute(hash) {

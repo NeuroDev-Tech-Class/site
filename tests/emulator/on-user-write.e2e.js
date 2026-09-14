@@ -63,3 +63,32 @@ test('onUserWrite mirrors claims, emails on approval and clears claims on delete
     return claims.role === undefined && claims.status === undefined;
   });
 });
+
+test('approval notifies the student, counts the unread and logs activity', async () => {
+  const uid = `e2e-approve-${Date.now()}`;
+  const email = `${uid}@example.com`;
+  await auth.createUser({ uid, email, password: 'password123' });
+  await db.doc(`users/${uid}`).set({
+    firstName: 'e2e', lastName: 'approved', email, role: 'student', status: 'pending',
+    studentType: 'current', courses: {}, certificates: []
+  });
+  await waitFor(async () => (await claimsOf(uid)).status === 'pending');
+
+  await db.doc(`users/${uid}`).update({ status: 'approved', approvedBy: 'adm1' });
+
+  const notif = await waitFor(async () => {
+    const snap = await db.doc(`users/${uid}/inbox/approved__${uid}`).get();
+    return snap.exists ? snap.data() : null;
+  });
+  assert.equal(notif.title, 'Your account is approved');
+  assert.equal(notif.read, false);
+
+  await waitFor(async () => (await db.doc(`users/${uid}/meta/counters`).get()).data()?.unread === 1);
+
+  const entry = await waitFor(async () => {
+    const snap = await db.doc(`activity/approved__${uid}`).get();
+    return snap.exists ? snap.data() : null;
+  });
+  assert.match(entry.summary, /approved E2e Approved/);
+  assert.equal(entry.subjectUid, uid);
+});

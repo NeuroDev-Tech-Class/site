@@ -18,6 +18,10 @@ test('parseRoute maps each hash pattern to a route name, params and query', () =
   assert.deepEqual(parseRoute('#/students/u1/results/python-1'), {
     name: 'results', params: { uid: 'u1', courseId: 'python-1' }, query: {}
   });
+  assert.deepEqual(parseRoute('#/activity'), { name: 'activity', params: {}, query: {} });
+  assert.deepEqual(parseRoute('#/activity?type=account_approved&student=jane'), {
+    name: 'activity', params: {}, query: { type: 'account_approved', student: 'jane' }
+  });
 });
 
 test('parseRoute returns null for empty and unknown hashes', () => {
@@ -25,6 +29,7 @@ test('parseRoute returns null for empty and unknown hashes', () => {
   assert.equal(parseRoute('#'), null);
   assert.equal(parseRoute('#/nope'), null);
   assert.equal(parseRoute('#/students/u1/extra'), null);
+  assert.equal(parseRoute('#/activity/x'), null);
 });
 
 let dom, log, routed, routes, ctx;

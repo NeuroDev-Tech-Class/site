@@ -78,7 +78,7 @@ export const todayView = {
         const student = store.students?.find(s => s.id === id);
         if (!student || !ctx.confirm(`Approve ${fullName(student)}?`)) return;
         try {
-          await users.approve(id);
+          await users.approve(id, ctx.currentUid);
           student.status = 'approved';
           store.upsertStudent(student);
         } catch (error) {

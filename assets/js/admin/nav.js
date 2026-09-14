@@ -6,7 +6,8 @@ const QUEUE_LIMIT = 200;
 const LINKS = [
   { label: 'Today', href: '#/today', icon: 'today', routes: ['today'], badge: false },
   { label: 'Grading Queue', href: '#/queue', icon: 'queue', routes: ['queue', 'grade'], badge: true },
-  { label: 'Students', href: '#/students', icon: 'students', routes: ['students', 'student'], badge: false }
+  { label: 'Students', href: '#/students', icon: 'students', routes: ['students', 'student'], badge: false },
+  { label: 'Activity', href: '#/activity', icon: 'activity', routes: ['activity'], badge: false }
 ];
 
 export function mountNav(container, store) {

@@ -28,7 +28,7 @@ firebase login:use neurodevtechcoach@gmail.com   # run inside this folder; pins 
 | `npm test` | everything except the end-to-end run, inside the Firestore emulator | Java |
 | `npm run test:unit` | pure modules, data repos against the fake Firestore, jsdom view tests, function handlers | nothing |
 | `npm run test:rules` | the security-rules matrix in `tests/rules/` | Java |
-| `npm run test:e2e` | `tests/emulator/*.e2e.js`: the real `onUserWrite` inside the Functions, Auth and Firestore emulators | Java |
+| `npm run test:e2e` | `tests/emulator/*.e2e.js`: the real `onUserWrite`, `onSubmissionWrite` and `onInboxWrite` inside the Functions, Auth and Firestore emulators, one file at a time | Java |
 | `npm run emulators` | leaves the emulators running for manual poking | Java |
 
 New features are test-first: write the failing test, watch it fail, implement, run `npm test`. Views take a `ctx` object (repos, store, `navigate`, `confirm`, `alert`, clock) so they run in jsdom without Firebase; see `tests/helpers/admin-ctx.js`.
@@ -39,12 +39,14 @@ Loading `functions/index.js` from a `/mnt/c` path takes about 16 seconds, longer
 
 ```
 assets/js/lib/      pure helpers: escape-html, html (escaping tagged template), format, claims-refresh,
-                    grade (pass threshold, derived totals), submissions (ids, labels), legacy-results
-assets/js/data/     one repo per collection (users, submissions, mail); the only files that call Firestore
-assets/js/ui/       shared markup fragments
+                    grade (pass threshold, derived totals), submissions (ids, labels), legacy-results,
+                    notifications (every notification and activity sentence, with deterministic ids)
+assets/js/data/     one repo per collection (users, submissions, mail, notifications, activity); the only files that call Firestore
+assets/js/ui/       shared markup fragments; notification-bell.js is the header bell, mounted by auth.js
 assets/js/admin/    admin dashboard: main.js, router.js, store.js, nav.js, checklist.js, views/
 assets/js/student/  profile pieces: recent-work.js
-functions/          Cloud Functions (onUserWrite, onSubmissionWrite); functions/shared/ is a generated copy of browser modules
+functions/          Cloud Functions (onUserWrite, onSubmissionWrite, onInboxWrite); lib/notify.js is the fan-out;
+                    functions/shared/ is a generated copy of browser modules (format, grade, submissions, notifications, mail)
 tools/              sync-shared.mjs, backfill-claims.mjs, migrate-test-results.mjs
 tests/              node --test suites; helpers/fake-firestore.js, helpers/dom.js, helpers/rules-env.js
 firestore.rules  firestore.indexes.json  storage.rules  firebase.json

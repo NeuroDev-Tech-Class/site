@@ -43,6 +43,22 @@ service cloud.firestore {
       allow update: if isAdmin() && roleUnchanged();
       allow update: if isSuperAdmin();
       allow delete: if isAdmin();
+
+      // Notifications are written by the fan-out in onSubmissionWrite and onUserWrite.
+      // The owner may mark one read; nobody may forge, edit or remove one.
+      match /inbox/{notifId} {
+        allow read: if signedIn() && request.auth.uid == userId;
+        allow update: if signedIn() &&
+                         request.auth.uid == userId &&
+                         request.resource.data.diff(resource.data).affectedKeys().hasOnly(['read']) &&
+                         request.resource.data.read is bool;
+        allow create, delete: if false;
+      }
+
+      // unread, maintained by onInboxWrite
+      match /meta/{docId} {
+        allow read: if signedIn() && request.auth.uid == userId;
+      }
     }
 
     // Certificate emails are queued by admins; approval emails come from onUserWrite
@@ -75,6 +91,11 @@ service cloud.firestore {
 
     // testResults rows whose email matched no user, written by the migration tool
     match /legacyOrphans/{email} {
+      allow read: if isAdmin();
+    }
+
+    // Append-only audit feed, written only by the functions
+    match /activity/{eventId} {
       allow read: if isAdmin();
     }
 

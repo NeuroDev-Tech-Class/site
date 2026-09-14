@@ -203,7 +203,7 @@ export const studentsView = {
 
     const actions = {
       approve(id) {
-        return mutate(() => users.approve(id), () => { findStudent(id).status = 'approved'; },
+        return mutate(() => users.approve(id, ctx.currentUid), () => { findStudent(id).status = 'approved'; },
           'Failed to approve student. Please try again.');
       },
       deny(id) {

@@ -2,6 +2,7 @@ import { createFakeFirestore } from './fake-firestore.js';
 import { usersRepo } from '../../assets/js/data/users.js';
 import { submissionsRepo } from '../../assets/js/data/submissions.js';
 import { mailRepo } from '../../assets/js/data/mail.js';
+import { activityRepo } from '../../assets/js/data/activity.js';
 import { createStore } from '../../assets/js/admin/store.js';
 
 export const NOW = new Date('2026-09-10T15:00:00Z');
@@ -64,6 +65,27 @@ export const seed = () => ({
     autoScore: null, manualScore: null, totalMax: null, totalScore: null, passed: null, provisional: false,
     feedback: '', submittedAt: '2026-06-03T12:00:00.000Z', submittedAtEstimated: true,
     gradedAt: null, gradedBy: null, createdAt: '2026-06-03T12:00:00.000Z', updatedAt: '2026-06-03T12:00:00.000Z'
+  },
+  'activity/signup__p1': {
+    type: 'new_registration', summary: 'Pat Pending signed up',
+    actorUid: 'p1', actorName: 'Pat Pending', subjectUid: 'p1', subjectName: 'Pat Pending',
+    courseId: '', courseName: '', link: 'admin.html#/students/p1', createdAt: '2026-09-10T14:55:00.000Z'
+  },
+  'activity/graded__c1__python-1_unit-1-test__1__1': {
+    type: 'submission_graded', summary: "Coach X graded Cee Current's Unit 1 Test (8 / 10 (80%))",
+    actorUid: 'me', actorName: 'Coach X', subjectUid: 'c1', subjectName: 'Cee Current',
+    courseId: 'python-1', courseName: 'Python I - Programming Fundamentals',
+    link: 'admin.html#/grade/c1__python-1_unit-1-test__1', createdAt: '2026-09-10T14:00:00.000Z'
+  },
+  'activity/approved__c2': {
+    type: 'account_approved', summary: 'Coach X approved <img src=x onerror=1> Evil',
+    actorUid: 'me', actorName: 'Coach X', subjectUid: 'c2', subjectName: '<img src=x onerror=1> Evil',
+    courseId: '', courseName: '', link: 'admin.html#/students/c2', createdAt: '2026-09-09T15:00:00.000Z'
+  },
+  'activity/cert__o1__gimp': {
+    type: 'certificate_awarded', summary: 'Coach X awarded Old One the 2D Digital Art - GIMP certificate',
+    actorUid: 'me', actorName: 'Coach X', subjectUid: 'o1', subjectName: 'Old One',
+    courseId: 'gimp', courseName: '2D Digital Art - GIMP', link: 'admin.html#/students/o1', createdAt: '2026-09-05T12:00:00.000Z'
   }
 });
 
@@ -76,6 +98,7 @@ export function makeCtx({ role = 'admin', confirm = () => true, courseStructure 
     users: usersRepo(fs),
     submissions: submissionsRepo(fs),
     mail: mailRepo(fs),
+    activity: activityRepo(fs),
     store: createStore(),
     navigate: path => calls.navigate.push(path),
     confirm: message => { calls.confirms.push(message); return confirm(message); },

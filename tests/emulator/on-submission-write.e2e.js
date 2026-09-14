@@ -57,3 +57,49 @@ test('onSubmissionWrite derives totals on grade, never stamps a timestamp, and m
   await fresh.set({ kind: 'test', studentUid: uid, status: 'submitted', submittedAt: clientTime, manualScore: null, totalMax: 10 });
   await waitFor(async () => (await fresh.get()).data().status === 'needs_grading');
 });
+
+test('grading notifies the student, counts the unread, logs activity and does not duplicate', async () => {
+  const uid = `e2e-notify-${Date.now()}`;
+  const subId = `${uid}__python-1_unit-1-test__1`;
+  const ref = db.doc(`submissions/${subId}`);
+  const gradedAt = Timestamp.fromDate(new Date('2026-09-11T18:00:00Z'));
+  await ref.set({
+    kind: 'test', studentUid: uid, studentName: 'E2e Student', studentEmail: `${uid}@example.com`,
+    courseId: 'python-1', courseName: 'Python I', itemId: 'python-1_unit-1-test', itemTitle: 'Unit 1 Test',
+    attempt: 1, status: 'needs_grading', answers: { Q1: 'A' },
+    autoScore: null, manualScore: null, totalMax: 10, totalScore: null, passed: null, provisional: false,
+    feedback: '', submittedAt: gradedAt, gradedAt: null, gradedBy: null
+  });
+
+  await ref.update({ manualScore: 8, status: 'graded', gradedBy: 'adm1', gradedAt });
+
+  const notifRef = db.doc(`users/${uid}/inbox/${subId}__graded__${gradedAt.toMillis()}`);
+  const notif = await waitFor(async () => {
+    const snap = await notifRef.get();
+    return snap.exists ? snap.data() : null;
+  });
+  assert.equal(notif.title, 'Unit 1 Test graded');
+  assert.equal(notif.body, 'Python I: you scored 8 / 10 (80%). Passed.');
+  assert.equal(notif.read, false);
+
+  const counters = db.doc(`users/${uid}/meta/counters`);
+  await waitFor(async () => (await counters.get()).data()?.unread === 1);
+
+  const entry = await waitFor(async () => {
+    const snap = await db.doc(`activity/graded__${subId}__${gradedAt.toMillis()}`).get();
+    return snap.exists ? snap.data() : null;
+  });
+  assert.match(entry.summary, /graded E2e Student's Unit 1 Test \(8 \/ 10 \(80%\)\)/);
+  assert.equal(entry.subjectUid, uid);
+
+  // A re-derive under the same gradedAt must not add a second notification or bump the count.
+  await ref.update({ manualScore: 6 });
+  await waitFor(async () => (await ref.get()).data().passed === false);
+  await settle(3000);
+  const inbox = await db.collection(`users/${uid}/inbox`).get();
+  assert.equal(inbox.size, 1, 'one grading, one notification');
+  assert.equal((await counters.get()).data().unread, 1);
+
+  await notifRef.update({ read: true });
+  await waitFor(async () => (await counters.get()).data().unread === 0);
+});

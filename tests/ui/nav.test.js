@@ -17,10 +17,10 @@ const label = a => text(a.querySelector('.admin-nav-label'));
 const active = () => links().filter(a => a.getAttribute('aria-current') === 'page').map(label);
 const badge = () => container.querySelector('.nav-badge');
 
-test('renders three links in fixed order with their hashes', () => {
+test('renders four links in fixed order with their hashes', () => {
   assert.equal(container.querySelector('nav').getAttribute('aria-label'), 'Admin');
-  assert.deepEqual(links().map(label), ['Today', 'Grading Queue', 'Students']);
-  assert.deepEqual(links().map(a => a.getAttribute('href')), ['#/today', '#/queue', '#/students']);
+  assert.deepEqual(links().map(label), ['Today', 'Grading Queue', 'Students', 'Activity']);
+  assert.deepEqual(links().map(a => a.getAttribute('href')), ['#/today', '#/queue', '#/students', '#/activity']);
 });
 
 test('active state follows the route name, mapping detail routes to their section', () => {
@@ -34,6 +34,8 @@ test('active state follows the route name, mapping detail routes to their sectio
     nav.setRoute({ name });
     assert.deepEqual(active(), ['Students']);
   }
+  nav.setRoute({ name: 'activity' });
+  assert.deepEqual(active(), ['Activity']);
 });
 
 test('the queue badge is hidden at zero, shows the count, and caps at 200+', () => {

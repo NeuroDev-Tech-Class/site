@@ -499,3 +499,235 @@ body.dark-mode .remember-label input[type="checkbox"] {
     font-size: 1.5rem;
   }
 }
+
+/* Notification bell, to the left of the user menu */
+.notif-menu {
+  position: absolute;
+  top: 1.25rem;
+  right: calc(1.25rem + 44px + 0.75rem);
+}
+
+.notif-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--tertiary-color);
+  border: 2px solid var(--tertiary-color);
+  color: var(--secondary-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  max-width: none;
+}
+
+.notif-btn:hover {
+  filter: brightness(1.08);
+}
+
+.notif-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.notif-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background: #c9302c;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.4rem;
+  text-align: center;
+  border: 2px solid var(--header-background);
+  box-sizing: content-box;
+}
+
+.notif-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(340px, calc(100vw - 6rem));
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+  z-index: 1000;
+  overflow: hidden;
+  text-align: left;
+}
+
+body.dark-mode .notif-panel {
+  background: #2a2a2a;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.notif-panel.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.notif-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+}
+
+body.dark-mode .notif-head {
+  border-color: #444;
+}
+
+.notif-heading {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+.notif-mark-all {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: var(--primary-color);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: none;
+  max-width: none;
+  white-space: nowrap;
+}
+
+.notif-mark-all:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+.notif-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.notif-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 16px 12px 30px;
+  border-bottom: 1px solid #eee;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  transition: background 0.15s ease;
+}
+
+body.dark-mode .notif-item {
+  border-color: #444;
+}
+
+.notif-list li:last-child .notif-item {
+  border-bottom: none;
+}
+
+.notif-item:hover {
+  background: #f5f5f5;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+body.dark-mode .notif-item:hover {
+  background: #333;
+}
+
+.notif-item.unread::before {
+  content: '';
+  position: absolute;
+  left: 13px;
+  top: 18px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary-color);
+}
+
+.notif-item.unread .notif-title {
+  font-weight: 600;
+}
+
+.notif-body {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+body.dark-mode .notif-body {
+  color: #aaa;
+}
+
+.notif-time {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.notif-empty {
+  margin: 0;
+  padding: 24px 16px;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  max-width: none;
+}
+
+body.dark-mode .notif-empty {
+  color: #aaa;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notif-btn,
+  .notif-panel,
+  .notif-item {
+    transition: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .notif-menu {
+    top: 0.75rem;
+    right: calc(0.75rem + 38px + 0.5rem);
+  }
+
+  .notif-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .notif-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .notif-panel {
+    right: -46px;
+    width: min(320px, calc(100vw - 1.5rem));
+  }
+}

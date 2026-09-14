@@ -215,7 +215,7 @@ export const studentDetailView = {
         try {
           await withBusyButton(button, 'Awarding...', async () => {
             const awardDate = ctx.now();
-            const cert = { courseId, courseName, awardedAt: awardDate.toISOString() };
+            const cert = { courseId, courseName, awardedAt: awardDate.toISOString(), awardedBy: ctx.currentUid };
             await users.addCertificate(uid, existing, cert);
             student.certificates = [...existing, cert];
             store.upsertStudent(student);
