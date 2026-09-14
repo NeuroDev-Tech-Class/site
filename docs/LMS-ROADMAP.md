@@ -1,6 +1,6 @@
 # NeuroDev Tech Class LMS Roadmap
 
-Status: planning approved Sep 8 2026. **Phase 0 (Foundations) done Sep 10 2026. Phase 1 (Submissions and Grading Queue) done Sep 10 2026**; see the decisions log and the "as delivered" notes under section 9. Phases 2 to 8 are not started.
+Status: planning approved Sep 8 2026. **Phase 0 (Foundations) done Sep 10 2026. Phase 1 (Submissions and Grading Queue) done Sep 10 2026. Phase 2 (Notifications and Activity) done Sep 14 2026**; see the decisions log and the "as delivered" notes under section 9. Phases 3 to 8 are not started.
 Companion document: [CHECKPOINT-DELIVERABLES.md](CHECKPOINT-DELIVERABLES.md) lists every checkpoint and the form fields it gets.
 
 Vocabulary: Topher says "certificate" for what the code calls a course. This document says **certificate (course)** where it matters; identifiers in code stay `courseId`.
@@ -40,6 +40,10 @@ We want one system: admins are notified when students finish things, progress is
 | Sep 10 2026 | Legacy rows with no `total` | Migrated with `totalMax: null` and `passed: null`; the score shows as points. The grade screen forces an "out of" value when an admin grades or re-grades such a row. |
 | Sep 10 2026 | Migrated item ids | `legacyKey` is the `itemId` until Phase 5 remaps it; the document id `{uid}__{legacyKey}__1` never changes. |
 | Sep 10 2026 | `testResults` after migration | **Deny-all** in rules. Dead data kept until Phase 8. Unmatched emails live in `legacyOrphans/{email}`. |
+| Sep 11 2026 | Which events notify in Phase 2 | **All four that exist**: work graded, account approved and certificate awarded go to the student; new registration goes to every admin. Submission received is built and tested but dormant until Phase 3 creates submissions. |
+| Sep 11 2026 | Counters document | **`unread` only.** The sidebar's Grading Queue badge keeps deriving its number from the live queue listener; no `pendingGrading` field until something needs it stored. |
+| Sep 11 2026 | Bell UX | **Dropdown panel** in the site header on every page: newest ten, click marks read and follows the link, Mark all read. No separate notifications page. |
+| Sep 11 2026 | Activity feed | **Filters included**: a type select and a student search, reflected in the query string, filtering client-side over the newest 100 exactly as the queue does. |
 
 ## Facts from the audit that shape the plan
 
@@ -110,9 +114,12 @@ users/{uid}                        existing fields plus summary{overallPercent, 
                                    (summary written only by a function)
 users/{uid}/progress/{courseId}    items{ [itemId]: {done, at, via} }, doneCount, totalCount,
                                    courseVersion, startedAt, lastActivityAt
-users/{uid}/inbox/{notifId}        type, title, body, link, read, createdAt
-users/{uid}/meta/counters          unread, pendingGrading (function-maintained)
-activity/{eventId}                 append-only audit feed, admin read
+users/{uid}/inbox/{notifId}        type, title, body, link, actorName, read, createdAt (Phase 2)
+users/{uid}/meta/counters          unread only, written by onInboxWrite; pendingGrading stays derived
+                                   from the queue listener until something needs it stored
+activity/{eventId}                 append-only audit feed, admin read (Phase 2): type, summary,
+                                   actorUid, actorName, subjectUid, subjectName, courseId,
+                                   courseName, link, createdAt
 certificates/{uid__courseId}       studentUid, courseId, courseTitle, awardedAt, awardedBy,
                                    templateId, storagePath, revoked
 certificateTemplates/{templateId}  name, storagePath, placeholders[{token, source}], active
@@ -134,14 +141,15 @@ Rules matrix:
 - `testResults` is deny-all (since Phase 1).
 - Storage: students write only under their own uid with size and MIME caps; admins read all.
 
-Realtime listener budget for an open admin tab: five (inbox, counters, queue, pending users, activity). All are `limit()`-bounded and all are disposed on navigation.
+Realtime listener budget for an open admin tab: inbox and counters (the header bell, on every page), the queue (page store), and activity only while its view is open. All are `limit()`-bounded and all are disposed on navigation or sign-out.
 
 ## 4. Cloud Functions (Node 22, `functions/`)
 
 | Function | Trigger | Does |
 |---|---|---|
-| `onSubmissionWrite` | `submissions/*` write | Auto-grades mc/tf/multi from `answerKeys`, sets status and the provisional flag, marks the progress item done when graded, fans out inbox notifications to admins and the student, bumps counters, logs activity. |
-| `onUserWrite` | `users/*` write | **Deployed (Phase 0).** Syncs role and status into custom claims. On approval queues the approval `mail` document (moved out of admin.js). Stamps `claimsUpdatedAt`. |
+| `onSubmissionWrite` | `submissions/*` write | **Deployed (Phase 1; fan-out Phase 2).** Moves `submitted` to `needs_grading` and derives totals on grade. Notifies the student of a grade and every admin of a new submission, logs activity. Later: auto-grades mc/tf/multi from `answerKeys`, sets the provisional flag, marks the progress item done. |
+| `onUserWrite` | `users/*` write | **Deployed (Phase 0; fan-out Phase 2).** Syncs role and status into custom claims. On approval queues the approval `mail` document and notifies the student. Notifies every admin of a registration and the student of each new certificate, logs activity. Stamps `claimsUpdatedAt`. |
+| `onInboxWrite` | `users/*/inbox/*` write | **Deployed (Phase 2).** Keeps `users/{uid}/meta/counters.unread` in step with the inbox by delta; writes nothing when the delta is zero. |
 | `onProgressWrite` | `users/*/progress/*` write | Recomputes `users.summary`, debounced 60 seconds. |
 | `publishCourse` | callable (admin) | Validates the course tree, writes `published/current`, bumps version. |
 | `awardCertificate` | callable (admin) | Renders the DOCX server-side (port of `admin/certificate-docx.js`), stores it, creates the certificate document, queues the mail, notifies the student. |
@@ -248,7 +256,7 @@ Sizes for one developer: S under a week, M one to two weeks, L two to four, XL f
 |---|---|---|---|---|
 | 0 | Foundations | M | Blaze (done) | **Done Sep 10 2026.** Budget alert. Storage and Functions initialised and deployed from the repo. **`testResults` write hole closed and answers escaped on render (hotfix, first PR).** Custom claims and rules rewrite. Test harness, fake Firestore, rules emulator suite, CI. `lib/` and `ui/` primitives. `admin.js` split into `admin/` with the router and the three current views ported one to one: no visible change, no `window.*` globals, no unescaped innerHTML. |
 | 1 | Submissions and Grading Queue | L | 0 | **Done Sep 10 2026.** `submissions`, indexes, `onSubmissionWrite`. Sidebar, Today, Queue and Grade views. Student "Recent work". `migrate-test-results` so the queue opens with history. **First shippable win.** |
-| 2 | Notifications and Activity | S/M | 1 | Inbox, counters, activity feed, header bell, sidebar badge. |
+| 2 | Notifications and Activity | S/M | 1 | **Done Sep 14 2026.** Inbox, unread counter, activity feed with type and student filters, header bell on every page. The sidebar badge stays derived from the queue listener. |
 | 3 | Checkpoints | L | 1, 2 | `checkpoints`, Storage uploads and rules, `checkpoint.html`, grade view field types, all 36 pages and 58 Classroom items converted via `import-classroom`. Ends emailed Word documents. |
 | 4 | Tests | L | 1 | `tests`, `questions`, `answerKeys`, auto-grading, `test.html`, provisional scoring, markdown import. Retires `form.html` and the Apps Script. Owner re-authors the 13 Forms. |
 | 5 | Course model in Firestore | L | 0 (uses types from 3 and 4) | `courses` tree, `publishCourse`, `onProgressWrite` and `users.summary`, extract, import and progress migration, `course-view.js` replaces `link-generator.js`. Riskiest step: dry run, report, fallback kept. |
@@ -282,6 +290,20 @@ Shipped as two merges from one branch. Merge A (steps 1 to 4) was additive: SDK 
 - Student profile: "Recent Work" section (`assets/js/student/recent-work.js`: ten newest, status word, score, feedback).
 - `npm test` is 234 tests; `test:e2e` covers `onUserWrite` and `onSubmissionWrite`.
 - Not in this phase: nothing lets a student create a submission (checkpoints in Phase 3, tests in Phase 4); notifications and counters (Phase 2); `link-generator.js` whole-map overwrite of `courses` (Phase 5).
+
+### Phase 2 as delivered (Sep 14 2026)
+
+Two merges from one branch again. Merge A (steps 1 to 4): harness, the shared text module, rules, the client repos and every function change; the inbox started filling from real events while nothing displayed it. Merge B (steps 5 to 7): the header bell and the Activity view.
+
+- `assets/js/lib/notifications.js` (synced into `functions/shared` along with `lib/submissions.js`): `NOTIFICATION_TYPES`, `TYPE_LABELS`, and one notification builder plus one activity builder per event, each returning its own deterministic id. Every field falls back to readable text ("A student's work") because Firestore rejects `undefined`. `lib/format.js` gained `timeAgo`.
+- Rules: `users/{uid}/inbox` owner read, owner update of `read` only (must be a bool), no create or delete from any client; `users/{uid}/meta` owner read only; `activity` admin read only. Admins cannot read another user's inbox; the audit trail is `activity`.
+- `data/notifications.js` (`subscribeInbox`, `subscribeUnreadCount` floored at zero, `markRead`, `markAllRead` as one single-key update per id) and `data/activity.js` (`subscribeFeed`, newest 100).
+- Functions: `functions/lib/notify.js` (`adminRecipients`, `actorFrom`, `deliver`, `deliverAll`, `logActivity`; every write is `create()` under a deterministic id with `ALREADY_EXISTS` swallowed) and `functions/lib/inbox-write.js` (`onInboxWrite`: unread delta via `FieldValue.increment`, no write on a zero delta). `onSubmissionWrite` fans out after the derived-totals early return, so its own re-trigger notifies nobody, and `legacy` rows notify nobody. `onUserWrite` fans out registration, approval and each new certificate. The graded id is keyed on the stored `gradedAt`: a retry is swallowed, a genuine re-grade notifies again.
+- Actor capture: `users.approve(uid, approvedBy)` and `awardedBy` on the certificate object, so the feed reads "Topher approved Jane Doe" rather than "someone did".
+- Header bell (`assets/js/ui/notification-bell.js`, mounted by `auth.js` for every signed-in user, pending included): count pill from the counters document, dropdown with the newest ten, click marks read then follows the link, Mark all read. Styles live in `auth.css` because it is the one stylesheet loaded on every page.
+- Activity view (`admin/views/activity.js`, `#/activity`): owns its listener, type and student filters in the query string, distinct empty states for "nothing yet" and "nothing matches", an error state instead of loading forever. Sidebar order is Today, Grading Queue, Students, Activity.
+- `npm test` is 331 tests; `test:e2e` runs its files one at a time (`--test-concurrency=1`) because two files against one functions emulator dropped events once the fan-out added work per trigger.
+- Not in this phase: the `submission_received` fan-out has no producer until Phase 3; inbox and activity retention (Phase 8); email for any of this (in-app only, decided Sep 8).
 
 ## 10. Open decisions
 
