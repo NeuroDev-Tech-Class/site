@@ -1451,3 +1451,68 @@ body.dark-mode .work-meta {
 body.dark-mode .work-feedback {
   border-top-color: rgba(255, 255, 255, 0.08);
 }
+
+/* Activity feed */
+.feed-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.feed-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+body.dark-mode .feed-item {
+  border-color: #333;
+}
+
+.feed-summary {
+  flex: 1 1 320px;
+  min-width: 0;
+  color: var(--text-color);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.feed-summary:hover {
+  color: var(--primary-color);
+}
+
+.feed-time {
+  flex: 0 0 auto;
+  font-size: 0.85rem;
+  color: #777;
+  white-space: nowrap;
+}
+
+body.dark-mode .feed-time {
+  color: #aaa;
+}
+
+.feed-loading {
+  margin: 0;
+  padding: 1rem 0;
+  color: #666;
+}
+
+body.dark-mode .feed-loading {
+  color: #aaa;
+}
+
+.feed-error {
+  margin: 0;
+  padding: 1rem 0;
+  color: #c9302c;
+  font-weight: 600;
+}
+
+body.dark-mode .feed-error {
+  color: #ef9a9a;
+}

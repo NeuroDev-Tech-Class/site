@@ -12,13 +12,17 @@ import {
   getDoc,
   serverTimestamp
 } from './firebase-config.js';
+import * as fs from './firebase-config.js';
 import { formatName, fullName, isAdmin } from './utils.js';
 import { escapeHtml } from './lib/escape-html.js';
 import { refreshTokenIfStale } from './lib/claims-refresh.js';
+import { notificationsRepo } from './data/notifications.js';
+import { mountBell } from './ui/notification-bell.js';
 
 // User state
 let currentUser = null;
 let userData = null;
+let bell = null;
 
 // Session management
 const SESSION_KEY = 'nd_session_expiry';
@@ -416,9 +420,10 @@ function updateUIForLoggedInUser() {
   const iconBtn = document.getElementById('user-icon-btn');
   
   if (!userData || !dropdown || !iconBtn) return;
-  
+
   // Update icon to show logged in state
   iconBtn.classList.add('logged-in');
+  mountNotificationBell();
   
   const isPending = userData.status === 'pending';
   const admin = isAdmin(userData);
@@ -486,9 +491,10 @@ function updateUIForLoggedOutUser() {
   const iconBtn = document.getElementById('user-icon-btn');
   
   if (!dropdown || !iconBtn) return;
-  
+
   iconBtn.classList.remove('logged-in');
-  
+  disposeNotificationBell();
+
   dropdown.innerHTML = `
     <button class="dropdown-item" id="dropdown-login">
       <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
@@ -513,6 +519,18 @@ function updateUIForLoggedOutUser() {
     dropdown.classList.remove('show');
     openAuthModal('register');
   });
+}
+
+// Pending users get the bell too: an approval notification is what they are waiting for.
+function mountNotificationBell() {
+  const header = document.querySelector('header');
+  if (!header || !currentUser) return;
+  bell = mountBell(header, { uid: currentUser.uid, repo: notificationsRepo(fs) });
+}
+
+function disposeNotificationBell() {
+  bell?.dispose();
+  bell = null;
 }
 
 // Convert Firebase error codes to user-friendly messages
