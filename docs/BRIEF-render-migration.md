@@ -2,13 +2,13 @@
 
 **For:** a Claude Code session opened in `NeuroDev/tech-class-website` (this folder; it was called `site` until 2026-09-17, and the GitHub repo is still named `site` on purpose, see "URL root" below) (with read access to the sibling folders `../neurodev-hub` and `../IDEA-Assessment`).
 **Owner:** Topher. **Written:** 2026-09-17. **Umbrella plan:** `../PROJECT.md`.
-**Layout decided 2026-09-22:** the tech site's **frontend** is its own Astro static site in this repo at `tech.neurodevlabs.com` (Render static sites are free). Its **backend is not a separate service**: it is a module inside `../neurodev-hub/backend/app/tech/`, served by the existing `hub-backend` at `https://hub-api.neurodevlabs.com/api/v1/tech/...`. This is the same split the scheduler used (`app/schedule/`), except the scheduler's pages also live in the hub and the tech site's pages do not. No new Render web service, no `tech-api` subdomain, no `tech_app` database role.
+**Layout decided 2026-09-22:** the tech site's **frontend** is its own Astro static site in this repo at `tech.neurodevmentoring.com` (Render static sites are free). Its **backend is not a separate service**: it is a module inside `../neurodev-hub/backend/app/tech/`, served by the existing `hub-backend` at `https://hub-api.neurodevmentoring.com/api/v1/tech/...`. This is the same split the scheduler used (`app/schedule/`), except the scheduler's pages also live in the hub and the tech site's pages do not. No new Render web service, no `tech-api` subdomain, no `tech_app` database role.
 
 So this brief drives work in **two repos**: backend PRs in `../neurodev-hub`, frontend PRs here. The scheduler migration (`../NeuroDev-Time-Off-Calendar/BRIEF-scheduler-migration.md`) is done and is the worked example to copy.
 
 ## Goal
 
-Same site, same features, same content, new platform: **Astro** frontend (React islands for the interactive parts), **FastAPI** routes added to `hub-backend` (`tech` schema in the shared NeuroDev database, managed by the hub's Alembic), deployed on Render as one free static site at `tech.neurodevlabs.com` talking to `https://hub-api.neurodevlabs.com`. Firebase project `tech-certificates-af7c3` is retired at the end.
+Same site, same features, same content, new platform: **Astro** frontend (React islands for the interactive parts), **FastAPI** routes added to `hub-backend` (`tech` schema in the shared NeuroDev database, managed by the hub's Alembic), deployed on Render as one free static site at `tech.neurodevmentoring.com` talking to `https://hub-api.neurodevmentoring.com`. Firebase project `tech-certificates-af7c3` is retired at the end.
 
 This is a **port, not a redesign**. LMS roadmap phases 3-8 (`docs/LMS-ROADMAP.md`) are paused and get built afterwards on the new stack. Do not start them here. The roadmap's "stay a static site on Firebase" guideline is superseded; every other guideline in it (test-first, escape by default, one grading spine, stable IDs, UX rules for a neurodivergent audience) still applies.
 
@@ -37,7 +37,7 @@ The hub's auth currently admits only `@neurodevmentoring.com` Google accounts. S
 2. Sign-in is per app: `GET /api/v1/auth/google/start?app=tech` allows any verified Google account and creates `kind=student`; `app=hub` (default) keeps the staff-domain rule. A `student` account can never open hub routes: add that check to `get_current_account` consumers in the hub and test it.
 3. Set `COOKIE_DOMAIN=.neurodevlabs.com` so the refresh cookie is shared by `hub.` and `tech.`; redirect targets after login come from an allowlist of app base URLs, never from a free-form parameter.
 4. Tech routes use the hub's own `get_current_account` dependency (same process, same tokens), plus a `get_tech_user` dependency that loads `tech.users` for that account. Tech-specific role and status (`student`/`admin`/`superadmin`, `pending`/`approved`) live in `tech.users`, keyed by `account_id`. A hub admin is not automatically a tech admin; `tech.users.role` decides.
-5. Cookie and CORS: the refresh cookie is set by `hub-api.neurodevlabs.com`, and `tech.neurodevlabs.com` is same-site with it, so it already flows; `COOKIE_DOMAIN` can stay empty. Add `https://tech.neurodevlabs.com` to `CORS_ORIGINS` and to the post-login redirect allowlist (env var, not code).
+5. Cookie and CORS: the refresh cookie is set by `hub-api.neurodevmentoring.com`, and `tech.neurodevmentoring.com` is same-site with it, so it already flows; `COOKIE_DOMAIN` can stay empty. Add `https://tech.neurodevmentoring.com` to `CORS_ORIGINS` and to the post-login redirect allowlist (env var, not code).
 
 ## Stage B — backend (`../neurodev-hub/backend/app/tech/`)
 
@@ -71,12 +71,12 @@ tech.mail_log         what was sent (replaces the `mail` collection + Trigger Em
 
 ### URL root: no `/site/` prefix (required)
 
-Today the site lives at `neurodev-tech-class.github.io/site/` and that prefix is hardcoded everywhere: `<base href="/site/">` and `/site/assets/js/...` script tags in every course page, `admin.html`, `catalog.html`, the lesson pages, and the `basePath` logic in `assets/js/load-header.js`. The new site serves from the **root of `tech.neurodevlabs.com`**.
+Today the site lives at `neurodev-tech-class.github.io/site/` and that prefix is hardcoded everywhere: `<base href="/site/">` and `/site/assets/js/...` script tags in every course page, `admin.html`, `catalog.html`, the lesson pages, and the `basePath` logic in `assets/js/load-header.js`. The new site serves from the **root of `tech.neurodevmentoring.com`**.
 
 - Astro `base` is `/`. Nothing in `web/` may contain the string `/site/`. Add a test that scans the build output and fails if it appears.
 - The content extractor rewrites internal links and asset paths while importing (strip the leading `/site`), with tests covering `<base>`, absolute `/site/...` links, and relative links that depended on the `<base>` tag.
 - Do not touch the `/site/` paths in the existing static files: the live GitHub Pages site needs them until cutover.
-- Redirects, listed in one file: `tech.neurodevlabs.com/site/*` -> `/*` (301, Render redirect rule in `render.yaml`), and a GitHub Pages stub for the old host that forwards `/site/<path>` to `https://tech.neurodevlabs.com/<path>`.
+- Redirects, listed in one file: `tech.neurodevmentoring.com/site/*` -> `/*` (301, Render redirect rule in `render.yaml`), and a GitHub Pages stub for the old host that forwards `/site/<path>` to `https://tech.neurodevmentoring.com/<path>`.
 - The GitHub repo rename (`site` -> `tech-class-website`) is a cutover step for Topher, after DNS points at Render, because renaming the repo kills the Pages URL immediately. Put it in `docs/CUTOVER.md`. Do not rename anything on GitHub.
 
 ## Stage D — data migration (hub repo: `backend/scripts/` and `scripts/`)
@@ -87,10 +87,10 @@ Today the site lives at `neurodev-tech-class.github.io/site/` and that prefix is
 
 ## Stage E — delivery
 
-- This repo's `render.yaml`: one static service `tech-frontend` (`rootDir: web`, `staticPublishPath: dist`, SPA/404 rules as Astro needs, the `/site/*` -> `/*` redirect, env `PUBLIC_API_URL=https://hub-api.neurodevlabs.com`). No web service, no database, no new Postgres role: the hub's `hub_app` role owns the `tech` schema because the hub's Alembic creates it.
-- Hub repo: no `render.yaml` change except documenting the two new env values (`CORS_ORIGINS` gains the tech origin; the redirect allowlist gains `https://tech.neurodevlabs.com`).
+- This repo's `render.yaml`: one static service `tech-frontend` (`rootDir: web`, `staticPublishPath: dist`, SPA/404 rules as Astro needs, the `/site/*` -> `/*` redirect, env `PUBLIC_API_URL=https://hub-api.neurodevmentoring.com`). No web service, no database, no new Postgres role: the hub's `hub_app` role owns the `tech` schema because the hub's Alembic creates it.
+- Hub repo: no `render.yaml` change except documenting the two new env values (`CORS_ORIGINS` gains the tech origin; the redirect allowlist gains `https://tech.neurodevmentoring.com`).
 - CI: replace the Firebase emulator jobs with backend (Postgres service) and frontend jobs, but only on the `render-migration` branch path until cutover so `main` keeps deploying rules and functions.
-- `docs/CUTOVER.md`: freeze window, export, dry run, import, smoke tests, DNS (`tech` CNAME to the Render static host, added to `../IDEA-Assessment/project-notes/03-dns-records.md`), GitHub Pages redirect stub, repo rename, 30 days of Firebase read-only, then Blaze downgrade. Steps Topher performs are marked as his. Model it on `../neurodev-hub/docs/scheduler-cutover.md`.
+- `docs/CUTOVER.md`: freeze window, export, dry run, import, smoke tests, DNS (`tech` CNAME in the **`neurodevmentoring.com`** zone to the Render static host; that zone carries the Workspace MX records, so add only; record it in `../IDEA-Assessment/project-notes/03-dns-records.md`), GitHub Pages redirect stub, repo rename, 30 days of Firebase read-only, then Blaze downgrade. Steps Topher performs are marked as his. Model it on `../neurodev-hub/docs/scheduler-cutover.md`.
 
 ## Suggested PR sequence
 
