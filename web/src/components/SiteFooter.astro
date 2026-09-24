@@ -1,0 +1,15 @@
+---
+import ThemeToggle from './ThemeToggle'
+
+const year = new Date().getFullYear()
+---
+
+<footer class="mt-16 border-t border-(--border) px-4 py-8 text-center text-(--muted)">
+  <p>
+    &copy; {year} <a href="https://neurodevmentoring.com/">NeuroDev</a>{' '}&middot;{' '}<a href="tel:+14355749393">435.574.9393</a>
+  </p>
+  <p class="mt-2"><a href="#main">Back to top</a></p>
+  <div class="mt-4">
+    <ThemeToggle client:load transition:persist="theme-toggle" />
+  </div>
+</footer>

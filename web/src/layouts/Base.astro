@@ -1,4 +1,7 @@
 ---
+import { ClientRouter } from 'astro:transitions'
+import SiteFooter from '../components/SiteFooter.astro'
+import SiteHeader from '../components/SiteHeader.astro'
 import '../styles/global.css'
 
 interface Props {
@@ -6,21 +9,56 @@ interface Props {
   description?: string
 }
 
-const { title, description = 'NeuroDev Tech Class: practical, hands-on technology courses.' } = Astro.props
+const {
+  title,
+  description = 'NeuroDev Tech Class: practical, hands-on technology courses for neurodivergent students in St. George, Utah and Raleigh, North Carolina.',
+} = Astro.props
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#23316a" />
     <title>{title === 'Home' ? 'NeuroDev Tech Class' : `${title} | NeuroDev Tech Class`}</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Before paint, and again after each in-site navigation (the router swaps <html>): dark unless chosen light -->
+    <script is:inline>
+      (() => {
+        const apply = () => {
+          let light = false;
+          try {
+            light = localStorage.getItem('theme') === 'light';
+          } catch {
+            // storage blocked: stay dark
+          }
+          document.documentElement.classList.toggle('dark', !light);
+        };
+        apply();
+        document.addEventListener('astro:after-swap', apply);
+      })();
+    </script>
+    <ClientRouter />
   </head>
   <body>
-    <a href="#main">Skip to content</a>
-    <main id="main" tabindex="-1">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-lg focus:bg-(--panel) focus:p-3"
+    >Skip to content</a>
+    <SiteHeader>
+      <slot name="account" slot="account" />
+    </SiteHeader>
+    <main id="main" tabindex="-1" class="mx-auto max-w-5xl px-4 py-8 focus:outline-none">
       <slot />
     </main>
+    <SiteFooter />
   </body>
 </html>

@@ -1,0 +1,31 @@
+---
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/catalog', label: 'Course Catalog' },
+  { href: '/resources', label: 'Resources' },
+]
+const path = Astro.url.pathname.replace(/\/$/, '') || '/'
+const current = (href: string) => (href === '/' ? path === '/' : path === href || path.startsWith(`${href}/`))
+---
+
+<header class="relative bg-(--header-bg) px-4 pt-6 pb-3 text-(--header-text)">
+  <div class="absolute top-3 right-3 sm:top-5 sm:right-5">
+    <slot name="account" />
+  </div>
+  <div class="mx-auto flex max-w-5xl flex-col items-center gap-3">
+    <a href="/" class="block w-3/4 max-w-[425px]">
+      <img src="/logo-white.png" alt="NeuroDev Tech Class home" width="824" height="208" class="h-auto w-full" />
+    </a>
+    <nav aria-label="Main" class="flex flex-col items-center sm:flex-row sm:gap-2">
+      {links.map(link => (
+        <a
+          href={link.href}
+          aria-current={current(link.href) ? 'page' : undefined}
+          class="inline-flex min-h-[44px] items-center rounded-lg px-3 font-heading font-semibold text-(--header-text) no-underline hover:underline aria-[current=page]:underline aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-4"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
