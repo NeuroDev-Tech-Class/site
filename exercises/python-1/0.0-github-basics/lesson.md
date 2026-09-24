@@ -1,211 +1,83 @@
-# Introduction to Git and Github
+# GitHub Basics: Your First Repository
 
-Git is a version control tool. In one way or the other you may need to use a git and a github.
-You need to use git and github either to store your projects on the cloud or to collabrate with your team.
-A version control is a means of recording changes to a file or set of files over time so that you can recall specific versions later.
-If you a visual learner you may check this <a href="https://www.youtube.com/watch?v=9cCApTLb_Io&list=PLbvhRHYrmshSCAHZbibqh_px_LxnU54dk&ab_channel=Washera">YouTube lesson</a>
+Every coding exercise in this course is handed in the same way: you keep your work in your own **repository**
+(a project folder that Git tracks) on **GitHub**, and you submit the link to it. This exercise walks you through
+doing that once, start to finish. After this, every exercise works the same way.
 
-If you prefer watching the tutorial click this [link](https://www.youtube.com/watch?v=9cCApTLb_Io&list=PLbvhRHYrmshSCAHZbibqh_px_LxnU54dk)
+**Git** is a tool on your computer that remembers every saved version of your project. **GitHub** is a website
+that stores a copy of your project online so you (and your coach) can see it from anywhere.
 
-## 1. Install Git and Signup on Github
+If you like to learn by watching first, this [video walkthrough](https://www.youtube.com/watch?v=9cCApTLb_Io&list=PLbvhRHYrmshSCAHZbibqh_px_LxnU54dk)
+covers the same steps.
 
-- Git:
-  Install [git](https://git-scm.com/downloads)
-- Github
-  Signup on [github](https://github.com/)
+## 1. Get set up (once)
 
-## 2. Configure your name and your email
-
-```shell
-git config --global user.name 'yourname'
-git config --global user.email 'youremail'
-```
-
-## 3. Create a local git repository
-
-On this step your will create a folder (directory) for your project. A local repository is a project or a folder which is on your computer.
-Go to start and type git bash. Git terminal will popup. On the terminal write:
+1. Install [Git](https://git-scm.com/downloads). Keep the default options.
+2. Make a free account on [GitHub](https://github.com/signup), or sign in if you already have one.
+3. Tell Git who you are. Open a terminal (on Windows, open **Git Bash**) and type, with your own name and email:
 
 ```shell
-mkdir project_name
-cd project_name
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
 ```
 
-## 4. Initialize Git
+## 2. Make a repository on GitHub
 
-After creating a new local repository or in an existing local repository, intitialize the repository by the following command:
+1. On GitHub, click the **+** in the top right corner, then **New repository**.
+2. Name it `github-basics`. Leave it **Public** so your coach can open it.
+3. Leave every other box unticked and click **Create repository**. GitHub shows you the repository's address;
+   keep that page open.
+
+## 3. Put the starter files in it
+
+1. Download the starter files from this page and unzip them into a new folder called `github-basics`.
+2. Open `README.md` in your editor and fill in the three lines about yourself. Save it.
+3. In your terminal, go into that folder and connect it to GitHub. Replace the address with the one GitHub showed you:
 
 ```shell
-   git init
+cd github-basics
+git init -b main
+git add .
+git commit -m "My first commit"
+git remote add origin https://github.com/your-username/github-basics.git
+git push -u origin main
 ```
 
-Once, the repository is intialized git tracks the changes in the files and folders.
+`git add .` picks up your changes, `git commit` saves a version with a short message, and `git push` sends it to
+GitHub. The first push may ask you to sign in to GitHub.
 
-## 5. Add file to the staging area
+Refresh the GitHub page: your `README.md` is there.
 
-File can be added to the stagging area in multiple ways.
-To add single file
+## 4. Submit
+
+Copy the address of your repository from your browser (it looks like `https://github.com/your-username/github-basics`)
+and paste it into the form below. That's the whole hand-in.
+
+## Every exercise after this
+
+1. Download the starter files and make a new repository for them, as above.
+2. Do the work. Whenever you reach a good point, save a version and send it to GitHub:
 
 ```shell
-   git add filename
+git add .
+git commit -m "Describe what you changed"
+git push
 ```
 
-To add multiple files
+3. Many exercises come with tests. When you push, GitHub runs them for you: a green check next to your latest
+   commit means they pass, a red X means something still needs work. Click it to see which test failed.
+4. Submit your repository link with the form on the exercise page.
 
-```shell
-   git add filename1 filename2
-```
+## Git cheat sheet
 
-To add all files and folders at once
-
-```shell
-   git add .
-```
-
-## 6. Unstage a file
-
-```shell
-    git reset HEAD filename
-```
-
-## 7. Commit the changes
-
-Commiting means taking a snapshot or a copy of your file at that point of time.
-
-```shell
-   git commit -m 'your message'
-```
-
-Your commit message has to be associated with the changes or modification you make.
-
-## 8. Creating a branch
-
-You can create copy of the master using branch. You built an awesome application. You like to keep this awesome application as it is and you like to add some features.
-This is the time, you need branching the master. Branch is the copy of the master at branching instant. After branching the branch and the master they don't see each other. You can create as many branches as you want.
-
-To create branch:
-
-- Only to create branch
-
-```shell
-    git branch branchname
-
-```
-
-To create branch:
-
-- To create and checkout to the branch at the same time:
-
-```shell
-    git checkout -b branchname
-
-```
-
-To switch between branches:
-
-```shell
-    git checkout master
-    git checkout branchname
-```
-
-To list down all the branches:
-
-```shell
-    git branch
-```
-
-## 9. Create Repository on Github
-
-Go to [github](https://github.com/) and create a repository by click the plus icon on the top right corner.
-
-## 10. Connecting git with remote repository
-
-In this step you will connect your local git repository with your remote github repository
-
-```shell
-    git remote add origin remote_repository_ul
-
-```
-
-The word origin could be any word. It is a means to assign the repository url.
-If this is step is passed without error, you are ready to push it to your remote github repository
-
-## 11. Push
-
-Commits if you have any changes and be ready to push your files to your remote github repository
-git push -u origin master
-```shell
-    git push -u origin master
-
-```
-
-## 12. Merge
-
-When you work on an individual project or a team project you may have different branches. Mostly you will have master, develop and other branchs.Then you will merge other branchs to your develop and your develop to master. It is possible to merge any branches. For instance lets merge feature branch to develop
-
-```shell
-    git checkout develop
-    git merge feature
-
-```
-
-## 12. Pull
-
-If your team merge new features to the develop. Then you will be behind, now you need to make your project to current stage by pulling from develop
-
-```shell
-    git checkout yourbranch
-    git pull origin develop
-    git checkout develop
-    git merge yourbranch
-    git push -u origin develop
-
-
-```
-
-## Git cheatsheet:
-
-Here you have the basic git commands which might be useful:
-
-```shell
-git --version //to check the version
-git help  // To get help from git
-git help commit // To get commit help
-
-git init  // Initilaizing git repository on local machine
-
-git config --list // to check what is configured
-git config // to get information about configuration
-git config --global user.name "username" //Configuring git user name
-git config --global user.email "email" //Configuring git user email
-
-git add filename
-git add first.txt # adding only one file
-git add second.txt third.txt // to add multiple file
-git add . //To add all the files and folders to the staging area
-
-git commit -m 'commit message' // after staging using add
-git commit -a -m 'commit message' // staging using a and commiting
-git commit -am 'commit message' // staging and committing
-
-git commit -am "Message" #Grab every thing in the working copy and -a allows to skip the staging copy
-git log  // To see the history on the repository
-git log --author ="name" #To check change by specific user
-git status  //To check changes or status of the file
-
-
-git diff #Compare workin copy in the repository
-git diff --staged # Compare files in the staging area
-
-git rm filename
-git mv filename1 filename2
-git mv filename foldernam/filename2
-git commit -am "This skip the stage process"
-git checkout -- filename #To get working copy back
-git reset  HEAD filename // removes from the staging area/unstage
-git checkout 01e7ba -- filename # Tracking the differentversion of the project
-git remote add anyname repositoryUrl
-git push -u remote master // to push the file into github
-git checkout 01e7ba -- filename
-git remote add anyname repositoryUrl
-```
+| Command | What it does |
+|---|---|
+| `git status` | Shows what has changed since your last commit |
+| `git add .` | Gets every change ready to be saved |
+| `git commit -m "message"` | Saves a version with a message describing it |
+| `git push` | Sends your saved versions to GitHub |
+| `git pull` | Brings down changes made on GitHub |
+| `git log --oneline` | Lists the versions you've saved |
+| `git diff` | Shows exactly what changed |
+| `git checkout -- filename` | Throws away changes to one file since the last commit |
+| `git branch name` / `git switch name` | Makes a separate line of work / moves to it |

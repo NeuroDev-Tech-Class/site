@@ -1,8 +1,8 @@
 {
   "course": "python-1",
   "number": "0.0",
-  "title": "Introduction to Git and Github",
-  "kind": "reading",
+  "title": "GitHub Basics: Your First Repository",
+  "kind": "exercise",
   "language": "python",
   "runner": "none",
   "source": {

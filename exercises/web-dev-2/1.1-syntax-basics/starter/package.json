@@ -1,7 +1,7 @@
 {
-  "name": "WebDev-II-1.1-Syntax_Basics",
+  "name": "web-dev-2-1.1-syntax-basics",
   "version": "1.0.0",
-  "description": "Learn how to write conditionals in JavaScript.",
+  "description": "JavaScript Syntax",
   "main": "learn.js",
   "scripts": {
     "test": "jest"
@@ -9,15 +9,7 @@
   "devDependencies": {
     "jest": "^29.7.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NeuroDev-Tech-Class/WebDev-II-1.1-Syntax_Basics.git"
-  },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/NeuroDev-Tech-Class/WebDev-II-1.1-Syntax_Basics/issues"
-  },
-  "homepage": "https://github.com/NeuroDev-Tech-Class/WebDev-II-1.1-Syntax_Basics#readme"
+  "license": "ISC"
 }

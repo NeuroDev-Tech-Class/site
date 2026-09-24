@@ -1,8 +1,8 @@
 {
   "course": "web-dev-3",
   "number": "1.6",
-  "title": "Unit 1 Project",
-  "kind": "exercise",
+  "title": "Wordle Recreation Project",
+  "kind": "project",
   "language": "web",
   "runner": "none",
   "source": {

@@ -13,4 +13,4 @@
  ■   Use at least five functions to organize your code. Possible function outline:  functions to present a problem of each type, functions to grade a problem of  each type, functions to run the quiz for each category and tally a score, and  one  main  function to ask the user to choose a category  and invoke the  appropriate function. 
 
  ### Prompt Function 
- We haven’t used the prompt function before; however, it is simple to use. There  is an example at the beginning of the test file. Simply declare a variable and have a set  equal to a prompt statement. The variable with then equal whatever the user types into  the terminal. 
+ We haven’t used the prompt function before; however, it is simple to use. There is an example at the beginning of quiz.js. Run `npm install` once to install it, then `npm start` to run your quiz. Simply declare a variable and have a set  equal to a prompt statement. The variable with then equal whatever the user types into  the terminal. 

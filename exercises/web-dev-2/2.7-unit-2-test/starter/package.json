@@ -1,0 +1,12 @@
+{
+  "name": "web-dev-2-2.7-unit-2-test",
+  "version": "1.0.0",
+  "description": "Unit 2 Test",
+  "private": true,
+  "scripts": {
+    "start": "node quiz.js"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}

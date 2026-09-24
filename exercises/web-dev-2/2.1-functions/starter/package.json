@@ -1,23 +1,15 @@
 {
-  "name": "WebDev-II-2.1-Functions",
+  "name": "web-dev-2-2.1-functions",
   "version": "1.0.0",
-  "description": "Learn how to write conditionals in JavaScript.",
+  "description": "JavaScript Functions",
   "main": "learn.js",
-   "scripts": {
+  "scripts": {
     "test": "jest"
   },
   "devDependencies": {
     "jest": "^29.7.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NeuroDev-Tech-Class/WebDev-II-2.1-Functions.git"
-  },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/NeuroDev-Tech-Class/WebDev-II-2.1-Functions/issues"
-  },
-  "homepage": "https://github.com/NeuroDev-Tech-Class/WebDev-II-2.1-Functions#readme"
+  "license": "ISC"
 }

@@ -1,23 +1,15 @@
 {
-  "name": "WebDev-II-1.5-Strings",
+  "name": "web-dev-2-1.5-strings",
   "version": "1.0.0",
-  "description": "Learn how to write conditionals in JavaScript.",
+  "description": "JavaScript String Manipulation",
   "main": "learn.js",
-   "scripts": {
+  "scripts": {
     "test": "jest"
   },
   "devDependencies": {
     "jest": "^29.7.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NeuroDev-Tech-Class/WebDev-II-1.5-Strings.git"
-  },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/NeuroDev-Tech-Class/WebDev-II-1.5-Strings/issues"
-  },
-  "homepage": "https://github.com/NeuroDev-Tech-Class/WebDev-II-1.5-Strings#readme"
+  "license": "ISC"
 }

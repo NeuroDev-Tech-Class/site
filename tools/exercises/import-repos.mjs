@@ -42,7 +42,8 @@ function headCommit(repo) {
 /** Which top-level files are the instructions rather than starter code, for each course's layout. */
 function instructionFiles(language, files) {
   const has = name => files.includes(name);
-  if (language === 'web') return { 'learn.md': 'lesson.md', 'README.md': 'assignment.md' };
+  // Web Dev III keeps the lesson in learn.md and the brief in README.md; with no learn.md the brief is the lesson
+  if (language === 'web' && has('learn.md')) return { 'learn.md': 'lesson.md', 'README.md': 'assignment.md' };
   if (language === 'python' && has('lesson.md')) return { 'lesson.md': 'lesson.md' };
   return { 'README.md': 'lesson.md' };
 }
@@ -53,7 +54,10 @@ function planRepo(repoDir, name, spec) {
   const [, number, rest] = match;
   const files = filesIn(repoDir);
   const moves = instructionFiles(spec.language, files);
-  const starter = files.filter(file => !moves[file]);
+  const leftovers = files.filter(file => !moves[file]);
+  const reading = !leftovers.some(f => CODE.test(f));
+  // A reading has nothing to write, so nothing to download (a stray .gitignore or requirements.txt included)
+  const starter = reading ? [] : leftovers;
   const lesson = Object.entries(moves).find(([, to]) => to === 'lesson.md')?.[0];
   const heading = lesson && files.includes(lesson) ? readFileSync(join(repoDir, lesson), 'utf8').match(/^#\s+(.+)$/m)?.[1] : null;
 
@@ -65,7 +69,7 @@ function planRepo(repoDir, name, spec) {
       course: spec.course,
       number,
       title: (heading || rest.replace(/_/g, ' ')).trim(),
-      kind: starter.some(f => CODE.test(f)) ? 'exercise' : 'reading',
+      kind: reading ? 'reading' : 'exercise',
       language: spec.language,
       runner: pytest ? 'pytest' : jest ? 'jest' : 'none',
       source: { repo: `NeuroDev-Tech-Class/${name}`, commit: headCommit(repoDir) },

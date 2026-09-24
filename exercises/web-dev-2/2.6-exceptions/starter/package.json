@@ -1,23 +1,15 @@
 {
-  "name": "WebDev-II-2.6-Exceptions",
+  "name": "web-dev-2-2.6-exceptions",
   "version": "1.0.0",
-  "description": "Learn how to write conditionals in JavaScript.",
+  "description": "JavaScript Exceptions",
   "main": "learn.js",
-   "scripts": {
+  "scripts": {
     "test": "jest"
   },
   "devDependencies": {
     "jest": "^29.7.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NeuroDev-Tech-Class/WebDev-II-2.6-Exceptions.git"
-  },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/NeuroDev-Tech-Class/WebDev-II-2.6-Exceptions/issues"
-  },
-  "homepage": "https://github.com/NeuroDev-Tech-Class/WebDev-II-2.6-Exceptions#readme"
+  "license": "ISC"
 }

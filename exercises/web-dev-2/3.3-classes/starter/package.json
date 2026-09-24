@@ -1,23 +1,15 @@
 {
-  "name": "WebDev-II-3.3-Classes",
+  "name": "web-dev-2-3.3-classes",
   "version": "1.0.0",
-  "description": "Learn how to write conditionals in JavaScript.",
+  "description": "JavaScript Classes",
   "main": "learn.js",
-   "scripts": {
+  "scripts": {
     "test": "jest"
   },
   "devDependencies": {
     "jest": "^29.7.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NeuroDev-Tech-Class/WebDev-II-3.3-Classes.git"
-  },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/NeuroDev-Tech-Class/WebDev-II-3.3-Classes/issues"
-  },
-  "homepage": "https://github.com/NeuroDev-Tech-Class/WebDev-II-3.3-Classes#readme"
+  "license": "ISC"
 }

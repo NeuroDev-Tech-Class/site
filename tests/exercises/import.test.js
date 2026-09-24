@@ -42,6 +42,8 @@ function fixtureRepos() {
     'Python-I-Assignments/Python-I-2.3-Loops/.git/HEAD': 'ref: refs/heads/main\n',
     'Python-I-Assignments/Python-I-2.3-Loops/.git/refs/heads/main': 'abc123def456\n',
     'Python-I-Assignments/Python-I-3.0-PEP8_Style_Guide/lesson.md': '# PEP 8\n\nStyle.\n',
+    'Python-I-Assignments/Python-I-3.0-PEP8_Style_Guide/.gitignore': '__pycache__/\n',
+    'Python-I-Assignments/Python-I-3.0-PEP8_Style_Guide/requirements.txt': 'pytest\n',
     'Python-I-Assignments/Python-I-3.0-PEP8_Style_Guide/.git/HEAD': 'ref: refs/heads/main\n',
     'Python-I-Assignments/Python-I-3.0-PEP8_Style_Guide/.git/packed-refs': '# pack-refs\n0f0f0f refs/heads/main\n',
     'WebDev-II-Assignments/WebDev-II-2.4-Arrays/README.md': '# JavaScript Arrays\n',
@@ -56,6 +58,10 @@ function fixtureRepos() {
     'WebDev-III-Assignments/WebDev-III-1.1-Event_Listeners/index.html': '<html></html>\n',
     'WebDev-III-Assignments/WebDev-III-1.1-Event_Listeners/.git/HEAD': 'ref: refs/heads/master\n',
     'WebDev-III-Assignments/WebDev-III-1.1-Event_Listeners/.git/refs/heads/master': '333444\n',
+    'WebDev-III-Assignments/WebDev-III-1.6-Unit_1_Project/README.md': '# Wordle Recreation Project\n\nBuild it.\n',
+    'WebDev-III-Assignments/WebDev-III-1.6-Unit_1_Project/practice.js': '',
+    'WebDev-III-Assignments/WebDev-III-1.6-Unit_1_Project/.git/HEAD': 'ref: refs/heads/master\n',
+    'WebDev-III-Assignments/WebDev-III-1.6-Unit_1_Project/.git/refs/heads/master': '555666\n',
     'WebDev-I-Assignments/WebDev-I-1.1-Creating_HTML_Docs/README.md': '# WebDev-I-Template\n',
   });
   return root;
@@ -101,6 +107,10 @@ test('each course layout lands in the right files', () => {
     'assignment.md', 'exercise.json', 'lesson.md', 'starter/index.html',
   ]);
   assert.equal(json('web-dev-3/1.1-event-listeners/exercise.json').language, 'web');
+
+  // no learn.md: the brief is the whole lesson
+  assert.deepEqual(tree(join(target, 'web-dev-3/1.6-unit-1-project')), ['exercise.json', 'lesson.md', 'starter/practice.js']);
+  assert.equal(json('web-dev-3/1.6-unit-1-project/exercise.json').title, 'Wordle Recreation Project');
   assert.ok(!existsSync(join(target, 'web-dev-1')), 'the unused Web Dev I templates are not imported');
 });
 

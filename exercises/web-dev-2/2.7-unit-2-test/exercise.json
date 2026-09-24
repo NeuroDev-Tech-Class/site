@@ -2,7 +2,7 @@
   "course": "web-dev-2",
   "number": "2.7",
   "title": "Unit 2 Test",
-  "kind": "exercise",
+  "kind": "project",
   "language": "javascript",
   "runner": "none",
   "source": {
