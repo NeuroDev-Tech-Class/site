@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-3",
+  "number": "1.1",
+  "title": "JavaScript: Event Listeners",
+  "kind": "exercise",
+  "language": "web",
+  "runner": "none",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-III-1.1-Event_Listeners",
+    "commit": "184ab4606da555cea28543d0e8c158fbc05c3580"
+  }
+}

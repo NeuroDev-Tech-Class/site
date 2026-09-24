@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "2.6",
+  "title": "JavaScript Exceptions",
+  "kind": "exercise",
+  "language": "javascript",
+  "runner": "jest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-2.6-Exceptions",
+    "commit": "4520174e1e1c1451b8cebdcd6dde492bd9086e22"
+  }
+}

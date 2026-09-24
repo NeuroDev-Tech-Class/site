@@ -9,7 +9,7 @@
     "test": "firebase emulators:exec --only firestore --project demo-neurodev \"node --test 'tests/**/*.test.js'\"",
     "test:unit": "node --test 'tests/lib/**/*.test.js' 'tests/data/**/*.test.js' 'tests/helpers/**/*.test.js' 'tests/ui/**/*.test.js' 'tests/student/**/*.test.js' 'tests/functions/**/*.test.js'",
     "sync-shared": "node tools/sync-shared.mjs",
-    "test:extract": "node --test 'tests/extract/**/*.test.js'",
+    "test:extract": "node --test 'tests/extract/**/*.test.js' 'tests/exercises/**/*.test.js'",
     "extract": "node tools/extract/extract.mjs",
     "test:rules": "firebase emulators:exec --only firestore --project demo-neurodev \"node --test 'tests/rules/**/*.test.js'\"",
     "test:e2e": "FUNCTIONS_DISCOVERY_TIMEOUT=120 firebase emulators:exec --only firestore,auth,functions --project demo-neurodev \"node --test --test-concurrency=1 'tests/emulator/**/*.e2e.js'\"",

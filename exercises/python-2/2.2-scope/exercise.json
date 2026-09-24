@@ -1,0 +1,12 @@
+{
+  "course": "python-2",
+  "number": "2.2",
+  "title": "Scope",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-II-2.2-Scope",
+    "commit": "f8b6967e5c294da8d27efc7ebf8d983a71df4504"
+  }
+}

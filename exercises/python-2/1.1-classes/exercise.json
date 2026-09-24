@@ -1,0 +1,12 @@
+{
+  "course": "python-2",
+  "number": "1.1",
+  "title": "Classes, Objects, and Encapsulation in Python",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-II-1.1-Classes",
+    "commit": "d4255b185ab9ae85c26c006168500eebbeabf3ce"
+  }
+}

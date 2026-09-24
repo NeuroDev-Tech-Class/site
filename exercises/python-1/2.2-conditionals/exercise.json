@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "2.2",
+  "title": "Conditionals",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-2.2-Conditionals",
+    "commit": "3e8c14cb16efe45d9e9c8694bcb3840b4c63be6d"
+  }
+}

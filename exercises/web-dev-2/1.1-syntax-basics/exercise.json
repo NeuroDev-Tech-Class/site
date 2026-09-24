@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "1.1",
+  "title": "JavaScript Syntax",
+  "kind": "exercise",
+  "language": "javascript",
+  "runner": "jest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-1.1-Syntax_Basics",
+    "commit": "b25cee58bab624e28cfe8705431f802345426d71"
+  }
+}

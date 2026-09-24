@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "2.1",
+  "title": "Functions",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-2.1-Functions",
+    "commit": "6b3b4452c3d70d3f1293076536e934566c02e3d5"
+  }
+}

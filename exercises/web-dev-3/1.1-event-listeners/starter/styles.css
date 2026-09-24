@@ -1,0 +1,9 @@
+* {
+    text-align: center;
+}
+
+span {
+    font-family: "Noto Color Emoji";
+    user-select: none;
+    font-size: 5vh;
+}

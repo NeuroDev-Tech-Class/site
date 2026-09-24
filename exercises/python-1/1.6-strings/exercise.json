@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "1.6",
+  "title": "String Manipulation",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-1.6-Strings",
+    "commit": "6984a6f560e9d604a21b61d2b8f8101c28308ed6"
+  }
+}

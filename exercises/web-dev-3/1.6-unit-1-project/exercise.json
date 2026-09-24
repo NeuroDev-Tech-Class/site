@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-3",
+  "number": "1.6",
+  "title": "Unit 1 Project",
+  "kind": "exercise",
+  "language": "web",
+  "runner": "none",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-III-1.6-Unit_1_Project",
+    "commit": "9dce9f8ac56f1c7bead0234d3e4a5d5fb51d3da8"
+  }
+}

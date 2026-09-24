@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "3.2",
+  "title": "Modules and Libraries",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-3.2-Modules",
+    "commit": "5ff58a668a9926d21808333e1e099a31f79b9880"
+  }
+}

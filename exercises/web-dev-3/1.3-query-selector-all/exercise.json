@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-3",
+  "number": "1.3",
+  "title": "Query Selector All",
+  "kind": "exercise",
+  "language": "web",
+  "runner": "none",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-III-1.3-Query_Selector_All",
+    "commit": "89cc9277cde1b81c8cd123599eee648b94ad329e"
+  }
+}

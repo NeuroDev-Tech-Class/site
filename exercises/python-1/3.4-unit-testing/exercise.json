@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "3.4",
+  "title": "Unit Testing",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "none",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-3.4-Unit_Testing",
+    "commit": "b222ecd365a739858ccf027cffce577f4ac42b4b"
+  }
+}

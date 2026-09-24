@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "0.0",
+  "title": "Introduction to Git and Github",
+  "kind": "reading",
+  "language": "python",
+  "runner": "none",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-0.0-Github_Basics",
+    "commit": "e40e3e010178c415d9ea3fdb1190d092e6057d41"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "course": "python-2",
+  "number": "3.5",
+  "title": "Final Project",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "none",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-II-3.5-Final_Project",
+    "commit": "215f63a56573ac2b27d68f4ab488e42fabf081c5"
+  }
+}

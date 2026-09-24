@@ -1,0 +1,12 @@
+{
+  "course": "python-2",
+  "number": "1.3",
+  "title": "Polymorphism in Python",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-II-1.3-Polymorphism",
+    "commit": "f5f577ebc495ba58d5fb766d361b59fd3a90c9ee"
+  }
+}

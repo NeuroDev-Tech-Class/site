@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "3.5",
+  "title": "File I/O",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-3.5-File_IO",
+    "commit": "a836a374effe9f02dda16e4aa8a55e23f7e80736"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-3",
+  "number": "1.5",
+  "title": "APIs",
+  "kind": "exercise",
+  "language": "web",
+  "runner": "none",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-III-1.5-APIs",
+    "commit": "edf2f1dc2bcc7a4b61f3582841c18fbd9da0ba10"
+  }
+}

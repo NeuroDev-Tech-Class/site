@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "3.3",
+  "title": "JavaScript Classes",
+  "kind": "exercise",
+  "language": "javascript",
+  "runner": "jest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-3.3-Classes",
+    "commit": "fd6e76ed6f963efbd5d1bb90df91a3db4a217ca1"
+  }
+}

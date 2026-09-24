@@ -1,0 +1,12 @@
+{
+  "course": "python-2",
+  "number": "3.4",
+  "title": "Text and Sound Effects in Pygame",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-II-3.4-Pygame_Sound",
+    "commit": "d0d81da2b757c2b9d1b762d242f680a38a4943c6"
+  }
+}

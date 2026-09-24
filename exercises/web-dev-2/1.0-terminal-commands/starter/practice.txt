@@ -1,0 +1,8 @@
+# Copy the code below and run it in your terminal
+
+ls -al
+
+# What happened? This code lists all files and gives more information on them
+
+# Now navigate one folder back in the hierarchy and run the previous code again
+# Now clear the output

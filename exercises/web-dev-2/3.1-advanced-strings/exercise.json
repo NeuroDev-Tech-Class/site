@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "3.1",
+  "title": "JavaScript Advanced Strings",
+  "kind": "exercise",
+  "language": "javascript",
+  "runner": "jest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-3.1-Advanced_Strings",
+    "commit": "301eb9780bab7891235924a52815bc2cc4358171"
+  }
+}

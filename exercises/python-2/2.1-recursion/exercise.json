@@ -1,0 +1,12 @@
+{
+  "course": "python-2",
+  "number": "2.1",
+  "title": "Recursion",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-II-2.1-Recursion",
+    "commit": "d8421f0945a7f07c020813b35cf03dacd52fc0d0"
+  }
+}

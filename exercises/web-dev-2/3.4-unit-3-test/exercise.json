@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "3.4",
+  "title": "Unit 3 Test",
+  "kind": "exercise",
+  "language": "javascript",
+  "runner": "none",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-3.4-Unit_3_Test",
+    "commit": "2b28bfac8379842da72f5ffc77951c949ad77c0d"
+  }
+}

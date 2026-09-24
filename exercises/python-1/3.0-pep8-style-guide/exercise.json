@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "3.0",
+  "title": "PEP 8: Python Style Guide",
+  "kind": "reading",
+  "language": "python",
+  "runner": "none",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-3.0-PEP8_Style_Guide",
+    "commit": "ccea2bf0f62ac6e93db4008a39b0bf7bdfd1eb40"
+  }
+}
