@@ -3,6 +3,7 @@
   "item_id": "i_531031c32a",
   "course_id": "office-software",
   "legacy_path": "computer-basics/office-software/word_processors/application-creating_a_résumé.html",
+  "exercise": null,
   "title": "Application: Creating a Résumé",
   "preset": null,
   "requires_sign_off": false,
@@ -32,5 +33,6 @@
     ]
   ],
   "instructions_html": "<div class=\"activity\">\n      <h2>Activity: Build Your Résumé</h2>\n\n      <p>A résumé is a formal document that summarizes your skills, education, work experience, and accomplishments. It is one of the most important tools in your professional life, used to apply for jobs, internships, and academic programs.</p>\n\n      <p>For this assignment, you will create a résumé using a word processor (Google Docs or Microsoft Word). You may start from a <strong>template</strong> or build one from scratch.</p>\n\n      <h3>Your Résumé Should Include</h3>\n      <ul>\n        <li><strong>Your name</strong> — prominently displayed at the top</li>\n        <li><strong>Contact information</strong> — phone number, email address, and optionally a LinkedIn profile or portfolio link</li>\n        <li><strong>Objective or Summary</strong> — a brief statement about your career goals or what you bring to a role</li>\n        <li><strong>Education</strong> — school name, expected graduation date, GPA (if applicable), and relevant coursework</li>\n        <li><strong>Work Experience</strong> — job title, company, dates, and bullet points describing your responsibilities and achievements</li>\n        <li><strong>Skills</strong> — technical skills, software proficiency, languages, or other relevant abilities</li>\n        <li><strong>Awards, Certifications, or Volunteer Work</strong> (optional) — any additional qualifications or activities</li>\n      </ul>\n\n      <div class=\"tip\">\n        <p><strong>Tip:</strong> Browse résumé templates in Google Docs (<strong>Template Gallery</strong>) or Microsoft Word (<strong>File &gt; New</strong>) to get started quickly. Choose a clean, professional layout.</p>\n      </div>\n\n      <h3>Formatting Guidelines</h3>\n      <ul>\n        <li>Use <strong>paragraph styles</strong> (Heading 1, Heading 2, Normal) to organize sections consistently.</li>\n        <li>Use <strong>bulleted lists</strong> for responsibilities and skills.</li>\n        <li>Keep the document to <strong>one page</strong>.</li>\n        <li>Use a professional, readable <strong>font</strong> (e.g., Arial, Calibri, or Times New Roman) at 10–12 pt size.</li>\n        <li>Proofread using the <strong>spelling and grammar check</strong> tool before submitting.</li>\n      </ul>\n\n      <p>Submit your work with the form below.</p>\n    </div>",
+  "starter_path": null,
   "grading_hint": null
 }

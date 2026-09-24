@@ -3,6 +3,7 @@
   "item_id": "i_6f87e6ffb2",
   "course_id": "linux",
   "legacy_path": null,
+  "exercise": null,
   "title": "Reflection: CLI vs GUI",
   "preset": null,
   "requires_sign_off": false,
@@ -16,5 +17,6 @@
   ],
   "required_one_of": [],
   "instructions_html": "<strong>Reflection:</strong> CLI vs GUI — When to use which? The GUI is great for browsing the web, editing documents, and visual tasks. The CLI is faster for file management, automation, and remote server access. Most Linux professionals use both! Write a short paragraph about a task where CLI would be better than GUI, and vice versa.",
+  "starter_path": null,
   "grading_hint": null
 }

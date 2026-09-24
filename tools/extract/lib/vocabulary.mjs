@@ -4,7 +4,7 @@ import { JSDOM } from 'jsdom';
 
 export const VOCABULARY = {
   tags: [
-    'a', 'b', 'blockquote', 'br', 'code', 'div', 'em', 'h2', 'h3', 'h4', 'hr', 'i', 'iframe', 'img', 'kbd', 'li', 'ol', 'p',
+    'a', 'b', 'blockquote', 'br', 'code', 'div', 'em', 'h2', 'h3', 'h4', 'h5', 'hr', 'i', 'iframe', 'img', 'kbd', 'li', 'ol', 'p',
     'pre', 'section', 'span', 'strong', 'table', 'tbody', 'td', 'th', 'thead', 'tr', 'ul',
   ],
   attributes: {
@@ -17,6 +17,8 @@ export const VOCABULARY = {
     th: ['colspan', 'rowspan', 'scope'],
   },
   classes: ['tip', 'warning', 'activity', 'card', 'grid-2', 'img-row', 'img-side', 'img-small', 'video-embed', 'subtitle'],
+  // Markdown code blocks name their language ("language-python"), which a highlighter can use later
+  class_prefixes: ['language-'],
   iframe_hosts: ['www.youtube.com', 'youtube.com', 'www.youtube-nocookie.com'],
 };
 
@@ -34,7 +36,7 @@ export function checkVocabulary(html, where) {
       if (!allowed.includes(name)) note(`attribute ${name} on <${tag}>`);
     }
     for (const cls of el.classList) {
-      if (!VOCABULARY.classes.includes(cls)) note(`class ${cls}`);
+      if (!VOCABULARY.classes.includes(cls) && !VOCABULARY.class_prefixes.some(p => cls.startsWith(p))) note(`class ${cls}`);
     }
     if (tag === 'iframe') {
       const src = el.getAttribute('src') || '';

@@ -3,6 +3,7 @@
   "item_id": "i_2fde0ee286",
   "course_id": "digital-literacy",
   "legacy_path": "computer-basics/digital-literacy/unit1/checkpoint-how_will_technology_help_me_.html",
+  "exercise": null,
   "title": "Checkpoint: How Will Technology Help Me?",
   "preset": null,
   "requires_sign_off": false,
@@ -38,5 +39,6 @@
   ],
   "required_one_of": [],
   "instructions_html": "<p>Use the previous readings to help answer the following questions:</p>\n\n    <ol>\n      <li>How will technology help me in my personal life? <em>(Two or three sentences)</em></li>\n      <li>How will technology help me in my professional life? <em>(Two or three sentences)</em></li>\n      <li>Why is it important to learn about digital technology? What are the benefits of using computers and the Internet? What are the dangers or potential downsides? Give several examples. <em>(Four to five sentences)</em></li>\n      <li>What are you hoping to learn from this course? Do you have any questions about computers or technology? <em>(Two or three sentences)</em></li>\n    </ol>\n\n    <p>Submit your work with the form below.</p>",
+  "starter_path": null,
   "grading_hint": null
 }

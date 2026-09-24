@@ -1,0 +1,29 @@
+{
+  "id": "c_9789b8b40c",
+  "item_id": "i_46b7fb8c1c",
+  "course_id": "web-dev-3",
+  "legacy_path": null,
+  "exercise": "web-dev-3/1.1-event-listeners",
+  "title": "JavaScript: Event Listeners",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>JavaScript: Event Listeners</h2>\n<p>Event listeners let your HTML, CSS, and JavaScript <strong>work together</strong>.<br>An <strong>event listener</strong> waits for an event to occur (like a click), then <strong>runs code</strong> in response.</p>\n<hr>\n<h3>Example</h3>\n<pre><code class=\"language-html\">&lt;button id=\"test_Button\"&gt;Click me&lt;/button&gt;\n&lt;p id=\"test_Output\"&gt;&lt;/p&gt;\n&lt;span id=\"emote\"&gt;&lt;/span&gt;\n</code></pre>\n<p>You have learned how to write HTML, CSS, and JavaScript code,\nNow we need to learn how to make them work together. The most basic way\nis using Event Listeners. An event listener is a procedure in JavaScript \nthat waits for an event to occur, then does something when that event occurs.</p>\n<pre><code class=\"language-javascript\">let testButton = document.querySelector(\"#test_Button\");\nlet testOutput = document.getElementById(\"test_Output\");\nlet emoji = document.querySelector(\"#emote\");\n\ntestButton.addEventListener(\"click\", function () {\n    testOutput.textContent = \"The button WAS clicked!\";\n    \n    // In JavaScript you put \\u{} with the emoji code inside\n    emoji.textContent = \"\\u{1F60F}\"\n});\n</code></pre>\n<p>This code adds an event listener to the button with the ID \"#test_Button\".\nWhen the button is clicked, the text content of the element with the class \n\"#test_Output\" changes to \"The button was clicked!\". Remember to include the\n\"#\" before ID and \".\" before class names when using querySelector().</p>\n<p>getElementById() is a method that returns the element with the specified ID.\nquerySelector() is a method that returns the first element that matches any \nspecified CSS selector (class, id, tag, etc).</p>\n<p>You need the empty function() {} to define what happens when the event occurs.</p>\n<hr>\n<h3>Key Takeaways</h3>\n<ul>\n<li><code>element.addEventListener(\"event\", handler)</code> attaches a handler to run when the event fires.  </li>\n<li><code>getElementById(\"id\")</code> selects an element <strong>by ID</strong>.  </li>\n<li><code>querySelector(\"selector\")</code> selects the <strong>first match</strong> of any CSS selector (<code>#id</code>, <code>.class</code>, <code>tag</code>, etc.).  </li>\n<li>Update text with <code>element.textContent = \"...\"</code>.  </li>\n<li>Unicode code points can be inserted with <code>\\u{...}</code> strings.</li>\n</ul>\n<h4>Event Selectors</h4>\n<p>You will start by using event selectors to detect when something was clicked,\nthen performing some action based on that. </p>\n<h5>Practice</h5>\n<p>As an introduction to web application development, you'll create a simple interactive web app with a UI that runs in a web browser. The app you'll make is a game of emojis, player versus computer. The player will choose one of three emojis to play, in the hope of defeating the computer's randomly-chosen emoji. For this assignment, you'll practice DOM operations, including querying, manipulation, and event listeners, as well as functions and conditional logic. Do this by making rock, paper, scissors. </p>\n<p>-Design and implement a user interface that displays three emoji options and an emoji battlefield (Rock, Paper, Scissors).\n-Use random logic to select the computer's choice, and conditional logic to decide the winner.\n-Use addEventListener to respond to the player's emoji selection by presenting an emoji battle.\n-Design and implement a unique way to visually reveal the winner after each play, including ties.\n-The game should continue indefinitely, allowing the player to repeatedly select an emoji.\n-Use several functions to separate each component of the game logic and UI implementation.\n-Use querySelector to query elements and the textContent property to modify elements.</p>\n<h5>Notes</h5>\n<p>-Remember that you can set listeners to the emojis so when you click them, it does something...</p>\n<p>-Use the Emojis as the buttons for your game. </p>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/web-dev-3/1.1-event-listeners/starter",
+  "grading_hint": null
+}

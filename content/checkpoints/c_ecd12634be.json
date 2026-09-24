@@ -3,6 +3,7 @@
   "item_id": "i_530d5b6640",
   "course_id": "office-software",
   "legacy_path": "computer-basics/office-software/presentation_software/application-careers_day_presentation.html",
+  "exercise": null,
   "title": "Application: Careers Day Presentation",
   "preset": null,
   "requires_sign_off": false,
@@ -55,5 +56,6 @@
     ]
   ],
   "instructions_html": "<div class=\"activity\">\n      <p>Now it’s time to put your presentation skills to use by creating a slideshow for Careers Day. This assignment doesn’t come with strict instructions, but it’s an opportunity for you to demonstrate what you’ve learned. The end result will be a polished presentation that you can actually deliver. Give it your best effort!</p>\n    </div>\n\n    <p>Create a slideshow presentation about a career that interests you. Include information such as:</p>\n\n    <ul>\n      <li>What the career is and what the day-to-day work looks like</li>\n      <li>Education or training requirements</li>\n      <li>Salary expectations</li>\n      <li>Why this career appeals to you</li>\n    </ul>\n\n    <p>Use text boxes, images, transitions, animations, speaker notes, and other features to make your presentation engaging and professional. Reach out for help or feedback if you need to.</p>\n\n    <p>Submit your work with the form below.</p>",
+  "starter_path": null,
   "grading_hint": null
 }

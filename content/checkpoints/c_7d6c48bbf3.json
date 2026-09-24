@@ -1,0 +1,29 @@
+{
+  "id": "c_7d6c48bbf3",
+  "item_id": "i_63efd20027",
+  "course_id": "web-dev-2",
+  "legacy_path": null,
+  "exercise": "web-dev-2/3.4-unit-3-test",
+  "title": "Unit 3 Test",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h4>Description</h4>\n<p> As a follow-up to the previous JavaScript console program, you'll create an  interactive app that allows a user to manage a library of items. The example below is a  library of books, but you can choose a library of any people, places, or things that you  like. Some additional examples include friends, destinations, and songs. The app will  allow the user to add, remove, retrieve, and randomize items in the library. You'll also  validate user input to keep the data consistent. For this test, you'll practice input/output,  arrays, loops, conditionals, and functions. Refer to the example output below for an idea  of how the program might be presented to the user, but vary your messaging to be  appropriate for the library that you design. </p>\n<h4>Requirements</h4>\n<p> ■   When the program starts, prompt the user to choose from the menu options  listed below.<br>■   The menu prompt should be repeated  forever  until the user explicitly chooses  to quit the program.<br>■   Option 1:  list  . Display a list of all items currently  in the library, one per line.  Validation: the list must not be empty.<br>■   Option 2:  add  . Prompt the user for a new item and  store it in the library.  Validation: the entry must not be empty.<br>■   Option 3:  remove  . Prompt the user for an item and  remove it from the library.  Validation: the entry must exist.<br>■   Option 4:  pick  . Randomly choose one item from the  library and present it.  Validation: the list must not be empty.<br>■   Option 5:  quit  . Stop prompting the user to choose  a menu option and allow  the program to terminate.<br>■   For each of the validation rules above, use the appropriate conditions to  inform the user when there's a problem.<br>■   If a user enters a menu option that isn't one of the above, inform the user and  prompt for a new choice.<br>■   Use the  console.log  function for console output and  the provided  prompt \n function to collect user input.<br>■   Create a separate function for each of the first four menu options, and a  main \n function to run the menu loop.<br>■   Create an array of strings to store the library's data, and use array operations  to implement each function. </p>\n<h4>Optional Challenges</h4>\n<p> ■   Add one or more additional menu options applicable to the library you design.<br>■   Allow the user the enter more than one data attribute for each item in the  library.<br>■   Add an easter egg, such as a hidden menu option that does something secret  or fun.<br>■   Save the library items to a file and load the items from the file when the  program starts. </p>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/web-dev-2/3.4-unit-3-test/starter",
+  "grading_hint": null
+}

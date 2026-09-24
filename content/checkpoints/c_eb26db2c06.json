@@ -1,0 +1,34 @@
+{
+  "id": "c_eb26db2c06",
+  "item_id": "i_630f203fc1",
+  "course_id": "python-1",
+  "legacy_path": null,
+  "exercise": "python-1/3.5-file-io",
+  "title": "File I/O",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>File I/O</h2>\n<p>Python provides a built-in <strong><code>open()</code></strong> function for working with files.<br>It takes two main arguments:  </p>\n<ol>\n<li>The <strong>name (or path)</strong> of the file.  </li>\n<li>The <strong>mode</strong> in which to open it.</li>\n</ol>\n<hr>\n<h3>File Modes</h3>\n<table>\n<thead>\n<tr>\n<th>Mode</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody><tr>\n<td><code>'r'</code></td>\n<td>Read mode (default) — opens a file for reading. Raises an error if the file doesn’t exist.</td>\n</tr>\n<tr>\n<td><code>'w'</code></td>\n<td>Write mode — creates a new file or overwrites an existing one.</td>\n</tr>\n<tr>\n<td><code>'a'</code></td>\n<td>Append mode — opens a file for writing but doesn’t erase existing content.</td>\n</tr>\n<tr>\n<td><code>'r+'</code></td>\n<td>Read and write mode.</td>\n</tr>\n<tr>\n<td><code>'b'</code></td>\n<td>Binary mode modifier (e.g., <code>'rb'</code>, <code>'wb'</code>).</td>\n</tr>\n</tbody></table>\n<hr>\n<h3>Reading from a File</h3>\n<p>The simplest way to read a file is with <strong>read mode (<code>'r'</code>)</strong>:</p>\n<pre><code class=\"language-python\">with open('example.txt', 'r') as f:\n    content = f.read()\n    print(content)\n</code></pre>\n<h4>How It Works</h4>\n<ul>\n<li><code>with</code> is used for <strong>context management</strong> — it ensures the file is automatically closed after use.  </li>\n<li><code>f</code> is the <strong>file object</strong>, and <code>f.read()</code> reads the <strong>entire file</strong> as a string.  </li>\n<li>If the file doesn’t exist, Python raises a <code>FileNotFoundError</code>.</li>\n</ul>\n<p>Example absolute path (Windows):</p>\n<pre><code class=\"language-python\">with open('C:\\Users\\username\\GitHub\\TechClass\\Python-I\\unit3-advanced\\example.txt', 'r') as f:\n    content = f.read()\n</code></pre>\n<blockquote>\n<p><strong>Note:</strong> Use double backslashes (<code>\\\\</code>) in file paths, since a single backslash is an escape character.</p>\n</blockquote>\n<hr>\n<h3>Writing to a File</h3>\n<p>To <strong>write</strong> text to a file, use <strong>write mode (<code>'w'</code>)</strong>:</p>\n<pre><code class=\"language-python\">with open('output.txt', 'w') as f:\n    f.write(\"Hello, world!\")\n</code></pre>\n<ul>\n<li>If the file doesn’t exist, it is <strong>created</strong>.  </li>\n<li>If the file already exists, its contents are <strong>overwritten</strong>.  </li>\n<li><code>f.write()</code> writes a string to the file.</li>\n</ul>\n<hr>\n<h3>Appending to a File</h3>\n<p>To <strong>add new content</strong> to an existing file without overwriting it, use <strong>append mode (<code>'a'</code>)</strong>:</p>\n<pre><code class=\"language-python\">with open('output.txt', 'a') as f:\n    f.write(\"\\nThis is an additional line.\")\n</code></pre>\n<ul>\n<li><code>\\n</code> creates a <strong>newline</strong>.  </li>\n<li>After running this code, <code>output.txt</code> will contain two lines:</li>\n</ul>\n<pre><code>Hello, world!\nThis is an additional line.\n</code></pre>\n<hr>\n<h3>Best Practices</h3>\n<ul>\n<li>Always use <code>with open()</code> to handle files — it ensures they are closed automatically.  </li>\n<li>Handle exceptions like <code>FileNotFoundError</code> when reading files.  </li>\n<li>Use absolute paths when working outside your current directory.</li>\n</ul>\n<hr>\n<h4>Example: Safe File Reading</h4>\n<pre><code class=\"language-python\">try:\n    with open('data.txt', 'r') as f:\n        data = f.read()\n        print(data)\nexcept FileNotFoundError:\n    print(\"Error: File not found.\")\n</code></pre>\n<hr>\n<p>File I/O is a foundational concept in Python — mastering it allows you to work with logs, data files, configuration files, and much more.</p>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Run the tests yourself with <code>pytest</code>. When you push, GitHub runs them too: a green check next to your latest commit means they pass, a red X means something still needs work.</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-1/3.5-file-io/starter",
+  "grading_hint": {
+    "runner": "pytest",
+    "tests": [
+      "exercises/python-1/3.5-file-io/starter/tests/test_exercise.py"
+    ]
+  }
+}

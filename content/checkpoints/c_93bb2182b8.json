@@ -1,0 +1,34 @@
+{
+  "id": "c_93bb2182b8",
+  "item_id": "i_c2fb58bf43",
+  "course_id": "python-1",
+  "legacy_path": null,
+  "exercise": "python-1/2.1-functions",
+  "title": "Functions",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Functions</h2>\n<p>A <strong>function</strong> (sometimes called a <em>subroutine</em>) is a block of reusable code that performs a specific task.<br>Functions help break down complex programs into smaller, more manageable pieces, making your code easier to read, understand, and maintain.</p>\n<p>A function may or may not take one or more inputs, and may or may not return an output value.</p>\n<hr>\n<h3>Defining a Function</h3>\n<p>We define a function using the <code>def</code> keyword.<br>The line that starts with <code>def</code> is called the <strong>function header</strong>.</p>\n<p>If there are any parameters, they go inside the parentheses <code>()</code>, separated by commas.<br>The body of the function is indented beneath the header.</p>\n<pre><code class=\"language-python\">def square(x):\n    print(x ** 2)  # This function takes a number and prints the square of it.\n\nsquare(3)  # This will print 9\n</code></pre>\n<hr>\n<h3>Functions Without Return Values</h3>\n<p>Sometimes functions don’t return anything. These are often called <strong>void functions</strong>.</p>\n<pre><code class=\"language-python\">def greet(name):\n    print(f\"Hello, {name}!\")\n\ngreet(\"Roo\")  # Prints \"Hello, Roo!\"\n</code></pre>\n<p>This function doesn’t return a value — it just performs an action (printing).</p>\n<hr>\n<h3>Multiple Parameters</h3>\n<p>Functions can be defined with multiple parameters.</p>\n<pre><code class=\"language-python\">def print_name_age(name, age):\n    print(f\"{name} is {age} years old.\")\n\nprint_name_age(\"Alice\", 30)  # Prints \"Alice is 30 years old.\"\n</code></pre>\n<hr>\n<h3>Default Parameter Values</h3>\n<p>You can define parameters with default values.<br>If no argument is provided for that parameter, the default value is used.</p>\n<pre><code class=\"language-python\">def repeat(word, times=3):\n    print(word * times)\n\nrepeat(\"hello\")    # Prints \"hellohellohello\"\nrepeat(\"bye\", 2)   # Prints \"byebye\"\n</code></pre>\n<hr>\n<h3>Returning Values</h3>\n<p>The <code>return</code> keyword outputs a value from a function.<br>Once a function returns, it stops executing and sends the result back to where it was called.</p>\n<pre><code class=\"language-python\">def add_numbers(x, y):\n    sum = x + y\n    return sum\n\nresult = add_numbers(5, 7)\nprint(result)  # Prints 12\n</code></pre>\n<hr>\n<h3>Arbitrary Number of Arguments</h3>\n<p>Use <code>*args</code> to allow a function to take any number of arguments.<br>Inside the function, <code>args</code> behaves like a tuple.</p>\n<pre><code class=\"language-python\">def multiply(*args):\n    product = 1\n    for arg in args:\n        product *= arg\n    return product\n\nresult = multiply(2, 3, 4)\nprint(result)  # Prints 24\n</code></pre>\n<hr>\n<h3>Passing Functions as Arguments</h3>\n<p>Functions can be passed as arguments to other functions.</p>\n<pre><code class=\"language-python\">def do_twice(func, x):\n    return func(func(x))\n\nresult = do_twice(square, 2)  # Calls the 'square' function twice\nprint(result)  # Prints 16\n</code></pre>\n<hr>\n<h3>Nested Functions</h3>\n<p>Functions can be defined inside other functions — these are called <strong>nested functions</strong>.</p>\n<pre><code class=\"language-python\">def outer():\n    print(\"Outer function\")\n\n    def inner():\n        print(\"Inner function\")\n\n    inner()\n\nouter()  # Prints \"Outer function\" and then \"Inner function\"\n</code></pre>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Run the tests yourself with <code>pytest</code>. When you push, GitHub runs them too: a green check next to your latest commit means they pass, a red X means something still needs work.</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-1/2.1-functions/starter",
+  "grading_hint": {
+    "runner": "pytest",
+    "tests": [
+      "exercises/python-1/2.1-functions/starter/tests/test_exercise.py"
+    ]
+  }
+}

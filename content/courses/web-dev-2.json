@@ -101,85 +101,85 @@
         {
           "id": "i_4c5ff583e9",
           "legacy_key": "1-0",
-          "type": "checkpoint",
-          "title": null,
+          "type": "lesson",
+          "title": "1.0 Terminal Commands",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/k8tacUzK",
-            "label": "Complete Lesson & Exercise 1.0 - Terminal Commands"
+            "exercise": "web-dev-2/1.0-terminal-commands",
+            "lesson_id": "l_30517b76c3"
           }
         },
         {
           "id": "i_0fb6235d83",
           "legacy_key": "1-1",
           "type": "checkpoint",
-          "title": null,
+          "title": "1.1 JavaScript Syntax",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/76y0rRHI",
-            "label": "Complete Lesson & Exercise 1.1 - Syntax"
+            "exercise": "web-dev-2/1.1-syntax-basics",
+            "checkpoint_id": "c_2f7060d2c8"
           }
         },
         {
           "id": "i_19c416717b",
           "legacy_key": "1-2",
           "type": "checkpoint",
-          "title": null,
+          "title": "1.2 JavaScript Data Types",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/9HzC-SrR",
-            "label": "Complete Lesson & Exercise 1.2 - Data Types"
+            "exercise": "web-dev-2/1.2-data-types",
+            "checkpoint_id": "c_f99183f13d"
           }
         },
         {
           "id": "i_d045157b91",
           "legacy_key": "1-3",
           "type": "checkpoint",
-          "title": null,
+          "title": "1.3 JavaScript Variables and Operations",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/AMTgQcfn",
-            "label": "Complete Lesson & Exercise 1.3 - Variables"
+            "exercise": "web-dev-2/1.3-variables",
+            "checkpoint_id": "c_5d4a06d827"
           }
         },
         {
           "id": "i_d7e635426e",
           "legacy_key": "1-4",
           "type": "checkpoint",
-          "title": null,
+          "title": "1.4 JavaScript Comparison, Logic, and Assignment Operators",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/q5ImkOkz",
-            "label": "Complete Lesson & Exercise 1.4 - Operators"
+            "exercise": "web-dev-2/1.4-operators",
+            "checkpoint_id": "c_1d4d22d76a"
           }
         },
         {
           "id": "i_15224a982c",
           "legacy_key": "1-5",
           "type": "checkpoint",
-          "title": null,
+          "title": "1.5 JavaScript String Manipulation",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/qNYrEn9C",
-            "label": "Complete Lesson & Exercise 1.5 - Strings"
+            "exercise": "web-dev-2/1.5-strings",
+            "checkpoint_id": "c_ee4b69175f"
           }
         },
         {
@@ -205,98 +205,98 @@
           "id": "i_9318c0c792",
           "legacy_key": "2-0",
           "type": "checkpoint",
-          "title": null,
+          "title": "2.1 JavaScript Functions",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/E0vH1tBp",
-            "label": "Complete Lesson & Exercise 2.1 - Functions"
+            "exercise": "web-dev-2/2.1-functions",
+            "checkpoint_id": "c_a3e0c4f46d"
           }
         },
         {
           "id": "i_1719c073dd",
           "legacy_key": "2-1",
           "type": "checkpoint",
-          "title": null,
+          "title": "2.2 JavaScript If Statements",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/DqlUBgzM",
-            "label": "Complete Lesson & Exercise 2.2 - Conditionals"
+            "exercise": "web-dev-2/2.2-conditionals",
+            "checkpoint_id": "c_c09705db34"
           }
         },
         {
           "id": "i_2d3d02199c",
           "legacy_key": "2-2",
           "type": "checkpoint",
-          "title": null,
+          "title": "2.3 JavaScript Loops",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/Z4hPuFEx",
-            "label": "Complete Lesson & Exercise 2.3 - Loops"
+            "exercise": "web-dev-2/2.3-loops",
+            "checkpoint_id": "c_fde0d096a8"
           }
         },
         {
           "id": "i_8e707dabda",
           "legacy_key": "2-3",
           "type": "checkpoint",
-          "title": null,
+          "title": "2.4 JavaScript Arrays",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/lPRBvoyU",
-            "label": "Complete Lesson & Exercise 2.4 - Arrays"
+            "exercise": "web-dev-2/2.4-arrays",
+            "checkpoint_id": "c_f857561f35"
           }
         },
         {
           "id": "i_3b533afe18",
           "legacy_key": "2-4",
           "type": "checkpoint",
-          "title": null,
+          "title": "2.5 JavaScript Objects",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/ZcqiHIsq",
-            "label": "Complete Lesson & Exercise 2.5 - Objects"
+            "exercise": "web-dev-2/2.5-objects",
+            "checkpoint_id": "c_116cec262b"
           }
         },
         {
           "id": "i_88344549d3",
           "legacy_key": "2-5",
           "type": "checkpoint",
-          "title": null,
+          "title": "2.6 JavaScript Exceptions",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/JhVVmx7z",
-            "label": "Complete Lesson & Exercise 2.6 - Exceptions"
+            "exercise": "web-dev-2/2.6-exceptions",
+            "checkpoint_id": "c_9e9a0d79ff"
           }
         },
         {
           "id": "i_39e6f1fa13",
           "legacy_key": "2-6",
           "type": "checkpoint",
-          "title": null,
+          "title": "2.7 Unit 2 Test",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/5VckQusm",
-            "label": "Complete Test 2.7 - Unit 2 TestInstructions here"
+            "exercise": "web-dev-2/2.7-unit-2-test",
+            "checkpoint_id": "c_2ad52743de"
           }
         }
       ]
@@ -311,56 +311,56 @@
           "id": "i_2fc22a9a92",
           "legacy_key": "3-0",
           "type": "checkpoint",
-          "title": null,
+          "title": "3.1 JavaScript Advanced Strings",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/x0aLmWLc",
-            "label": "Complete Lesson & Exercise 3.1 - Advanced Strings"
+            "exercise": "web-dev-2/3.1-advanced-strings",
+            "checkpoint_id": "c_5dff70e6ae"
           }
         },
         {
           "id": "i_d9972683c6",
           "legacy_key": "3-1",
           "type": "checkpoint",
-          "title": null,
+          "title": "3.2 JavaScript Advanced Arrays",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/KjW9tq57",
-            "label": "Complete Lesson & Exercise 3.2 - Advanced Arrays"
+            "exercise": "web-dev-2/3.2-advanced-arrays",
+            "checkpoint_id": "c_cf8f6d1b82"
           }
         },
         {
           "id": "i_457dfb3232",
           "legacy_key": "3-2",
           "type": "checkpoint",
-          "title": null,
+          "title": "3.3 JavaScript Classes",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/0yLs7XHU",
-            "label": "Complete Lesson & Exercise 3.3 - Classes"
+            "exercise": "web-dev-2/3.3-classes",
+            "checkpoint_id": "c_1b3b4aba65"
           }
         },
         {
           "id": "i_63efd20027",
           "legacy_key": "3-3",
           "type": "checkpoint",
-          "title": null,
+          "title": "3.4 Unit 3 Test",
           "status": "ok",
           "tags": [
             "github-exercise"
           ],
           "payload": {
-            "classroom_url": "https://classroom.github.com/a/TPTVQlSG",
-            "label": "Complete Test 3.4 - Unit 3 TestInstructions here"
+            "exercise": "web-dev-2/3.4-unit-3-test",
+            "checkpoint_id": "c_7d6c48bbf3"
           }
         }
       ]

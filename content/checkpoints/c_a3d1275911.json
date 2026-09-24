@@ -1,0 +1,34 @@
+{
+  "id": "c_a3d1275911",
+  "item_id": "i_17fbbafc51",
+  "course_id": "python-1",
+  "legacy_path": null,
+  "exercise": "python-1/2.7-dictionaries",
+  "title": "Dictionaries",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Dictionaries</h2>\n<p><strong>Dictionaries</strong> are a type of data structure that store a collection of <strong>key-value pairs</strong>.<br>Keys are typically strings or numbers, and values can be any type of Python object.  </p>\n<p>Dictionaries are also known as <strong>maps</strong>, <strong>hash maps</strong>, or <strong>associative arrays</strong>.</p>\n<hr>\n<h3>Creating a Dictionary</h3>\n<p>You can create an empty dictionary or initialize one with key-value pairs.</p>\n<pre><code class=\"language-python\">empty_dict = {}\n\nfruit_colors = {'apple': 'red', 'banana': 'yellow', 'grape': 'purple'}\n</code></pre>\n<hr>\n<h3>Accessing Values</h3>\n<p>You can access a value by using its key in square brackets:</p>\n<pre><code class=\"language-python\">print(fruit_colors['apple'])   # Output: 'red'\nprint(fruit_colors['banana'])  # Output: 'yellow'\n</code></pre>\n<p>If you try to access a key that doesn’t exist, Python raises a <strong>KeyError</strong>:</p>\n<pre><code class=\"language-python\"># print(fruit_colors['orange'])  # Raises KeyError\n</code></pre>\n<p>To avoid errors, use the <code>.get()</code> method and specify a default value:</p>\n<pre><code class=\"language-python\">print(fruit_colors.get('orange', 'unknown'))  # Output: 'unknown'\n</code></pre>\n<hr>\n<h3>Modifying Values</h3>\n<p>You can change the value for an existing key like this:</p>\n<pre><code class=\"language-python\">fruit_colors['apple'] = 'green'\nprint(fruit_colors['apple'])  # Output: 'green'\n</code></pre>\n<hr>\n<h3>Adding New Key-Value Pairs</h3>\n<p>You can add a new key-value pair by simply assigning it:</p>\n<pre><code class=\"language-python\">fruit_colors['blueberry'] = 'blue'\nprint(fruit_colors['blueberry'])  # Output: 'blue'\n</code></pre>\n<hr>\n<h3>Removing Key-Value Pairs</h3>\n<p>Use the <code>del</code> statement to remove a key-value pair:</p>\n<pre><code class=\"language-python\">del fruit_colors['grape']\n# print(fruit_colors['grape'])  # Raises KeyError\n</code></pre>\n<hr>\n<h3>Iterating Over Dictionaries</h3>\n<p>You can loop through keys using a <code>for</code> loop:</p>\n<pre><code class=\"language-python\">for fruit in fruit_colors:\n    print(fruit)\n</code></pre>\n<p>This prints all the keys (e.g., <code>'apple'</code>, <code>'banana'</code>, <code>'blueberry'</code>).</p>\n<p>To access both keys and values, use the <code>.items()</code> method:</p>\n<pre><code class=\"language-python\">for fruit, color in fruit_colors.items():\n    print(f'{fruit} is {color}')\n</code></pre>\n<p>Output:</p>\n<pre><code>apple is green\nbanana is yellow\nblueberry is blue\n</code></pre>\n<hr>\n<h3>Dictionary Comprehensions</h3>\n<p>Like list comprehensions, you can build dictionaries dynamically:</p>\n<pre><code class=\"language-python\">fruits = ['apple', 'banana', 'orange']\nfruit_lengths = {fruit: len(fruit) for fruit in fruits}\nprint(fruit_lengths)  # Output: {'apple': 5, 'banana': 6, 'orange': 6}\n</code></pre>\n<hr>\n<p>Dictionaries are powerful and efficient tools for mapping keys to values — essential for data organization and quick lookups.</p>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Run the tests yourself with <code>pytest</code>. When you push, GitHub runs them too: a green check next to your latest commit means they pass, a red X means something still needs work.</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-1/2.7-dictionaries/starter",
+  "grading_hint": {
+    "runner": "pytest",
+    "tests": [
+      "exercises/python-1/2.7-dictionaries/starter/tests/test_exercise.py"
+    ]
+  }
+}

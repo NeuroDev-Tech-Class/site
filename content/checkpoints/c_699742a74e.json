@@ -1,0 +1,34 @@
+{
+  "id": "c_699742a74e",
+  "item_id": "i_d1cb02d26b",
+  "course_id": "python-1",
+  "legacy_path": null,
+  "exercise": "python-1/1.1-basic-syntax",
+  "title": "Basic Python Syntax",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Basic Python Syntax</h2>\n<p>In Python, each line of code contains its own instruction.<br>These instructions are executed from top to bottom.</p>\n<p>In some programming languages like Java and C++, indentation (spaces or tabs at the beginning of a line) is mainly for readability and doesn't affect the program. However, in Python, spacing and indentation <em>do</em> matter.</p>\n<h3>Comments</h3>\n<ul>\n<li>The hash symbol <code>#</code> is used to write comments.</li>\n<li>Comments are ignored by Python when the code runs.</li>\n<li>They help explain what the code does or temporarily disable parts of code for testing.</li>\n</ul>\n<pre><code class=\"language-python\"># This is a comment\n</code></pre>\n<p>You can use triple quotes for multi-line comments:</p>\n<pre><code class=\"language-python\">\"\"\"\nThis is a\nmulti-line\ncomment\n\"\"\"\n</code></pre>\n<h3>Printing to the Terminal</h3>\n<p>Here is a one-line Python program:</p>\n<pre><code class=\"language-python\">print(\"Hello, world!\")\n</code></pre>\n<ul>\n<li><p>This prints <code>Hello, world!</code> to the terminal (sometimes called the <strong>console</strong>).</p>\n</li>\n<li><p>Inside the parentheses is a <strong>string</strong> — a sequence of characters enclosed in quotes.</p>\n</li>\n<li><p>The value inside the parentheses is called an <strong>argument</strong>:</p>\n<blockquote>\n<p>An argument is any value passed to a function when it is called.</p>\n</blockquote>\n</li>\n</ul>\n<p>Some functions require multiple arguments, and some don't require any at all.</p>\n<h3>Printing Numbers and Expressions</h3>\n<pre><code class=\"language-python\">print(2 + 2)\n</code></pre>\n<ul>\n<li>Here, we passed a math expression (<code>2 + 2</code>) to <code>print()</code>.</li>\n<li>Python evaluates the expression and prints the result: <code>4</code>.</li>\n</ul>\n<p><code>print()</code> can accept many types of input, not just strings.\nUnlike many other languages, Python automatically converts values to strings when printing.</p>\n<h3>More Examples</h3>\n<pre><code class=\"language-python\">print(\"Python is fun!\")\nprint(10 * 3)\nprint(\"The sum of 5 and 7 is\", 5 + 7)\n</code></pre>\n<p>Output:</p>\n<pre><code>Python is fun!\n30\nThe sum of 5 and 7 is 12\n</code></pre>\n<h3>Functions</h3>\n<ul>\n<li><code>print()</code> is just one of many built-in Python functions.</li>\n<li>Programmers can also define their own functions.</li>\n<li>We'll learn how to do that very soon, and that’s when programming gets really fun!</li>\n</ul>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Run the tests yourself with <code>pytest</code>. When you push, GitHub runs them too: a green check next to your latest commit means they pass, a red X means something still needs work.</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-1/1.1-basic-syntax/starter",
+  "grading_hint": {
+    "runner": "pytest",
+    "tests": [
+      "exercises/python-1/1.1-basic-syntax/starter/tests/test_exercise.py"
+    ]
+  }
+}

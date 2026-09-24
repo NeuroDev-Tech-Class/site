@@ -1,0 +1,34 @@
+{
+  "id": "c_a1292bc973",
+  "item_id": "i_3abb4aff5c",
+  "course_id": "python-1",
+  "legacy_path": null,
+  "exercise": "python-1/2.5-lists",
+  "title": "Lists",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Lists</h2>\n<p><strong>Lists</strong> are a type of data structure in Python used to store a collection of items.<br>They are <strong>ordered</strong>, <strong>mutable</strong> (able to be changed), and allow <strong>duplicate elements</strong>.</p>\n<hr>\n<h3>Creating a List</h3>\n<pre><code class=\"language-python\">fruits = ['apple', 'banana', 'cherry']\n</code></pre>\n<hr>\n<h3>Accessing Items in a List</h3>\n<pre><code class=\"language-python\">print(fruits[0])   # Output: 'apple'. Indexing starts at 0, not 1\nprint(fruits[1])   # Output: 'banana'\nprint(fruits[-1])  # Output: 'cherry'. -1 indexes the last item\n</code></pre>\n<p>Negative indexing works backward from the end of the list (<code>-2</code> = second to last, etc.).</p>\n<hr>\n<h3>Reassigning an Item</h3>\n<pre><code class=\"language-python\">fruits[1] = 'orange'\nprint(fruits)  # Output: ['apple', 'orange', 'cherry']\n</code></pre>\n<hr>\n<h3>Looping Through a List</h3>\n<pre><code class=\"language-python\">for fruit in fruits:\n    print(fruit)\n</code></pre>\n<hr>\n<h3>Checking if an Item Exists</h3>\n<pre><code class=\"language-python\">if 'apple' in fruits:\n    print('Yes, apple is in the fruits list.')\n</code></pre>\n<hr>\n<h3>Adding and Removing Items</h3>\n<h4>Append (add to the end)</h4>\n<pre><code class=\"language-python\">fruits.append('banana')\nprint(fruits)  # Output: ['apple', 'orange', 'cherry', 'banana']\n</code></pre>\n<h4>Remove</h4>\n<pre><code class=\"language-python\">fruits.remove('cherry')\nprint(fruits)  # Output: ['apple', 'orange', 'banana']\n</code></pre>\n<hr>\n<h3>Sorting and Reversing Lists</h3>\n<pre><code class=\"language-python\">fruits.sort()\nprint(fruits)  # Output: ['apple', 'banana', 'orange']\n\nfruits.reverse()\nprint(fruits)  # Output: ['orange', 'banana', 'apple']\n</code></pre>\n<hr>\n<h3>Slicing Lists and Strings</h3>\n<p><strong>Slicing</strong> extracts a specific section of a sequence (like a list or string).<br>The syntax is <code>sequence[start:end]</code> — the start index is <strong>inclusive</strong>, the end index is <strong>exclusive</strong>.</p>\n<h4>List Slicing</h4>\n<pre><code class=\"language-python\">numbers = [0, 1, 2, 3, 4, 5]\nslice1 = numbers[2:4]  # [2, 3]\nprint(slice1)\n\nslice2 = numbers[:3]   # [0, 1, 2]\nprint(slice2)\n\nslice3 = numbers[3:]   # [3, 4, 5]\nprint(slice3)\n</code></pre>\n<h4>String Slicing</h4>\n<pre><code class=\"language-python\">text = \"Hello, world!\"\nslice4 = text[7:12]  # \"world\"\nprint(slice4)\n</code></pre>\n<hr>\n<h3>List Comprehensions</h3>\n<p><strong>List comprehensions</strong> provide a concise way to create lists.<br>They consist of an expression followed by a <code>for</code> clause, and can include additional <code>for</code> or <code>if</code> conditions.</p>\n<h4>Example: List of Squares</h4>\n<pre><code class=\"language-python\">squares = [x**2 for x in range(10)]\nprint(squares)  # Output: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]\n</code></pre>\n<h4>Example: List of Even Numbers</h4>\n<pre><code class=\"language-python\">evens = [x for x in range(10) if x % 2 == 0]\nprint(evens)  # Output: [0, 2, 4, 6, 8]\n</code></pre>\n<h4>Example: Nested List Comprehensions</h4>\n<pre><code class=\"language-python\">combinations = [(x, y) for x in [1, 2, 3] for y in [3, 1, 4] if x != y]\nprint(combinations)  # Output: [(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]\n</code></pre>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Run the tests yourself with <code>pytest</code>. When you push, GitHub runs them too: a green check next to your latest commit means they pass, a red X means something still needs work.</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-1/2.5-lists/starter",
+  "grading_hint": {
+    "runner": "pytest",
+    "tests": [
+      "exercises/python-1/2.5-lists/starter/tests/test_exercise.py"
+    ]
+  }
+}

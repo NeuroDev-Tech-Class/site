@@ -1,0 +1,29 @@
+{
+  "id": "c_c6b6d4e795",
+  "item_id": "i_483730c39f",
+  "course_id": "python-1",
+  "legacy_path": null,
+  "exercise": "python-1/3.3-type-hinting",
+  "title": "Type Hinting",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Type Hinting</h2>\n<p>Python is a <strong>dynamically typed language</strong>, which means that the type of a variable is checked only during <strong>runtime</strong>.<br>However, as your programs grow in size and complexity, it’s helpful to have a way to check types earlier — before running your code.</p>\n<hr>\n<h3>What Is Type Hinting?</h3>\n<p><strong>Type hinting</strong> was introduced in <strong>Python 3.5</strong>.<br>It allows you to annotate your code to suggest the expected data types of variables, function arguments, and return values.</p>\n<p>Type hints <strong>don’t affect the actual runtime behavior</strong> of your program — they are purely informational.<br>They help with <strong>readability</strong>, <strong>documentation</strong>, and <strong>static type checking</strong> tools (like <code>mypy</code> or IDE autocompletion).</p>\n<hr>\n<h3>Example: Without Type Hints</h3>\n<pre><code class=\"language-python\">def describe_age(age):\n    return f\"You are {age} years old.\"\n</code></pre>\n<hr>\n<h3>Example: With Type Hints</h3>\n<pre><code class=\"language-python\">def describe_age(age: int) -&gt; str:\n    return f\"You are {age} years old.\"\n</code></pre>\n<p>Here’s what each part means:</p>\n<ul>\n<li><code>age: int</code> → The parameter <code>age</code> is expected to be an <strong>integer</strong>.  </li>\n<li><code>-&gt; str</code> → The function is expected to <strong>return a string</strong>.</li>\n</ul>\n<hr>\n<h3>Using Built-in Types in Hints</h3>\n<p>You can use built-in types like <code>int</code>, <code>float</code>, <code>str</code>, <code>list</code>, <code>dict</code>, etc.</p>\n<pre><code class=\"language-python\">def square_list(numbers: list[int]) -&gt; list[int]:\n    return [n ** 2 for n in numbers]\n</code></pre>\n<hr>\n<h3>Using the <code>typing</code> Module</h3>\n<p>For more complex or older Python versions (before 3.9), use the <strong><code>typing</code></strong> module.</p>\n<pre><code class=\"language-python\">from typing import List, Dict\n\ndef total_sales(sales: Dict[str, int]) -&gt; int:\n    return sum(sales.values())\n\ndef find_largest(numbers: List[int]) -&gt; int:\n    return max(numbers)\n</code></pre>\n<ul>\n<li><code>Dict[str, int]</code> → A dictionary with <strong>string keys</strong> and <strong>integer values</strong>.  </li>\n<li><code>List[int]</code> → A list containing integers.</li>\n</ul>\n<hr>\n<h3>Why Use Type Hints?</h3>\n<p>Type hints make your code:</p>\n<ul>\n<li><strong>More readable</strong> — It’s clear what types are expected.  </li>\n<li><strong>Easier to debug</strong> — Type checkers can catch mistakes early.  </li>\n<li><strong>Better for collaboration</strong> — Other developers can immediately understand the data structure expectations.</li>\n</ul>\n<hr>\n<h4>Example of a Static Type Check</h4>\n<p>You can use <strong>mypy</strong> (a popular static type checker) to validate your hints:</p>\n<pre><code>pip install mypy\nmypy your_script.py\n</code></pre>\n<p>This will report any type mismatches it finds — helping you catch potential errors <strong>before runtime</strong>.</p>\n<hr>\n<p>Type hinting is one of the best practices for writing clear, maintainable Python code — especially in large projects or collaborative environments.</p>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-1/3.3-type-hinting/starter",
+  "grading_hint": null
+}

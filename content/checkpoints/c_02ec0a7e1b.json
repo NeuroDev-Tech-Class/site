@@ -1,0 +1,29 @@
+{
+  "id": "c_02ec0a7e1b",
+  "item_id": "i_9ec7449a03",
+  "course_id": "python-1",
+  "legacy_path": null,
+  "exercise": "python-1/3.1-debugging",
+  "title": "Debugging",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Debugging</h2>\n<p><strong>Debugging</strong> is an essential skill for any developer.<br>It helps you understand why your code isn’t working as expected and how to fix it.  </p>\n<p>In Python, there are several debugging techniques, such as using <strong>print statements</strong>, <strong>Python’s built-in debugger (<code>pdb</code>)</strong>, or <strong>IDE debugging tools</strong>.</p>\n<hr>\n<h3>Debugging Using Print Statements</h3>\n<p>One of the simplest and most common ways to debug is to print out variables at key stages of your program to check their values and flow.</p>\n<pre><code class=\"language-python\">def add_numbers(x, y):\n    print(f\"Adding {x} and {y}\")\n    result = x + y\n    print(f\"The result is {result}\")\n    return result\n\nadd_numbers(5, 3)  # Prints \"Adding 5 and 3\" and \"The result is 8\"\n</code></pre>\n<p>This method is quick and easy, but for complex code, it can clutter your output and miss deeper issues.</p>\n<hr>\n<h3>Debugging with IDEs</h3>\n<p>Most modern IDEs (like <strong>VS Code</strong>, <strong>PyCharm</strong>, or <strong>Thonny</strong>) have powerful built-in debugging tools.</p>\n<p>In <strong>VS Code</strong>, for example:</p>\n<ol>\n<li>Click on the <strong>Run</strong> menu, then select <strong>Start Debugging</strong> or press <strong>F5</strong>.  </li>\n<li>The <strong>Run and Debug</strong> panel appears on the left, showing variables, call stack, and breakpoints.</li>\n</ol>\n<hr>\n<h4>Breakpoints</h4>\n<p>You can add a <strong>breakpoint</strong> by clicking next to a line number in your code editor — a red dot appears.<br>When the debugger runs, it pauses execution at these breakpoints, allowing you to:</p>\n<ul>\n<li>Inspect variable values  </li>\n<li>Step through your code line by line  </li>\n<li>Control program flow (continue, step in, step out, etc.)</li>\n</ul>\n<p>Breakpoints are especially useful for finding logical errors or verifying that certain sections of code are being executed.</p>\n<hr>\n<p>Debugging effectively will save you time and help you understand how your code behaves.<br>Remember: <strong>Debugging isn’t just about fixing errors — it’s about learning how your code works.</strong></p>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-1/3.1-debugging/starter",
+  "grading_hint": null
+}

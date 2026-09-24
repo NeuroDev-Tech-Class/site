@@ -1,0 +1,34 @@
+{
+  "id": "c_2f7060d2c8",
+  "item_id": "i_0fb6235d83",
+  "course_id": "web-dev-2",
+  "legacy_path": null,
+  "exercise": "web-dev-2/1.1-syntax-basics",
+  "title": "JavaScript Syntax",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>JavaScript Syntax</h2>\n<p>Each line in JavaScript contains instructions for the computer to execute.<br>Similar to Python, JavaScript executes instructions <strong>line-by-line from top to bottom.</strong></p>\n<p>Unlike Python, indentation at the beginning of each line is for readability only.<br>However, it is standard practice to use indentation.</p>\n<hr>\n<h3>Comments in JavaScript</h3>\n<p>In JavaScript, we use special symbols to make comments — these are lines that the computer <strong>ignores</strong> when running the program.</p>\n<pre><code class=\"language-javascript\">// This is a single-line comment\n\n/*\nThis is a multi-line comment\nIt can span several lines\n*/\n</code></pre>\n<p>Comments are used by developers to <strong>explain what sections of code do.</strong><br>They make the code easier to read and understand — both for you and for others.</p>\n<p>In this course, comments will be used often to help explain new coding concepts.</p>\n<hr>\n<h3>What Is JavaScript Used For?</h3>\n<p>JavaScript is primarily used for <strong>web development</strong>.<br>When you browse websites, most interactive or dynamic features (buttons, animations, pop-ups, etc.) are created using JavaScript.</p>\n<p>This first course will help you:</p>\n<ul>\n<li>Get familiar with JavaScript syntax.</li>\n<li>Learn how to run code.</li>\n<li>Later, use it to make <strong>webpages and interactive projects</strong>.</li>\n</ul>\n<hr>\n<h3>Printing to the Console</h3>\n<p>You can print (output) messages in JavaScript using <code>console.log()</code>:</p>\n<pre><code class=\"language-javascript\">console.log(\"Hello World\");\n</code></pre>\n<p>This line <strong>prints text to the console</strong> — not the screen of a website, but the developer console where you can test your code.</p>\n<h4>Try It Yourself</h4>\n<ol>\n<li>Open your terminal.</li>\n<li>Type:<pre><code class=\"language-bash\">node\n</code></pre>\nThis opens the Node.js environment.</li>\n<li>Copy and paste:<pre><code class=\"language-javascript\">console.log(\"Hello World\");\n</code></pre>\nPress <strong>Enter</strong> to see the output.</li>\n</ol>\n<hr>\n<h3>Expressions in <code>console.log()</code></h3>\n<p>You can also perform calculations inside <code>console.log()</code>:</p>\n<pre><code class=\"language-javascript\">console.log(2 + 4);\n</code></pre>\n<p>This prints:</p>\n<pre><code>6\n</code></pre>\n<p>Anything placed inside the parentheses will be evaluated before printing.</p>\n<hr>\n<h3>The Semicolon (<code>;</code>)</h3>\n<p>Notice the <strong>semicolon</strong> at the end of each line:</p>\n<pre><code class=\"language-javascript\">console.log(\"Hello World\");\nconsole.log(2 + 4);\n</code></pre>\n<p>In JavaScript, semicolons are used to <strong>end a statement</strong>.<br>They tell the computer where one instruction stops and the next one begins.</p>\n<p>While not always required, it’s good practice to include them — especially as your programs become more complex.</p>\n<hr>\n<p>You now know:</p>\n<ul>\n<li>How to write and run JavaScript code.</li>\n<li>How comments work.</li>\n<li>How to print results to the console.</li>\n<li>Why semicolons matter in JavaScript.</li>\n</ul>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Run the tests yourself with <code>npm test</code>. When you push, GitHub runs them too: a green check next to your latest commit means they pass, a red X means something still needs work.</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/web-dev-2/1.1-syntax-basics/starter",
+  "grading_hint": {
+    "runner": "jest",
+    "tests": [
+      "exercises/web-dev-2/1.1-syntax-basics/starter/__tests__/learn.test.js"
+    ]
+  }
+}

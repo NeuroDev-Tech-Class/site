@@ -10,6 +10,7 @@
     "h2",
     "h3",
     "h4",
+    "h5",
     "hr",
     "i",
     "iframe",
@@ -84,6 +85,9 @@
     "img-small",
     "video-embed",
     "subtitle"
+  ],
+  "class_prefixes": [
+    "language-"
   ],
   "iframe_hosts": [
     "www.youtube.com",

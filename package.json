@@ -21,6 +21,7 @@
     "firebase": "^12.18.0",
     "firebase-admin": "^14.3.0",
     "firebase-tools": "^15.29.0",
-    "jsdom": "^30.0.1"
+    "jsdom": "^30.0.1",
+    "marked": "^18.0.14"
   }
 }

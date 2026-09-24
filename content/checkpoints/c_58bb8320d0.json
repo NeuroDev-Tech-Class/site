@@ -1,0 +1,34 @@
+{
+  "id": "c_58bb8320d0",
+  "item_id": "i_c2187c62d6",
+  "course_id": "python-1",
+  "legacy_path": null,
+  "exercise": "python-1/2.6-tuples",
+  "title": "Tuples",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Tuples</h2>\n<p><strong>Tuples</strong> are another container data type in Python.<br>They are <strong>ordered</strong> like lists, but <strong>immutable</strong>, meaning their values cannot be changed once created.<br>Tuples are defined using <strong>parentheses</strong> <code>()</code> instead of square brackets <code>[]</code>.</p>\n<hr>\n<h3>Creating a Tuple</h3>\n<pre><code class=\"language-python\">my_tuple = (1, 2, 3, 4, 5)\nprint(my_tuple)\n</code></pre>\n<p>Output:</p>\n<pre><code>(1, 2, 3, 4, 5)\n</code></pre>\n<hr>\n<h3>Accessing Tuple Elements</h3>\n<p>Accessing items in a tuple works the same way as with lists.</p>\n<pre><code class=\"language-python\">print(my_tuple[0])     # Prints 1\nprint(my_tuple[2:4])   # Prints (3, 4)\n</code></pre>\n<p>You can use positive or negative indexing, and slicing works the same way as in lists.</p>\n<hr>\n<h3>Tuples and Functions</h3>\n<p>Tuples can be used to <strong>return multiple values</strong> from a function.</p>\n<pre><code class=\"language-python\">def calculate_rectangle(length, width):\n    area = length * width\n    perimeter = 2 * (length + width)\n    return area, perimeter\n\nresult = calculate_rectangle(5, 3)\nprint(\"Area:\", result[0])\nprint(\"Perimeter:\", result[1])\n</code></pre>\n<p>Output:</p>\n<pre><code>Area: 15\nPerimeter: 16\n</code></pre>\n<hr>\n<h3>Tuple Unpacking</h3>\n<p>You can unpack a tuple directly into multiple variables for cleaner code.</p>\n<pre><code class=\"language-python\">area, perimeter = calculate_rectangle(6, 4)\nprint(\"Area:\", area)\nprint(\"Perimeter:\", perimeter)\n</code></pre>\n<p>Output:</p>\n<pre><code>Area: 24\nPerimeter: 20\n</code></pre>\n<hr>\n<p>Tuples are often used when you want to group related data that shouldn't change — for example, coordinates, dimensions, or constant values.</p>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Run the tests yourself with <code>pytest</code>. When you push, GitHub runs them too: a green check next to your latest commit means they pass, a red X means something still needs work.</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-1/2.6-tuples/starter",
+  "grading_hint": {
+    "runner": "pytest",
+    "tests": [
+      "exercises/python-1/2.6-tuples/starter/tests/test_exercise.py"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "c_0e01cf3207",
+  "item_id": "i_ed4e572cff",
+  "course_id": "web-dev-3",
+  "legacy_path": null,
+  "exercise": "web-dev-3/1.6-unit-1-project",
+  "title": "Wordle Recreation Project",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Wordle Recreation Project — Full Specification</h2>\n<h3>Overview</h3>\n<p>In this project, you will recreate the classic and widely celebrated word game <strong>Wordle</strong>. Your version will feature an interactive user interface, visual feedback for guesses, validation against an official dictionary, and a complete implementation of the game’s core logic.</p>\n<p>This assignment provides practice with:</p>\n<ul>\n<li>DOM manipulation  </li>\n<li>Event listeners  </li>\n<li>Keyboard events  </li>\n<li>Functions and modular design  </li>\n<li>Arrays and strings  </li>\n<li>Fetch requests  </li>\n<li>JSON data handling</li>\n</ul>\n<p>Your UI should be uniquely your own, though you may reference example designs in course materials for inspiration.</p>\n<hr>\n<h3>Core Requirements</h3>\n<h4>User Interface</h4>\n<p>Your application must include the following components:</p>\n<ol>\n<li><p><strong>A 5 × 6 Grid</strong>  </p>\n<ul>\n<li>Starts empty.  </li>\n<li>Displays up to <strong>six five-letter guesses</strong>, one per row.</li>\n</ul>\n</li>\n<li><p><strong>Real‑time Guess Rendering</strong>  </p>\n<ul>\n<li>Letters should appear in the current row as the user types.  </li>\n<li>No <code>&lt;input&gt;</code> elements allowed — use keyboard events only.</li>\n</ul>\n</li>\n<li><p><strong>Game Feedback Messages</strong>  </p>\n<ul>\n<li>Show messages when the player:<ul>\n<li>Wins  </li>\n<li>Loses  </li>\n<li>Submits an invalid guess</li>\n</ul>\n</li>\n</ul>\n</li>\n<li><p><strong>Visual Highlighting Rules</strong>  </p>\n<ul>\n<li><strong>Green</strong>: letter is in the correct position.  </li>\n<li><strong>Yellow</strong>: letter exists in the answer but is in the wrong position.  </li>\n<li>Letters appearing multiple times must highlight only for each occurrence in the secret answer.</li>\n</ul>\n</li>\n</ol>\n<hr>\n<h3>Game Logic Requirements</h3>\n<p>Your implementation must match the rules of the original game:</p>\n<ul>\n<li>A secret answer is randomly chosen at the start from the official dictionary.</li>\n<li>The player may submit <strong>up to six guesses</strong>.</li>\n<li>Each guess:<ul>\n<li>Must be exactly 5 letters.  </li>\n<li>Must exist in the dictionary.  </li>\n<li>Produces hint coloring after submission.</li>\n</ul>\n</li>\n<li>The player <strong>wins</strong> if a guess matches the correct answer.</li>\n<li>The player <strong>loses</strong> if all six guesses are incorrect.</li>\n<li>Once the game ends, <strong>no additional input</strong> is accepted.</li>\n</ul>\n<hr>\n<h3>Data Loading Requirements</h3>\n<p>Use <strong>Fetch</strong> to retrieve the dictionary from a remote JSON API:</p>\n<pre><code>https://wordle-api.up.railway.app/words\n</code></pre>\n<p>The API returns two lists:</p>\n<ul>\n<li><strong>answers</strong> — valid words AND also eligible as the secret answer  </li>\n<li><strong>allowed</strong> — additional valid words that may be guessed but will never be the answer</li>\n</ul>\n<p>Before writing your logic, inspect the API with a tool such as <strong>Postman</strong> to understand its structure.</p>\n<hr>\n<h3>Technical Implementation Requirements</h3>\n<ul>\n<li>Use the <strong>keydown</strong> event to capture:<ul>\n<li>Letter keys  </li>\n<li>Backspace  </li>\n<li>Enter/Return</li>\n</ul>\n</li>\n<li>Use event properties such as:<ul>\n<li><code>event.key</code></li>\n<li><code>event.keyCode</code></li>\n</ul>\n</li>\n<li>Organize your code into <strong>separate functions</strong> for:<ul>\n<li>Rendering the grid  </li>\n<li>Handling input  </li>\n<li>Submitting guesses  </li>\n<li>Applying color‑coding  </li>\n<li>Fetching data  </li>\n<li>Determining win/loss conditions</li>\n</ul>\n</li>\n</ul>\n<p>You may style your interface however you'd like, as long as the rules and behaviors fully match the original game.</p>\n<hr>\n<h3>Optional Challenge Features</h3>\n<p>If you'd like to elevate your implementation further, consider adding:</p>\n<h4>On‑screen Keyboard</h4>\n<ul>\n<li>Dynamic highlighting for letters that have been guessed.  </li>\n<li>Behavior similar to the official Wordle on mobile and desktop.</li>\n</ul>\n<h4>Persistent Game State</h4>\n<ul>\n<li>Store the current answer and previous guesses using <strong>localStorage</strong>, enabling the game to persist across page reloads.</li>\n</ul>\n<h4>Timed Daily or Hourly Word Challenges</h4>\n<ul>\n<li>Choose answers based on a time-driven system so all players receive the same challenge at the same time.</li>\n</ul>\n<h4>CSS Animations</h4>\n<p>Add visual polish using animations during:</p>\n<ul>\n<li>Letter entry  </li>\n<li>Guess submission  </li>\n<li>Row reveal animations  </li>\n<li>Winning celebration</li>\n</ul>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/web-dev-3/1.6-unit-1-project/starter",
+  "grading_hint": null
+}

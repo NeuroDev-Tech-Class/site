@@ -1,0 +1,34 @@
+{
+  "id": "c_6ba66520d0",
+  "item_id": "i_ed90011709",
+  "course_id": "python-1",
+  "legacy_path": null,
+  "exercise": "python-1/2.3-loops",
+  "title": "Loops",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Loops</h2>\n<p><strong>Loops</strong> are used to execute a block of code repeatedly, as long as a certain condition is met.<br>There are two main types of loops in Python: <strong>for loops</strong> and <strong>while loops</strong>.</p>\n<hr>\n<h3>For Loops</h3>\n<p>A <strong>for loop</strong> is used to iterate over a sequence (such as a list, string, or tuple) and execute a block of code once per item in that sequence.</p>\n<pre><code class=\"language-python\">fruits = [\"strawberry\", \"lemon\", \"kiwi\"]\nfor fruit in fruits:\n    print(fruit)\n    # The variable \"fruit\" represents each item in the list \"fruits\"\n</code></pre>\n<hr>\n<p>You can also loop through strings:</p>\n<pre><code class=\"language-python\">word = \"sesquipedalian\"\nfor char in word:\n    print(char)\n    # Prints every character in the string on its own line\n</code></pre>\n<hr>\n<h4>Using <code>range()</code></h4>\n<p><code>range()</code> is a built-in function that returns a sequence of numbers.<br>It can take up to three arguments: <code>start</code>, <code>stop</code>, and <code>step</code>.</p>\n<pre><code class=\"language-python\">for i in range(1, 6):\n    print(i)\n    # Prints numbers 1 through 5 (stops before 6)\n</code></pre>\n<p>If you omit the start value, it defaults to <code>0</code>:</p>\n<pre><code class=\"language-python\">for i in range(4):\n    print(i)\n    # Prints 0, 1, 2, 3\n</code></pre>\n<p>You can also include a third argument for the step value (how much to increment each time):</p>\n<pre><code class=\"language-python\">for i in range(10, 20, 2):\n    print(i)\n    # Prints even numbers from 10 to 18\n</code></pre>\n<hr>\n<h3>While Loops</h3>\n<p>A <strong>while loop</strong> repeatedly executes a block of code as long as a specified condition remains <code>True</code>.</p>\n<pre><code class=\"language-python\">i = 1\nwhile i &lt; 6:\n    print(i)\n    i += 1\n</code></pre>\n<p>Here, <code>i</code> starts at 1 and increments by 1 until it reaches 6.</p>\n<hr>\n<h3>Loop Control Statements</h3>\n<p>Python provides special statements to modify loop behavior:</p>\n<h4><code>break</code></h4>\n<p>Terminates the loop entirely.</p>\n<pre><code class=\"language-python\">animals = [\"sheep\", \"pig\", \"cow\"]\nfor animal in animals:\n    if animal == \"pig\":\n        break\n    print(animal)\n    # Prints \"sheep\" and stops when it reaches \"pig\"\n</code></pre>\n<p>Another example:</p>\n<pre><code class=\"language-python\">numbers = [1, 3, 5, 4, 7, 9, 10, 11]\nfor num in numbers:\n    if num % 2 == 0:\n        print(\"The first even number is\", num)\n        break\n</code></pre>\n<hr>\n<h4><code>continue</code></h4>\n<p>Skips the current iteration and continues with the next one.</p>\n<pre><code class=\"language-python\">trees = [\"oak\", \"birch\", \"spruce\"]\nfor tree in trees:\n    if tree == \"birch\":\n        continue\n    print(tree)\n    # Prints \"oak\" and \"spruce\", skips \"birch\"\n</code></pre>\n<hr>\n<h4><code>pass</code></h4>\n<p>Acts as a placeholder — it does nothing when executed.<br>Useful when a statement is required syntactically but you don’t want to run any code yet.</p>\n<pre><code class=\"language-python\">metals = [\"gold\", \"iron\", \"copper\"]\nfor metal in metals:\n    pass\n    # Nothing happens — 'pass' prevents a syntax error\n</code></pre>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Run the tests yourself with <code>pytest</code>. When you push, GitHub runs them too: a green check next to your latest commit means they pass, a red X means something still needs work.</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-1/2.3-loops/starter",
+  "grading_hint": {
+    "runner": "pytest",
+    "tests": [
+      "exercises/python-1/2.3-loops/starter/tests/test_exercise.py"
+    ]
+  }
+}

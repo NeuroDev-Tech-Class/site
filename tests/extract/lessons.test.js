@@ -106,7 +106,7 @@ test('markup outside the lesson vocabulary is reported with where it was found',
 });
 
 test('the ordinary lesson vocabulary raises nothing', () => {
-  const html = `<h2>A</h2><h3>B</h3><h4>C</h4><p><strong>s</strong> <b>b</b> <em>e</em> <i>i</i> <code>c</code> <kbd>Ctrl</kbd><br></p>
+  const html = `<h2>A</h2><h3>B</h3><h4>C</h4><h5>D</h5><p><strong>s</strong> <b>b</b> <em>e</em> <i>i</i> <code>c</code> <kbd>Ctrl</kbd><br></p>
     <ul><li>x</li></ul><ol start="2" type="a"><li>y</li></ol><pre><code>z</code></pre><blockquote>q</blockquote><hr>
     <table><thead><tr><th colspan="2">h</th></tr></thead><tbody><tr><td>d</td></tr></tbody></table>
     <div class="tip warning activity card grid-2 img-row img-side img-small"><span class="subtitle">s</span></div>
@@ -135,7 +135,8 @@ test('every lesson any course reaches is extracted once, including ones only an 
   // Windows Node installation), minus the pages that became checkpoints (their body is the checkpoint's instructions)
   const spec = JSON.parse(readFileSync(new URL('../../tools/extract/checkpoints.json', import.meta.url), 'utf8'));
   const checkpointPages = Object.keys(spec).filter(key => !key.startsWith('note:')).length;
-  assert.equal(ids.length, 154 - checkpointPages);
+  // ...plus the two readings among the old Classroom exercises (PEP-8, Terminal Commands)
+  assert.equal(ids.length, 154 - checkpointPages + 2);
   for (const id of ids) assert.ok(files.has(`content/lessons/${id}.html`), id);
   const byPath = Object.fromEntries(Object.values(index).map(l => [l.legacy_path, l]));
   assert.deepEqual(byPath['it/computer_hardware/building_a_pc.html'].used_by, ['hardware']);
@@ -147,8 +148,9 @@ test('every lesson any course reaches is extracted once, including ones only an 
 test('every lesson item points at its extracted lesson', () => {
   for (const path of [...files.keys()].filter(p => p.startsWith('content/courses/'))) {
     for (const item of json(path).units.flatMap(u => u.items).filter(i => i.type === 'lesson')) {
-      assert.equal(item.payload.lesson_id, lessonId(item.payload.legacy_path));
-      assert.ok(files.has(`content/lessons/${item.payload.lesson_id}.html`), item.payload.legacy_path);
+      const source = item.payload.legacy_path ?? `exercises/${item.payload.exercise}`;
+      if (item.payload.legacy_path) assert.equal(item.payload.lesson_id, lessonId(item.payload.legacy_path));
+      assert.ok(files.has(`content/lessons/${item.payload.lesson_id}.html`), source);
     }
   }
 });

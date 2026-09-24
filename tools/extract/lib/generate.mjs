@@ -4,6 +4,7 @@ import { join, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { replaceSubmissionEmails, validateSpec } from './checkpoints.mjs';
 import { buildCourse, legacyKeys, parseCatalog } from './courses.mjs';
+import { exerciseCheckpoint, loadExercises, matchExercise, renderMarkdown, shiftHeadings } from './exercises.mjs';
 import { checkpointId, lessonId } from './ids.mjs';
 import { extractLesson } from './lessons.mjs';
 import { rewriteHtml } from './links.mjs';
@@ -36,6 +37,8 @@ export async function generate(siteRoot) {
   const spec = JSON.parse(read('tools/extract/checkpoints.json'));
   const targets = { lessons: new Set(), notes: new Set() };
   const pending = [];
+  const exercises = loadExercises(siteRoot);
+  const exerciseItems = [];
 
   const courses = [];
   for (const category of catalog) {
@@ -65,6 +68,15 @@ export async function generate(siteRoot) {
             pending.push({ key, course: id, item, html: item.payload.html });
             Object.assign(item, { type: 'checkpoint', title: spec[key].title, payload: { checkpoint_id: checkpointId(item.id) } });
           }
+        } else if (item.tags.includes('github-exercise')) {
+          const exercise = matchExercise(exercises, id, item.payload.label);
+          if (!exercise) throw new Error(`${where} item ${item.legacy_key}: no exercise matches "${item.payload.label}"`);
+          const title = `${exercise.number} ${exercise.title}`;
+          const payload = exercise.kind === 'reading'
+            ? { exercise: exercise.id, lesson_id: lessonId(`exercises/${exercise.id}`) }
+            : { exercise: exercise.id, checkpoint_id: checkpointId(item.id) };
+          Object.assign(item, { type: exercise.kind === 'reading' ? 'lesson' : 'checkpoint', title, payload });
+          exerciseItems.push({ exercise, item, course: id });
         }
       }
       for (const link of links) {
@@ -87,8 +99,28 @@ export async function generate(siteRoot) {
     found.push(...links.filter(l => l.kind !== 'lesson-ref'));
     found.push(...checkVocabulary(lesson.html, `assets/pdfs/${path}`));
     const { html, ...meta } = lesson;
-    lessons.push({ ...meta, used_by: courseIds });
+    lessons.push({ ...meta, source: `assets/pdfs/${path}`, used_by: courseIds });
     files.set(`content/lessons/${lesson.id}.html`, `${html}\n`);
+  }
+  for (const { exercise, item, course } of exerciseItems) {
+    const where = `exercises/${exercise.id}`;
+    if (exercise.kind === 'reading') {
+      const html = rewriteHtml(shiftHeadings(renderMarkdown(exercise.lesson)), where, found);
+      found.push(...checkVocabulary(html, where));
+      lessons.push({
+        id: item.payload.lesson_id, legacy_path: null, title: exercise.title, subtitle: null,
+        course_tag: courseMetadata[course].name, youtube_ids: [], source: `${where}/lesson.md`, used_by: [course],
+      });
+      files.set(`content/lessons/${item.payload.lesson_id}.html`, `${html}\n`);
+      continue;
+    }
+    const checkpoint = exerciseCheckpoint(exercise);
+    checkpoint.instructions_html = rewriteHtml(checkpoint.instructions_html, where, found);
+    found.push(...checkVocabulary(checkpoint.instructions_html, where));
+    files.set(`content/checkpoints/${item.payload.checkpoint_id}.json`, asJson({
+      id: item.payload.checkpoint_id, item_id: item.id, course_id: course, legacy_path: null, exercise: exercise.id,
+      ...checkpoint,
+    }));
   }
   for (const { key, course, item, legacyPath, html } of pending) {
     const where = legacyPath ? `assets/pdfs/${legacyPath}` : `courses/${course}.html`;
@@ -111,12 +143,14 @@ export async function generate(siteRoot) {
       item_id: item.id,
       course_id: course,
       legacy_path: legacyPath ?? null,
+      exercise: null,
       title,
       preset: null,
       requires_sign_off,
       fields,
       required_one_of,
       instructions_html: instructions,
+      starter_path: null,
       grading_hint: null,
     }));
   }

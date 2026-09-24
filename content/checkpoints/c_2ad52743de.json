@@ -1,0 +1,29 @@
+{
+  "id": "c_2ad52743de",
+  "item_id": "i_39e6f1fa13",
+  "course_id": "web-dev-2",
+  "legacy_path": null,
+  "exercise": "web-dev-2/2.7-unit-2-test",
+  "title": "Unit 2 Test",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h4>Description</h4>\n<p> To explore basic user input and output, as well as practice all the things we  learned about in Unit 2, you'll create an interactive, console-based JavaScript program  that challenges a user with a set of random numerical problems and presents a final  scorecard afterward. The quiz should start by asking the user to choose between at  least two problem categories to practice. You'll need to randomly generate number  values for the problems, present the problems to the user in sequence, evaluate the  user's responses, and provide feedback by tracking the user's score. Refer to the  example output below for an idea of how the program might be presented to the user,  but vary your messaging and problems from those demonstrated. </p>\n<h4>Requirements</h4>\n<p> ■   When the program starts, prompt the user to choose between at least two  distinct problem types. For each:<br>■   Use a  for  loop to present a fixed-size sequence of problems, e.g., 10 or 20  problems.<br>■   Use  random  number logic to generate integer values.  Keep difficulty in mind  when deciding the random ranges.<br>■   Use string formatting to output problems to the user, combining words,  operators, and values as needed.<br>■   Use conditionals and expressions to grade responses and provide feedback  on each correct or incorrect answer.<br>■   Use the  console.log  function for console output and  the provided  prompt \n function to collect user input.<br>■   Use variables to track the user's score and display a score card with the  results at the conclusion of the quiz.<br>■   Use at least five functions to organize your code. Possible function outline:  functions to present a problem of each type, functions to grade a problem of  each type, functions to run the quiz for each category and tally a score, and  one  main  function to ask the user to choose a category  and invoke the  appropriate function. </p>\n<h4>Prompt Function</h4>\n<p> We haven’t used the prompt function before; however, it is simple to use. There is an example at the beginning of quiz.js. Run <code>npm install</code> once to install it, then <code>npm start</code> to run your quiz. Simply declare a variable and have a set  equal to a prompt statement. The variable with then equal whatever the user types into  the terminal. </p>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/web-dev-2/2.7-unit-2-test/starter",
+  "grading_hint": null
+}
