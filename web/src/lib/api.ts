@@ -83,6 +83,19 @@ export function login(email: string, password: string): Promise<TechAccount> {
   return signIn(`${AUTH}/login`, { email, password })
 }
 
+export function verifyEmail(email: string, code: string): Promise<TechAccount> {
+  return signIn(`${AUTH}/verify-email`, { email, code })
+}
+
+const post = (path: string, body: unknown) =>
+  request<{ status: string }>(`${AUTH}${path}`, { method: 'POST', body: JSON.stringify(body) }, false)
+
+export const register = (body: { first_name: string, last_name: string, email: string, password: string }) =>
+  post('/register', body)
+export const resendCode = (email: string) => post('/resend-code', { email })
+export const forgotPassword = (email: string) => post('/forgot-password', { email })
+export const resetPassword = (token: string, new_password: string) => post('/reset-password', { token, new_password })
+
 export async function logout(): Promise<void> {
   accessToken = null
   await fetch(`${API_URL}${AUTH}/logout`, { method: 'POST', credentials: 'include' }).catch(() => undefined)

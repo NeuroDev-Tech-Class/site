@@ -66,8 +66,10 @@ describe('the built site', () => {
     }
   })
 
-  test('has the public pages and a not-found page', () => {
-    for (const path of ['index.html', 'catalog/index.html', 'resources/index.html', '404.html']) {
+  test('has the public pages, the sign-in pages and a not-found page', () => {
+    const signInPages = ['sign-in', 'register', 'verify', 'forgot-password', 'reset-password', 'waiting']
+    for (const path of ['index.html', 'catalog/index.html', 'resources/index.html', '404.html',
+      ...signInPages.map(page => `${page}/index.html`)]) {
       expect(existsSync(join(DIST, path)), path).toBe(true)
     }
   })

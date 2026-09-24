@@ -1,0 +1,8 @@
+---
+import AuthPage from '../layouts/AuthPage.astro'
+import WaitingStatus from '../components/auth/WaitingStatus'
+---
+
+<AuthPage title="Your account">
+  <WaitingStatus client:only="react" />
+</AuthPage>

@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import type { TechAccount } from '../lib/api'
 import { fullName, isStaff } from '../lib/format'
+import { safeNext } from '../lib/redirect'
 import { signOut, useSession } from '../lib/session'
 
 const STATUS_WORDS: Partial<Record<TechAccount['status'], string>> = {
@@ -12,7 +13,7 @@ const STATUS_WORDS: Partial<Record<TechAccount['status'], string>> = {
 const onHeader = 'btn border border-(--header-text)/40 text-(--header-text) hover:bg-(--header-text)/10'
 
 function signInHref(): string {
-  const here = window.location.pathname + window.location.search
+  const here = safeNext(`?next=${encodeURIComponent(window.location.pathname + window.location.search)}`)
   return here === '/' ? '/sign-in' : `/sign-in?next=${encodeURIComponent(here)}`
 }
 

@@ -1,0 +1,20 @@
+---
+import Base from './Base.astro'
+
+interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+---
+
+<Base title={title}>
+  <meta name="robots" content="noindex" slot="head" />
+  <div class="panel mx-auto max-w-md">
+    <h1 class="text-2xl">{title}</h1>
+    <div class="mt-4">
+      <slot />
+      <noscript><p>Signing in needs JavaScript. Please turn it on in your browser and reload this page.</p></noscript>
+    </div>
+  </div>
+</Base>
