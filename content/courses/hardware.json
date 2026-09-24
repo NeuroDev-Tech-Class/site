@@ -56,13 +56,13 @@
         {
           "id": "i_5ccb4c1fed",
           "legacy_key": "0-3",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Hands-on Exercise - Navigating the BIOS/UEFI",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "it/computer_hardware/navigating_the_bios_uefi.html",
-            "lesson_id": "l_4e14e55856"
+            "checkpoint_id": "c_cc1cc4d015"
           }
         },
         {
@@ -184,13 +184,13 @@
         {
           "id": "i_d0e25642e3",
           "legacy_key": "2-2",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Final Project - Build a Custom PC",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "it/computer_hardware/final_project-build_a_custom_pc.html",
-            "lesson_id": "l_d707fb3b2d"
+            "checkpoint_id": "c_455b1db3ee"
           }
         }
       ]

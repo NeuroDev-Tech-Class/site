@@ -190,13 +190,13 @@
         {
           "id": "i_3d94f4cc43",
           "legacy_key": "1-8",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Unit 1 Activity - Edit a Mini Highlight Reel",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "media/davinci-resolve/unit1/activity_highlight_reel.html",
-            "lesson_id": "l_74068c29dd"
+            "checkpoint_id": "c_5185048ebf"
           }
         },
         {
@@ -321,13 +321,13 @@
         {
           "id": "i_7199c86ff5",
           "legacy_key": "2-8",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Unit 2 Activity - Color Grade a Short Scene",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "media/davinci-resolve/unit2/activity_color_grade_scene.html",
-            "lesson_id": "l_d71e573af1"
+            "checkpoint_id": "c_e95929d3bd"
           }
         },
         {
@@ -402,13 +402,13 @@
         {
           "id": "i_d61e5a84c1",
           "legacy_key": "3-4",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Final Project - Produce a Short Video",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "media/davinci-resolve/unit3/final_project.html",
-            "lesson_id": "l_6191f592d9"
+            "checkpoint_id": "c_564906a9f8"
           }
         },
         {

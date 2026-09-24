@@ -46,25 +46,25 @@
         {
           "id": "i_ca7f8759dc",
           "legacy_key": "0-2",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Practice - Word Processors",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/office-software/word_processors/practice-word_processors.html",
-            "lesson_id": "l_80a1912376"
+            "checkpoint_id": "c_527fd0acb6"
           }
         },
         {
           "id": "i_531031c32a",
           "legacy_key": "0-3",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Application - Creating a Résumé",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/office-software/word_processors/application-creating_a_résumé.html",
-            "lesson_id": "l_eeb08fb871"
+            "checkpoint_id": "c_29266362c7"
           }
         }
       ]
@@ -90,36 +90,36 @@
         {
           "id": "i_6af363da85",
           "legacy_key": "1-1",
-          "type": "note",
-          "title": null,
+          "type": "checkpoint",
+          "title": "Worksheet: Spreadsheet Formulas",
           "status": "ok",
           "tags": [],
           "payload": {
-            "html": "<a href=\"https://docs.google.com/spreadsheets/d/1-DqkSTjb0iq8MDh-hrxfyP-fkK9dMA6bvFY7e-4GFsE/edit?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Worksheet - Spreadsheet Formulas</a> (make a copy of this spreadsheet and complete the tasks on all five sheets)"
+            "checkpoint_id": "c_978acfeaaa"
           }
         },
         {
           "id": "i_26ab02cd13",
           "legacy_key": "1-2",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Practice - Spreadsheets",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/office-software/spreadsheets/practice-spreadsheets.html",
-            "lesson_id": "l_c016e3a7e9"
+            "checkpoint_id": "c_8ca3c5508c"
           }
         },
         {
           "id": "i_8102899076",
           "legacy_key": "1-3",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Application - Creating a Budget",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/office-software/spreadsheets/application-creating_a_budget.html",
-            "lesson_id": "l_799749ff2d"
+            "checkpoint_id": "c_54c254256b"
           }
         }
       ]
@@ -145,13 +145,13 @@
         {
           "id": "i_530d5b6640",
           "legacy_key": "2-1",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Application - “Career Day” Presentation",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/office-software/presentation_software/application-careers_day_presentation.html",
-            "lesson_id": "l_d71a0307f6"
+            "checkpoint_id": "c_ecd12634be"
           }
         }
       ]

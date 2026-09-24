@@ -94,16 +94,6 @@
       "linux"
     ]
   },
-  "l_13f75cc221": {
-    "legacy_path": "game-development/unreal-engine/unit2/activity_obstacle_course.html",
-    "title": "Activity: Obstacle Course",
-    "subtitle": "Build a playable platforming level using every Blueprint mechanic from Unit 2",
-    "course_tag": "Intro to Unreal Engine",
-    "youtube_ids": [],
-    "used_by": [
-      "unreal-engine"
-    ]
-  },
   "l_168cc693f4": {
     "legacy_path": "game-development/unreal-engine/unit1/foliage_and_detail.html",
     "title": "Foliage & Detail",
@@ -118,16 +108,6 @@
     "legacy_path": "computer-basics/ai-prompt-engineering/prompt_engineering_approaches_and_strategies.html",
     "title": "Prompt Engineering Approaches and Strategies",
     "subtitle": null,
-    "course_tag": "AI Prompt Engineering",
-    "youtube_ids": [],
-    "used_by": [
-      "ai-usage"
-    ]
-  },
-  "l_175e7084c6": {
-    "legacy_path": "computer-basics/ai-prompt-engineering/responsible_ai_use.html",
-    "title": "Responsible AI Use",
-    "subtitle": "Misinformation, privacy, and using AI honestly in school.",
     "course_tag": "AI Prompt Engineering",
     "youtube_ids": [],
     "used_by": [
@@ -152,16 +132,6 @@
     "youtube_ids": [],
     "used_by": [
       "audacity"
-    ]
-  },
-  "l_1e44d8e237": {
-    "legacy_path": "computer-basics/ai-prompt-engineering/final_assignment-ai_application.html",
-    "title": "Final Assignment: AI Application",
-    "subtitle": null,
-    "course_tag": "AI Prompt Engineering",
-    "youtube_ids": [],
-    "used_by": [
-      "ai-usage"
     ]
   },
   "l_1f2851c86c": {
@@ -298,36 +268,6 @@
       "linux"
     ]
   },
-  "l_33c382e276": {
-    "legacy_path": "game-development/blender-zbrush/unit3/final_project.html",
-    "title": "Final Project",
-    "subtitle": "Design, Sculpt, Print, and Finish a Showcase Piece",
-    "course_tag": "Blender & ZBrush Mini",
-    "youtube_ids": [],
-    "used_by": [
-      "blender-zbrush-mini"
-    ]
-  },
-  "l_37009b860f": {
-    "legacy_path": "media/audacity/unit2/final_project_podcast.html",
-    "title": "Final Project: Mini Podcast Episode",
-    "subtitle": "Combine everything you've learned into a polished podcast-style audio piece",
-    "course_tag": "Audio Production — Audacity",
-    "youtube_ids": [],
-    "used_by": [
-      "audacity"
-    ]
-  },
-  "l_3a165d5e4e": {
-    "legacy_path": "computer-basics/digital-literacy/unit3/hands-on_exercise-email_account.html",
-    "title": "Hands-on Exercise: Setting Up an Email Account",
-    "subtitle": null,
-    "course_tag": "Digital Literacy",
-    "youtube_ids": [],
-    "used_by": [
-      "digital-literacy"
-    ]
-  },
   "l_3ade682fc5": {
     "legacy_path": "computer-science/python-2-object-oriented_programming/sidenote-refactoring.html",
     "title": "Refactoring Strategies",
@@ -346,16 +286,6 @@
     "youtube_ids": [],
     "used_by": [
       "blender-zbrush-mini"
-    ]
-  },
-  "l_3fd823d419": {
-    "legacy_path": "game-development/unreal-engine/unit1/activity_castle_courtyard.html",
-    "title": "Activity: Castle Courtyard",
-    "subtitle": "Build a complete 3D environment by combining everything you've learned in Unit 1",
-    "course_tag": "Intro to Unreal Engine",
-    "youtube_ids": [],
-    "used_by": [
-      "unreal-engine"
     ]
   },
   "l_41118eea39": {
@@ -401,16 +331,6 @@
       "web-dev-2"
     ]
   },
-  "l_456ef876ca": {
-    "legacy_path": "computer-science/python-1-intro_to_programming/unit3/final_project_text_adventure_game.html",
-    "title": "Final Project: Text Adventure Game",
-    "subtitle": null,
-    "course_tag": "Python I",
-    "youtube_ids": [],
-    "used_by": [
-      "python-1"
-    ]
-  },
   "l_4573200bef": {
     "legacy_path": "media/davinci-resolve/unit1/project_settings_media.html",
     "title": "Project Settings & Media Management",
@@ -451,16 +371,6 @@
       "blender-zbrush-mini"
     ]
   },
-  "l_4e14e55856": {
-    "legacy_path": "it/computer_hardware/navigating_the_bios_uefi.html",
-    "title": "How to Access and Navigate Your BIOS/UEFI",
-    "subtitle": null,
-    "course_tag": "Hardware",
-    "youtube_ids": [],
-    "used_by": [
-      "hardware"
-    ]
-  },
   "l_4f2610f336": {
     "legacy_path": "computer-science/python-1-intro_to_programming/unit3/best_practices.html",
     "title": "Best Practices",
@@ -479,16 +389,6 @@
     "youtube_ids": [],
     "used_by": [
       "audacity"
-    ]
-  },
-  "l_5464691129": {
-    "legacy_path": "game-development/unreal-engine/unit3/game_design_documents.html",
-    "title": "Game Design Documents",
-    "subtitle": "Plan your game before you build it — a guide to writing a GDD",
-    "course_tag": "Intro to Unreal Engine",
-    "youtube_ids": [],
-    "used_by": [
-      "unreal-engine"
     ]
   },
   "l_54ffdd3029": {
@@ -565,16 +465,6 @@
       "audacity"
     ]
   },
-  "l_5dc4459a7a": {
-    "legacy_path": "computer-basics/ai-prompt-engineering/hands-on_generative_ai_exercises.html",
-    "title": "Generative AI Exercises",
-    "subtitle": null,
-    "course_tag": "AI Prompt Engineering",
-    "youtube_ids": [],
-    "used_by": [
-      "ai-usage"
-    ]
-  },
   "l_5edb0bec9e": {
     "legacy_path": "game-development/unreal-engine/unit1/viewport_navigation.html",
     "title": "Viewport Navigation",
@@ -603,16 +493,6 @@
     "youtube_ids": [],
     "used_by": [
       "unreal-engine"
-    ]
-  },
-  "l_6191f592d9": {
-    "legacy_path": "media/davinci-resolve/unit3/final_project.html",
-    "title": "Final Project: Short Film or Video Essay",
-    "subtitle": "Create a polished 3–5 minute video that demonstrates your editing, color, and audio skills",
-    "course_tag": "Video Production — DaVinci Resolve",
-    "youtube_ids": [],
-    "used_by": [
-      "davinci-resolve"
     ]
   },
   "l_6431aef40f": {
@@ -729,16 +609,6 @@
       "audacity"
     ]
   },
-  "l_74068c29dd": {
-    "legacy_path": "media/davinci-resolve/unit1/activity_highlight_reel.html",
-    "title": "Activity: Highlight Reel",
-    "subtitle": "Put your Unit 1 skills together by building a polished 60–90 second highlight reel",
-    "course_tag": "Video Production — DaVinci Resolve",
-    "youtube_ids": [],
-    "used_by": [
-      "davinci-resolve"
-    ]
-  },
   "l_740e4d08f6": {
     "legacy_path": "media/audacity/unit2/noise_reduction_cleanup.html",
     "title": "Noise Reduction & Cleanup",
@@ -759,26 +629,6 @@
       "linux"
     ]
   },
-  "l_76b0317e89": {
-    "legacy_path": "game-development/blender-zbrush/unit2/activity_model_print_ring.html",
-    "title": "Activity: Model & Print a Ring",
-    "subtitle": "Design, Model, Slice, and 3D Print a Custom Ring",
-    "course_tag": "Blender & ZBrush Mini",
-    "youtube_ids": [],
-    "used_by": [
-      "blender-zbrush-mini"
-    ]
-  },
-  "l_799749ff2d": {
-    "legacy_path": "computer-basics/office-software/spreadsheets/application-creating_a_budget.html",
-    "title": "Application: Creating a Budget",
-    "subtitle": null,
-    "course_tag": "Office Software",
-    "youtube_ids": [],
-    "used_by": [
-      "office-software"
-    ]
-  },
   "l_79c4c65a81": {
     "legacy_path": "game-development/blender-zbrush/unit2/modifiers.html",
     "title": "Modifiers",
@@ -787,16 +637,6 @@
     "youtube_ids": [
       "nIoXOplUvAw"
     ],
-    "used_by": [
-      "blender-zbrush-mini"
-    ]
-  },
-  "l_7ac2161a02": {
-    "legacy_path": "game-development/blender-zbrush/unit1/activity_create_a_scene.html",
-    "title": "Activity: Create a 3D Scene",
-    "subtitle": "Put your modeling skills together to build a complete scene",
-    "course_tag": "Blender & ZBrush Mini",
-    "youtube_ids": [],
     "used_by": [
       "blender-zbrush-mini"
     ]
@@ -823,16 +663,6 @@
       "blender-zbrush-mini"
     ]
   },
-  "l_7d3d678a57": {
-    "legacy_path": "computer-basics/digital-literacy/unit2/unit_2_recap.html",
-    "title": "Unit 2 Recap & Review Exercises",
-    "subtitle": null,
-    "course_tag": "Digital Literacy",
-    "youtube_ids": [],
-    "used_by": [
-      "digital-literacy"
-    ]
-  },
   "l_80710f6adf": {
     "legacy_path": "it/linux/bash_3.html",
     "title": "Bash Command Tutorial 3",
@@ -841,16 +671,6 @@
     "youtube_ids": [],
     "used_by": [
       "linux"
-    ]
-  },
-  "l_80a1912376": {
-    "legacy_path": "computer-basics/office-software/word_processors/practice-word_processors.html",
-    "title": "Practice: Word Processors",
-    "subtitle": null,
-    "course_tag": "Office Software",
-    "youtube_ids": [],
-    "used_by": [
-      "office-software"
     ]
   },
   "l_82e875d17e": {
@@ -937,16 +757,6 @@
       "digital-literacy"
     ]
   },
-  "l_8ec6fa6102": {
-    "legacy_path": "media/gimp/unit1/activity_photo_restoration.html",
-    "title": "Activity: Photo Restoration",
-    "subtitle": "Bringing an Old or Damaged Photo Back to Life",
-    "course_tag": "2D Digital Art — GIMP",
-    "youtube_ids": [],
-    "used_by": [
-      "gimp"
-    ]
-  },
   "l_8fbc3a81a0": {
     "legacy_path": "computer-basics/digital-literacy/unit3/search_engines.html",
     "title": "Search Engines 🔎",
@@ -977,16 +787,6 @@
       "digital-literacy"
     ]
   },
-  "l_966638b9ab": {
-    "legacy_path": "media/gimp/unit3/final_project.html",
-    "title": "Final Project: Portfolio Showcase",
-    "subtitle": "Demonstrate Everything You've Learned in Three Finished Pieces",
-    "course_tag": "2D Digital Art — GIMP",
-    "youtube_ids": [],
-    "used_by": [
-      "gimp"
-    ]
-  },
   "l_9b03660dbc": {
     "legacy_path": "it/linux/file_permissions.html",
     "title": "File Permissions and Ownership",
@@ -995,16 +795,6 @@
     "youtube_ids": [],
     "used_by": [
       "linux"
-    ]
-  },
-  "l_9cfe9e8868": {
-    "legacy_path": "computer-basics/digital-literacy/unit3/hands-on_exercise-social_media.html",
-    "title": "Hands-on Exercise: Social Media",
-    "subtitle": null,
-    "course_tag": "Digital Literacy",
-    "youtube_ids": [],
-    "used_by": [
-      "digital-literacy"
     ]
   },
   "l_9e0e0a15fa": {
@@ -1193,16 +983,6 @@
       "blender-zbrush-mini"
     ]
   },
-  "l_b586ea37ef": {
-    "legacy_path": "computer-basics/digital-literacy/unit1/unit_1_recap.html",
-    "title": "Unit 1 Recap & Review Exercises",
-    "subtitle": null,
-    "course_tag": "Digital Literacy",
-    "youtube_ids": [],
-    "used_by": [
-      "digital-literacy"
-    ]
-  },
   "l_b7810e8b68": {
     "legacy_path": "game-development/blender-zbrush/unit1/edit_mode_mesh_elements.html",
     "title": "Edit Mode & Mesh Elements",
@@ -1255,26 +1035,6 @@
       "web-dev-1"
     ]
   },
-  "l_c016e3a7e9": {
-    "legacy_path": "computer-basics/office-software/spreadsheets/practice-spreadsheets.html",
-    "title": "Practice: Spreadsheets",
-    "subtitle": null,
-    "course_tag": "Office Software",
-    "youtube_ids": [],
-    "used_by": [
-      "office-software"
-    ]
-  },
-  "l_c5725b1cea": {
-    "legacy_path": "computer-basics/ai-prompt-engineering/working_with_modern_ai_tools.html",
-    "title": "Working with Modern AI Tools",
-    "subtitle": "Beyond the chat box: multimodal input, your own documents, custom assistants, and AI agents.",
-    "course_tag": "AI Prompt Engineering",
-    "youtube_ids": [],
-    "used_by": [
-      "ai-usage"
-    ]
-  },
   "l_c749da6508": {
     "legacy_path": "media/gimp/unit2/paths_and_vectors.html",
     "title": "Paths & Vectors",
@@ -1293,16 +1053,6 @@
     "youtube_ids": [
       "x6pXJ7Ijir0"
     ],
-    "used_by": [
-      "gimp"
-    ]
-  },
-  "l_c78dd9a64f": {
-    "legacy_path": "media/gimp/unit2/activity_movie_poster.html",
-    "title": "Activity: Movie Poster Design",
-    "subtitle": "Create a Professional-Quality Movie Poster in GIMP",
-    "course_tag": "2D Digital Art — GIMP",
-    "youtube_ids": [],
     "used_by": [
       "gimp"
     ]
@@ -1357,46 +1107,6 @@
       "digital-literacy"
     ]
   },
-  "l_d3bba87a7e": {
-    "legacy_path": "game-development/unreal-engine/unit3/final_project.html",
-    "title": "Final Project",
-    "subtitle": "Design and build a complete, playable game level from scratch",
-    "course_tag": "Intro to Unreal Engine",
-    "youtube_ids": [],
-    "used_by": [
-      "unreal-engine"
-    ]
-  },
-  "l_d707fb3b2d": {
-    "legacy_path": "it/computer_hardware/final_project-build_a_custom_pc.html",
-    "title": "Final Project: Build a Custom PC",
-    "subtitle": null,
-    "course_tag": "Hardware",
-    "youtube_ids": [],
-    "used_by": [
-      "hardware"
-    ]
-  },
-  "l_d71a0307f6": {
-    "legacy_path": "computer-basics/office-software/presentation_software/application-careers_day_presentation.html",
-    "title": "Application: Careers Day Presentation",
-    "subtitle": null,
-    "course_tag": "Office Software",
-    "youtube_ids": [],
-    "used_by": [
-      "office-software"
-    ]
-  },
-  "l_d71e573af1": {
-    "legacy_path": "media/davinci-resolve/unit2/activity_color_grade_scene.html",
-    "title": "Activity: Color Grade a Short Scene",
-    "subtitle": "Apply primary correction, shot matching, and a creative grade to a multi-clip scene",
-    "course_tag": "Video Production — DaVinci Resolve",
-    "youtube_ids": [],
-    "used_by": [
-      "davinci-resolve"
-    ]
-  },
   "l_d7bcbf8924": {
     "legacy_path": "media/gimp/unit2/filters_and_effects.html",
     "title": "Filters & Effects",
@@ -1407,26 +1117,6 @@
     ],
     "used_by": [
       "gimp"
-    ]
-  },
-  "l_de9c335ac6": {
-    "legacy_path": "it/linux/final_project.html",
-    "title": "Final Project: Linux Task Challenge",
-    "subtitle": "Put your skills to the test with this hands-on Linux challenge",
-    "course_tag": "Introduction to Linux",
-    "youtube_ids": [],
-    "used_by": [
-      "linux"
-    ]
-  },
-  "l_e0c8ff6d0d": {
-    "legacy_path": "media/audacity/unit1/activity_60sec_intro.html",
-    "title": "Activity: 60-Second Personal Introduction",
-    "subtitle": "Record, edit, and export a clean voice recording from start to finish",
-    "course_tag": "Audio Production — Audacity",
-    "youtube_ids": [],
-    "used_by": [
-      "audacity"
     ]
   },
   "l_e21b7fa8ba": {
@@ -1503,16 +1193,6 @@
       "python-1"
     ]
   },
-  "l_eeb08fb871": {
-    "legacy_path": "computer-basics/office-software/word_processors/application-creating_a_résumé.html",
-    "title": "Application: Creating a Résumé",
-    "subtitle": null,
-    "course_tag": "Office Software",
-    "youtube_ids": [],
-    "used_by": [
-      "office-software"
-    ]
-  },
   "l_ef7739bc2c": {
     "legacy_path": "computer-science/python-1-intro_to_programming/unit3/3rd_party_libraries.html",
     "title": "Third-Party Libraries",
@@ -1536,16 +1216,6 @@
   "l_f1682a9388": {
     "legacy_path": "computer-basics/digital-literacy/unit1/why_is_my_computer_so_slow.html",
     "title": "\"Why Is My Computer So Slow?\"",
-    "subtitle": null,
-    "course_tag": "Digital Literacy",
-    "youtube_ids": [],
-    "used_by": [
-      "digital-literacy"
-    ]
-  },
-  "l_f48e7a6e73": {
-    "legacy_path": "computer-basics/digital-literacy/unit1/checkpoint-how_will_technology_help_me_.html",
-    "title": "Checkpoint: How Will Technology Help Me?",
     "subtitle": null,
     "course_tag": "Digital Literacy",
     "youtube_ids": [],

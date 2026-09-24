@@ -1,0 +1,99 @@
+{
+  "id": "c_80f5652d1c",
+  "item_id": "i_6d388c8664",
+  "course_id": "digital-literacy",
+  "legacy_path": "computer-basics/digital-literacy/unit2/unit_2_recap.html",
+  "title": "Unit 2 Recap & Review Exercises",
+  "preset": null,
+  "requires_sign_off": true,
+  "fields": [
+    {
+      "id": "shortcut_cut",
+      "type": "shortText",
+      "label": "What is the keyboard shortcut for Cut?",
+      "required": true
+    },
+    {
+      "id": "shortcut_copy",
+      "type": "shortText",
+      "label": "What is the keyboard shortcut for Copy?",
+      "required": true
+    },
+    {
+      "id": "shortcut_paste",
+      "type": "shortText",
+      "label": "What is the keyboard shortcut for Paste?",
+      "required": true
+    },
+    {
+      "id": "shortcut_undo",
+      "type": "shortText",
+      "label": "What is the keyboard shortcut for Undo?",
+      "required": true
+    },
+    {
+      "id": "shortcut_redo",
+      "type": "shortText",
+      "label": "What is the keyboard shortcut for Redo?",
+      "required": true
+    },
+    {
+      "id": "shortcut_select_all",
+      "type": "shortText",
+      "label": "What is the keyboard shortcut for Select All?",
+      "required": true
+    },
+    {
+      "id": "shortcut_find",
+      "type": "shortText",
+      "label": "What is the keyboard shortcut for Find?",
+      "required": true
+    },
+    {
+      "id": "shortcut_new_window",
+      "type": "shortText",
+      "label": "What is the keyboard shortcut for New Window?",
+      "required": true
+    },
+    {
+      "id": "shortcut_close_window",
+      "type": "shortText",
+      "label": "What is the keyboard shortcut for Close Window?",
+      "required": true
+    },
+    {
+      "id": "shortcut_switch_windows",
+      "type": "shortText",
+      "label": "What is the keyboard shortcut for Switch Between Windows?",
+      "required": true
+    },
+    {
+      "id": "startup_program_explanation",
+      "type": "longText",
+      "label": "Which startup program did you disable, and why?",
+      "required": true
+    },
+    {
+      "id": "power_options_findings",
+      "type": "longText",
+      "label": "What differences did you notice between sleep and a complete shutdown (timing and other effects)? When might you prefer one over the other?",
+      "required": true
+    },
+    {
+      "id": "wallpaper_slideshow_image",
+      "type": "image",
+      "label": "Screenshot of your wallpaper slideshow setup",
+      "multiple": false,
+      "required": false
+    },
+    {
+      "id": "signoff_shortcuts",
+      "type": "mentorSignOff",
+      "label": "Confirms the student demonstrated the keyboard shortcuts in person",
+      "required": true
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Keyboard Shortcuts</h2>\n\n    <p>Identify the following keyboard shortcuts for your operating system and demonstrate their usage to your tech coach:</p>\n\n    <ul>\n      <li>Cut</li>\n      <li>Copy</li>\n      <li>Paste</li>\n      <li>Undo</li>\n      <li>Redo</li>\n      <li>Select All</li>\n      <li>Find</li>\n      <li>New Window</li>\n      <li>Close Window</li>\n      <li>Switch Between Windows</li>\n    </ul>\n\n    <h2>Wallpaper Slideshow</h2>\n\n    <p>Navigate to the default Pictures folder in your operating system. Inside this folder, create a new folder named \"Wallpapers.\" Find at least five images that you like and save them into the \"Wallpapers\" folder. Then, set your desktop background to be a slideshow that cycles through the images in the \"Wallpapers\" folder.</p>\n\n    <h2>Disable Startup Programs</h2>\n\n    <p>Go to your system settings and find the list of startup programs. Identify any programs that you don't recognize or don't need to start up with your computer. Disable at least one of these programs and explain to your tech coach why you chose that specific program. This exercise will help you understand how to improve your computer's boot time and overall system performance by freeing up resources.</p>\n\n    <h2>Power Options</h2>\n\n    <p>Before you start, make sure all of your work is saved so you can safely close your programs. Open up a couple of programs and documents.</p>\n\n    <ol>\n      <li>Put your computer to sleep, then wake it up. Take note of how much time it takes for each process. Observe what happens with your open programs or documents.</li>\n      <li>Repeat the process, but this time perform a complete shutdown of your computer and then power it back on. Note the time it takes for your computer to shut down and boot up fully.</li>\n      <li>Compare the differences in start-up time and any other differences you notice. Pay attention to how these power options affect your computer's performance immediately after waking up or powering on.</li>\n    </ol>\n\n    <p>Discuss your findings with your tech coach, including when you might prefer to use sleep mode versus a complete shutdown. Finally, find the settings that allow you to choose when your computer goes into Sleep, Hibernate, Shutdown, etc. and adjust them however you like.</p>",
+  "grading_hint": null
+}

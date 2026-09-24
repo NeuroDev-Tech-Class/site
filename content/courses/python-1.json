@@ -531,13 +531,13 @@
         {
           "id": "i_a65243e6c7",
           "legacy_key": "4-11",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Final Project - Text Adventure Game",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-science/python-1-intro_to_programming/unit3/final_project_text_adventure_game.html",
-            "lesson_id": "l_456ef876ca"
+            "checkpoint_id": "c_50a9d06f35"
           }
         }
       ]

@@ -140,13 +140,13 @@
         {
           "id": "i_d08c2ca04d",
           "legacy_key": "1-4",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Reading - Responsible AI Use",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/ai-prompt-engineering/responsible_ai_use.html",
-            "lesson_id": "l_175e7084c6"
+            "checkpoint_id": "c_33a57b9116"
           }
         },
         {
@@ -163,13 +163,13 @@
         {
           "id": "i_0e06797d7c",
           "legacy_key": "1-6",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Hands-on Generative AI Exercises",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/ai-prompt-engineering/hands-on_generative_ai_exercises.html",
-            "lesson_id": "l_5dc4459a7a"
+            "checkpoint_id": "c_28b24a62f6"
           }
         }
       ]
@@ -217,25 +217,25 @@
         {
           "id": "i_4f8db4411a",
           "legacy_key": "2-3",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Reading - Working with Modern AI Tools",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/ai-prompt-engineering/working_with_modern_ai_tools.html",
-            "lesson_id": "l_c5725b1cea"
+            "checkpoint_id": "c_41580f1ba8"
           }
         },
         {
           "id": "i_c8eea5f6a1",
           "legacy_key": "2-4",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Final Assignment - AI Application",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/ai-prompt-engineering/final_assignment-ai_application.html",
-            "lesson_id": "l_1e44d8e237"
+            "checkpoint_id": "c_eee43ce4ac"
           }
         }
       ]

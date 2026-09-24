@@ -1,0 +1,32 @@
+{
+  "id": "c_28b24a62f6",
+  "item_id": "i_0e06797d7c",
+  "course_id": "ai-usage",
+  "legacy_path": "computer-basics/ai-prompt-engineering/hands-on_generative_ai_exercises.html",
+  "title": "Generative AI Exercises",
+  "preset": null,
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "exercise1_observations",
+      "type": "longText",
+      "label": "Exercise 1: Observe the Randomness — what did you notice about how the AI's answers changed and stayed the same across your attempts?",
+      "required": true
+    },
+    {
+      "id": "exercise2_limits",
+      "type": "longText",
+      "label": "Exercise 2: Find the Limits — what happened when you tried to get the AI to tell you something untrue? What inaccuracies or fabrications did you notice?",
+      "required": true
+    },
+    {
+      "id": "exercise3_novel_idea",
+      "type": "longText",
+      "label": "Exercise 3: Synthesize a Novel Idea — what did you ask the AI to come up with, and what did it produce?",
+      "required": true
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<p>Now that you have an account with ChatGPT or Gemini, let’s do some practice exercises that will help you learn how to write effective prompts. This should also help you understand some of the limits of generative AI.</p>\n\n    <div class=\"activity\">\n      <h2>Exercise 1: Observe the Randomness</h2>\n      <p>Ask the AI model the same question <strong>3 separate times</strong>, in separate chats. Notice how the answers change and how they stay the same. Also try phrasing the question differently. You will get more interesting results as your prompts get more complex.</p>\n      <p>This randomness is part of what makes generative AI models so powerful. Without randomness, the model’s answers would be overly generic and less helpful.</p>\n    </div>\n\n    <div class=\"activity\">\n      <h2>Exercise 2: Find the Limits</h2>\n      <p>Try to get the AI model to <strong>tell you something untrue</strong>. A good way to do this is to ask questions about niche, obscure topics that you know a lot about. For example, ask it about a side character in a lesser-known book that you’ve read.</p>\n      <p>Sometimes ChatGPT will “hallucinate” and confidently tell you information that is completely untrue. Keep asking harder and harder questions, and take note of any inaccuracies or fabrications.</p>\n      <p>Keep in mind that it’s just as capable of being wrong about <em>any</em> subject; it’s just easier to notice when it’s a subject you know about. <strong>Always fact-check!</strong></p>\n    </div>\n\n    <div class=\"activity\">\n      <h2>Exercise 3: Synthesize a Novel Idea</h2>\n      <p>Have the AI model <strong>come up with something that has never been imagined before</strong>. For example, choose 3 random ingredients and ask it to come up with a recipe, or ask it to write a new episode of one of your favorite shows.</p>\n      <p>This is what sets apart generative AI chatbots from search engines like Google. They’re not just combing the Internet for existing data; they’re actually coming up with something new by iterating on existing patterns.</p>\n    </div>\n\n    <p>Submit your work with the form below.</p>",
+  "grading_hint": null
+}

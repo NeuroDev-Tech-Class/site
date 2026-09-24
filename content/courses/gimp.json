@@ -201,13 +201,13 @@
         {
           "id": "i_d8b7660356",
           "legacy_key": "1-9",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Unit 1 Activity - Photo Restoration",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "media/gimp/unit1/activity_photo_restoration.html",
-            "lesson_id": "l_8ec6fa6102"
+            "checkpoint_id": "c_8b6c1cef3b"
           }
         },
         {
@@ -332,13 +332,13 @@
         {
           "id": "i_c16763dae1",
           "legacy_key": "2-8",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Unit 2 Activity - Design a Movie Poster",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "media/gimp/unit2/activity_movie_poster.html",
-            "lesson_id": "l_c78dd9a64f"
+            "checkpoint_id": "c_8dbec9ed60"
           }
         },
         {
@@ -438,13 +438,13 @@
         {
           "id": "i_382185a712",
           "legacy_key": "3-6",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Final Project - Portfolio Showcase",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "media/gimp/unit3/final_project.html",
-            "lesson_id": "l_966638b9ab"
+            "checkpoint_id": "c_aa3e40461f"
           }
         },
         {

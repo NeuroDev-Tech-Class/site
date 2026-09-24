@@ -1,0 +1,35 @@
+{
+  "id": "c_978acfeaaa",
+  "item_id": "i_6af363da85",
+  "course_id": "office-software",
+  "legacy_path": null,
+  "title": "Worksheet: Spreadsheet Formulas",
+  "preset": null,
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "sheet_url",
+      "type": "url",
+      "label": "Link to your copied Google Sheet — make a copy of the linked spreadsheet, complete the tasks on all five sheets, and share the link (make sure sharing is turned on)",
+      "required": false
+    },
+    {
+      "id": "sheet_file",
+      "type": "file",
+      "label": "Or upload your completed workbook",
+      "accept": [
+        ".xlsx"
+      ],
+      "multiple": false,
+      "required": false
+    }
+  ],
+  "required_one_of": [
+    [
+      "sheet_url",
+      "sheet_file"
+    ]
+  ],
+  "instructions_html": "<a href=\"https://docs.google.com/spreadsheets/d/1-DqkSTjb0iq8MDh-hrxfyP-fkK9dMA6bvFY7e-4GFsE/edit?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Worksheet - Spreadsheet Formulas</a> (make a copy of this spreadsheet and complete the tasks on all five sheets)",
+  "grading_hint": null
+}

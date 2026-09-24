@@ -132,8 +132,10 @@ test('every lesson any course reaches is extracted once, including ones only an 
   const index = json('content/lessons.json');
   const ids = Object.keys(index);
   // 150 lessons items point at, plus 4 only an intro or note links to (Building a PC, two Python I side notes,
-  // Windows Node installation)
-  assert.equal(ids.length, 154);
+  // Windows Node installation), minus the pages that became checkpoints (their body is the checkpoint's instructions)
+  const spec = JSON.parse(readFileSync(new URL('../../tools/extract/checkpoints.json', import.meta.url), 'utf8'));
+  const checkpointPages = Object.keys(spec).filter(key => !key.startsWith('note:')).length;
+  assert.equal(ids.length, 154 - checkpointPages);
   for (const id of ids) assert.ok(files.has(`content/lessons/${id}.html`), id);
   const byPath = Object.fromEntries(Object.values(index).map(l => [l.legacy_path, l]));
   assert.deepEqual(byPath['it/computer_hardware/building_a_pc.html'].used_by, ['hardware']);

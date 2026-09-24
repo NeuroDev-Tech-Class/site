@@ -201,13 +201,13 @@
         {
           "id": "i_9243d49c7f",
           "legacy_key": "1-9",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Unit 1 Activity - Build a Castle Courtyard",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "game-development/unreal-engine/unit1/activity_castle_courtyard.html",
-            "lesson_id": "l_3fd823d419"
+            "checkpoint_id": "c_0ed3da9f96"
           }
         }
       ]
@@ -332,13 +332,13 @@
         {
           "id": "i_98190371af",
           "legacy_key": "2-9",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Unit 2 Activity - Obstacle Course",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "game-development/unreal-engine/unit2/activity_obstacle_course.html",
-            "lesson_id": "l_13f75cc221"
+            "checkpoint_id": "c_9c55a3b36e"
           }
         }
       ]
@@ -402,13 +402,13 @@
         {
           "id": "i_00ffe65c9a",
           "legacy_key": "3-4",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Reading - Game Design Documents",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "game-development/unreal-engine/unit3/game_design_documents.html",
-            "lesson_id": "l_5464691129"
+            "checkpoint_id": "c_6a05a0ca93"
           }
         },
         {
@@ -464,13 +464,13 @@
         {
           "id": "i_db805eb891",
           "legacy_key": "3-9",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Final Project - Build Your Game Level",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "game-development/unreal-engine/unit3/final_project.html",
-            "lesson_id": "l_d3bba87a7e"
+            "checkpoint_id": "c_8eea02b6f2"
           }
         }
       ]

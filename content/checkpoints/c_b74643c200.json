@@ -1,0 +1,36 @@
+{
+  "id": "c_b74643c200",
+  "item_id": "i_4b32884eeb",
+  "course_id": "digital-literacy",
+  "legacy_path": "computer-basics/digital-literacy/unit3/hands-on_exercise-social_media.html",
+  "title": "Hands-on Exercise: Social Media",
+  "preset": null,
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "checklist",
+      "type": "checklist",
+      "label": "Instagram Exercise",
+      "help": "This exercise is optional. You don't have to share personal details or photos if you're not comfortable — skip any step you'd rather not do.",
+      "items": [
+        "Downloaded and installed the Instagram app",
+        "Created an account with a unique username and strong password",
+        "Set up your profile with a photo and bio",
+        "Followed some accounts",
+        "Engaged with other users (liked and commented, using proper etiquette)",
+        "Posted your first photo or video"
+      ],
+      "required": false
+    },
+    {
+      "id": "profile_url",
+      "type": "url",
+      "label": "Link to your profile",
+      "help": "Optional — only share this if you're comfortable doing so.",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>\"Do I really need an Instagram account?\"</h2>\n\n    <p>No! However, learning to responsibly use social media can be a great skill. It can help you:</p>\n\n    <ul>\n      <li>Improve your communication skills by engaging with others</li>\n      <li>Join supportive communities around specific topics</li>\n      <li>Connect with people who share your interests and passions</li>\n      <li>Express your creativity and show off your talents</li>\n      <li>Learn from educational content and gain inspiration</li>\n      <li>Develop essential digital competency skills</li>\n      <li>Network and seek job opportunities</li>\n    </ul>\n\n    <p>Remember, you don't have to share personal details or photos of yourself if you're not comfortable.</p>\n\n    <p>This is more an exercise in social skills than an exercise in tech skills, but this guide will be handy if this is unfamiliar territory. Social media should be used as a vehicle for in-person connection, not a substitute. Use it to build and grow real-life relationships.</p>\n\n    <div class=\"activity\">\n      <h2>Instagram Exercise</h2>\n\n      <ol>\n        <li><strong>Download and install the Instagram app</strong> by going to the App Store (iOS) or Google Play Store (Android) and searching for \"Instagram.\"</li>\n        <li><strong>Create an account.</strong> Open the Instagram app and click \"Sign Up.\" You can sign up with the new email address you created earlier, another email, a phone number, or by connecting your Facebook account. Choose a unique username and a strong password (and consider using a password manager; don't reuse the password for any other account).\n        <img src=\"/images/digital-literacy/hands-on_exercise-social_media_1.webp\" class=\"img-small\" alt=\"Figure 1\">\n      </li>\n\n        <li><strong>Set up your profile.</strong> Add a profile photo, write a brief bio, and fill in any other personal information you'd like to include. Check out other people's bios if you want some examples. Optional: If you want to keep your account more private, go to your profile and tap the menu icon (three lines) in the upper-right corner. Select \"Settings,\" then \"Privacy.\" Here you can make your account private, control who can send you messages, and more.</li>\n        <li><strong>Follow some accounts.</strong> Search for friends, family, or public figures you're interested in and follow them. You can also follow hashtags related to topics you're interested in.</li>\n        <li><strong>Engage with other users.</strong> Like and comment on the posts of the accounts you follow. Use proper etiquette, including positive language, respecting others' opinions, and avoiding spamming.</li>\n        <li><strong>Post your first photo or video.</strong> Take a photo or video using your device's camera or choose one from your gallery. Add a caption, location, and tag any friends in the post.</li>\n      </ol>\n    </div>",
+  "grading_hint": null
+}

@@ -58,13 +58,13 @@
         {
           "id": "i_2fde0ee286",
           "legacy_key": "0-3",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Checkpoint - How Will Technology Help Me?",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/digital-literacy/unit1/checkpoint-how_will_technology_help_me_.html",
-            "lesson_id": "l_f48e7a6e73"
+            "checkpoint_id": "c_a414501b1d"
           }
         },
         {
@@ -176,13 +176,13 @@
         {
           "id": "i_96f2f78128",
           "legacy_key": "0-13",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Unit 1 Recap & Review Exercises",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/digital-literacy/unit1/unit_1_recap.html",
-            "lesson_id": "l_b586ea37ef"
+            "checkpoint_id": "c_c035689939"
           }
         },
         {
@@ -300,13 +300,13 @@
         {
           "id": "i_6d388c8664",
           "legacy_key": "1-8",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Unit 2 Recap & Review Exercises",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/digital-literacy/unit2/unit_2_recap.html",
-            "lesson_id": "l_7d3d678a57"
+            "checkpoint_id": "c_80f5652d1c"
           }
         },
         {
@@ -400,13 +400,13 @@
         {
           "id": "i_e86cb352b5",
           "legacy_key": "2-6",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Hands-on Exercise - Setting Up an Email Account",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/digital-literacy/unit3/hands-on_exercise-email_account.html",
-            "lesson_id": "l_3a165d5e4e"
+            "checkpoint_id": "c_acb45265f0"
           }
         },
         {
@@ -423,13 +423,13 @@
         {
           "id": "i_4b32884eeb",
           "legacy_key": "2-8",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Hands-on Exercise - Social Media (Instagram Account)",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/digital-literacy/unit3/hands-on_exercise-social_media.html",
-            "lesson_id": "l_9cfe9e8868"
+            "checkpoint_id": "c_b74643c200"
           }
         },
         {

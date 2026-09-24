@@ -358,12 +358,12 @@
         {
           "id": "i_6f87e6ffb2",
           "legacy_key": "2-10",
-          "type": "note",
-          "title": null,
+          "type": "checkpoint",
+          "title": "Reflection: CLI vs GUI",
           "status": "ok",
           "tags": [],
           "payload": {
-            "html": "<strong>Reflection:</strong> CLI vs GUI — When to use which? The GUI is great for browsing the web, editing documents, and visual tasks. The CLI is faster for file management, automation, and remote server access. Most Linux professionals use both! Write a short paragraph about a task where CLI would be better than GUI, and vice versa."
+            "checkpoint_id": "c_b89fc9c762"
           }
         }
       ]
@@ -469,13 +469,13 @@
         {
           "id": "i_db696031fd",
           "legacy_key": "3-8",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Final Project - Linux Task Challenge",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "it/linux/final_project.html",
-            "lesson_id": "l_de9c335ac6"
+            "checkpoint_id": "c_df6cfb70be"
           }
         },
         {

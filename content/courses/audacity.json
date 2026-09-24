@@ -199,13 +199,13 @@
         {
           "id": "i_bdbaca5ba8",
           "legacy_key": "1-8",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Unit 1 Activity - Record a 60-Second Introduction",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "media/audacity/unit1/activity_60sec_intro.html",
-            "lesson_id": "l_e0c8ff6d0d"
+            "checkpoint_id": "c_60e98779ee"
           }
         },
         {
@@ -330,13 +330,13 @@
         {
           "id": "i_9f10501cd8",
           "legacy_key": "2-8",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Final Project - Produce a Mini Podcast Episode",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "media/audacity/unit2/final_project_podcast.html",
-            "lesson_id": "l_37009b860f"
+            "checkpoint_id": "c_6e13324172"
           }
         },
         {

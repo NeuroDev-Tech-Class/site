@@ -199,13 +199,13 @@
         {
           "id": "i_2c13e8b521",
           "legacy_key": "1-8",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Unit 1 Activity - Create a Scene",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "game-development/blender-zbrush/unit1/activity_create_a_scene.html",
-            "lesson_id": "l_7ac2161a02"
+            "checkpoint_id": "c_07d569448e"
           }
         },
         {
@@ -329,13 +329,13 @@
         {
           "id": "i_a02099483a",
           "legacy_key": "2-8",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Unit 2 Activity - Model & Print a Ring",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "game-development/blender-zbrush/unit2/activity_model_print_ring.html",
-            "lesson_id": "l_76b0317e89"
+            "checkpoint_id": "c_1fc365ce2e"
           }
         },
         {
@@ -447,13 +447,13 @@
         {
           "id": "i_e434c898bb",
           "legacy_key": "3-7",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Final Project - Portfolio Sculpt & Print",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "game-development/blender-zbrush/unit3/final_project.html",
-            "lesson_id": "l_33c382e276"
+            "checkpoint_id": "c_b2eb815e16"
           }
         },
         {

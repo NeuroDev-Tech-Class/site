@@ -1,0 +1,52 @@
+{
+  "id": "c_60e98779ee",
+  "item_id": "i_bdbaca5ba8",
+  "course_id": "audacity",
+  "legacy_path": "media/audacity/unit1/activity_60sec_intro.html",
+  "title": "Activity: 60-Second Personal Introduction",
+  "preset": null,
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "script",
+      "type": "longText",
+      "label": "Your script for the introduction",
+      "required": true
+    },
+    {
+      "id": "audio_file",
+      "type": "file",
+      "label": "Upload your recording (WAV, MP3, and your Audacity project file)",
+      "accept": [
+        ".wav",
+        ".mp3",
+        ".aup3"
+      ],
+      "multiple": true,
+      "required": true
+    },
+    {
+      "id": "checklist",
+      "type": "checklist",
+      "label": "Submission Checklist — before you submit, confirm",
+      "items": [
+        "Script was written before recording.",
+        "Microphone was set up and levels were tested before the real recording.",
+        "Recording features your name, interests, and a fun fact.",
+        "Excess silence at the beginning and end is trimmed.",
+        "Mistakes and filler words are removed.",
+        "Noise Reduction was applied (if background noise was present).",
+        "Audio is normalized (peaks near -1 dB).",
+        "Exported as WAV file.",
+        "Exported as MP3 at 192 kbps.",
+        "Metadata tags (Title, Artist) are filled in.",
+        "Final length is between 45 and 75 seconds.",
+        "Audacity project file (.aup3) is saved."
+      ],
+      "required": true
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Overview</h2>\n  <p>In this activity, you'll apply everything you've learned in Unit 1 to create a short personal introduction recording. You'll write a script, set up your microphone, record, edit, and export — the complete audio production workflow.</p>\n\n  <h2>What You'll Create</h2>\n  <p>A polished <strong>45- to 75-second</strong> audio clip where you introduce yourself. The final product should sound clear, be properly leveled, and be free of mistakes and unnecessary silence.</p>\n\n  <h2>Step-by-Step Instructions</h2>\n\n  <h3>Step 1: Write Your Script</h3>\n  <p>Before you hit Record, write a short script covering the following:</p>\n  <ul>\n    <li>Your <strong>name</strong> (and how you'd like to be addressed).</li>\n    <li>A little about your <strong>interests or hobbies</strong> (1–2 sentences).</li>\n    <li>A <strong>fun fact</strong> about yourself.</li>\n    <li>What you're hoping to <strong>learn or build</strong> in this course.</li>\n  </ul>\n  <p>Aim for about <strong>100–150 words</strong> — roughly 45–75 seconds when spoken naturally. Read it aloud a couple of times to make sure it flows and feels comfortable.</p>\n\n  <div class=\"tip\">\n    <strong>Tip:</strong> Write in a conversational tone. You're not giving a formal speech — imagine you're introducing yourself to a new classmate.\n  </div>\n\n  <h3>Step 2: Set Up Your Microphone</h3>\n  <ol>\n    <li>Open Audacity.</li>\n    <li>Select your microphone as the input device (Audio Setup toolbar or Edit &gt; Preferences &gt; Audio Settings).</li>\n    <li>Set the channel to <strong>1 (Mono)</strong>.</li>\n    <li>Click the <strong>Recording Meter</strong> to start monitoring.</li>\n    <li>Speak at your normal volume and adjust the recording level so peaks land between <strong>-12 dB and -6 dB</strong>.</li>\n  </ol>\n\n  <h3>Step 3: Record Your Introduction</h3>\n  <ol>\n    <li>Press <kbd>R</kbd> to start recording.</li>\n    <li>Wait <strong>2–3 seconds</strong> of silence, then read your script naturally.</li>\n    <li>If you make a mistake, <strong>pause briefly</strong>, then re-read the sentence from the beginning. You'll edit out the mistake later.</li>\n    <li>Leave another <strong>2–3 seconds</strong> of silence at the end.</li>\n    <li>Press <kbd>Space</kbd> to stop recording.</li>\n  </ol>\n\n  <div class=\"tip\">\n    <strong>Tip:</strong> The extra silence at the beginning is important — you'll use it later to capture a <strong>noise profile</strong> for Noise Reduction.\n  </div>\n\n  <h3>Step 4: Edit Your Recording</h3>\n  <ol>\n    <li>Press <kbd>Home</kbd> then <kbd>Space</kbd> to play your recording from the beginning. Listen for any mistakes, long pauses, or \"ums\" and \"ahs.\"</li>\n    <li><strong>Trim excess silence:</strong> Select the long silence at the beginning and end, leaving about 0.5 seconds of quiet at each edge, and press <kbd>Del</kbd>.</li>\n    <li><strong>Remove mistakes:</strong> Zoom in (<kbd>Ctrl</kbd>+<kbd>1</kbd>), select the mistake, preview the cut (<kbd>C</kbd>), and press <kbd>Del</kbd> if it sounds good.</li>\n    <li><strong>Check flow:</strong> Play the whole recording again. Make sure edits sound natural and there are no jarring jumps.</li>\n  </ol>\n\n  <h3>Step 5: Apply Noise Reduction (If Needed)</h3>\n  <p>If you hear background noise (hum, hiss, fan noise):</p>\n  <ol>\n    <li>Select a short section (1–2 seconds) of <strong>pure silence</strong> where only background noise is present (no speech).</li>\n    <li>Go to <strong>Effect &gt; Noise Reduction</strong> and click <strong>Get Noise Profile</strong>.</li>\n    <li>Select the entire track (<kbd>Ctrl</kbd>+<kbd>A</kbd>).</li>\n    <li>Go to <strong>Effect &gt; Noise Reduction</strong> again and click <strong>OK</strong> (default settings are usually fine for a first pass).</li>\n  </ol>\n\n  <h3>Step 6: Normalize Volume</h3>\n  <ol>\n    <li>Select the entire track (<kbd>Ctrl</kbd>+<kbd>A</kbd>).</li>\n    <li>Go to <strong>Effect &gt; Normalize</strong>.</li>\n    <li>Set \"Normalize peak amplitude to\" <strong>-1.0 dB</strong>.</li>\n    <li>Check \"Remove DC offset\" if available.</li>\n    <li>Click <strong>OK</strong>.</li>\n  </ol>\n  <p>This ensures your audio is at a consistent, professional volume level.</p>\n\n  <h3>Step 7: Export</h3>\n  <p>Export your finished recording in <strong>two formats</strong>:</p>\n  <ol>\n    <li><strong>WAV</strong> — Go to <strong>File &gt; Export Audio</strong>, choose <strong>WAV (Microsoft)</strong>, name it <code>intro_yourname.wav</code>, and click Export.</li>\n    <li><strong>MP3</strong> — Go to <strong>File &gt; Export Audio</strong>, choose <strong>MP3</strong>, set the bitrate to <strong>192 kbps</strong>, name it <code>intro_yourname.mp3</code>, and click Export.</li>\n  </ol>\n  <p>Fill in the <strong>Metadata</strong> tags when prompted:</p>\n  <ul>\n    <li><strong>Title:</strong> Personal Introduction</li>\n    <li><strong>Artist:</strong> Your Name</li>\n  </ul>\n  <p>Finally, save your Audacity project as well: <strong>File &gt; Save Project &gt; Save Project As</strong>.</p>\n\n  <h2>Evaluation Criteria</h2>\n  <table>\n    <thead>\n      <tr><th>Criterion</th><th>Details</th></tr>\n    </thead>\n    <tbody>\n      <tr><td><strong>Clear Audio</strong></td><td>Voice is easy to understand with minimal background noise.</td></tr>\n      <tr><td><strong>Proper Volume</strong></td><td>Audio is normalized; not too quiet or too loud. No clipping.</td></tr>\n      <tr><td><strong>Clean Edits</strong></td><td>Mistakes, long pauses, and \"ums\" are removed. Edits sound natural.</td></tr>\n      <tr><td><strong>Length</strong></td><td>Final recording is between 45 and 75 seconds.</td></tr>\n      <tr><td><strong>Correct Exports</strong></td><td>Both a WAV file and a 192 kbps MP3 file are submitted.</td></tr>\n      <tr><td><strong>Metadata</strong></td><td>Title and Artist tags are filled in.</td></tr>\n    </tbody>\n  </table>\n\n  <h2>Submission Checklist</h2>\n  <div class=\"activity\">\n    <h3>Before You Submit, Confirm:</h3>\n    <ul>\n      <li>☐ Script was written before recording.</li>\n      <li>☐ Microphone was set up and levels were tested before the real recording.</li>\n      <li>☐ Recording features your name, interests, and a fun fact.</li>\n      <li>☐ Excess silence at the beginning and end is trimmed.</li>\n      <li>☐ Mistakes and filler words are removed.</li>\n      <li>☐ Noise Reduction was applied (if background noise was present).</li>\n      <li>☐ Audio is normalized (peaks near -1 dB).</li>\n      <li>☐ Exported as <strong>WAV</strong> file.</li>\n      <li>☐ Exported as <strong>MP3 at 192 kbps</strong>.</li>\n      <li>☐ Metadata tags (Title, Artist) are filled in.</li>\n      <li>☐ Final length is between 45 and 75 seconds.</li>\n      <li>☐ Audacity project file (.aup3) is saved.</li>\n    </ul>\n  </div>",
+  "grading_hint": null
+}

@@ -72,26 +72,17 @@
     "assets/pdfs/it/linux/troubleshooting.html": {
       "lesson": "l_120423cfa9"
     },
-    "assets/pdfs/game-development/unreal-engine/unit2/activity_obstacle_course.html": {
-      "lesson": "l_13f75cc221"
-    },
     "assets/pdfs/game-development/unreal-engine/unit1/foliage_and_detail.html": {
       "lesson": "l_168cc693f4"
     },
     "assets/pdfs/computer-basics/ai-prompt-engineering/prompt_engineering_approaches_and_strategies.html": {
       "lesson": "l_16b78298d9"
     },
-    "assets/pdfs/computer-basics/ai-prompt-engineering/responsible_ai_use.html": {
-      "lesson": "l_175e7084c6"
-    },
     "assets/pdfs/media/gimp/unit2/text_and_typography.html": {
       "lesson": "l_1b158b70d1"
     },
     "assets/pdfs/media/audacity/unit1/toolbar_and_playback.html": {
       "lesson": "l_1ca9438797"
-    },
-    "assets/pdfs/computer-basics/ai-prompt-engineering/final_assignment-ai_application.html": {
-      "lesson": "l_1e44d8e237"
     },
     "assets/pdfs/game-development/blender-zbrush/unit1/navigation_and_transforms.html": {
       "lesson": "l_1f2851c86c"
@@ -132,23 +123,11 @@
     "assets/pdfs/it/linux/bash_1.html": {
       "lesson": "l_3287079d60"
     },
-    "assets/pdfs/game-development/blender-zbrush/unit3/final_project.html": {
-      "lesson": "l_33c382e276"
-    },
-    "assets/pdfs/media/audacity/unit2/final_project_podcast.html": {
-      "lesson": "l_37009b860f"
-    },
-    "assets/pdfs/computer-basics/digital-literacy/unit3/hands-on_exercise-email_account.html": {
-      "lesson": "l_3a165d5e4e"
-    },
     "assets/pdfs/computer-science/python-2-object-oriented_programming/sidenote-refactoring.html": {
       "lesson": "l_3ade682fc5"
     },
     "assets/pdfs/game-development/blender-zbrush/unit2/slicing_and_print_settings.html": {
       "lesson": "l_3d45039f5e"
-    },
-    "assets/pdfs/game-development/unreal-engine/unit1/activity_castle_courtyard.html": {
-      "lesson": "l_3fd823d419"
     },
     "assets/pdfs/computer-basics/digital-literacy/unit1/files,_data,_and_information.html": {
       "lesson": "l_41118eea39"
@@ -162,9 +141,6 @@
     "assets/pdfs/computer-science/python-1-intro_to_programming/unit1/what_is_an_ide.html": {
       "lesson": "l_44bcb0b672"
     },
-    "assets/pdfs/computer-science/python-1-intro_to_programming/unit3/final_project_text_adventure_game.html": {
-      "lesson": "l_456ef876ca"
-    },
     "assets/pdfs/media/davinci-resolve/unit1/project_settings_media.html": {
       "lesson": "l_4573200bef"
     },
@@ -177,17 +153,11 @@
     "assets/pdfs/game-development/blender-zbrush/unit3/zbrush_interface_brushes.html": {
       "lesson": "l_4bdcbf4c92"
     },
-    "assets/pdfs/it/computer_hardware/navigating_the_bios_uefi.html": {
-      "lesson": "l_4e14e55856"
-    },
     "assets/pdfs/computer-science/python-1-intro_to_programming/unit3/best_practices.html": {
       "lesson": "l_4f2610f336"
     },
     "assets/pdfs/media/audacity/unit1/setting_up_microphone.html": {
       "lesson": "l_52fbbbfcd9"
-    },
-    "assets/pdfs/game-development/unreal-engine/unit3/game_design_documents.html": {
-      "lesson": "l_5464691129"
     },
     "assets/pdfs/media/audacity/unit2/essential_effects.html": {
       "lesson": "l_54ffdd3029"
@@ -210,9 +180,6 @@
     "assets/pdfs/media/audacity/unit2/multi_track_mixing.html": {
       "lesson": "l_5b90611d5f"
     },
-    "assets/pdfs/computer-basics/ai-prompt-engineering/hands-on_generative_ai_exercises.html": {
-      "lesson": "l_5dc4459a7a"
-    },
     "assets/pdfs/game-development/unreal-engine/unit1/viewport_navigation.html": {
       "lesson": "l_5edb0bec9e"
     },
@@ -221,9 +188,6 @@
     },
     "assets/pdfs/game-development/unreal-engine/unit3/win_lose_checkpoints.html": {
       "lesson": "l_611fde328c"
-    },
-    "assets/pdfs/media/davinci-resolve/unit3/final_project.html": {
-      "lesson": "l_6191f592d9"
     },
     "assets/pdfs/game-development/blender-zbrush/unit3/finishing_prints.html": {
       "lesson": "l_6431aef40f"
@@ -258,26 +222,14 @@
     "assets/pdfs/media/audacity/unit1/the_audacity_interface.html": {
       "lesson": "l_6fa575965b"
     },
-    "assets/pdfs/media/davinci-resolve/unit1/activity_highlight_reel.html": {
-      "lesson": "l_74068c29dd"
-    },
     "assets/pdfs/media/audacity/unit2/noise_reduction_cleanup.html": {
       "lesson": "l_740e4d08f6"
     },
     "assets/pdfs/it/linux/why_learn_the_command_line_.html": {
       "lesson": "l_756d0ef3d2"
     },
-    "assets/pdfs/game-development/blender-zbrush/unit2/activity_model_print_ring.html": {
-      "lesson": "l_76b0317e89"
-    },
-    "assets/pdfs/computer-basics/office-software/spreadsheets/application-creating_a_budget.html": {
-      "lesson": "l_799749ff2d"
-    },
     "assets/pdfs/game-development/blender-zbrush/unit2/modifiers.html": {
       "lesson": "l_79c4c65a81"
-    },
-    "assets/pdfs/game-development/blender-zbrush/unit1/activity_create_a_scene.html": {
-      "lesson": "l_7ac2161a02"
     },
     "assets/pdfs/media/gimp/unit3/logo_and_icon_design.html": {
       "lesson": "l_7bebd5758c"
@@ -285,14 +237,8 @@
     "assets/pdfs/game-development/blender-zbrush/unit1/the_blender_interface.html": {
       "lesson": "l_7c997127cf"
     },
-    "assets/pdfs/computer-basics/digital-literacy/unit2/unit_2_recap.html": {
-      "lesson": "l_7d3d678a57"
-    },
     "assets/pdfs/it/linux/bash_3.html": {
       "lesson": "l_80710f6adf"
-    },
-    "assets/pdfs/computer-basics/office-software/word_processors/practice-word_processors.html": {
-      "lesson": "l_80a1912376"
     },
     "assets/pdfs/computer-basics/digital-literacy/unit1/your_computer_s_properties.html": {
       "lesson": "l_82e875d17e"
@@ -318,9 +264,6 @@
     "assets/pdfs/computer-basics/digital-literacy/unit2/file_management.html": {
       "lesson": "l_8cdd4f20c4"
     },
-    "assets/pdfs/media/gimp/unit1/activity_photo_restoration.html": {
-      "lesson": "l_8ec6fa6102"
-    },
     "assets/pdfs/computer-basics/digital-literacy/unit3/search_engines.html": {
       "lesson": "l_8fbc3a81a0"
     },
@@ -330,14 +273,8 @@
     "assets/pdfs/computer-basics/digital-literacy/unit2/hands-on_exercise-keyboard_shortcuts.html": {
       "lesson": "l_95652f0f3e"
     },
-    "assets/pdfs/media/gimp/unit3/final_project.html": {
-      "lesson": "l_966638b9ab"
-    },
     "assets/pdfs/it/linux/file_permissions.html": {
       "lesson": "l_9b03660dbc"
-    },
-    "assets/pdfs/computer-basics/digital-literacy/unit3/hands-on_exercise-social_media.html": {
-      "lesson": "l_9cfe9e8868"
     },
     "assets/pdfs/media/gimp/unit1/canvas_resolution_formats.html": {
       "lesson": "l_9e0e0a15fa"
@@ -393,9 +330,6 @@
     "assets/pdfs/game-development/blender-zbrush/unit2/ngons_and_topology.html": {
       "lesson": "l_b4f75978e3"
     },
-    "assets/pdfs/computer-basics/digital-literacy/unit1/unit_1_recap.html": {
-      "lesson": "l_b586ea37ef"
-    },
     "assets/pdfs/game-development/blender-zbrush/unit1/edit_mode_mesh_elements.html": {
       "lesson": "l_b7810e8b68"
     },
@@ -411,20 +345,11 @@
     "assets/pdfs/web-development/web1-html_css/intro_to_html.html": {
       "lesson": "l_bbbde28d21"
     },
-    "assets/pdfs/computer-basics/office-software/spreadsheets/practice-spreadsheets.html": {
-      "lesson": "l_c016e3a7e9"
-    },
-    "assets/pdfs/computer-basics/ai-prompt-engineering/working_with_modern_ai_tools.html": {
-      "lesson": "l_c5725b1cea"
-    },
     "assets/pdfs/media/gimp/unit2/paths_and_vectors.html": {
       "lesson": "l_c749da6508"
     },
     "assets/pdfs/media/gimp/unit1/the_gimp_interface.html": {
       "lesson": "l_c77ed8b383"
-    },
-    "assets/pdfs/media/gimp/unit2/activity_movie_poster.html": {
-      "lesson": "l_c78dd9a64f"
     },
     "assets/pdfs/media/audacity/unit1/audio_concepts.html": {
       "lesson": "l_c97573c272"
@@ -441,26 +366,8 @@
     "assets/pdfs/computer-basics/digital-literacy/unit1/what_does_it_mean_to_be_digitally_literate_.html": {
       "lesson": "l_d2a7b751a8"
     },
-    "assets/pdfs/game-development/unreal-engine/unit3/final_project.html": {
-      "lesson": "l_d3bba87a7e"
-    },
-    "assets/pdfs/it/computer_hardware/final_project-build_a_custom_pc.html": {
-      "lesson": "l_d707fb3b2d"
-    },
-    "assets/pdfs/computer-basics/office-software/presentation_software/application-careers_day_presentation.html": {
-      "lesson": "l_d71a0307f6"
-    },
-    "assets/pdfs/media/davinci-resolve/unit2/activity_color_grade_scene.html": {
-      "lesson": "l_d71e573af1"
-    },
     "assets/pdfs/media/gimp/unit2/filters_and_effects.html": {
       "lesson": "l_d7bcbf8924"
-    },
-    "assets/pdfs/it/linux/final_project.html": {
-      "lesson": "l_de9c335ac6"
-    },
-    "assets/pdfs/media/audacity/unit1/activity_60sec_intro.html": {
-      "lesson": "l_e0c8ff6d0d"
     },
     "assets/pdfs/media/davinci-resolve/unit1/transitions_speed_keyframes.html": {
       "lesson": "l_e21b7fa8ba"
@@ -483,9 +390,6 @@
     "assets/pdfs/computer-science/python-1-intro_to_programming/DataStructures.html": {
       "lesson": "l_e7cc8bb6b5"
     },
-    "assets/pdfs/computer-basics/office-software/word_processors/application-creating_a_résumé.html": {
-      "lesson": "l_eeb08fb871"
-    },
     "assets/pdfs/computer-science/python-1-intro_to_programming/unit3/3rd_party_libraries.html": {
       "lesson": "l_ef7739bc2c"
     },
@@ -494,9 +398,6 @@
     },
     "assets/pdfs/computer-basics/digital-literacy/unit1/why_is_my_computer_so_slow.html": {
       "lesson": "l_f1682a9388"
-    },
-    "assets/pdfs/computer-basics/digital-literacy/unit1/checkpoint-how_will_technology_help_me_.html": {
-      "lesson": "l_f48e7a6e73"
     },
     "assets/pdfs/computer-science/python-1-intro_to_programming/unit1/what_is_python.html": {
       "lesson": "l_f7a205d92d"
