@@ -1,0 +1,5 @@
+{
+  "web-dev-1": [
+    { "find": "<p>TODO: https://www.codecademy.com/enrolled/courses/learn-html</p>", "replace": "" }
+  ]
+}

@@ -204,17 +204,6 @@
       "unreal-engine"
     ]
   },
-  "l_2513e9f66d": {
-    "legacy_path": "computer-basics/digital-literacy/unit1/hands-on_exercise-identifying_hardware.html",
-    "title": "Hands-on Exercise: Identifying Hardware",
-    "subtitle": null,
-    "course_tag": "Digital Literacy",
-    "youtube_ids": [],
-    "source": "assets/pdfs/computer-basics/digital-literacy/unit1/hands-on_exercise-identifying_hardware.html",
-    "used_by": [
-      "digital-literacy"
-    ]
-  },
   "l_25b8151105": {
     "legacy_path": "computer-basics/digital-literacy/unit3/email.html",
     "title": "Email ✉️",
@@ -874,17 +863,6 @@
       "unreal-engine"
     ]
   },
-  "l_95652f0f3e": {
-    "legacy_path": "computer-basics/digital-literacy/unit2/hands-on_exercise-keyboard_shortcuts.html",
-    "title": "Hands-on Exercise: Keyboard Shortcuts Practice",
-    "subtitle": null,
-    "course_tag": "Digital Literacy",
-    "youtube_ids": [],
-    "source": "assets/pdfs/computer-basics/digital-literacy/unit2/hands-on_exercise-keyboard_shortcuts.html",
-    "used_by": [
-      "digital-literacy"
-    ]
-  },
   "l_9b03660dbc": {
     "legacy_path": "it/linux/file_permissions.html",
     "title": "File Permissions and Ownership",
@@ -1065,17 +1043,6 @@
     "source": "assets/pdfs/media/audacity/unit1/what_is_digital_audio.html",
     "used_by": [
       "audacity"
-    ]
-  },
-  "l_ae2409c5c8": {
-    "legacy_path": "it/computer_hardware/identifying_computer_hardware.html",
-    "title": "Identifying Computer Hardware",
-    "subtitle": null,
-    "course_tag": "Hardware",
-    "youtube_ids": [],
-    "source": "assets/pdfs/it/computer_hardware/identifying_computer_hardware.html",
-    "used_by": [
-      "hardware"
     ]
   },
   "l_ae3d54dbea": {

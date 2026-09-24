@@ -5,7 +5,8 @@ import { rewriteHtml } from './links.mjs';
 
 const squash = text => text.replace(/\s+/g, ' ').trim();
 
-export function extractLesson(html, legacyPath, found = null) {
+/** `bodyOverride`, when given, replaces the page's body (tools/extract/overrides/lessons); its title and tag stay. */
+export function extractLesson(html, legacyPath, found = null, bodyOverride = null) {
   const main = new JSDOM(html).window.document.querySelector('main');
   const header = main.querySelector('.doc-header');
   const subtitle = header?.querySelector('.subtitle');
@@ -15,6 +16,7 @@ export function extractLesson(html, legacyPath, found = null) {
     course_tag: squash(header?.querySelector('.course-tag')?.textContent || ''),
   };
   for (const chrome of main.querySelectorAll('.back-link, .doc-header, .doc-footer')) chrome.remove();
+  if (bodyOverride !== null) main.innerHTML = bodyOverride;
 
   const youtubeIds = [...main.querySelectorAll('iframe[src]')]
     .map(frame => frame.getAttribute('src').match(/youtube(?:-nocookie)?\.com\/embed\/([\w-]{11})/)?.[1])

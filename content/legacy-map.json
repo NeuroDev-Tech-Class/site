@@ -99,9 +99,6 @@
     "assets/pdfs/game-development/unreal-engine/unit3/umg_widgets_and_hud.html": {
       "lesson": "l_23d6aec383"
     },
-    "assets/pdfs/computer-basics/digital-literacy/unit1/hands-on_exercise-identifying_hardware.html": {
-      "lesson": "l_2513e9f66d"
-    },
     "assets/pdfs/computer-basics/digital-literacy/unit3/email.html": {
       "lesson": "l_25b8151105"
     },
@@ -273,9 +270,6 @@
     "assets/pdfs/game-development/unreal-engine/unit1/what_is_a_game_engine.html": {
       "lesson": "l_91407dfc66"
     },
-    "assets/pdfs/computer-basics/digital-literacy/unit2/hands-on_exercise-keyboard_shortcuts.html": {
-      "lesson": "l_95652f0f3e"
-    },
     "assets/pdfs/it/linux/file_permissions.html": {
       "lesson": "l_9b03660dbc"
     },
@@ -323,9 +317,6 @@
     },
     "assets/pdfs/media/audacity/unit1/what_is_digital_audio.html": {
       "lesson": "l_ad7e857134"
-    },
-    "assets/pdfs/it/computer_hardware/identifying_computer_hardware.html": {
-      "lesson": "l_ae2409c5c8"
     },
     "assets/pdfs/computer-science/python-2-object-oriented_programming/sidenote-DRY.html": {
       "lesson": "l_ae3d54dbea"

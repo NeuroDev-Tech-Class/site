@@ -1,0 +1,57 @@
+{
+  "id": "c_799061ab6b",
+  "item_id": "i_3cb4ba58f9",
+  "course_id": "digital-literacy",
+  "legacy_path": "computer-basics/digital-literacy/unit2/hands-on_exercise-keyboard_shortcuts.html",
+  "exercise": null,
+  "title": "Hands-on Exercise: Keyboard Shortcuts Practice",
+  "preset": null,
+  "requires_sign_off": true,
+  "fields": [
+    {
+      "id": "checklist",
+      "type": "checklist",
+      "label": "Steps you completed",
+      "required": true,
+      "items": [
+        "Opened a blank document",
+        "Copied the text with a shortcut",
+        "Pasted it without formatting",
+        "Cut a sentence and pasted it somewhere else",
+        "Found and replaced the word \"id\"",
+        "Deleted a sentence, then undid and redid it",
+        "Made a sentence bold, underlined and italic",
+        "Jumped to the start and end of a line and of the document",
+        "Selected all the text and deleted it",
+        "Opened File Explorer and selected several items with Ctrl + click",
+        "Opened a new window and created a new folder",
+        "Took a full screenshot and a Snipping Tool screenshot",
+        "Cut both screenshots and pasted them onto the desktop",
+        "Switched back to File Explorer and closed it"
+      ]
+    },
+    {
+      "id": "favorite_shortcut",
+      "type": "longText",
+      "label": "Which shortcut do you think you will use most, and why?",
+      "required": true
+    },
+    {
+      "id": "screenshot",
+      "type": "image",
+      "label": "One of the screenshots you took (optional)",
+      "required": false,
+      "multiple": false
+    },
+    {
+      "id": "signoff",
+      "type": "mentorSignOff",
+      "label": "Your coach watches you use a few of these shortcuts",
+      "required": true
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<p>These steps use Windows shortcuts. On a Mac, most are the same with <kbd>Cmd</kbd> in place of <kbd>Ctrl</kbd>. If a step stumps you, look back at the <a href=\"/lessons/l_60c574ef30\">Keyboard Shortcuts</a> reading. Try to use only the keyboard for each step.</p>\n\n<div class=\"activity\">\n  <h2>Keyboard Shortcuts Practice</h2>\n\n  <ol>\n    <li>Open a blank document in Google Docs or Microsoft Word.</li>\n    <li>\n      <p>Copy this text using a keyboard shortcut:</p>\n      <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae turpis massa sed elementum tempus. Pharetra sit amet aliquam id diam. Rhoncus est pellentesque elit ullamcorper dignissim cras. Auctor urna nunc id cursus metus aliquam eleifend. Volutpat diam ut venenatis tellus in metus vulputate eu. Ultricies leo integer malesuada nunc vel risus commodo viverra maecenas. Nibh ipsum consequat nisl vel pretium lectus quam id. Sagittis orci a scelerisque purus semper. Nisi lacus sed viverra tellus in hac habitasse platea dictumst. Velit laoreet id donec ultrices tincidunt arcu non sodales neque. Tristique nulla aliquet enim tortor at auctor urna. Nulla portitor massa id neque aliquam. Interdum varius sit amet mattis vulputate enim nulla aliquet.</blockquote>\n    </li>\n    <li>Paste the text into your document without its formatting.</li>\n    <li>Cut a sentence from one part of your document and paste it somewhere else.</li>\n    <li>Use a shortcut to find the word \"id\" and replace it with something else.</li>\n    <li>Delete a sentence. Use a shortcut to undo that, and then redo it.</li>\n    <li>Make a sentence bold, underlined and italic.</li>\n    <li>Use <kbd>Home</kbd> and <kbd>End</kbd> to jump to the start and end of a line, then use shortcuts to jump to the start and end of the whole document.</li>\n    <li>Select all of the text at once and delete it.</li>\n    <li>Use a shortcut to open File Explorer, then select several files or folders with <kbd>Ctrl</kbd> + click.</li>\n    <li>Use a shortcut to open a new File Explorer window, then another to create a new folder.</li>\n    <li>Use a shortcut to take a screenshot of your whole screen, then use the Snipping Tool shortcut to capture a smaller area.</li>\n    <li>Open your Screenshots folder. Cut the two images you just made and paste them onto your desktop.</li>\n    <li>Use a shortcut to switch back to File Explorer, and another to close it.</li>\n  </ol>\n</div>\n\n<p>Tick each step in the form below as you finish it. Your coach will ask you to show a few of these shortcuts in person.</p>",
+  "starter_path": null,
+  "grading_hint": null
+}

@@ -128,13 +128,13 @@
         {
           "id": "i_7c48f88a69",
           "legacy_key": "0-9",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Hands-on Exercise - Identifying Hardware",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/digital-literacy/unit1/hands-on_exercise-identifying_hardware.html",
-            "lesson_id": "l_2513e9f66d"
+            "checkpoint_id": "c_0214c68a29"
           }
         },
         {
@@ -288,13 +288,13 @@
         {
           "id": "i_3cb4ba58f9",
           "legacy_key": "1-7",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Hands-on Exercise - Keyboard Shortcuts Practice",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "computer-basics/digital-literacy/unit2/hands-on_exercise-keyboard_shortcuts.html",
-            "lesson_id": "l_95652f0f3e"
+            "checkpoint_id": "c_799061ab6b"
           }
         },
         {

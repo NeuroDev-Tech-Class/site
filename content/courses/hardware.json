@@ -120,13 +120,13 @@
         {
           "id": "i_bde427f159",
           "legacy_key": "1-2",
-          "type": "lesson",
+          "type": "checkpoint",
           "title": "Hands-on Exercise - Identifying Computer Hardware",
           "status": "ok",
           "tags": [],
           "payload": {
             "legacy_path": "it/computer_hardware/identifying_computer_hardware.html",
-            "lesson_id": "l_ae2409c5c8"
+            "checkpoint_id": "c_67880d4475"
           }
         },
         {

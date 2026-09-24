@@ -6,6 +6,7 @@ import { replaceSubmissionEmails, validateSpec } from './checkpoints.mjs';
 import { buildCourse, legacyKeys, parseCatalog } from './courses.mjs';
 import { exerciseCheckpoint, loadExercises, matchExercise, renderMarkdown, shiftHeadings } from './exercises.mjs';
 import { checkpointId, lessonId } from './ids.mjs';
+import { applyCoursePatches, loadCoursePatches, loadOverrides, unusedOverrides } from './overrides.mjs';
 import { extractLesson } from './lessons.mjs';
 import { rewriteHtml } from './links.mjs';
 import { renderReport } from './report.mjs';
@@ -39,12 +40,15 @@ export async function generate(siteRoot) {
   const pending = [];
   const exercises = loadExercises(siteRoot);
   const exerciseItems = [];
+  const overrides = loadOverrides(siteRoot);
+  const patches = loadCoursePatches(siteRoot);
 
   const courses = [];
   for (const category of catalog) {
     for (const id of category.courseIds) {
-      const course = buildCourse({ id, title: courseMetadata[id].name, category: category.name, html: read(`courses/${id}.html`) });
       const where = `courses/${id}.html`;
+      const html = applyCoursePatches(read(where), patches[id] || [], where);
+      const course = buildCourse({ id, title: courseMetadata[id].name, category: category.name, html });
       const links = [];
       course.intro_html = rewriteHtml(course.intro_html, where, links);
       found.push(...checkVocabulary(course.intro_html, where));
@@ -95,7 +99,7 @@ export async function generate(siteRoot) {
       continue;
     }
     const links = [];
-    const lesson = extractLesson(read(`assets/pdfs/${path}`), path, links);
+    const lesson = extractLesson(read(`assets/pdfs/${path}`), path, links, overrides.get(path) ?? null);
     found.push(...links.filter(l => l.kind !== 'lesson-ref'));
     found.push(...checkVocabulary(lesson.html, `assets/pdfs/${path}`));
     const { html, ...meta } = lesson;
@@ -127,7 +131,7 @@ export async function generate(siteRoot) {
     let instructions = html;
     if (legacyPath) {
       const links = [];
-      instructions = extractLesson(read(where), legacyPath, links).html;
+      instructions = extractLesson(read(where), legacyPath, links, overrides.get(legacyPath) ?? null).html;
       found.push(...links.filter(l => l.kind !== 'lesson-ref'));
       if (!KEEPS_ITS_EMAIL.includes(legacyPath)) instructions = replaceSubmissionEmails(instructions, where, found);
       found.push(...checkVocabulary(instructions, where));
@@ -156,6 +160,8 @@ export async function generate(siteRoot) {
   }
   const specProblems = validateSpec(spec, targets);
   const checkpointPaths = new Set(pending.map(p => p.legacyPath).filter(Boolean));
+  const stray = unusedOverrides([...overrides.keys()], new Set([...usedBy.keys(), ...checkpointPaths]));
+  if (stray.length) throw new Error(`overrides for pages no course uses (check the path): ${stray.join(', ')}`);
   const orphans = htmlFilesUnder(join(siteRoot, 'assets/pdfs'))
     .filter(path => !usedBy.has(path) && !checkpointPaths.has(path)).sort();
 
