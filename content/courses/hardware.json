@@ -1,0 +1,196 @@
+{
+  "id": "hardware",
+  "title": "Computer Hardware",
+  "category": "I.T.",
+  "status": "published",
+  "heading": "Computer Hardware",
+  "summary": "This introductory I.T. course focuses on the practical aspects of building PCs and maintaining computer hardware. Students will gain hands-on experience with diagnosing hardware issues, assembling PCs, and understanding the intricacies of computer hardware. The culminating project involves constructing a custom computer, tailored to fit a given budget and performance specifications.",
+  "objectives": [
+    "Identify and understand the functions of basic computer hardware.",
+    "Diagnose and troubleshoot common hardware issues.",
+    "Understand the principles of memory, storage, power supply, and cooling options, making informed decisions based on system requirements.",
+    "Navigate and configure BIOS/UEFI settings for optimal hardware performance.",
+    "Complete a final project that demonstrates the ability to plan, budget for, and build a custom PC, reflecting an integration of course content and practical skills."
+  ],
+  "intro_html": "<section>\n        <h3>PC Building Guide</h3>\n        <p>\n          Use this complete PC Building guide as a reference throughout the\n          remainder of this course. It's probably best to approach this one bite\n          at a time, rather than trying to speed through it. It's a lot of\n          material!\n        </p>\n\n        <ul>\n          <li>\n            <a href=\"assets/pdfs/it/computer_hardware/building_a_pc.html\" target=\"_blank\" rel=\"noopener noreferrer\">Building a PC</a>\n          </li>\n        </ul>\n      </section>",
+  "units": [
+    {
+      "id": "u_b9224d50d3",
+      "legacy_key": "0",
+      "title": "Unit 1: Introduction to Computer Hardware",
+      "description": "Learn the basic components of computer hardware and their functions.",
+      "items": [
+        {
+          "id": "i_dfc510e0a5",
+          "legacy_key": "0-0",
+          "type": "video",
+          "title": "How Does Computer Hardware Work?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "d86ws7mQYIg"
+          }
+        },
+        {
+          "id": "i_eddd535b7b",
+          "legacy_key": "0-1",
+          "type": "video",
+          "title": "CPU vs GPU (What's the Difference?)",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "_cyVDoyI6NE"
+          }
+        },
+        {
+          "id": "i_2823365c44",
+          "legacy_key": "0-2",
+          "type": "video",
+          "title": "BIOS and UEFI Explained",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "zIYkol851dU"
+          }
+        },
+        {
+          "id": "i_5ccb4c1fed",
+          "legacy_key": "0-3",
+          "type": "lesson",
+          "title": "Hands-on Exercise - Navigating the BIOS/UEFI",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/computer_hardware/navigating_the_bios_uefi.html"
+          }
+        },
+        {
+          "id": "i_10a4345fd1",
+          "legacy_key": "0-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Refer to the <a href=\"assets/pdfs/it/computer_hardware/building_a_pc.html\" target=\"_blank\" rel=\"noopener noreferrer\">PC Building Guide</a> for more information on the CPU, the GPU, and the motherboard before taking the quiz."
+          }
+        },
+        {
+          "id": "i_60234f5b45",
+          "legacy_key": "0-5",
+          "type": "test",
+          "title": "Quiz - CPU, GPU, Motherboard",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSdbK59EcsSBoxTUbgtoYZUG8Q6SSsHvJn-e2QEASSMVUb-SVg/viewform?usp=sf_link"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_2f392d3848",
+      "legacy_key": "1",
+      "title": "Unit 2: Memory, Storage, Power, and Cooling",
+      "description": "Learn about RAM, the difference between HDDs and SSDs, and more.",
+      "items": [
+        {
+          "id": "i_552d510a97",
+          "legacy_key": "1-0",
+          "type": "video",
+          "title": "SSDs vs Hard Drives as Fast as Possible",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "YQEjGKYXjw8"
+          }
+        },
+        {
+          "id": "i_cfbd146f85",
+          "legacy_key": "1-1",
+          "type": "video",
+          "title": "How Heatpipes & Air Coolers Work",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "ieMvtUpFENM"
+          }
+        },
+        {
+          "id": "i_bde427f159",
+          "legacy_key": "1-2",
+          "type": "lesson",
+          "title": "Hands-on Exercise - Identifying Computer Hardware",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/computer_hardware/identifying_computer_hardware.html"
+          }
+        },
+        {
+          "id": "i_e9b39bf25f",
+          "legacy_key": "1-3",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Refer to the <a href=\"assets/pdfs/it/computer_hardware/building_a_pc.html\" target=\"_blank\" rel=\"noopener noreferrer\">PC Building Guide</a> for more information on RAM, storage, the PSU, and cooling before taking the quiz."
+          }
+        },
+        {
+          "id": "i_714ec10c8d",
+          "legacy_key": "1-4",
+          "type": "test",
+          "title": "Quiz - Memory, Storage, Power, Cooling",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSca37QDCluAtZsCKwBcXC8ySmm0jihmNUTDRBv7IwhrRHflCQ/viewform?usp=sf_link"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_170df7791f",
+      "legacy_key": "2",
+      "title": "Unit 3: Building a PC",
+      "description": "Apply knowledge to build a PC. This involves planning ahead and shopping for parts, safely assembling the hardware components, and installing an operating system.",
+      "items": [
+        {
+          "id": "i_52a78ba26f",
+          "legacy_key": "2-0",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Refer to the rest of the <a href=\"assets/pdfs/it/computer_hardware/building_a_pc.html\" target=\"_blank\" rel=\"noopener noreferrer\">PC Building Guide</a> to complete the final quiz."
+          }
+        },
+        {
+          "id": "i_dedaf654e4",
+          "legacy_key": "2-1",
+          "type": "test",
+          "title": "Quiz - Building a PC",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSdF6s3pxXSLY1IHEL6MINhYr3NR9FTwsvEcU7K1_Olf_bp7Eg/viewform?usp=sf_link"
+          }
+        },
+        {
+          "id": "i_d0e25642e3",
+          "legacy_key": "2-2",
+          "type": "lesson",
+          "title": "Final Project - Build a Custom PC",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/computer_hardware/final_project-build_a_custom_pc.html"
+          }
+        }
+      ]
+    }
+  ]
+}

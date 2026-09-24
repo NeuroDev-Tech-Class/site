@@ -1,0 +1,460 @@
+{
+  "id": "unreal-engine",
+  "title": "Intro to Unreal Engine",
+  "category": "Game Development",
+  "status": "published",
+  "heading": "Intro to Unreal Engine",
+  "summary": "This course introduces students to game development using Unreal Engine 5, the same engine behind Fortnite, Rocket League, and countless AAA titles. Students will learn to navigate the editor, build 3D environments, script gameplay with Blueprints, and design a complete playable level. No prior programming experience is required—everything is done visually with Blueprint nodes.",
+  "objectives": [
+    "Install and configure Unreal Engine 5 via the Epic Games Launcher.",
+    "Navigate the editor viewport, content browser, and details panel.",
+    "Build environments using static meshes, materials, landscapes, and foliage.",
+    "Create interactive gameplay using the Blueprint visual scripting system.",
+    "Design UI elements and HUDs using UMG Widget Blueprints.",
+    "Plan, graybox, and polish a complete game level with win/lose mechanics."
+  ],
+  "intro_html": "<section>\n        <h3>System Requirements</h3>\n        <p>\n          <strong>Windows:</strong> Windows 10 64-bit, quad-core CPU (2.5 GHz+),\n          8 GB RAM minimum, DirectX 11/12 GPU.\n          <strong>macOS:</strong> macOS 13+, quad-core Intel, Metal 1.2 GPU.\n          Unreal Engine is free for students and educators.\n        </p>\n      </section>",
+  "units": [
+    {
+      "id": "u_d23d635eed",
+      "legacy_key": "0",
+      "title": "Getting Started",
+      "description": "Set up your development environment and get familiar with the Unreal Engine editor.",
+      "items": [
+        {
+          "id": "i_f69036a075",
+          "legacy_key": "0-0",
+          "type": "lesson",
+          "title": "Reading - What Is a Game Engine?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit1/what_is_a_game_engine.html"
+          }
+        },
+        {
+          "id": "i_5010d5daf8",
+          "legacy_key": "0-1",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Download and install the <a href=\"https://www.unrealengine.com/en-US/download\" target=\"_blank\" rel=\"noopener noreferrer\">Epic Games Launcher</a>, then install Unreal Engine 5 from the Unreal Engine tab."
+          }
+        },
+        {
+          "id": "i_a9dfbea9db",
+          "legacy_key": "0-2",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Create a new <strong>Third Person</strong> Blueprint project with <strong>Starter Content</strong> enabled."
+          }
+        },
+        {
+          "id": "i_7ca346361c",
+          "legacy_key": "0-3",
+          "type": "lesson",
+          "title": "Reading - The UE5 Interface",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit1/the_ue5_interface.html"
+          }
+        },
+        {
+          "id": "i_98a29475e9",
+          "legacy_key": "0-4",
+          "type": "video",
+          "title": "Your First Hour in Unreal Engine 5",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "k-zMkzmduqI"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_bd5fca687a",
+      "legacy_key": "1",
+      "title": "Unit 1: Building Worlds",
+      "description": "Learn to construct 3D environments using meshes, materials, landscapes, lighting, and foliage.",
+      "items": [
+        {
+          "id": "i_f7a2f0a608",
+          "legacy_key": "1-0",
+          "type": "lesson",
+          "title": "Reading - Viewport Navigation & Controls",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit1/viewport_navigation.html"
+          }
+        },
+        {
+          "id": "i_82de286e7e",
+          "legacy_key": "1-1",
+          "type": "lesson",
+          "title": "Reading - Meshes, Transforms & Materials",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit1/meshes_transforms_materials.html"
+          }
+        },
+        {
+          "id": "i_62b14e328e",
+          "legacy_key": "1-2",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 1.1:</strong> Place and arrange static meshes to build a simple room or courtyard. Practice Move (<code>W</code>), Rotate (<code>E</code>), and Scale (<code>R</code>) transforms. Duplicate meshes with <code>Alt</code>+Drag."
+          }
+        },
+        {
+          "id": "i_633f5c82ed",
+          "legacy_key": "1-3",
+          "type": "lesson",
+          "title": "Reading - Landscapes & Terrain Sculpting",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit1/landscapes_and_terrain.html"
+          }
+        },
+        {
+          "id": "i_fe765ed070",
+          "legacy_key": "1-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 1.2:</strong> Create a Landscape, sculpt mountains and a valley, then paint it with a multi-layer material (grass, dirt, rock)."
+          }
+        },
+        {
+          "id": "i_390364adf8",
+          "legacy_key": "1-5",
+          "type": "lesson",
+          "title": "Reading - Lighting & Atmosphere",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit1/lighting_and_atmosphere.html"
+          }
+        },
+        {
+          "id": "i_85b42269da",
+          "legacy_key": "1-6",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 1.3:</strong> Add a Directional Light, Sky Atmosphere, Sky Light, Volumetric Clouds, and Exponential Height Fog to your level. Adjust the sun angle and observe how the mood changes."
+          }
+        },
+        {
+          "id": "i_e2376ea960",
+          "legacy_key": "1-7",
+          "type": "lesson",
+          "title": "Reading - Foliage & Detail Painting",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit1/foliage_and_detail.html"
+          }
+        },
+        {
+          "id": "i_89e9f17ef1",
+          "legacy_key": "1-8",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 1.4:</strong> Use the Foliage tool to scatter trees, bushes, and grass across your landscape."
+          }
+        },
+        {
+          "id": "i_9243d49c7f",
+          "legacy_key": "1-9",
+          "type": "lesson",
+          "title": "Unit 1 Activity - Build a Castle Courtyard",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit1/activity_castle_courtyard.html"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_c8bc5b27c9",
+      "legacy_key": "2",
+      "title": "Unit 2: Blueprints & Interactivity",
+      "description": "Learn the Blueprint visual scripting system to add logic, interactivity, and gameplay elements to your levels.",
+      "items": [
+        {
+          "id": "i_b680ec089f",
+          "legacy_key": "2-0",
+          "type": "lesson",
+          "title": "Reading - Intro to Blueprints",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit2/intro_to_blueprints.html"
+          }
+        },
+        {
+          "id": "i_632d14d09e",
+          "legacy_key": "2-1",
+          "type": "video",
+          "title": "Blueprints in 5 Minutes",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "EFXO12UzJJA"
+          }
+        },
+        {
+          "id": "i_047cd47296",
+          "legacy_key": "2-2",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 2.1:</strong> Open the Level Blueprint and create a keyboard event that prints \"Hello, World!\" when you press <code>N</code>. Add a <code>PlayerName</code> variable and append it to the greeting."
+          }
+        },
+        {
+          "id": "i_34533d6148",
+          "legacy_key": "2-3",
+          "type": "lesson",
+          "title": "Reading - Variables, Branches & Functions",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit2/variables_branches_functions.html"
+          }
+        },
+        {
+          "id": "i_66a4d42856",
+          "legacy_key": "2-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 2.2:</strong> Create a gold-collecting system in the Level Blueprint. Add a <code>TotalGold</code> integer and an <code>AddGold</code> function. Use a Branch node to print a special message when gold reaches 10."
+          }
+        },
+        {
+          "id": "i_4ebb714db1",
+          "legacy_key": "2-5",
+          "type": "lesson",
+          "title": "Reading - Actor Blueprints & Collision",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit2/actor_blueprints_collision.html"
+          }
+        },
+        {
+          "id": "i_b674a4253e",
+          "legacy_key": "2-6",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 2.3:</strong> Create a <strong>BP_Key</strong> and <strong>BP_Door</strong> Actor Blueprint. The key is picked up on overlap (setting a boolean), and the door only opens if the player has the key."
+          }
+        },
+        {
+          "id": "i_898f2fa14b",
+          "legacy_key": "2-7",
+          "type": "lesson",
+          "title": "Reading - Collectibles, Jump Pads & Movement",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit2/collectibles_jumppads_movement.html"
+          }
+        },
+        {
+          "id": "i_58c00cfb2b",
+          "legacy_key": "2-8",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 2.4:</strong> Create BP_Coin (with rotating movement), BP_JumpPad (Launch Character), and enable double-jump on the player character."
+          }
+        },
+        {
+          "id": "i_98190371af",
+          "legacy_key": "2-9",
+          "type": "lesson",
+          "title": "Unit 2 Activity - Obstacle Course",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit2/activity_obstacle_course.html"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_63f430cc70",
+      "legacy_key": "3",
+      "title": "Unit 3: UI, Game Design & Final Project",
+      "description": "Create user interfaces, plan a game design document, and build a complete playable level as your final project.",
+      "items": [
+        {
+          "id": "i_0e55015f3b",
+          "legacy_key": "3-0",
+          "type": "lesson",
+          "title": "Reading - UMG Widgets & HUD",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit3/umg_widgets_and_hud.html"
+          }
+        },
+        {
+          "id": "i_281d57f5d9",
+          "legacy_key": "3-1",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 3.1:</strong> Create a HUD Widget Blueprint that displays the player's coin count. Bind it to the <code>CoinCount</code> variable and add it to the viewport on BeginPlay."
+          }
+        },
+        {
+          "id": "i_bcdc9b363e",
+          "legacy_key": "3-2",
+          "type": "lesson",
+          "title": "Reading - Enhanced Input & Sprint Mechanics",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit3/enhanced_input_sprint.html"
+          }
+        },
+        {
+          "id": "i_60967f904f",
+          "legacy_key": "3-3",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 3.2:</strong> Set up an IA_Sprint Input Action with Left Shift, create SprintStart/SprintStop functions that modify Max Walk Speed, and connect them to your Input Mapping Context."
+          }
+        },
+        {
+          "id": "i_00ffe65c9a",
+          "legacy_key": "3-4",
+          "type": "lesson",
+          "title": "Reading - Game Design Documents",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit3/game_design_documents.html"
+          }
+        },
+        {
+          "id": "i_1946fe083c",
+          "legacy_key": "3-5",
+          "type": "lesson",
+          "title": "Reading - Level Design & Grayboxing",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit3/level_design_grayboxing.html"
+          }
+        },
+        {
+          "id": "i_fee079579c",
+          "legacy_key": "3-6",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 3.3:</strong> Write a short Game Design Document for your final level: title, genre, theme, core mechanics, reference images, and a top-down sketch."
+          }
+        },
+        {
+          "id": "i_66cee2589e",
+          "legacy_key": "3-7",
+          "type": "lesson",
+          "title": "Reading - Win, Lose & Checkpoint Systems",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit3/win_lose_checkpoints.html"
+          }
+        },
+        {
+          "id": "i_ce3f9cd15b",
+          "legacy_key": "3-8",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 3.4:</strong> Create BP_Win (triggers victory), BP_Enemy (sends player to a checkpoint), and BP_Checkpoint (stores respawn location)."
+          }
+        },
+        {
+          "id": "i_db805eb891",
+          "legacy_key": "3-9",
+          "type": "lesson",
+          "title": "Final Project - Build Your Game Level",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/unreal-engine/unit3/final_project.html"
+          }
+        }
+      ]
+    }
+  ]
+}

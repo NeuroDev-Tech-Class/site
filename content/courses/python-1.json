@@ -1,0 +1,539 @@
+{
+  "id": "python-1",
+  "title": "Python I - Programming Fundamentals",
+  "category": "Computer Programming",
+  "status": "published",
+  "heading": "Python I - Programming Fundamentals",
+  "summary": "This beginner programming course introduces students to the essentials of coding using Python 3, focusing on foundational concepts like data types, variables, loops, and functions. Students will learn to write Python code within the Visual Studio Code IDE, developing skills to build a simple text-based adventure game. This course lays the groundwork for more advanced studies in computer science.",
+  "objectives": [
+    "Gain foundational knowledge of programming concepts including variables, conditionals, loops, and data structures.",
+    "Develop proficiency in Python by learning syntax and writing code.",
+    "Become comfortable with code editors like Visual Studio Code.",
+    "Apply problem-solving skills to tackle programming challenges.",
+    "Understand and implement best practices in code readability and version control.",
+    "Demonstrate knowledge with a text-based adventure game that utilizes all course concepts."
+  ],
+  "intro_html": "",
+  "units": [
+    {
+      "id": "u_336bee3b62",
+      "legacy_key": "0",
+      "title": "Getting Started",
+      "description": "",
+      "items": [
+        {
+          "id": "i_4f5c7d4a48",
+          "legacy_key": "0-0",
+          "type": "lesson",
+          "title": "Reading - What Is Python?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/what_is_python.html"
+          }
+        },
+        {
+          "id": "i_f839b9e33b",
+          "legacy_key": "0-1",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Download and install <a href=\"https://www.python.org/downloads/\" target=\"_blank\" rel=\"noopener noreferrer\">Python 3</a>."
+          }
+        },
+        {
+          "id": "i_b2097a56d6",
+          "legacy_key": "0-2",
+          "type": "lesson",
+          "title": "Reading - What Is an IDE?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/what_is_an_ide.html"
+          }
+        },
+        {
+          "id": "i_5a2fc36e4c",
+          "legacy_key": "0-3",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Download and install <a href=\"https://code.visualstudio.com/download\" target=\"_blank\" rel=\"noopener noreferrer\">Visual Studio Code</a>."
+          }
+        },
+        {
+          "id": "i_e2c9af2a00",
+          "legacy_key": "0-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Install the Python extension in VS Code."
+          }
+        },
+        {
+          "id": "i_184e80792e",
+          "legacy_key": "0-5",
+          "type": "lesson",
+          "title": "Reading - Setting Up GitHub",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/github_setup.html"
+          }
+        },
+        {
+          "id": "i_0625d8bb3d",
+          "legacy_key": "0-6",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/_BTt4Xjr",
+            "label": "Complete Lesson & Exercise 0.0 - GitHub Basics. This will add you to the Python I classroom and teach you how to submit your code for review."
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_50940bfa5e",
+      "legacy_key": "1",
+      "title": "How Assignments Work",
+      "description": "Each assignment is hosted on GitHub Classroom. When you click the assignment link, GitHub will create a private repository just for you. Clone that repository to your computer and open it in VS Code. Inside the repository, you'll find a lesson (.md file) and an exercise (.py file). Open the lesson file and read it by using Ctrl+Shift+V or the Open Preview icon in the upper right corner. Then complete the exercise by following the commented instructions. When you finish, commit your changes and push them to GitHub for review.",
+      "items": []
+    },
+    {
+      "id": "u_5b812f36f5",
+      "legacy_key": "2",
+      "title": "Unit 1: Data Types, Variables, and Operators",
+      "description": "Learn some of the fundamental building blocks of programming, including data types, variables, operators, and basic syntax.",
+      "items": [
+        {
+          "id": "i_d1cb02d26b",
+          "legacy_key": "2-0",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/5_wjUJ52",
+            "label": "Complete Lesson & Exercise 1.1 - Basic Syntax"
+          }
+        },
+        {
+          "id": "i_c247011c7f",
+          "legacy_key": "2-1",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/YRWXnfst",
+            "label": "Complete Lesson & Exercise 1.2 - Data Types"
+          }
+        },
+        {
+          "id": "i_7616bfae52",
+          "legacy_key": "2-2",
+          "type": "video",
+          "title": "Why TRUE + TRUE = 2: Data Types",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "6otW6OXjR8c"
+          }
+        },
+        {
+          "id": "i_dc2962328d",
+          "legacy_key": "2-3",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/HMF15QKE",
+            "label": "Complete Lesson & Exercise 1.3 - Variables"
+          }
+        },
+        {
+          "id": "i_d83924a2f5",
+          "legacy_key": "2-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Read Sidenote: <a href=\"assets/pdfs/computer-science/python-1-intro_to_programming/NamingConventions.html\" target=\"_blank\" rel=\"noopener noreferrer\">Naming Conventions</a>"
+          }
+        },
+        {
+          "id": "i_050914cacb",
+          "legacy_key": "2-5",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/dgwDBCxR",
+            "label": "Complete Lesson & Exercise 1.4 - Operators"
+          }
+        },
+        {
+          "id": "i_2ff7fd241b",
+          "legacy_key": "2-6",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/-pKTxb9p",
+            "label": "Complete Lesson & Exercise 1.5 - User Input"
+          }
+        },
+        {
+          "id": "i_e0ca516410",
+          "legacy_key": "2-7",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/59vW8V7u",
+            "label": "Complete Lesson & Exercise 1.6 - String Manipulation"
+          }
+        },
+        {
+          "id": "i_2a47ea050e",
+          "legacy_key": "2-8",
+          "type": "test",
+          "title": "Unit 1 Test",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSfOlN9MM7r_MMXUHHWKeJsYdOv9DNVD2MtWcCgXAnZLNekunw/viewform?usp=sf_link"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_2d057611ad",
+      "legacy_key": "3",
+      "title": "Unit 2: Control Flow and Data Structures",
+      "description": "Learn to build more expressive programs using conditional statements, loops, and basic data structures.",
+      "items": [
+        {
+          "id": "i_8734747e54",
+          "legacy_key": "3-0",
+          "type": "lesson",
+          "title": "Reading - What Is Control Flow?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit2/what_is_control_flow.html"
+          }
+        },
+        {
+          "id": "i_c2fb58bf43",
+          "legacy_key": "3-1",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/IjVa3rJM",
+            "label": "Complete Lesson & Exercise 2.1 - Functions"
+          }
+        },
+        {
+          "id": "i_2798f05258",
+          "legacy_key": "3-2",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/Itws9P_9",
+            "label": "Complete Lesson & Exercise 2.2 - Conditional Statements"
+          }
+        },
+        {
+          "id": "i_ed90011709",
+          "legacy_key": "3-3",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/BmzBFZwC",
+            "label": "Complete Lesson & Exercise 2.3 - Loops"
+          }
+        },
+        {
+          "id": "i_c7f2443fe2",
+          "legacy_key": "3-4",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/R6cD0twt",
+            "label": "Complete Lesson & Exercise 2.4 - Exception Handling"
+          }
+        },
+        {
+          "id": "i_941afda699",
+          "legacy_key": "3-5",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Read Sidenote: <a href=\"assets/pdfs/computer-science/python-1-intro_to_programming/DataStructures.html\" target=\"_blank\" rel=\"noopener noreferrer\">Data Structures</a>"
+          }
+        },
+        {
+          "id": "i_3abb4aff5c",
+          "legacy_key": "3-6",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/0j_6bGat",
+            "label": "Complete Lesson & Exercise 2.5 - Lists"
+          }
+        },
+        {
+          "id": "i_c2187c62d6",
+          "legacy_key": "3-7",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/yaTdkHri",
+            "label": "Complete Lesson & Exercise 2.6 - Tuples"
+          }
+        },
+        {
+          "id": "i_17fbbafc51",
+          "legacy_key": "3-8",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/Ffl3IiaK",
+            "label": "Complete Lesson & Exercise 2.7 - Dictionaries"
+          }
+        },
+        {
+          "id": "i_c01f262263",
+          "legacy_key": "3-9",
+          "type": "test",
+          "title": "Unit 2 Test",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSeI-uVrDq7YKlJ1KpFDscx5SV7TQH2MmpgBgzDhmHM2JP9ZMA/viewform?usp=share_link"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_53d88b39b5",
+      "legacy_key": "4",
+      "title": "Unit 3: Best Practices and Advanced Tools",
+      "description": "Learn good habits to help you write cleaner, more efficient, and more maintainable code.",
+      "items": [
+        {
+          "id": "i_41292e5064",
+          "legacy_key": "4-0",
+          "type": "lesson",
+          "title": "Reading - Best Practices",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit3/best_practices.html"
+          }
+        },
+        {
+          "id": "i_b511952736",
+          "legacy_key": "4-1",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/70xQBGoV",
+            "label": "Reading 3.0 - PEP-8 Style Guide"
+          }
+        },
+        {
+          "id": "i_e3ee44f64e",
+          "legacy_key": "4-2",
+          "type": "video",
+          "title": "Best Practices for Comments in Python",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "7FpJRXuwLSY"
+          }
+        },
+        {
+          "id": "i_9ec7449a03",
+          "legacy_key": "4-3",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/NsLlHg8I",
+            "label": "Complete Lesson & Exercise 3.1 - Debugging"
+          }
+        },
+        {
+          "id": "i_93e049aaeb",
+          "legacy_key": "4-4",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/CmCKLPBv",
+            "label": "Complete Lesson & Exercise 3.2 - Modules and Libraries"
+          }
+        },
+        {
+          "id": "i_1755f55b32",
+          "legacy_key": "4-5",
+          "type": "lesson",
+          "title": "Reading - Third-Party Libraries",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit3/3rd_party_libraries.html"
+          }
+        },
+        {
+          "id": "i_483730c39f",
+          "legacy_key": "4-6",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/2hCf3bb8",
+            "label": "Complete Lesson & Exercise 3.3 - Type Hinting"
+          }
+        },
+        {
+          "id": "i_7dbdc1f48b",
+          "legacy_key": "4-7",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/8uKwJj1k",
+            "label": "Read Lesson 3.4 - Unit Testing"
+          }
+        },
+        {
+          "id": "i_630f203fc1",
+          "legacy_key": "4-8",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/fOxY52SK",
+            "label": "Read Lesson 3.5 - File I/O"
+          }
+        },
+        {
+          "id": "i_974fd25b98",
+          "legacy_key": "4-9",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/TFcoLlBl",
+            "label": "Complete Lesson & Exercise 3.6 - Regular Expressions"
+          }
+        },
+        {
+          "id": "i_f7a17d64ac",
+          "legacy_key": "4-10",
+          "type": "test",
+          "title": "Unit 3 Test",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSdkdibic7ZjpzzqPpDb2w3yZkw4eSoRwdCTSFVMYzqjrTZgCA/viewform?usp=sf_link"
+          }
+        },
+        {
+          "id": "i_a65243e6c7",
+          "legacy_key": "4-11",
+          "type": "lesson",
+          "title": "Final Project - Text Adventure Game",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit3/final_project_text_adventure_game.html"
+          }
+        }
+      ]
+    }
+  ]
+}

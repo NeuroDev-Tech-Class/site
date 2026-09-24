@@ -1,0 +1,454 @@
+{
+  "id": "blender-zbrush-mini",
+  "title": "Intro to Blender & ZBrush",
+  "category": "Game Development",
+  "status": "published",
+  "heading": "Intro to Blender & ZBrush Mini",
+  "summary": "This course teaches students 3D modeling, sculpting, and basic 3D printing using Blender (free, open-source 3D software) and ZBrushCoreMini (a free digital sculpting tool). Students will progress from simple shapes to detailed models, learn to prepare files for 3D printing, and explore digital sculpting with a tablet. By the end, students will have a portfolio of printed and digital creations.",
+  "objectives": [
+    "Navigate the Blender interface and use essential modeling tools.",
+    "Model 3D objects using extrude, inset, loop cut, and modifiers.",
+    "Understand mesh topology, N-gons, and clean geometry.",
+    "Prepare 3D models for printing: export, slice, and configure printer settings.",
+    "Sculpt organic shapes in ZBrushCoreMini using various brushes.",
+    "Complete a portfolio of 3D models suitable for printing or rendering."
+  ],
+  "intro_html": "<section>\n        <h3>System Requirements</h3>\n        <p>\n          <strong>Blender:</strong> Windows 8.1+ (64-bit), 4-core CPU with SSE4.2,\n          8 GB RAM minimum, GPU with 2 GB VRAM and OpenGL 4.3.\n          Blender is 100% free and open-source.\n        </p>\n        <p>\n          <strong>ZBrushCoreMini:</strong> Free download from Maxon. Tablet\n          (drawing tablet) recommended for sculpting but not required.\n        </p>\n      </section>",
+  "units": [
+    {
+      "id": "u_818b810ed4",
+      "legacy_key": "0",
+      "title": "Getting Started",
+      "description": "Install the software and learn the basics of navigating 3D space.",
+      "items": [
+        {
+          "id": "i_37200c4523",
+          "legacy_key": "0-0",
+          "type": "lesson",
+          "title": "Reading - What Is 3D Modeling?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit1/what_is_3d_modeling.html"
+          }
+        },
+        {
+          "id": "i_1549b125c4",
+          "legacy_key": "0-1",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Download and install <a href=\"https://www.blender.org/download/\" target=\"_blank\" rel=\"noopener noreferrer\">Blender</a> (free, open source)."
+          }
+        },
+        {
+          "id": "i_3a268cbd4a",
+          "legacy_key": "0-2",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Download and install <a href=\"https://www.maxon.net/en/zbrushcoremini\" target=\"_blank\" rel=\"noopener noreferrer\">ZBrushCoreMini</a> (free, requires account)."
+          }
+        },
+        {
+          "id": "i_e4c033ad46",
+          "legacy_key": "0-3",
+          "type": "lesson",
+          "title": "Reading - The Blender Interface",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit1/the_blender_interface.html"
+          }
+        },
+        {
+          "id": "i_d3dd13d23e",
+          "legacy_key": "0-4",
+          "type": "video",
+          "title": "Blender Beginner Tutorial (Part 1)",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "nIoXOplUvAw"
+          }
+        },
+        {
+          "id": "i_4b67c9c54f",
+          "legacy_key": "0-5",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Video Resource:</strong> Watch <a href=\"https://www.youtube.com/results?search_query=Blender+Guru+Donut+Tutorial+Blender+4\" target=\"_blank\" rel=\"noopener noreferrer\">Blender Guru's Donut Series</a> for a full beginner walkthrough from interface basics to rendering."
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_d475469657",
+      "legacy_key": "1",
+      "title": "Unit 1: Blender Modeling Fundamentals",
+      "description": "Learn core modeling tools and techniques to create your first 3D objects.",
+      "items": [
+        {
+          "id": "i_f453d0795a",
+          "legacy_key": "1-0",
+          "type": "lesson",
+          "title": "Reading - Navigation & Transform Tools",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit1/navigation_and_transforms.html"
+          }
+        },
+        {
+          "id": "i_ab4105d44d",
+          "legacy_key": "1-1",
+          "type": "lesson",
+          "title": "Reading - Edit Mode & Mesh Elements",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit1/edit_mode_mesh_elements.html"
+          }
+        },
+        {
+          "id": "i_5d837ff8e6",
+          "legacy_key": "1-2",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 1.1:</strong> Create a new scene. Add a UV Sphere and a Cylinder. Practice switching between Object Mode (<code>Tab</code>) and Edit Mode. Select vertices, edges, and faces with <code>1</code>, <code>2</code>, <code>3</code>."
+          }
+        },
+        {
+          "id": "i_76b534453b",
+          "legacy_key": "1-3",
+          "type": "lesson",
+          "title": "Reading - Extrude, Inset & Loop Cut",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit1/extrude_inset_loopcut.html"
+          }
+        },
+        {
+          "id": "i_00004f838e",
+          "legacy_key": "1-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 1.2 - Model Dice:</strong> Start with a cube, use Inset (<code>I</code>) and Extrude (<code>E</code>) to create the pip indentations on each face."
+          }
+        },
+        {
+          "id": "i_2f400bfebb",
+          "legacy_key": "1-5",
+          "type": "lesson",
+          "title": "Reading - Viewport Shading & Materials",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit1/shading_and_materials.html"
+          }
+        },
+        {
+          "id": "i_a29cb250e1",
+          "legacy_key": "1-6",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 1.3 - Model a Car:</strong> Start from a cube. Use Loop Cut (<code>Ctrl+R</code>), Extrude, and scaling to block out a simple car shape. Apply a basic material color."
+          }
+        },
+        {
+          "id": "i_26f0248102",
+          "legacy_key": "1-7",
+          "type": "lesson",
+          "title": "Reading - Exporting Your Models",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit1/exporting_models.html"
+          }
+        },
+        {
+          "id": "i_2c13e8b521",
+          "legacy_key": "1-8",
+          "type": "lesson",
+          "title": "Unit 1 Activity - Create a Scene",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit1/activity_create_a_scene.html"
+          }
+        },
+        {
+          "id": "i_2f66d7c16b",
+          "legacy_key": "1-9",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Video Resource:</strong> Watch <a href=\"https://www.youtube.com/results?search_query=CG+Cookie+Blender+beginner+modeling+basics\" target=\"_blank\" rel=\"noopener noreferrer\">CG Cookie beginner modeling lessons</a> to reinforce extrude, inset, loop cuts, and clean mesh workflow."
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_3bffa08622",
+      "legacy_key": "2",
+      "title": "Unit 2: Topology, 3D Printing & Advanced Modeling",
+      "description": "Dive deeper into topology, modifiers, and the 3D printing pipeline.",
+      "items": [
+        {
+          "id": "i_04b1a8dc95",
+          "legacy_key": "2-0",
+          "type": "lesson",
+          "title": "Reading - N-Gons & Clean Topology",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit2/ngons_and_topology.html"
+          }
+        },
+        {
+          "id": "i_7d3d47bf8f",
+          "legacy_key": "2-1",
+          "type": "lesson",
+          "title": "Reading - The Knife Tool & Merge",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit2/knife_tool_and_merge.html"
+          }
+        },
+        {
+          "id": "i_3913606d26",
+          "legacy_key": "2-2",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 2.1 - Model a Sword:</strong> Block out a sword shape using reference images. Use bevels and edge loops for detail. Fix any N-gons with the Knife tool (<code>K</code>)."
+          }
+        },
+        {
+          "id": "i_1a8fa486ea",
+          "legacy_key": "2-3",
+          "type": "lesson",
+          "title": "Reading - Modifiers (Subdivision, Mirror, Bevel)",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit2/modifiers.html"
+          }
+        },
+        {
+          "id": "i_c64ab768cc",
+          "legacy_key": "2-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 2.2:</strong> Add a Mirror modifier to model half a character head. Use Subdivision Surface for smoothing. Apply modifiers when satisfied."
+          }
+        },
+        {
+          "id": "i_6ad9c4288a",
+          "legacy_key": "2-5",
+          "type": "lesson",
+          "title": "Reading - 3D Printing Basics",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit2/3d_printing_basics.html"
+          }
+        },
+        {
+          "id": "i_b137052d61",
+          "legacy_key": "2-6",
+          "type": "lesson",
+          "title": "Reading - Slicing Software & Print Settings",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit2/slicing_and_print_settings.html"
+          }
+        },
+        {
+          "id": "i_6aaeb0fdc6",
+          "legacy_key": "2-7",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 2.3 - Print Your Dice:</strong> Export your dice model from Unit 1 as OBJ. Load it into the slicer, scale to 15-20mm, configure supports if needed, and print."
+          }
+        },
+        {
+          "id": "i_a02099483a",
+          "legacy_key": "2-8",
+          "type": "lesson",
+          "title": "Unit 2 Activity - Model & Print a Ring",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit2/activity_model_print_ring.html"
+          }
+        },
+        {
+          "id": "i_48bd908453",
+          "legacy_key": "2-9",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Video Resource:</strong> Watch <a href=\"https://www.youtube.com/results?search_query=Maker+Tales+Blender+3D+printing+workflow\" target=\"_blank\" rel=\"noopener noreferrer\">Maker Tales Blender-to-3D-print workflow videos</a> for practical print prep and slicing tips."
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_ce1cdfb1af",
+      "legacy_key": "3",
+      "title": "Unit 3: Digital Sculpting with ZBrush",
+      "description": "Learn digital sculpting with ZBrushCoreMini and complete a final portfolio project.",
+      "items": [
+        {
+          "id": "i_5a593d893b",
+          "legacy_key": "3-0",
+          "type": "lesson",
+          "title": "Reading - ZBrushCoreMini Interface & Brushes",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit3/zbrush_interface_brushes.html"
+          }
+        },
+        {
+          "id": "i_b6dc395ebd",
+          "legacy_key": "3-1",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 3.1 - Smiley/Sad Sculpt:</strong> Use the Standard brush to sculpt a smiley face on one side of a sphere. Rotate and sculpt a sad face on the back. Hold <code>Alt</code> to carve."
+          }
+        },
+        {
+          "id": "i_98e3d9e05b",
+          "legacy_key": "3-2",
+          "type": "lesson",
+          "title": "Reading - Sculpting Techniques & Brush Guide",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit3/sculpting_techniques.html"
+          }
+        },
+        {
+          "id": "i_31d9f580cd",
+          "legacy_key": "3-3",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 3.2:</strong> Practice each brush (ClayBuildup, Inflate, Pinch, Move, SnakeHook, hPolish) on a fresh sphere. Observe how each one manipulates the surface differently."
+          }
+        },
+        {
+          "id": "i_99776fe5b8",
+          "legacy_key": "3-4",
+          "type": "lesson",
+          "title": "Reading - Exporting & Blender Round-Trip",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit3/export_and_roundtrip.html"
+          }
+        },
+        {
+          "id": "i_0ca8d20381",
+          "legacy_key": "3-5",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 3.3:</strong> Export your sculpt as OBJ. Import it into Blender. Add extra geometry (a torus for a pendant loop, a flat base for stability). Re-export for printing."
+          }
+        },
+        {
+          "id": "i_705050796c",
+          "legacy_key": "3-6",
+          "type": "lesson",
+          "title": "Reading - Finishing: Sanding & Painting Prints",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit3/finishing_prints.html"
+          }
+        },
+        {
+          "id": "i_e434c898bb",
+          "legacy_key": "3-7",
+          "type": "lesson",
+          "title": "Final Project - Portfolio Sculpt & Print",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "game-development/blender-zbrush/unit3/final_project.html"
+          }
+        },
+        {
+          "id": "i_c03665bca6",
+          "legacy_key": "3-8",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Video Resource:</strong> Watch <a href=\"https://www.youtube.com/results?search_query=ZBrushCoreMini+beginner+sculpting+tutorial\" target=\"_blank\" rel=\"noopener noreferrer\">ZBrushCoreMini beginner sculpting tutorials</a> for brush control and form-building practice."
+          }
+        }
+      ]
+    }
+  ]
+}

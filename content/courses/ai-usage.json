@@ -1,0 +1,302 @@
+{
+  "id": "ai-usage",
+  "title": "AI Usage & Prompt Engineering",
+  "category": "Computer Basics",
+  "status": "published",
+  "heading": "AI Usage & Prompt Engineering",
+  "summary": "This course introduces students to the rapidly developing world of AI, with an emphasis on the large language models (LLMs) that power today's AI assistants — like OpenAI's ChatGPT, Google's Gemini, and Anthropic's Claude. These tools are now multimodal: alongside text, they can understand images, listen and speak, work with documents, and generate images of their own. Designed for beginners, the course covers the practical skills for engaging with AI responsibly and effectively.",
+  "objectives": [
+    "Understand the basics of Generative AI, especially LLMs, and their role in generative tasks.",
+    "Practice ethical usage of Generative AI.",
+    "Learn clear communication strategies with Generative AI, called \"prompt engineering.\"",
+    "Apply Generative AI tools in practical scenarios for creativity, learning, and productivity."
+  ],
+  "intro_html": "",
+  "units": [
+    {
+      "id": "u_c64b7de37d",
+      "legacy_key": "0",
+      "title": "Unit 1: Fundamentals of AI",
+      "description": "How generative AI works under the hood — from neural networks and training to the LLMs and image models behind today's AI assistants.",
+      "items": [
+        {
+          "id": "i_dc0e42f49b",
+          "legacy_key": "0-0",
+          "type": "slides",
+          "title": "Slideshow - Intro to Generative AI",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "slides_url": "https://docs.google.com/presentation/d/1AfwUX_T-DBr3q2e0ZJSNyGEbciYaMNyaI3QI6apNgHc/edit?usp=sharing"
+          }
+        },
+        {
+          "id": "i_a4ab9d2e0c",
+          "legacy_key": "0-1",
+          "type": "test",
+          "title": "Quiz - Generative AI",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLScApLPHV6QTArfW_I2TUUAmUw8xz3_jJdI0amFrOOMJYyprIA/viewform?usp=sharing"
+          }
+        },
+        {
+          "id": "i_cade7b9ec9",
+          "legacy_key": "0-2",
+          "type": "video",
+          "title": "AI art, explained",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "SVcsDDABEkM"
+          }
+        },
+        {
+          "id": "i_81518cbd4b",
+          "legacy_key": "0-3",
+          "type": "video",
+          "title": "Why Neural Networks can learn (almost) anything",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "0QczhVg5HaI"
+          }
+        },
+        {
+          "id": "i_fa42df0fd1",
+          "legacy_key": "0-4",
+          "type": "link",
+          "title": "Neural Network Playground",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "url": "https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.05544&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false"
+          }
+        },
+        {
+          "id": "i_2ad8bfea74",
+          "legacy_key": "0-5",
+          "type": "video",
+          "title": "Watching Neural Networks Learn",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "TkwXa7Cvfr8"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_f5fd9db616",
+      "legacy_key": "1",
+      "title": "Unit 2: Ethical AI Usage",
+      "description": "Overview of AI and ethics of engagement for generative purposes.",
+      "items": [
+        {
+          "id": "i_07718942a9",
+          "legacy_key": "1-0",
+          "type": "slides",
+          "title": "Slideshow - AI Ethics",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "slides_url": "https://docs.google.com/presentation/d/1O3jb91xuNxmalFGFuN1j_CFw3cWBdrCSRCs-_BCbbuw/edit?usp=drive_link"
+          }
+        },
+        {
+          "id": "i_b9b085d84c",
+          "legacy_key": "1-1",
+          "type": "link",
+          "title": "Article - AI Fairness Isn't Just an Ethical Issue",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "url": "https://hbr.org/2020/10/ai-fairness-isnt-just-an-ethical-issue"
+          }
+        },
+        {
+          "id": "i_35756b850b",
+          "legacy_key": "1-2",
+          "type": "link",
+          "title": "Article - Generative AI Has a Visual Plagiarism Problem",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "url": "https://spectrum.ieee.org/midjourney-copyright"
+          }
+        },
+        {
+          "id": "i_eab3d2c6bf",
+          "legacy_key": "1-3",
+          "type": "video",
+          "title": "AI can do your homework. Now what?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "bEJ0_TVXh-I"
+          }
+        },
+        {
+          "id": "i_d08c2ca04d",
+          "legacy_key": "1-4",
+          "type": "lesson",
+          "title": "Reading - Responsible AI Use",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/ai-prompt-engineering/responsible_ai_use.html"
+          }
+        },
+        {
+          "id": "i_11f7d5e459",
+          "legacy_key": "1-5",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Sign up for a free <a href=\"https://chatgpt.com\" target=\"_blank\" rel=\"noopener noreferrer\">ChatGPT</a>, <a href=\"https://gemini.google.com\" target=\"_blank\" rel=\"noopener noreferrer\">Gemini</a>, or <a href=\"https://claude.ai\" target=\"_blank\" rel=\"noopener noreferrer\">Claude</a> account."
+          }
+        },
+        {
+          "id": "i_0e06797d7c",
+          "legacy_key": "1-6",
+          "type": "lesson",
+          "title": "Hands-on Generative AI Exercises",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/ai-prompt-engineering/hands-on_generative_ai_exercises.html"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_96313fb095",
+      "legacy_key": "2",
+      "title": "Unit 3: Problem-Solving with AI",
+      "description": "Principles of clear communication with AI through problem formulation.",
+      "items": [
+        {
+          "id": "i_c55a6c9a60",
+          "legacy_key": "2-0",
+          "type": "lesson",
+          "title": "Reading - Prompt Engineering Approaches and Strategies",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/ai-prompt-engineering/prompt_engineering_approaches_and_strategies.html"
+          }
+        },
+        {
+          "id": "i_090def3d59",
+          "legacy_key": "2-1",
+          "type": "link",
+          "title": "Article - Prompt Engineering 101",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "url": "https://hackernoon.com/prompt-engineering-101-i-unveiling-principles-and-techniques-of-effective-prompt-crafting"
+          }
+        },
+        {
+          "id": "i_66a1338493",
+          "legacy_key": "2-2",
+          "type": "slides",
+          "title": "Slideshow - Prompt Engineering vs. Problem Formulation",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "slides_url": "https://docs.google.com/presentation/d/1p0PsTj-5NdPQPne3LKOHqjUddnLLRKhdLU-8JfdDWgQ/edit?usp=drive_link"
+          }
+        },
+        {
+          "id": "i_4f8db4411a",
+          "legacy_key": "2-3",
+          "type": "lesson",
+          "title": "Reading - Working with Modern AI Tools",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/ai-prompt-engineering/working_with_modern_ai_tools.html"
+          }
+        },
+        {
+          "id": "i_c8eea5f6a1",
+          "legacy_key": "2-4",
+          "type": "lesson",
+          "title": "Final Assignment - AI Application",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/ai-prompt-engineering/final_assignment-ai_application.html"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_d8ab6ce1b6",
+      "legacy_key": "3",
+      "title": "Additional Resources",
+      "description": "",
+      "items": [
+        {
+          "id": "i_54cc2019c6",
+          "legacy_key": "3-0",
+          "type": "video",
+          "title": "\"But what is a neural network?\"",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "aircAruvnKk"
+          }
+        },
+        {
+          "id": "i_7881f4201b",
+          "legacy_key": "3-1",
+          "type": "video",
+          "title": "Transformers (how LLMs work) explained visually",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "wjZofJX0v4M"
+          }
+        },
+        {
+          "id": "i_b11a2f31e9",
+          "legacy_key": "3-2",
+          "type": "video",
+          "title": "The moment we stopped understanding AI",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "UZDiGooFs54"
+          }
+        },
+        {
+          "id": "i_c1b993c0d5",
+          "legacy_key": "3-3",
+          "type": "link",
+          "title": "What Is ChatGPT Doing... and Why Does It Work?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "url": "https://faculty.sites.iastate.edu/tesfatsi/archive/tesfatsi/ChatGPT.WhatIsItWhyDoesItWork.SWolfram.2024.pdf"
+          }
+        },
+        {
+          "id": "i_c1d2481cbd",
+          "legacy_key": "3-4",
+          "type": "link",
+          "title": "Article - Prompt Engineering 101 (Part II): Advanced Techniques",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "url": "https://hackernoon.com/prompt-engineering-101-ii-mastering-prompt-crafting-with-advanced-techniques"
+          }
+        }
+      ]
+    }
+  ]
+}

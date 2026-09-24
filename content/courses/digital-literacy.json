@@ -1,0 +1,450 @@
+{
+  "id": "digital-literacy",
+  "title": "Digital Literacy",
+  "category": "Computer Basics",
+  "status": "published",
+  "heading": "Digital Literacy",
+  "summary": "The goal of this entry-level course is to equip students with essential digital literacy skills, important for both personal and professional success in today's digital world. By mastering basic computer and internet skills, students will improve their productivity, safety, and digital communication abilities. Even tech-savvy learners should find this course helpful.",
+  "objectives": [
+    "Understand the function of basic hardware and software components.",
+    "Navigate efficiently through an operating system (Windows or macOS).",
+    "Employ effective internet search strategies.",
+    "Practice digital communication etiquette.",
+    "Apply best practices for digital security and privacy.",
+    "Utilize common productivity tools and cloud storage solutions."
+  ],
+  "intro_html": "",
+  "units": [
+    {
+      "id": "u_e68eada1ae",
+      "legacy_key": "0",
+      "title": "Unit 1: Intro to Computers",
+      "description": "Learn the basics of hardware, software, and computer safety.",
+      "items": [
+        {
+          "id": "i_5f795b9ed8",
+          "legacy_key": "0-0",
+          "type": "slides",
+          "title": "Slideshow - \"When am I going to use this?\"",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "slides_url": "https://docs.google.com/presentation/u/0/d/1A5Wxnjh8EWCwFQYhK-_iWr0yY05UBOP80svrONxToss"
+          }
+        },
+        {
+          "id": "i_1ac8a88398",
+          "legacy_key": "0-1",
+          "type": "lesson",
+          "title": "Reading - What Does It Mean to Be Digitally Literate?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit1/what_does_it_mean_to_be_digitally_literate_.html"
+          }
+        },
+        {
+          "id": "i_dc4dc0611d",
+          "legacy_key": "0-2",
+          "type": "slides",
+          "title": "Slideshow - Basics of Computer Safety",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "slides_url": "https://docs.google.com/presentation/d/12idFrbgFHmDyqFY7wbD84SgNzaU1u8qxcUlJuP3DJ8I"
+          }
+        },
+        {
+          "id": "i_2fde0ee286",
+          "legacy_key": "0-3",
+          "type": "lesson",
+          "title": "Checkpoint - How Will Technology Help Me?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit1/checkpoint-how_will_technology_help_me_.html"
+          }
+        },
+        {
+          "id": "i_d69c6fcec6",
+          "legacy_key": "0-4",
+          "type": "lesson",
+          "title": "Reading - Hardware and Software",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit1/hardware_and_software.html"
+          }
+        },
+        {
+          "id": "i_51bb408bbc",
+          "legacy_key": "0-5",
+          "type": "video",
+          "title": "The Fetch-Execute Cycle: What's Your Computer Actually Doing?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "Z5JC9Ve1sfI"
+          }
+        },
+        {
+          "id": "i_c37102409d",
+          "legacy_key": "0-6",
+          "type": "lesson",
+          "title": "Reading - Computer Hazards",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit1/computer_hazards.html"
+          }
+        },
+        {
+          "id": "i_a39a0bc78c",
+          "legacy_key": "0-7",
+          "type": "video",
+          "title": "The Worst Typo I Ever Made (Why backups are important)",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "X6NJkWbM1xk"
+          }
+        },
+        {
+          "id": "i_2792771fd7",
+          "legacy_key": "0-8",
+          "type": "lesson",
+          "title": "Reading - Cables and Ports",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit1/cables_and_ports.html"
+          }
+        },
+        {
+          "id": "i_7c48f88a69",
+          "legacy_key": "0-9",
+          "type": "lesson",
+          "title": "Hands-on Exercise - Identifying Hardware",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit1/hands-on_exercise-identifying_hardware.html"
+          }
+        },
+        {
+          "id": "i_fcd647b01c",
+          "legacy_key": "0-10",
+          "type": "lesson",
+          "title": "Reading - Files, Data, and Information",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit1/files,_data,_and_information.html"
+          }
+        },
+        {
+          "id": "i_3eff6d1bcd",
+          "legacy_key": "0-11",
+          "type": "lesson",
+          "title": "Reading - \"Why is my computer so slow?\"",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit1/why_is_my_computer_so_slow.html"
+          }
+        },
+        {
+          "id": "i_3cd547e577",
+          "legacy_key": "0-12",
+          "type": "lesson",
+          "title": "Reading - Your Computer's Properties",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit1/your_computer_s_properties.html"
+          }
+        },
+        {
+          "id": "i_96f2f78128",
+          "legacy_key": "0-13",
+          "type": "lesson",
+          "title": "Unit 1 Recap & Review Exercises",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit1/unit_1_recap.html"
+          }
+        },
+        {
+          "id": "i_7935332fce",
+          "legacy_key": "0-14",
+          "type": "test",
+          "title": "Unit 1 Test",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLScr3Av6NjYj078UyzPSgV_avz7BLk9WN-ftffa5a8AsO4JVPw/viewform?usp=sf_link"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_cfa9e0df12",
+      "legacy_key": "1",
+      "title": "Unit 2: Navigating Your OS",
+      "description": "Become more comfortable with your operating system of choice (Windows or macOS).",
+      "items": [
+        {
+          "id": "i_53be08d036",
+          "legacy_key": "1-0",
+          "type": "slides",
+          "title": "Slideshow - \"What Is an Operating System?\"",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "slides_url": "https://docs.google.com/presentation/d/1YgPZ86xzO6iCwPE-fJGx4Rn6GzQXY3tiKuxAkDjvlog"
+          }
+        },
+        {
+          "id": "i_942c972aef",
+          "legacy_key": "1-1",
+          "type": "video",
+          "title": "What Is an Operating System (as Fast as Possible)",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "pVzRTmdd9j0"
+          }
+        },
+        {
+          "id": "i_a84248621d",
+          "legacy_key": "1-2",
+          "type": "lesson",
+          "title": "Reading - The User Interface (Navigation Basics)",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit2/the_user_interface_(navigation_basics).html"
+          }
+        },
+        {
+          "id": "i_50ea9b159d",
+          "legacy_key": "1-3",
+          "type": "lesson",
+          "title": "Reading - File Management",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit2/file_management.html"
+          }
+        },
+        {
+          "id": "i_d1f9400ba6",
+          "legacy_key": "1-4",
+          "type": "lesson",
+          "title": "Reading - Customizing Your OS",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit2/customizing_your_os.html"
+          }
+        },
+        {
+          "id": "i_5e910ce5c7",
+          "legacy_key": "1-5",
+          "type": "video",
+          "title": "Top Windows 10 Shortcut Keys",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "DALQ7XR1Yv4"
+          }
+        },
+        {
+          "id": "i_4d9daa6999",
+          "legacy_key": "1-6",
+          "type": "lesson",
+          "title": "Reading - Keyboard Shortcuts",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit2/keyboard_shortcuts.html"
+          }
+        },
+        {
+          "id": "i_3cb4ba58f9",
+          "legacy_key": "1-7",
+          "type": "lesson",
+          "title": "Hands-on Exercise - Keyboard Shortcuts Practice",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit2/hands-on_exercise-keyboard_shortcuts.html"
+          }
+        },
+        {
+          "id": "i_6d388c8664",
+          "legacy_key": "1-8",
+          "type": "lesson",
+          "title": "Unit 2 Recap & Review Exercises",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit2/unit_2_recap.html"
+          }
+        },
+        {
+          "id": "i_c9082386f2",
+          "legacy_key": "1-9",
+          "type": "test",
+          "title": "Unit 2 Test",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSeenFbj5KMZxnhepGBl91inOmCFtBVolk_n7UmFLd-86_ormQ/viewform?usp=share_link"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_a56328e701",
+      "legacy_key": "2",
+      "title": "Unit 3: Internet Skills",
+      "description": "Develop efficient web searching techniques, email etiquette, and online safety.",
+      "items": [
+        {
+          "id": "i_e77f14ace9",
+          "legacy_key": "2-0",
+          "type": "slides",
+          "title": "Slideshow - The Internet & the World Wide Web",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "slides_url": "https://docs.google.com/presentation/d/1o6iHCSnfMbyhYXQq_TqNxu1VshKGRqylQ4RISb8GcwY"
+          }
+        },
+        {
+          "id": "i_20773857b1",
+          "legacy_key": "2-1",
+          "type": "lesson",
+          "title": "Reading - Web Browsers",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit3/web_browsers.html"
+          }
+        },
+        {
+          "id": "i_5962edadfb",
+          "legacy_key": "2-2",
+          "type": "video",
+          "title": "Search Engines (as Fast as Possible)",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "ADvI44Sap3g"
+          }
+        },
+        {
+          "id": "i_39e820fad4",
+          "legacy_key": "2-3",
+          "type": "lesson",
+          "title": "Reading - Search Engines",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit3/search_engines.html"
+          }
+        },
+        {
+          "id": "i_63e6cfa496",
+          "legacy_key": "2-4",
+          "type": "lesson",
+          "title": "Reading - Email",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit3/email.html"
+          }
+        },
+        {
+          "id": "i_2efa26d35d",
+          "legacy_key": "2-5",
+          "type": "video",
+          "title": "Why You Should Turn On Two Factor Authentication",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "hGRii5f_uSc"
+          }
+        },
+        {
+          "id": "i_e86cb352b5",
+          "legacy_key": "2-6",
+          "type": "lesson",
+          "title": "Hands-on Exercise - Setting Up an Email Account",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit3/hands-on_exercise-email_account.html"
+          }
+        },
+        {
+          "id": "i_acf8715bae",
+          "legacy_key": "2-7",
+          "type": "slides",
+          "title": "Slideshow - Social Networking: The Pros and Cons",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "slides_url": "https://docs.google.com/presentation/d/1Ui78wk2fnLQK55Za7MMA2VrRrSksnXzY4nHEbmHHXlk"
+          }
+        },
+        {
+          "id": "i_4b32884eeb",
+          "legacy_key": "2-8",
+          "type": "lesson",
+          "title": "Hands-on Exercise - Social Media (Instagram Account)",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit3/hands-on_exercise-social_media.html"
+          }
+        },
+        {
+          "id": "i_f49f9d0788",
+          "legacy_key": "2-9",
+          "type": "lesson",
+          "title": "Reading - Cloud Storage",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit3/cloud_storage.html"
+          }
+        },
+        {
+          "id": "i_688a6a16e4",
+          "legacy_key": "2-10",
+          "type": "lesson",
+          "title": "Reading - Online Shopping",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/digital-literacy/unit3/online_shopping.html"
+          }
+        },
+        {
+          "id": "i_d1fd6776b4",
+          "legacy_key": "2-11",
+          "type": "test",
+          "title": "Unit 3 Test",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSerBjfErFZmleRQKWns2dUar3se9TOzUAFYXUmN_g8x9cbJ0w/viewform?usp=sf_link"
+          }
+        }
+      ]
+    }
+  ]
+}

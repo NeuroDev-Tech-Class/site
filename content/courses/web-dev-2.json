@@ -1,0 +1,366 @@
+{
+  "id": "web-dev-2",
+  "title": "Web Development II - JavaScript",
+  "category": "Web Development",
+  "status": "published",
+  "heading": "JavaScript I - JavaScript Fundamentals",
+  "summary": "This beginner JavaScript programming course introduces students to the coding in JavaScript, focusing on foundational concepts like data types, variables, loops, and functions. Students will learn to write JavaScript code within the Visual Studio Code IDE. This course is designed for students who have some knowledge of programming. If that is not the case, I would recommend looking at our Python Course first. Javascript is used along side HTML / CSS. It is recommended that you go through the the Web Development I course if you haven't.",
+  "objectives": [
+    "Gain foundational knowledge of JavaScript concepts including variables, conditionals, loops, and data structures.",
+    "Develop proficiency in JavaScript by learning syntax and writing code.",
+    "Become comfortable with using JavaScript in a code editor like Visual Studio Code.",
+    "Apply problem-solving skills to tackle programming challenges.",
+    "Understand and implement best practices in code readability and version control.",
+    "Demonstrate knowledge with a text-based math game."
+  ],
+  "intro_html": "",
+  "units": [
+    {
+      "id": "u_bf12ce71ae",
+      "legacy_key": "0",
+      "title": "Getting Started",
+      "description": "",
+      "items": [
+        {
+          "id": "i_32035e5764",
+          "legacy_key": "0-0",
+          "type": "lesson",
+          "title": "Reading - What Is JavaScript?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "web-development/what_is_javascript.html"
+          }
+        },
+        {
+          "id": "i_7fa697ec7a",
+          "legacy_key": "0-1",
+          "type": "lesson",
+          "title": "Reading - What Is an IDE?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/what_is_an_ide.html"
+          }
+        },
+        {
+          "id": "i_daa8dd5948",
+          "legacy_key": "0-2",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Download and install <a href=\"https://code.visualstudio.com/download\" target=\"_blank\" rel=\"noopener noreferrer\">VS Code</a>."
+          }
+        },
+        {
+          "id": "i_c89fe1134a",
+          "legacy_key": "0-3",
+          "type": "lesson",
+          "title": "Reading - Setting Up GitHub",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/github_setup.html"
+          }
+        },
+        {
+          "id": "i_d9d3fc5848",
+          "legacy_key": "0-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "For each assignment you will create a github repository using github classrooms. There will be a link for each assignment below. Use README.md to study the new subject, and use practice.js to test your skills. Don't mess with the other files."
+          }
+        },
+        {
+          "id": "i_f19b9712e7",
+          "legacy_key": "0-5",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Go to <a href='https://nodejs.org/en' target='_blank'>Nodejs.org</a>. Download Node. It will open a terminal and take a bit. Afterwards, use this <a href='assets/pdfs/web-development/Windows-Node-Installation.html' target='_blank'>guide</a> to get your Node, npm, and Jest environment ready to go."
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_b8af4ccd7e",
+      "legacy_key": "1",
+      "title": "Unit 1: Data Types, Variables, and Operators",
+      "description": "Learn some of the fundamental building blocks of programming, including data types, variables, operators, and basic syntax. For each assignment below, click the link and accept the github repo to get started.",
+      "items": [
+        {
+          "id": "i_4c5ff583e9",
+          "legacy_key": "1-0",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/k8tacUzK",
+            "label": "Complete Lesson & Exercise 1.0 - Terminal Commands"
+          }
+        },
+        {
+          "id": "i_0fb6235d83",
+          "legacy_key": "1-1",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/76y0rRHI",
+            "label": "Complete Lesson & Exercise 1.1 - Syntax"
+          }
+        },
+        {
+          "id": "i_19c416717b",
+          "legacy_key": "1-2",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/9HzC-SrR",
+            "label": "Complete Lesson & Exercise 1.2 - Data Types"
+          }
+        },
+        {
+          "id": "i_d045157b91",
+          "legacy_key": "1-3",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/AMTgQcfn",
+            "label": "Complete Lesson & Exercise 1.3 - Variables"
+          }
+        },
+        {
+          "id": "i_d7e635426e",
+          "legacy_key": "1-4",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/q5ImkOkz",
+            "label": "Complete Lesson & Exercise 1.4 - Operators"
+          }
+        },
+        {
+          "id": "i_15224a982c",
+          "legacy_key": "1-5",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/qNYrEn9C",
+            "label": "Complete Lesson & Exercise 1.5 - Strings"
+          }
+        },
+        {
+          "id": "i_a4cda77503",
+          "legacy_key": "1-6",
+          "type": "test",
+          "title": "Unit 1 Test",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSchezRadI8pDYvw7yUpytgN4q0dt_qXCss7FPemKewPhR93-g/viewform?usp=sharing&ouid=106165783246153405519"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_ceb605a04d",
+      "legacy_key": "2",
+      "title": "Unit 2: Control Flow and Data Structures",
+      "description": "Learn to build more expressive programs using conditional statements, loops, and basic data structures.",
+      "items": [
+        {
+          "id": "i_9318c0c792",
+          "legacy_key": "2-0",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/E0vH1tBp",
+            "label": "Complete Lesson & Exercise 2.1 - Functions"
+          }
+        },
+        {
+          "id": "i_1719c073dd",
+          "legacy_key": "2-1",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/DqlUBgzM",
+            "label": "Complete Lesson & Exercise 2.2 - Conditionals"
+          }
+        },
+        {
+          "id": "i_2d3d02199c",
+          "legacy_key": "2-2",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/Z4hPuFEx",
+            "label": "Complete Lesson & Exercise 2.3 - Loops"
+          }
+        },
+        {
+          "id": "i_8e707dabda",
+          "legacy_key": "2-3",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/lPRBvoyU",
+            "label": "Complete Lesson & Exercise 2.4 - Arrays"
+          }
+        },
+        {
+          "id": "i_3b533afe18",
+          "legacy_key": "2-4",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/ZcqiHIsq",
+            "label": "Complete Lesson & Exercise 2.5 - Objects"
+          }
+        },
+        {
+          "id": "i_88344549d3",
+          "legacy_key": "2-5",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/JhVVmx7z",
+            "label": "Complete Lesson & Exercise 2.6 - Exceptions"
+          }
+        },
+        {
+          "id": "i_39e6f1fa13",
+          "legacy_key": "2-6",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/5VckQusm",
+            "label": "Complete Test 2.7 - Unit 2 TestInstructions here"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_c3022d4ba9",
+      "legacy_key": "3",
+      "title": "Unit 3: Advanced Techniques",
+      "description": "Learn more advanced techniques for principles you've learned earlier in this course. Practice by writing a math game project.",
+      "items": [
+        {
+          "id": "i_2fc22a9a92",
+          "legacy_key": "3-0",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/x0aLmWLc",
+            "label": "Complete Lesson & Exercise 3.1 - Advanced Strings"
+          }
+        },
+        {
+          "id": "i_d9972683c6",
+          "legacy_key": "3-1",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/KjW9tq57",
+            "label": "Complete Lesson & Exercise 3.2 - Advanced Arrays"
+          }
+        },
+        {
+          "id": "i_457dfb3232",
+          "legacy_key": "3-2",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/0yLs7XHU",
+            "label": "Complete Lesson & Exercise 3.3 - Classes"
+          }
+        },
+        {
+          "id": "i_63efd20027",
+          "legacy_key": "3-3",
+          "type": "checkpoint",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "classroom_url": "https://classroom.github.com/a/TPTVQlSG",
+            "label": "Complete Test 3.4 - Unit 3 TestInstructions here"
+          }
+        }
+      ]
+    }
+  ]
+}

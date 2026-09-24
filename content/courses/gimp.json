@@ -1,0 +1,447 @@
+{
+  "id": "gimp",
+  "title": "2D Digital Art - GIMP",
+  "category": "Media",
+  "status": "published",
+  "heading": "2D Digital Art — GIMP",
+  "summary": "This course teaches students digital image editing and graphic design using GIMP (GNU Image Manipulation Program), a free and open-source alternative to Adobe Photoshop. Students will learn to edit photos, create original digital artwork, and design graphics for print and web. GIMP runs on Windows, macOS, and Linux, so you can practice on any computer.",
+  "objectives": [
+    "Install and navigate the GIMP interface, toolbox, and dockable dialogs.",
+    "Use selection, painting, and transformation tools effectively.",
+    "Understand layers, channels, and blending modes for non-destructive editing.",
+    "Edit and enhance photographs using color correction, filters, and retouching.",
+    "Create original graphics including logos, posters, and digital paintings.",
+    "Export work in appropriate formats for web, print, and social media."
+  ],
+  "intro_html": "<section>\n        <h3>System Requirements</h3>\n        <p>\n          <strong>GIMP 3.0</strong> requires Windows 10 (1903+), macOS, or\n          Linux. It is completely free and open-source. A mouse works fine;\n          a drawing tablet is optional but helpful for digital painting.\n        </p>\n      </section>",
+  "units": [
+    {
+      "id": "u_99db31f0f0",
+      "legacy_key": "0",
+      "title": "Getting Started",
+      "description": "Install GIMP and learn the basics of the interface.",
+      "items": [
+        {
+          "id": "i_f605370461",
+          "legacy_key": "0-0",
+          "type": "lesson",
+          "title": "Reading - What Is GIMP?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit1/what_is_gimp.html"
+          }
+        },
+        {
+          "id": "i_30b835fb31",
+          "legacy_key": "0-1",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Download and install <a href=\"https://www.gimp.org/downloads/\" target=\"_blank\" rel=\"noopener noreferrer\">GIMP</a> (free, open source). Choose the installer for your operating system."
+          }
+        },
+        {
+          "id": "i_2790f94f0a",
+          "legacy_key": "0-2",
+          "type": "lesson",
+          "title": "Reading - The GIMP Interface",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit1/the_gimp_interface.html"
+          }
+        },
+        {
+          "id": "i_4a269d6158",
+          "legacy_key": "0-3",
+          "type": "video",
+          "title": "GIMP for Beginners - Complete Overview",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "x6pXJ7Ijir0"
+          }
+        },
+        {
+          "id": "i_fb42a9757d",
+          "legacy_key": "0-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Video Resource:</strong> Watch <a href=\"https://www.youtube.com/results?search_query=Davies+Media+Design+GIMP+beginners\" target=\"_blank\" rel=\"noopener noreferrer\">Davies Media Design beginner GIMP videos</a> for step-by-step interface and workflow practice."
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_5b407d3444",
+      "legacy_key": "1",
+      "title": "Unit 1: Image Editing Essentials",
+      "description": "Learn the fundamental tools for selecting, editing, and enhancing images.",
+      "items": [
+        {
+          "id": "i_cc50ca5cf3",
+          "legacy_key": "1-0",
+          "type": "lesson",
+          "title": "Reading - Canvas, Resolution & File Formats",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit1/canvas_resolution_formats.html"
+          }
+        },
+        {
+          "id": "i_861b359c02",
+          "legacy_key": "1-1",
+          "type": "lesson",
+          "title": "Reading - Selection Tools",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit1/selection_tools.html"
+          }
+        },
+        {
+          "id": "i_9f49a3b06c",
+          "legacy_key": "1-2",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 1.1:</strong> Open a photo. Practice using Rectangle Select, Ellipse Select, Free Select (Lasso), and Fuzzy Select (Magic Wand) to isolate parts of the image."
+          }
+        },
+        {
+          "id": "i_2edda7f7c8",
+          "legacy_key": "1-3",
+          "type": "lesson",
+          "title": "Reading - Layers & Layer Modes",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit1/layers_and_layer_modes.html"
+          }
+        },
+        {
+          "id": "i_7a6faf675c",
+          "legacy_key": "1-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 1.2:</strong> Create a multi-layer composition. Place a background on one layer, a foreground element on another, and text on a third. Experiment with opacity and layer order."
+          }
+        },
+        {
+          "id": "i_bee15dc13d",
+          "legacy_key": "1-5",
+          "type": "lesson",
+          "title": "Reading - Transform & Paint Tools",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit1/transform_and_paint_tools.html"
+          }
+        },
+        {
+          "id": "i_df1d968d9a",
+          "legacy_key": "1-6",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 1.3:</strong> Crop, rotate, flip, and resize a photo. Then use the Clone Stamp and Healing Tool to remove an object or blemish from the image."
+          }
+        },
+        {
+          "id": "i_5679c0091c",
+          "legacy_key": "1-7",
+          "type": "lesson",
+          "title": "Reading - Color Correction & Adjustment",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit1/color_correction.html"
+          }
+        },
+        {
+          "id": "i_4f30fab178",
+          "legacy_key": "1-8",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 1.4:</strong> Take a dark or washed-out photo and use Levels, Curves, Brightness-Contrast, and Hue-Saturation to make it look better."
+          }
+        },
+        {
+          "id": "i_d8b7660356",
+          "legacy_key": "1-9",
+          "type": "lesson",
+          "title": "Unit 1 Activity - Photo Restoration",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit1/activity_photo_restoration.html"
+          }
+        },
+        {
+          "id": "i_7c36fe2ade",
+          "legacy_key": "1-10",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Video Resource:</strong> Watch <a href=\"https://www.youtube.com/results?search_query=GIMP+photo+retouching+tutorial+beginner\" target=\"_blank\" rel=\"noopener noreferrer\">GIMP photo retouching tutorials</a> to see practical healing, clone, and color-correction workflows."
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_d2346a4f86",
+      "legacy_key": "2",
+      "title": "Unit 2: Filters, Effects & Text",
+      "description": "Explore GIMP's filters and effects to transform images and create eye-catching text.",
+      "items": [
+        {
+          "id": "i_5aa37e519e",
+          "legacy_key": "2-0",
+          "type": "lesson",
+          "title": "Reading - Filters & Effects Gallery",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit2/filters_and_effects.html"
+          }
+        },
+        {
+          "id": "i_cc9dfcf38d",
+          "legacy_key": "2-1",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 2.1:</strong> Apply Blur, Sharpen, Distort, and Light & Shadow filters to a photo. Compare before and after for each filter."
+          }
+        },
+        {
+          "id": "i_a624f2fe7d",
+          "legacy_key": "2-2",
+          "type": "lesson",
+          "title": "Reading - Text Tool & Typography",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit2/text_and_typography.html"
+          }
+        },
+        {
+          "id": "i_0a1fc3061a",
+          "legacy_key": "2-3",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 2.2:</strong> Create a stylized text title using the Text tool. Apply Text Along Path to curve text, then add a drop shadow and gradient fill."
+          }
+        },
+        {
+          "id": "i_8c081455d8",
+          "legacy_key": "2-4",
+          "type": "lesson",
+          "title": "Reading - Paths & Vector Selections",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit2/paths_and_vectors.html"
+          }
+        },
+        {
+          "id": "i_19fe9ce0f8",
+          "legacy_key": "2-5",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 2.3:</strong> Use the Paths tool (Bézier curves) to create a precise outline around a complex object, convert the path to a selection, and extract the object from its background."
+          }
+        },
+        {
+          "id": "i_234c5c6818",
+          "legacy_key": "2-6",
+          "type": "lesson",
+          "title": "Reading - Masks & Advanced Compositing",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit2/masks_and_compositing.html"
+          }
+        },
+        {
+          "id": "i_b1de667bf5",
+          "legacy_key": "2-7",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 2.4:</strong> Combine two photos into a seamless composite using layer masks. Blend a person into a new background so it looks natural."
+          }
+        },
+        {
+          "id": "i_c16763dae1",
+          "legacy_key": "2-8",
+          "type": "lesson",
+          "title": "Unit 2 Activity - Design a Movie Poster",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit2/activity_movie_poster.html"
+          }
+        },
+        {
+          "id": "i_917fc85d34",
+          "legacy_key": "2-9",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Video Resource:</strong> Watch <a href=\"https://www.youtube.com/results?search_query=GIMP+text+effects+and+compositing+tutorial\" target=\"_blank\" rel=\"noopener noreferrer\">GIMP text effects and compositing tutorials</a> for poster-style design techniques."
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_b2ef636741",
+      "legacy_key": "3",
+      "title": "Unit 3: Digital Art & Graphic Design",
+      "description": "Apply everything you've learned to create original artwork and practical design projects.",
+      "items": [
+        {
+          "id": "i_03ee424c13",
+          "legacy_key": "3-0",
+          "type": "lesson",
+          "title": "Reading - Digital Painting Basics",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit3/digital_painting_basics.html"
+          }
+        },
+        {
+          "id": "i_2a881d4e54",
+          "legacy_key": "3-1",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 3.1:</strong> Create a digital painting from scratch using GIMP's brush tools. Start with a rough sketch layer, add a base color layer, then paint details on top."
+          }
+        },
+        {
+          "id": "i_bb9fd27396",
+          "legacy_key": "3-2",
+          "type": "lesson",
+          "title": "Reading - Logo & Icon Design",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit3/logo_and_icon_design.html"
+          }
+        },
+        {
+          "id": "i_d2c76c231b",
+          "legacy_key": "3-3",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 3.2:</strong> Design a personal logo using shapes, paths, gradients, and text. Export it as a PNG with a transparent background."
+          }
+        },
+        {
+          "id": "i_b486740717",
+          "legacy_key": "3-4",
+          "type": "lesson",
+          "title": "Reading - Designing for Print vs. Web",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit3/print_vs_web_design.html"
+          }
+        },
+        {
+          "id": "i_3035d529ce",
+          "legacy_key": "3-5",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "<strong>Exercise 3.3:</strong> Design a social media banner (1500×500px, 72 DPI for web) and a poster (8.5×11in, 300 DPI for print). Notice the differences."
+          }
+        },
+        {
+          "id": "i_382185a712",
+          "legacy_key": "3-6",
+          "type": "lesson",
+          "title": "Final Project - Portfolio Showcase",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "media/gimp/unit3/final_project.html"
+          }
+        },
+        {
+          "id": "i_c0f9d14d14",
+          "legacy_key": "3-7",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Video Resource:</strong> Watch <a href=\"https://www.youtube.com/results?search_query=GIMP+digital+painting+workflow+tutorial\" target=\"_blank\" rel=\"noopener noreferrer\">GIMP digital painting workflow videos</a> for brush technique and composition practice."
+          }
+        }
+      ]
+    }
+  ]
+}
