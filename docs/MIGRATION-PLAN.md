@@ -17,7 +17,7 @@ Work the phases in number order. Each phase ends with Topher's review, the manua
 | # | Phase | Repo | Needs | Status |
 |---|---|---|---|---|
 | 1 | Tech accounts and sign-in (email/password, Google, hub staff access, account admin, email service) | hub | none | [x] 2026-09-24 |
-| 2 | Content extractor + content fixes + hands-on rewrites (content JSON committed) | site | none | [ ] |
+| 2 | Content extractor + content fixes + hands-on rewrites (content JSON committed) | site | none | [x] 2026-09-24 |
 | 3 | Astro site shell: theme, header/footer, public pages, sign-in pages | site | 1 | [ ] |
 | 4 | Content in the database + read API (catalog public, lessons behind login) | hub | 2 | [ ] |
 | 5 | Progress + video watch tracking | hub | 4 | [ ] |
@@ -154,6 +154,13 @@ Two repos. Hub work goes on the existing `tech-class` branch (currently equal to
 *Before merging to `main`* (Topher): set `EMAIL_BACKEND=resend`, `RESEND_API_KEY`, `TECH_APP_BASE_URL`, `TECH_GOOGLE_REDIRECT_URI` and the tech CORS origin on hub-backend in Render. The merge is additive: new routes that nothing calls yet.
 
 **Phase 2. Site: content extractor (M, parallel with Phase 1)** in `tools/extract/` (Node, `node --test`, next to the existing harness)
+
+*As delivered (2026-09-24)*: `npm run extract` writes `content/` (234 files) from the live site and `exercises/`; `npm run test:extract` is 78 tests; `npm run test:exercises` runs all 42 exercises with tests in Docker (all run cleanly). What Phase 4 imports, per `content/report.md`:
+- 15 courses (web-dev-1 draft), 406 items: 119 lesson items over 120 extracted lesson pages (a few pages are shared or reached only from an intro or note, such as Building a PC; 2 are exercise readings), 94 checkpoints (38 from lesson pages and notes via `tools/extract/checkpoints.json`, 56 GitHub-repo exercises), 29 videos, 9 slides, 13 tests (`needs_content` until Phase 11), 129 notes (68 tagged `exercise`), 13 links. `legacy-map.json` maps every old progress key and old URL.
+- **One allowlist:** Phase 4's nh3 sanitiser loads `content/vocabulary.json` (tags, attributes, classes, `language-` class prefix, YouTube-only iframes). Only finding left: three `style` colours on Blender's X/Y/Z labels (text still names the colour).
+- **Exercises moved into this repo** (decided 2026-09-24): the 58 Classroom repos are now `exercises/<course>/<number-slug>/` (exercise.json, lesson.md, assignment.md, starter/ with tests and a GitHub Actions test workflow). Students download the starter, push to their own repo and submit its link; checkpoints carry `starter_path` (Phase 8 zips it) and a `grading_hint`. Clean-up: Classroom workflows and private-repo links removed; Web Dev II unit projects start from `quiz.js` with `prompt-sync`; every Web Dev III page loads its own CSS and JS; Web Dev III 1.2's Puppeteer tests dropped (too heavy for students and CI); GitHub Basics rewritten to teach the new hand-in; PEP-8 and Terminal Commands are readings (lessons).
+- **Fixes live only in the extracted copy** (`tools/extract/overrides/`): 7 page bodies (5 hands-on exercises, Responsible AI Use, the new IT hardware exercise replacing the BIOS duplicate) and one course patch (Web Dev I's `TODO:`). Email-your-work sentences are swapped sentence by sentence for "Submit your work with the form below" and listed in the report; the Email Account exercise keeps the address because emailing the coach is the task.
+- Differences from the plan above: lessons are stored flat (`content/lessons/<id>.html` + `lessons.json`) because some are shared between courses; 154 lesson files are reachable (one true orphan, the Python I PEP-8 HTML page, superseded by its repo); the extractor reports rather than strips markup; starters are not copied into `content/`; Web Dev II's broken course links needed no patch (they sit in the overview, which becomes plain-text summary); the two "missing" Web Dev II PDFs were the unit-project briefs, now the lessons of those exercises.
 - Parse the 15 `unit-data` blocks + `course-metadata.js` into `content/courses/*.json` with deterministic IDs and `legacy_key`; classify items per roadmap section 8 step 1.
 - Lessons: take `main` minus back-link, header and footer; rewrite links (strip `/site/`, resolve `<base>`-relative paths, map lesson-to-lesson links to new routes); sanitise against the fixed vocabulary; emit a strip-diff report; record each lesson's embedded YouTube ids in `media`.
 - Checkpoints: the 36 pages per `CHECKPOINT-DELIVERABLES.md` plus `import-classroom` for the 58 repos in `../tech-class-courses/` (instructions from `lesson.md`/`README.md`, starter code, tests kept as a grading hint).
@@ -202,7 +209,7 @@ Two repos. Hub work goes on the existing `tech-class` branch (currently equal to
 
 - **Phase 13. Accreditation review (Topher)**: after the Mandy conversation, confirm or adjust the model.
 - **Phase 14. Export/import (M)**: `scripts/export_firebase_tech.mjs` (users + `auth:export`, progress maps, submissions, inbox, activity, certificates array, legacyOrphans, `testResults` kept as dead data); `backend/scripts/import_firebase_tech.py` + `scripts/import_tech_to_render.sh`: idempotent, `--dry-run`, create/skip/conflict per row, a second dry run shows only skip; accounts matched by lowercased email with `legacy_uid` stored; **positional `u-i` keys mapped to item ids through `legacy_key`**, with an unmapped-key report; legacy certificates imported as records (files regenerated as PDFs on demand). No Firebase password hashes: password users get a "set your password" email at cutover (template in the PR; Topher sends).
-- **Phase 15. Delivery (M)**: `render.yaml` static service `tech-frontend` (redirects, `/site/*` to `/*`, env `PUBLIC_API_URL`); CI jobs for `web/` scoped to the `render-migration` branch path until cutover; a GitHub Pages redirect stub; `docs/CUTOVER.md` modelled on `neurodev-hub/docs/scheduler-cutover.md` (freeze, export, dry run, import, smoke tests, DNS CNAME add-only in the `neurodevmentoring.com` zone recorded in `03-dns-records.md`, Pages stub, repo rename `site` to `tech-class-website`, Firebase read-only for 30 days, Blaze downgrade).
+- **Phase 15. Delivery (M)**: `render.yaml` static service `tech-frontend` (redirects, `/site/*` to `/*`, env `PUBLIC_API_URL`); CI jobs for `web/` scoped to the `render-migration` branch path until cutover; a GitHub Pages redirect stub; `docs/CUTOVER.md` modelled on `neurodev-hub/docs/scheduler-cutover.md` (freeze, export, dry run, import, smoke tests, DNS CNAME add-only in the `neurodevmentoring.com` zone recorded in `03-dns-records.md`, Pages stub, repo rename `site` to `tech-class-website`, Firebase read-only for 30 days, Blaze downgrade). It also lists: no reordering of items on the live course pages between Phase 2 and the import (item ids and old progress keys come from their positions), and archiving the 60 `NeuroDev-Tech-Class` exercise repos read-only after cutover (the local `tech-class-courses/` folder can then go).
 
 ### After cutover (next plan)
 
@@ -214,7 +221,7 @@ Course builder, test builder, checkpoint builder with draft/publish validation (
 |---|---|
 | Before Phase 1 ships (**done 2026-09-23**) | Resend: add and verify `mail.neurodevmentoring.com` (DNS add-only). Google OAuth client: add the tech callback redirect URI (prod + localhost:8001). |
 | Before Phase 8 | Create a Cloudflare account, an R2 bucket and an API token; put the keys in the hub's Render env. |
-| During Phase 2 | Approve the 5 exercise rewrites; supply real content for the duplicated hardware lesson; say which email (if any) should stay in lesson text. |
+| During Phase 2 (**done 2026-09-24**) | Approved the exercise rewrites and the new hardware exercise; chose repo-link hand-in with downloadable starters; exercises moved into this repo. |
 | During Phase 11 | Export the 13 Forms' response CSVs and re-author the quizzes. |
 | During Phase 12 | Approve the certificate PDF design. |
 | Before Phase 14 prod run | Talk to Mandy (accreditation); run the Firebase export with `~/keys/github-deploy.json`. |

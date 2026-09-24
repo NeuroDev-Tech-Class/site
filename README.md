@@ -6,6 +6,7 @@ Planning docs:
 
 - [docs/LMS-ROADMAP.md](docs/LMS-ROADMAP.md): goals, decisions, data model, admin redesign and phased roadmap for in-site checkpoints, tests and the content editor.
 - [docs/CHECKPOINT-DELIVERABLES.md](docs/CHECKPOINT-DELIVERABLES.md): every checkpoint and the form fields it gets.
+- [docs/MIGRATION-PLAN.md](docs/MIGRATION-PLAN.md): the move to Render + Postgres, with its phase tracker. See "Render migration" below.
 
 ## Development
 
@@ -106,3 +107,30 @@ GOOGLE_APPLICATION_CREDENTIALS=~/keys/github-deploy.json node tools/migrate-test
 ```
 
 Each row prints as `create`, `skip` (already migrated), `orphan` or `conflict`. A second dry run after the real run must show only `skip`. Existing submissions are never overwritten, so grades entered after the migration survive a rerun. `--strict` exits non-zero when orphans exist.
+
+## Render migration
+
+On the `render-migration` branch the site is being rebuilt on Render + Postgres ([docs/MIGRATION-PLAN.md](docs/MIGRATION-PLAN.md) has the phase tracker). Nothing below is served by the live site, and none of it changes the live site's files.
+
+```
+exercises/              the 58 former GitHub Classroom exercises, one folder each:
+                        exercise.json, lesson.md, assignment.md (Web Dev III), starter/ (what students download,
+                        tests and a GitHub Actions test workflow included)
+tools/extract/          reads the live site (courses/, assets/pdfs/) and exercises/, writes content/
+  checkpoints.json      which lesson pages and notes become checkpoints, and their form fields
+  overrides/            fixes that exist only in the extracted copy: lessons/<page path> replaces a page's body,
+                        courses.json patches a course page
+tools/exercises/        import-repos.mjs (the one-time Classroom import), verify.mjs, workflows/ (the test workflows)
+content/                generated, committed: catalog, courses, lessons, checkpoints, legacy-map, vocabulary, report.md
+```
+
+| Command | Does |
+|---|---|
+| `npm run test:extract` | extractor and exercise tests (fast, no emulator) |
+| `npm run extract` | regenerates `content/`; commit what changes |
+| `npm run extract -- --check` | fails if `content/` is out of date (CI runs this) |
+| `npm run test:exercises` | runs every exercise's tests in Python 3.12 / Node 22 containers; needs Docker. Add `-- python-1/2.3-loops` for one |
+
+After changing anything the extractor reads (a course page, a lesson, `checkpoints.json`, an override or an exercise), run `npm run extract`, read `content/report.md`, and commit `content/` with the change. **Don't reorder items on the live course pages before cutover**: item ids and the old progress keys are taken from their positions.
+
+`exercises/` is edited by hand; `import-repos.mjs` refuses to run over it. The `Migration` workflow (`.github/workflows/migration.yml`) runs these checks on the `render-migration` branch only; `main` keeps deploying the Firebase site through `ci.yml`.
