@@ -1,4 +1,5 @@
 ---
+import CourseStart from '../../components/CourseStart'
 import Base from '../../layouts/Base.astro'
 import { itemLabel, publishedCourses, sanitize, type Course } from '../../lib/content'
 
@@ -7,7 +8,6 @@ export function getStaticPaths() {
 }
 
 const { course } = Astro.props as { course: Course }
-const signIn = `/sign-in?next=${encodeURIComponent(`/courses/${course.id}`)}`
 ---
 
 <Base title={course.heading} description={course.summary}>
@@ -17,7 +17,7 @@ const signIn = `/sign-in?next=${encodeURIComponent(`/courses/${course.id}`)}`
   <h2>Course Overview</h2>
   <p>{course.summary}</p>
   <p class="mt-6">
-    <a class="btn-primary" href={signIn}>Sign in to start this course</a>
+    <CourseStart client:load courseId={course.id} />
   </p>
 
   <h2>Course Objectives</h2>
