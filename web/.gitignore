@@ -1,0 +1,5 @@
+node_modules/
+dist/
+.astro/
+# copied from ../assets/images by scripts/sync-assets.mjs before every dev run and build
+public/images/

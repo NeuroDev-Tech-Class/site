@@ -1,0 +1,26 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title: string
+  description?: string
+}
+
+const { title, description = 'NeuroDev Tech Class: practical, hands-on technology courses.' } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title === 'Home' ? 'NeuroDev Tech Class' : `${title} | NeuroDev Tech Class`}</title>
+  </head>
+  <body>
+    <a href="#main">Skip to content</a>
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+  </body>
+</html>

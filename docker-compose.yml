@@ -1,0 +1,18 @@
+# The new Astro site (web/). The whole repo is mounted because the build reads ../content and ../assets/images.
+# Its API is the hub's backend: run `docker compose up` in ../neurodev-hub first (backend on 8001, Mailpit on 8026).
+services:
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app
+      - web_node_modules:/app/web/node_modules
+    ports:
+      - "4321:4321"
+    environment:
+      PUBLIC_API_URL: http://localhost:8001
+      ASTRO_TELEMETRY_DISABLED: "1"
+
+volumes:
+  web_node_modules:
