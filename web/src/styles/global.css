@@ -63,6 +63,11 @@
   a {
     @apply text-(--link) underline underline-offset-2;
   }
+  /* Page copy and imported content; :where keeps these easy for components to override */
+  main :where(p, ul, ol) { @apply mt-4; }
+  main :where(ul) { @apply list-disc pl-6; }
+  main :where(ol) { @apply list-decimal pl-6; }
+  main :where(li + li) { @apply mt-1; }
   :focus-visible {
     @apply outline-solid outline-2 outline-offset-2 outline-(--focus);
   }

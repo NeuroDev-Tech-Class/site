@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro'
+import { catalog, publishedCatalog } from '../lib/content'
+
+const categories = publishedCatalog(catalog)
+---
+
+<Base title="Course Catalog" description="Every NeuroDev Tech Class course, from computer basics to game development.">
+  <h1>Course Catalog</h1>
+  {categories.map(category => (
+    <section>
+      <h2>{category.name}</h2>
+      <ul class="mt-4 grid list-none gap-4 pl-0 md:grid-cols-2">
+        {category.courses.map(course => (
+          <li class="panel relative mt-0 h-full transition-shadow focus-within:shadow-md hover:shadow-md">
+            <h3 class="mt-0">
+              <a href={`/courses/${course.id}`} class="after:absolute after:inset-0 after:rounded-(--radius-card)">
+                {course.title}
+              </a>
+            </h3>
+            <p class="mt-2 text-(--muted)">{course.summary}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Base>

@@ -48,16 +48,58 @@ describe('the built site', () => {
     expect(html).toMatch(/<meta name="astro-view-transitions-enabled"/)
   })
 
-  test('the home page marks Home as the current page', () => {
-    const home = readFileSync(join(DIST, 'index.html'), 'utf8')
-    expect(home).toMatch(/<a[^>]*href="\/"[^>]*aria-current="page"[^>]*>\s*Home/)
+  test.each([
+    ['index.html', '/', 'Home'],
+    ['catalog/index.html', '/catalog', 'Course Catalog'],
+    ['resources/index.html', '/resources', 'Resources'],
+  ])('%s marks %s as the current page', (file, href, label) => {
+    const html = readFileSync(join(DIST, file), 'utf8')
+    expect(html).toMatch(new RegExp(`<a[^>]*href="${href}"[^>]*aria-current="page"[^>]*>\\s*${label}`))
+    expect(html.match(/aria-current="page"/g)).toHaveLength(1)
   })
 
-  test('the favicon and logo each page points at exist', () => {
+  test('every local image, favicon and logo a page points at exists', () => {
     for (const { html, file } of pages.map(page)) {
-      for (const [, src] of html.matchAll(/(?:href|src)="(\/(?:favicon|logo)[^"]+)"/g)) {
+      for (const [, src] of html.matchAll(/(?:href|src)="(\/(?:favicon|logo|images\/)[^"]+)"/g)) {
         expect(existsSync(join(DIST, src)), `${file} links ${src}`).toBe(true)
       }
     }
+  })
+
+  test('has the public pages and a not-found page', () => {
+    for (const path of ['index.html', 'catalog/index.html', 'resources/index.html', '404.html']) {
+      expect(existsSync(join(DIST, path)), path).toBe(true)
+    }
+  })
+})
+
+describe('the catalog and course pages', () => {
+  const catalogJson = JSON.parse(readFileSync(new URL('../../content/catalog.json', import.meta.url), 'utf8')) as {
+    categories: { name: string, courses: { id: string, title: string, status: string }[] }[]
+  }
+  const all = catalogJson.categories.flatMap(c => c.courses)
+  const published = all.filter(c => c.status === 'published')
+  const catalogHtml = () => readFileSync(join(DIST, 'catalog/index.html'), 'utf8')
+
+  test('the catalog links every published course and no draft', () => {
+    for (const { id } of published) expect(catalogHtml()).toContain(`href="/courses/${id}"`)
+    for (const { id } of all.filter(c => c.status !== 'published')) expect(catalogHtml()).not.toContain(`/courses/${id}"`)
+  })
+
+  test('every published course has a page, and drafts have none', () => {
+    for (const { id } of published) expect(existsSync(join(DIST, `courses/${id}/index.html`)), id).toBe(true)
+    for (const { id } of all.filter(c => c.status !== 'published')) expect(existsSync(join(DIST, `courses/${id}`)), id).toBe(false)
+  })
+
+  test('a course page invites a signed-out visitor to sign in and come back', () => {
+    const html = readFileSync(join(DIST, 'courses/digital-literacy/index.html'), 'utf8')
+    expect(html).toMatch(/<h1[^>]*>Digital Literacy<\/h1>/)
+    expect(html).toMatch(/href="\/sign-in\?next=%2Fcourses%2Fdigital-literacy"[^>]*>\s*Sign in to start this course/)
+  })
+
+  test('the home page points new students at Digital Literacy and no longer mentions a password', () => {
+    const home = readFileSync(join(DIST, 'index.html'), 'utf8')
+    expect(home).toContain('href="/courses/digital-literacy"')
+    expect(home).not.toMatch(/password/i)
   })
 })

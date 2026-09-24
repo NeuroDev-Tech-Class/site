@@ -1,0 +1,50 @@
+---
+import Base from '../../layouts/Base.astro'
+import { itemLabel, publishedCourses, sanitize, type Course } from '../../lib/content'
+
+export function getStaticPaths() {
+  return publishedCourses().map(course => ({ params: { id: course.id }, props: { course } }))
+}
+
+const { course } = Astro.props as { course: Course }
+const signIn = `/sign-in?next=${encodeURIComponent(`/courses/${course.id}`)}`
+---
+
+<Base title={course.heading} description={course.summary}>
+  <p class="text-sm"><a href="/catalog">Course Catalog</a> / {course.category}</p>
+  <h1 class="mt-2">{course.heading}</h1>
+
+  <h2>Course Overview</h2>
+  <p>{course.summary}</p>
+  <p class="mt-6">
+    <a class="btn-primary" href={signIn}>Sign in to start this course</a>
+  </p>
+
+  <h2>Course Objectives</h2>
+  <ul>
+    {course.objectives.map(objective => <li>{objective}</li>)}
+  </ul>
+
+  {course.intro_html && <Fragment set:html={sanitize(course.intro_html, { shiftHeadings: true })} />}
+
+  {course.units.map(unit => (
+    <section class="panel mt-8">
+      <h2 class="mt-0">{unit.title}</h2>
+      {unit.description && <p class="mt-2 text-(--muted)">{unit.description}</p>}
+      <ol class="mt-4 list-none divide-y divide-(--border) pl-0">
+        {unit.items.map(item => {
+          if (item.type === 'note') {
+            return <li class="mt-0 py-3" set:html={sanitize(String(item.payload.html ?? ''))} />
+          }
+          const { label, title } = itemLabel(item)
+          return (
+            <li class="mt-0 flex flex-wrap items-baseline gap-x-3 gap-y-1 py-3">
+              <span class="w-24 shrink-0 text-sm font-semibold tracking-wide text-(--muted) uppercase">{label}</span>
+              <span class="min-w-0 flex-1">{title}</span>
+            </li>
+          )
+        })}
+      </ol>
+    </section>
+  ))}
+</Base>
