@@ -11,6 +11,7 @@
     "sync-shared": "node tools/sync-shared.mjs",
     "test:extract": "node --test 'tests/extract/**/*.test.js' 'tests/exercises/**/*.test.js'",
     "extract": "node tools/extract/extract.mjs",
+    "test:exercises": "node tools/exercises/verify.mjs",
     "test:rules": "firebase emulators:exec --only firestore --project demo-neurodev \"node --test 'tests/rules/**/*.test.js'\"",
     "test:e2e": "FUNCTIONS_DISCOVERY_TIMEOUT=120 firebase emulators:exec --only firestore,auth,functions --project demo-neurodev \"node --test --test-concurrency=1 'tests/emulator/**/*.e2e.js'\"",
     "emulators": "firebase emulators:start --only firestore,auth,functions,storage --project demo-neurodev"

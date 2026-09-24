@@ -1,0 +1,33 @@
+name: Migration
+
+# The Render migration's checks. They run only for the render-migration branch until cutover,
+# so main keeps deploying the Firebase site through ci.yml untouched.
+on:
+  push:
+    branches: [render-migration]
+  pull_request:
+    branches: [render-migration]
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run test:extract
+      - name: content/ matches what the extractor generates
+        run: npm run extract -- --check
+
+  exercises:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - name: Every exercise's tests install and run
+        run: npm run test:exercises
