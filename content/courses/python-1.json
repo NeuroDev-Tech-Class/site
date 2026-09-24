@@ -29,7 +29,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/what_is_python.html"
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/what_is_python.html",
+            "lesson_id": "l_f7a205d92d"
           }
         },
         {
@@ -51,7 +52,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/what_is_an_ide.html"
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/what_is_an_ide.html",
+            "lesson_id": "l_44bcb0b672"
           }
         },
         {
@@ -84,7 +86,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/github_setup.html"
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/github_setup.html",
+            "lesson_id": "l_a04cb9e6f8"
           }
         },
         {
@@ -177,7 +180,7 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "html": "Read Sidenote: <a href=\"assets/pdfs/computer-science/python-1-intro_to_programming/NamingConventions.html\" target=\"_blank\" rel=\"noopener noreferrer\">Naming Conventions</a>"
+            "html": "Read Sidenote: <a href=\"/lessons/l_cc88408bbb\" target=\"_blank\" rel=\"noopener noreferrer\">Naming Conventions</a>"
           }
         },
         {
@@ -249,7 +252,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-science/python-1-intro_to_programming/unit2/what_is_control_flow.html"
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit2/what_is_control_flow.html",
+            "lesson_id": "l_2b8b92bf81"
           }
         },
         {
@@ -316,7 +320,7 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "html": "Read Sidenote: <a href=\"assets/pdfs/computer-science/python-1-intro_to_programming/DataStructures.html\" target=\"_blank\" rel=\"noopener noreferrer\">Data Structures</a>"
+            "html": "Read Sidenote: <a href=\"/lessons/l_e7cc8bb6b5\" target=\"_blank\" rel=\"noopener noreferrer\">Data Structures</a>"
           }
         },
         {
@@ -388,7 +392,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-science/python-1-intro_to_programming/unit3/best_practices.html"
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit3/best_practices.html",
+            "lesson_id": "l_4f2610f336"
           }
         },
         {
@@ -452,7 +457,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-science/python-1-intro_to_programming/unit3/3rd_party_libraries.html"
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit3/3rd_party_libraries.html",
+            "lesson_id": "l_ef7739bc2c"
           }
         },
         {
@@ -530,7 +536,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-science/python-1-intro_to_programming/unit3/final_project_text_adventure_game.html"
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit3/final_project_text_adventure_game.html",
+            "lesson_id": "l_456ef876ca"
           }
         }
       ]

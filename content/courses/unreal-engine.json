@@ -29,7 +29,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit1/what_is_a_game_engine.html"
+            "legacy_path": "game-development/unreal-engine/unit1/what_is_a_game_engine.html",
+            "lesson_id": "l_91407dfc66"
           }
         },
         {
@@ -62,7 +63,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit1/the_ue5_interface.html"
+            "legacy_path": "game-development/unreal-engine/unit1/the_ue5_interface.html",
+            "lesson_id": "l_2d20d084bf"
           }
         },
         {
@@ -92,7 +94,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit1/viewport_navigation.html"
+            "legacy_path": "game-development/unreal-engine/unit1/viewport_navigation.html",
+            "lesson_id": "l_5edb0bec9e"
           }
         },
         {
@@ -103,7 +106,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit1/meshes_transforms_materials.html"
+            "legacy_path": "game-development/unreal-engine/unit1/meshes_transforms_materials.html",
+            "lesson_id": "l_66b2ff5ce1"
           }
         },
         {
@@ -127,7 +131,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit1/landscapes_and_terrain.html"
+            "legacy_path": "game-development/unreal-engine/unit1/landscapes_and_terrain.html",
+            "lesson_id": "l_9ee6580378"
           }
         },
         {
@@ -151,7 +156,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit1/lighting_and_atmosphere.html"
+            "legacy_path": "game-development/unreal-engine/unit1/lighting_and_atmosphere.html",
+            "lesson_id": "l_d194ba66ea"
           }
         },
         {
@@ -175,7 +181,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit1/foliage_and_detail.html"
+            "legacy_path": "game-development/unreal-engine/unit1/foliage_and_detail.html",
+            "lesson_id": "l_168cc693f4"
           }
         },
         {
@@ -199,7 +206,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit1/activity_castle_courtyard.html"
+            "legacy_path": "game-development/unreal-engine/unit1/activity_castle_courtyard.html",
+            "lesson_id": "l_3fd823d419"
           }
         }
       ]
@@ -218,7 +226,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit2/intro_to_blueprints.html"
+            "legacy_path": "game-development/unreal-engine/unit2/intro_to_blueprints.html",
+            "lesson_id": "l_e639dcff43"
           }
         },
         {
@@ -253,7 +262,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit2/variables_branches_functions.html"
+            "legacy_path": "game-development/unreal-engine/unit2/variables_branches_functions.html",
+            "lesson_id": "l_5529bf2361"
           }
         },
         {
@@ -277,7 +287,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit2/actor_blueprints_collision.html"
+            "legacy_path": "game-development/unreal-engine/unit2/actor_blueprints_collision.html",
+            "lesson_id": "l_5a5cd8be52"
           }
         },
         {
@@ -301,7 +312,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit2/collectibles_jumppads_movement.html"
+            "legacy_path": "game-development/unreal-engine/unit2/collectibles_jumppads_movement.html",
+            "lesson_id": "l_2adc6febd3"
           }
         },
         {
@@ -325,7 +337,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit2/activity_obstacle_course.html"
+            "legacy_path": "game-development/unreal-engine/unit2/activity_obstacle_course.html",
+            "lesson_id": "l_13f75cc221"
           }
         }
       ]
@@ -344,7 +357,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit3/umg_widgets_and_hud.html"
+            "legacy_path": "game-development/unreal-engine/unit3/umg_widgets_and_hud.html",
+            "lesson_id": "l_23d6aec383"
           }
         },
         {
@@ -368,7 +382,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit3/enhanced_input_sprint.html"
+            "legacy_path": "game-development/unreal-engine/unit3/enhanced_input_sprint.html",
+            "lesson_id": "l_b92a8351f8"
           }
         },
         {
@@ -392,7 +407,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit3/game_design_documents.html"
+            "legacy_path": "game-development/unreal-engine/unit3/game_design_documents.html",
+            "lesson_id": "l_5464691129"
           }
         },
         {
@@ -403,7 +419,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit3/level_design_grayboxing.html"
+            "legacy_path": "game-development/unreal-engine/unit3/level_design_grayboxing.html",
+            "lesson_id": "l_561e856e01"
           }
         },
         {
@@ -427,7 +444,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit3/win_lose_checkpoints.html"
+            "legacy_path": "game-development/unreal-engine/unit3/win_lose_checkpoints.html",
+            "lesson_id": "l_611fde328c"
           }
         },
         {
@@ -451,7 +469,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/unreal-engine/unit3/final_project.html"
+            "legacy_path": "game-development/unreal-engine/unit3/final_project.html",
+            "lesson_id": "l_d3bba87a7e"
           }
         }
       ]

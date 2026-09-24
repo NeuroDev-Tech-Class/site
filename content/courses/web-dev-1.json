@@ -27,7 +27,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "web-development/web1-html_css/what_are_html_and_css.html"
+            "legacy_path": "web-development/web1-html_css/what_are_html_and_css.html",
+            "lesson_id": "l_2380e9329b"
           }
         },
         {
@@ -38,7 +39,7 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "html": "Download and install <a href='https://code.visualstudio.com/download' target='_blank' rel='noopener noreferrer'>VS Code</a>. VS Code is a code editor that you'll be using to write HTML and CSS."
+            "html": "Download and install <a href=\"https://code.visualstudio.com/download\" target=\"_blank\" rel=\"noopener noreferrer\">VS Code</a>. VS Code is a code editor that you'll be using to write HTML and CSS."
           }
         },
         {
@@ -60,7 +61,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/github_setup.html"
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/github_setup.html",
+            "lesson_id": "l_a04cb9e6f8"
           }
         },
         {
@@ -71,7 +73,7 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "html": "Clone this repository: <a href='https://github.com/Hjhawley/neurodev-tech-class-Web1' target='_blank' rel='noopener noreferrer'>Web Dev I Repo</a>. This is where you'll find example code to reference throughout this course."
+            "html": "Clone this repository: <a href=\"https://github.com/Hjhawley/neurodev-tech-class-Web1\" target=\"_blank\" rel=\"noopener noreferrer\">Web Dev I Repo</a>. This is where you'll find example code to reference throughout this course."
           }
         }
       ]
@@ -90,7 +92,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "web-development/web1-html_css/intro_to_html.html"
+            "legacy_path": "web-development/web1-html_css/intro_to_html.html",
+            "lesson_id": "l_bbbde28d21"
           }
         },
         {
@@ -114,7 +117,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 1.1: Creating an HTML Document"
+            "html": "Complete Lesson &amp; Exercise 1.1: Creating an HTML Document"
           }
         },
         {
@@ -127,7 +130,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 1.2: Text Content and Headings"
+            "html": "Complete Lesson &amp; Exercise 1.2: Text Content and Headings"
           }
         },
         {
@@ -140,7 +143,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 1.3: Lists and Links"
+            "html": "Complete Lesson &amp; Exercise 1.3: Lists and Links"
           }
         },
         {
@@ -153,7 +156,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 1.4: Images and Multimedia"
+            "html": "Complete Lesson &amp; Exercise 1.4: Images and Multimedia"
           }
         },
         {
@@ -166,7 +169,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 1.5: Forms and Tables"
+            "html": "Complete Lesson &amp; Exercise 1.5: Forms and Tables"
           }
         },
         {
@@ -179,7 +182,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 1.6: Semantic HTML"
+            "html": "Complete Lesson &amp; Exercise 1.6: Semantic HTML"
           }
         },
         {
@@ -222,7 +225,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 2.1: Introduction to CSS"
+            "html": "Complete Lesson &amp; Exercise 2.1: Introduction to CSS"
           }
         },
         {
@@ -235,7 +238,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 2.2: The Box Model"
+            "html": "Complete Lesson &amp; Exercise 2.2: The Box Model"
           }
         },
         {
@@ -248,7 +251,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 2.3: Colors and Backgrounds"
+            "html": "Complete Lesson &amp; Exercise 2.3: Colors and Backgrounds"
           }
         },
         {
@@ -261,7 +264,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 2.4: Typography"
+            "html": "Complete Lesson &amp; Exercise 2.4: Typography"
           }
         },
         {
@@ -274,7 +277,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 2.5: Layout Techniques"
+            "html": "Complete Lesson &amp; Exercise 2.5: Layout Techniques"
           }
         },
         {
@@ -287,7 +290,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 2.6: CSS Transitions and Animations"
+            "html": "Complete Lesson &amp; Exercise 2.6: CSS Transitions and Animations"
           }
         },
         {
@@ -330,7 +333,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 3.1: Introduction to Flexbox"
+            "html": "Complete Lesson &amp; Exercise 3.1: Introduction to Flexbox"
           }
         },
         {
@@ -343,7 +346,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 3.2: Advanced Flexbox"
+            "html": "Complete Lesson &amp; Exercise 3.2: Advanced Flexbox"
           }
         },
         {
@@ -356,7 +359,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 3.3: Introduction to CSS Grid"
+            "html": "Complete Lesson &amp; Exercise 3.3: Introduction to CSS Grid"
           }
         },
         {
@@ -369,7 +372,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 3.4: Media Queries"
+            "html": "Complete Lesson &amp; Exercise 3.4: Media Queries"
           }
         },
         {
@@ -382,7 +385,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 3.5: Dark Mode and Theming"
+            "html": "Complete Lesson &amp; Exercise 3.5: Dark Mode and Theming"
           }
         },
         {
@@ -395,7 +398,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 3.6: Performance Best Practices"
+            "html": "Complete Lesson &amp; Exercise 3.6: Performance Best Practices"
           }
         },
         {
@@ -408,7 +411,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "Complete Lesson & Exercise 3.7: Debugging & Testing"
+            "html": "Complete Lesson &amp; Exercise 3.7: Debugging &amp; Testing"
           }
         },
         {

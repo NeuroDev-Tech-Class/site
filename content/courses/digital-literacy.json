@@ -40,7 +40,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit1/what_does_it_mean_to_be_digitally_literate_.html"
+            "legacy_path": "computer-basics/digital-literacy/unit1/what_does_it_mean_to_be_digitally_literate_.html",
+            "lesson_id": "l_d2a7b751a8"
           }
         },
         {
@@ -62,7 +63,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit1/checkpoint-how_will_technology_help_me_.html"
+            "legacy_path": "computer-basics/digital-literacy/unit1/checkpoint-how_will_technology_help_me_.html",
+            "lesson_id": "l_f48e7a6e73"
           }
         },
         {
@@ -73,7 +75,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit1/hardware_and_software.html"
+            "legacy_path": "computer-basics/digital-literacy/unit1/hardware_and_software.html",
+            "lesson_id": "l_89fe64ab22"
           }
         },
         {
@@ -95,7 +98,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit1/computer_hazards.html"
+            "legacy_path": "computer-basics/digital-literacy/unit1/computer_hazards.html",
+            "lesson_id": "l_68d61125db"
           }
         },
         {
@@ -117,7 +121,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit1/cables_and_ports.html"
+            "legacy_path": "computer-basics/digital-literacy/unit1/cables_and_ports.html",
+            "lesson_id": "l_071ad21b67"
           }
         },
         {
@@ -128,7 +133,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit1/hands-on_exercise-identifying_hardware.html"
+            "legacy_path": "computer-basics/digital-literacy/unit1/hands-on_exercise-identifying_hardware.html",
+            "lesson_id": "l_2513e9f66d"
           }
         },
         {
@@ -139,7 +145,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit1/files,_data,_and_information.html"
+            "legacy_path": "computer-basics/digital-literacy/unit1/files,_data,_and_information.html",
+            "lesson_id": "l_41118eea39"
           }
         },
         {
@@ -150,7 +157,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit1/why_is_my_computer_so_slow.html"
+            "legacy_path": "computer-basics/digital-literacy/unit1/why_is_my_computer_so_slow.html",
+            "lesson_id": "l_f1682a9388"
           }
         },
         {
@@ -161,7 +169,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit1/your_computer_s_properties.html"
+            "legacy_path": "computer-basics/digital-literacy/unit1/your_computer_s_properties.html",
+            "lesson_id": "l_82e875d17e"
           }
         },
         {
@@ -172,7 +181,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit1/unit_1_recap.html"
+            "legacy_path": "computer-basics/digital-literacy/unit1/unit_1_recap.html",
+            "lesson_id": "l_b586ea37ef"
           }
         },
         {
@@ -224,7 +234,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit2/the_user_interface_(navigation_basics).html"
+            "legacy_path": "computer-basics/digital-literacy/unit2/the_user_interface_(navigation_basics).html",
+            "lesson_id": "l_aa2d92764e"
           }
         },
         {
@@ -235,7 +246,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit2/file_management.html"
+            "legacy_path": "computer-basics/digital-literacy/unit2/file_management.html",
+            "lesson_id": "l_8cdd4f20c4"
           }
         },
         {
@@ -246,7 +258,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit2/customizing_your_os.html"
+            "legacy_path": "computer-basics/digital-literacy/unit2/customizing_your_os.html",
+            "lesson_id": "l_e68f3e520f"
           }
         },
         {
@@ -268,7 +281,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit2/keyboard_shortcuts.html"
+            "legacy_path": "computer-basics/digital-literacy/unit2/keyboard_shortcuts.html",
+            "lesson_id": "l_60c574ef30"
           }
         },
         {
@@ -279,7 +293,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit2/hands-on_exercise-keyboard_shortcuts.html"
+            "legacy_path": "computer-basics/digital-literacy/unit2/hands-on_exercise-keyboard_shortcuts.html",
+            "lesson_id": "l_95652f0f3e"
           }
         },
         {
@@ -290,7 +305,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit2/unit_2_recap.html"
+            "legacy_path": "computer-basics/digital-literacy/unit2/unit_2_recap.html",
+            "lesson_id": "l_7d3d678a57"
           }
         },
         {
@@ -331,7 +347,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit3/web_browsers.html"
+            "legacy_path": "computer-basics/digital-literacy/unit3/web_browsers.html",
+            "lesson_id": "l_5b2dc6cd37"
           }
         },
         {
@@ -353,7 +370,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit3/search_engines.html"
+            "legacy_path": "computer-basics/digital-literacy/unit3/search_engines.html",
+            "lesson_id": "l_8fbc3a81a0"
           }
         },
         {
@@ -364,7 +382,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit3/email.html"
+            "legacy_path": "computer-basics/digital-literacy/unit3/email.html",
+            "lesson_id": "l_25b8151105"
           }
         },
         {
@@ -386,7 +405,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit3/hands-on_exercise-email_account.html"
+            "legacy_path": "computer-basics/digital-literacy/unit3/hands-on_exercise-email_account.html",
+            "lesson_id": "l_3a165d5e4e"
           }
         },
         {
@@ -408,7 +428,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit3/hands-on_exercise-social_media.html"
+            "legacy_path": "computer-basics/digital-literacy/unit3/hands-on_exercise-social_media.html",
+            "lesson_id": "l_9cfe9e8868"
           }
         },
         {
@@ -419,7 +440,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit3/cloud_storage.html"
+            "legacy_path": "computer-basics/digital-literacy/unit3/cloud_storage.html",
+            "lesson_id": "l_b98d7f8744"
           }
         },
         {
@@ -430,7 +452,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/digital-literacy/unit3/online_shopping.html"
+            "legacy_path": "computer-basics/digital-literacy/unit3/online_shopping.html",
+            "lesson_id": "l_a0a9a3ad2f"
           }
         },
         {

@@ -29,7 +29,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/linux/what_is_linux.html"
+            "legacy_path": "it/linux/what_is_linux.html",
+            "lesson_id": "l_09a20f2189"
           }
         },
         {
@@ -40,7 +41,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/linux/why_learn_the_command_line_.html"
+            "legacy_path": "it/linux/why_learn_the_command_line_.html",
+            "lesson_id": "l_756d0ef3d2"
           }
         },
         {
@@ -136,7 +138,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/linux/intro_to_WSL.html"
+            "legacy_path": "it/linux/intro_to_WSL.html",
+            "lesson_id": "l_2b62009ac3"
           }
         },
         {
@@ -147,7 +150,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/linux/bash_1.html"
+            "legacy_path": "it/linux/bash_1.html",
+            "lesson_id": "l_3287079d60"
           }
         },
         {
@@ -158,7 +162,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/linux/bash_2.html"
+            "legacy_path": "it/linux/bash_2.html",
+            "lesson_id": "l_86fb6ca4c5"
           }
         },
         {
@@ -169,7 +174,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/linux/bash_3.html"
+            "legacy_path": "it/linux/bash_3.html",
+            "lesson_id": "l_80710f6adf"
           }
         },
         {
@@ -191,7 +197,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/linux/package_managers.html"
+            "legacy_path": "it/linux/package_managers.html",
+            "lesson_id": "l_666fbcfe76"
           }
         },
         {
@@ -202,7 +209,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/linux/bash_4.html"
+            "legacy_path": "it/linux/bash_4.html",
+            "lesson_id": "l_8a4678247f"
           }
         },
         {
@@ -243,7 +251,7 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "html": "<strong>Step 1:</strong> Download and install <a href='https://www.virtualbox.org/wiki/Downloads' target='_blank'>VirtualBox</a> for your operating system. Run the installer and follow the prompts."
+            "html": "<strong>Step 1:</strong> Download and install <a href=\"https://www.virtualbox.org/wiki/Downloads\" target=\"_blank\">VirtualBox</a> for your operating system. Run the installer and follow the prompts."
           }
         },
         {
@@ -254,7 +262,7 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "html": "<strong>Step 2:</strong> Download the latest <a href='https://ubuntu.com/download/desktop' target='_blank'>Ubuntu Desktop ISO</a>. Save it somewhere you can easily find it (like your Downloads folder)."
+            "html": "<strong>Step 2:</strong> Download the latest <a href=\"https://ubuntu.com/download/desktop\" target=\"_blank\">Ubuntu Desktop ISO</a>. Save it somewhere you can easily find it (like your Downloads folder)."
           }
         },
         {
@@ -298,7 +306,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/linux/abs_vs_rel_paths.html"
+            "legacy_path": "it/linux/abs_vs_rel_paths.html",
+            "lesson_id": "l_fa261f6886"
           }
         },
         {
@@ -320,7 +329,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/linux/file_permissions.html"
+            "legacy_path": "it/linux/file_permissions.html",
+            "lesson_id": "l_9b03660dbc"
           }
         },
         {
@@ -331,7 +341,7 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "html": "<strong>Exercise:</strong> Create a file with <code>touch ~/practice/secret.txt</code>. Check its permissions with <code>ls -l</code>. Remove all permissions for others: <code>chmod o-rwx secret.txt</code>. Make a script executable: <code>echo '#!/bin/bash' > ~/practice/scripts/test.sh && chmod u+x ~/practice/scripts/test.sh</code>. Verify with <code>ls -l</code>."
+            "html": "<strong>Exercise:</strong> Create a file with <code>touch ~/practice/secret.txt</code>. Check its permissions with <code>ls -l</code>. Remove all permissions for others: <code>chmod o-rwx secret.txt</code>. Make a script executable: <code>echo '#!/bin/bash' &gt; ~/practice/scripts/test.sh &amp;&amp; chmod u+x ~/practice/scripts/test.sh</code>. Verify with <code>ls -l</code>."
           }
         },
         {
@@ -394,7 +404,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/linux/system_monitoring.html"
+            "legacy_path": "it/linux/system_monitoring.html",
+            "lesson_id": "l_a788deff38"
           }
         },
         {
@@ -405,7 +416,7 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "html": "<strong>Exercise:</strong> Open a terminal and run <code>top</code>. Press <kbd>M</kbd> to sort by memory usage. Press <kbd>q</kbd> to quit. Then install and run <code>htop</code>. Try the tree view (<kbd>F5</kbd>) and search (<kbd>F3</kbd>). Finally, start a background process with <code>sleep 300 &</code>, find its PID, and kill it."
+            "html": "<strong>Exercise:</strong> Open a terminal and run <code>top</code>. Press <kbd>M</kbd> to sort by memory usage. Press <kbd>q</kbd> to quit. Then install and run <code>htop</code>. Try the tree view (<kbd>F5</kbd>) and search (<kbd>F3</kbd>). Finally, start a background process with <code>sleep 300 &amp;</code>, find its PID, and kill it."
           }
         },
         {
@@ -416,7 +427,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/linux/user_group_management.html"
+            "legacy_path": "it/linux/user_group_management.html",
+            "lesson_id": "l_6953cb4ee1"
           }
         },
         {
@@ -438,7 +450,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/linux/troubleshooting.html"
+            "legacy_path": "it/linux/troubleshooting.html",
+            "lesson_id": "l_120423cfa9"
           }
         },
         {
@@ -449,7 +462,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/linux/i_broke_it.html"
+            "legacy_path": "it/linux/i_broke_it.html",
+            "lesson_id": "l_6720d7d520"
           }
         },
         {
@@ -460,7 +474,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/linux/final_project.html"
+            "legacy_path": "it/linux/final_project.html",
+            "lesson_id": "l_de9c335ac6"
           }
         },
         {

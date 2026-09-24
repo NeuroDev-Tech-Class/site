@@ -29,7 +29,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit1/what_is_gimp.html"
+            "legacy_path": "media/gimp/unit1/what_is_gimp.html",
+            "lesson_id": "l_2302355d87"
           }
         },
         {
@@ -51,7 +52,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit1/the_gimp_interface.html"
+            "legacy_path": "media/gimp/unit1/the_gimp_interface.html",
+            "lesson_id": "l_c77ed8b383"
           }
         },
         {
@@ -92,7 +94,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit1/canvas_resolution_formats.html"
+            "legacy_path": "media/gimp/unit1/canvas_resolution_formats.html",
+            "lesson_id": "l_9e0e0a15fa"
           }
         },
         {
@@ -103,7 +106,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit1/selection_tools.html"
+            "legacy_path": "media/gimp/unit1/selection_tools.html",
+            "lesson_id": "l_6916164cb9"
           }
         },
         {
@@ -127,7 +131,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit1/layers_and_layer_modes.html"
+            "legacy_path": "media/gimp/unit1/layers_and_layer_modes.html",
+            "lesson_id": "l_0b450d365e"
           }
         },
         {
@@ -151,7 +156,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit1/transform_and_paint_tools.html"
+            "legacy_path": "media/gimp/unit1/transform_and_paint_tools.html",
+            "lesson_id": "l_6f2d41d0c2"
           }
         },
         {
@@ -175,7 +181,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit1/color_correction.html"
+            "legacy_path": "media/gimp/unit1/color_correction.html",
+            "lesson_id": "l_04caf98310"
           }
         },
         {
@@ -199,7 +206,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit1/activity_photo_restoration.html"
+            "legacy_path": "media/gimp/unit1/activity_photo_restoration.html",
+            "lesson_id": "l_8ec6fa6102"
           }
         },
         {
@@ -229,7 +237,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit2/filters_and_effects.html"
+            "legacy_path": "media/gimp/unit2/filters_and_effects.html",
+            "lesson_id": "l_d7bcbf8924"
           }
         },
         {
@@ -242,7 +251,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "<strong>Exercise 2.1:</strong> Apply Blur, Sharpen, Distort, and Light & Shadow filters to a photo. Compare before and after for each filter."
+            "html": "<strong>Exercise 2.1:</strong> Apply Blur, Sharpen, Distort, and Light &amp; Shadow filters to a photo. Compare before and after for each filter."
           }
         },
         {
@@ -253,7 +262,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit2/text_and_typography.html"
+            "legacy_path": "media/gimp/unit2/text_and_typography.html",
+            "lesson_id": "l_1b158b70d1"
           }
         },
         {
@@ -277,7 +287,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit2/paths_and_vectors.html"
+            "legacy_path": "media/gimp/unit2/paths_and_vectors.html",
+            "lesson_id": "l_c749da6508"
           }
         },
         {
@@ -301,7 +312,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit2/masks_and_compositing.html"
+            "legacy_path": "media/gimp/unit2/masks_and_compositing.html",
+            "lesson_id": "l_64a672885b"
           }
         },
         {
@@ -325,7 +337,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit2/activity_movie_poster.html"
+            "legacy_path": "media/gimp/unit2/activity_movie_poster.html",
+            "lesson_id": "l_c78dd9a64f"
           }
         },
         {
@@ -355,7 +368,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit3/digital_painting_basics.html"
+            "legacy_path": "media/gimp/unit3/digital_painting_basics.html",
+            "lesson_id": "l_b99cb9b4f8"
           }
         },
         {
@@ -379,7 +393,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit3/logo_and_icon_design.html"
+            "legacy_path": "media/gimp/unit3/logo_and_icon_design.html",
+            "lesson_id": "l_7bebd5758c"
           }
         },
         {
@@ -403,7 +418,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit3/print_vs_web_design.html"
+            "legacy_path": "media/gimp/unit3/print_vs_web_design.html",
+            "lesson_id": "l_0b16095c20"
           }
         },
         {
@@ -427,7 +443,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/gimp/unit3/final_project.html"
+            "legacy_path": "media/gimp/unit3/final_project.html",
+            "lesson_id": "l_966638b9ab"
           }
         },
         {

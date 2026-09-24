@@ -29,7 +29,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit1/what_is_3d_modeling.html"
+            "legacy_path": "game-development/blender-zbrush/unit1/what_is_3d_modeling.html",
+            "lesson_id": "l_835a57e3bd"
           }
         },
         {
@@ -62,7 +63,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit1/the_blender_interface.html"
+            "legacy_path": "game-development/blender-zbrush/unit1/the_blender_interface.html",
+            "lesson_id": "l_7c997127cf"
           }
         },
         {
@@ -103,7 +105,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit1/navigation_and_transforms.html"
+            "legacy_path": "game-development/blender-zbrush/unit1/navigation_and_transforms.html",
+            "lesson_id": "l_1f2851c86c"
           }
         },
         {
@@ -114,7 +117,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit1/edit_mode_mesh_elements.html"
+            "legacy_path": "game-development/blender-zbrush/unit1/edit_mode_mesh_elements.html",
+            "lesson_id": "l_b7810e8b68"
           }
         },
         {
@@ -138,7 +142,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit1/extrude_inset_loopcut.html"
+            "legacy_path": "game-development/blender-zbrush/unit1/extrude_inset_loopcut.html",
+            "lesson_id": "l_58d1e4c785"
           }
         },
         {
@@ -162,7 +167,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit1/shading_and_materials.html"
+            "legacy_path": "game-development/blender-zbrush/unit1/shading_and_materials.html",
+            "lesson_id": "l_0c47f7b57c"
           }
         },
         {
@@ -186,7 +192,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit1/exporting_models.html"
+            "legacy_path": "game-development/blender-zbrush/unit1/exporting_models.html",
+            "lesson_id": "l_4b321bc3c6"
           }
         },
         {
@@ -197,7 +204,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit1/activity_create_a_scene.html"
+            "legacy_path": "game-development/blender-zbrush/unit1/activity_create_a_scene.html",
+            "lesson_id": "l_7ac2161a02"
           }
         },
         {
@@ -227,7 +235,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit2/ngons_and_topology.html"
+            "legacy_path": "game-development/blender-zbrush/unit2/ngons_and_topology.html",
+            "lesson_id": "l_b4f75978e3"
           }
         },
         {
@@ -238,7 +247,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit2/knife_tool_and_merge.html"
+            "legacy_path": "game-development/blender-zbrush/unit2/knife_tool_and_merge.html",
+            "lesson_id": "l_67b2a41622"
           }
         },
         {
@@ -262,7 +272,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit2/modifiers.html"
+            "legacy_path": "game-development/blender-zbrush/unit2/modifiers.html",
+            "lesson_id": "l_79c4c65a81"
           }
         },
         {
@@ -286,7 +297,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit2/3d_printing_basics.html"
+            "legacy_path": "game-development/blender-zbrush/unit2/3d_printing_basics.html",
+            "lesson_id": "l_ad06eb51b3"
           }
         },
         {
@@ -297,7 +309,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit2/slicing_and_print_settings.html"
+            "legacy_path": "game-development/blender-zbrush/unit2/slicing_and_print_settings.html",
+            "lesson_id": "l_3d45039f5e"
           }
         },
         {
@@ -321,7 +334,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit2/activity_model_print_ring.html"
+            "legacy_path": "game-development/blender-zbrush/unit2/activity_model_print_ring.html",
+            "lesson_id": "l_76b0317e89"
           }
         },
         {
@@ -351,7 +365,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit3/zbrush_interface_brushes.html"
+            "legacy_path": "game-development/blender-zbrush/unit3/zbrush_interface_brushes.html",
+            "lesson_id": "l_4bdcbf4c92"
           }
         },
         {
@@ -375,7 +390,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit3/sculpting_techniques.html"
+            "legacy_path": "game-development/blender-zbrush/unit3/sculpting_techniques.html",
+            "lesson_id": "l_a3f6b19d51"
           }
         },
         {
@@ -399,7 +415,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit3/export_and_roundtrip.html"
+            "legacy_path": "game-development/blender-zbrush/unit3/export_and_roundtrip.html",
+            "lesson_id": "l_114f3fcd75"
           }
         },
         {
@@ -423,7 +440,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit3/finishing_prints.html"
+            "legacy_path": "game-development/blender-zbrush/unit3/finishing_prints.html",
+            "lesson_id": "l_6431aef40f"
           }
         },
         {
@@ -434,7 +452,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "game-development/blender-zbrush/unit3/final_project.html"
+            "legacy_path": "game-development/blender-zbrush/unit3/final_project.html",
+            "lesson_id": "l_33c382e276"
           }
         },
         {

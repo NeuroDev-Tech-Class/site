@@ -12,7 +12,7 @@
     "Navigate and configure BIOS/UEFI settings for optimal hardware performance.",
     "Complete a final project that demonstrates the ability to plan, budget for, and build a custom PC, reflecting an integration of course content and practical skills."
   ],
-  "intro_html": "<section>\n        <h3>PC Building Guide</h3>\n        <p>\n          Use this complete PC Building guide as a reference throughout the\n          remainder of this course. It's probably best to approach this one bite\n          at a time, rather than trying to speed through it. It's a lot of\n          material!\n        </p>\n\n        <ul>\n          <li>\n            <a href=\"assets/pdfs/it/computer_hardware/building_a_pc.html\" target=\"_blank\" rel=\"noopener noreferrer\">Building a PC</a>\n          </li>\n        </ul>\n      </section>",
+  "intro_html": "<section>\n        <h3>PC Building Guide</h3>\n        <p>\n          Use this complete PC Building guide as a reference throughout the\n          remainder of this course. It's probably best to approach this one bite\n          at a time, rather than trying to speed through it. It's a lot of\n          material!\n        </p>\n\n        <ul>\n          <li>\n            <a href=\"/lessons/l_4bbf0c3a25\" target=\"_blank\" rel=\"noopener noreferrer\">Building a PC</a>\n          </li>\n        </ul>\n      </section>",
   "units": [
     {
       "id": "u_b9224d50d3",
@@ -61,7 +61,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/computer_hardware/navigating_the_bios_uefi.html"
+            "legacy_path": "it/computer_hardware/navigating_the_bios_uefi.html",
+            "lesson_id": "l_4e14e55856"
           }
         },
         {
@@ -72,7 +73,7 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "html": "Refer to the <a href=\"assets/pdfs/it/computer_hardware/building_a_pc.html\" target=\"_blank\" rel=\"noopener noreferrer\">PC Building Guide</a> for more information on the CPU, the GPU, and the motherboard before taking the quiz."
+            "html": "Refer to the <a href=\"/lessons/l_4bbf0c3a25\" target=\"_blank\" rel=\"noopener noreferrer\">PC Building Guide</a> for more information on the CPU, the GPU, and the motherboard before taking the quiz."
           }
         },
         {
@@ -124,7 +125,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/computer_hardware/identifying_computer_hardware.html"
+            "legacy_path": "it/computer_hardware/identifying_computer_hardware.html",
+            "lesson_id": "l_ae2409c5c8"
           }
         },
         {
@@ -135,7 +137,7 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "html": "Refer to the <a href=\"assets/pdfs/it/computer_hardware/building_a_pc.html\" target=\"_blank\" rel=\"noopener noreferrer\">PC Building Guide</a> for more information on RAM, storage, the PSU, and cooling before taking the quiz."
+            "html": "Refer to the <a href=\"/lessons/l_4bbf0c3a25\" target=\"_blank\" rel=\"noopener noreferrer\">PC Building Guide</a> for more information on RAM, storage, the PSU, and cooling before taking the quiz."
           }
         },
         {
@@ -165,7 +167,7 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "html": "Refer to the rest of the <a href=\"assets/pdfs/it/computer_hardware/building_a_pc.html\" target=\"_blank\" rel=\"noopener noreferrer\">PC Building Guide</a> to complete the final quiz."
+            "html": "Refer to the rest of the <a href=\"/lessons/l_4bbf0c3a25\" target=\"_blank\" rel=\"noopener noreferrer\">PC Building Guide</a> to complete the final quiz."
           }
         },
         {
@@ -187,7 +189,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "it/computer_hardware/final_project-build_a_custom_pc.html"
+            "legacy_path": "it/computer_hardware/final_project-build_a_custom_pc.html",
+            "lesson_id": "l_d707fb3b2d"
           }
         }
       ]

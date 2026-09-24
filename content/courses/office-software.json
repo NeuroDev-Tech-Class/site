@@ -28,7 +28,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/office-software/word_processors/word_processors.html"
+            "legacy_path": "computer-basics/office-software/word_processors/word_processors.html",
+            "lesson_id": "l_9fdbf22bcb"
           }
         },
         {
@@ -50,7 +51,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/office-software/word_processors/practice-word_processors.html"
+            "legacy_path": "computer-basics/office-software/word_processors/practice-word_processors.html",
+            "lesson_id": "l_80a1912376"
           }
         },
         {
@@ -61,7 +63,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/office-software/word_processors/application-creating_a_résumé.html"
+            "legacy_path": "computer-basics/office-software/word_processors/application-creating_a_résumé.html",
+            "lesson_id": "l_eeb08fb871"
           }
         }
       ]
@@ -80,7 +83,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/office-software/spreadsheets/spreadsheets.html"
+            "legacy_path": "computer-basics/office-software/spreadsheets/spreadsheets.html",
+            "lesson_id": "l_a910a22114"
           }
         },
         {
@@ -102,7 +106,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/office-software/spreadsheets/practice-spreadsheets.html"
+            "legacy_path": "computer-basics/office-software/spreadsheets/practice-spreadsheets.html",
+            "lesson_id": "l_c016e3a7e9"
           }
         },
         {
@@ -113,7 +118,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/office-software/spreadsheets/application-creating_a_budget.html"
+            "legacy_path": "computer-basics/office-software/spreadsheets/application-creating_a_budget.html",
+            "lesson_id": "l_799749ff2d"
           }
         }
       ]
@@ -132,7 +138,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/office-software/presentation_software/slideshows.html"
+            "legacy_path": "computer-basics/office-software/presentation_software/slideshows.html",
+            "lesson_id": "l_e6363af40a"
           }
         },
         {
@@ -143,7 +150,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/office-software/presentation_software/application-careers_day_presentation.html"
+            "legacy_path": "computer-basics/office-software/presentation_software/application-careers_day_presentation.html",
+            "lesson_id": "l_d71a0307f6"
           }
         }
       ]

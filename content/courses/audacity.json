@@ -29,7 +29,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/audacity/unit1/what_is_digital_audio.html"
+            "legacy_path": "media/audacity/unit1/what_is_digital_audio.html",
+            "lesson_id": "l_ad7e857134"
           }
         },
         {
@@ -62,7 +63,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/audacity/unit1/the_audacity_interface.html"
+            "legacy_path": "media/audacity/unit1/the_audacity_interface.html",
+            "lesson_id": "l_6fa575965b"
           }
         },
         {
@@ -103,7 +105,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/audacity/unit1/setting_up_microphone.html"
+            "legacy_path": "media/audacity/unit1/setting_up_microphone.html",
+            "lesson_id": "l_52fbbbfcd9"
           }
         },
         {
@@ -116,7 +119,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "<strong>Exercise 1.1:</strong> Connect a microphone (or use your built-in mic). In Edit &rarr; Preferences &rarr; Audio Settings, select your input device. Record yourself introducing your name and a fun fact. Save the project."
+            "html": "<strong>Exercise 1.1:</strong> Connect a microphone (or use your built-in mic). In Edit → Preferences → Audio Settings, select your input device. Record yourself introducing your name and a fun fact. Save the project."
           }
         },
         {
@@ -127,7 +130,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/audacity/unit1/toolbar_and_playback.html"
+            "legacy_path": "media/audacity/unit1/toolbar_and_playback.html",
+            "lesson_id": "l_1ca9438797"
           }
         },
         {
@@ -138,7 +142,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/audacity/unit1/selection_cutting_trimming.html"
+            "legacy_path": "media/audacity/unit1/selection_cutting_trimming.html",
+            "lesson_id": "l_007538a81c"
           }
         },
         {
@@ -162,7 +167,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/audacity/unit1/importing_and_exporting.html"
+            "legacy_path": "media/audacity/unit1/importing_and_exporting.html",
+            "lesson_id": "l_a4b21b4b66"
           }
         },
         {
@@ -186,7 +192,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/audacity/unit1/audio_concepts.html"
+            "legacy_path": "media/audacity/unit1/audio_concepts.html",
+            "lesson_id": "l_c97573c272"
           }
         },
         {
@@ -197,7 +204,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/audacity/unit1/activity_60sec_intro.html"
+            "legacy_path": "media/audacity/unit1/activity_60sec_intro.html",
+            "lesson_id": "l_e0c8ff6d0d"
           }
         },
         {
@@ -227,7 +235,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/audacity/unit2/noise_reduction_cleanup.html"
+            "legacy_path": "media/audacity/unit2/noise_reduction_cleanup.html",
+            "lesson_id": "l_740e4d08f6"
           }
         },
         {
@@ -240,7 +249,7 @@
             "exercise"
           ],
           "payload": {
-            "html": "<strong>Exercise 2.1:</strong> Open a recording with background noise. Select a few seconds of pure noise &rarr; Effect &rarr; Noise Reduction &rarr; Get Noise Profile. Then select the full track and apply Noise Reduction."
+            "html": "<strong>Exercise 2.1:</strong> Open a recording with background noise. Select a few seconds of pure noise → Effect → Noise Reduction → Get Noise Profile. Then select the full track and apply Noise Reduction."
           }
         },
         {
@@ -251,7 +260,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/audacity/unit2/essential_effects.html"
+            "legacy_path": "media/audacity/unit2/essential_effects.html",
+            "lesson_id": "l_54ffdd3029"
           }
         },
         {
@@ -275,7 +285,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/audacity/unit2/multi_track_mixing.html"
+            "legacy_path": "media/audacity/unit2/multi_track_mixing.html",
+            "lesson_id": "l_5b90611d5f"
           }
         },
         {
@@ -299,7 +310,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/audacity/unit2/envelope_tool.html"
+            "legacy_path": "media/audacity/unit2/envelope_tool.html",
+            "lesson_id": "l_8b961725bb"
           }
         },
         {
@@ -323,7 +335,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/audacity/unit2/final_project_podcast.html"
+            "legacy_path": "media/audacity/unit2/final_project_podcast.html",
+            "lesson_id": "l_37009b860f"
           }
         },
         {

@@ -145,7 +145,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/ai-prompt-engineering/responsible_ai_use.html"
+            "legacy_path": "computer-basics/ai-prompt-engineering/responsible_ai_use.html",
+            "lesson_id": "l_175e7084c6"
           }
         },
         {
@@ -167,7 +168,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/ai-prompt-engineering/hands-on_generative_ai_exercises.html"
+            "legacy_path": "computer-basics/ai-prompt-engineering/hands-on_generative_ai_exercises.html",
+            "lesson_id": "l_5dc4459a7a"
           }
         }
       ]
@@ -186,7 +188,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/ai-prompt-engineering/prompt_engineering_approaches_and_strategies.html"
+            "legacy_path": "computer-basics/ai-prompt-engineering/prompt_engineering_approaches_and_strategies.html",
+            "lesson_id": "l_16b78298d9"
           }
         },
         {
@@ -219,7 +222,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/ai-prompt-engineering/working_with_modern_ai_tools.html"
+            "legacy_path": "computer-basics/ai-prompt-engineering/working_with_modern_ai_tools.html",
+            "lesson_id": "l_c5725b1cea"
           }
         },
         {
@@ -230,7 +234,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-basics/ai-prompt-engineering/final_assignment-ai_application.html"
+            "legacy_path": "computer-basics/ai-prompt-engineering/final_assignment-ai_application.html",
+            "lesson_id": "l_1e44d8e237"
           }
         }
       ]

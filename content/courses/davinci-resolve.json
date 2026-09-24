@@ -30,7 +30,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/davinci-resolve/unit1/what_is_video_editing.html"
+            "legacy_path": "media/davinci-resolve/unit1/what_is_video_editing.html",
+            "lesson_id": "l_43ebeaeb45"
           }
         },
         {
@@ -52,7 +53,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/davinci-resolve/unit1/the_resolve_interface.html"
+            "legacy_path": "media/davinci-resolve/unit1/the_resolve_interface.html",
+            "lesson_id": "l_ac4e6ce8ab"
           }
         },
         {
@@ -93,7 +95,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/davinci-resolve/unit1/project_settings_media.html"
+            "legacy_path": "media/davinci-resolve/unit1/project_settings_media.html",
+            "lesson_id": "l_4573200bef"
           }
         },
         {
@@ -117,7 +120,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/davinci-resolve/unit1/edit_page_timeline.html"
+            "legacy_path": "media/davinci-resolve/unit1/edit_page_timeline.html",
+            "lesson_id": "l_f104a1f882"
           }
         },
         {
@@ -141,7 +145,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/davinci-resolve/unit1/transitions_speed_keyframes.html"
+            "legacy_path": "media/davinci-resolve/unit1/transitions_speed_keyframes.html",
+            "lesson_id": "l_e21b7fa8ba"
           }
         },
         {
@@ -165,7 +170,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/davinci-resolve/unit1/titles_and_graphics.html"
+            "legacy_path": "media/davinci-resolve/unit1/titles_and_graphics.html",
+            "lesson_id": "l_ac135ec124"
           }
         },
         {
@@ -189,7 +195,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/davinci-resolve/unit1/activity_highlight_reel.html"
+            "legacy_path": "media/davinci-resolve/unit1/activity_highlight_reel.html",
+            "lesson_id": "l_74068c29dd"
           }
         },
         {
@@ -219,7 +226,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/davinci-resolve/unit2/color_correction_grading.html"
+            "legacy_path": "media/davinci-resolve/unit2/color_correction_grading.html",
+            "lesson_id": "l_2289b54e33"
           }
         },
         {
@@ -243,7 +251,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/davinci-resolve/unit2/color_scopes_matching.html"
+            "legacy_path": "media/davinci-resolve/unit2/color_scopes_matching.html",
+            "lesson_id": "l_899f36ba99"
           }
         },
         {
@@ -267,7 +276,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/davinci-resolve/unit2/fairlight_audio_editing.html"
+            "legacy_path": "media/davinci-resolve/unit2/fairlight_audio_editing.html",
+            "lesson_id": "l_2b11a8e369"
           }
         },
         {
@@ -291,7 +301,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/davinci-resolve/unit2/intro_to_fusion.html"
+            "legacy_path": "media/davinci-resolve/unit2/intro_to_fusion.html",
+            "lesson_id": "l_cd7b25ae74"
           }
         },
         {
@@ -315,7 +326,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/davinci-resolve/unit2/activity_color_grade_scene.html"
+            "legacy_path": "media/davinci-resolve/unit2/activity_color_grade_scene.html",
+            "lesson_id": "l_d71e573af1"
           }
         },
         {
@@ -345,7 +357,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/davinci-resolve/unit3/deliver_page_export.html"
+            "legacy_path": "media/davinci-resolve/unit3/deliver_page_export.html",
+            "lesson_id": "l_e25ce7b56e"
           }
         },
         {
@@ -369,7 +382,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/davinci-resolve/unit3/optimizing_workflow.html"
+            "legacy_path": "media/davinci-resolve/unit3/optimizing_workflow.html",
+            "lesson_id": "l_41c611ece0"
           }
         },
         {
@@ -393,7 +407,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "media/davinci-resolve/unit3/final_project.html"
+            "legacy_path": "media/davinci-resolve/unit3/final_project.html",
+            "lesson_id": "l_6191f592d9"
           }
         },
         {

@@ -29,7 +29,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-science/python-2-object-oriented_programming/what_is_oop.html"
+            "legacy_path": "computer-science/python-2-object-oriented_programming/what_is_oop.html",
+            "lesson_id": "l_e516d6b6da"
           }
         },
         {
@@ -196,7 +197,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-science/python-2-object-oriented_programming/sidenote-DRY.html"
+            "legacy_path": "computer-science/python-2-object-oriented_programming/sidenote-DRY.html",
+            "lesson_id": "l_ae3d54dbea"
           }
         },
         {
@@ -207,7 +209,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-science/python-2-object-oriented_programming/sidenote-refactoring.html"
+            "legacy_path": "computer-science/python-2-object-oriented_programming/sidenote-refactoring.html",
+            "lesson_id": "l_3ade682fc5"
           }
         }
       ]

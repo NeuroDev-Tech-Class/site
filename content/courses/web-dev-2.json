@@ -29,7 +29,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "web-development/what_is_javascript.html"
+            "legacy_path": "web-development/what_is_javascript.html",
+            "lesson_id": "l_9eb0eaa687"
           }
         },
         {
@@ -40,7 +41,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/what_is_an_ide.html"
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/what_is_an_ide.html",
+            "lesson_id": "l_44bcb0b672"
           }
         },
         {
@@ -62,7 +64,8 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/github_setup.html"
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/github_setup.html",
+            "lesson_id": "l_a04cb9e6f8"
           }
         },
         {
@@ -84,7 +87,7 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "html": "Go to <a href='https://nodejs.org/en' target='_blank'>Nodejs.org</a>. Download Node. It will open a terminal and take a bit. Afterwards, use this <a href='assets/pdfs/web-development/Windows-Node-Installation.html' target='_blank'>guide</a> to get your Node, npm, and Jest environment ready to go."
+            "html": "Go to <a href=\"https://nodejs.org/en\" target=\"_blank\">Nodejs.org</a>. Download Node. It will open a terminal and take a bit. Afterwards, use this <a href=\"/lessons/l_f899f9eb6f\" target=\"_blank\">guide</a> to get your Node, npm, and Jest environment ready to go."
           }
         }
       ]

@@ -1,0 +1,1586 @@
+{
+  "l_007538a81c": {
+    "legacy_path": "media/audacity/unit1/selection_cutting_trimming.html",
+    "title": "Selection, Cutting & Trimming",
+    "subtitle": "Learn to select, cut, trim, split, and clean up audio recordings",
+    "course_tag": "Audio Production — Audacity",
+    "youtube_ids": [],
+    "used_by": [
+      "audacity"
+    ]
+  },
+  "l_04caf98310": {
+    "legacy_path": "media/gimp/unit1/color_correction.html",
+    "title": "Color Correction",
+    "subtitle": "Fixing Exposure, White Balance, and Color in Your Images",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_071ad21b67": {
+    "legacy_path": "computer-basics/digital-literacy/unit1/cables_and_ports.html",
+    "title": "Cables and Ports",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [
+      "f38sotYHqtA",
+      "egkqDwQuh8E"
+    ],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_09a20f2189": {
+    "legacy_path": "it/linux/what_is_linux.html",
+    "title": "What Is Linux?",
+    "subtitle": null,
+    "course_tag": "Introduction to Linux",
+    "youtube_ids": [
+      "sWbUDq4S6Y8"
+    ],
+    "used_by": [
+      "linux"
+    ]
+  },
+  "l_0b16095c20": {
+    "legacy_path": "media/gimp/unit3/print_vs_web_design.html",
+    "title": "Print vs. Web Design",
+    "subtitle": "Understanding the Key Differences Between Designing for Print and Screen",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_0b450d365e": {
+    "legacy_path": "media/gimp/unit1/layers_and_layer_modes.html",
+    "title": "Layers & Layer Modes",
+    "subtitle": "Building Images with Stackable, Transparent Sheets",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_0c47f7b57c": {
+    "legacy_path": "game-development/blender-zbrush/unit1/shading_and_materials.html",
+    "title": "Shading & Materials",
+    "subtitle": "Making your models look good with shading modes and surface materials",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_114f3fcd75": {
+    "legacy_path": "game-development/blender-zbrush/unit3/export_and_roundtrip.html",
+    "title": "Export & Roundtrip",
+    "subtitle": "Moving Your Sculpt from ZBrushCoreMini to Blender and Beyond",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_120423cfa9": {
+    "legacy_path": "it/linux/troubleshooting.html",
+    "title": "Basic Troubleshooting Techniques",
+    "subtitle": "How to diagnose and fix common Linux problems",
+    "course_tag": "Introduction to Linux",
+    "youtube_ids": [],
+    "used_by": [
+      "linux"
+    ]
+  },
+  "l_13f75cc221": {
+    "legacy_path": "game-development/unreal-engine/unit2/activity_obstacle_course.html",
+    "title": "Activity: Obstacle Course",
+    "subtitle": "Build a playable platforming level using every Blueprint mechanic from Unit 2",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_168cc693f4": {
+    "legacy_path": "game-development/unreal-engine/unit1/foliage_and_detail.html",
+    "title": "Foliage & Detail",
+    "subtitle": "Quickly populate your world with trees, grass, rocks, and other environmental details",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_16b78298d9": {
+    "legacy_path": "computer-basics/ai-prompt-engineering/prompt_engineering_approaches_and_strategies.html",
+    "title": "Prompt Engineering Approaches and Strategies",
+    "subtitle": null,
+    "course_tag": "AI Prompt Engineering",
+    "youtube_ids": [],
+    "used_by": [
+      "ai-usage"
+    ]
+  },
+  "l_175e7084c6": {
+    "legacy_path": "computer-basics/ai-prompt-engineering/responsible_ai_use.html",
+    "title": "Responsible AI Use",
+    "subtitle": "Misinformation, privacy, and using AI honestly in school.",
+    "course_tag": "AI Prompt Engineering",
+    "youtube_ids": [],
+    "used_by": [
+      "ai-usage"
+    ]
+  },
+  "l_1b158b70d1": {
+    "legacy_path": "media/gimp/unit2/text_and_typography.html",
+    "title": "Text & Typography",
+    "subtitle": "Adding and Styling Text in GIMP",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_1ca9438797": {
+    "legacy_path": "media/audacity/unit1/toolbar_and_playback.html",
+    "title": "Toolbar & Playback Controls",
+    "subtitle": "Master playback, navigation, zooming, and looping with keyboard shortcuts",
+    "course_tag": "Audio Production — Audacity",
+    "youtube_ids": [],
+    "used_by": [
+      "audacity"
+    ]
+  },
+  "l_1e44d8e237": {
+    "legacy_path": "computer-basics/ai-prompt-engineering/final_assignment-ai_application.html",
+    "title": "Final Assignment: AI Application",
+    "subtitle": null,
+    "course_tag": "AI Prompt Engineering",
+    "youtube_ids": [],
+    "used_by": [
+      "ai-usage"
+    ]
+  },
+  "l_1f2851c86c": {
+    "legacy_path": "game-development/blender-zbrush/unit1/navigation_and_transforms.html",
+    "title": "Navigation & Transforms",
+    "subtitle": "Moving through 3D space and manipulating objects",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_2289b54e33": {
+    "legacy_path": "media/davinci-resolve/unit2/color_correction_grading.html",
+    "title": "Color Correction & Grading",
+    "subtitle": "Using DaVinci Resolve's industry-standard Color page for primary corrections and creative grades",
+    "course_tag": "Video Production — DaVinci Resolve",
+    "youtube_ids": [
+      "63Ln33O4p4c"
+    ],
+    "used_by": [
+      "davinci-resolve"
+    ]
+  },
+  "l_2302355d87": {
+    "legacy_path": "media/gimp/unit1/what_is_gimp.html",
+    "title": "What Is GIMP?",
+    "subtitle": "An Introduction to the GNU Image Manipulation Program",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_2380e9329b": {
+    "legacy_path": "web-development/web1-html_css/what_are_html_and_css.html",
+    "title": "Intro to Web Technologies",
+    "subtitle": "HTML, CSS, and JavaScript",
+    "course_tag": "Web Dev I",
+    "youtube_ids": [],
+    "used_by": [
+      "web-dev-1"
+    ]
+  },
+  "l_23d6aec383": {
+    "legacy_path": "game-development/unreal-engine/unit3/umg_widgets_and_hud.html",
+    "title": "UMG Widgets & HUD",
+    "subtitle": "Create on-screen UI elements using Unreal Motion Graphics and display a live coin counter",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_2513e9f66d": {
+    "legacy_path": "computer-basics/digital-literacy/unit1/hands-on_exercise-identifying_hardware.html",
+    "title": "Hands-on Exercise: Identifying Hardware",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_25b8151105": {
+    "legacy_path": "computer-basics/digital-literacy/unit3/email.html",
+    "title": "Email ✉️",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_2adc6febd3": {
+    "legacy_path": "game-development/unreal-engine/unit2/collectibles_jumppads_movement.html",
+    "title": "Collectibles, Jump Pads & Movement",
+    "subtitle": "Build coins the player can collect, pads that launch them skyward, and enable double jump",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_2b11a8e369": {
+    "legacy_path": "media/davinci-resolve/unit2/fairlight_audio_editing.html",
+    "title": "Fairlight Audio Editing",
+    "subtitle": "Using the Fairlight page to mix, EQ, and polish the audio in your video projects",
+    "course_tag": "Video Production — DaVinci Resolve",
+    "youtube_ids": [],
+    "used_by": [
+      "davinci-resolve"
+    ]
+  },
+  "l_2b62009ac3": {
+    "legacy_path": "it/linux/intro_to_WSL.html",
+    "title": "Intro to WSL",
+    "subtitle": null,
+    "course_tag": "Introduction to Linux",
+    "youtube_ids": [],
+    "used_by": [
+      "linux"
+    ]
+  },
+  "l_2b8b92bf81": {
+    "legacy_path": "computer-science/python-1-intro_to_programming/unit2/what_is_control_flow.html",
+    "title": "What Is Control Flow?",
+    "subtitle": null,
+    "course_tag": "Python I",
+    "youtube_ids": [],
+    "used_by": [
+      "python-1"
+    ]
+  },
+  "l_2d20d084bf": {
+    "legacy_path": "game-development/unreal-engine/unit1/the_ue5_interface.html",
+    "title": "The UE5 Interface",
+    "subtitle": "A complete walkthrough of every major panel in the Unreal Engine 5 editor",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_3287079d60": {
+    "legacy_path": "it/linux/bash_1.html",
+    "title": "Bash Command Tutorial 1",
+    "subtitle": "mkdir, ls, pwd, cd, clear",
+    "course_tag": "Introduction to Linux",
+    "youtube_ids": [
+      "sWbUDq4S6Y8"
+    ],
+    "used_by": [
+      "linux"
+    ]
+  },
+  "l_33c382e276": {
+    "legacy_path": "game-development/blender-zbrush/unit3/final_project.html",
+    "title": "Final Project",
+    "subtitle": "Design, Sculpt, Print, and Finish a Showcase Piece",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_37009b860f": {
+    "legacy_path": "media/audacity/unit2/final_project_podcast.html",
+    "title": "Final Project: Mini Podcast Episode",
+    "subtitle": "Combine everything you've learned into a polished podcast-style audio piece",
+    "course_tag": "Audio Production — Audacity",
+    "youtube_ids": [],
+    "used_by": [
+      "audacity"
+    ]
+  },
+  "l_3a165d5e4e": {
+    "legacy_path": "computer-basics/digital-literacy/unit3/hands-on_exercise-email_account.html",
+    "title": "Hands-on Exercise: Setting Up an Email Account",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_3ade682fc5": {
+    "legacy_path": "computer-science/python-2-object-oriented_programming/sidenote-refactoring.html",
+    "title": "Refactoring Strategies",
+    "subtitle": null,
+    "course_tag": "Python II",
+    "youtube_ids": [],
+    "used_by": [
+      "python-2"
+    ]
+  },
+  "l_3d45039f5e": {
+    "legacy_path": "game-development/blender-zbrush/unit2/slicing_and_print_settings.html",
+    "title": "Slicing & Print Settings",
+    "subtitle": "Turning a 3D Model into Printer-Ready Instructions",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_3fd823d419": {
+    "legacy_path": "game-development/unreal-engine/unit1/activity_castle_courtyard.html",
+    "title": "Activity: Castle Courtyard",
+    "subtitle": "Build a complete 3D environment by combining everything you've learned in Unit 1",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_41118eea39": {
+    "legacy_path": "computer-basics/digital-literacy/unit1/files,_data,_and_information.html",
+    "title": "Files, Data, and Information",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_41c611ece0": {
+    "legacy_path": "media/davinci-resolve/unit3/optimizing_workflow.html",
+    "title": "Optimizing Your Workflow",
+    "subtitle": "Tips and techniques for faster, smoother editing in DaVinci Resolve",
+    "course_tag": "Video Production — DaVinci Resolve",
+    "youtube_ids": [],
+    "used_by": [
+      "davinci-resolve"
+    ]
+  },
+  "l_43ebeaeb45": {
+    "legacy_path": "media/davinci-resolve/unit1/what_is_video_editing.html",
+    "title": "What Is Video Editing?",
+    "subtitle": "An introduction to the craft of video editing, its history, and the fundamentals every editor should know",
+    "course_tag": "Video Production — DaVinci Resolve",
+    "youtube_ids": [
+      "63Ln33O4p4c"
+    ],
+    "used_by": [
+      "davinci-resolve"
+    ]
+  },
+  "l_44bcb0b672": {
+    "legacy_path": "computer-science/python-1-intro_to_programming/unit1/what_is_an_ide.html",
+    "title": "What Is an IDE?",
+    "subtitle": null,
+    "course_tag": "Python I",
+    "youtube_ids": [],
+    "used_by": [
+      "python-1",
+      "web-dev-2"
+    ]
+  },
+  "l_456ef876ca": {
+    "legacy_path": "computer-science/python-1-intro_to_programming/unit3/final_project_text_adventure_game.html",
+    "title": "Final Project: Text Adventure Game",
+    "subtitle": null,
+    "course_tag": "Python I",
+    "youtube_ids": [],
+    "used_by": [
+      "python-1"
+    ]
+  },
+  "l_4573200bef": {
+    "legacy_path": "media/davinci-resolve/unit1/project_settings_media.html",
+    "title": "Project Settings & Media Management",
+    "subtitle": "Configuring your project, importing footage, and organizing your media library",
+    "course_tag": "Video Production — DaVinci Resolve",
+    "youtube_ids": [],
+    "used_by": [
+      "davinci-resolve"
+    ]
+  },
+  "l_4b321bc3c6": {
+    "legacy_path": "game-development/blender-zbrush/unit1/exporting_models.html",
+    "title": "Exporting Models",
+    "subtitle": "Getting your 3D models out of Blender and into the real world",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_4bbf0c3a25": {
+    "legacy_path": "it/computer_hardware/building_a_pc.html",
+    "title": "Building a PC 🖥🔧",
+    "subtitle": null,
+    "course_tag": "Hardware",
+    "youtube_ids": [],
+    "used_by": [
+      "hardware"
+    ]
+  },
+  "l_4bdcbf4c92": {
+    "legacy_path": "game-development/blender-zbrush/unit3/zbrush_interface_brushes.html",
+    "title": "ZBrush Interface & Brushes",
+    "subtitle": "Getting Around ZBrushCoreMini — Tools, Navigation, and Controls",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_4e14e55856": {
+    "legacy_path": "it/computer_hardware/navigating_the_bios_uefi.html",
+    "title": "How to Access and Navigate Your BIOS/UEFI",
+    "subtitle": null,
+    "course_tag": "Hardware",
+    "youtube_ids": [],
+    "used_by": [
+      "hardware"
+    ]
+  },
+  "l_4f2610f336": {
+    "legacy_path": "computer-science/python-1-intro_to_programming/unit3/best_practices.html",
+    "title": "Best Practices",
+    "subtitle": null,
+    "course_tag": "Python I",
+    "youtube_ids": [],
+    "used_by": [
+      "python-1"
+    ]
+  },
+  "l_52fbbbfcd9": {
+    "legacy_path": "media/audacity/unit1/setting_up_microphone.html",
+    "title": "Setting Up Your Microphone",
+    "subtitle": "Configuring audio input so Audacity records clear, properly leveled sound",
+    "course_tag": "Audio Production — Audacity",
+    "youtube_ids": [],
+    "used_by": [
+      "audacity"
+    ]
+  },
+  "l_5464691129": {
+    "legacy_path": "game-development/unreal-engine/unit3/game_design_documents.html",
+    "title": "Game Design Documents",
+    "subtitle": "Plan your game before you build it — a guide to writing a GDD",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_54ffdd3029": {
+    "legacy_path": "media/audacity/unit2/essential_effects.html",
+    "title": "Essential Audio Effects",
+    "subtitle": "Amplify, normalize, compress, equalize, fade, and transform your audio",
+    "course_tag": "Audio Production — Audacity",
+    "youtube_ids": [],
+    "used_by": [
+      "audacity"
+    ]
+  },
+  "l_5529bf2361": {
+    "legacy_path": "game-development/unreal-engine/unit2/variables_branches_functions.html",
+    "title": "Variables, Branches & Functions",
+    "subtitle": "Store data, make decisions, and organize your Blueprint logic",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_561e856e01": {
+    "legacy_path": "game-development/unreal-engine/unit3/level_design_grayboxing.html",
+    "title": "Level Design & Grayboxing",
+    "subtitle": "Prototype your level layout with simple shapes before adding any detail",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_58d1e4c785": {
+    "legacy_path": "game-development/blender-zbrush/unit1/extrude_inset_loopcut.html",
+    "title": "Extrude, Inset & Loop Cut",
+    "subtitle": "The three most important modeling tools in Blender",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_5a5cd8be52": {
+    "legacy_path": "game-development/unreal-engine/unit2/actor_blueprints_collision.html",
+    "title": "Actor Blueprints & Collision",
+    "subtitle": "Create interactive objects with collision events and build a key-and-door system",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_5b2dc6cd37": {
+    "legacy_path": "computer-basics/digital-literacy/unit3/web_browsers.html",
+    "title": "Web Browsers 🌐",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [
+      "kDJTTeL_E-4"
+    ],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_5b90611d5f": {
+    "legacy_path": "media/audacity/unit2/multi_track_mixing.html",
+    "title": "Multi-Track Mixing",
+    "subtitle": "Combine voice, music, and sound effects into a polished mix",
+    "course_tag": "Audio Production — Audacity",
+    "youtube_ids": [
+      "yzJ2VyYkmaA"
+    ],
+    "used_by": [
+      "audacity"
+    ]
+  },
+  "l_5dc4459a7a": {
+    "legacy_path": "computer-basics/ai-prompt-engineering/hands-on_generative_ai_exercises.html",
+    "title": "Generative AI Exercises",
+    "subtitle": null,
+    "course_tag": "AI Prompt Engineering",
+    "youtube_ids": [],
+    "used_by": [
+      "ai-usage"
+    ]
+  },
+  "l_5edb0bec9e": {
+    "legacy_path": "game-development/unreal-engine/unit1/viewport_navigation.html",
+    "title": "Viewport Navigation",
+    "subtitle": "Master the controls for moving around 3D space and manipulating objects in the Unreal Editor",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_60c574ef30": {
+    "legacy_path": "computer-basics/digital-literacy/unit2/keyboard_shortcuts.html",
+    "title": "Keyboard Shortcuts",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_611fde328c": {
+    "legacy_path": "game-development/unreal-engine/unit3/win_lose_checkpoints.html",
+    "title": "Win, Lose & Checkpoints",
+    "subtitle": "Build the core game loop — victory conditions, failure states, and respawn points",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_6191f592d9": {
+    "legacy_path": "media/davinci-resolve/unit3/final_project.html",
+    "title": "Final Project: Short Film or Video Essay",
+    "subtitle": "Create a polished 3–5 minute video that demonstrates your editing, color, and audio skills",
+    "course_tag": "Video Production — DaVinci Resolve",
+    "youtube_ids": [],
+    "used_by": [
+      "davinci-resolve"
+    ]
+  },
+  "l_6431aef40f": {
+    "legacy_path": "game-development/blender-zbrush/unit3/finishing_prints.html",
+    "title": "Finishing Prints",
+    "subtitle": "Sanding, Priming, Painting, and Caring for Your Printer",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_64a672885b": {
+    "legacy_path": "media/gimp/unit2/masks_and_compositing.html",
+    "title": "Masks & Compositing",
+    "subtitle": "Non-Destructive Editing and Seamless Image Blending",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_666fbcfe76": {
+    "legacy_path": "it/linux/package_managers.html",
+    "title": "What is a Package Manager?",
+    "subtitle": null,
+    "course_tag": "Introduction to Linux",
+    "youtube_ids": [],
+    "used_by": [
+      "linux"
+    ]
+  },
+  "l_66b2ff5ce1": {
+    "legacy_path": "game-development/unreal-engine/unit1/meshes_transforms_materials.html",
+    "title": "Meshes, Transforms & Materials",
+    "subtitle": "Learn how to place 3D objects, position them precisely, and control how their surfaces look",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_6720d7d520": {
+    "legacy_path": "it/linux/i_broke_it.html",
+    "title": "I Broke It — Now What?",
+    "subtitle": "A survival guide for when things go wrong in Linux",
+    "course_tag": "Introduction to Linux",
+    "youtube_ids": [],
+    "used_by": [
+      "linux"
+    ]
+  },
+  "l_67b2a41622": {
+    "legacy_path": "game-development/blender-zbrush/unit2/knife_tool_and_merge.html",
+    "title": "Knife Tool & Merge",
+    "subtitle": "Cutting, Merging, and Cleaning Up Geometry",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_68d61125db": {
+    "legacy_path": "computer-basics/digital-literacy/unit1/computer_hazards.html",
+    "title": "Computer Hazards",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [
+      "eMDccQCQW7k"
+    ],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_6916164cb9": {
+    "legacy_path": "media/gimp/unit1/selection_tools.html",
+    "title": "Selection Tools",
+    "subtitle": "Isolating Parts of Your Image for Editing",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_6953cb4ee1": {
+    "legacy_path": "it/linux/user_group_management.html",
+    "title": "User and Group Management",
+    "subtitle": "Creating users, managing groups, and switching accounts in Linux",
+    "course_tag": "Introduction to Linux",
+    "youtube_ids": [],
+    "used_by": [
+      "linux"
+    ]
+  },
+  "l_6f2d41d0c2": {
+    "legacy_path": "media/gimp/unit1/transform_and_paint_tools.html",
+    "title": "Transform & Paint Tools",
+    "subtitle": "Moving, Reshaping, and Painting on Your Images",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_6fa575965b": {
+    "legacy_path": "media/audacity/unit1/the_audacity_interface.html",
+    "title": "The Audacity Interface",
+    "subtitle": "A complete walkthrough of every panel, toolbar, and control you'll use",
+    "course_tag": "Audio Production — Audacity",
+    "youtube_ids": [
+      "yzJ2VyYkmaA"
+    ],
+    "used_by": [
+      "audacity"
+    ]
+  },
+  "l_74068c29dd": {
+    "legacy_path": "media/davinci-resolve/unit1/activity_highlight_reel.html",
+    "title": "Activity: Highlight Reel",
+    "subtitle": "Put your Unit 1 skills together by building a polished 60–90 second highlight reel",
+    "course_tag": "Video Production — DaVinci Resolve",
+    "youtube_ids": [],
+    "used_by": [
+      "davinci-resolve"
+    ]
+  },
+  "l_740e4d08f6": {
+    "legacy_path": "media/audacity/unit2/noise_reduction_cleanup.html",
+    "title": "Noise Reduction & Cleanup",
+    "subtitle": "Remove background noise, shorten pauses, and fix audio glitches",
+    "course_tag": "Audio Production — Audacity",
+    "youtube_ids": [],
+    "used_by": [
+      "audacity"
+    ]
+  },
+  "l_756d0ef3d2": {
+    "legacy_path": "it/linux/why_learn_the_command_line_.html",
+    "title": "Why Learn the Command Line?",
+    "subtitle": null,
+    "course_tag": "Introduction to Linux",
+    "youtube_ids": [],
+    "used_by": [
+      "linux"
+    ]
+  },
+  "l_76b0317e89": {
+    "legacy_path": "game-development/blender-zbrush/unit2/activity_model_print_ring.html",
+    "title": "Activity: Model & Print a Ring",
+    "subtitle": "Design, Model, Slice, and 3D Print a Custom Ring",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_799749ff2d": {
+    "legacy_path": "computer-basics/office-software/spreadsheets/application-creating_a_budget.html",
+    "title": "Application: Creating a Budget",
+    "subtitle": null,
+    "course_tag": "Office Software",
+    "youtube_ids": [],
+    "used_by": [
+      "office-software"
+    ]
+  },
+  "l_79c4c65a81": {
+    "legacy_path": "game-development/blender-zbrush/unit2/modifiers.html",
+    "title": "Modifiers",
+    "subtitle": "Non-Destructive Tools That Transform Your Mesh",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [
+      "nIoXOplUvAw"
+    ],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_7ac2161a02": {
+    "legacy_path": "game-development/blender-zbrush/unit1/activity_create_a_scene.html",
+    "title": "Activity: Create a 3D Scene",
+    "subtitle": "Put your modeling skills together to build a complete scene",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_7bebd5758c": {
+    "legacy_path": "media/gimp/unit3/logo_and_icon_design.html",
+    "title": "Logo & Icon Design",
+    "subtitle": "Designing Clean, Memorable Graphics in GIMP",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_7c997127cf": {
+    "legacy_path": "game-development/blender-zbrush/unit1/the_blender_interface.html",
+    "title": "The Blender Interface",
+    "subtitle": "A detailed walkthrough of Blender's workspace",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [
+      "nIoXOplUvAw"
+    ],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_7d3d678a57": {
+    "legacy_path": "computer-basics/digital-literacy/unit2/unit_2_recap.html",
+    "title": "Unit 2 Recap & Review Exercises",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_80710f6adf": {
+    "legacy_path": "it/linux/bash_3.html",
+    "title": "Bash Command Tutorial 3",
+    "subtitle": "wget, head, tail, less, grep, cp, |, >, >>",
+    "course_tag": "Introduction to Linux",
+    "youtube_ids": [],
+    "used_by": [
+      "linux"
+    ]
+  },
+  "l_80a1912376": {
+    "legacy_path": "computer-basics/office-software/word_processors/practice-word_processors.html",
+    "title": "Practice: Word Processors",
+    "subtitle": null,
+    "course_tag": "Office Software",
+    "youtube_ids": [],
+    "used_by": [
+      "office-software"
+    ]
+  },
+  "l_82e875d17e": {
+    "legacy_path": "computer-basics/digital-literacy/unit1/your_computer_s_properties.html",
+    "title": "Your Computer's Properties",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [
+      "t-aRlwLI-b0"
+    ],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_835a57e3bd": {
+    "legacy_path": "game-development/blender-zbrush/unit1/what_is_3d_modeling.html",
+    "title": "What Is 3D Modeling?",
+    "subtitle": "Understanding 3D modeling and why it matters",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_86fb6ca4c5": {
+    "legacy_path": "it/linux/bash_2.html",
+    "title": "Bash Command Tutorial 2",
+    "subtitle": "rm, rmdir, touch, echo, cat, nano, mv",
+    "course_tag": "Introduction to Linux",
+    "youtube_ids": [],
+    "used_by": [
+      "linux"
+    ]
+  },
+  "l_899f36ba99": {
+    "legacy_path": "media/davinci-resolve/unit2/color_scopes_matching.html",
+    "title": "Color Scopes & Shot Matching",
+    "subtitle": "Reading scopes for precise color decisions and making multiple shots look consistent",
+    "course_tag": "Video Production — DaVinci Resolve",
+    "youtube_ids": [],
+    "used_by": [
+      "davinci-resolve"
+    ]
+  },
+  "l_89fe64ab22": {
+    "legacy_path": "computer-basics/digital-literacy/unit1/hardware_and_software.html",
+    "title": "Hardware and Software",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [
+      "lR6cr9VpT0c"
+    ],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_8a4678247f": {
+    "legacy_path": "it/linux/bash_4.html",
+    "title": "Bash Command Tutorial 4",
+    "subtitle": "apt, tree",
+    "course_tag": "Introduction to Linux",
+    "youtube_ids": [],
+    "used_by": [
+      "linux"
+    ]
+  },
+  "l_8b961725bb": {
+    "legacy_path": "media/audacity/unit2/envelope_tool.html",
+    "title": "The Envelope Tool",
+    "subtitle": "Control volume changes over time with precision and flexibility",
+    "course_tag": "Audio Production — Audacity",
+    "youtube_ids": [],
+    "used_by": [
+      "audacity"
+    ]
+  },
+  "l_8cdd4f20c4": {
+    "legacy_path": "computer-basics/digital-literacy/unit2/file_management.html",
+    "title": "File Management",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_8ec6fa6102": {
+    "legacy_path": "media/gimp/unit1/activity_photo_restoration.html",
+    "title": "Activity: Photo Restoration",
+    "subtitle": "Bringing an Old or Damaged Photo Back to Life",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_8fbc3a81a0": {
+    "legacy_path": "computer-basics/digital-literacy/unit3/search_engines.html",
+    "title": "Search Engines 🔎",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_91407dfc66": {
+    "legacy_path": "game-development/unreal-engine/unit1/what_is_a_game_engine.html",
+    "title": "What Is a Game Engine?",
+    "subtitle": "Understanding the software that powers modern games — and why Unreal Engine 5 is an industry leader",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_95652f0f3e": {
+    "legacy_path": "computer-basics/digital-literacy/unit2/hands-on_exercise-keyboard_shortcuts.html",
+    "title": "Hands-on Exercise: Keyboard Shortcuts Practice",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_966638b9ab": {
+    "legacy_path": "media/gimp/unit3/final_project.html",
+    "title": "Final Project: Portfolio Showcase",
+    "subtitle": "Demonstrate Everything You've Learned in Three Finished Pieces",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_9b03660dbc": {
+    "legacy_path": "it/linux/file_permissions.html",
+    "title": "File Permissions and Ownership",
+    "subtitle": "Controlling who can read, write, and execute files in Linux",
+    "course_tag": "Introduction to Linux",
+    "youtube_ids": [],
+    "used_by": [
+      "linux"
+    ]
+  },
+  "l_9cfe9e8868": {
+    "legacy_path": "computer-basics/digital-literacy/unit3/hands-on_exercise-social_media.html",
+    "title": "Hands-on Exercise: Social Media",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_9e0e0a15fa": {
+    "legacy_path": "media/gimp/unit1/canvas_resolution_formats.html",
+    "title": "Canvas, Resolution & File Formats",
+    "subtitle": "Setting Up Your Image and Saving It the Right Way",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_9eb0eaa687": {
+    "legacy_path": "web-development/what_is_javascript.html",
+    "title": "What Is JavaScript?",
+    "subtitle": null,
+    "course_tag": "Web Dev II",
+    "youtube_ids": [],
+    "used_by": [
+      "web-dev-2"
+    ]
+  },
+  "l_9ee6580378": {
+    "legacy_path": "game-development/unreal-engine/unit1/landscapes_and_terrain.html",
+    "title": "Landscapes & Terrain",
+    "subtitle": "Create, sculpt, and paint realistic outdoor terrain using Unreal Engine's Landscape system",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_9fdbf22bcb": {
+    "legacy_path": "computer-basics/office-software/word_processors/word_processors.html",
+    "title": "Word Processors",
+    "subtitle": "Introduction to Word Processors",
+    "course_tag": "Office Software",
+    "youtube_ids": [],
+    "used_by": [
+      "office-software"
+    ]
+  },
+  "l_a04cb9e6f8": {
+    "legacy_path": "computer-science/python-1-intro_to_programming/unit1/github_setup.html",
+    "title": "GitHub Setup",
+    "subtitle": null,
+    "course_tag": "Python I",
+    "youtube_ids": [],
+    "used_by": [
+      "python-1",
+      "web-dev-1",
+      "web-dev-2"
+    ]
+  },
+  "l_a0a9a3ad2f": {
+    "legacy_path": "computer-basics/digital-literacy/unit3/online_shopping.html",
+    "title": "Online Shopping 🛍️",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_a3f6b19d51": {
+    "legacy_path": "game-development/blender-zbrush/unit3/sculpting_techniques.html",
+    "title": "Sculpting Techniques",
+    "subtitle": "A Detailed Guide to Every Brush in ZBrushCoreMini",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [
+      "nIoXOplUvAw"
+    ],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_a4b21b4b66": {
+    "legacy_path": "media/audacity/unit1/importing_and_exporting.html",
+    "title": "Importing & Exporting Audio",
+    "subtitle": "Bring audio into your project and save it in the right format for any purpose",
+    "course_tag": "Audio Production — Audacity",
+    "youtube_ids": [],
+    "used_by": [
+      "audacity"
+    ]
+  },
+  "l_a788deff38": {
+    "legacy_path": "it/linux/system_monitoring.html",
+    "title": "System Monitoring Tools",
+    "subtitle": "Keeping an eye on your system with top, htop, and friends",
+    "course_tag": "Introduction to Linux",
+    "youtube_ids": [
+      "sWbUDq4S6Y8"
+    ],
+    "used_by": [
+      "linux"
+    ]
+  },
+  "l_a910a22114": {
+    "legacy_path": "computer-basics/office-software/spreadsheets/spreadsheets.html",
+    "title": "Spreadsheets",
+    "subtitle": "Introduction to Spreadsheets",
+    "course_tag": "Office Software",
+    "youtube_ids": [],
+    "used_by": [
+      "office-software"
+    ]
+  },
+  "l_aa2d92764e": {
+    "legacy_path": "computer-basics/digital-literacy/unit2/the_user_interface_(navigation_basics).html",
+    "title": "The User Interface (Navigation Basics)",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_ac135ec124": {
+    "legacy_path": "media/davinci-resolve/unit1/titles_and_graphics.html",
+    "title": "Titles & Graphics",
+    "subtitle": "Adding text, lower thirds, compound clips, and adjustment layers to your projects",
+    "course_tag": "Video Production — DaVinci Resolve",
+    "youtube_ids": [],
+    "used_by": [
+      "davinci-resolve"
+    ]
+  },
+  "l_ac4e6ce8ab": {
+    "legacy_path": "media/davinci-resolve/unit1/the_resolve_interface.html",
+    "title": "The Resolve Interface",
+    "subtitle": "Understanding DaVinci Resolve's page-based workflow and the Edit page layout",
+    "course_tag": "Video Production — DaVinci Resolve",
+    "youtube_ids": [],
+    "used_by": [
+      "davinci-resolve"
+    ]
+  },
+  "l_ad06eb51b3": {
+    "legacy_path": "game-development/blender-zbrush/unit2/3d_printing_basics.html",
+    "title": "3D Printing Basics",
+    "subtitle": "How FDM Printing Works — From Filament to Finished Object",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_ad7e857134": {
+    "legacy_path": "media/audacity/unit1/what_is_digital_audio.html",
+    "title": "What Is Digital Audio?",
+    "subtitle": "Understanding how sound becomes data a computer can store and play back",
+    "course_tag": "Audio Production — Audacity",
+    "youtube_ids": [],
+    "used_by": [
+      "audacity"
+    ]
+  },
+  "l_ae2409c5c8": {
+    "legacy_path": "it/computer_hardware/identifying_computer_hardware.html",
+    "title": "Identifying Computer Hardware",
+    "subtitle": null,
+    "course_tag": "Hardware",
+    "youtube_ids": [],
+    "used_by": [
+      "hardware"
+    ]
+  },
+  "l_ae3d54dbea": {
+    "legacy_path": "computer-science/python-2-object-oriented_programming/sidenote-DRY.html",
+    "title": "DRY – Don’t Repeat Yourself",
+    "subtitle": null,
+    "course_tag": "Python II",
+    "youtube_ids": [],
+    "used_by": [
+      "python-2"
+    ]
+  },
+  "l_b4f75978e3": {
+    "legacy_path": "game-development/blender-zbrush/unit2/ngons_and_topology.html",
+    "title": "N-Gons & Topology",
+    "subtitle": "Understanding How Meshes Are Built — and Why It Matters",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_b586ea37ef": {
+    "legacy_path": "computer-basics/digital-literacy/unit1/unit_1_recap.html",
+    "title": "Unit 1 Recap & Review Exercises",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_b7810e8b68": {
+    "legacy_path": "game-development/blender-zbrush/unit1/edit_mode_mesh_elements.html",
+    "title": "Edit Mode & Mesh Elements",
+    "subtitle": "Understanding vertices, edges, faces, and how meshes work",
+    "course_tag": "Blender & ZBrush Mini",
+    "youtube_ids": [],
+    "used_by": [
+      "blender-zbrush-mini"
+    ]
+  },
+  "l_b92a8351f8": {
+    "legacy_path": "game-development/unreal-engine/unit3/enhanced_input_sprint.html",
+    "title": "Enhanced Input & Sprint",
+    "subtitle": "Use UE5's Enhanced Input system to add a sprint mechanic with keyboard and gamepad support",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_b98d7f8744": {
+    "legacy_path": "computer-basics/digital-literacy/unit3/cloud_storage.html",
+    "title": "Cloud Storage 🌧️",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_b99cb9b4f8": {
+    "legacy_path": "media/gimp/unit3/digital_painting_basics.html",
+    "title": "Digital Painting Basics",
+    "subtitle": "Painting Original Artwork in GIMP",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [
+      "x6pXJ7Ijir0"
+    ],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_bbbde28d21": {
+    "legacy_path": "web-development/web1-html_css/intro_to_html.html",
+    "title": "Intro to HTML",
+    "subtitle": null,
+    "course_tag": "Web Dev I",
+    "youtube_ids": [],
+    "used_by": [
+      "web-dev-1"
+    ]
+  },
+  "l_c016e3a7e9": {
+    "legacy_path": "computer-basics/office-software/spreadsheets/practice-spreadsheets.html",
+    "title": "Practice: Spreadsheets",
+    "subtitle": null,
+    "course_tag": "Office Software",
+    "youtube_ids": [],
+    "used_by": [
+      "office-software"
+    ]
+  },
+  "l_c5725b1cea": {
+    "legacy_path": "computer-basics/ai-prompt-engineering/working_with_modern_ai_tools.html",
+    "title": "Working with Modern AI Tools",
+    "subtitle": "Beyond the chat box: multimodal input, your own documents, custom assistants, and AI agents.",
+    "course_tag": "AI Prompt Engineering",
+    "youtube_ids": [],
+    "used_by": [
+      "ai-usage"
+    ]
+  },
+  "l_c749da6508": {
+    "legacy_path": "media/gimp/unit2/paths_and_vectors.html",
+    "title": "Paths & Vectors",
+    "subtitle": "Drawing Precise Shapes with Bézier Curves",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_c77ed8b383": {
+    "legacy_path": "media/gimp/unit1/the_gimp_interface.html",
+    "title": "The GIMP Interface",
+    "subtitle": "Finding Your Way Around GIMP's Workspace",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [
+      "x6pXJ7Ijir0"
+    ],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_c78dd9a64f": {
+    "legacy_path": "media/gimp/unit2/activity_movie_poster.html",
+    "title": "Activity: Movie Poster Design",
+    "subtitle": "Create a Professional-Quality Movie Poster in GIMP",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_c97573c272": {
+    "legacy_path": "media/audacity/unit1/audio_concepts.html",
+    "title": "Audio Production Concepts",
+    "subtitle": "Essential theory and terminology every audio producer should know",
+    "course_tag": "Audio Production — Audacity",
+    "youtube_ids": [],
+    "used_by": [
+      "audacity"
+    ]
+  },
+  "l_cc88408bbb": {
+    "legacy_path": "computer-science/python-1-intro_to_programming/NamingConventions.html",
+    "title": "Naming Conventions",
+    "subtitle": null,
+    "course_tag": "Python I",
+    "youtube_ids": [],
+    "used_by": [
+      "python-1"
+    ]
+  },
+  "l_cd7b25ae74": {
+    "legacy_path": "media/davinci-resolve/unit2/intro_to_fusion.html",
+    "title": "Introduction to Fusion",
+    "subtitle": "An overview of DaVinci Resolve's node-based compositing and visual effects engine",
+    "course_tag": "Video Production — DaVinci Resolve",
+    "youtube_ids": [],
+    "used_by": [
+      "davinci-resolve"
+    ]
+  },
+  "l_d194ba66ea": {
+    "legacy_path": "game-development/unreal-engine/unit1/lighting_and_atmosphere.html",
+    "title": "Lighting & Atmosphere",
+    "subtitle": "Set the mood of your world with lights, sky, fog, and post-processing effects",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_d2a7b751a8": {
+    "legacy_path": "computer-basics/digital-literacy/unit1/what_does_it_mean_to_be_digitally_literate_.html",
+    "title": "What Does It Mean to Be Digitally Literate?",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_d3bba87a7e": {
+    "legacy_path": "game-development/unreal-engine/unit3/final_project.html",
+    "title": "Final Project",
+    "subtitle": "Design and build a complete, playable game level from scratch",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_d707fb3b2d": {
+    "legacy_path": "it/computer_hardware/final_project-build_a_custom_pc.html",
+    "title": "Final Project: Build a Custom PC",
+    "subtitle": null,
+    "course_tag": "Hardware",
+    "youtube_ids": [],
+    "used_by": [
+      "hardware"
+    ]
+  },
+  "l_d71a0307f6": {
+    "legacy_path": "computer-basics/office-software/presentation_software/application-careers_day_presentation.html",
+    "title": "Application: Careers Day Presentation",
+    "subtitle": null,
+    "course_tag": "Office Software",
+    "youtube_ids": [],
+    "used_by": [
+      "office-software"
+    ]
+  },
+  "l_d71e573af1": {
+    "legacy_path": "media/davinci-resolve/unit2/activity_color_grade_scene.html",
+    "title": "Activity: Color Grade a Short Scene",
+    "subtitle": "Apply primary correction, shot matching, and a creative grade to a multi-clip scene",
+    "course_tag": "Video Production — DaVinci Resolve",
+    "youtube_ids": [],
+    "used_by": [
+      "davinci-resolve"
+    ]
+  },
+  "l_d7bcbf8924": {
+    "legacy_path": "media/gimp/unit2/filters_and_effects.html",
+    "title": "Filters & Effects",
+    "subtitle": "Transforming Your Images with GIMP's Built-In Filters",
+    "course_tag": "2D Digital Art — GIMP",
+    "youtube_ids": [
+      "x6pXJ7Ijir0"
+    ],
+    "used_by": [
+      "gimp"
+    ]
+  },
+  "l_de9c335ac6": {
+    "legacy_path": "it/linux/final_project.html",
+    "title": "Final Project: Linux Task Challenge",
+    "subtitle": "Put your skills to the test with this hands-on Linux challenge",
+    "course_tag": "Introduction to Linux",
+    "youtube_ids": [],
+    "used_by": [
+      "linux"
+    ]
+  },
+  "l_e0c8ff6d0d": {
+    "legacy_path": "media/audacity/unit1/activity_60sec_intro.html",
+    "title": "Activity: 60-Second Personal Introduction",
+    "subtitle": "Record, edit, and export a clean voice recording from start to finish",
+    "course_tag": "Audio Production — Audacity",
+    "youtube_ids": [],
+    "used_by": [
+      "audacity"
+    ]
+  },
+  "l_e21b7fa8ba": {
+    "legacy_path": "media/davinci-resolve/unit1/transitions_speed_keyframes.html",
+    "title": "Transitions, Speed Changes & Keyframes",
+    "subtitle": "Adding polish with transitions, controlling playback speed, and animating properties with keyframes",
+    "course_tag": "Video Production — DaVinci Resolve",
+    "youtube_ids": [],
+    "used_by": [
+      "davinci-resolve"
+    ]
+  },
+  "l_e25ce7b56e": {
+    "legacy_path": "media/davinci-resolve/unit3/deliver_page_export.html",
+    "title": "The Deliver Page & Exporting",
+    "subtitle": "Configuring render settings and exporting your finished video",
+    "course_tag": "Video Production — DaVinci Resolve",
+    "youtube_ids": [
+      "63Ln33O4p4c"
+    ],
+    "used_by": [
+      "davinci-resolve"
+    ]
+  },
+  "l_e516d6b6da": {
+    "legacy_path": "computer-science/python-2-object-oriented_programming/what_is_oop.html",
+    "title": "What Is Object-Oriented Programming?",
+    "subtitle": null,
+    "course_tag": "Python II",
+    "youtube_ids": [],
+    "used_by": [
+      "python-2"
+    ]
+  },
+  "l_e6363af40a": {
+    "legacy_path": "computer-basics/office-software/presentation_software/slideshows.html",
+    "title": "Slideshows",
+    "subtitle": "Introduction to Presentation Software",
+    "course_tag": "Office Software",
+    "youtube_ids": [],
+    "used_by": [
+      "office-software"
+    ]
+  },
+  "l_e639dcff43": {
+    "legacy_path": "game-development/unreal-engine/unit2/intro_to_blueprints.html",
+    "title": "Introduction to Blueprints",
+    "subtitle": "Learn Unreal Engine's visual scripting system — no coding required",
+    "course_tag": "Intro to Unreal Engine",
+    "youtube_ids": [],
+    "used_by": [
+      "unreal-engine"
+    ]
+  },
+  "l_e68f3e520f": {
+    "legacy_path": "computer-basics/digital-literacy/unit2/customizing_your_os.html",
+    "title": "Customizing Your OS",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [
+      "hGRii5f_uSc"
+    ],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_e7cc8bb6b5": {
+    "legacy_path": "computer-science/python-1-intro_to_programming/DataStructures.html",
+    "title": "Data Structures",
+    "subtitle": null,
+    "course_tag": "Python I",
+    "youtube_ids": [],
+    "used_by": [
+      "python-1"
+    ]
+  },
+  "l_eeb08fb871": {
+    "legacy_path": "computer-basics/office-software/word_processors/application-creating_a_résumé.html",
+    "title": "Application: Creating a Résumé",
+    "subtitle": null,
+    "course_tag": "Office Software",
+    "youtube_ids": [],
+    "used_by": [
+      "office-software"
+    ]
+  },
+  "l_ef7739bc2c": {
+    "legacy_path": "computer-science/python-1-intro_to_programming/unit3/3rd_party_libraries.html",
+    "title": "Third-Party Libraries",
+    "subtitle": null,
+    "course_tag": "Python I",
+    "youtube_ids": [],
+    "used_by": [
+      "python-1"
+    ]
+  },
+  "l_f104a1f882": {
+    "legacy_path": "media/davinci-resolve/unit1/edit_page_timeline.html",
+    "title": "The Edit Page & Timeline",
+    "subtitle": "Building your project on the timeline — tracks, editing modes, tools, and navigation",
+    "course_tag": "Video Production — DaVinci Resolve",
+    "youtube_ids": [],
+    "used_by": [
+      "davinci-resolve"
+    ]
+  },
+  "l_f1682a9388": {
+    "legacy_path": "computer-basics/digital-literacy/unit1/why_is_my_computer_so_slow.html",
+    "title": "\"Why Is My Computer So Slow?\"",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_f48e7a6e73": {
+    "legacy_path": "computer-basics/digital-literacy/unit1/checkpoint-how_will_technology_help_me_.html",
+    "title": "Checkpoint: How Will Technology Help Me?",
+    "subtitle": null,
+    "course_tag": "Digital Literacy",
+    "youtube_ids": [],
+    "used_by": [
+      "digital-literacy"
+    ]
+  },
+  "l_f7a205d92d": {
+    "legacy_path": "computer-science/python-1-intro_to_programming/unit1/what_is_python.html",
+    "title": "What Is Python?",
+    "subtitle": null,
+    "course_tag": "Python I",
+    "youtube_ids": [],
+    "used_by": [
+      "python-1"
+    ]
+  },
+  "l_f899f9eb6f": {
+    "legacy_path": "web-development/Windows-Node-Installation.html",
+    "title": "Windows Setup: Node.js, npm & Jest",
+    "subtitle": "PowerShell — A student-friendly guide",
+    "course_tag": "Web Dev II",
+    "youtube_ids": [],
+    "used_by": [
+      "web-dev-2"
+    ]
+  },
+  "l_fa261f6886": {
+    "legacy_path": "it/linux/abs_vs_rel_paths.html",
+    "title": "Absolute vs. Relative Paths",
+    "subtitle": "Understanding how Linux locates files and directories",
+    "course_tag": "Introduction to Linux",
+    "youtube_ids": [],
+    "used_by": [
+      "linux"
+    ]
+  }
+}
