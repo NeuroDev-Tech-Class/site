@@ -1,0 +1,53 @@
+# Render Blueprint — NeuroDev Tech Class site (frontend only)
+#
+# One free static site. The backend is the hub's `hub-backend` service (routes under /api/v1/tech/*),
+# so this repo has no web service, no database and no Postgres role of its own.
+#
+# First-time setup: Render dashboard > New > Blueprint > this repo, branch `render-migration` > Apply.
+# Then move the service into the "Tech Class" environment of the NeuroDev project (the blueprint can't do that),
+# and add the `tech` CNAME in the neurodevmentoring.com zone pointing at the host Render shows under
+# Settings > Custom Domains. See docs/RENDER-SETUP.md.
+#
+# Until cutover the blueprint follows `render-migration`; switch `branch` to `main` when the old site is retired.
+
+services:
+  - type: web
+    name: tech-frontend
+    runtime: static
+    branch: render-migration
+    # Built from the repo root, not `rootDir: web`, because the Astro build imports ../content/*.json
+    # and copies ../assets/images before building.
+    buildCommand: cd web && npm ci && npm run build
+    staticPublishPath: web/dist
+    buildFilter:
+      paths:
+        - web/**
+        - content/**
+        - assets/images/**
+        - render.yaml
+      ignoredPaths:
+        - web/tests/**
+        - web/**/*.test.*
+    domains:
+      - tech.neurodevmentoring.com
+    routes:
+      # Old GitHub Pages URLs lived under /site/; the new site serves from the root.
+      # (Per-page .html -> /slug/ redirects come with the cutover, Phase 15, from content/legacy-map.json.)
+      - type: redirect
+        source: /site/*
+        destination: /*
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+    envVars:
+      - key: NODE_VERSION
+        value: "22.13.0"
+      - key: PUBLIC_API_URL
+        value: https://hub-api.neurodevmentoring.com
