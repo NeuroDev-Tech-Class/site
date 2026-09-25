@@ -53,7 +53,7 @@ function AccountMenu({ account }: { account: TechAccount }) {
         aria-controls={panelId}
         onClick={() => setOpen(!open)}
       >
-        <span aria-hidden="true" className="grid size-7 place-items-center rounded-full bg-(--header-text) font-heading text-sm font-bold text-(--header-bg)">
+        <span aria-hidden="true" className="grid size-7 place-items-center rounded-full bg-brand-cyan font-heading text-sm font-bold text-brand-blue">
           {name.charAt(0).toUpperCase()}
         </span>
         <span className="max-w-[12rem] truncate">{name}</span>

@@ -105,3 +105,44 @@ describe('the catalog and course pages', () => {
     expect(home).not.toMatch(/password/i)
   })
 })
+
+const text = (html: string) => html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ')
+const read = (path: string) => readFileSync(join(DIST, path), 'utf8')
+
+describe('the revamped pages', () => {
+  test('the header carries a logo for each theme', () => {
+    const header = read('index.html').match(/<header[\s\S]*?<\/header>/)?.[0] ?? ''
+    expect(header).toContain('src="/logo-white.png"')
+    expect(header).toContain('src="/logo-black.png"')
+  })
+
+  test('home opens with a way in and the three steps', () => {
+    const home = read('index.html')
+    expect(home).toMatch(/<a[^>]*href="\/courses\/digital-literacy"[^>]*>\s*Start with Digital Literacy/)
+    expect(home).toMatch(/<a[^>]*href="\/catalog"[^>]*>\s*Browse the catalog/)
+    const steps = home.match(/<ol[^>]*data-steps[^>]*>([\s\S]*?)<\/ol>/)?.[1] ?? ''
+    expect([...steps.matchAll(/<h3[^>]*>([^<]+)<\/h3>/g)].map(m => m[1].trim()))
+      .toEqual(['Create an account', 'Learn at your own pace', 'Earn certificates'])
+  })
+
+  test('every catalog card shows its units and items, and every category heading has an icon', () => {
+    const html = read('catalog/index.html')
+    const cards = html.match(/<li[^>]*data-course[^>]*>[\s\S]*?<\/li>/g) ?? []
+    expect(cards).toHaveLength(14)
+    for (const card of cards) expect(text(card)).toMatch(/\d+ units?\b.*\b\d+ items?\b/)
+    const headings = html.match(/<h2[^>]*>[\s\S]*?<\/h2>/g) ?? []
+    expect(headings).toHaveLength(6)
+    for (const heading of headings) expect(heading).toContain('<svg')
+  })
+
+  test('every item on a course page carries an icon with its label', () => {
+    const html = read('courses/digital-literacy/index.html')
+    const items = html.match(/<li[^>]*data-item[^>]*>[\s\S]*?<\/li>/g) ?? []
+    expect(items.length).toBeGreaterThan(30)
+    for (const item of items) expect(item).toContain('<svg')
+  })
+
+  test('Resources keeps a space between a link and the words after it', () => {
+    expect(text(read('resources/index.html'))).toContain('Atwood Innovation Plaza (Access to 3D printers')
+  })
+})

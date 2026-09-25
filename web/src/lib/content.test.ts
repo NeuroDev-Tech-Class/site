@@ -1,11 +1,15 @@
 import { describe, expect, test } from 'vitest'
 import {
   catalog,
+  categoryKey,
+  courseStats,
   courses,
   itemLabel,
   publishedCatalog,
   sanitize,
+  unitHeading,
   type Catalog,
+  type Course,
   type Item,
 } from './content'
 
@@ -71,6 +75,39 @@ describe('sanitize', () => {
   test('can shift headings up a level so a course intro sits under the page sections', () => {
     expect(sanitize('<h3>Req</h3><h4>Sub</h4>', { shiftHeadings: true })).toBe('<h2>Req</h2><h3>Sub</h3>')
     expect(sanitize('<h3>Req</h3>')).toBe('<h3>Req</h3>')
+  })
+})
+
+describe('courseStats', () => {
+  test('counts units and the items a student works through, leaving out untitled notes', () => {
+    const course = {
+      units: [
+        { items: [item('lesson', 'Reading - A'), item('note', null), item('video', 'B')] },
+        { items: [item('test', 'Unit 2 Test')] },
+      ],
+    } as unknown as Course
+    expect(courseStats(course)).toEqual({ units: 2, items: 3 })
+  })
+})
+
+describe('categoryKey', () => {
+  test('gives every catalog category its own colour and icon key', () => {
+    const keys = publishedCatalog(catalog).map(c => categoryKey(c.name))
+    expect(keys).toEqual(['basics', 'programming', 'it', 'web', 'game', 'media'])
+  })
+
+  test('refuses a category it has no colour for, so a new one is noticed', () => {
+    expect(() => categoryKey('Robotics')).toThrow('Robotics')
+  })
+})
+
+describe('unitHeading', () => {
+  test.each([
+    ['Unit 1: Intro to Computers', { number: '1', title: 'Intro to Computers' }],
+    ['Unit 12: Final Project', { number: '12', title: 'Final Project' }],
+    ['Getting Started', { number: null, title: 'Getting Started' }],
+  ])('%s', (heading, expected) => {
+    expect(unitHeading(heading)).toEqual(expected)
   })
 })
 

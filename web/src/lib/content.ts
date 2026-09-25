@@ -105,3 +105,32 @@ export function itemLabel(item: Item): { label: string, title: string } {
   }
   return { label: LABELS[item.type], title }
 }
+
+export function courseStats(course: Course): { units: number, items: number } {
+  return {
+    units: course.units.length,
+    items: course.units.reduce((sum, unit) => sum + unit.items.filter(item => item.type !== 'note').length, 0),
+  }
+}
+
+export type CategoryKey = 'basics' | 'programming' | 'it' | 'web' | 'game' | 'media'
+
+const CATEGORY_KEYS: Record<string, CategoryKey> = {
+  'Computer Basics': 'basics',
+  'Computer Programming': 'programming',
+  'I.T.': 'it',
+  'Web Development': 'web',
+  'Game Development': 'game',
+  Media: 'media',
+}
+
+export function categoryKey(name: string): CategoryKey {
+  const key = CATEGORY_KEYS[name]
+  if (!key) throw new Error(`No colour or icon for the category "${name}"; add it to CATEGORY_KEYS`)
+  return key
+}
+
+export function unitHeading(heading: string): { number: string | null, title: string } {
+  const match = heading.match(/^Unit (\d+):\s*(.+)$/)
+  return match ? { number: match[1], title: match[2] } : { number: null, title: heading }
+}

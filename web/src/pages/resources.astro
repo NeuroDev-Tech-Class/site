@@ -1,6 +1,31 @@
 ---
+import Icon from '../components/Icon.astro'
 import Base from '../layouts/Base.astro'
 
+const machines = [
+  { name: 'Desktop Computer', specs: ['Core i5 7500', 'NVIDIA GeForce RTX 2070', 'Windows 10 Home'] },
+  { name: 'Dell XPS 27 All-in-One Computer', specs: ['Core i5 7400', 'Windows 10 Home'] },
+  {
+    name: 'Driving Simulator Rig',
+    specs: [
+      'AMD Ryzen 5 5600X', 'AMD Radeon RX 6700 XT', 'Meta Quest 2 VR Headset', 'Next Level Racing GT Lite Cockpit',
+      'Logitech G923 Racing Wheel & Pedals', 'Logitech G Driving Force Shifter', 'Windows 11 Pro',
+    ],
+    link: ['City Car Driving', 'https://store.steampowered.com/app/493490/City_Car_Driving/'],
+  },
+  {
+    name: 'Disassembled Computer Hardware for Demonstrations',
+    specs: ['Motherboards, CPUs, GPUs, RAM Sticks, Hard Drives & SSDs, Power Supplies, Wi-Fi Routers, Ethernet Cables'],
+  },
+]
+const gadgets = ['Flashforge Guider II 3D Printer', 'Raspberry Pi 4 Model B', 'XP-PEN Deco Mini7 Drawing Tablet']
+const software = [
+  ['Programming Tools', 'Visual Studio Code, Python, Java, Git, GitHub'],
+  ['3D Modeling Software', 'Blender, ZBrush Mini, FlashPrint'],
+  ['Game Development Software', 'Unreal Engine, Unity, GameMaker Studio 2'],
+  ['Digital Art Tools', 'GIMP'],
+  ['Media Editing Tools', 'Audacity (Audio), DaVinci Resolve (Video)'],
+]
 const udemy = [
   ['C# Unity Game Development', 'https://www.udemy.com/share/101XCe3@LroQr7Ls83bm3inPmSISjHqP0jIgr5DTPKUnTnmHzNzK_6pdEC0Ef2UG6InohWo4IA==/'],
   ['The Linux Command Line Bootcamp', 'https://www.udemy.com/share/104wCM3@oqi_KP8pntbBM_bBT0bmRStGr4xYIdJZpbJI2SlIOYmglomeMDf5MQA5QUFbsVXh3w==/'],
@@ -17,76 +42,61 @@ const udemy = [
   ['Complete Node.js Developer Course', 'https://www.udemy.com/share/101WpA3@LM0DnMH8HjsBtvvyXpjVIKKb0Muu7bRm2fYWN2u7mY1wq01TjH41amMAmccHf315BQ==/'],
   ['iOS & Swift App Development', 'https://www.udemy.com/share/101Wsa3@OM2DTYLUxuYZ78_aBPwLdW2GiSpVxjNEi4i5zKswjKlCxhDWZLdpixKpJHIcI41-IQ==/'],
 ]
+const external = { target: '_blank', rel: 'noopener noreferrer' } as const
 ---
 
 <Base title="Resources" description="The equipment, software and extra learning resources available to NeuroDev Tech Class students.">
-  <h1>Technology Equipment &amp; Resource Inventory</h1>
+  <p class="eyebrow mt-0">What's in the lab</p>
+  <h1 class="mt-1">Technology Equipment &amp; Resource Inventory</h1>
 
-  <h2>Hardware</h2>
-  <ul>
-    <li>
-      Desktop Computer
-      <ul>
-        <li>Core i5 7500</li>
-        <li>NVIDIA GeForce RTX 2070</li>
-        <li>Windows 10 Home</li>
-      </ul>
-    </li>
-    <li>
-      Dell XPS 27 All-in-One Computer
-      <ul>
-        <li>Core i5 7400</li>
-        <li>Windows 10 Home</li>
-      </ul>
-    </li>
-    <li>
-      Driving Simulator Rig
-      <ul>
-        <li>AMD Ryzen 5 5600X</li>
-        <li>AMD Radeon RX 6700 XT</li>
-        <li>Meta Quest 2 VR Headset</li>
-        <li>Next Level Racing GT Lite Cockpit</li>
-        <li>Logitech G923 Racing Wheel &amp; Pedals</li>
-        <li>Logitech G Driving Force Shifter</li>
-        <li>Windows 11 Pro</li>
-        <li>
-          <a href="https://store.steampowered.com/app/493490/City_Car_Driving/" target="_blank" rel="noopener noreferrer">City Car Driving</a>
-        </li>
-      </ul>
-    </li>
-    <li>
-      Disassembled Computer Hardware for Demonstrations
-      <ul>
-        <li>Motherboards, CPUs, GPUs, RAM Sticks, Hard Drives &amp; SSDs, Power Supplies, Wi-Fi Routers, Ethernet Cables</li>
-      </ul>
-    </li>
-    <li>Flashforge Guider II 3D Printer</li>
-    <li>Raspberry Pi 4 Model B</li>
-    <li>XP-PEN Deco Mini7 Drawing Tablet</li>
-  </ul>
+  <section style="--accent: var(--cat-it)">
+    <h2 class="flex items-center gap-3"><span class="icon-tile size-9"><Icon name="it" size={20} /></span>Hardware</h2>
+    <div class="mt-5 grid gap-5 md:grid-cols-2">
+      {machines.map(machine => (
+        <div class="panel">
+          <h3 class="mt-0 text-lg">{machine.name}</h3>
+          <ul class="mt-3">
+            {machine.specs.map(spec => <li>{spec}</li>)}
+            {machine.link && <li><a href={machine.link[1]} {...external}>{machine.link[0]}</a></li>}
+          </ul>
+        </div>
+      ))}
+      <div class="panel md:col-span-2">
+        <h3 class="mt-0 text-lg">Also in the lab</h3>
+        <ul class="mt-3 sm:columns-3">
+          {gadgets.map(gadget => <li>{gadget}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
 
-  <h2>Software and Licenses</h2>
-  <ul>
-    <li>Programming Tools: Visual Studio Code, Python, Java, Git, GitHub</li>
-    <li>3D Modeling Software: Blender, ZBrush Mini, FlashPrint</li>
-    <li>Game Development Software: Unreal Engine, Unity, GameMaker Studio 2</li>
-    <li>Digital Art Tools: GIMP</li>
-    <li>Media Editing Tools: Audacity (Audio), DaVinci Resolve (Video)</li>
-  </ul>
+  <section style="--accent: var(--cat-programming)">
+    <h2 class="flex items-center gap-3"><span class="icon-tile size-9"><Icon name="programming" size={20} /></span>Software and Licenses</h2>
+    <dl class="panel mt-5 grid gap-x-6 gap-y-3 sm:grid-cols-[auto_1fr]">
+      {software.map(([kind, tools]) => (
+        <>
+          <dt class="font-heading font-semibold text-(--heading)">{kind}</dt>
+          <dd class="text-(--text)">{tools}</dd>
+        </>
+      ))}
+    </dl>
+  </section>
 
-  <h2>Additional Resources</h2>
-  <ul>
-    <li>
-      <a href="https://innovation.utahtech.edu/makerspace/" target="_blank" rel="noopener noreferrer">The Makerspace at the Atwood Innovation Plaza</a>
-      (Access to 3D printers, CNC machines, and more)
-    </li>
-    <li>
-      Udemy Course Subscriptions:
-      <ul>
-        {udemy.map(([title, href]) => (
-          <li><a href={href} target="_blank" rel="noopener noreferrer">{title}</a></li>
-        ))}
-      </ul>
-    </li>
-  </ul>
+  <section style="--accent: var(--cat-media)">
+    <h2 class="flex items-center gap-3"><span class="icon-tile size-9"><Icon name="learn" size={20} /></span>Additional Resources</h2>
+    <div class="mt-5 grid gap-5">
+      <div class="panel">
+        <h3 class="mt-0 text-lg">
+          <a href="https://innovation.utahtech.edu/makerspace/" {...external}>The Makerspace at the Atwood Innovation Plaza</a>{' '}
+          <span class="font-body text-base font-normal text-(--muted)">(Access to 3D printers, CNC machines, and more)</span>
+        </h3>
+      </div>
+      <div class="panel">
+        <h3 class="mt-0 text-lg">Udemy Course Subscriptions</h3>
+        <ul class="mt-3 sm:columns-2">
+          {udemy.map(([title, href]) => <li class="break-inside-avoid"><a href={href} {...external}>{title}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
 </Base>
