@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-3",
+  "number": "1.2",
+  "title": "JavaScript: Create Element and Append Child",
+  "kind": "exercise",
+  "language": "web",
+  "runner": "none",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-III-1.2-Create_Element",
+    "commit": "bb2c2f9dfb542b9a56f70002dc480d48a27e0551"
+  }
+}

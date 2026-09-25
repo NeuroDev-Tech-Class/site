@@ -1,0 +1,442 @@
+{
+  "id": "web-dev-1",
+  "title": "Web Development I - HTML & CSS",
+  "category": "Web Development",
+  "status": "draft",
+  "heading": "Web Development I - HTML & CSS",
+  "summary": "This beginner-level course introduces students to the essentials of web design and development, focusing on frontend creation with HTML and CSS. Students will learn about the infrastructure of the Internet, how to build and publish web pages, and employ various layout and styling techniques.",
+  "objectives": [
+    "Create multi-page websites using semantic HTML elements, links, and media.",
+    "Apply CSS styling for text, colors, and layouts using classes and IDs.",
+    "Build responsive designs using Flexbox and Grid.",
+    "Publish a website using GitHub Pages."
+  ],
+  "intro_html": "<section>\n        <h3>\"Web Design\" vs. \"Web Development\"</h3>\n        <p>\n          A <b>web designer</b> focuses on the visual aspects of a website:\n          layout, colors, fonts, and overall appearance. They create mockups to\n          make sure the site is visually appealing and user-friendly, using\n          tools like Photoshop and design frameworks.\n        </p>\n        <p>\n          A <b>web developer</b>, on the other hand, focuses on the technical\n          side: building the website using code like HTML, CSS, and JavaScript.\n          Developers take the designer's mockups and turn them into a\n          functional, working website.\n        </p>\n        <p>\n          In this course, you'll be learning web development: how to write code\n          that makes websites work and look the way they're supposed to. We\n          won't cover graphic design principles. I am not an artist, and it's\n          okay if you're not either!\n        </p>\n        <p>\n          While we're at it, don't worry if you don't consider yourself a\n          programmer. Coding websites, especially with HTML and CSS, is very\n          different from traditional programming (using languages like Python or\n          C++). HTML structures web content, and CSS styles it. Neither involves\n          complex logic or algorithms, making web development a great starting\n          point for anyone learning to code.\n        </p>\n        \n      </section>",
+  "units": [
+    {
+      "id": "u_a8ff6db02b",
+      "legacy_key": "0",
+      "title": "Getting Started",
+      "description": "",
+      "items": [
+        {
+          "id": "i_fc065295d6",
+          "legacy_key": "0-0",
+          "type": "lesson",
+          "title": "Reading - What Are HTML and CSS?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "web-development/web1-html_css/what_are_html_and_css.html",
+            "lesson_id": "l_2380e9329b"
+          }
+        },
+        {
+          "id": "i_bc36917fb2",
+          "legacy_key": "0-1",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Download and install <a href=\"https://code.visualstudio.com/download\" target=\"_blank\" rel=\"noopener noreferrer\">VS Code</a>. VS Code is a code editor that you'll be using to write HTML and CSS."
+          }
+        },
+        {
+          "id": "i_0d2ad968dc",
+          "legacy_key": "0-2",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "In VS Code, install the Live Server extension by Ritwick Dey. This will let you preview your web pages as you work on them."
+          }
+        },
+        {
+          "id": "i_9964a111eb",
+          "legacy_key": "0-3",
+          "type": "lesson",
+          "title": "Reading - Setting Up GitHub",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-science/python-1-intro_to_programming/unit1/github_setup.html",
+            "lesson_id": "l_a04cb9e6f8"
+          }
+        },
+        {
+          "id": "i_d2033abdd2",
+          "legacy_key": "0-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Clone this repository: <a href=\"https://github.com/Hjhawley/neurodev-tech-class-Web1\" target=\"_blank\" rel=\"noopener noreferrer\">Web Dev I Repo</a>. This is where you'll find example code to reference throughout this course."
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_df4400f429",
+      "legacy_key": "1",
+      "title": "Unit 1: Structuring a Web Page (Basic HTML)",
+      "description": "Learn how to structure content on a webpage using HTML and semantic elements.",
+      "items": [
+        {
+          "id": "i_e40a184ada",
+          "legacy_key": "1-0",
+          "type": "lesson",
+          "title": "Reading - Intro to HTML",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "web-development/web1-html_css/intro_to_html.html",
+            "lesson_id": "l_bbbde28d21"
+          }
+        },
+        {
+          "id": "i_b91072fc36",
+          "legacy_key": "1-1",
+          "type": "video",
+          "title": "HTML in 100 Seconds",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "ok-plXXHlWw"
+          }
+        },
+        {
+          "id": "i_5b09244b45",
+          "legacy_key": "1-2",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 1.1: Creating an HTML Document"
+          }
+        },
+        {
+          "id": "i_370b9328fd",
+          "legacy_key": "1-3",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 1.2: Text Content and Headings"
+          }
+        },
+        {
+          "id": "i_dfbc2c90fa",
+          "legacy_key": "1-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 1.3: Lists and Links"
+          }
+        },
+        {
+          "id": "i_211c8d9e41",
+          "legacy_key": "1-5",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 1.4: Images and Multimedia"
+          }
+        },
+        {
+          "id": "i_f8a0067b20",
+          "legacy_key": "1-6",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 1.5: Forms and Tables"
+          }
+        },
+        {
+          "id": "i_8c23535b4c",
+          "legacy_key": "1-7",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 1.6: Semantic HTML"
+          }
+        },
+        {
+          "id": "i_91179d2dcd",
+          "legacy_key": "1-8",
+          "type": "link",
+          "title": "Unit 1 Quiz",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "url": null
+          }
+        },
+        {
+          "id": "i_be65abf44c",
+          "legacy_key": "1-9",
+          "type": "link",
+          "title": "Unit 1 Assignment - Start Your Blog",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "url": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_0a4db29358",
+      "legacy_key": "2",
+      "title": "Unit 2: Styling a Web Page (Basic CSS)",
+      "description": "Apply CSS to style HTML content, control layout, and improve the visual presentation of your web pages.",
+      "items": [
+        {
+          "id": "i_8c7adbb80c",
+          "legacy_key": "2-0",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 2.1: Introduction to CSS"
+          }
+        },
+        {
+          "id": "i_164eea8fdf",
+          "legacy_key": "2-1",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 2.2: The Box Model"
+          }
+        },
+        {
+          "id": "i_d373d2ccb7",
+          "legacy_key": "2-2",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 2.3: Colors and Backgrounds"
+          }
+        },
+        {
+          "id": "i_505c5941dc",
+          "legacy_key": "2-3",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 2.4: Typography"
+          }
+        },
+        {
+          "id": "i_4df0e63ff0",
+          "legacy_key": "2-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 2.5: Layout Techniques"
+          }
+        },
+        {
+          "id": "i_1b7e5efe7d",
+          "legacy_key": "2-5",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 2.6: CSS Transitions and Animations"
+          }
+        },
+        {
+          "id": "i_f807ab54a5",
+          "legacy_key": "2-6",
+          "type": "link",
+          "title": "Unit 2 Quiz",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "url": null
+          }
+        },
+        {
+          "id": "i_b20aaa644b",
+          "legacy_key": "2-7",
+          "type": "link",
+          "title": "Unit 2 Assignment - Spice Up Your Blog",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "url": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_69c3097e44",
+      "legacy_key": "3",
+      "title": "Unit 3: Layout & Responsive Design (Advanced CSS)",
+      "description": "Learn advanced layout techniques using Flexbox and Grid, and make your pages responsive to different screen sizes.",
+      "items": [
+        {
+          "id": "i_20410e9694",
+          "legacy_key": "3-0",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 3.1: Introduction to Flexbox"
+          }
+        },
+        {
+          "id": "i_d87a10daf9",
+          "legacy_key": "3-1",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 3.2: Advanced Flexbox"
+          }
+        },
+        {
+          "id": "i_103e14e400",
+          "legacy_key": "3-2",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 3.3: Introduction to CSS Grid"
+          }
+        },
+        {
+          "id": "i_a28765aa56",
+          "legacy_key": "3-3",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 3.4: Media Queries"
+          }
+        },
+        {
+          "id": "i_e826cb3b97",
+          "legacy_key": "3-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 3.5: Dark Mode and Theming"
+          }
+        },
+        {
+          "id": "i_858f8a1ddf",
+          "legacy_key": "3-5",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 3.6: Performance Best Practices"
+          }
+        },
+        {
+          "id": "i_e61dd9033e",
+          "legacy_key": "3-6",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [
+            "exercise"
+          ],
+          "payload": {
+            "html": "Complete Lesson &amp; Exercise 3.7: Debugging &amp; Testing"
+          }
+        },
+        {
+          "id": "i_5a6dfc9d5a",
+          "legacy_key": "3-7",
+          "type": "link",
+          "title": "Unit 3 Quiz",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "url": null
+          }
+        },
+        {
+          "id": "i_2923361433",
+          "legacy_key": "3-8",
+          "type": "link",
+          "title": "Unit 3 Assignment - Complete and Present Your Blog",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "url": null
+          }
+        }
+      ]
+    }
+  ]
+}

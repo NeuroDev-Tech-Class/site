@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "2.5",
+  "title": "Lists",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-2.5-Lists",
+    "commit": "ebd03748fcfc9cd38b4537231fadc2b2d0be2fa4"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "id": "c_726e8defa1",
+  "item_id": "i_974fd25b98",
+  "course_id": "python-1",
+  "legacy_path": null,
+  "exercise": "python-1/3.6-regex",
+  "title": "Regular Expressions",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Regular Expressions</h2>\n<p>A <strong>regular expression</strong> (or <strong>regex</strong>) is a sequence of characters that defines a search pattern.<br>It’s often used to check if a string contains a particular pattern, extract specific data, or replace text.</p>\n<p>Python provides a built-in module for working with regular expressions called <strong><code>re</code></strong>.</p>\n<hr>\n<h3>Importing the <code>re</code> Module</h3>\n<pre><code class=\"language-python\">import re\n</code></pre>\n<p>The <code>re</code> module includes several functions for searching, matching, and manipulating strings.</p>\n<hr>\n<h3><code>findall()</code> — Find All Matches</h3>\n<p>The <strong><code>findall()</code></strong> function returns a list of all <strong>non-overlapping</strong> matches of a pattern in a string.</p>\n<pre><code class=\"language-python\">print(re.findall(\"a\", \"Hello, my name is Ana.\"))\n# Output: ['a', 'a']\n</code></pre>\n<blockquote>\n<p>Note: It only matches lowercase <code>'a'</code>, not uppercase <code>'A'</code> — regex is <strong>case-sensitive</strong> by default.</p>\n</blockquote>\n<hr>\n<h3><code>search()</code> — Find the First Match</h3>\n<p>The <strong><code>search()</code></strong> function scans a string for the first occurrence of a pattern.<br>It returns a <strong>Match object</strong> if a match is found, otherwise <code>None</code>.</p>\n<pre><code class=\"language-python\">match = re.search(\"a\", \"Hello, my name is Ana.\")\nprint(match)\n# Output: &lt;re.Match object; span=(11, 12), match='a'&gt;\n</code></pre>\n<p>You can access the actual text matched using:</p>\n<pre><code class=\"language-python\">print(match.group())  # Output: 'a'\n</code></pre>\n<hr>\n<h3><code>sub()</code> — Replace Matches</h3>\n<p>The <strong><code>sub()</code></strong> function replaces all occurrences of a pattern with another string.</p>\n<pre><code class=\"language-python\">print(re.sub(\"a\", \"X\", \"Hello, my name is Ana.\"))\n# Output: 'Hello, my nXme is AnX.'\n</code></pre>\n<hr>\n<h3>Using Character Classes and Metacharacters</h3>\n<p>Regular expressions support <strong>metacharacters</strong> like <code>[a-z]</code> and <code>[0-9]</code> to represent character ranges.</p>\n<pre><code class=\"language-python\"># Find all lowercase letters\nprint(re.findall(\"[a-z]\", \"Hello, my name is Ana.\"))\n# Output: ['e', 'l', 'l', 'm', 'y', 'n', 'a', 'm', 'e', 'i', 's', 'n', 'a']\n\n# Find all digits\nprint(re.findall(\"[0-9]\", \"I have 2 apples and 3 oranges.\"))\n# Output: ['2', '3']\n</code></pre>\n<p>Common metacharacters:</p>\n<table>\n<thead>\n<tr>\n<th>Pattern</th>\n<th>Matches</th>\n</tr>\n</thead>\n<tbody><tr>\n<td><code>[a-z]</code></td>\n<td>Any lowercase letter</td>\n</tr>\n<tr>\n<td><code>[A-Z]</code></td>\n<td>Any uppercase letter</td>\n</tr>\n<tr>\n<td><code>[0-9]</code></td>\n<td>Any digit</td>\n</tr>\n<tr>\n<td><code>.</code></td>\n<td>Any character except newline</td>\n</tr>\n<tr>\n<td><code>\\s</code></td>\n<td>Any whitespace character (space, tab, newline)</td>\n</tr>\n<tr>\n<td><code>\\d</code></td>\n<td>Any digit (same as <code>[0-9]</code>)</td>\n</tr>\n<tr>\n<td><code>\\w</code></td>\n<td>Any alphanumeric character (letters, digits, underscore)</td>\n</tr>\n</tbody></table>\n<hr>\n<h3><code>split()</code> — Split Strings by Pattern</h3>\n<p>The <strong><code>split()</code></strong> function splits a string where the pattern occurs.</p>\n<pre><code class=\"language-python\">print(re.split(\"\\s\", \"Split on spaces.\"))\n# Output: ['Split', 'on', 'spaces.']\n</code></pre>\n<p>Here, <code>\\s</code> represents <strong>whitespace</strong> characters, so it splits wherever spaces occur.</p>\n<hr>\n<h3>Summary</h3>\n<table>\n<thead>\n<tr>\n<th>Function</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody><tr>\n<td><code>findall()</code></td>\n<td>Returns all matches as a list</td>\n</tr>\n<tr>\n<td><code>search()</code></td>\n<td>Returns the first match as a Match object</td>\n</tr>\n<tr>\n<td><code>sub()</code></td>\n<td>Replaces matches with another string</td>\n</tr>\n<tr>\n<td><code>split()</code></td>\n<td>Splits the string at matches of the pattern</td>\n</tr>\n</tbody></table>\n<hr>\n<p>Regular expressions are extremely powerful tools for text processing — once you master them, you’ll be able to handle complex search and replace operations efficiently.</p>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Run the tests yourself with <code>pytest</code>. When you push, GitHub runs them too: a green check next to your latest commit means they pass, a red X means something still needs work.</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-1/3.6-regex/starter",
+  "grading_hint": {
+    "runner": "pytest",
+    "tests": [
+      "exercises/python-1/3.6-regex/starter/tests/test_exercise.py"
+    ]
+  }
+}

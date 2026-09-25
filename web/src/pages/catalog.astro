@@ -1,0 +1,48 @@
+---
+import Icon from '../components/Icon.astro'
+import Base from '../layouts/Base.astro'
+import { catalog, categoryKey, courseStats, courses, publishedCatalog } from '../lib/content'
+
+const categories = publishedCatalog(catalog).map(category => ({ ...category, key: categoryKey(category.name) }))
+const statsFor = (id: string) => {
+  const course = courses.find(c => c.id === id)
+  return course ? courseStats(course) : null
+}
+const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`
+---
+
+<Base title="Course Catalog" description="Every NeuroDev Tech Class course, from computer basics to game development.">
+  <p class="eyebrow mt-0">Pick your next course</p>
+  <h1 class="mt-1">Course Catalog</h1>
+  {categories.map(category => (
+    <section style={`--accent: var(--cat-${category.key})`}>
+      <h2 class="flex items-center gap-3">
+        <span class="icon-tile size-9"><Icon name={category.key} size={20} /></span>
+        {category.name}
+      </h2>
+      <ul class="mt-5 grid list-none gap-5 pl-0 md:grid-cols-2">
+        {category.courses.map(course => {
+          const stats = statsFor(course.id)
+          return (
+            <li data-course class="panel card-glow relative mt-0 flex flex-col gap-3">
+              <span class="icon-tile"><Icon name={category.key} /></span>
+              <h3 class="mt-0 text-lg">
+                <a href={`/courses/${course.id}`} class="text-(--heading) no-underline after:absolute after:inset-0 after:rounded-(--radius-card) hover:underline">
+                  {course.title}
+                </a>
+              </h3>
+              <p class="mt-0 line-clamp-3 text-(--muted)">{course.summary}</p>
+              {stats && (
+                <p class="mt-auto flex gap-2 text-sm font-semibold text-(--muted)">
+                  <span>{plural(stats.units, 'unit')}</span>
+                  <span aria-hidden="true">/</span>
+                  <span>{plural(stats.items, 'item')}</span>
+                </p>
+              )}
+            </li>
+          )
+        })}
+      </ul>
+    </section>
+  ))}
+</Base>

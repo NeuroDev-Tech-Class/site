@@ -1,0 +1,34 @@
+{
+  "id": "c_98935b471d",
+  "item_id": "i_93e049aaeb",
+  "course_id": "python-1",
+  "legacy_path": null,
+  "exercise": "python-1/3.2-modules",
+  "title": "Modules and Libraries",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Modules and Libraries</h2>\n<p>A <strong>Python module</strong> is a single <code>.py</code> file that defines functions, classes, and variables that can be used in other Python files.<br>A <strong>library</strong> is a collection of multiple modules grouped together to provide related functionality.</p>\n<hr>\n<h3>Built-in Libraries</h3>\n<p>Python comes with a large number of built-in modules called the <strong>standard library</strong>.<br>These provide a wide range of functionality — from math operations to working with files, networking, and more.</p>\n<h4>Example: Using the <code>math</code> Module</h4>\n<pre><code class=\"language-python\">import math\n\nprint(math.sqrt(16))  # prints \"4.0\"\n</code></pre>\n<p>Here, <code>sqrt</code> is a function from the <code>math</code> module.<br>To use it, we must import the module first.</p>\n<hr>\n<h4>Importing Specific Functions</h4>\n<p>Instead of importing the entire module, you can import only what you need:</p>\n<pre><code class=\"language-python\">from math import sqrt\n\nprint(sqrt(16))  # prints \"4.0\"\n</code></pre>\n<p>This imports only the <code>sqrt</code> function, allowing us to use it directly without the <code>math.</code> prefix.<br>However, other functions from the <code>math</code> module won’t be available unless explicitly imported.</p>\n<hr>\n<h4>Example: Using the <code>random</code> Module</h4>\n<p>The built-in <strong><code>random</code></strong> module allows us to generate random numbers.</p>\n<pre><code class=\"language-python\">import random\n\n# This prints a random integer between 1 and 10\nprint(random.randint(1, 10))\n</code></pre>\n<p>The <code>randint()</code> function generates a random integer within a specified range.</p>\n<hr>\n<h3>Third-Party Libraries</h3>\n<p>Beyond the standard library, the Python community has created <strong>thousands of third-party libraries</strong>.<br>These libraries don’t come with Python by default but can be installed using <strong>pip</strong>.</p>\n<h4>Installing a Third-Party Library</h4>\n<p>To install a package, type the following command in your terminal or command prompt:</p>\n<pre><code>pip install requests\n</code></pre>\n<h4>Example: Using the <code>requests</code> Library</h4>\n<p><code>requests</code> is a popular third-party library used to make HTTP requests.</p>\n<pre><code class=\"language-python\">import requests\n\nresponse = requests.get('https://www.example.com')\nprint(response.status_code)  # prints the HTTP status code\n</code></pre>\n<p>This sends a GET request to the specified URL and prints the resulting status code.</p>\n<hr>\n<h3>Import Conventions</h3>\n<p>It’s standard practice to import all modules <strong>at the top of your Python file</strong>.<br>This makes it easy to see all dependencies in one place and improves readability.</p>\n<hr>\n<h4>Summary</h4>\n<ul>\n<li><strong>Modules</strong>: Individual <code>.py</code> files that contain code you can reuse.  </li>\n<li><strong>Libraries</strong>: Collections of modules providing related features.  </li>\n<li><strong>Standard Library</strong>: Comes built into Python.  </li>\n<li><strong>Third-party Libraries</strong>: Installed via <code>pip</code> and developed by the Python community.</li>\n</ul>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Run the tests yourself with <code>pytest</code>. When you push, GitHub runs them too: a green check next to your latest commit means they pass, a red X means something still needs work.</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-1/3.2-modules/starter",
+  "grading_hint": {
+    "runner": "pytest",
+    "tests": [
+      "exercises/python-1/3.2-modules/starter/tests/test_exercise.py"
+    ]
+  }
+}

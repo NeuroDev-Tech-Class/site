@@ -1,0 +1,43 @@
+{
+  "id": "c_0214c68a29",
+  "item_id": "i_7c48f88a69",
+  "course_id": "digital-literacy",
+  "legacy_path": "computer-basics/digital-literacy/unit1/hands-on_exercise-identifying_hardware.html",
+  "exercise": null,
+  "title": "Hands-on Exercise: Identifying Hardware",
+  "preset": null,
+  "requires_sign_off": true,
+  "fields": [
+    {
+      "id": "checklist",
+      "type": "checklist",
+      "label": "What you did",
+      "required": true,
+      "items": [
+        "Found every port on my laptop and said what each one is for",
+        "Named two input devices and two output devices",
+        "Shut down and unplugged the desktop before opening it",
+        "Discharged static by touching the metal case",
+        "Found the CPU (or its cooler), motherboard, RAM, storage drive, power supply and graphics card",
+        "Matched the ports on the back of the desktop to their cables",
+        "Closed the case and checked the computer still works"
+      ]
+    },
+    {
+      "id": "component_notes",
+      "type": "longText",
+      "label": "What you wrote down about each part: brand, size, labels or numbers you could see",
+      "required": true
+    },
+    {
+      "id": "signoff",
+      "type": "mentorSignOff",
+      "label": "Your coach checks you can point out the ports, name the components and open and close the case safely",
+      "required": true
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<p>In this exercise you will look at real hardware: first the outside of your own laptop, then the inside of a desktop computer. Your coach will be with you when you open the desktop, so you can ask questions as you go.</p>\n\n<div class=\"activity\">\n  <h2>Part 1: Your laptop</h2>\n  <ol>\n    <li>Find every port on your laptop. For each one, say what it is for and which cable plugs into it. The <a href=\"/lessons/l_071ad21b67\">Cables and Ports</a> reading has pictures if you get stuck.</li>\n    <li>Using only your laptop and anything plugged into it, find at least two <strong>input devices</strong> (they send information into the computer) and two <strong>output devices</strong> (they send information out of it).</li>\n  </ol>\n</div>\n\n<div class=\"activity\">\n  <h2>Part 2: Inside a desktop</h2>\n  <p>Use one of the tech class desktops, with your coach.</p>\n  <ol>\n    <li>Make sure the computer is <strong>completely shut down</strong>, then unplug every cable.</li>\n    <li>Before you touch anything inside, touch a metal part of the case to discharge static electricity, which can damage components. Keep screws in a cup so none get lost.</li>\n    <li>Open the case. Your coach will show you where the screws or latches are.</li>\n    <li>Find each of these parts. Write down what you can see on each one: brand, size, labels, or numbers.\n      <ul>\n        <li>CPU (it sits under the cooler; you may only see the cooler)</li>\n        <li>Motherboard</li>\n        <li>RAM</li>\n        <li>Storage drive</li>\n        <li>Power supply</li>\n        <li>Graphics card, if there is one</li>\n      </ul>\n    </li>\n    <li>Find the ports on the back of the desktop and match each one to its cable.</li>\n    <li>Close the case, plug everything back in and turn the computer on to check it still works.</li>\n  </ol>\n</div>\n\n<div class=\"tip\">\n  <p><strong>Tip:</strong> The <a href=\"/lessons/l_89fe64ab22\">Hardware and Software</a> reading has pictures of each part if you want to check what you found.</p>\n</div>\n\n<p>Submit your work with the form below. Your coach will also check a few things with you in person.</p>",
+  "starter_path": null,
+  "grading_hint": null
+}

@@ -1,0 +1,138 @@
+{
+  "id": "web-dev-3",
+  "title": "Web Development III - Web Apps",
+  "category": "Web Development",
+  "status": "published",
+  "heading": "Web App Development",
+  "summary": "Now that you have learned HTML, CSS, and JavaScript, we will be combining all that together to make full webpages and web apps. You will learn how to combine files together into a structure that is standard across the industry. You will learn how to work in all three languages, and how to use them interact with each other. This course is designed for students who have already done the Web Development 1 and 2 courses. If that is not the case, you should go back and go through them. This course assumes you have already learned all three languages.",
+  "objectives": [
+    "Gain foundational knowledge of web page file structure and interactions.",
+    "Learn how JavaScript, HTML, and CSS interact together.",
+    "Write code to create full websites and wep apps."
+  ],
+  "intro_html": "",
+  "units": [
+    {
+      "id": "u_f0f98156b7",
+      "legacy_key": "0",
+      "title": "Getting Started",
+      "description": "",
+      "items": [
+        {
+          "id": "i_f68653577d",
+          "legacy_key": "0-0",
+          "type": "link",
+          "title": "Reading - What Is a Web App?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "url": "https://blog.hubspot.com/website/what-is-web-app"
+          }
+        },
+        {
+          "id": "i_2383e92ee7",
+          "legacy_key": "0-1",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "For each assignment you will create a github repository using github classrooms. There will be a link for each assignment below."
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_184569a3d9",
+      "legacy_key": "1",
+      "title": "Unit 1: Event Listeners",
+      "description": "Learn how to combine JavaScript, HTML, and SCC to create basic Web Apps",
+      "items": [
+        {
+          "id": "i_46b7fb8c1c",
+          "legacy_key": "1-0",
+          "type": "checkpoint",
+          "title": "1.1 JavaScript: Event Listeners",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "web-dev-3/1.1-event-listeners",
+            "checkpoint_id": "c_9789b8b40c"
+          }
+        },
+        {
+          "id": "i_d79b5c9222",
+          "legacy_key": "1-1",
+          "type": "checkpoint",
+          "title": "1.2 JavaScript: Create Element and Append Child",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "web-dev-3/1.2-create-element",
+            "checkpoint_id": "c_c3f87b7ed8"
+          }
+        },
+        {
+          "id": "i_5b5ad8e100",
+          "legacy_key": "1-2",
+          "type": "checkpoint",
+          "title": "1.3 Query Selector All",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "web-dev-3/1.3-query-selector-all",
+            "checkpoint_id": "c_57c8584859"
+          }
+        },
+        {
+          "id": "i_042cb64f15",
+          "legacy_key": "1-3",
+          "type": "checkpoint",
+          "title": "1.4 Audio in Web Development",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "web-dev-3/1.4-audio",
+            "checkpoint_id": "c_1cbcf8b180"
+          }
+        },
+        {
+          "id": "i_184f1de92d",
+          "legacy_key": "1-4",
+          "type": "checkpoint",
+          "title": "1.5 APIs",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "web-dev-3/1.5-apis",
+            "checkpoint_id": "c_804be50b5d"
+          }
+        },
+        {
+          "id": "i_ed4e572cff",
+          "legacy_key": "1-5",
+          "type": "checkpoint",
+          "title": "1.6 Wordle Recreation Project",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "web-dev-3/1.6-unit-1-project",
+            "checkpoint_id": "c_0e01cf3207"
+          }
+        }
+      ]
+    }
+  ]
+}

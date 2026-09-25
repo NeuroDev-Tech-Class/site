@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "2.4",
+  "title": "Exception Handling",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-2.4-Exceptions",
+    "commit": "1fe01e3b6db50e9885e3f4e4004e31182ca88db4"
+  }
+}

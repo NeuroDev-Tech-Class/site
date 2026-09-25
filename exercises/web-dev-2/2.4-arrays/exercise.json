@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "2.4",
+  "title": "JavaScript Arrays",
+  "kind": "exercise",
+  "language": "javascript",
+  "runner": "jest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-2.4-Arrays",
+    "commit": "2a71b672d6d4a328e1be3f0778fe14e4dd8f98dc"
+  }
+}

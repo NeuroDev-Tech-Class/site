@@ -1,0 +1,163 @@
+@import 'tailwindcss';
+
+/* Dark is the default theme; Base.astro puts .dark on <html> before the page paints */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Brand tokens shared with the NeuroDev hub (neurodev-hub/frontend/src/index.css) */
+@theme {
+  --color-brand-cyan: #45bbec;
+  --color-brand-blue: #23316a;
+  --color-brand-gold: #ffee99;
+  --color-brand-pink: #ff4fa3;
+
+  --font-heading: Poppins, sans-serif;
+  --font-body: 'Open Sans', sans-serif;
+
+  --radius-card: 1rem;
+}
+
+/* Night Arcade. Light is a daylight version of the same page. Category and item colours are darker
+   in light and brighter in dark so their text stays at 4.5:1 or better on both backgrounds. */
+:root {
+  --page: #eef1ff;
+  --panel: #ffffff;
+  --text: #161c45;
+  --muted: #4b5487;
+  --heading: var(--color-brand-blue);
+  --link: #155e9c;
+  --header-text: var(--color-brand-blue);
+  --focus: var(--color-brand-blue);
+  --border: #cfd6f5;
+  --dot: rgb(35 49 106 / 0.09);
+  --glow: 0;
+
+  --cat-basics: #0b6f9e;
+  --cat-programming: #6d3fd6;
+  --cat-it: #b93c0b;
+  --cat-web: #b8185a;
+  --cat-game: #15803d;
+  --cat-media: #8a5a00;
+
+  --type-lesson: #1d63c9;
+  --type-video: #c7283a;
+  --type-checkpoint: #15803d;
+  --type-slides: #a2480a;
+  --type-test: #6d3fd6;
+  --type-link: #0e7490;
+}
+
+:root.dark {
+  --page: #0e1233;
+  --panel: #171d4d;
+  --text: #eef1ff;
+  --muted: #aab3e6;
+  --heading: var(--color-brand-gold);
+  --link: var(--color-brand-cyan);
+  --header-text: #ffffff;
+  --focus: var(--color-brand-gold);
+  --border: #2c3678;
+  --dot: rgb(255 255 255 / 0.07);
+  --glow: 1;
+
+  --cat-basics: #45bbec;
+  --cat-programming: #b39dff;
+  --cat-it: #fb923c;
+  --cat-web: #f472b6;
+  --cat-game: #4ade80;
+  --cat-media: #facc15;
+
+  --type-lesson: #7cb4ff;
+  --type-video: #ff8a8e;
+  --type-checkpoint: #4ade80;
+  --type-slides: #fbbf24;
+  --type-test: #c0a8ff;
+  --type-link: #5eead4;
+}
+
+@layer base {
+  html {
+    font-size: 16px;
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-(--page) font-body leading-relaxed text-(--text) antialiased;
+    background-image: radial-gradient(var(--dot) 1.2px, transparent 1.4px);
+    background-size: 20px 20px;
+  }
+  h1, h2, h3, h4 {
+    @apply font-heading font-semibold text-(--heading);
+    text-wrap: balance;
+  }
+  h1 { @apply text-3xl font-bold sm:text-4xl; }
+  h2 { @apply mt-10 text-2xl; }
+  h3 { @apply mt-6 text-xl; }
+  a {
+    @apply text-(--link) underline underline-offset-2;
+  }
+  /* Page copy and imported content; :where keeps these easy for components to override */
+  main :where(p, ul, ol) { @apply mt-4; }
+  main :where(ul) { @apply list-disc pl-6; }
+  main :where(ol) { @apply list-decimal pl-6; }
+  main :where(li + li) { @apply mt-1; }
+  main :where(li > ul, li > ol) { @apply mt-1; }
+  :focus-visible {
+    @apply outline-solid outline-2 outline-offset-2 outline-(--focus);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* 44px minimum targets; one visual style for the primary action */
+@utility btn {
+  @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg px-4 py-2 font-heading font-semibold no-underline transition disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn text-brand-blue hover:-translate-y-px;
+  background: linear-gradient(90deg, var(--color-brand-cyan), #86e3ff);
+  box-shadow: 0 0 calc(var(--glow) * 22px) rgb(69 187 236 / 0.45);
+}
+@utility btn-quiet {
+  @apply btn bg-(--panel) text-(--text) hover:border-(--link);
+  border: 1.5px solid var(--border);
+}
+@utility field {
+  @apply min-h-[44px] w-full rounded-lg bg-(--page) px-3 py-2 text-(--text);
+  border: 1.5px solid var(--border);
+}
+@utility panel {
+  @apply rounded-(--radius-card) bg-(--panel) p-6;
+  border: 1.5px solid var(--border);
+}
+/* A card that lights up in its --accent colour on hover and keyboard focus */
+@utility card-glow {
+  @apply transition;
+  &:hover, &:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), 0 0 calc(var(--glow) * 28px) color-mix(in srgb, var(--accent) 45%, transparent);
+    transform: translateY(-2px);
+  }
+}
+/* A square icon tile tinted with --accent */
+@utility icon-tile {
+  @apply grid size-11 shrink-0 place-items-center rounded-lg text-(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+@utility unit-pill {
+  @apply inline-flex items-center rounded-md px-3 py-1 font-heading text-xs font-extrabold tracking-[0.16em] text-brand-blue uppercase;
+  background: linear-gradient(90deg, var(--color-brand-cyan), var(--color-brand-gold));
+}
+@utility eyebrow {
+  @apply font-heading text-xs font-bold tracking-[0.14em] text-(--link) uppercase;
+}
+@utility neon-rule {
+  border-image: linear-gradient(90deg, var(--color-brand-cyan), var(--color-brand-pink), var(--color-brand-gold)) 1;
+}

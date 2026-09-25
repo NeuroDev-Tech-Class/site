@@ -1,0 +1,335 @@
+<h2>Terminal Commands</h2>
+<p>The terminal lets you work with files and run programs by typing commands. Read the section for your computer
+(Linux and macOS use the same commands; Windows uses PowerShell), then try the practice below.</p>
+<h3>Using the Terminal: A Beginner’s Guide</h3>
+<p>In this lesson, you’ll learn how to use the terminal (also known as the command line).<br>We’ll use it to navigate files, run JavaScript programs, and later, work with Git for saving your code projects.</p>
+<hr>
+<h3>What Is the Terminal?</h3>
+<p>The terminal is a tool that lets you type commands to tell your computer what to do.</p>
+<p>We’ll use it to:</p>
+<ul>
+<li>Navigate between folders (directories)</li>
+<li>Run JavaScript files using Node.js</li>
+<li>Use Git to save and share code</li>
+</ul>
+<hr>
+<h3>Opening the Terminal</h3>
+<p>If you don’t see one at the bottom of your screen:</p>
+<ol>
+<li>Click <strong>View</strong> at the top of VS Code.</li>
+<li>Select <strong>Terminal</strong> near the bottom of the list.</li>
+</ol>
+<p>You should see something like this:</p>
+<pre><code class="language-bash">yourname@DESKTOP-GHSDFJ02:/mnt/c/SomeFolders/WebDev-II-1.0-Terminal_Commands/
+</code></pre>
+<p>Each <code>/</code> separates folders on your computer, ending with the folder you’re currently in.</p>
+<hr>
+<h3>Navigating Files and Folders</h3>
+<h4>ls</h4>
+<pre><code class="language-bash">ls
+</code></pre>
+<p>Lists all files and folders in your current directory.<br>Try it now — you’ll see your assignments or units.</p>
+<h4>cd</h4>
+<pre><code class="language-bash">cd Unit-1/
+</code></pre>
+<p><code>cd</code> stands for <strong>Change Directory</strong> — it’s how you move into a folder.<br>You’ll notice the terminal path updates to show your new location.</p>
+<h4>cd ..</h4>
+<pre><code class="language-bash">cd ..
+</code></pre>
+<p>Moves <strong>back one folder</strong> (up one level).<br>Try moving into and out of folders a few times to get comfortable.</p>
+<h4>Auto-Completion</h4>
+<p>When typing folder names:</p>
+<ul>
+<li>Press <strong>TAB</strong> once to auto-complete the name.</li>
+<li>Press <strong>TAB</strong> twice to see all possible matches.</li>
+</ul>
+<hr>
+<h3>Running JavaScript Files</h3>
+<p>We’ll use <strong>Node.js</strong> to execute JavaScript files directly from the terminal.</p>
+<pre><code class="language-bash">node 1.1-Syntax.js
+</code></pre>
+<p>To test your code:</p>
+<ol>
+<li>Save your JavaScript file.</li>
+<li>Type <code>node YourFileName.js</code>.</li>
+<li>Press <strong>Enter</strong> to run it.</li>
+</ol>
+<hr>
+<h3>Helpful Shortcuts</h3>
+<table>
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + L</td>
+<td>Clear the terminal screen</td>
+</tr>
+<tr>
+<td>Ctrl + C</td>
+<td>Stop the current process</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + C</td>
+<td>Copy text in the terminal</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + V</td>
+<td>Paste text into the terminal</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>Git Basics (Version Control)</h3>
+<p>Git helps you save versions of your code, track changes, and collaborate with others.</p>
+<h4>Initialize a Repository</h4>
+<pre><code class="language-bash">git init
+</code></pre>
+<p>Creates a new Git repository in your project folder.</p>
+<h4>Check Status</h4>
+<pre><code class="language-bash">git status
+</code></pre>
+<p>Shows which files are new, changed, or ready to be saved.</p>
+<h4>Stage Files</h4>
+<pre><code class="language-bash">git add .
+</code></pre>
+<p>Stages (prepares) all your changed files for saving.</p>
+<h4>Commit Changes</h4>
+<pre><code class="language-bash">git commit -m "Add initial project files"
+</code></pre>
+<p>Saves your changes with a short message about what you did.</p>
+<h4>Connect to GitHub (Optional)</h4>
+<pre><code class="language-bash">git remote add origin https://github.com/YourUsername/your-repo.git
+git push -u origin main
+</code></pre>
+<p>Links your local project to GitHub and uploads it.</p>
+<h4>Quick Recap</h4>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>git init</td>
+<td>Start version tracking</td>
+</tr>
+<tr>
+<td>git add .</td>
+<td>Stage changes</td>
+</tr>
+<tr>
+<td>git commit -m "message"</td>
+<td>Save your progress</td>
+</tr>
+<tr>
+<td>git push</td>
+<td>Upload to GitHub</td>
+</tr>
+</tbody></table>
+<hr>
+<p>You now know how to navigate the terminal, run code, and start saving your progress with Git.</p>
+<h3>PowerShell Basics for Windows Users</h3>
+<p>If you’re using <strong>Windows without WSL</strong>, you’ll work in <strong>PowerShell</strong> instead of a Linux shell.<br>The core ideas are the same: navigate folders, run JavaScript with Node, and use Git to manage code.</p>
+<hr>
+<h3>Navigating Files and Folders</h3>
+<table>
+<thead>
+<tr>
+<th>Purpose</th>
+<th>Linux Command</th>
+<th>PowerShell Command</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>List files</td>
+<td><code>ls</code></td>
+<td><code>dir</code> or <code>Get-ChildItem</code></td>
+</tr>
+<tr>
+<td>Show hidden files</td>
+<td><code>ls -a</code></td>
+<td><code>Get-ChildItem -Force</code></td>
+</tr>
+<tr>
+<td>Change into a folder</td>
+<td><code>cd foldername</code></td>
+<td><code>cd foldername</code></td>
+</tr>
+<tr>
+<td>Go up one folder</td>
+<td><code>cd ..</code></td>
+<td><code>cd ..</code></td>
+</tr>
+<tr>
+<td>Where am I?</td>
+<td><code>pwd</code></td>
+<td><code>Get-Location</code></td>
+</tr>
+<tr>
+<td>Clear the screen</td>
+<td><code>clear</code></td>
+<td><code>cls</code></td>
+</tr>
+</tbody></table>
+<h4>Example</h4>
+<pre><code class="language-powershell">dir
+cd Documents
+cls
+</code></pre>
+<p>Each command lets you explore and organize files just like a GUI file explorer—only faster.</p>
+<hr>
+<h3>Running JavaScript Files (Node.js)</h3>
+<p>PowerShell uses the <strong>same</strong> command as Linux to run JavaScript:</p>
+<pre><code class="language-powershell">node 1.1-Syntax.js
+</code></pre>
+<p>If you see:</p>
+<pre><code>'node' is not recognized as the name of a cmdlet, function, script file, or operable program
+</code></pre>
+<p>then Node isn’t installed or your session needs a restart.</p>
+<p>Verify versions:</p>
+<pre><code class="language-powershell">node -v
+npm -v
+</code></pre>
+<p>If you use <strong>nvm-windows</strong>:</p>
+<pre><code class="language-powershell">nvm use 20
+</code></pre>
+<hr>
+<h3>Using Git in PowerShell</h3>
+<p>Git commands are <strong>identical</strong> in PowerShell and Linux:</p>
+<pre><code class="language-powershell">git init
+git status
+git add .
+git commit -m "Initial commit"
+git push
+</code></pre>
+<p>The first push may prompt you to sign in to GitHub; approve the login.</p>
+<hr>
+<h3>Helpful Shortcuts</h3>
+<table>
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Ctrl + L</code> or <code>cls</code></td>
+<td>Clear the terminal</td>
+</tr>
+<tr>
+<td><code>Ctrl + C</code></td>
+<td>Stop the current command</td>
+</tr>
+<tr>
+<td><code>↑</code> / <code>↓</code></td>
+<td>Browse command history</td>
+</tr>
+<tr>
+<td><code>Tab</code></td>
+<td>Autocomplete file/folder names</td>
+</tr>
+<tr>
+<td><code>Ctrl + Shift + C</code> / <code>Ctrl + Shift + V</code></td>
+<td>Copy / Paste</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>Practice Commands for PowerShell</h3>
+<p>On Linux/macOS you might use a <code>.sh</code> script; in PowerShell, create a <code>.ps1</code> script.</p>
+<h4>Example: <code>practice.ps1</code></h4>
+<pre><code class="language-powershell"># List all files (including hidden)
+Get-ChildItem -Force
+
+# Go up one folder and list again
+Set-Location ..
+Get-ChildItem -Force
+
+# Clear the screen
+Clear-Host
+</code></pre>
+<h4>Run it</h4>
+<pre><code class="language-powershell">.\practice.ps1
+</code></pre>
+<p>If scripts are blocked for security, allow scripts <strong>for this session only</strong>:</p>
+<pre><code class="language-powershell">Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+</code></pre>
+<hr>
+<h3>PowerShell vs. Linux Command Reference</h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Linux</th>
+<th>PowerShell</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>List files</td>
+<td><code>ls</code></td>
+<td><code>dir</code></td>
+</tr>
+<tr>
+<td>Show hidden files</td>
+<td><code>ls -a</code></td>
+<td><code>Get-ChildItem -Force</code></td>
+</tr>
+<tr>
+<td>Enter folder</td>
+<td><code>cd folder</code></td>
+<td><code>cd folder</code></td>
+</tr>
+<tr>
+<td>Up one level</td>
+<td><code>cd ..</code></td>
+<td><code>cd ..</code></td>
+</tr>
+<tr>
+<td>Current directory</td>
+<td><code>pwd</code></td>
+<td><code>Get-Location</code></td>
+</tr>
+<tr>
+<td>Clear screen</td>
+<td><code>clear</code></td>
+<td><code>cls</code></td>
+</tr>
+<tr>
+<td>Run a script</td>
+<td><code>bash script.sh</code></td>
+<td><code>.\script.ps1</code></td>
+</tr>
+<tr>
+<td>Show history</td>
+<td><code>history</code></td>
+<td><code>Get-History</code></td>
+</tr>
+<tr>
+<td>Exit terminal</td>
+<td><code>exit</code></td>
+<td><code>exit</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3>Summary</h3>
+<p>You can now:</p>
+<ul>
+<li>Navigate folders and files in PowerShell.</li>
+<li>Run JavaScript files with Node.</li>
+<li>Use Git to track and share your code.</li>
+<li>Write and run simple PowerShell scripts.</li>
+<li>Translate common Linux shell commands to PowerShell.</li>
+</ul>
+<h3>Practice</h3>
+<p>Type each command into your terminal and watch what it does:</p>
+<pre><code class="language-shell"># Copy the code below and run it in your terminal
+
+ls -al
+
+# What happened? This code lists all files and gives more information on them
+
+# Now navigate one folder back in the hierarchy and run the previous code again
+# Now clear the output
+</code></pre>

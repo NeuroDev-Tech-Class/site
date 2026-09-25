@@ -1,0 +1,12 @@
+{
+  "course": "python-2",
+  "number": "3.2",
+  "title": "Drawing Shapes in Pygame",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-II-3.2-Pygame_Shapes",
+    "commit": "62cf673df56733a5ee4df5d4e561f8a731af787f"
+  }
+}

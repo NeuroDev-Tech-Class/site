@@ -1,0 +1,121 @@
+{
+  "id": "c_aa3e40461f",
+  "item_id": "i_382185a712",
+  "course_id": "gimp",
+  "legacy_path": "media/gimp/unit3/final_project.html",
+  "exercise": null,
+  "title": "Final Project: Portfolio Showcase",
+  "preset": null,
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "piece1_image",
+      "type": "image",
+      "label": "Piece 1 (Edited/Restored Photo): exported PNG or JPEG",
+      "multiple": false,
+      "required": true
+    },
+    {
+      "id": "piece1_file",
+      "type": "file",
+      "label": "Piece 1: your GIMP project file",
+      "accept": [
+        ".xcf"
+      ],
+      "multiple": false,
+      "required": true
+    },
+    {
+      "id": "piece1_q1",
+      "type": "longText",
+      "label": "Piece 1: what the piece is and what you were aiming to achieve",
+      "required": true
+    },
+    {
+      "id": "piece1_q2",
+      "type": "longText",
+      "label": "Piece 1: which GIMP tools and techniques you used to create it",
+      "required": true
+    },
+    {
+      "id": "piece1_q3",
+      "type": "longText",
+      "label": "Piece 1: any challenges you faced and how you solved them",
+      "required": true
+    },
+    {
+      "id": "piece2_image",
+      "type": "image",
+      "label": "Piece 2 (Original Graphic Design): exported PNG or JPEG",
+      "multiple": false,
+      "required": true
+    },
+    {
+      "id": "piece2_file",
+      "type": "file",
+      "label": "Piece 2: your GIMP project file",
+      "accept": [
+        ".xcf"
+      ],
+      "multiple": false,
+      "required": true
+    },
+    {
+      "id": "piece2_q1",
+      "type": "longText",
+      "label": "Piece 2: what the piece is and what you were aiming to achieve",
+      "required": true
+    },
+    {
+      "id": "piece2_q2",
+      "type": "longText",
+      "label": "Piece 2: which GIMP tools and techniques you used to create it",
+      "required": true
+    },
+    {
+      "id": "piece2_q3",
+      "type": "longText",
+      "label": "Piece 2: any challenges you faced and how you solved them",
+      "required": true
+    },
+    {
+      "id": "piece3_image",
+      "type": "image",
+      "label": "Piece 3 (Creative Composition or Digital Painting): exported PNG or JPEG",
+      "multiple": false,
+      "required": true
+    },
+    {
+      "id": "piece3_file",
+      "type": "file",
+      "label": "Piece 3: your GIMP project file",
+      "accept": [
+        ".xcf"
+      ],
+      "multiple": false,
+      "required": true
+    },
+    {
+      "id": "piece3_q1",
+      "type": "longText",
+      "label": "Piece 3: what the piece is and what you were aiming to achieve",
+      "required": true
+    },
+    {
+      "id": "piece3_q2",
+      "type": "longText",
+      "label": "Piece 3: which GIMP tools and techniques you used to create it",
+      "required": true
+    },
+    {
+      "id": "piece3_q3",
+      "type": "longText",
+      "label": "Piece 3: any challenges you faced and how you solved them",
+      "required": true
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Overview</h2>\n  <p>\n    For your final project, you will create a <strong>portfolio of three original pieces</strong> that demonstrate the skills and techniques you've learned throughout this course. Each piece focuses on a different area of image editing, and together they showcase your range as a digital artist.\n  </p>\n\n  <h2>The Three Pieces</h2>\n\n  <h3>Piece 1: Edited / Restored Photo</h3>\n  <p>\n    Take a photo (one you've taken yourself, a family photo, or a public-domain image) and apply a complete editing and retouching workflow. Your finished image should demonstrate:\n  </p>\n  <ul>\n    <li><strong>Color correction</strong> — use Levels, Curves, and/or Color Balance to fix exposure and white balance.</li>\n    <li><strong>Retouching</strong> — use the Clone Stamp and/or Healing Tool to remove blemishes, scratches, distracting elements, or other imperfections.</li>\n    <li><strong>Enhancement</strong> — apply sharpening (Unsharp Mask), noise reduction, or selective adjustments to improve the final image.</li>\n  </ul>\n  <p>\n    The goal is a polished, professional-looking photograph that shows clear improvement over the original.\n  </p>\n\n  <h3>Piece 2: Original Graphic Design</h3>\n  <p>\n    Create an original graphic design piece from scratch. Choose <strong>one</strong> of the following:\n  </p>\n  <ul>\n    <li><strong>Poster</strong> — a movie poster, event poster, concert poster, or informational poster (at least 11 × 17 inches at 150 DPI).</li>\n    <li><strong>Logo</strong> — a logo and wordmark for a real or fictional brand, company, or project (with transparent background, exported at multiple sizes).</li>\n    <li><strong>Social media graphic</strong> — a set of 2–3 coordinated graphics (banner, profile image, post) for a social media account.</li>\n  </ul>\n  <p>\n    Your design must include styled text, intentional use of color and layout, and at least one composited image element or applied filter effect.\n  </p>\n\n  <h3>Piece 3: Creative Composition or Digital Painting</h3>\n  <p>\n    Create a piece that showcases your creativity. Choose <strong>one</strong> of the following:\n  </p>\n  <ul>\n    <li><strong>Photo composite</strong> — combine elements from multiple images into a seamless, creative scene using layer masks, blend modes, and color matching.</li>\n    <li><strong>Digital painting</strong> — paint an original artwork from scratch using GIMP's brush tools, a layered workflow, and color theory principles.</li>\n    <li><strong>Mixed-media piece</strong> — combine photo elements with painted elements, text, and effects to create a unique artistic work.</li>\n  </ul>\n  <p>\n    This is your chance to be creative. There are no strict requirements for subject matter — express yourself!\n  </p>\n\n  <h2>Technical Requirements</h2>\n  <p>\n    Each of your three pieces must demonstrate at least <strong>3 different techniques</strong> from the skills learned in this course. Techniques include (but are not limited to):\n  </p>\n  <table>\n    <thead>\n      <tr>\n        <th>Category</th>\n        <th>Techniques</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>Selection</td>\n        <td>Rectangle/Ellipse Select, Fuzzy Select, Select by Color, Quick Mask, Feathering</td>\n      </tr>\n      <tr>\n        <td>Layers</td>\n        <td>Multiple layers, layer groups, blend modes, opacity adjustments</td>\n      </tr>\n      <tr>\n        <td>Color Correction</td>\n        <td>Levels, Curves, Hue-Saturation, Color Balance, Desaturate</td>\n      </tr>\n      <tr>\n        <td>Retouching</td>\n        <td>Clone Stamp, Healing Tool, Smudge, Blur/Sharpen</td>\n      </tr>\n      <tr>\n        <td>Text</td>\n        <td>Text tool, styled text, text effects, text along path</td>\n      </tr>\n      <tr>\n        <td>Paths</td>\n        <td>Bézier paths, path to selection, stroke path</td>\n      </tr>\n      <tr>\n        <td>Masks</td>\n        <td>Layer masks, alpha channel manipulation</td>\n      </tr>\n      <tr>\n        <td>Filters</td>\n        <td>Blur, Sharpen, Distort, Light and Shadow, Artistic filters</td>\n      </tr>\n      <tr>\n        <td>Painting</td>\n        <td>Paintbrush, custom brushes, dynamics, digital painting workflow</td>\n      </tr>\n      <tr>\n        <td>Transform</td>\n        <td>Scale, Rotate, Perspective, Flip, Crop</td>\n      </tr>\n    </tbody>\n  </table>\n\n  <h2>Written Descriptions</h2>\n  <p>\n    For each of your three pieces, write a <strong>short description</strong> (3–5 sentences) that explains:\n  </p>\n  <ol>\n    <li>What the piece is and what you were aiming to achieve.</li>\n    <li>Which GIMP tools and techniques you used to create it.</li>\n    <li>Any challenges you faced and how you solved them.</li>\n  </ol>\n  <p>\n    These descriptions can be submitted as a separate document or typed directly into your project submission.\n  </p>\n\n  <h2>Deliverables</h2>\n  <p>\n    Submit the following:\n  </p>\n  <ul>\n    <li><strong>3 XCF project files</strong> — one for each piece, with all layers intact.</li>\n    <li><strong>3 exported images</strong> — one PNG or JPEG export of each finished piece.</li>\n    <li><strong>Written descriptions</strong> — one for each piece (3–5 sentences each).</li>\n  </ul>\n\n  <h2>Evaluation Criteria</h2>\n  <table>\n    <thead>\n      <tr>\n        <th>Criteria</th>\n        <th>Description</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td><strong>Technique Variety</strong></td>\n        <td>Each piece uses at least 3 different techniques from the course. A wide range of techniques across all 3 pieces demonstrates thorough learning.</td>\n      </tr>\n      <tr>\n        <td><strong>Visual Quality</strong></td>\n        <td>Pieces are well-crafted with attention to detail — clean edges, proper color, well-organized layers, appropriate resolution, and professional polish.</td>\n      </tr>\n      <tr>\n        <td><strong>Creativity</strong></td>\n        <td>Pieces show original thinking, creative problem-solving, and personal expression. Work goes beyond simply following instructions.</td>\n      </tr>\n      <tr>\n        <td><strong>Written Descriptions</strong></td>\n        <td>Clear, specific descriptions that accurately explain the tools and techniques used in each piece.</td>\n      </tr>\n    </tbody>\n  </table>\n\n  <h2>Activity Checklist</h2>\n  <div class=\"activity\">\n    <ul>\n      <li>☐ <strong>Piece 1:</strong> Edited/restored photo with color correction and retouching</li>\n      <li>☐ <strong>Piece 2:</strong> Original graphic design (poster, logo, or social media graphic)</li>\n      <li>☐ <strong>Piece 3:</strong> Creative composition or digital painting</li>\n      <li>☐ Each piece demonstrates at least 3 different techniques</li>\n      <li>☐ Written description for each piece (3–5 sentences)</li>\n      <li>☐ 3 XCF project files saved with all layers</li>\n      <li>☐ 3 exported PNG or JPEG images</li>\n    </ul>\n  </div>\n\n  <div class=\"tip\">\n    <strong>Tip:</strong> Start early and work on one piece at a time. Don't try to rush all three at the end. Your portfolio is a showcase of your best work — give each piece the time and attention it deserves.\n  </div>",
+  "starter_path": null,
+  "grading_hint": null
+}

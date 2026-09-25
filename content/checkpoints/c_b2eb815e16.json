@@ -1,0 +1,67 @@
+{
+  "id": "c_b2eb815e16",
+  "item_id": "i_e434c898bb",
+  "course_id": "blender-zbrush-mini",
+  "legacy_path": "game-development/blender-zbrush/unit3/final_project.html",
+  "exercise": null,
+  "title": "Final Project",
+  "preset": null,
+  "requires_sign_off": true,
+  "fields": [
+    {
+      "id": "sketch_image",
+      "type": "image",
+      "label": "Photo of your paper sketch (front view + side/detail view)",
+      "multiple": false,
+      "required": true
+    },
+    {
+      "id": "finished_image",
+      "type": "image",
+      "label": "Photo of your finished, painted piece",
+      "multiple": false,
+      "required": true
+    },
+    {
+      "id": "model_file",
+      "type": "file",
+      "label": "Your exported 3D model file",
+      "accept": [
+        ".obj",
+        ".stl"
+      ],
+      "multiple": false,
+      "required": true
+    },
+    {
+      "id": "checklist",
+      "type": "checklist",
+      "label": "Activity Checklist",
+      "items": [
+        "Gathered reference images and inspiration",
+        "Sketched design on paper (front view + side/detail view)",
+        "Created the piece in ZBrushCoreMini or Blender (or both)",
+        "Used at least 4 brushes (ZBrush) or 3 techniques/modifiers (Blender)",
+        "Exported correctly (OBJ from ZBrush or STL from Blender)",
+        "Loaded in slicer, configured settings, and previewed layers",
+        "Successfully 3D printed the piece",
+        "Sanded the print (at least two grits)",
+        "Applied spray primer",
+        "Painted with at least two colors",
+        "Optional: Applied clear coat",
+        "Presented finished piece to instructor"
+      ],
+      "required": true
+    },
+    {
+      "id": "signoff_print_paint",
+      "type": "mentorSignOff",
+      "label": "Confirms the piece was successfully 3D printed, sanded, primed, and painted",
+      "required": true
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Overview</h2>\n  <p>\n    For your final project, you'll create a <strong>showcase piece</strong> that demonstrates everything you've learned\n    in this course — from digital sculpting or modeling all the way through 3D printing and finishing. This is your\n    chance to make something entirely your own: an original creation that shows off your skills, creativity, and\n    personal style.\n  </p>\n\n  <h2>Requirements</h2>\n\n  <h3>1. Choose Your Tool</h3>\n  <p>\n    Design and create your piece using <strong>ZBrushCoreMini</strong> (sculpting) <em>or</em> <strong>Blender</strong>\n    (polygon modeling) — <strong>student's choice</strong>. You may also combine both (sculpt in ZBrush, refine in\n    Blender) if you'd like to demonstrate the roundtrip workflow.\n  </p>\n\n  <h3>2. Demonstrate Multiple Tools / Brushes</h3>\n  <p>\n    Your project must show that you can use a <strong>variety of tools</strong>, not just one or two. Specifically:\n  </p>\n  <ul>\n    <li><strong>If sculpting in ZBrushCoreMini:</strong> Use at least <strong>4 different brushes</strong> (e.g., Move,\n      ClayBuildup, Standard, Pinch, Smooth). Your sculpt should show evidence of blockout (large forms), medium detail,\n      and fine detail.</li>\n    <li><strong>If modeling in Blender:</strong> Use at least <strong>3 different techniques or modifiers</strong> (e.g.,\n      extrude, loop cuts, Subdivision Surface, Mirror, Bevel, Boolean). Your model should demonstrate clean topology.</li>\n  </ul>\n\n  <h3>3. Intentional Design — Sketch It First</h3>\n  <p>\n    Before you touch the computer, <strong>sketch your idea on paper</strong>. Your sketch doesn't need to be a\n    masterpiece — it just needs to show that you planned your design ahead of time. Include:\n  </p>\n  <ul>\n    <li>A front view of your design.</li>\n    <li>A side or three-quarter view.</li>\n    <li>Notes about details, dimensions, or features you want to include.</li>\n    <li>Reference images you're drawing inspiration from (printed, sketched, or described).</li>\n  </ul>\n  <p>\n    Intentional design separates a thoughtful creation from random sculpting. Plan ahead, then execute.\n  </p>\n\n  <h3>4. Proper Export</h3>\n  <p>\n    Export your finished model correctly:\n  </p>\n  <ul>\n    <li>From ZBrushCoreMini: use the <strong>Printer Export</strong> icon to save as OBJ.</li>\n    <li>From Blender: export as <strong>STL</strong> with correct scale and \"Selection Only\" checked.</li>\n    <li>Verify the file opens correctly in your slicer before printing.</li>\n  </ul>\n\n  <h3>5. Successful 3D Print</h3>\n  <p>\n    Your project must be <strong>3D printed</strong>. This means:\n  </p>\n  <ul>\n    <li>Load the file in your slicer and configure appropriate settings (layer height, infill, supports if needed).</li>\n    <li>Orient the model for best print quality.</li>\n    <li>Preview the sliced layers and verify everything looks correct.</li>\n    <li>Print the object. If the first attempt fails, troubleshoot (re-orient, add supports, adjust settings) and try\n      again — problem-solving is part of the process!</li>\n  </ul>\n\n  <h3>6. Sanding and Painting</h3>\n  <p>\n    Apply what you learned about finishing:\n  </p>\n  <ul>\n    <li><strong>Sand</strong> the print (at least two grits — coarse and fine).</li>\n    <li><strong>Prime</strong> with spray primer.</li>\n    <li><strong>Paint</strong> with at least two colors of acrylic paint.</li>\n    <li><strong>Optional:</strong> Apply a clear coat for protection.</li>\n  </ul>\n\n  <h2>Project Ideas</h2>\n  <p>\n    Not sure what to make? Here are some ideas to get you started:\n  </p>\n  <ul>\n    <li><strong>Pendant or keychain:</strong> A wearable sculpt with a loop for a chain or keyring. Great for gifts!</li>\n    <li><strong>Figurine:</strong> A small character, creature, or animal. Could be original or fan art of a favorite\n      character.</li>\n    <li><strong>Custom game piece:</strong> A chess piece, tabletop RPG miniature, or board game token with your own\n      design.</li>\n    <li><strong>Decorative object:</strong> A small sculpture, desk ornament, or display piece.</li>\n    <li><strong>Functional item:</strong> A custom phone stand, pencil holder, or small container.</li>\n    <li><strong>Badge or emblem:</strong> A 3D logo, crest, or symbol with raised details.</li>\n  </ul>\n\n  <h2>Inspiration and References</h2>\n  <p>\n    Every great artist uses references. Gather inspiration before you begin:\n  </p>\n  <ul>\n    <li>Search for reference images of similar objects (animals, characters, shapes).</li>\n    <li>Look at existing 3D prints on sites like Thingiverse or MyMiniFactory for ideas.</li>\n    <li>Study real-world objects for proportions and details — hold them, turn them around,\n      notice the shapes.</li>\n    <li>Save or print your references so you can look at them while working.</li>\n  </ul>\n\n  <h2>Evaluation Criteria</h2>\n  <table>\n    <thead>\n      <tr>\n        <th>Category</th>\n        <th>What We're Looking For</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td><strong>Creativity</strong></td>\n        <td>Is the design original and thoughtful? Does it show personal style? Was it planned with a sketch?</td>\n      </tr>\n      <tr>\n        <td><strong>Technique</strong></td>\n        <td>Were multiple tools/brushes used effectively? Does the model show evidence of intentional sculpting or\n          modeling decisions? Is the topology clean (Blender) or the sculpt well-formed (ZBrush)?</td>\n      </tr>\n      <tr>\n        <td><strong>Finish Quality</strong></td>\n        <td>Was the print sanded, primed, and painted? Is the paint job clean with thin, even coats? Does the final\n          piece look polished and complete?</td>\n      </tr>\n    </tbody>\n  </table>\n\n  <h2>Activity Checklist</h2>\n  <table>\n    <thead>\n      <tr>\n        <th>✓</th>\n        <th>Task</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr><td>☐</td><td>Gathered reference images and inspiration</td></tr>\n      <tr><td>☐</td><td>Sketched design on paper (front view + side/detail view)</td></tr>\n      <tr><td>☐</td><td>Created the piece in ZBrushCoreMini or Blender (or both)</td></tr>\n      <tr><td>☐</td><td>Used at least 4 brushes (ZBrush) or 3 techniques/modifiers (Blender)</td></tr>\n      <tr><td>☐</td><td>Exported correctly (OBJ from ZBrush or STL from Blender)</td></tr>\n      <tr><td>☐</td><td>Loaded in slicer, configured settings, and previewed layers</td></tr>\n      <tr><td>☐</td><td>Successfully 3D printed the piece</td></tr>\n      <tr><td>☐</td><td>Sanded the print (at least two grits)</td></tr>\n      <tr><td>☐</td><td>Applied spray primer</td></tr>\n      <tr><td>☐</td><td>Painted with at least two colors</td></tr>\n      <tr><td>☐</td><td>Optional: Applied clear coat</td></tr>\n      <tr><td>☐</td><td>Presented finished piece to instructor</td></tr>\n    </tbody>\n  </table>",
+  "starter_path": null,
+  "grading_hint": null
+}

@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "2.3",
+  "title": "JavaScript Loops",
+  "kind": "exercise",
+  "language": "javascript",
+  "runner": "jest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-2.3-Loops",
+    "commit": "ccb25efd7142dd33148fadf0325aa02aa73ab44a"
+  }
+}

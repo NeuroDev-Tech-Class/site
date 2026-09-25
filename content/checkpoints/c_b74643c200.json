@@ -1,0 +1,38 @@
+{
+  "id": "c_b74643c200",
+  "item_id": "i_4b32884eeb",
+  "course_id": "digital-literacy",
+  "legacy_path": "computer-basics/digital-literacy/unit3/hands-on_exercise-social_media.html",
+  "exercise": null,
+  "title": "Hands-on Exercise: Social Media",
+  "preset": null,
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "checklist",
+      "type": "checklist",
+      "label": "Instagram Exercise",
+      "help": "This exercise is optional. You don't have to share personal details or photos if you're not comfortable — skip any step you'd rather not do.",
+      "items": [
+        "Downloaded and installed the Instagram app",
+        "Created an account with a unique username and strong password",
+        "Set up your profile with a photo and bio",
+        "Followed some accounts",
+        "Engaged with other users (liked and commented, using proper etiquette)",
+        "Posted your first photo or video"
+      ],
+      "required": false
+    },
+    {
+      "id": "profile_url",
+      "type": "url",
+      "label": "Link to your profile",
+      "help": "Optional — only share this if you're comfortable doing so.",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<div class=\"tip\">\n  <p><strong>This exercise is optional.</strong> Skip any step you're not comfortable with. You never have to share personal details or photos of yourself.</p>\n</div>\n\n<h2>\"Do I really need an Instagram account?\"</h2>\n\n<p>No! But using social media responsibly can be a great skill. It can help you:</p>\n\n<ul>\n  <li>Improve your communication skills by engaging with others</li>\n  <li>Join supportive communities around specific topics</li>\n  <li>Connect with people who share your interests and passions</li>\n  <li>Express your creativity and show off your talents</li>\n  <li>Learn from educational content and find inspiration</li>\n  <li>Build everyday digital skills</li>\n  <li>Network and find job opportunities</li>\n</ul>\n\n<p>This is more an exercise in social skills than in tech skills, but the steps below will help if this is new to you. Social media works best as a way to build and grow real-life relationships, not as a replacement for them.</p>\n\n<div class=\"activity\">\n  <h2>Instagram Exercise</h2>\n\n  <ol>\n    <li><strong>Download and install the Instagram app</strong> from the App Store (iPhone) or Google Play Store (Android).</li>\n    <li><strong>Create an account.</strong> Open the app and tap \"Sign Up.\" You can use the email address you created in the email exercise, another email, or a phone number. Choose a unique username and a strong password you don't use anywhere else (a password manager helps).\n      <img src=\"/images/digital-literacy/hands-on_exercise-social_media_1.webp\" class=\"img-small\" alt=\"The Instagram sign-up screen\">\n    </li>\n    <li><strong>Set up your profile.</strong> Add a profile photo, write a short bio and fill in anything else you'd like to include. Look at other people's bios for ideas. To keep your account more private, go to your profile, tap the menu icon (three lines) in the upper right, then choose Settings, then Privacy. There you can make your account private and control who can message you.</li>\n    <li><strong>Follow some accounts.</strong> Search for friends, family or public figures you're interested in and follow them. You can also follow hashtags about topics you like.</li>\n    <li><strong>Engage with other users.</strong> Like and comment on posts from the accounts you follow. Be kind, respect other people's opinions and don't spam.</li>\n    <li><strong>Post your first photo or video.</strong> Take one with your camera or pick one from your gallery. Add a caption and a location, and tag any friends in it.</li>\n  </ol>\n</div>\n\n<p>In the form below, tick the steps you did. Sharing a link to your profile is optional.</p>",
+  "starter_path": null,
+  "grading_hint": null
+}

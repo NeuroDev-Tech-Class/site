@@ -1,0 +1,124 @@
+{
+  "categories": [
+    {
+      "name": "Computer Basics",
+      "courses": [
+        {
+          "id": "digital-literacy",
+          "title": "Digital Literacy",
+          "summary": "The goal of this entry-level course is to equip students with essential digital literacy skills, important for both personal and professional success in today's digital world. By mastering basic computer and internet skills, students will improve their productivity, safety, and digital communication abilities. Even tech-savvy learners should find this course helpful.",
+          "status": "published"
+        },
+        {
+          "id": "ai-usage",
+          "title": "AI Usage & Prompt Engineering",
+          "summary": "This course introduces students to the rapidly developing world of AI, with an emphasis on the large language models (LLMs) that power today's AI assistants — like OpenAI's ChatGPT, Google's Gemini, and Anthropic's Claude. These tools are now multimodal: alongside text, they can understand images, listen and speak, work with documents, and generate images of their own. Designed for beginners, the course covers the practical skills for engaging with AI responsibly and effectively.",
+          "status": "published"
+        },
+        {
+          "id": "office-software",
+          "title": "Office Software",
+          "summary": "This comprehensive course will prepare students to more effectively utilize the leading office productivity tools: Microsoft 365 and Google Workspace. Specifically the course offers a deep dive into Microsoft Word / Google Docs, MS Excel / Google Sheets, and MS PowerPoint / Google Slides. This course is ideal for students wanting to enhance their everyday software skills in academic, personal, and professional settings.",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "name": "Computer Programming",
+      "courses": [
+        {
+          "id": "python-1",
+          "title": "Python I - Programming Fundamentals",
+          "summary": "This beginner programming course introduces students to the essentials of coding using Python 3, focusing on foundational concepts like data types, variables, loops, and functions. Students will learn to write Python code within the Visual Studio Code IDE, developing skills to build a simple text-based adventure game. This course lays the groundwork for more advanced studies in computer science.",
+          "status": "published"
+        },
+        {
+          "id": "python-2",
+          "title": "Python II - Object-Oriented Programming",
+          "summary": "This intermediate course dives into object-oriented programming (OOP) concepts, GUI development, and modular programming with Python. Students will learn about recursion, generators, decorators, and third-party libraries, culminating in a project where students develop a GUI-based chess game using PyGame.",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "name": "I.T.",
+      "courses": [
+        {
+          "id": "hardware",
+          "title": "Computer Hardware",
+          "summary": "This introductory I.T. course focuses on the practical aspects of building PCs and maintaining computer hardware. Students will gain hands-on experience with diagnosing hardware issues, assembling PCs, and understanding the intricacies of computer hardware. The culminating project involves constructing a custom computer, tailored to fit a given budget and performance specifications.",
+          "status": "published"
+        },
+        {
+          "id": "linux",
+          "title": "Introduction to Linux",
+          "summary": "The Linux family of operating systems is responsible for powering most of the world's servers, smartphones, and cloud systems. Learning it can give you much insight into modern computing. This beginner course introduces students to the Linux family of operating systems through a series of beginner-friendly, hands-on tasks. Covered topics include navigating the terminal, managing files and processes, and working with open-source tools. By the end of the course, students will have the skills and confidence to use Linux comfortably as a daily driver.",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "name": "Web Development",
+      "courses": [
+        {
+          "id": "web-dev-1",
+          "title": "Web Development I - HTML & CSS",
+          "summary": "This beginner-level course introduces students to the essentials of web design and development, focusing on frontend creation with HTML and CSS. Students will learn about the infrastructure of the Internet, how to build and publish web pages, and employ various layout and styling techniques.",
+          "status": "draft"
+        },
+        {
+          "id": "web-dev-2",
+          "title": "Web Development II - JavaScript",
+          "summary": "This beginner JavaScript programming course introduces students to the coding in JavaScript, focusing on foundational concepts like data types, variables, loops, and functions. Students will learn to write JavaScript code within the Visual Studio Code IDE. This course is designed for students who have some knowledge of programming. If that is not the case, I would recommend looking at our Python Course first. Javascript is used along side HTML / CSS. It is recommended that you go through the the Web Development I course if you haven't.",
+          "status": "published"
+        },
+        {
+          "id": "web-dev-3",
+          "title": "Web Development III - Web Apps",
+          "summary": "Now that you have learned HTML, CSS, and JavaScript, we will be combining all that together to make full webpages and web apps. You will learn how to combine files together into a structure that is standard across the industry. You will learn how to work in all three languages, and how to use them interact with each other. This course is designed for students who have already done the Web Development 1 and 2 courses. If that is not the case, you should go back and go through them. This course assumes you have already learned all three languages.",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "name": "Game Development",
+      "courses": [
+        {
+          "id": "unreal-engine",
+          "title": "Intro to Unreal Engine",
+          "summary": "This course introduces students to game development using Unreal Engine 5, the same engine behind Fortnite, Rocket League, and countless AAA titles. Students will learn to navigate the editor, build 3D environments, script gameplay with Blueprints, and design a complete playable level. No prior programming experience is required—everything is done visually with Blueprint nodes.",
+          "status": "published"
+        },
+        {
+          "id": "blender-zbrush-mini",
+          "title": "Intro to Blender & ZBrush",
+          "summary": "This course teaches students 3D modeling, sculpting, and basic 3D printing using Blender (free, open-source 3D software) and ZBrushCoreMini (a free digital sculpting tool). Students will progress from simple shapes to detailed models, learn to prepare files for 3D printing, and explore digital sculpting with a tablet. By the end, students will have a portfolio of printed and digital creations.",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "name": "Media",
+      "courses": [
+        {
+          "id": "gimp",
+          "title": "2D Digital Art - GIMP",
+          "summary": "This course teaches students digital image editing and graphic design using GIMP (GNU Image Manipulation Program), a free and open-source alternative to Adobe Photoshop. Students will learn to edit photos, create original digital artwork, and design graphics for print and web. GIMP runs on Windows, macOS, and Linux, so you can practice on any computer.",
+          "status": "published"
+        },
+        {
+          "id": "audacity",
+          "title": "Audio Software - Audacity",
+          "summary": "This course teaches students how to record, edit, and produce audio using Audacity, a free and open-source digital audio workstation. Students will learn to record voiceovers, edit and clean up audio, apply effects, mix multiple tracks, and export finished projects. Whether you want to make a podcast, edit music, create sound effects, or improve audio quality, Audacity is a powerful starting point.",
+          "status": "published"
+        },
+        {
+          "id": "davinci-resolve",
+          "title": "Video Software - DaVinci Resolve",
+          "summary": "This course introduces students to professional video editing, color correction, and audio post-production using DaVinci Resolve, the free industry-standard software from Blackmagic Design used on Hollywood films and TV shows. Students will learn the full post-production workflow: importing media, editing on a timeline, adding transitions and titles, correcting color, mixing audio, and exporting a finished video. DaVinci Resolve runs on Windows, macOS, and Linux.",
+          "status": "published"
+        }
+      ]
+    }
+  ]
+}

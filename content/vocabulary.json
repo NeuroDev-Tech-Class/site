@@ -1,0 +1,97 @@
+{
+  "tags": [
+    "a",
+    "b",
+    "blockquote",
+    "br",
+    "code",
+    "div",
+    "em",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "hr",
+    "i",
+    "iframe",
+    "img",
+    "kbd",
+    "li",
+    "ol",
+    "p",
+    "pre",
+    "section",
+    "span",
+    "strong",
+    "table",
+    "tbody",
+    "td",
+    "th",
+    "thead",
+    "tr",
+    "ul"
+  ],
+  "attributes": {
+    "*": [
+      "class"
+    ],
+    "a": [
+      "href",
+      "title",
+      "target",
+      "rel"
+    ],
+    "img": [
+      "src",
+      "alt",
+      "loading",
+      "title",
+      "width",
+      "height"
+    ],
+    "iframe": [
+      "src",
+      "title",
+      "allow",
+      "loading",
+      "referrerpolicy",
+      "allowfullscreen",
+      "frameborder",
+      "width",
+      "height"
+    ],
+    "ol": [
+      "start",
+      "type"
+    ],
+    "td": [
+      "colspan",
+      "rowspan"
+    ],
+    "th": [
+      "colspan",
+      "rowspan",
+      "scope"
+    ]
+  },
+  "classes": [
+    "tip",
+    "warning",
+    "activity",
+    "card",
+    "grid-2",
+    "img-row",
+    "img-side",
+    "img-small",
+    "video-embed",
+    "subtitle"
+  ],
+  "class_prefixes": [
+    "language-"
+  ],
+  "iframe_hosts": [
+    "www.youtube.com",
+    "youtube.com",
+    "www.youtube-nocookie.com"
+  ]
+}

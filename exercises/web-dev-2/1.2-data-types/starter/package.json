@@ -1,0 +1,15 @@
+{
+  "name": "web-dev-2-1.2-data-types",
+  "version": "1.0.0",
+  "description": "JavaScript Data Types",
+  "main": "learn.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

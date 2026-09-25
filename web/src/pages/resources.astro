@@ -1,0 +1,102 @@
+---
+import Icon from '../components/Icon.astro'
+import Base from '../layouts/Base.astro'
+
+const machines = [
+  { name: 'Desktop Computer', specs: ['Core i5 7500', 'NVIDIA GeForce RTX 2070', 'Windows 10 Home'] },
+  { name: 'Dell XPS 27 All-in-One Computer', specs: ['Core i5 7400', 'Windows 10 Home'] },
+  {
+    name: 'Driving Simulator Rig',
+    specs: [
+      'AMD Ryzen 5 5600X', 'AMD Radeon RX 6700 XT', 'Meta Quest 2 VR Headset', 'Next Level Racing GT Lite Cockpit',
+      'Logitech G923 Racing Wheel & Pedals', 'Logitech G Driving Force Shifter', 'Windows 11 Pro',
+    ],
+    link: ['City Car Driving', 'https://store.steampowered.com/app/493490/City_Car_Driving/'],
+  },
+  {
+    name: 'Disassembled Computer Hardware for Demonstrations',
+    specs: ['Motherboards, CPUs, GPUs, RAM Sticks, Hard Drives & SSDs, Power Supplies, Wi-Fi Routers, Ethernet Cables'],
+  },
+]
+const gadgets = ['Flashforge Guider II 3D Printer', 'Raspberry Pi 4 Model B', 'XP-PEN Deco Mini7 Drawing Tablet']
+const software = [
+  ['Programming Tools', 'Visual Studio Code, Python, Java, Git, GitHub'],
+  ['3D Modeling Software', 'Blender, ZBrush Mini, FlashPrint'],
+  ['Game Development Software', 'Unreal Engine, Unity, GameMaker Studio 2'],
+  ['Digital Art Tools', 'GIMP'],
+  ['Media Editing Tools', 'Audacity (Audio), DaVinci Resolve (Video)'],
+]
+const udemy = [
+  ['C# Unity Game Development', 'https://www.udemy.com/share/101XCe3@LroQr7Ls83bm3inPmSISjHqP0jIgr5DTPKUnTnmHzNzK_6pdEC0Ef2UG6InohWo4IA==/'],
+  ['The Linux Command Line Bootcamp', 'https://www.udemy.com/share/104wCM3@oqi_KP8pntbBM_bBT0bmRStGr4xYIdJZpbJI2SlIOYmglomeMDf5MQA5QUFbsVXh3w==/'],
+  ['Animation Production with Blender', 'https://www.udemy.com/share/104vyq3@o1Wq_WgM4H6mO4dDbUhe2N2gVqOwOVvTMaJGTBndY3Pr-7HlsIwIlHGPwSnb1s9tSw==/'],
+  ['Gimp Masterclass', 'https://www.udemy.com/share/1025gI3@VDCd-8osy1Tix6e_A64Q_xcDZaWNCyYutN0Vg9WrWKcaEt06NqjgyVeIIN1sf_RQug==/'],
+  ['Computer Literacy & Basic Computer Skills', 'https://www.udemy.com/share/1027kW3@XaPBuelge0mbo2b6SqD3JEVOOXCQwLyHrhZznUjvKNp4Rg6n-IrHkoC46cDBcWed7A==/'],
+  ['Android App Development using Kotlin', 'https://www.udemy.com/share/101xCa3@qTiYgPLguuysqIrf0doKNKkVtNeW-LxObzDPSKdN4IYL8kC_nqGvFj8X137kpITHfg==/'],
+  ['AutoCAD Complete Course', 'https://www.udemy.com/share/101SIG3@seSMR-xbY5i-R1NP9ua_0tRvis-ZAokNnc-QlRKKk064QKuczoJ7Y2wlt6eNsTtB3A==/'],
+  ['Complete JavaScript Course', 'https://www.udemy.com/share/101WeY3@LwXlnkI187ChAnMmvdnyekHVdN9l_HkLXDIl2jjDfbT3296wXxZDTWykAnCCwJ27Yw==/'],
+  ['Complete Networking Fundamentals Course', 'https://www.udemy.com/share/101ZDe3@WklVxD_ujikl8I3g-0PphAfO80y9b42oZbR_CJJvMMYOe5E6dE07PA2Pu4oAT-RM9A==/'],
+  ['Complete Blender Megacourse', 'https://www.udemy.com/share/106mkC3@sC3IHZEtT2BEgTBxaBJilTlND1MxV0CSYeReeZVq_Oq7H6iz8Z7NxNMeryjClva1zA==/'],
+  ['React - The Complete Guide', 'https://www.udemy.com/share/101Way3@Xx6TRpCp8ItpPF-T8oq6hathhU-EqaDC78yvPVI8O3xcofUG87C8p0fayrCGEV8nUg==/'],
+  ['Complete SQL Bootcamp', 'https://www.udemy.com/share/101WsU3@yY-bosmR7iTmGX9BmpA-uKw252k61eALXK7tlUAexfLDCJ89opfc95ljgbguGkYFvw==/'],
+  ['Complete Node.js Developer Course', 'https://www.udemy.com/share/101WpA3@LM0DnMH8HjsBtvvyXpjVIKKb0Muu7bRm2fYWN2u7mY1wq01TjH41amMAmccHf315BQ==/'],
+  ['iOS & Swift App Development', 'https://www.udemy.com/share/101Wsa3@OM2DTYLUxuYZ78_aBPwLdW2GiSpVxjNEi4i5zKswjKlCxhDWZLdpixKpJHIcI41-IQ==/'],
+]
+const external = { target: '_blank', rel: 'noopener noreferrer' } as const
+---
+
+<Base title="Resources" description="The equipment, software and extra learning resources available to NeuroDev Tech Class students.">
+  <p class="eyebrow mt-0">What's in the lab</p>
+  <h1 class="mt-1">Technology Equipment &amp; Resource Inventory</h1>
+
+  <section style="--accent: var(--cat-it)">
+    <h2 class="flex items-center gap-3"><span class="icon-tile size-9"><Icon name="it" size={20} /></span>Hardware</h2>
+    <div class="mt-5 grid gap-5 md:grid-cols-2">
+      {machines.map(machine => (
+        <div class="panel">
+          <h3 class="mt-0 text-lg">{machine.name}</h3>
+          <ul class="mt-3">
+            {machine.specs.map(spec => <li>{spec}</li>)}
+            {machine.link && <li><a href={machine.link[1]} {...external}>{machine.link[0]}</a></li>}
+          </ul>
+        </div>
+      ))}
+      <div class="panel md:col-span-2">
+        <h3 class="mt-0 text-lg">Also in the lab</h3>
+        <ul class="mt-3 sm:columns-3">
+          {gadgets.map(gadget => <li>{gadget}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="--accent: var(--cat-programming)">
+    <h2 class="flex items-center gap-3"><span class="icon-tile size-9"><Icon name="programming" size={20} /></span>Software and Licenses</h2>
+    <dl class="panel mt-5 grid gap-x-6 gap-y-3 sm:grid-cols-[auto_1fr]">
+      {software.map(([kind, tools]) => (
+        <>
+          <dt class="font-heading font-semibold text-(--heading)">{kind}</dt>
+          <dd class="text-(--text)">{tools}</dd>
+        </>
+      ))}
+    </dl>
+  </section>
+
+  <section style="--accent: var(--cat-media)">
+    <h2 class="flex items-center gap-3"><span class="icon-tile size-9"><Icon name="learn" size={20} /></span>Additional Resources</h2>
+    <div class="mt-5 grid gap-5">
+      <div class="panel">
+        <h3 class="mt-0 text-lg">
+          <a href="https://innovation.utahtech.edu/makerspace/" {...external}>The Makerspace at the Atwood Innovation Plaza</a>{' '}
+          <span class="font-body text-base font-normal text-(--muted)">(Access to 3D printers, CNC machines, and more)</span>
+        </h3>
+      </div>
+      <div class="panel">
+        <h3 class="mt-0 text-lg">Udemy Course Subscriptions</h3>
+        <ul class="mt-3 sm:columns-2">
+          {udemy.map(([title, href]) => <li class="break-inside-avoid"><a href={href} {...external}>{title}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>

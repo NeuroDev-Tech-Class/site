@@ -1,0 +1,15 @@
+{
+  "name": "web-dev-2-1.5-strings",
+  "version": "1.0.0",
+  "description": "JavaScript String Manipulation",
+  "main": "learn.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

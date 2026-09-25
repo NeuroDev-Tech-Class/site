@@ -1,0 +1,1612 @@
+{
+  "computer-basics/digital-literacy/unit1/checkpoint-how_will_technology_help_me_.html": {
+    "title": "Checkpoint: How Will Technology Help Me?",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "q1_personal_life",
+        "type": "longText",
+        "label": "How will technology help me in my personal life?",
+        "help": "Two or three sentences",
+        "required": true
+      },
+      {
+        "id": "q2_professional_life",
+        "type": "longText",
+        "label": "How will technology help me in my professional life?",
+        "help": "Two or three sentences",
+        "required": true
+      },
+      {
+        "id": "q3_importance",
+        "type": "longText",
+        "label": "Why is it important to learn about digital technology? What are the benefits of using computers and the Internet? What are the dangers or potential downsides? Give several examples.",
+        "help": "Four to five sentences",
+        "required": true
+      },
+      {
+        "id": "q4_hopes_questions",
+        "type": "longText",
+        "label": "What are you hoping to learn from this course? Do you have any questions about computers or technology?",
+        "help": "Two or three sentences",
+        "required": true
+      }
+    ]
+  },
+  "computer-basics/ai-prompt-engineering/hands-on_generative_ai_exercises.html": {
+    "title": "Generative AI Exercises",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "exercise1_observations",
+        "type": "longText",
+        "label": "Exercise 1: Observe the Randomness — what did you notice about how the AI's answers changed and stayed the same across your attempts?",
+        "required": true
+      },
+      {
+        "id": "exercise2_limits",
+        "type": "longText",
+        "label": "Exercise 2: Find the Limits — what happened when you tried to get the AI to tell you something untrue? What inaccuracies or fabrications did you notice?",
+        "required": true
+      },
+      {
+        "id": "exercise3_novel_idea",
+        "type": "longText",
+        "label": "Exercise 3: Synthesize a Novel Idea — what did you ask the AI to come up with, and what did it produce?",
+        "required": true
+      }
+    ]
+  },
+  "computer-basics/ai-prompt-engineering/working_with_modern_ai_tools.html": {
+    "title": "Working with Modern AI Tools",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "features_tried",
+        "type": "checklist",
+        "label": "Pick two of the features below and try each one with ChatGPT, Gemini, or Claude. Check off the two you tried.",
+        "items": [
+          "Image input: take a photo of something around you and ask the AI to explain or analyze it",
+          "Chat with a document: upload a PDF or your own notes and ask the AI to summarize it or quiz you on it",
+          "Voice mode: have a short spoken conversation and notice how it differs from typing",
+          "Custom assistant: create a simple Custom GPT, Gem, or Project with a saved role"
+        ],
+        "note": "The page offers 4 options and asks students to try 2 of them; the audit's 'which two were tried' is captured by which items get checked, not a shorter list.",
+        "required": true
+      },
+      {
+        "id": "reflection",
+        "type": "longText",
+        "label": "Write a few sentences about what worked well, what surprised you, and where the AI got something wrong.",
+        "required": true
+      }
+    ]
+  },
+  "computer-basics/ai-prompt-engineering/responsible_ai_use.html": {
+    "title": "Responsible AI Use",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "q1_deepfake_example",
+        "type": "longText",
+        "label": "Find an example (real or hypothetical) of how a deepfake or AI-generated misinformation could fool people. How could someone check whether it's real?",
+        "required": true
+      },
+      {
+        "id": "q2_privacy_settings",
+        "type": "longText",
+        "label": "Look at the privacy settings of an AI tool you use. What did you find, and did you change anything?",
+        "required": true
+      },
+      {
+        "id": "q3_ai_help_vs_cheat",
+        "type": "longText",
+        "label": "Describe one way you could use AI to help you learn a subject, and one way that would cross the line into cheating yourself.",
+        "required": true
+      }
+    ]
+  },
+  "game-development/unreal-engine/unit3/game_design_documents.html": {
+    "title": "Game Design Document Template",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "title",
+        "type": "shortText",
+        "label": "Title",
+        "help": "The name of your game — a working title is fine.",
+        "required": true
+      },
+      {
+        "id": "authors",
+        "type": "shortText",
+        "label": "Author(s)",
+        "help": "List every team member and their role (designer, builder, artist, etc.).",
+        "required": true
+      },
+      {
+        "id": "genre",
+        "type": "shortText",
+        "label": "Genre",
+        "help": "Examples: Platformer, RPG, Puzzle, Adventure, Horror, Racing, Shooter, Sandbox.",
+        "required": true
+      },
+      {
+        "id": "theme_setting",
+        "type": "longText",
+        "label": "Theme & Setting — where and when does the game take place? What's the vibe?",
+        "required": true
+      },
+      {
+        "id": "target_audience",
+        "type": "shortText",
+        "label": "Target Audience — who is this game for?",
+        "required": true
+      },
+      {
+        "id": "core_mechanics",
+        "type": "longText",
+        "label": "Core Mechanics (3–5) — list the main gameplay mechanics, the actions the player will do most often.",
+        "required": true
+      },
+      {
+        "id": "reference_images",
+        "type": "image",
+        "label": "Reference Images / Mood Board — 3–5 images that capture the look and feel you're going for.",
+        "multiple": true,
+        "required": false
+      },
+      {
+        "id": "must_have_features",
+        "type": "longText",
+        "label": "Must-Have Features",
+        "required": true
+      },
+      {
+        "id": "nice_to_have_features",
+        "type": "longText",
+        "label": "Nice-to-Have Features",
+        "required": true
+      },
+      {
+        "id": "timeline",
+        "type": "longText",
+        "label": "Timeline — set rough deadlines (e.g. layout by Week 1, gameplay working by Week 2, polish by Week 3).",
+        "required": true
+      },
+      {
+        "id": "hollywood_pitch",
+        "type": "shortText",
+        "label": "Hollywood Pitch — summarize your entire game in 1–2 sentences, as if pitching it to a movie studio.",
+        "required": true
+      }
+    ]
+  },
+  "it/computer_hardware/navigating_the_bios_uefi.html": {
+    "title": "Practice: Navigating the BIOS/UEFI",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "activity1_bios_details",
+        "type": "shortText",
+        "label": "Activity 1: What is the version or manufacturer name of your BIOS/UEFI?",
+        "required": true
+      },
+      {
+        "id": "activity2_boot_order",
+        "type": "shortText",
+        "label": "Activity 2: What is the boot order of devices you observed (Hard Drive, USB, DVD, etc.)?",
+        "required": true
+      },
+      {
+        "id": "activity3_hardware_monitor",
+        "type": "shortText",
+        "label": "Activity 3: What CPU temperature or fan speeds did you see in the Hardware Monitor?",
+        "required": true
+      },
+      {
+        "id": "photo",
+        "type": "image",
+        "label": "Photo of your BIOS/UEFI screen",
+        "multiple": false,
+        "required": false
+      }
+    ]
+  },
+  "computer-basics/office-software/word_processors/practice-word_processors.html": {
+    "title": "Practice: Word Processors",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "document_file",
+        "type": "file",
+        "label": "Upload your completed \"Frogs\" document",
+        "accept": [
+          ".docx",
+          ".pdf"
+        ],
+        "multiple": false,
+        "required": false
+      },
+      {
+        "id": "document_url",
+        "type": "url",
+        "label": "Or share a link to your document",
+        "required": false
+      }
+    ],
+    "required_one_of": [
+      [
+        "document_file",
+        "document_url"
+      ]
+    ]
+  },
+  "computer-basics/office-software/word_processors/application-creating_a_résumé.html": {
+    "title": "Application: Creating a Résumé",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "resume_file",
+        "type": "file",
+        "label": "Upload your résumé",
+        "accept": [
+          ".docx",
+          ".pdf"
+        ],
+        "multiple": false,
+        "required": false
+      },
+      {
+        "id": "resume_url",
+        "type": "url",
+        "label": "Or share a link to your résumé",
+        "required": false
+      }
+    ],
+    "required_one_of": [
+      [
+        "resume_file",
+        "resume_url"
+      ]
+    ]
+  },
+  "computer-basics/office-software/spreadsheets/practice-spreadsheets.html": {
+    "title": "Practice: Spreadsheets",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "spreadsheet_file",
+        "type": "file",
+        "label": "Upload your \"Gardening Expenses\" spreadsheet",
+        "accept": [
+          ".xlsx"
+        ],
+        "multiple": false,
+        "required": false
+      },
+      {
+        "id": "spreadsheet_url",
+        "type": "url",
+        "label": "Or share a link to your spreadsheet",
+        "required": false
+      }
+    ],
+    "required_one_of": [
+      [
+        "spreadsheet_file",
+        "spreadsheet_url"
+      ]
+    ]
+  },
+  "computer-basics/office-software/spreadsheets/application-creating_a_budget.html": {
+    "title": "Application: Creating a Budget",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "budget_file",
+        "type": "file",
+        "label": "Upload your budget spreadsheet",
+        "accept": [
+          ".xlsx"
+        ],
+        "multiple": false,
+        "required": false
+      },
+      {
+        "id": "budget_url",
+        "type": "url",
+        "label": "Or share a link to your budget spreadsheet",
+        "required": false
+      },
+      {
+        "id": "categories_explanation",
+        "type": "longText",
+        "label": "Explain the income and expense categories you included in your budget.",
+        "note": "The page doesn't ask for a written explanation directly; this field is added per the audit to capture the categories chosen.",
+        "required": true
+      }
+    ],
+    "required_one_of": [
+      [
+        "budget_file",
+        "budget_url"
+      ]
+    ]
+  },
+  "computer-basics/office-software/presentation_software/application-careers_day_presentation.html": {
+    "title": "Application: Careers Day Presentation",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "presentation_file",
+        "type": "file",
+        "label": "Upload your presentation",
+        "accept": [
+          ".pptx"
+        ],
+        "multiple": false,
+        "required": false
+      },
+      {
+        "id": "presentation_url",
+        "type": "url",
+        "label": "Or share a link to your presentation",
+        "required": false
+      },
+      {
+        "id": "q1_role_description",
+        "type": "longText",
+        "label": "What the career is and what the day-to-day work looks like",
+        "required": true
+      },
+      {
+        "id": "q2_education",
+        "type": "longText",
+        "label": "Education or training requirements",
+        "required": true
+      },
+      {
+        "id": "q3_salary",
+        "type": "longText",
+        "label": "Salary expectations",
+        "required": true
+      },
+      {
+        "id": "q4_appeal",
+        "type": "longText",
+        "label": "Why this career appeals to you",
+        "required": true
+      }
+    ],
+    "required_one_of": [
+      [
+        "presentation_file",
+        "presentation_url"
+      ]
+    ]
+  },
+  "computer-basics/ai-prompt-engineering/final_assignment-ai_application.html": {
+    "title": "Final Assignment: AI Application",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "q1_goal",
+        "type": "longText",
+        "label": "What you hoped to accomplish",
+        "required": true
+      },
+      {
+        "id": "q2_outcome",
+        "type": "longText",
+        "label": "Whether you accomplished your goal (it's okay if you didn't — if you bit off more than you could chew, just describe what you did get done)",
+        "required": true
+      },
+      {
+        "id": "q3_roadblocks",
+        "type": "longText",
+        "label": "Any roadblocks you encountered",
+        "required": true
+      },
+      {
+        "id": "q4_learned",
+        "type": "longText",
+        "label": "What you learned from the experience",
+        "required": true
+      },
+      {
+        "id": "screenshots",
+        "type": "image",
+        "label": "Screenshots of your conversations with the AI model, including the prompts you used and the responses you received",
+        "multiple": true,
+        "required": false
+      },
+      {
+        "id": "transcript_code",
+        "type": "code",
+        "label": "Or paste the transcript of your AI conversation",
+        "language": "text",
+        "required": false
+      }
+    ],
+    "required_one_of": [
+      [
+        "screenshots",
+        "transcript_code"
+      ]
+    ]
+  },
+  "game-development/blender-zbrush/unit1/activity_create_a_scene.html": {
+    "title": "Activity: Create a 3D Scene",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "blend_file",
+        "type": "file",
+        "label": "Upload your .blend project file",
+        "accept": [
+          ".blend"
+        ],
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "render_image",
+        "type": "image",
+        "label": "Upload your rendered screenshot (PNG)",
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "checklist",
+        "type": "checklist",
+        "label": "Requirements Checklist — before submitting, make sure you can check off every item",
+        "items": [
+          "At least 3 different modeled objects in the scene",
+          "Extrude (E) used on at least 2 objects",
+          "Inset (I) used on at least 2 objects",
+          "Loop Cut (Ctrl+R) used on at least 2 objects",
+          "Each object has a different material color",
+          "Objects are arranged into a logical, coherent scene",
+          "Camera is positioned to frame the scene",
+          "A rendered screenshot (PNG) is saved and submitted",
+          "The .blend project file is saved and submitted"
+        ],
+        "required": true
+      }
+    ]
+  },
+  "media/audacity/unit1/activity_60sec_intro.html": {
+    "title": "Activity: 60-Second Personal Introduction",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "script",
+        "type": "longText",
+        "label": "Your script for the introduction",
+        "required": true
+      },
+      {
+        "id": "audio_file",
+        "type": "file",
+        "label": "Upload your recording (WAV, MP3, and your Audacity project file)",
+        "accept": [
+          ".wav",
+          ".mp3",
+          ".aup3"
+        ],
+        "multiple": true,
+        "required": true
+      },
+      {
+        "id": "checklist",
+        "type": "checklist",
+        "label": "Submission Checklist — before you submit, confirm",
+        "items": [
+          "Script was written before recording.",
+          "Microphone was set up and levels were tested before the real recording.",
+          "Recording features your name, interests, and a fun fact.",
+          "Excess silence at the beginning and end is trimmed.",
+          "Mistakes and filler words are removed.",
+          "Noise Reduction was applied (if background noise was present).",
+          "Audio is normalized (peaks near -1 dB).",
+          "Exported as WAV file.",
+          "Exported as MP3 at 192 kbps.",
+          "Metadata tags (Title, Artist) are filled in.",
+          "Final length is between 45 and 75 seconds.",
+          "Audacity project file (.aup3) is saved."
+        ],
+        "required": true
+      }
+    ]
+  },
+  "media/audacity/unit2/final_project_podcast.html": {
+    "title": "Final Project: Mini Podcast Episode",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "audio_file",
+        "type": "file",
+        "label": "Upload your finished episode (MP3) and Audacity project file",
+        "accept": [
+          ".mp3",
+          ".aup3"
+        ],
+        "multiple": true,
+        "required": true
+      },
+      {
+        "id": "music_sources",
+        "type": "longText",
+        "label": "List the royalty-free music and sound effect sources you used",
+        "required": true
+      },
+      {
+        "id": "checklist",
+        "type": "checklist",
+        "label": "Submission Checklist — before you submit, confirm",
+        "items": [
+          "Episode is between 2 and 5 minutes long.",
+          "Includes an introduction with background music.",
+          "Contains at least 2 distinct segments or topics.",
+          "At least 1 sound effect is included.",
+          "Transitions are used between segments (cross-fades, music bridges, or sound effects).",
+          "Includes an outro with closing remarks and a music fade-out.",
+          "Project uses at least 3 tracks (voice, music, effects).",
+          "Noise Reduction has been applied to the voice track.",
+          "Normalize or Compressor has been applied to the voice track.",
+          "Envelope tool was used to duck music under narration.",
+          "Exported as MP3 at 192 kbps.",
+          "Metadata tags (Title, Artist, Genre) are filled in.",
+          "Written companion document listing all royalty-free music and sound effect sources is included.",
+          "Audacity project file (.aup3) is saved and submitted."
+        ],
+        "required": true
+      }
+    ]
+  },
+  "media/davinci-resolve/unit1/activity_highlight_reel.html": {
+    "title": "Activity: Highlight Reel",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "video_url",
+        "type": "url",
+        "label": "Link to your exported highlight reel (YouTube or Drive, set to unlisted)",
+        "required": true
+      },
+      {
+        "id": "checklist",
+        "type": "checklist",
+        "label": "Checklist",
+        "items": [
+          "60–90 seconds long",
+          "At least 8 clips",
+          "At least 3 transitions (including Cross Dissolve)",
+          "Title text at the beginning",
+          "End card / credits",
+          "Background music (royalty-free)",
+          "Speed change on at least 1 clip",
+          "At least 1 keyframed animation",
+          "Media Pool organized with bins",
+          "Exported as MP4 at 1080p"
+        ],
+        "required": true
+      }
+    ]
+  },
+  "media/davinci-resolve/unit2/activity_color_grade_scene.html": {
+    "title": "Activity: Color Grade a Short Scene",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "before_image",
+        "type": "image",
+        "label": "Before: screenshot with grades bypassed",
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "after_image",
+        "type": "image",
+        "label": "After: screenshot with your grade applied",
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "checklist",
+        "type": "checklist",
+        "label": "Checklist",
+        "items": [
+          "3–5 clips on the timeline",
+          "Primary correction applied to each clip (exposure + white balance)",
+          "Shots matched for visual consistency",
+          "Creative grade applied on a separate node",
+          "At least 1 Power Window or Qualifier used",
+          "Gallery Still saved",
+          "Before/after comparison exported or captured"
+        ],
+        "required": true
+      }
+    ]
+  },
+  "media/davinci-resolve/unit3/final_project.html": {
+    "title": "Final Project: Short Film or Video Essay",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "video_url",
+        "type": "url",
+        "label": "Link to your exported video",
+        "required": true
+      },
+      {
+        "id": "creative_vision",
+        "type": "longText",
+        "label": "Your creative vision paragraph — what your video is about and why you chose the topic, what mood you wanted to create, and what creative choices you made in editing, color, and audio",
+        "help": "4–6 sentences",
+        "required": true
+      }
+    ]
+  },
+  "media/gimp/unit1/activity_photo_restoration.html": {
+    "title": "Activity: Photo Restoration",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "before_image",
+        "type": "image",
+        "label": "Before: your original damaged or faded photo",
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "after_image",
+        "type": "image",
+        "label": "After: your restored photo",
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "xcf_file",
+        "type": "file",
+        "label": "Your GIMP project file",
+        "accept": [
+          ".xcf"
+        ],
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "q1_hardest",
+        "type": "longText",
+        "label": "What damage was hardest to fix?",
+        "required": true
+      },
+      {
+        "id": "q2_tool",
+        "type": "longText",
+        "label": "Which tool was most useful?",
+        "required": true
+      },
+      {
+        "id": "q3_different",
+        "type": "longText",
+        "label": "What would you do differently next time?",
+        "required": true
+      }
+    ]
+  },
+  "media/gimp/unit2/activity_movie_poster.html": {
+    "title": "Activity: Movie Poster Design",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "poster_image",
+        "type": "image",
+        "label": "Your exported poster (PNG or JPEG)",
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "xcf_file",
+        "type": "file",
+        "label": "Your GIMP project file",
+        "accept": [
+          ".xcf"
+        ],
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "checklist",
+        "type": "checklist",
+        "label": "Activity Checklist",
+        "items": [
+          "Canvas is at least 11×17 inches at 150 DPI",
+          "Title text with at least one styled effect (shadow, gradient, glow)",
+          "At least one composited photo/image",
+          "Background (gradient, texture, or photo)",
+          "Tagline text",
+          "Credit block at the bottom",
+          "At least 3 layers used",
+          "At least 1 filter effect applied",
+          "At least 1 layer mask used",
+          "Project saved as XCF and exported as PNG or JPEG"
+        ],
+        "required": true
+      }
+    ]
+  },
+  "media/gimp/unit3/final_project.html": {
+    "title": "Final Project: Portfolio Showcase",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "piece1_image",
+        "type": "image",
+        "label": "Piece 1 (Edited/Restored Photo): exported PNG or JPEG",
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "piece1_file",
+        "type": "file",
+        "label": "Piece 1: your GIMP project file",
+        "accept": [
+          ".xcf"
+        ],
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "piece1_q1",
+        "type": "longText",
+        "label": "Piece 1: what the piece is and what you were aiming to achieve",
+        "required": true
+      },
+      {
+        "id": "piece1_q2",
+        "type": "longText",
+        "label": "Piece 1: which GIMP tools and techniques you used to create it",
+        "required": true
+      },
+      {
+        "id": "piece1_q3",
+        "type": "longText",
+        "label": "Piece 1: any challenges you faced and how you solved them",
+        "required": true
+      },
+      {
+        "id": "piece2_image",
+        "type": "image",
+        "label": "Piece 2 (Original Graphic Design): exported PNG or JPEG",
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "piece2_file",
+        "type": "file",
+        "label": "Piece 2: your GIMP project file",
+        "accept": [
+          ".xcf"
+        ],
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "piece2_q1",
+        "type": "longText",
+        "label": "Piece 2: what the piece is and what you were aiming to achieve",
+        "required": true
+      },
+      {
+        "id": "piece2_q2",
+        "type": "longText",
+        "label": "Piece 2: which GIMP tools and techniques you used to create it",
+        "required": true
+      },
+      {
+        "id": "piece2_q3",
+        "type": "longText",
+        "label": "Piece 2: any challenges you faced and how you solved them",
+        "required": true
+      },
+      {
+        "id": "piece3_image",
+        "type": "image",
+        "label": "Piece 3 (Creative Composition or Digital Painting): exported PNG or JPEG",
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "piece3_file",
+        "type": "file",
+        "label": "Piece 3: your GIMP project file",
+        "accept": [
+          ".xcf"
+        ],
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "piece3_q1",
+        "type": "longText",
+        "label": "Piece 3: what the piece is and what you were aiming to achieve",
+        "required": true
+      },
+      {
+        "id": "piece3_q2",
+        "type": "longText",
+        "label": "Piece 3: which GIMP tools and techniques you used to create it",
+        "required": true
+      },
+      {
+        "id": "piece3_q3",
+        "type": "longText",
+        "label": "Piece 3: any challenges you faced and how you solved them",
+        "required": true
+      }
+    ]
+  },
+  "computer-science/python-1-intro_to_programming/unit3/final_project_text_adventure_game.html": {
+    "title": "Final Project: Text Adventure Game",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "repo_url",
+        "type": "url",
+        "label": "Link to your project repository",
+        "note": "The page doesn't explicitly ask for a repo link; added per the audit as the submission format for a code project.",
+        "required": true
+      },
+      {
+        "id": "code_paste",
+        "type": "code",
+        "label": "Or paste your final Python code here",
+        "language": "python",
+        "required": false
+      },
+      {
+        "id": "design_notes",
+        "type": "longText",
+        "label": "Design notes — your game concept, your room map, and how the rooms connect",
+        "note": "Derived from the page's \"Choose a Game Concept\" and \"Design the Game Map\" sections per the audit; the page doesn't call these \"design notes\" directly.",
+        "required": true
+      }
+    ]
+  },
+  "it/linux/final_project.html": {
+    "title": "Final Project: Linux Task Challenge",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "task1_output",
+        "type": "code",
+        "label": "Task 1: Create a Project Structure — terminal output",
+        "language": "bash",
+        "required": true
+      },
+      {
+        "id": "task2_output",
+        "type": "code",
+        "label": "Task 2: Create and Populate Files — terminal output",
+        "language": "bash",
+        "required": true
+      },
+      {
+        "id": "task3_output",
+        "type": "code",
+        "label": "Task 3: Copy, Move, and Organize — terminal output, including the contents of weekly_summary.txt",
+        "language": "bash",
+        "required": true
+      },
+      {
+        "id": "task4_output",
+        "type": "code",
+        "label": "Task 4: Write a Shell Script — terminal output from running sysinfo.sh",
+        "language": "bash",
+        "required": true
+      },
+      {
+        "id": "task5_output",
+        "type": "code",
+        "label": "Task 5: Set File Permissions — terminal output from ls -l showing sysinfo.sh's permissions",
+        "language": "bash",
+        "required": true
+      },
+      {
+        "id": "task6_output",
+        "type": "code",
+        "label": "Task 6: Create a Private Directory — terminal output from ls -la showing the directory's permissions",
+        "language": "bash",
+        "required": true
+      },
+      {
+        "id": "task7_output",
+        "type": "code",
+        "label": "Task 7: Create a User and Group — terminal output",
+        "language": "bash",
+        "required": true
+      },
+      {
+        "id": "task8_output",
+        "type": "code",
+        "label": "Task 8: Monitor and Report — terminal output (disk usage, memory usage, the sleep process)",
+        "language": "bash",
+        "required": true
+      },
+      {
+        "id": "task9_output",
+        "type": "code",
+        "label": "Task 9: Fix the Broken Script — terminal output from running the corrected script",
+        "language": "bash",
+        "required": true
+      },
+      {
+        "id": "task10_output",
+        "type": "code",
+        "label": "Task 10: Clean Up — terminal output",
+        "language": "bash",
+        "required": true
+      },
+      {
+        "id": "broken_script_fixed",
+        "type": "code",
+        "label": "Your corrected broken.sh script",
+        "language": "bash",
+        "required": true
+      },
+      {
+        "id": "sysinfo_log",
+        "type": "longText",
+        "label": "Paste the contents of your sysinfo.log file",
+        "required": true
+      },
+      {
+        "id": "permissions_octal",
+        "type": "shortText",
+        "label": "What is the numeric (octal) value for the sysinfo.sh permissions you set in Task 5?",
+        "required": true
+      },
+      {
+        "id": "reflection",
+        "type": "longText",
+        "label": "What was the most challenging part of this project, and what did you learn?",
+        "required": true
+      },
+      {
+        "id": "htop_screenshot",
+        "type": "image",
+        "label": "Screenshot of htop showing the process list (Task 8)",
+        "multiple": false,
+        "required": false
+      }
+    ]
+  },
+  "computer-basics/digital-literacy/unit1/unit_1_recap.html": {
+    "title": "Unit 1 Recap & Review Exercises",
+    "requires_sign_off": true,
+    "fields": [
+      {
+        "id": "properties_comparison",
+        "type": "longText",
+        "label": "Compare your computer's specs (CPU, RAM, storage) with another computer's. What are the differences, and what do they mean in terms of performance?",
+        "required": true
+      },
+      {
+        "id": "formats_comparison",
+        "type": "longText",
+        "label": "What differences did you observe in quality, file size, and compression ratio between the different image formats and compression software you tried? Which format or software is best for which purpose?",
+        "required": true
+      },
+      {
+        "id": "slowdown_findings",
+        "type": "longText",
+        "label": "What did you find when checking CPU, memory, and disk usage, and what steps did you take to try to improve your computer's performance?",
+        "required": true
+      },
+      {
+        "id": "pcpartpicker_url",
+        "type": "url",
+        "label": "Link to your hypothetical PCPartPicker build",
+        "required": true
+      },
+      {
+        "id": "signoff_build_explanation",
+        "type": "mentorSignOff",
+        "label": "Confirms the student explained their reasoning for each component of the PC build",
+        "required": true
+      },
+      {
+        "id": "signoff_startup_app",
+        "type": "mentorSignOff",
+        "label": "Confirms the student showed at least one disabled startup app",
+        "required": true
+      }
+    ]
+  },
+  "computer-basics/digital-literacy/unit2/unit_2_recap.html": {
+    "title": "Unit 2 Recap & Review Exercises",
+    "requires_sign_off": true,
+    "fields": [
+      {
+        "id": "shortcut_cut",
+        "type": "shortText",
+        "label": "What is the keyboard shortcut for Cut?",
+        "required": true
+      },
+      {
+        "id": "shortcut_copy",
+        "type": "shortText",
+        "label": "What is the keyboard shortcut for Copy?",
+        "required": true
+      },
+      {
+        "id": "shortcut_paste",
+        "type": "shortText",
+        "label": "What is the keyboard shortcut for Paste?",
+        "required": true
+      },
+      {
+        "id": "shortcut_undo",
+        "type": "shortText",
+        "label": "What is the keyboard shortcut for Undo?",
+        "required": true
+      },
+      {
+        "id": "shortcut_redo",
+        "type": "shortText",
+        "label": "What is the keyboard shortcut for Redo?",
+        "required": true
+      },
+      {
+        "id": "shortcut_select_all",
+        "type": "shortText",
+        "label": "What is the keyboard shortcut for Select All?",
+        "required": true
+      },
+      {
+        "id": "shortcut_find",
+        "type": "shortText",
+        "label": "What is the keyboard shortcut for Find?",
+        "required": true
+      },
+      {
+        "id": "shortcut_new_window",
+        "type": "shortText",
+        "label": "What is the keyboard shortcut for New Window?",
+        "required": true
+      },
+      {
+        "id": "shortcut_close_window",
+        "type": "shortText",
+        "label": "What is the keyboard shortcut for Close Window?",
+        "required": true
+      },
+      {
+        "id": "shortcut_switch_windows",
+        "type": "shortText",
+        "label": "What is the keyboard shortcut for Switch Between Windows?",
+        "required": true
+      },
+      {
+        "id": "startup_program_explanation",
+        "type": "longText",
+        "label": "Which startup program did you disable, and why?",
+        "required": true
+      },
+      {
+        "id": "power_options_findings",
+        "type": "longText",
+        "label": "What differences did you notice between sleep and a complete shutdown (timing and other effects)? When might you prefer one over the other?",
+        "required": true
+      },
+      {
+        "id": "wallpaper_slideshow_image",
+        "type": "image",
+        "label": "Screenshot of your wallpaper slideshow setup",
+        "multiple": false,
+        "required": false
+      },
+      {
+        "id": "signoff_shortcuts",
+        "type": "mentorSignOff",
+        "label": "Confirms the student demonstrated the keyboard shortcuts in person",
+        "required": true
+      }
+    ]
+  },
+  "computer-basics/digital-literacy/unit3/hands-on_exercise-email_account.html": {
+    "title": "Hands-on Exercise: Setting Up an Email Account",
+    "requires_sign_off": true,
+    "fields": [
+      {
+        "id": "folder_explanations",
+        "type": "longText",
+        "label": "Explain what each of these folders is for: Inbox, Starred, Snoozed, Sent, Drafts, Spam, and Trash.",
+        "required": true
+      },
+      {
+        "id": "signoff_email_sent",
+        "type": "mentorSignOff",
+        "label": "Confirms the student sent the tech coach a professional email, with good etiquette and an attached file under 25MB, from their new account",
+        "required": true
+      }
+    ]
+  },
+  "computer-basics/digital-literacy/unit3/hands-on_exercise-social_media.html": {
+    "title": "Hands-on Exercise: Social Media",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "checklist",
+        "type": "checklist",
+        "label": "Instagram Exercise",
+        "help": "This exercise is optional. You don't have to share personal details or photos if you're not comfortable — skip any step you'd rather not do.",
+        "items": [
+          "Downloaded and installed the Instagram app",
+          "Created an account with a unique username and strong password",
+          "Set up your profile with a photo and bio",
+          "Followed some accounts",
+          "Engaged with other users (liked and commented, using proper etiquette)",
+          "Posted your first photo or video"
+        ],
+        "required": false
+      },
+      {
+        "id": "profile_url",
+        "type": "url",
+        "label": "Link to your profile",
+        "help": "Optional — only share this if you're comfortable doing so.",
+        "required": false
+      }
+    ]
+  },
+  "game-development/blender-zbrush/unit2/activity_model_print_ring.html": {
+    "title": "Activity: Model & Print a Ring",
+    "requires_sign_off": true,
+    "fields": [
+      {
+        "id": "checklist",
+        "type": "checklist",
+        "label": "Activity Checklist",
+        "items": [
+          "Researched and recorded target ring size (inner diameter in mm)",
+          "Created a torus with correct dimensions in Blender",
+          "Added at least one custom detail (gemstone, engraving, shape, or pattern)",
+          "Applied at least one modifier (Bevel, Subdivision Surface, Boolean, etc.)",
+          "Ran the 3D Print Toolbox check — mesh is manifold / watertight",
+          "Exported as STL",
+          "Loaded in slicer, verified dimensions, and oriented correctly",
+          "Sliced at fine layer height (0.12mm) and previewed layers",
+          "Successfully printed the ring",
+          "Removed brim/supports and tested fit"
+        ],
+        "required": true
+      },
+      {
+        "id": "target_diameter",
+        "type": "shortText",
+        "label": "What target inner diameter (in mm) did you use for your ring?",
+        "required": true
+      },
+      {
+        "id": "stl_file",
+        "type": "file",
+        "label": "Upload your exported STL file",
+        "accept": [
+          ".stl"
+        ],
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "signoff_print",
+        "type": "mentorSignOff",
+        "label": "Confirms the ring was successfully 3D printed",
+        "required": true
+      }
+    ]
+  },
+  "game-development/blender-zbrush/unit3/final_project.html": {
+    "title": "Final Project",
+    "requires_sign_off": true,
+    "fields": [
+      {
+        "id": "sketch_image",
+        "type": "image",
+        "label": "Photo of your paper sketch (front view + side/detail view)",
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "finished_image",
+        "type": "image",
+        "label": "Photo of your finished, painted piece",
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "model_file",
+        "type": "file",
+        "label": "Your exported 3D model file",
+        "accept": [
+          ".obj",
+          ".stl"
+        ],
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "checklist",
+        "type": "checklist",
+        "label": "Activity Checklist",
+        "items": [
+          "Gathered reference images and inspiration",
+          "Sketched design on paper (front view + side/detail view)",
+          "Created the piece in ZBrushCoreMini or Blender (or both)",
+          "Used at least 4 brushes (ZBrush) or 3 techniques/modifiers (Blender)",
+          "Exported correctly (OBJ from ZBrush or STL from Blender)",
+          "Loaded in slicer, configured settings, and previewed layers",
+          "Successfully 3D printed the piece",
+          "Sanded the print (at least two grits)",
+          "Applied spray primer",
+          "Painted with at least two colors",
+          "Optional: Applied clear coat",
+          "Presented finished piece to instructor"
+        ],
+        "required": true
+      },
+      {
+        "id": "signoff_print_paint",
+        "type": "mentorSignOff",
+        "label": "Confirms the piece was successfully 3D printed, sanded, primed, and painted",
+        "required": true
+      }
+    ]
+  },
+  "it/computer_hardware/final_project-build_a_custom_pc.html": {
+    "title": "Final Project: Build a Custom PC",
+    "requires_sign_off": true,
+    "fields": [
+      {
+        "id": "pcpartpicker_url",
+        "type": "url",
+        "label": "Link to your final parts list on PCPartPicker",
+        "required": true
+      },
+      {
+        "id": "component_justification",
+        "type": "longText",
+        "label": "Explain why you chose each component",
+        "required": true
+      },
+      {
+        "id": "build_photos",
+        "type": "image",
+        "label": "Photos documenting each stage of the build",
+        "multiple": true,
+        "required": true
+      },
+      {
+        "id": "signoff_build",
+        "type": "mentorSignOff",
+        "label": "Confirms the completed PC build and the student's presentation explaining their component choices and any challenges encountered during assembly",
+        "required": true
+      }
+    ]
+  },
+  "game-development/unreal-engine/unit1/activity_castle_courtyard.html": {
+    "title": "Activity: Castle Courtyard",
+    "requires_sign_off": true,
+    "fields": [
+      {
+        "id": "checklist",
+        "type": "checklist",
+        "label": "Completion Checklist",
+        "items": [
+          "Landscape created with sculpted terrain (valley/hills)",
+          "Castle walls placed around the courtyard with at least one entrance",
+          "Landscape painted with at least 2 layers (grass + dirt/stone)",
+          "Foliage painted on exterior terrain (trees, bushes)",
+          "Lighting set to a warm sunset atmosphere",
+          "Post Process Volume with at least one visible effect",
+          "Player Start placed inside the courtyard",
+          "Play-tested and walked through the level successfully",
+          "Outliner is organized with named actors and/or folders",
+          "Level saved (Ctrl+S)"
+        ],
+        "required": true
+      },
+      {
+        "id": "screenshot",
+        "type": "image",
+        "label": "Screenshot of your finished courtyard",
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "signoff_playtest",
+        "type": "mentorSignOff",
+        "label": "Confirms the student play-tested the level",
+        "required": true
+      }
+    ]
+  },
+  "game-development/unreal-engine/unit2/activity_obstacle_course.html": {
+    "title": "Activity: Obstacle Course",
+    "requires_sign_off": true,
+    "fields": [
+      {
+        "id": "checklist",
+        "type": "checklist",
+        "label": "Completion Checklist",
+        "items": [
+          "New level created and saved as ObstacleCourse",
+          "Platforms built at varying heights with clear jump paths",
+          "At least 10 BP_Coin actors placed and collectible",
+          "At least 2 BP_JumpPad actors placed and functional",
+          "1 BP_Key placed in a challenging location",
+          "1 BP_Door blocking access to the final area — unlockable with the key",
+          "At least 2 BP_Checkpoint actors placed at milestone locations",
+          "1 BP_Win actor in the victory area that triggers a win message",
+          "Player Start placed at the beginning of the course",
+          "Full course play-tested and completable from start to finish",
+          "Level saved (Ctrl+S)"
+        ],
+        "note": "The audit lists 9 items; the page's own Completion Checklist table has 11 rows. Used the page's full list rather than trimming it.",
+        "required": true
+      },
+      {
+        "id": "screenshot",
+        "type": "image",
+        "label": "Screenshot of your finished obstacle course",
+        "multiple": false,
+        "required": true
+      },
+      {
+        "id": "signoff_playtest",
+        "type": "mentorSignOff",
+        "label": "Confirms the student play-tested the full course from start to finish",
+        "required": true
+      }
+    ]
+  },
+  "game-development/unreal-engine/unit3/final_project.html": {
+    "title": "Final Project",
+    "requires_sign_off": true,
+    "fields": [
+      {
+        "id": "gdd_title",
+        "type": "shortText",
+        "label": "Game Design Document — Title",
+        "required": true
+      },
+      {
+        "id": "gdd_author",
+        "type": "shortText",
+        "label": "Game Design Document — Author",
+        "required": true
+      },
+      {
+        "id": "gdd_genre",
+        "type": "shortText",
+        "label": "Game Design Document — Genre",
+        "required": true
+      },
+      {
+        "id": "gdd_theme_setting",
+        "type": "longText",
+        "label": "Game Design Document — Theme/Setting",
+        "required": true
+      },
+      {
+        "id": "gdd_target_audience",
+        "type": "shortText",
+        "label": "Game Design Document — Target Audience",
+        "required": true
+      },
+      {
+        "id": "gdd_core_mechanics",
+        "type": "longText",
+        "label": "Game Design Document — Core Mechanics",
+        "required": true
+      },
+      {
+        "id": "gdd_hollywood_pitch",
+        "type": "shortText",
+        "label": "Game Design Document — Hollywood Pitch",
+        "required": true
+      },
+      {
+        "id": "level_image",
+        "type": "image",
+        "label": "Screenshot of your finished level",
+        "multiple": false,
+        "required": false
+      },
+      {
+        "id": "level_url",
+        "type": "url",
+        "label": "Or a link to a video walkthrough of your level",
+        "required": false
+      },
+      {
+        "id": "signoff_level",
+        "type": "mentorSignOff",
+        "label": "Confirms the level is fully playable from start to finish",
+        "required": true
+      }
+    ],
+    "required_one_of": [
+      [
+        "level_image",
+        "level_url"
+      ]
+    ]
+  },
+  "note:office-software:1-1": {
+    "title": "Worksheet: Spreadsheet Formulas",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "sheet_url",
+        "type": "url",
+        "label": "Link to your copied Google Sheet — make a copy of the linked spreadsheet, complete the tasks on all five sheets, and share the link (make sure sharing is turned on)",
+        "required": false
+      },
+      {
+        "id": "sheet_file",
+        "type": "file",
+        "label": "Or upload your completed workbook",
+        "accept": [
+          ".xlsx"
+        ],
+        "multiple": false,
+        "required": false
+      }
+    ],
+    "required_one_of": [
+      [
+        "sheet_url",
+        "sheet_file"
+      ]
+    ]
+  },
+  "note:linux:2-10": {
+    "title": "Reflection: CLI vs GUI",
+    "requires_sign_off": false,
+    "fields": [
+      {
+        "id": "reflection",
+        "type": "longText",
+        "label": "Write a short paragraph about a task where CLI would be better than GUI, and vice versa.",
+        "required": true
+      }
+    ]
+  },
+  "computer-basics/digital-literacy/unit1/hands-on_exercise-identifying_hardware.html": {
+    "title": "Hands-on Exercise: Identifying Hardware",
+    "requires_sign_off": true,
+    "fields": [
+      {
+        "id": "checklist",
+        "type": "checklist",
+        "label": "What you did",
+        "required": true,
+        "items": [
+          "Found every port on my laptop and said what each one is for",
+          "Named two input devices and two output devices",
+          "Shut down and unplugged the desktop before opening it",
+          "Discharged static by touching the metal case",
+          "Found the CPU (or its cooler), motherboard, RAM, storage drive, power supply and graphics card",
+          "Matched the ports on the back of the desktop to their cables",
+          "Closed the case and checked the computer still works"
+        ]
+      },
+      {
+        "id": "component_notes",
+        "type": "longText",
+        "label": "What you wrote down about each part: brand, size, labels or numbers you could see",
+        "required": true
+      },
+      {
+        "id": "signoff",
+        "type": "mentorSignOff",
+        "label": "Your coach checks you can point out the ports, name the components and open and close the case safely",
+        "required": true
+      }
+    ]
+  },
+  "computer-basics/digital-literacy/unit2/hands-on_exercise-keyboard_shortcuts.html": {
+    "title": "Hands-on Exercise: Keyboard Shortcuts Practice",
+    "requires_sign_off": true,
+    "fields": [
+      {
+        "id": "checklist",
+        "type": "checklist",
+        "label": "Steps you completed",
+        "required": true,
+        "items": [
+          "Opened a blank document",
+          "Copied the text with a shortcut",
+          "Pasted it without formatting",
+          "Cut a sentence and pasted it somewhere else",
+          "Found and replaced the word \"id\"",
+          "Deleted a sentence, then undid and redid it",
+          "Made a sentence bold, underlined and italic",
+          "Jumped to the start and end of a line and of the document",
+          "Selected all the text and deleted it",
+          "Opened File Explorer and selected several items with Ctrl + click",
+          "Opened a new window and created a new folder",
+          "Took a full screenshot and a Snipping Tool screenshot",
+          "Cut both screenshots and pasted them onto the desktop",
+          "Switched back to File Explorer and closed it"
+        ]
+      },
+      {
+        "id": "favorite_shortcut",
+        "type": "longText",
+        "label": "Which shortcut do you think you will use most, and why?",
+        "required": true
+      },
+      {
+        "id": "screenshot",
+        "type": "image",
+        "label": "One of the screenshots you took (optional)",
+        "required": false,
+        "multiple": false
+      },
+      {
+        "id": "signoff",
+        "type": "mentorSignOff",
+        "label": "Your coach watches you use a few of these shortcuts",
+        "required": true
+      }
+    ]
+  },
+  "it/computer_hardware/identifying_computer_hardware.html": {
+    "title": "Hands-on Exercise: Identifying Computer Hardware",
+    "requires_sign_off": true,
+    "fields": [
+      {
+        "id": "ram",
+        "type": "shortText",
+        "label": "RAM: how many sticks, and the capacity, type and speed on the label",
+        "required": true
+      },
+      {
+        "id": "storage",
+        "type": "shortText",
+        "label": "Storage: each drive's type (M.2 SSD, SATA SSD or hard drive) and capacity",
+        "required": true
+      },
+      {
+        "id": "power_supply",
+        "type": "shortText",
+        "label": "Power supply: wattage and efficiency rating",
+        "required": true
+      },
+      {
+        "id": "cooling",
+        "type": "longText",
+        "label": "Cooling: how the CPU is cooled, how many case fans there are, and which way the air flows",
+        "required": true
+      },
+      {
+        "id": "inside_photo",
+        "type": "image",
+        "label": "A photo of the inside of the case (optional)",
+        "required": false,
+        "multiple": false
+      },
+      {
+        "id": "signoff",
+        "type": "mentorSignOff",
+        "label": "Your coach checks you can point out the RAM, storage, power supply and cooling, and opened the case safely",
+        "required": true
+      }
+    ]
+  }
+}

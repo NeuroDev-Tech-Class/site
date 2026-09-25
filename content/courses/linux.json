@@ -1,0 +1,495 @@
+{
+  "id": "linux",
+  "title": "Introduction to Linux",
+  "category": "I.T.",
+  "status": "published",
+  "heading": "Introduction to Linux",
+  "summary": "The Linux family of operating systems is responsible for powering most of the world's servers, smartphones, and cloud systems. Learning it can give you much insight into modern computing. This beginner course introduces students to the Linux family of operating systems through a series of beginner-friendly, hands-on tasks. Covered topics include navigating the terminal, managing files and processes, and working with open-source tools. By the end of the course, students will have the skills and confidence to use Linux comfortably as a daily driver.",
+  "objectives": [
+    "Understand what Linux is and how it differs from Windows and macOS.",
+    "Use the command line to navigate and manipulate the file system.",
+    "Manage software using package managers.",
+    "Understand basic file permissions and user management.",
+    "Perform basic system monitoring and troubleshooting.",
+    "Develop confidence and familiarity with a Linux desktop environment."
+  ],
+  "intro_html": "",
+  "units": [
+    {
+      "id": "u_e8c9511fff",
+      "legacy_key": "0",
+      "title": "Getting Started",
+      "description": "",
+      "items": [
+        {
+          "id": "i_5687645576",
+          "legacy_key": "0-0",
+          "type": "lesson",
+          "title": "Reading - What is Linux?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/linux/what_is_linux.html",
+            "lesson_id": "l_09a20f2189"
+          }
+        },
+        {
+          "id": "i_c5ea6aa70a",
+          "legacy_key": "0-1",
+          "type": "lesson",
+          "title": "Reading - Why Learn the Command Line?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/linux/why_learn_the_command_line_.html",
+            "lesson_id": "l_756d0ef3d2"
+          }
+        },
+        {
+          "id": "i_84aa359de0",
+          "legacy_key": "0-2",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Run <strong>PowerShell</strong> as administrator, type <code>wsl --install</code> and hit Enter. This will enable WSL and download Ubuntu."
+          }
+        },
+        {
+          "id": "i_e56e9092eb",
+          "legacy_key": "0-3",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Open the Start Menu and launch Ubuntu. It might take a few minutes to extract and set up the file system. Once that's done, restart your computer (don't skip this step!)"
+          }
+        },
+        {
+          "id": "i_02d1a5dccf",
+          "legacy_key": "0-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "After rebooting, launch Ubuntu. You'll be asked to enter a new UNIX username. Choose something simple with no spaces and no capital letters."
+          }
+        },
+        {
+          "id": "i_a0c5672fba",
+          "legacy_key": "0-5",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Then you'll be asked for a password. When you type the password, nothing will appear on the screen. Don't worry, that's normal! It's registering your key presses, just not showing them for security reasons."
+          }
+        },
+        {
+          "id": "i_e989dfeb1f",
+          "legacy_key": "0-6",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Once that's done, we need to verify that your installation worked. Type <code>pwd</code> and hit Enter. If you see <strong>/home/[username]</strong>, that means you're inside your Linux home directory. Congrats, you did it!"
+          }
+        },
+        {
+          "id": "i_71b2d054a4",
+          "legacy_key": "0-7",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Update your system. Enter <code>sudo apt update</code> and <code>sudo apt upgrade</code>. It will ask you for the password you just created. If it says there are updates, press Y and hit Enter to install. (Commands are case-sensitive. So, for example, <code>Sudo Apt Update</code> is NOT a valid command.)"
+          }
+        },
+        {
+          "id": "i_f2357a98ff",
+          "legacy_key": "0-8",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Video Resource:</strong> Watch <a href=\"https://www.youtube.com/results?search_query=Learn+Linux+TV+Linux+for+beginners\" target=\"_blank\" rel=\"noopener noreferrer\">Learn Linux TV beginner videos</a> for a visual overview of Linux concepts and setup."
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_a46a4d1f68",
+      "legacy_key": "1",
+      "title": "Unit 1: The Command Line",
+      "description": "Learn Linux concepts and terminal basics using Ubuntu (WSL).",
+      "items": [
+        {
+          "id": "i_148f2c7f88",
+          "legacy_key": "1-0",
+          "type": "lesson",
+          "title": "Reading - Intro to WSL",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/linux/intro_to_WSL.html",
+            "lesson_id": "l_2b62009ac3"
+          }
+        },
+        {
+          "id": "i_33ffd4842c",
+          "legacy_key": "1-1",
+          "type": "lesson",
+          "title": "Bash Command Tutorial 1 - mkdir, ls, pwd, cd, clear",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/linux/bash_1.html",
+            "lesson_id": "l_3287079d60"
+          }
+        },
+        {
+          "id": "i_7ef34ac403",
+          "legacy_key": "1-2",
+          "type": "lesson",
+          "title": "Bash Command Tutorial 2 - rm, rmdir, touch, echo, cat, nano, mv",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/linux/bash_2.html",
+            "lesson_id": "l_86fb6ca4c5"
+          }
+        },
+        {
+          "id": "i_0af03ab02c",
+          "legacy_key": "1-3",
+          "type": "lesson",
+          "title": "Bash Command Tutorial 3 - wget, head, tail, less, grep, cp, |, >, >>",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/linux/bash_3.html",
+            "lesson_id": "l_80710f6adf"
+          }
+        },
+        {
+          "id": "i_208133ad92",
+          "legacy_key": "1-4",
+          "type": "test",
+          "title": "Quiz - Bash Commands",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLScZK2yr-2tqefaFcV6xJ7Zi0CAq7SWMZms47R0z7IefhG2eQw/viewform?usp=header"
+          }
+        },
+        {
+          "id": "i_63a53ecaa7",
+          "legacy_key": "1-5",
+          "type": "lesson",
+          "title": "Reading - Package Managers",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/linux/package_managers.html",
+            "lesson_id": "l_666fbcfe76"
+          }
+        },
+        {
+          "id": "i_ce41eb6a36",
+          "legacy_key": "1-6",
+          "type": "lesson",
+          "title": "Bash Command Tutorial 4 - apt, tree",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/linux/bash_4.html",
+            "lesson_id": "l_8a4678247f"
+          }
+        },
+        {
+          "id": "i_4d16447d3d",
+          "legacy_key": "1-7",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "Unit 1 Lab - Create hello.sh with #!/bin/bash and echo 'Hello Linux!' Practice chmod +x hello.sh and run with ./hello.sh"
+          }
+        },
+        {
+          "id": "i_175d3404b3",
+          "legacy_key": "1-8",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Video Resource:</strong> Watch <a href=\"https://www.youtube.com/results?search_query=freeCodeCamp+Linux+command+line+full+course\" target=\"_blank\" rel=\"noopener noreferrer\">freeCodeCamp Linux command-line lessons</a> to see each Bash command demonstrated in context."
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_80b156f5b1",
+      "legacy_key": "2",
+      "title": "Unit 2: Full Linux Environment",
+      "description": "Explore Linux GUI and system tools using a Virtual Machine (Ubuntu Desktop).",
+      "items": [
+        {
+          "id": "i_2df440a849",
+          "legacy_key": "2-0",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Step 1:</strong> Download and install <a href=\"https://www.virtualbox.org/wiki/Downloads\" target=\"_blank\">VirtualBox</a> for your operating system. Run the installer and follow the prompts."
+          }
+        },
+        {
+          "id": "i_d93a0e2193",
+          "legacy_key": "2-1",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Step 2:</strong> Download the latest <a href=\"https://ubuntu.com/download/desktop\" target=\"_blank\">Ubuntu Desktop ISO</a>. Save it somewhere you can easily find it (like your Downloads folder)."
+          }
+        },
+        {
+          "id": "i_c5b992ef8d",
+          "legacy_key": "2-2",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Step 3:</strong> Open VirtualBox and click <em>New</em>. Name your VM (e.g. 'Ubuntu Desktop'), select <em>Type: Linux</em> and <em>Version: Ubuntu (64-bit)</em>. Allocate at least <strong>4 GB RAM</strong> (4096 MB), <strong>2 CPU cores</strong>, and create a virtual hard disk with at least <strong>25 GB</strong> of space."
+          }
+        },
+        {
+          "id": "i_82040e09a7",
+          "legacy_key": "2-3",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Step 4:</strong> Before starting the VM, go to <em>Settings → Storage</em>. Click the empty disc icon under Controller: IDE, then click the disc icon on the right and choose your downloaded Ubuntu ISO file. Click OK."
+          }
+        },
+        {
+          "id": "i_a2d210cadf",
+          "legacy_key": "2-4",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Step 5:</strong> Start the VM and install Ubuntu. Choose <em>Install Ubuntu</em>, select your language and keyboard, choose <em>Normal installation</em>, and select <em>Erase disk and install Ubuntu</em> (this only erases the virtual disk, not your real one!). Create your user account and let the installation finish."
+          }
+        },
+        {
+          "id": "i_7402a404b3",
+          "legacy_key": "2-5",
+          "type": "lesson",
+          "title": "Reading - Absolute vs Relative Paths",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/linux/abs_vs_rel_paths.html",
+            "lesson_id": "l_fa261f6886"
+          }
+        },
+        {
+          "id": "i_a62d8114e5",
+          "legacy_key": "2-6",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Exercise:</strong> In your VM, open the Terminal app. Create a directory structure: <code>mkdir -p ~/practice/{docs,images,scripts}</code>. Navigate between them using both absolute and relative paths. Use <code>pwd</code> to verify your location after each <code>cd</code> command."
+          }
+        },
+        {
+          "id": "i_53d1a1ba74",
+          "legacy_key": "2-7",
+          "type": "lesson",
+          "title": "Reading - File Permissions and Ownership",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/linux/file_permissions.html",
+            "lesson_id": "l_9b03660dbc"
+          }
+        },
+        {
+          "id": "i_d18ec8a279",
+          "legacy_key": "2-8",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Exercise:</strong> Create a file with <code>touch ~/practice/secret.txt</code>. Check its permissions with <code>ls -l</code>. Remove all permissions for others: <code>chmod o-rwx secret.txt</code>. Make a script executable: <code>echo '#!/bin/bash' &gt; ~/practice/scripts/test.sh &amp;&amp; chmod u+x ~/practice/scripts/test.sh</code>. Verify with <code>ls -l</code>."
+          }
+        },
+        {
+          "id": "i_c83a032215",
+          "legacy_key": "2-9",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Exercise:</strong> Open a config file with <code>nano ~/.bashrc</code>. Scroll to the bottom and add a custom alias: <code>alias ll='ls -la'</code>. Save with Ctrl+O, exit with Ctrl+X. Run <code>source ~/.bashrc</code> to apply, then test by typing <code>ll</code>."
+          }
+        },
+        {
+          "id": "i_6f87e6ffb2",
+          "legacy_key": "2-10",
+          "type": "checkpoint",
+          "title": "Reflection: CLI vs GUI",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "checkpoint_id": "c_b89fc9c762"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_fc37ce0cec",
+      "legacy_key": "3",
+      "title": "Unit 3: Real-World Linux Use",
+      "description": "Practice system monitoring, user management, and troubleshooting on a Linux system.",
+      "items": [
+        {
+          "id": "i_73827dd5c4",
+          "legacy_key": "3-0",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Live USB Experience:</strong> Your instructor will distribute bootable Ubuntu Desktop Live USBs. To boot from one: plug it in, restart your computer, and press <kbd>F12</kbd> (or <kbd>F2</kbd>/<kbd>Esc</kbd>/<kbd>Del</kbd> depending on your system) to open the boot menu. Select the USB drive. Choose <em>Try Ubuntu</em> — this runs Ubuntu directly from the USB without installing anything!"
+          }
+        },
+        {
+          "id": "i_1662ff0b32",
+          "legacy_key": "3-1",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Walkthrough:</strong> Explore the Ubuntu Desktop. Find the application launcher (bottom-left or press the Super/Windows key). Open the file manager (Files), the web browser (Firefox), the text editor, and the Terminal. Try right-clicking the desktop and exploring the Settings app."
+          }
+        },
+        {
+          "id": "i_b45944eeb7",
+          "legacy_key": "3-2",
+          "type": "lesson",
+          "title": "Reading - System Monitoring Tools (top, htop)",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/linux/system_monitoring.html",
+            "lesson_id": "l_a788deff38"
+          }
+        },
+        {
+          "id": "i_ee3c794e0e",
+          "legacy_key": "3-3",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Exercise:</strong> Open a terminal and run <code>top</code>. Press <kbd>M</kbd> to sort by memory usage. Press <kbd>q</kbd> to quit. Then install and run <code>htop</code>. Try the tree view (<kbd>F5</kbd>) and search (<kbd>F3</kbd>). Finally, start a background process with <code>sleep 300 &amp;</code>, find its PID, and kill it."
+          }
+        },
+        {
+          "id": "i_78820728f8",
+          "legacy_key": "3-4",
+          "type": "lesson",
+          "title": "Reading - User and Group Management",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/linux/user_group_management.html",
+            "lesson_id": "l_6953cb4ee1"
+          }
+        },
+        {
+          "id": "i_1388e44e36",
+          "legacy_key": "3-5",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Exercise:</strong> Create a new user with <code>sudo adduser labuser</code>. Create a group with <code>sudo addgroup labteam</code>. Add the user to the group: <code>sudo usermod -aG labteam labuser</code>. Switch to the new user with <code>su - labuser</code>, run <code>whoami</code> and <code>groups</code>, then type <code>exit</code> to return. Clean up with <code>sudo deluser --remove-home labuser</code> and <code>sudo delgroup labteam</code>."
+          }
+        },
+        {
+          "id": "i_d8d16d6333",
+          "legacy_key": "3-6",
+          "type": "lesson",
+          "title": "Reading - Basic Troubleshooting Techniques",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/linux/troubleshooting.html",
+            "lesson_id": "l_120423cfa9"
+          }
+        },
+        {
+          "id": "i_6601a5b07e",
+          "legacy_key": "3-7",
+          "type": "lesson",
+          "title": "Guide - I Broke It — Now What?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/linux/i_broke_it.html",
+            "lesson_id": "l_6720d7d520"
+          }
+        },
+        {
+          "id": "i_db696031fd",
+          "legacy_key": "3-8",
+          "type": "checkpoint",
+          "title": "Final Project - Linux Task Challenge",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "it/linux/final_project.html",
+            "checkpoint_id": "c_df6cfb70be"
+          }
+        },
+        {
+          "id": "i_49369f0b6b",
+          "legacy_key": "3-9",
+          "type": "note",
+          "title": null,
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "html": "<strong>Video Resource:</strong> Watch <a href=\"https://www.youtube.com/results?search_query=NetworkChuck+Linux+admin+basics\" target=\"_blank\" rel=\"noopener noreferrer\">Linux admin basics videos</a> for practical troubleshooting and system management examples."
+          }
+        }
+      ]
+    }
+  ]
+}

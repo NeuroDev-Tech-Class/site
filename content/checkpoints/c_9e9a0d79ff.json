@@ -1,0 +1,34 @@
+{
+  "id": "c_9e9a0d79ff",
+  "item_id": "i_88344549d3",
+  "course_id": "web-dev-2",
+  "legacy_path": null,
+  "exercise": "web-dev-2/2.6-exceptions",
+  "title": "JavaScript Exceptions",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>JavaScript Exceptions</h2>\n<p><strong>Exceptions</strong> are errors that occur during the execution of a program.<br>Instead of letting the entire program crash, JavaScript allows us to <strong>catch</strong> these errors and handle them gracefully.</p>\n<hr>\n<h3>Handling Errors with <code>try...catch</code></h3>\n<p>The <code>try...catch</code> statement lets you test a block of code for errors.</p>\n<pre><code class=\"language-javascript\">try {\n    // Code that may throw an error\n} catch (error) {\n    // Code that runs if an error occurs\n}\n</code></pre>\n<hr>\n<h4>Example: Basic <code>try...catch</code></h4>\n<pre><code class=\"language-javascript\">try {\n    let result = 10 / 0;\n    console.log(result);\n    throw new Error(\"This is a custom error!\");\n} catch (error) {\n    console.log(\"An error occurred: \" + error.message);\n}\n</code></pre>\n<p><strong>Output:</strong></p>\n<pre><code>Infinity\nAn error occurred: This is a custom error!\n</code></pre>\n<p>Here’s what happens:</p>\n<ul>\n<li>The code inside <code>try</code> runs normally.</li>\n<li>When <code>throw new Error(...)</code> is executed, it triggers an exception.</li>\n<li>The <code>catch</code> block catches that exception and prints an error message.</li>\n</ul>\n<hr>\n<h3>The <code>finally</code> Block</h3>\n<p>The <code>finally</code> block runs <strong>no matter what happens</strong> — whether an error occurs or not.</p>\n<pre><code class=\"language-javascript\">try {\n    console.log(\"Opening file...\");\n    throw new Error(\"File not found\");\n} catch (error) {\n    console.log(\"Error: \" + error.message);\n} finally {\n    console.log(\"Closing file... (always runs)\");\n}\n</code></pre>\n<p><strong>Output:</strong></p>\n<pre><code>Opening file...\nError: File not found\nClosing file... (always runs)\n</code></pre>\n<p>Even though an error occurred, the <code>finally</code> block still ran.</p>\n<hr>\n<h3>Throwing Errors Manually</h3>\n<p>You can create and throw your own custom errors using the <code>throw</code> keyword.</p>\n<pre><code class=\"language-javascript\">function divide(a, b) {\n    if (b === 0) {\n        throw new Error(\"Cannot divide by zero\");\n    }\n    return a / b;\n}\n\ntry {\n    console.log(divide(10, 2)); // 5\n    console.log(divide(10, 0)); // throws error\n} catch (error) {\n    console.log(\"Caught: \" + error.message);\n}\n</code></pre>\n<p><strong>Output:</strong></p>\n<pre><code>5\nCaught: Cannot divide by zero\n</code></pre>\n<p>This is useful when you want to enforce your own rules and stop execution under certain conditions.</p>\n<hr>\n<h3>Nested <code>try...catch</code></h3>\n<p>You can have <code>try...catch</code> blocks inside other ones.<br>This allows you to handle errors locally and rethrow them to outer layers if needed.</p>\n<pre><code class=\"language-javascript\">try {\n    try {\n        JSON.parse(\"{ bad json }\");\n    } catch (innerError) {\n        console.log(\"Inner error: \" + innerError.message);\n        throw innerError; // rethrow the error to outer catch\n    }\n} catch (outerError) {\n    console.log(\"Outer error: \" + outerError.message);\n}\n</code></pre>\n<p><strong>Output:</strong></p>\n<pre><code>Inner error: Unexpected token b in JSON at position 2\nOuter error: Unexpected token b in JSON at position 2\n</code></pre>\n<p>The inner <code>catch</code> handled the error first, then passed it along to the outer <code>catch</code>.</p>\n<hr>\n<h3>Summary</h3>\n<table>\n<thead>\n<tr>\n<th>Keyword</th>\n<th>Description</th>\n<th>Example</th>\n</tr>\n</thead>\n<tbody><tr>\n<td><code>try</code></td>\n<td>Code that may throw an error</td>\n<td><code>try { riskyCode(); }</code></td>\n</tr>\n<tr>\n<td><code>catch</code></td>\n<td>Code that runs when an error occurs</td>\n<td><code>catch (err) { console.log(err); }</code></td>\n</tr>\n<tr>\n<td><code>finally</code></td>\n<td>Code that always runs (optional)</td>\n<td><code>finally { cleanup(); }</code></td>\n</tr>\n<tr>\n<td><code>throw</code></td>\n<td>Manually trigger an error</td>\n<td><code>throw new Error(\"Bad input\");</code></td>\n</tr>\n</tbody></table>\n<hr>\n<h4>Key Takeaways</h4>\n<ul>\n<li>Use <code>try...catch</code> to prevent errors from crashing your program.  </li>\n<li><code>finally</code> always runs, whether or not an error occurred.  </li>\n<li>Use <code>throw</code> to manually create and raise your own errors.  </li>\n<li>Nested <code>try...catch</code> blocks allow fine-grained error handling.  </li>\n<li>Always include meaningful error messages to make debugging easier.</li>\n</ul>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Run the tests yourself with <code>npm test</code>. When you push, GitHub runs them too: a green check next to your latest commit means they pass, a red X means something still needs work.</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/web-dev-2/2.6-exceptions/starter",
+  "grading_hint": {
+    "runner": "jest",
+    "tests": [
+      "exercises/web-dev-2/2.6-exceptions/starter/__tests__/learn.test.js"
+    ]
+  }
+}

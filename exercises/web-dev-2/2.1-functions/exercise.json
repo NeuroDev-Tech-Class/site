@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "2.1",
+  "title": "JavaScript Functions",
+  "kind": "exercise",
+  "language": "javascript",
+  "runner": "jest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-2.1-Functions",
+    "commit": "99b272d5542cee4738a8a19c41d12b4d16ff9991"
+  }
+}

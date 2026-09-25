@@ -1,0 +1,29 @@
+{
+  "id": "c_5fa67e7e94",
+  "item_id": "i_761bf01038",
+  "course_id": "python-2",
+  "legacy_path": null,
+  "exercise": "python-2/3.5-final-project",
+  "title": "Final Project",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Final Project</h2>\n<p>For this project you will create a full, working chess game using Pygame. I have provided assets for each of the pieces so you can use them. Finish the pieces_dict file to place all the pieces. Write the game code in the project.py. If you have any questions, ask the Tech Coach. Good luck!</p>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-2/3.5-final-project/starter",
+  "grading_hint": null
+}

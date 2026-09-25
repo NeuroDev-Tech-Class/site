@@ -1,0 +1,12 @@
+{
+  "course": "python-2",
+  "number": "3.1",
+  "title": "Introduction to Pygame",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-II-3.1-Pygame_Intro",
+    "commit": "9f75018d6109ee64521da1437f091d32ae6763ce"
+  }
+}

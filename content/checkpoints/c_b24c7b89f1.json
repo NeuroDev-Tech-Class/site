@@ -1,0 +1,29 @@
+{
+  "id": "c_b24c7b89f1",
+  "item_id": "i_0625d8bb3d",
+  "course_id": "python-1",
+  "legacy_path": null,
+  "exercise": "python-1/0.0-github-basics",
+  "title": "GitHub Basics: Your First Repository",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>GitHub Basics: Your First Repository</h2>\n<p>Every coding exercise in this course is handed in the same way: you keep your work in your own <strong>repository</strong>\n(a project folder that Git tracks) on <strong>GitHub</strong>, and you submit the link to it. This exercise walks you through\ndoing that once, start to finish. After this, every exercise works the same way.</p>\n<p><strong>Git</strong> is a tool on your computer that remembers every saved version of your project. <strong>GitHub</strong> is a website\nthat stores a copy of your project online so you (and your coach) can see it from anywhere.</p>\n<p>If you like to learn by watching first, this <a href=\"https://www.youtube.com/watch?v=9cCApTLb_Io&amp;list=PLbvhRHYrmshSCAHZbibqh_px_LxnU54dk\">video walkthrough</a>\ncovers the same steps.</p>\n<h3>1. Get set up (once)</h3>\n<ol>\n<li>Install <a href=\"https://git-scm.com/downloads\">Git</a>. Keep the default options.</li>\n<li>Make a free account on <a href=\"https://github.com/signup\">GitHub</a>, or sign in if you already have one.</li>\n<li>Tell Git who you are. Open a terminal (on Windows, open <strong>Git Bash</strong>) and type, with your own name and email:</li>\n</ol>\n<pre><code class=\"language-shell\">git config --global user.name \"Your Name\"\ngit config --global user.email \"you@example.com\"\n</code></pre>\n<h3>2. Make a repository on GitHub</h3>\n<ol>\n<li>On GitHub, click the <strong>+</strong> in the top right corner, then <strong>New repository</strong>.</li>\n<li>Name it <code>github-basics</code>. Leave it <strong>Public</strong> so your coach can open it.</li>\n<li>Leave every other box unticked and click <strong>Create repository</strong>. GitHub shows you the repository's address;\nkeep that page open.</li>\n</ol>\n<h3>3. Put the starter files in it</h3>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder called <code>github-basics</code>.</li>\n<li>Open <code>README.md</code> in your editor and fill in the three lines about yourself. Save it.</li>\n<li>In your terminal, go into that folder and connect it to GitHub. Replace the address with the one GitHub showed you:</li>\n</ol>\n<pre><code class=\"language-shell\">cd github-basics\ngit init -b main\ngit add .\ngit commit -m \"My first commit\"\ngit remote add origin https://github.com/your-username/github-basics.git\ngit push -u origin main\n</code></pre>\n<p><code>git add .</code> picks up your changes, <code>git commit</code> saves a version with a short message, and <code>git push</code> sends it to\nGitHub. The first push may ask you to sign in to GitHub.</p>\n<p>Refresh the GitHub page: your <code>README.md</code> is there.</p>\n<h3>4. Submit</h3>\n<p>Copy the address of your repository from your browser (it looks like <code>https://github.com/your-username/github-basics</code>)\nand paste it into the form below. That's the whole hand-in.</p>\n<h3>Every exercise after this</h3>\n<ol>\n<li>Download the starter files and make a new repository for them, as above.</li>\n<li>Do the work. Whenever you reach a good point, save a version and send it to GitHub:</li>\n</ol>\n<pre><code class=\"language-shell\">git add .\ngit commit -m \"Describe what you changed\"\ngit push\n</code></pre>\n<ol start=\"3\">\n<li>Many exercises come with tests. When you push, GitHub runs them for you: a green check next to your latest\ncommit means they pass, a red X means something still needs work. Click it to see which test failed.</li>\n<li>Submit your repository link with the form on the exercise page.</li>\n</ol>\n<h3>Git cheat sheet</h3>\n<table>\n<thead>\n<tr>\n<th>Command</th>\n<th>What it does</th>\n</tr>\n</thead>\n<tbody><tr>\n<td><code>git status</code></td>\n<td>Shows what has changed since your last commit</td>\n</tr>\n<tr>\n<td><code>git add .</code></td>\n<td>Gets every change ready to be saved</td>\n</tr>\n<tr>\n<td><code>git commit -m \"message\"</code></td>\n<td>Saves a version with a message describing it</td>\n</tr>\n<tr>\n<td><code>git push</code></td>\n<td>Sends your saved versions to GitHub</td>\n</tr>\n<tr>\n<td><code>git pull</code></td>\n<td>Brings down changes made on GitHub</td>\n</tr>\n<tr>\n<td><code>git log --oneline</code></td>\n<td>Lists the versions you've saved</td>\n</tr>\n<tr>\n<td><code>git diff</code></td>\n<td>Shows exactly what changed</td>\n</tr>\n<tr>\n<td><code>git checkout -- filename</code></td>\n<td>Throws away changes to one file since the last commit</td>\n</tr>\n<tr>\n<td><code>git branch name</code> / <code>git switch name</code></td>\n<td>Makes a separate line of work / moves to it</td>\n</tr>\n</tbody></table>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-1/0.0-github-basics/starter",
+  "grading_hint": null
+}

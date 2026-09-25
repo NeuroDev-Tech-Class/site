@@ -1,0 +1,34 @@
+{
+  "id": "c_28b24a62f6",
+  "item_id": "i_0e06797d7c",
+  "course_id": "ai-usage",
+  "legacy_path": "computer-basics/ai-prompt-engineering/hands-on_generative_ai_exercises.html",
+  "exercise": null,
+  "title": "Generative AI Exercises",
+  "preset": null,
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "exercise1_observations",
+      "type": "longText",
+      "label": "Exercise 1: Observe the Randomness — what did you notice about how the AI's answers changed and stayed the same across your attempts?",
+      "required": true
+    },
+    {
+      "id": "exercise2_limits",
+      "type": "longText",
+      "label": "Exercise 2: Find the Limits — what happened when you tried to get the AI to tell you something untrue? What inaccuracies or fabrications did you notice?",
+      "required": true
+    },
+    {
+      "id": "exercise3_novel_idea",
+      "type": "longText",
+      "label": "Exercise 3: Synthesize a Novel Idea — what did you ask the AI to come up with, and what did it produce?",
+      "required": true
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<p>Now that you have a ChatGPT or Gemini account, try these three exercises. They'll help you write better prompts, and they'll show you some of the limits of generative AI. Keep notes as you go: you'll write about each exercise in the form at the bottom of this page.</p>\n\n<div class=\"activity\">\n  <h2>Exercise 1: Observe the Randomness</h2>\n  <p>Ask the AI the same question <strong>3 separate times</strong>, in separate chats. Notice how the answers change and how they stay the same. Then try asking the question in a different way. The more complex your prompt, the more interesting the results.</p>\n  <p>This randomness is part of what makes generative AI so powerful. Without it, the answers would be generic and much less helpful.</p>\n</div>\n\n<div class=\"activity\">\n  <h2>Exercise 2: Find the Limits</h2>\n  <p>Try to get the AI to <strong>tell you something untrue</strong>. A good way is to ask about a niche topic you know a lot about, such as a side character in a lesser-known book you've read.</p>\n  <p>Sometimes the AI will \"hallucinate\": it confidently tells you something completely made up. Keep asking harder questions and note any mistakes or inventions.</p>\n  <p>It can be wrong about <em>any</em> subject; it's just easier to notice on a subject you know well. <strong>Always fact-check!</strong></p>\n</div>\n\n<div class=\"activity\">\n  <h2>Exercise 3: Synthesize a Novel Idea</h2>\n  <p>Ask the AI to <strong>come up with something nobody has imagined before</strong>. For example, pick 3 random ingredients and ask for a recipe, or ask it to write a new episode of one of your favorite shows.</p>\n  <p>This is what sets AI chatbots apart from search engines like Google. They aren't just finding existing information; they create something new by building on patterns they've learned.</p>\n</div>\n\n<p>When you've tried all three, write what you noticed in each exercise in the form below.</p>",
+  "starter_path": null,
+  "grading_hint": null
+}

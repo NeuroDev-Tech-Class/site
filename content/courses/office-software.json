@@ -1,0 +1,160 @@
+{
+  "id": "office-software",
+  "title": "Office Software",
+  "category": "Computer Basics",
+  "status": "published",
+  "heading": "Office Software: Microsoft 365 & Google Workspace",
+  "summary": "This comprehensive course will prepare students to more effectively utilize the leading office productivity tools: Microsoft 365 and Google Workspace. Specifically the course offers a deep dive into Microsoft Word / Google Docs, MS Excel / Google Sheets, and MS PowerPoint / Google Slides. This course is ideal for students wanting to enhance their everyday software skills in academic, personal, and professional settings.",
+  "objectives": [
+    "Understand the core functionalities of word processors, spreadsheets, and presentation software.",
+    "Develop proficiency in creating, formatting, and editing documents using Microsoft Word and Google Docs.",
+    "Master spreadsheet skills, including formula application, data analysis, and budget creation with Excel and Google Sheets.",
+    "Learn to design and deliver effective presentations using PowerPoint and Google Slides, focusing on audience engagement and clear communication.",
+    "Apply real-world applications of office productivity software through project-based assignments, including résumé creation, budget management, and presentation delivery."
+  ],
+  "intro_html": "",
+  "units": [
+    {
+      "id": "u_f8d58e97f2",
+      "legacy_key": "0",
+      "title": "Unit 1: Word Processors",
+      "description": "Learn how to better use Microsoft Word and Google Docs.",
+      "items": [
+        {
+          "id": "i_b79ef39f79",
+          "legacy_key": "0-0",
+          "type": "lesson",
+          "title": "Reading - Word Processors",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/office-software/word_processors/word_processors.html",
+            "lesson_id": "l_9fdbf22bcb"
+          }
+        },
+        {
+          "id": "i_f78bbc3652",
+          "legacy_key": "0-1",
+          "type": "test",
+          "title": "Quiz - Word Processors",
+          "status": "needs_content",
+          "tags": [],
+          "payload": {
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSdqqkhza05g7Aar0w9ElvafKq54gdsBDNkBgZaROEgnWvqa0A/viewform?usp=sf_link"
+          }
+        },
+        {
+          "id": "i_ca7f8759dc",
+          "legacy_key": "0-2",
+          "type": "checkpoint",
+          "title": "Practice - Word Processors",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/office-software/word_processors/practice-word_processors.html",
+            "checkpoint_id": "c_527fd0acb6"
+          }
+        },
+        {
+          "id": "i_531031c32a",
+          "legacy_key": "0-3",
+          "type": "checkpoint",
+          "title": "Application - Creating a Résumé",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/office-software/word_processors/application-creating_a_résumé.html",
+            "checkpoint_id": "c_29266362c7"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_86214d7db3",
+      "legacy_key": "1",
+      "title": "Unit 2: Spreadsheets",
+      "description": "Learn how to better use Microsoft Excel and Google Sheets.",
+      "items": [
+        {
+          "id": "i_730164e142",
+          "legacy_key": "1-0",
+          "type": "lesson",
+          "title": "Reading - Spreadsheets",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/office-software/spreadsheets/spreadsheets.html",
+            "lesson_id": "l_a910a22114"
+          }
+        },
+        {
+          "id": "i_6af363da85",
+          "legacy_key": "1-1",
+          "type": "checkpoint",
+          "title": "Worksheet: Spreadsheet Formulas",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "checkpoint_id": "c_978acfeaaa"
+          }
+        },
+        {
+          "id": "i_26ab02cd13",
+          "legacy_key": "1-2",
+          "type": "checkpoint",
+          "title": "Practice - Spreadsheets",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/office-software/spreadsheets/practice-spreadsheets.html",
+            "checkpoint_id": "c_8ca3c5508c"
+          }
+        },
+        {
+          "id": "i_8102899076",
+          "legacy_key": "1-3",
+          "type": "checkpoint",
+          "title": "Application - Creating a Budget",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/office-software/spreadsheets/application-creating_a_budget.html",
+            "checkpoint_id": "c_54c254256b"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_c740b30237",
+      "legacy_key": "2",
+      "title": "Unit 3: Presentation Software",
+      "description": "Learn how to better use Microsoft PowerPoint and Google Slides.",
+      "items": [
+        {
+          "id": "i_96fa2e7d07",
+          "legacy_key": "2-0",
+          "type": "lesson",
+          "title": "Reading - Slideshows",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/office-software/presentation_software/slideshows.html",
+            "lesson_id": "l_e6363af40a"
+          }
+        },
+        {
+          "id": "i_530d5b6640",
+          "legacy_key": "2-1",
+          "type": "checkpoint",
+          "title": "Application - “Career Day” Presentation",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-basics/office-software/presentation_software/application-careers_day_presentation.html",
+            "checkpoint_id": "c_ecd12634be"
+          }
+        }
+      ]
+    }
+  ]
+}

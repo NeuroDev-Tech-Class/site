@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "1.4",
+  "title": "Operators",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-1.4-Operators",
+    "commit": "beaa8e48d1c7c860e613aea5cc832c0ab6354942"
+  }
+}

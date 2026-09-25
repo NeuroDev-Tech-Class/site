@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "2.5",
+  "title": "JavaScript Objects",
+  "kind": "exercise",
+  "language": "javascript",
+  "runner": "jest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-2.5-Objects",
+    "commit": "1ae2bbdaccd277e39eeaf3dca4eaf1719e2ee35f"
+  }
+}

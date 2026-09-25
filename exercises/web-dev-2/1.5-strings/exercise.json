@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "1.5",
+  "title": "JavaScript String Manipulation",
+  "kind": "exercise",
+  "language": "javascript",
+  "runner": "jest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-1.5-Strings",
+    "commit": "175a141736105eb71be54fbdd32f86b35f35521d"
+  }
+}

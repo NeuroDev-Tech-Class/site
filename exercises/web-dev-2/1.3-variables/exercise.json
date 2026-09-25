@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "1.3",
+  "title": "JavaScript Variables and Operations",
+  "kind": "exercise",
+  "language": "javascript",
+  "runner": "jest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-1.3-Variables",
+    "commit": "9c80b035f18c0885d84d47b958fa496ebe84b32e"
+  }
+}

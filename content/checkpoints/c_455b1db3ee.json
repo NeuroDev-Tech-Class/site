@@ -1,0 +1,41 @@
+{
+  "id": "c_455b1db3ee",
+  "item_id": "i_d0e25642e3",
+  "course_id": "hardware",
+  "legacy_path": "it/computer_hardware/final_project-build_a_custom_pc.html",
+  "exercise": null,
+  "title": "Final Project: Build a Custom PC",
+  "preset": null,
+  "requires_sign_off": true,
+  "fields": [
+    {
+      "id": "pcpartpicker_url",
+      "type": "url",
+      "label": "Link to your final parts list on PCPartPicker",
+      "required": true
+    },
+    {
+      "id": "component_justification",
+      "type": "longText",
+      "label": "Explain why you chose each component",
+      "required": true
+    },
+    {
+      "id": "build_photos",
+      "type": "image",
+      "label": "Photos documenting each stage of the build",
+      "multiple": true,
+      "required": true
+    },
+    {
+      "id": "signoff_build",
+      "type": "mentorSignOff",
+      "label": "Confirms the completed PC build and the student's presentation explaining their component choices and any challenges encountered during assembly",
+      "required": true
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<p>Work with the tech coach to plan and build a custom PC that meets a specific budget and set of requirements. If the budget allows for it, we’ll actually build a completely new system from scratch. Otherwise, we’ll just practice by taking apart an older PC and putting it back together as if it were brand-new. Either way, you should go through all the planning and part-selection steps just as you would for a fresh build.</p>\n\n    <h2>Planning</h2>\n    <ul>\n      <li>Determine what the PC will primarily be used for and identify the hardware that fits those needs.</li>\n      <li>Use <a href=\"https://pcpartpicker.com\" target=\"_blank\" rel=\"noopener noreferrer\">PCPartPicker</a> to help narrow down your choices and stay within your budget.</li>\n      <li>Submit your work with the form below.</li>\n    </ul>\n\n    <h2>Building</h2>\n    <ul>\n      <li>Once you have your components (whether newly purchased or from the disassembled PC), follow the PC Building Guide step-by-step to build the PC under the tech coach’s supervision.</li>\n      <li>Take photos throughout the building process and document each stage.</li>\n      <li>Install an operating system and test all the hardware to make sure everything works properly.</li>\n    </ul>\n\n    <h2>Presentation</h2>\n    <p>Show off the completed PC, explain why you chose each component, and talk about any challenges you encountered during assembly.</p>",
+  "starter_path": null,
+  "grading_hint": null
+}

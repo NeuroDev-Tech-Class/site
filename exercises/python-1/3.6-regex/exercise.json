@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "3.6",
+  "title": "Regular Expressions",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-3.6-Regex",
+    "commit": "b95c3fd7b3e96593ba0f2974d8747ed893662673"
+  }
+}

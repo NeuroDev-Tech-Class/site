@@ -1,0 +1,12 @@
+{
+  "course": "python-2",
+  "number": "1.5",
+  "title": "Operator Overloading",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-II-1.5-Overloading",
+    "commit": "00504112275546ce06a1c7de62e560e74bd085ae"
+  }
+}

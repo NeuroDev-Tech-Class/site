@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "3.2",
+  "title": "JavaScript Advanced Arrays",
+  "kind": "exercise",
+  "language": "javascript",
+  "runner": "jest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-3.2-Advanced_Arrays",
+    "commit": "0a0ae7c8f7f2480c5693399509281843e9222e4d"
+  }
+}

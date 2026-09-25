@@ -1,0 +1,34 @@
+---
+import UserMenu from './UserMenu'
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/catalog', label: 'Course Catalog' },
+  { href: '/resources', label: 'Resources' },
+]
+const path = Astro.url.pathname.replace(/\/$/, '') || '/'
+const current = (href: string) => (href === '/' ? path === '/' : path === href || path.startsWith(`${href}/`))
+---
+
+<header class="neon-rule relative border-b-2 px-4 pt-3 pb-2 text-(--header-text) sm:pt-6">
+  <div class="mb-3 flex justify-end sm:absolute sm:top-5 sm:right-5 sm:mb-0">
+    <UserMenu client:load />
+  </div>
+  <div class="mx-auto flex max-w-5xl flex-col items-center gap-2">
+    <a href="/" class="block w-3/4 max-w-[380px]">
+      <img src="/logo-white.png" alt="NeuroDev Tech Class home" width="824" height="208" class="hidden h-auto w-full dark:block" />
+      <img src="/logo-black.png" alt="NeuroDev Tech Class home" width="824" height="208" class="h-auto w-full dark:hidden" />
+    </a>
+    <nav aria-label="Main" class="flex flex-wrap items-center justify-center sm:gap-3">
+      {links.map(link => (
+        <a
+          href={link.href}
+          aria-current={current(link.href) ? 'page' : undefined}
+          class="inline-flex min-h-[44px] items-center rounded-lg px-3 font-heading font-semibold text-(--header-text) no-underline decoration-brand-cyan decoration-[3px] underline-offset-8 hover:underline aria-[current=page]:underline"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

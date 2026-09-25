@@ -1,0 +1,15 @@
+{
+  "name": "web-dev-2-2.2-conditionals",
+  "version": "1.0.0",
+  "description": "JavaScript If Statements",
+  "main": "learn.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

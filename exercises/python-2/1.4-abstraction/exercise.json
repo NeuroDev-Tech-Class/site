@@ -1,0 +1,12 @@
+{
+  "course": "python-2",
+  "number": "1.4",
+  "title": "Abstraction",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-II-1.4-Abstraction",
+    "commit": "e2123adaab75dcbf0cf2ca3dcdb1b1b3c70dc3a3"
+  }
+}

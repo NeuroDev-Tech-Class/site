@@ -1,0 +1,308 @@
+{
+  "id": "python-2",
+  "title": "Python II - Object-Oriented Programming",
+  "category": "Computer Programming",
+  "status": "published",
+  "heading": "Python II - Object-Oriented Programming",
+  "summary": "This intermediate course dives into object-oriented programming (OOP) concepts, GUI development, and modular programming with Python. Students will learn about recursion, generators, decorators, and third-party libraries, culminating in a project where students develop a GUI-based chess game using PyGame.",
+  "objectives": [
+    "Apply object-oriented programming principles including classes, encapsulation, inheritance, polymorphism, and abstraction.",
+    "Learn best practices for software development, including code organization, documentation, and version control.",
+    "Learn new tools to write more efficient and modular Python code.",
+    "Implement modular programming techniques using Python's third-party libraries.",
+    "Develop graphical user interfaces (GUIs) with Python, focusing on event-driven programming and user interaction.",
+    "Complete a comprehensive project to design and implement a chess game using PyGame, demonstrating mastery of OOP and GUI programming."
+  ],
+  "intro_html": "",
+  "units": [
+    {
+      "id": "u_904091c010",
+      "legacy_key": "0",
+      "title": "Unit 1: Objects and Classes",
+      "description": "Explore the core principles of Object-Oriented Programming (OOP) in Python, including classes, objects, inheritance, polymorphism, encapsulation, and abstraction. This unit lays the foundation for designing robust and reusable code structures.",
+      "items": [
+        {
+          "id": "i_dd1bf4c2e9",
+          "legacy_key": "0-0",
+          "type": "lesson",
+          "title": "Reading - What Is Object-Oriented Programming?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-science/python-2-object-oriented_programming/what_is_oop.html",
+            "lesson_id": "l_e516d6b6da"
+          }
+        },
+        {
+          "id": "i_eca636ef39",
+          "legacy_key": "0-1",
+          "type": "video",
+          "title": "Classes and Instances",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "ZDa-Z5JzLYM"
+          }
+        },
+        {
+          "id": "i_a43836cd54",
+          "legacy_key": "0-2",
+          "type": "checkpoint",
+          "title": "1.1 Classes, Objects, and Encapsulation in Python",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "python-2/1.1-classes",
+            "checkpoint_id": "c_24b6253b9b"
+          }
+        },
+        {
+          "id": "i_bb6980f8e2",
+          "legacy_key": "0-3",
+          "type": "checkpoint",
+          "title": "1.2 Inheritance in Python",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "python-2/1.2-inheritance",
+            "checkpoint_id": "c_57702a1904"
+          }
+        },
+        {
+          "id": "i_b6206c77f3",
+          "legacy_key": "0-4",
+          "type": "checkpoint",
+          "title": "1.3 Polymorphism in Python",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "python-2/1.3-polymorphism",
+            "checkpoint_id": "c_1b6aa3aed4"
+          }
+        },
+        {
+          "id": "i_21fe7c47a2",
+          "legacy_key": "0-5",
+          "type": "checkpoint",
+          "title": "1.4 Abstraction",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "python-2/1.4-abstraction",
+            "checkpoint_id": "c_8640e1b1ad"
+          }
+        },
+        {
+          "id": "i_d940f80784",
+          "legacy_key": "0-6",
+          "type": "checkpoint",
+          "title": "1.5 Operator Overloading",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "python-2/1.5-overloading",
+            "checkpoint_id": "c_57f7ffc010"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_3c7ac83a74",
+      "legacy_key": "1",
+      "title": "Unit 2: Advanced Programming Techniques",
+      "description": "Delve into advanced programming concepts such as recursion, scope, and modular programming. This unit also introduces basic graphics with Python using Turtle Graphics, setting the stage for game development with PyGame.",
+      "items": [
+        {
+          "id": "i_b1a2f7ef60",
+          "legacy_key": "1-0",
+          "type": "video",
+          "title": "You WILL Understand Recursion After Watching This",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "youtube_id": "DUC1qg7ZaRg"
+          }
+        },
+        {
+          "id": "i_547fa128b9",
+          "legacy_key": "1-1",
+          "type": "checkpoint",
+          "title": "2.1 Recursion",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "python-2/2.1-recursion",
+            "checkpoint_id": "c_ad2ee8296a"
+          }
+        },
+        {
+          "id": "i_d6c490f6c1",
+          "legacy_key": "1-2",
+          "type": "checkpoint",
+          "title": "2.2 Scope",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "python-2/2.2-scope",
+            "checkpoint_id": "c_29215b0fe4"
+          }
+        },
+        {
+          "id": "i_e1dc8a07a4",
+          "legacy_key": "1-3",
+          "type": "checkpoint",
+          "title": "2.3 Modular Programming Revisited",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "python-2/2.3-modules",
+            "checkpoint_id": "c_00a5ac8416"
+          }
+        },
+        {
+          "id": "i_22b924a68d",
+          "legacy_key": "1-4",
+          "type": "checkpoint",
+          "title": "2.4 Turtle Graphics",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "python-2/2.4-turtle",
+            "checkpoint_id": "c_9de3058482"
+          }
+        },
+        {
+          "id": "i_15beb37201",
+          "legacy_key": "1-5",
+          "type": "lesson",
+          "title": "Sidenote - DRY (Don't Repeat Yourself)",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-science/python-2-object-oriented_programming/sidenote-DRY.html",
+            "lesson_id": "l_ae3d54dbea"
+          }
+        },
+        {
+          "id": "i_aa9a293756",
+          "legacy_key": "1-6",
+          "type": "lesson",
+          "title": "Sidenote - Refactoring Strategies",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "legacy_path": "computer-science/python-2-object-oriented_programming/sidenote-refactoring.html",
+            "lesson_id": "l_3ade682fc5"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u_d086fc01f8",
+      "legacy_key": "2",
+      "title": "Unit 3: PyGame",
+      "description": "Introduce game development using PyGame. This unit covers the essentials of creating graphical applications, handling user input, and integrating sound. Students will apply their knowledge to develop a GUI-based chess game as their final project.",
+      "items": [
+        {
+          "id": "i_0db3a305bf",
+          "legacy_key": "2-0",
+          "type": "checkpoint",
+          "title": "3.1 Introduction to Pygame",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "python-2/3.1-pygame-intro",
+            "checkpoint_id": "c_d051d1ce4b"
+          }
+        },
+        {
+          "id": "i_210674a0da",
+          "legacy_key": "2-1",
+          "type": "checkpoint",
+          "title": "3.2 Drawing Shapes in Pygame",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "python-2/3.2-pygame-shapes",
+            "checkpoint_id": "c_93f5d7c646"
+          }
+        },
+        {
+          "id": "i_7b4fb82d76",
+          "legacy_key": "2-2",
+          "type": "checkpoint",
+          "title": "3.3 Handling User Input in Pygame",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "python-2/3.3-pygame-input",
+            "checkpoint_id": "c_0ad84e390e"
+          }
+        },
+        {
+          "id": "i_ee0f612be6",
+          "legacy_key": "2-3",
+          "type": "checkpoint",
+          "title": "3.4 Text and Sound Effects in Pygame",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "python-2/3.4-pygame-sound",
+            "checkpoint_id": "c_3fe9c44330"
+          }
+        },
+        {
+          "id": "i_1878b4da98",
+          "legacy_key": "2-4",
+          "type": "slides",
+          "title": "Slideshow - What Is Version Control?",
+          "status": "ok",
+          "tags": [],
+          "payload": {
+            "slides_url": "https://docs.google.com/presentation/d/1WNJ8Q2gWr2XkNXglvT60i0FEZywW0he0h430FTe7plc/edit?usp=sharing"
+          }
+        },
+        {
+          "id": "i_761bf01038",
+          "legacy_key": "2-5",
+          "type": "checkpoint",
+          "title": "3.5 Final Project",
+          "status": "ok",
+          "tags": [
+            "github-exercise"
+          ],
+          "payload": {
+            "exercise": "python-2/3.5-final-project",
+            "checkpoint_id": "c_5fa67e7e94"
+          }
+        }
+      ]
+    }
+  ]
+}

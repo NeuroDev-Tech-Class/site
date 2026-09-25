@@ -1,0 +1,34 @@
+{
+  "id": "c_24b6253b9b",
+  "item_id": "i_a43836cd54",
+  "course_id": "python-2",
+  "legacy_path": null,
+  "exercise": "python-2/1.1-classes",
+  "title": "Classes, Objects, and Encapsulation in Python",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Classes, Objects, and Encapsulation in Python</h2>\n<p>Object-Oriented Programming (OOP) allows you to model real-world concepts using <strong>classes</strong> and <strong>objects</strong>.<br>A <strong>class</strong> is a blueprint, and an <strong>object</strong> is an instance created from that blueprint.</p>\n<p>This combined lesson includes:</p>\n<ol>\n<li><strong>Classes and Objects</strong> — how to define and use classes.  </li>\n<li><strong>Encapsulation</strong> — how to protect and manage an object's internal data.</li>\n</ol>\n<hr>\n<h3>1. Classes and Objects in Python</h3>\n<h4>Defining a Simple Class</h4>\n<p>Below is a simple class that represents a car. It defines attributes such as brand, model, year, and color, and provides methods for displaying and updating information.</p>\n<pre><code class=\"language-python\">class Car:\n    def __init__(self, brand, model, year, color):\n        self.brand = brand\n        self.model = model\n        self.year = year\n        self.color = color\n\n    def display_info(self):\n        return f\"Car: {self.color} {self.year} {self.brand} {self.model}\"\n\n    def update_year(self, new_year):\n        self.year = new_year\n</code></pre>\n<hr>\n<h4>Creating Objects</h4>\n<pre><code class=\"language-python\">your_car = Car(\"Chevrolet\", \"Impala\", 2015, \"Silver\")\nprint(your_car.display_info())\n# Output: Car: Silver 2015 Chevrolet Impala\n</code></pre>\n<hr>\n<h4>Updating Attributes With Methods</h4>\n<pre><code class=\"language-python\">my_car = Car(\"Honda\", \"Accord\", 2003, \"White\")\nprint(my_car.display_info())\n\nmy_car.update_year(2021)\nprint(my_car.display_info())\n</code></pre>\n<hr>\n<h4>Accessing Attributes Directly</h4>\n<pre><code class=\"language-python\">print(my_car.brand)\nprint(my_car.model)\n\nmy_car.color = \"Black\"\nprint(my_car.display_info())\n</code></pre>\n<hr>\n<h4>Summary: Classes and Objects</h4>\n<ul>\n<li>A class defines structure and behavior.  </li>\n<li>The <code>__init__</code> method initializes new objects.  </li>\n<li>Methods provide controlled behavior and updates.  </li>\n<li>Attributes can be accessed directly, but using methods is preferred.</li>\n</ul>\n<hr>\n<h3>2. Encapsulation</h3>\n<h4>What Is Encapsulation?</h4>\n<p>Encapsulation bundles data and methods into a class and restricts unwanted direct access.<br>Python does not strictly enforce access control, but uses conventions such as:</p>\n<ul>\n<li><code>_attribute</code> → intended as private  </li>\n<li>Getter/setter methods → preferred way to access/modify data</li>\n</ul>\n<hr>\n<h3>Encapsulating a Class in Python</h3>\n<pre><code class=\"language-python\">class Car:\n    def __init__(self, brand, model, year, color):\n        self._brand = brand\n        self._model = model\n        self._year = year\n        self._color = color\n\n    def get_brand(self):\n        return self._brand\n    def set_brand(self, brand):\n        self._brand = brand\n\n    def get_model(self):\n        return self._model\n    def set_model(self, model):\n        self._model = model\n\n    def get_year(self):\n        return self._year\n    def set_year(self, year):\n        self._year = year\n\n    def get_color(self):\n        return self._color\n    def set_color(self, color):\n        self._color = color\n\n    def display_info(self):\n        return f\"Car: {self._color} {self._year} {self._brand} {self._model}\"\n</code></pre>\n<hr>\n<h4>Using an Encapsulated Object</h4>\n<pre><code class=\"language-python\">my_car = Car(\"Toyota\", \"Camry\", 2018, \"Blue\")\nprint(my_car.display_info())\n\nmy_car.set_year(2022)\nmy_car.set_color(\"Red\")\nprint(my_car.display_info())\n\nprint(my_car.get_brand())\nprint(my_car.get_model())\n</code></pre>\n<hr>\n<h4>Avoiding Direct Access</h4>\n<pre><code class=\"language-python\"># Discouraged:\n# my_car._year = 2025\n\n# Preferred:\nmy_car.set_year(2025)\n</code></pre>\n<hr>\n<h3>Final Summary</h3>\n<ul>\n<li><strong>Classes and Objects</strong> define reusable structures and behavior.  </li>\n<li><strong>Encapsulation</strong> protects internal data and promotes clean, maintainable code.  </li>\n<li>Python uses naming conventions and getter/setter methods rather than strict access control.</li>\n</ul>\n<p>These concepts form the foundation for designing reliable, modular programs in Python.</p>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Run the tests yourself with <code>pytest</code>. When you push, GitHub runs them too: a green check next to your latest commit means they pass, a red X means something still needs work.</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-2/1.1-classes/starter",
+  "grading_hint": {
+    "runner": "pytest",
+    "tests": [
+      "exercises/python-2/1.1-classes/starter/tests/test_exercise.py"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "1.1",
+  "title": "Basic Python Syntax",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-1.1-Basic_Syntax",
+    "commit": "18ad07aa1bb22b4c1735d6655c05ecb6fe3a07b7"
+  }
+}

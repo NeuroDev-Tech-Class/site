@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "1.2",
+  "title": "Basic Data Types",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-1.2-Data_Types",
+    "commit": "516b6715b5dd3fcbebfae6ba2dec2f3795d44e91"
+  }
+}

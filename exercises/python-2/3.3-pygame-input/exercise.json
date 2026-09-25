@@ -1,0 +1,12 @@
+{
+  "course": "python-2",
+  "number": "3.3",
+  "title": "Handling User Input in Pygame",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-II-3.3-Pygame_Input",
+    "commit": "47e75e17c0f5f8568b20e60a744191a34c2981b8"
+  }
+}

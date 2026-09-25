@@ -1,0 +1,12 @@
+{
+  "course": "python-2",
+  "number": "2.3",
+  "title": "Modular Programming Revisited",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-II-2.3-Modules",
+    "commit": "a1e424c9db6c722cf88726836dcfd9978433c403"
+  }
+}

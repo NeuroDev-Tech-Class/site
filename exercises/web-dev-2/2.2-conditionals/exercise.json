@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "2.2",
+  "title": "JavaScript If Statements",
+  "kind": "exercise",
+  "language": "javascript",
+  "runner": "jest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-2.2-Conditionals",
+    "commit": "02e6bcc4086adf9d0c6ae16c505123c7bb306730"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "3.3",
+  "title": "Type Hinting",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "none",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-3.3-Type_Hinting",
+    "commit": "ad5af6d125ebf420fddc967c5bf78566629c5b1d"
+  }
+}

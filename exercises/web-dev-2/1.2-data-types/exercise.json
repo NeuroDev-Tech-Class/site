@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "1.2",
+  "title": "JavaScript Data Types",
+  "kind": "exercise",
+  "language": "javascript",
+  "runner": "jest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-1.2-Data_Types",
+    "commit": "65f768ca913abf99c1372b1c03c5cd4c848e6031"
+  }
+}

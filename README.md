@@ -6,6 +6,7 @@ Planning docs:
 
 - [docs/LMS-ROADMAP.md](docs/LMS-ROADMAP.md): goals, decisions, data model, admin redesign and phased roadmap for in-site checkpoints, tests and the content editor.
 - [docs/CHECKPOINT-DELIVERABLES.md](docs/CHECKPOINT-DELIVERABLES.md): every checkpoint and the form fields it gets.
+- [docs/MIGRATION-PLAN.md](docs/MIGRATION-PLAN.md): the move to Render + Postgres, with its phase tracker. See "Render migration" below.
 
 ## Development
 
@@ -106,3 +107,48 @@ GOOGLE_APPLICATION_CREDENTIALS=~/keys/github-deploy.json node tools/migrate-test
 ```
 
 Each row prints as `create`, `skip` (already migrated), `orphan` or `conflict`. A second dry run after the real run must show only `skip`. Existing submissions are never overwritten, so grades entered after the migration survive a rerun. `--strict` exits non-zero when orphans exist.
+
+## Render migration
+
+On the `render-migration` branch the site is being rebuilt on Render + Postgres ([docs/MIGRATION-PLAN.md](docs/MIGRATION-PLAN.md) has the phase tracker). Nothing below is served by the live site, and none of it changes the live site's files.
+
+```
+exercises/              the 58 former GitHub Classroom exercises, one folder each:
+                        exercise.json, lesson.md, assignment.md (Web Dev III), starter/ (what students download,
+                        tests and a GitHub Actions test workflow included)
+tools/extract/          reads the live site (courses/, assets/pdfs/) and exercises/, writes content/
+  checkpoints.json      which lesson pages and notes become checkpoints, and their form fields
+  overrides/            fixes that exist only in the extracted copy: lessons/<page path> replaces a page's body,
+                        courses.json patches a course page
+tools/exercises/        import-repos.mjs (the one-time Classroom import), verify.mjs, workflows/ (the test workflows)
+content/                generated, committed: catalog, courses, lessons, checkpoints, legacy-map, vocabulary, report.md
+web/                    the new site: Astro + React islands + Tailwind, served at tech.neurodevmentoring.com
+  src/pages/            Home, Catalog, Resources, courses/[id], the six sign-in pages, 404
+  src/lib/              content.ts (reads content/, sanitises), api.ts (hub client), session.ts, redirect.ts, format.ts
+  src/components/       header, footer, ThemeToggle, UserMenu, CourseStart, auth/ (the sign-in forms)
+  tests/build.test.ts   checks every page in dist/ (one h1, skip link, nav, no /site/, images exist, catalog links)
+```
+
+The web site runs in Docker only (`docker-compose.yml` at the repo root; `node_modules` lives in a volume). Run these from the repo root, with the hub running for sign-in (`neurodev-hub`: `docker compose up`; API on 8001, Mailpit on 8026):
+
+| Command | Does |
+|---|---|
+| `docker compose up web` | dev server at http://localhost:4321 |
+| `docker compose run --rm web sh -c "npm run lint && npm run typecheck && npm test"` | ESLint, `astro check`, unit and component tests |
+| `docker compose run --rm web sh -c "npm run build && npm run test:build"` | builds `dist/` and checks the built pages |
+| `docker compose run --rm -p 4321:4321 web sh -c "npm run build && npx astro preview --ignore-lock --host"` | serves the production build |
+
+`--ignore-lock` is needed because a stopped preview leaves Astro's lock file in `web/.astro/`.
+
+The extractor and exercise commands run in WSL:
+
+| Command | Does |
+|---|---|
+| `npm run test:extract` | extractor and exercise tests (fast, no emulator) |
+| `npm run extract` | regenerates `content/`; commit what changes |
+| `npm run extract -- --check` | fails if `content/` is out of date (CI runs this) |
+| `npm run test:exercises` | runs every exercise's tests in Python 3.12 / Node 22 containers; needs Docker. Add `-- python-1/2.3-loops` for one |
+
+After changing anything the extractor reads (a course page, a lesson, `checkpoints.json`, an override or an exercise), run `npm run extract`, read `content/report.md`, and commit `content/` with the change. **Don't reorder items on the live course pages before cutover**: item ids and the old progress keys are taken from their positions.
+
+`exercises/` is edited by hand; `import-repos.mjs` refuses to run over it. The `Migration` workflow (`.github/workflows/migration.yml`) runs these checks on the `render-migration` branch only; `main` keeps deploying the Firebase site through `ci.yml`.

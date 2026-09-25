@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "1.0",
+  "title": "Terminal Commands",
+  "kind": "reading",
+  "language": "javascript",
+  "runner": "none",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-1.0-Terminal_Commands",
+    "commit": "2c9c4136c9a780f588ce26e54db4402f7974329f"
+  }
+}

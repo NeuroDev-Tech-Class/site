@@ -1,0 +1,34 @@
+{
+  "id": "c_4ce0e8c754",
+  "item_id": "i_c247011c7f",
+  "course_id": "python-1",
+  "legacy_path": null,
+  "exercise": "python-1/1.2-data-types",
+  "title": "Basic Data Types",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Basic Data Types</h2>\n<p>A <strong>data type</strong> is a classification of data that tells the computer how to interpret and use it.<br>It gives context to the data.</p>\n<p>In Python, there are several built-in data types.</p>\n<hr>\n<h3>Integers</h3>\n<p>An <strong>integer</strong> (or <code>int</code>) is a whole number.</p>\n<pre><code class=\"language-python\">print(42)\nprint(0)\nprint(-17)\n</code></pre>\n<hr>\n<h3>Floats</h3>\n<p>Short for <strong>floating point number</strong> — a number with a decimal point.</p>\n<pre><code class=\"language-python\">print(3.14)\nprint(0.5)\nprint(-2.0)\n</code></pre>\n<hr>\n<h3>Strings</h3>\n<p>A <strong>string</strong> is a sequence of characters enclosed in quotes.</p>\n<pre><code class=\"language-python\">print(\"Hello, world!\")\nprint('Python is cool.')  # Can be written with \" \" or ' '.\nprint(\"1234\")  # Even though this looks like a number, it's not.\n</code></pre>\n<hr>\n<h3>Booleans</h3>\n<p>A <strong>boolean</strong> is a logical value that is either <code>True</code> or <code>False</code>.</p>\n<pre><code class=\"language-python\">print(True)   # Not a string because there are no quotes.\nprint(False)  # Must be capitalized; Python is case-sensitive.\nprint(2 &gt; 3)  # Evaluates to False, because 2 is not greater than 3.\n</code></pre>\n<hr>\n<h3>Checking Data Types</h3>\n<p>You can check something’s data type using the <code>type()</code> function.</p>\n<pre><code class=\"language-python\">print(type(3))       # Prints &lt;class 'int'&gt;\nprint(type(1.1))     # Prints &lt;class 'float'&gt;\nprint(type(\"Yellow\"))  # Prints &lt;class 'str'&gt;\nprint(type(10 &gt; 5))    # Prints &lt;class 'bool'&gt;\n</code></pre>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Run the tests yourself with <code>pytest</code>. When you push, GitHub runs them too: a green check next to your latest commit means they pass, a red X means something still needs work.</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-1/1.2-data-types/starter",
+  "grading_hint": {
+    "runner": "pytest",
+    "tests": [
+      "exercises/python-1/1.2-data-types/starter/tests/test_exercise.py"
+    ]
+  }
+}

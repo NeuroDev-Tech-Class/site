@@ -1,0 +1,53 @@
+{
+  "id": "c_67880d4475",
+  "item_id": "i_bde427f159",
+  "course_id": "hardware",
+  "legacy_path": "it/computer_hardware/identifying_computer_hardware.html",
+  "exercise": null,
+  "title": "Hands-on Exercise: Identifying Computer Hardware",
+  "preset": null,
+  "requires_sign_off": true,
+  "fields": [
+    {
+      "id": "ram",
+      "type": "shortText",
+      "label": "RAM: how many sticks, and the capacity, type and speed on the label",
+      "required": true
+    },
+    {
+      "id": "storage",
+      "type": "shortText",
+      "label": "Storage: each drive's type (M.2 SSD, SATA SSD or hard drive) and capacity",
+      "required": true
+    },
+    {
+      "id": "power_supply",
+      "type": "shortText",
+      "label": "Power supply: wattage and efficiency rating",
+      "required": true
+    },
+    {
+      "id": "cooling",
+      "type": "longText",
+      "label": "Cooling: how the CPU is cooled, how many case fans there are, and which way the air flows",
+      "required": true
+    },
+    {
+      "id": "inside_photo",
+      "type": "image",
+      "label": "A photo of the inside of the case (optional)",
+      "required": false,
+      "multiple": false
+    },
+    {
+      "id": "signoff",
+      "type": "mentorSignOff",
+      "label": "Your coach checks you can point out the RAM, storage, power supply and cooling, and opened the case safely",
+      "required": true
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<p>You've read and watched how memory, storage, power and cooling work. Now find each of them inside a real computer and read what's written on it. You'll open one of the tech class desktops with your coach.</p>\n\n<div class=\"warning\">\n  <p><strong>Safety first.</strong> Shut the computer down completely and unplug every cable before you open it. Touch a metal part of the case before touching anything inside, to discharge static electricity. Never open the power supply itself: it can hold a dangerous charge even when unplugged.</p>\n</div>\n\n<div class=\"activity\">\n  <h2>Find and read each part</h2>\n  <ol>\n    <li><strong>Memory (RAM).</strong> Find the RAM sticks next to the CPU. Count them and read the label on one: note its capacity (for example 8 GB), its type (DDR4 or DDR5) and its speed if it's shown. Are the sticks in the slots your motherboard recommends for dual channel?</li>\n    <li><strong>Storage.</strong> Find every storage drive. Is each one an M.2 SSD on the motherboard, a 2.5-inch SATA SSD, or a 3.5-inch hard drive? Note its capacity from the label.</li>\n    <li><strong>Power supply (PSU).</strong> Find the power supply, usually at the top or bottom of the case. Read its sticker without opening it: note its wattage and any efficiency rating (such as 80 Plus Bronze or Gold).</li>\n    <li><strong>Cooling.</strong> Find how the CPU is cooled: an air cooler with a heatsink and fan, or a liquid cooler with a radiator. Count the case fans and work out which way the air flows through the case.</li>\n    <li>Take a photo of the inside of the case if you can, then close it up, plug everything back in and check the computer still starts.</li>\n  </ol>\n</div>\n\n<div class=\"tip\">\n  <p><strong>Not sure what you're looking at?</strong> The <a href=\"/lessons/l_4bbf0c3a25\">Building a PC</a> guide has photos of each of these parts being installed.</p>\n</div>\n\n<p>Record what you found in the form below. Your coach will check a few parts with you in person.</p>",
+  "starter_path": null,
+  "grading_hint": null
+}

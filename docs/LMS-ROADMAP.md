@@ -1,6 +1,6 @@
 # NeuroDev Tech Class LMS Roadmap
 
-Status: planning approved Sep 8 2026. **Phase 0 (Foundations) done Sep 10 2026. Phase 1 (Submissions and Grading Queue) done Sep 10 2026. Phase 2 (Notifications and Activity) done Sep 14 2026**; see the decisions log and the "as delivered" notes under section 9. Phases 3 to 8 are not started.
+Status: planning approved Sep 8 2026. **Phase 0 (Foundations) done Sep 10 2026. Phase 1 (Submissions and Grading Queue) done Sep 10 2026. Phase 2 (Notifications and Activity) done Sep 14 2026**; see the decisions log and the "as delivered" notes under section 9. **Phases 3 to 8 move to the new stack (2026-09-23):** phases 3 and 4 (checkpoints, tests), the target data model from phase 5 and certificates from phase 8 are built as part of the Render + Postgres migration before cutover; the builders (6), lesson editor (7) and Settings/cleanup follow after cutover. See [MIGRATION-PLAN.md](MIGRATION-PLAN.md). The "stay a static site" guideline in section 2 and everything Firebase-specific are superseded; the goals, data model, UX guidelines and test-first rule carry over. The Firebase site gets bug fixes only until cutover.
 Companion document: [CHECKPOINT-DELIVERABLES.md](CHECKPOINT-DELIVERABLES.md) lists every checkpoint and the form fields it gets.
 
 Vocabulary: Topher says "certificate" for what the code calls a course. This document says **certificate (course)** where it matters; identifiers in code stay `courseId`.

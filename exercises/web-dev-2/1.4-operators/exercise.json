@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-2",
+  "number": "1.4",
+  "title": "JavaScript Comparison, Logic, and Assignment Operators",
+  "kind": "exercise",
+  "language": "javascript",
+  "runner": "none",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-II-1.4-Operators",
+    "commit": "747810702646ef83c5bae8c477e50cdc05946dff"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "c_527fd0acb6",
+  "item_id": "i_ca7f8759dc",
+  "course_id": "office-software",
+  "legacy_path": "computer-basics/office-software/word_processors/practice-word_processors.html",
+  "exercise": null,
+  "title": "Practice: Word Processors",
+  "preset": null,
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "document_file",
+      "type": "file",
+      "label": "Upload your completed \"Frogs\" document",
+      "accept": [
+        ".docx",
+        ".pdf"
+      ],
+      "multiple": false,
+      "required": false
+    },
+    {
+      "id": "document_url",
+      "type": "url",
+      "label": "Or share a link to your document",
+      "required": false
+    }
+  ],
+  "required_one_of": [
+    [
+      "document_file",
+      "document_url"
+    ]
+  ],
+  "instructions_html": "<div class=\"activity\">\n      <h2>Activity: Creating and Formatting a Document</h2>\n      <p>Follow the steps below to practice using a word processor. You may use Google Docs or Microsoft Word.</p>\n\n      <ol>\n        <li><strong>Create a new document</strong> and name it <strong>“Frogs”</strong>.</li>\n        <li><strong>Copy and paste</strong> the following text into the document:\n          <blockquote>\n            <p>Frogs are fascinating amphibians known for their jumping abilities, croaking sounds, and bulging eyes. They are found on every continent except Antarctica and come in a remarkable variety of sizes, colors, and habitats.</p>\n            <p>Frogs play a crucial role in the ecosystem. As both predator and prey, they help control insect populations and serve as food for a variety of creatures. They are also considered indicator species, meaning their health reflects the health of the ecosystem they inhabit.</p>\n            <p>One of the most notable characteristics of frogs is their life cycle, known as metamorphosis. They start life as eggs, then become tadpoles (which are aquatic and breathe through gills), and eventually transform into adult frogs that can live on land and breathe air.</p>\n            <p>Frogs have permeable skin, which means they can absorb water and oxygen through their skin. This is why they are often found near bodies of water. However, some species have adapted to live in trees, underground, or even in deserts.</p>\n            <p>Despite their adaptability, many frog species are currently under threat due to habitat loss, pollution, climate change, and a deadly fungal disease known as chytridiomycosis. Conservation efforts are ongoing worldwide to protect these vital creatures.</p>\n          </blockquote>\n        </li>\n        <li><strong>Format the title “Frogs”</strong> so it is larger than the body text. Use paragraph styles or manually increase the font size and make it bold.</li>\n        <li><strong>Indent</strong> the first line of each paragraph using the <kbd>Tab</kbd> key.</li>\n        <li><strong>Set the line spacing</strong> of the body text to <strong>double spacing</strong> (2.0).</li>\n        <li><strong>Add a bulleted list</strong> below the last paragraph with at least three fun facts about frogs. For example:\n          <ul>\n            <li>The glass frog has translucent skin, allowing you to see its internal organs.</li>\n            <li>The golden poison dart frog has enough poison to kill 10 grown men.</li>\n            <li>The wood frog can survive being frozen solid during winter.</li>\n          </ul>\n        </li>\n        <li><strong>Add a header</strong> to your document with your name and the date.</li>\n        <li><strong>Use Find and Replace</strong> (<kbd>Ctrl</kbd> + <kbd>H</kbd>) to replace the word “frogs” with “tree frogs” throughout the document. Observe the changes. Then undo the replacement with <kbd>Ctrl</kbd> + <kbd>Z</kbd>.</li>\n        <li><strong>Add a hyperlink</strong> to the word “chytridiomycosis” in the last paragraph. Link it to an article about the disease (search online for a reference). Use <kbd>Ctrl</kbd> + <kbd>K</kbd> to insert the link.</li>\n        <li><strong>Insert an image</strong> of a frog from the web into the document. Resize and position it as desired. Experiment with different text wrapping options.</li>\n      </ol>\n\n      <p>Submit your work with the form below.</p>\n    </div>\n\n    \n    <img src=\"/images/office-software/practice-word_processors_4.webp\" alt=\"Figure 4\">\n\n    <img src=\"/images/office-software/practice-word_processors_3.webp\" alt=\"Figure 3\">\n\n    <img src=\"/images/office-software/practice-word_processors_2.webp\" alt=\"Figure 2\">\n\n    <img src=\"/images/office-software/practice-word_processors_1.webp\" alt=\"Figure 1\">",
+  "starter_path": null,
+  "grading_hint": null
+}

@@ -1,0 +1,12 @@
+{
+  "course": "python-1",
+  "number": "2.3",
+  "title": "Loops",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-I-2.3-Loops",
+    "commit": "ac5f29c91ecc65e9936c6d75989209b8af0b38b8"
+  }
+}

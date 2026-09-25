@@ -1,0 +1,15 @@
+{
+  "name": "web-dev-2-1.3-variables",
+  "version": "1.0.0",
+  "description": "JavaScript Variables and Operations",
+  "main": "learn.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

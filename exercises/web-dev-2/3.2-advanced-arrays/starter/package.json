@@ -1,0 +1,15 @@
+{
+  "name": "web-dev-2-3.2-advanced-arrays",
+  "version": "1.0.0",
+  "description": "JavaScript Advanced Arrays",
+  "main": "learn.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

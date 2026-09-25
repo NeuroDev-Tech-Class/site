@@ -29,7 +29,7 @@ This is a **port, not a redesign**. LMS roadmap phases 3-8 (`docs/LMS-ROADMAP.md
 - No deploys, no DNS, no Firebase deletions, no sending email to real users. Topher does cutover.
 - Ask rather than guess; record answers under "Decisions" at the bottom of this file.
 
-## Stage A — accounts for non-staff (done in `../neurodev-hub`, separate PR there)
+## Stage A — accounts for non-staff (SUPERSEDED 2026-09-23: the tech site has its own `tech.accounts`; see Decisions)
 
 The hub's auth currently admits only `@neurodevmentoring.com` Google accounts. Students need to sign in to the tech site with the same central accounts.
 
@@ -103,4 +103,26 @@ Each PR is independently reviewable and leaves `main` working.
 
 ## Decisions
 
-(append here)
+Full plan with the work breakdown: `docs/MIGRATION-PLAN.md`.
+
+| Date | Topic | Decision |
+|---|---|---|
+| 2026-09-23 | Port vs upgrade | **Not a straight port.** The LMS roadmap's target model (stable IDs, content in Postgres, item-level progress) is built directly. Before cutover: checkpoints (36 pages + all 58 GitHub Classroom exercises), native tests replacing the 13 Google Forms, PDF certificates, and the five `NeuroDevNotes.md` items. After cutover: the course/test/checkpoint builders, the lesson editor, Settings, cleanup. Supersedes "This is a port, not a redesign" and "LMS roadmap phases 3-8 are paused" above. |
+| 2026-09-23 | Content | Postgres is the source of truth, served by the API behind a real login check. Home, catalog, resources and course overviews are public; lessons, videos, slides, checkpoints and tests need an approved account. The extractor's JSON (`content/`) is committed: import input, build-time catalog source, backup. Supersedes "static Astro pages generated from" the lesson files in Stage C. |
+| 2026-09-23 | Auth | **Own auth, not the hub's.** `tech.accounts` / `tech.sessions`, refresh cookie `nd_tech_refresh`, token type `tech_access`; tech tokens are rejected by hub routes and hub tokens by tech routes. Google + email/password (IDEA's password, verification-code and reset flows ported). Stage A is dropped; `core.accounts` is not changed. |
+| 2026-09-23 | Hub staff access | One way. Google sign-in on the tech site by an active hub Super Admin gives tech superadmin; hub Admin or Tech Coach gives tech admin. Re-checked on every sign-in and refresh by a read-only query of `core.accounts`. Only tech superadmins add or remove tech-only admins. Tech accounts can never open hub routes. |
+| 2026-09-23 | File storage | Cloudflare R2 behind `app/tech/storage.py` (local-filesystem implementation for dev and tests), presigned upload and download URLs. |
+| 2026-09-23 | Media | Required: Mark complete stays disabled until every YouTube video on the item is about 90% watched, enforced by the API too. Admins see percent watched per student. Slides and links record "opened" only. |
+| 2026-09-23 | Completion | Every item page ends in a button. Readings, videos, slides: Mark complete, then back to the course page scrolled to that unit with the item ticked. Checkpoints and tests: Submit. A checkpoint is done when graded Complete; Returned reopens it. A test is done when submitted. |
+| 2026-09-23 | Checkpoint grading | Complete / Return, no points. Tests keep points and the 70% pass. |
+| 2026-09-23 | Email | Resend from a new `mail.neurodevmentoring.com` sending domain (Labs is IDEA-only per the Sep 22 meeting). Mailpit locally. |
+| 2026-09-23 | Hands-on exercises | All 5 rewritten in the student's voice and turned into checkpoints; Topher approves each rewrite. |
+| 2026-09-23 | Certificates | Server-generated PDF from a template recreated from `Certificate-Template.docx`, stored in R2, emailed, downloadable by the student. |
+| 2026-09-23 | Accreditation | Not yet discussed with Mandy; not a blocker. Every progress event, submission and grade is timestamped, activity is append-only with CSV export. Revisit before the production import. |
+| 2026-09-23 | Live updates | Polling every 30 s while the tab is visible. Unread count is a query on a partial index; `tech.counters` is dropped. |
+| 2026-09-23 | Superadmin | Tech superadmin comes only from being the hub Super Admin (`topher@neurodevmentoring.com`). `neurodevtechcoach@gmail.com`, the old hardcoded Firebase superadmin, becomes an ordinary tech admin at import. A hub-derived account that loses its hub role is deactivated on its next sign-in or refresh; a tech superadmin can reactivate it. |
+| 2026-09-23 | Sender | `NeuroDev Tech Class <notifications@mail.neurodevmentoring.com>`, Reply-To `neurodevtechcoach@gmail.com`. Domain verified in Resend and Google OAuth tech callback URIs added (prod + localhost:8001) by Topher. |
+| 2026-09-23 | Rate limits behind Render | The hub had no proxy-headers middleware, so every request shared the proxy's IP and one rate-limit bucket. Fixed in Phase 1 (uvicorn `ProxyHeadersMiddleware`, as IDEA does). |
+| 2026-09-24 | Coding exercises | GitHub Classroom is retired. The 58 exercise repos moved into this repo as `exercises/` (edited here from now on; the org repos are archived after cutover). Students download the starter from the site, push to their own GitHub repo (a test workflow gives them a green check or red X) and submit the repo link. CI proves every exercise's tests run. |
+| 2026-09-24 | Content fixes | Made only in the extracted copy (`tools/extract/overrides/`), never in the live site's files, until cutover. Rewrites approved by Topher: the Digital Literacy hands-on exercises, Generative AI exercises, Responsible AI Use, and a new IT Hardware hands-on exercise replacing the BIOS duplicate. PEP-8 comes from its repo's `lesson.md`. |
+| 2026-09-23 | Timeline | No deadline. Firebase site untouched until one cutover window; Firebase read-only for 30 days after. |

@@ -1,0 +1,12 @@
+{
+  "course": "web-dev-3",
+  "number": "1.4",
+  "title": "Audio in Web Development",
+  "kind": "exercise",
+  "language": "web",
+  "runner": "none",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/WebDev-III-1.4-Audio",
+    "commit": "bd4102ee17e953d36135e624a65b5cb33fa3d8b6"
+  }
+}

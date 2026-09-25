@@ -1,0 +1,50 @@
+{
+  "id": "c_07d569448e",
+  "item_id": "i_2c13e8b521",
+  "course_id": "blender-zbrush-mini",
+  "legacy_path": "game-development/blender-zbrush/unit1/activity_create_a_scene.html",
+  "exercise": null,
+  "title": "Activity: Create a 3D Scene",
+  "preset": null,
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "blend_file",
+      "type": "file",
+      "label": "Upload your .blend project file",
+      "accept": [
+        ".blend"
+      ],
+      "multiple": false,
+      "required": true
+    },
+    {
+      "id": "render_image",
+      "type": "image",
+      "label": "Upload your rendered screenshot (PNG)",
+      "multiple": false,
+      "required": true
+    },
+    {
+      "id": "checklist",
+      "type": "checklist",
+      "label": "Requirements Checklist — before submitting, make sure you can check off every item",
+      "items": [
+        "At least 3 different modeled objects in the scene",
+        "Extrude (E) used on at least 2 objects",
+        "Inset (I) used on at least 2 objects",
+        "Loop Cut (Ctrl+R) used on at least 2 objects",
+        "Each object has a different material color",
+        "Objects are arranged into a logical, coherent scene",
+        "Camera is positioned to frame the scene",
+        "A rendered screenshot (PNG) is saved and submitted",
+        "The .blend project file is saved and submitted"
+      ],
+      "required": true
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>Overview</h2>\n  <p>\n    In this activity, you'll use everything you've learned so far — navigation, transforms, Edit Mode, Extrude, Inset, Loop Cut, and materials — to create a <strong>complete 3D scene</strong> in Blender. This is your chance to be creative and show off your new skills!\n  </p>\n  <p>\n    Your scene should represent a small environment, like a <strong>desk setup</strong>, a <strong>room corner</strong>, a <strong>kitchen counter</strong>, or an <strong>outdoor picnic area</strong>. The theme is up to you.\n  </p>\n\n  <h2>Requirements</h2>\n  <p>Your scene must include the following:</p>\n\n  <h3>1. At Least 3 Different Objects</h3>\n  <p>\n    Model at least three distinct objects. They can be simple — we're not looking for movie-quality realism. Here are some ideas based on difficulty:\n  </p>\n\n  <table>\n    <thead>\n      <tr>\n        <th>Easier</th>\n        <th>Medium</th>\n        <th>Challenging</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>Table</td>\n        <td>Chair</td>\n        <td>Lamp with shade</td>\n      </tr>\n      <tr>\n        <td>Bookshelf</td>\n        <td>Mug / Cup</td>\n        <td>Computer monitor</td>\n      </tr>\n      <tr>\n        <td>Box / Crate</td>\n        <td>Book (open or closed)</td>\n        <td>Desk with drawers</td>\n      </tr>\n      <tr>\n        <td>Step stool</td>\n        <td>Plate</td>\n        <td>Game controller</td>\n      </tr>\n      <tr>\n        <td>Bench</td>\n        <td>Pencil / Pen</td>\n        <td>Robot character</td>\n      </tr>\n    </tbody>\n  </table>\n\n  <div class=\"tip\">\n    <strong>Tip:</strong> Start with the easiest objects and work your way up. It's better to have three well-made simple objects than one rushed complex one.\n  </div>\n\n  <h3>2. Use Extrude, Inset, and Loop Cut</h3>\n  <p>\n    At least <strong>2 of your objects</strong> must demonstrate the use of:\n  </p>\n  <ul>\n    <li><strong>Extrude</strong> (<kbd>E</kbd>) — to create legs, handles, raised or recessed features</li>\n    <li><strong>Inset</strong> (<kbd>I</kbd>) — to add panel details, screen areas, or decorative elements</li>\n    <li><strong>Loop Cut</strong> (<kbd>Ctrl</kbd>+<kbd>R</kbd>) — to add geometry for more detailed shapes</li>\n  </ul>\n  <p>\n    You don't need to use all three tools on every object, but across your scene, all three should be demonstrated on at least two objects.\n  </p>\n\n  <h3>3. Apply Materials</h3>\n  <p>\n    Each object in your scene must have a <strong>different material color</strong>. For example:\n  </p>\n  <ul>\n    <li>A brown table</li>\n    <li>A red mug</li>\n    <li>A blue book</li>\n  </ul>\n  <p>\n    You're welcome to use multiple materials on a single object (like a black screen on a silver monitor) for bonus points.\n  </p>\n\n  <h3>4. Arrange Into a Scene</h3>\n  <p>\n    Don't just leave objects scattered randomly. <strong>Arrange them</strong> into a believable scene. Place objects on top of each other, next to each other, or in logical positions. A mug on a table looks like a scene — a mug floating in empty space does not.\n  </p>\n  <p>\n    Use <kbd>G</kbd> (grab/move) to position objects. Use <kbd>R</kbd> (rotate) to angle them naturally. Use <kbd>S</kbd> (scale) to make sure objects are proportional to each other.\n  </p>\n\n  <h3>5. Render a Screenshot</h3>\n  <p>\n    When your scene is complete:\n  </p>\n  <ol>\n    <li>Position the <strong>camera</strong> to frame your scene nicely (select the camera, then use <kbd>G</kbd> and <kbd>R</kbd> to place it, or press <kbd>Numpad 0</kbd> to enter camera view and use <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Numpad 0</kbd> to snap the camera to your current view)</li>\n    <li>Switch to <strong>Material Preview</strong> or <strong>Rendered</strong> shading mode so materials are visible</li>\n    <li>Go to <strong>Render &gt; Render Image</strong> (or press <kbd>F12</kbd>)</li>\n    <li>In the render window, go to <strong>Image &gt; Save As</strong> to save your render as a PNG file</li>\n  </ol>\n\n  <h2>Requirements Checklist</h2>\n  <p>Before submitting, make sure you can check off every item:</p>\n\n  <table>\n    <thead>\n      <tr>\n        <th>✓</th>\n        <th>Requirement</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>☐</td>\n        <td>At least 3 different modeled objects in the scene</td>\n      </tr>\n      <tr>\n        <td>☐</td>\n        <td>Extrude (<kbd>E</kbd>) used on at least 2 objects</td>\n      </tr>\n      <tr>\n        <td>☐</td>\n        <td>Inset (<kbd>I</kbd>) used on at least 2 objects</td>\n      </tr>\n      <tr>\n        <td>☐</td>\n        <td>Loop Cut (<kbd>Ctrl</kbd>+<kbd>R</kbd>) used on at least 2 objects</td>\n      </tr>\n      <tr>\n        <td>☐</td>\n        <td>Each object has a different material color</td>\n      </tr>\n      <tr>\n        <td>☐</td>\n        <td>Objects are arranged into a logical, coherent scene</td>\n      </tr>\n      <tr>\n        <td>☐</td>\n        <td>Camera is positioned to frame the scene</td>\n      </tr>\n      <tr>\n        <td>☐</td>\n        <td>A rendered screenshot (PNG) is saved and submitted</td>\n      </tr>\n      <tr>\n        <td>☐</td>\n        <td>The .blend project file is saved and submitted</td>\n      </tr>\n    </tbody>\n  </table>\n\n  <h2>Submission</h2>\n  <p>Submit the following files:</p>\n  <ol>\n    <li>Your <strong>.blend file</strong> (the Blender project)</li>\n    <li>Your <strong>rendered screenshot</strong> (PNG image)</li>\n  </ol>\n\n  <div class=\"tip\">\n    <strong>Have fun with it!</strong> This is a creative project. Add extra objects, experiment with different materials, try unusual color combinations. The more you practice, the faster you'll get. There's no wrong way to build a scene as long as you meet the requirements.\n  </div>\n\n  <div class=\"warning\">\n    <strong>Save frequently!</strong> Press <kbd>Ctrl</kbd>+<kbd>S</kbd> after every major step. There's nothing worse than losing an hour of work because you forgot to save.\n  </div>",
+  "starter_path": null,
+  "grading_hint": null
+}

@@ -1,0 +1,8 @@
+---
+import AuthPage from '../layouts/AuthPage.astro'
+import SignInForm from '../components/auth/SignInForm'
+---
+
+<AuthPage title="Sign in">
+  <SignInForm client:only="react" />
+</AuthPage>

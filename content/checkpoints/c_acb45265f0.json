@@ -1,0 +1,28 @@
+{
+  "id": "c_acb45265f0",
+  "item_id": "i_e86cb352b5",
+  "course_id": "digital-literacy",
+  "legacy_path": "computer-basics/digital-literacy/unit3/hands-on_exercise-email_account.html",
+  "exercise": null,
+  "title": "Hands-on Exercise: Setting Up an Email Account",
+  "preset": null,
+  "requires_sign_off": true,
+  "fields": [
+    {
+      "id": "folder_explanations",
+      "type": "longText",
+      "label": "Explain what each of these folders is for: Inbox, Starred, Snoozed, Sent, Drafts, Spam, and Trash.",
+      "required": true
+    },
+    {
+      "id": "signoff_email_sent",
+      "type": "mentorSignOff",
+      "label": "Confirms the student sent the tech coach a professional email, with good etiquette and an attached file under 25MB, from their new account",
+      "required": true
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<p>Let's create a junk mail account for practice. Use it for newsletters, online registrations, subscriptions and promotions. That keeps unwanted emails out of your main inbox and helps keep it organized.</p>\n\n<div class=\"activity\">\n  <h2>Email Account Setup</h2>\n\n  <ol>\n    <li><strong>Choose an email service</strong> (Gmail, Outlook, ProtonMail, Yahoo Mail, and so on). These steps assume Gmail, but they're similar for any provider.</li>\n    <li><strong>Create an account:</strong>\n      <ol type=\"a\">\n        <li>Use a search engine to find the provider's homepage, then click the button that says \"Create an account\" or \"Sign up.\"</li>\n        <li>Fill out the required information. Choose a good email address and a strong password. Consider a password manager such as Google Chrome's built-in one, or the one on your phone. Don't reuse passwords!</li>\n        <li>Set up two-factor authentication with your phone number or a recovery email address. It makes your account more secure and gives you a way back in if you forget your password.</li>\n      </ol>\n    </li>\n    <li><strong>Use your new email account</strong> to sign in to a site such as YouTube or Amazon to make sure it works.</li>\n    <li><strong>Send the tech coach an email</strong> at <a href=\"mailto:neurodevtechcoach@gmail.com\">neurodevtechcoach@gmail.com</a>. Use professional email etiquette: a helpful subject line, a proper greeting and ending, and good spelling and grammar. Attach a file under 25 MB.</li>\n    <li><strong>Explore your email's interface:</strong>\n      <ol type=\"a\">\n        <li>Look at your Inbox, Starred, Snoozed, Sent, Drafts, Spam and Trash folders. You'll explain what each one is for in the form below.</li>\n        <li>Use the search bar to find a specific email. Try keywords, and try the advanced search options to look for a sender or recipient, a date range, or emails with attachments.</li>\n        <li>Personalize your settings with the gear icon in the upper right. Try the different densities. Create an email signature. Change your label settings to show the Trash folder instead of hiding it, and your inbox settings to show unread messages first.</li>\n      </ol>\n    </li>\n  </ol>\n</div>\n\n<div class=\"tip\">\n  <strong>Optional but recommended:</strong> Switch to your main email account. Find some spam or other unimportant email in your inbox. Open it, click the three dots and choose \"Filter messages like these.\" Create a filter that marks those messages as read, and tick \"Also apply filter to matching conversations.\"\n</div>\n\n<p>When you're done, answer the question in the form below. Your coach will confirm your email arrived.</p>",
+  "starter_path": null,
+  "grading_hint": null
+}

@@ -1,0 +1,34 @@
+{
+  "id": "c_fb47974390",
+  "item_id": "i_e0ca516410",
+  "course_id": "python-1",
+  "legacy_path": null,
+  "exercise": "python-1/1.6-strings",
+  "title": "String Manipulation",
+  "preset": "github-exercise",
+  "requires_sign_off": false,
+  "fields": [
+    {
+      "id": "repo_url",
+      "type": "url",
+      "label": "Link to your GitHub repository",
+      "required": true,
+      "help": "It looks like https://github.com/your-username/your-repository"
+    },
+    {
+      "id": "notes",
+      "type": "longText",
+      "label": "Anything you want your coach to know?",
+      "required": false
+    }
+  ],
+  "required_one_of": [],
+  "instructions_html": "<h2>String Manipulation</h2>\n<p>There are many ways to manipulate strings in helpful ways.</p>\n<hr>\n<h3>Concatenation</h3>\n<p>Concatenation means chaining two strings together.</p>\n<pre><code class=\"language-python\">str1 = \"Hello\"\nstr2 = \"world\"\nstr3 = str1 + \" \" + str2\nprint(str3)\n</code></pre>\n<p>We define two string variables <code>str1</code> and <code>str2</code>, and use the <code>+</code> operator to concatenate them together, along with a space in between.<br>The resulting string is stored in a new variable <code>str3</code>, which is then printed to the console.</p>\n<hr>\n<h3>Slicing</h3>\n<p>Slicing means extracting a portion of a string.</p>\n<pre><code class=\"language-python\">str4 = \"Python is awesome\"\nprint(str4[0:6])   # Prints \"Python\" (characters 0-5)\nprint(str4[7:9])   # Prints \"is\" (characters 7-8)\nprint(str4[10:17]) # Prints \"awesome\" (characters 10-16)\n</code></pre>\n<p>We define a string variable <code>str4</code> and use square brackets <code>[]</code> to slice the string into substrings.</p>\n<p>In Python, indexing starts at 0, so the first character of a string is at index 0, the second is at index 1, and so on.<br>When slicing, the starting index is <strong>inclusive</strong>, and the ending index is <strong>exclusive</strong>.</p>\n<hr>\n<h3>Formatting</h3>\n<p>Formatting allows you to insert values into a string. There are several methods to do this.</p>\n<pre><code class=\"language-python\">name = \"Hayden\"\nage = 29\n</code></pre>\n<h4>Using the <code>%</code> Operator</h4>\n<pre><code class=\"language-python\">print(\"My name is %s and I am %d years old.\" % (name, age))\n</code></pre>\n<p>The <code>%</code> operator uses special formatting codes to insert values into the string.  </p>\n<ul>\n<li><code>%s</code> for strings  </li>\n<li><code>%d</code> for integers  </li>\n<li><code>%f</code> for floats</li>\n</ul>\n<h4>Using <code>str.format()</code></h4>\n<pre><code class=\"language-python\">print(\"My name is {} and I am {} years old.\".format(name, age))\n</code></pre>\n<p>The <code>str.format()</code> method allows inserting values by placing them inside <code>{}</code>.<br>You can use positional or keyword arguments to specify which values go where.</p>\n<h4>Using f-Strings</h4>\n<pre><code class=\"language-python\">print(f\"My name is {name} and I am {age} years old.\")\n</code></pre>\n<p><strong>f-strings</strong> are formatted string literals that begin with <code>f</code>.<br>You can embed variables or even expressions directly inside <code>{}</code>.</p>\n<hr>\n<h3>Additional Tricks for Formatting Strings</h3>\n<h4>New Lines</h4>\n<p>The <code> </code> character represents a <strong>newline</strong> (line break) in the output.</p>\n<pre><code class=\"language-python\">print(\"\\nI \\nlove \\nPython\")\n</code></pre>\n<p>Output:</p>\n<pre><code>I\nlove\nPython\n</code></pre>\n<hr>\n<h3>Helpful String Methods</h3>\n<h4><code>.upper()</code></h4>\n<p>Converts a string into uppercase.</p>\n<pre><code class=\"language-python\">name = \"roo\"\nname = name.upper()\nprint(name)\n</code></pre>\n<h4><code>.strip()</code></h4>\n<p>Removes whitespace from the beginning and end of a string.</p>\n<pre><code class=\"language-python\">game = \"Minecraft     \"\nprint(game, \"is fun.\")\ngame = game.strip()\nprint(game, \"is fun.\")\n</code></pre>\n<h4><code>.count()</code></h4>\n<p>Returns the number of times a specified value occurs in a string.</p>\n<pre><code class=\"language-python\">sentence = \"The quick brown fox jumps over the lazy dog.\"\ne_count = sentence.count(\"e\")\nprint(e_count)\n</code></pre>\n<h2>Hand it in</h2>\n<ol>\n<li>Download the starter files from this page and unzip them into a new folder.</li>\n<li>Make a new repository on GitHub and push your folder to it. (GitHub Basics, the first exercise in Python I, walks through this.)</li>\n<li>Run the tests yourself with <code>pytest</code>. When you push, GitHub runs them too: a green check next to your latest commit means they pass, a red X means something still needs work.</li>\n<li>Submit the link to your repository with the form below.</li>\n</ol>",
+  "starter_path": "exercises/python-1/1.6-strings/starter",
+  "grading_hint": {
+    "runner": "pytest",
+    "tests": [
+      "exercises/python-1/1.6-strings/starter/tests/test_exercise.py"
+    ]
+  }
+}

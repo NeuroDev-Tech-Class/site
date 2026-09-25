@@ -1,0 +1,8 @@
+---
+import AuthPage from '../layouts/AuthPage.astro'
+import RegisterForm from '../components/auth/RegisterForm'
+---
+
+<AuthPage title="Create an account">
+  <RegisterForm client:only="react" />
+</AuthPage>

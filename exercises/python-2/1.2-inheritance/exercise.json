@@ -1,0 +1,12 @@
+{
+  "course": "python-2",
+  "number": "1.2",
+  "title": "Inheritance in Python",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-II-1.2-Inheritance",
+    "commit": "48491e231c2a30a2024ba1a98067e6ab739b7ef1"
+  }
+}

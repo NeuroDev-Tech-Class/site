@@ -1,0 +1,12 @@
+{
+  "course": "python-2",
+  "number": "2.4",
+  "title": "Turtle Graphics",
+  "kind": "exercise",
+  "language": "python",
+  "runner": "pytest",
+  "source": {
+    "repo": "NeuroDev-Tech-Class/Python-II-2.4-Turtle",
+    "commit": "25f18fcb95c22caa740ce35ac0659ddd37dc8c25"
+  }
+}

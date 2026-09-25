@@ -1,0 +1,15 @@
+{
+  "name": "web-dev-2-1.1-syntax-basics",
+  "version": "1.0.0",
+  "description": "JavaScript Syntax",
+  "main": "learn.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
