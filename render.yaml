@@ -3,18 +3,19 @@
 # One free static site. The backend is the hub's `hub-backend` service (routes under /api/v1/tech/*),
 # so this repo has no web service, no database and no Postgres role of its own.
 #
-# First-time setup: Render dashboard > New > Blueprint > this repo, branch `render-migration` > Apply.
+# First-time setup: Render dashboard > New > Blueprint > this repo, branch `main` > Apply.
 # Then move the service into the "Tech Class" environment of the NeuroDev project (the blueprint can't do that),
 # and add the `tech` CNAME in the neurodevmentoring.com zone pointing at the host Render shows under
 # Settings > Custom Domains. See docs/RENDER-SETUP.md.
 #
-# Until cutover the blueprint follows `render-migration`; switch `branch` to `main` when the old site is retired.
+# Deploys from `main` (render-migration is merged into main as each phase lands). The old GitHub Pages site
+# also deploys from `main`; `.nojekyll` at the repo root keeps Pages from running Jekyll over web/ and content/.
 
 services:
   - type: web
     name: tech-frontend
     runtime: static
-    branch: render-migration
+    branch: main
     # Built from the repo root, not `rootDir: web`, because the Astro build imports ../content/*.json
     # and copies ../assets/images before building.
     buildCommand: cd web && npm ci && npm run build
