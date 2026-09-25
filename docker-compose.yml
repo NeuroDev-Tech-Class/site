@@ -8,6 +8,8 @@ services:
     volumes:
       - .:/app
       - web_node_modules:/app/web/node_modules
+      # Hides the extractor's root node_modules so web/ sees only its own packages, as it does in CI
+      - /app/node_modules
     ports:
       - "4321:4321"
     environment:
