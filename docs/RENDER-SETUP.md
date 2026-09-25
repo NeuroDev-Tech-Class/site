@@ -8,9 +8,9 @@ Written 2026-09-25, when Phase 4 was done. Steps marked **(Topher)** need his Re
 
 ## 1. First deploy (once)
 
-1. **(Topher)** Commit and push `render.yaml` and this file on `render-migration`.
+1. **(Topher)** Commit and push `render.yaml`, `.nojekyll` and this file, and merge to `main`.
 2. **(Topher)** Render dashboard > **New > Blueprint** > repository `NeuroDev-Tech-Class/site` > branch
-   **`render-migration`** > Apply. Render creates `tech-frontend` and runs the first build
+   **`main`** > Apply. Render creates `tech-frontend` and runs the first build
    (`cd web && npm ci && npm run build`, publishing `web/dist`). It lands "ungrouped".
 3. **(Topher)** Move it into the **Tech Class** environment of the NeuroDev project (service > Settings, or the
    environment's "Add service"). Blueprints can't place a service in an environment.
@@ -41,9 +41,9 @@ expected, not a bug.
 
 ## 4. Every later deploy
 
-Push to `render-migration` and Render rebuilds automatically, but only when something under `web/`, `content/`,
-`assets/images/` or `render.yaml` changed (`buildFilter`). Nothing is deployed from `main` until cutover; at
-cutover change `branch` in `render.yaml` to `main` (Phase 15, `CUTOVER.md`).
+Merge to `main` and Render rebuilds automatically, but only when something under `web/`, `content/`,
+`assets/images/` or `render.yaml` changed (`buildFilter`). `main` also feeds the old GitHub Pages site until cutover: `.nojekyll` at the repo root stops Pages from running
+Jekyll over `web/` and `content/` (Astro's `---` front matter broke the Pages build on 2026-09-25).
 
 ## 5. Checks after the first deploy
 
