@@ -18,7 +18,7 @@ Work the phases in number order. Each phase ends with Topher's review, the manua
 |---|---|---|---|---|
 | 1 | Tech accounts and sign-in (email/password, Google, hub staff access, account admin, email service) | hub | none | [x] 2026-09-24 |
 | 2 | Content extractor + content fixes + hands-on rewrites (content JSON committed) | site | none | [x] 2026-09-24 |
-| 3 | Astro site shell: theme, header/footer, public pages, sign-in pages | site | 1 | [ ] |
+| 3 | Astro site shell: theme, header/footer, public pages, sign-in pages | site | 1 | [x] 2026-09-24 |
 | 4 | Content in the database + read API (catalog public, lessons behind login) | hub | 2 | [ ] |
 | 5 | Progress + video watch tracking | hub | 4 | [ ] |
 | 6 | Student pages: course page, item pages with Mark complete, catalog progress, My Courses | site | 3, 5 | [ ] |
@@ -175,6 +175,13 @@ Two repos. Hub work goes on the existing `tech-class` branch (currently equal to
 - Layout, header, footer, theme toggle; static Home, Catalog (from `content/`), Resources; auth island (sign in, register, verify code, forgot/reset, pending, declined).
 - Pure modules from `assets/js/lib/` (escape-html, html, format, grade, submissions, notifications) converted to TypeScript **with their tests**.
 - A build test that fails if `/site/` appears anywhere in `dist/`.
+
+*As delivered (2026-09-24)*: `web/` is Astro 7.3 (static) + React 19.3 + Tailwind 4.3 + TS 5.9, run through the `web` service in `docker-compose.yml`; 105 unit/component tests and 59 checks on the built pages, all in the `Migration` CI job.
+- **Look**: the old layout (big logo, Home / Course Catalog / Resources) in the hub's colours; dark by default with a "Switch to light theme" button; skip link, 44px targets, visible focus, reduced motion. `<ClientRouter />` keeps the session in memory between pages, so the hub is asked once per full page load.
+- **Public pages** from `content/`: Home (copy approved by Topher: accounts instead of a password, Mark complete, tests and grading in the site), Catalog (six categories, a card per published course; `web-dev-1` hidden as a draft), Resources (Krita corrected to GIMP), a page per published course (overview, objectives, sanitised intro, units with a type label per item; a title prefix that repeats the label is dropped; notes shown in place), 404. Items are not links until Phase 6. `scripts/sync-assets.mjs` copies `assets/images` into `public/images` before dev and build.
+- **Sign-in**: `lib/api.ts` (port of the hub client), `lib/session.ts`, the header account menu (Sign in / Register; signed in: name, email, status, My courses, Dashboard for tech admins, Sign out) and six pages: `/sign-in`, `/register`, `/verify`, `/forgot-password`, `/reset-password` (also the admin invite's "set your password"), `/waiting`. Google sign-in returns through `/waiting?next=`, which forwards approved accounts on. Remember me dropped.
+- **Hub** (`tech-class`): tech auth limits sized for a classroom on one IP (login and verify 60/min, refresh 300/min, Google 60/min, register, resend, forgot, reset and change password 30/hour), with `tests/tech/test_rate_limits.py`.
+- **Changed from this plan**: only `format` was ported from `assets/js/lib/`. `grade`, `submissions` and `notifications` port with the phase that first uses them (7 and 10); `escape-html` and `html` are not needed, since React escapes text itself.
 
 ### Milestone 2: learning (read, progress, the 5 notes items)
 

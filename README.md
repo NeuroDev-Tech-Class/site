@@ -122,7 +122,25 @@ tools/extract/          reads the live site (courses/, assets/pdfs/) and exercis
                         courses.json patches a course page
 tools/exercises/        import-repos.mjs (the one-time Classroom import), verify.mjs, workflows/ (the test workflows)
 content/                generated, committed: catalog, courses, lessons, checkpoints, legacy-map, vocabulary, report.md
+web/                    the new site: Astro + React islands + Tailwind, served at tech.neurodevmentoring.com
+  src/pages/            Home, Catalog, Resources, courses/[id], the six sign-in pages, 404
+  src/lib/              content.ts (reads content/, sanitises), api.ts (hub client), session.ts, redirect.ts, format.ts
+  src/components/       header, footer, ThemeToggle, UserMenu, CourseStart, auth/ (the sign-in forms)
+  tests/build.test.ts   checks every page in dist/ (one h1, skip link, nav, no /site/, images exist, catalog links)
 ```
+
+The web site runs in Docker only (`docker-compose.yml` at the repo root; `node_modules` lives in a volume). Run these from the repo root, with the hub running for sign-in (`neurodev-hub`: `docker compose up`; API on 8001, Mailpit on 8026):
+
+| Command | Does |
+|---|---|
+| `docker compose up web` | dev server at http://localhost:4321 |
+| `docker compose run --rm web sh -c "npm run lint && npm run typecheck && npm test"` | ESLint, `astro check`, unit and component tests |
+| `docker compose run --rm web sh -c "npm run build && npm run test:build"` | builds `dist/` and checks the built pages |
+| `docker compose run --rm -p 4321:4321 web sh -c "npm run build && npx astro preview --ignore-lock --host"` | serves the production build |
+
+`--ignore-lock` is needed because a stopped preview leaves Astro's lock file in `web/.astro/`.
+
+The extractor and exercise commands run in WSL:
 
 | Command | Does |
 |---|---|
