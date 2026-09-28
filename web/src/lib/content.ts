@@ -140,3 +140,39 @@ export function unitHeading(heading: string): { number: string | null, title: st
   const match = heading.match(/^Unit (\d+):\s*(.+)$/)
   return match ? { number: match[1], title: match[2] } : { number: null, title: heading }
 }
+
+/** An item as the course page shows it; built at build time and handed to the CourseUnits island */
+export interface ItemView {
+  id: string
+  type: ItemType
+  label: string
+  title: string
+  // Notes only: their cleaned text, shown in place
+  html: string | null
+  exercise: boolean
+  counts: boolean
+}
+
+export interface UnitView {
+  id: string
+  number: string | null
+  title: string
+  description: string
+  items: ItemView[]
+}
+
+export function unitViews(course: Course): UnitView[] {
+  return course.units.map(unit => ({
+    id: unit.id,
+    ...unitHeading(unit.title),
+    description: unit.description,
+    items: unit.items.map(item => ({
+      id: item.id,
+      type: item.type,
+      ...itemLabel(item),
+      html: item.type === 'note' ? sanitize(String(item.payload.html ?? '')) : null,
+      exercise: isExercise(item),
+      counts: countsTowardProgress(item),
+    })),
+  }))
+}

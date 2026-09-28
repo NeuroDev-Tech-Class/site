@@ -8,6 +8,7 @@ import {
   publishedCatalog,
   sanitize,
   unitHeading,
+  unitViews,
   type Catalog,
   type Course,
   type Item,
@@ -92,6 +93,32 @@ describe('courseStats', () => {
 
   test.each([['digital-literacy', 34], ['gimp', 29]])('%s matches the hub progress total (%i)', (id, total) => {
     expect(courseStats(courses.find(c => c.id === id) as Course).items).toBe(total)
+  })
+})
+
+describe('unitViews', () => {
+  test('prepares each unit for the course page: number, labels, exercises, what counts, cleaned note text', () => {
+    const exercise = { ...item('note', null), id: 'i_ex', tags: ['exercise'], payload: { html: '<b onclick="x()">Exercise 1.1:</b> Try it.' } }
+    const course = {
+      units: [
+        { id: 'u_1', title: 'Unit 1: Basics', description: 'Start here.', items: [
+          { ...item('lesson', 'Reading - Layers'), id: 'i_r' },
+          exercise,
+          { ...item('note', null), id: 'i_n', payload: { html: 'Tip: save often.' } },
+          { ...item('test', 'Unit 1 Test'), id: 'i_t', status: 'needs_content' },
+        ] },
+        { id: 'u_2', title: 'Getting Started', description: '', items: [] },
+      ],
+    } as unknown as Course
+    const [basics, start] = unitViews(course)
+    expect({ ...basics, items: undefined }).toEqual({ id: 'u_1', number: '1', title: 'Basics', description: 'Start here.', items: undefined })
+    expect(basics.items).toEqual([
+      { id: 'i_r', type: 'lesson', label: 'Reading', title: 'Layers', html: null, exercise: false, counts: true },
+      { id: 'i_ex', type: 'note', label: 'Note', title: '', html: '<b>Exercise 1.1:</b> Try it.', exercise: true, counts: true },
+      { id: 'i_n', type: 'note', label: 'Note', title: '', html: 'Tip: save often.', exercise: false, counts: false },
+      { id: 'i_t', type: 'test', label: 'Test', title: 'Unit 1 Test', html: null, exercise: false, counts: false },
+    ])
+    expect(start).toEqual({ id: 'u_2', number: null, title: 'Getting Started', description: '', items: [] })
   })
 })
 
