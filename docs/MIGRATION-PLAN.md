@@ -240,6 +240,7 @@ Course builder, test builder, checkpoint builder with draft/publish validation (
 | During Phase 12 | Approve the certificate PDF design. |
 | Before Phase 14 prod run | Talk to Mandy (accreditation); run the Firebase export with `~/keys/github-deploy.json`. |
 | Cutover | Everything marked as his in `CUTOVER.md`. |
+| Cutover, after DNS points at Render | Rename the GitHub repo `site` to **`tech-class-website`** (display name "Tech Class Website"). Not before: the rename ends the `neurodev-tech-class.github.io/site/` Pages URL at once. Afterwards update local remotes (`git remote set-url origin …/tech-class-website.git`) and check the Render blueprint still shows the repo (GitHub redirects the old name, but relink it if Render lost it). |
 
 ## Docs updated in the first commit
 
