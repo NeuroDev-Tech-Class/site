@@ -1,5 +1,5 @@
 import { navigate } from 'astro:transitions/client'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   ApiError,
   completeItem,
@@ -13,6 +13,7 @@ import {
 } from '../../lib/api'
 import { slidesEmbedUrl, type ItemPageView } from '../../lib/content'
 import { useSession } from '../../lib/session'
+import { trackableSrc, useVideoTracking } from '../../lib/videoTracking'
 import Icon from '../Icon'
 
 // Mirrors the hub's REQUIRED_PERCENT and its refusal wording (app/tech/watch.py, progress.py)
@@ -47,7 +48,7 @@ function Content({ page, item }: { page: ItemPageView, item: ItemContent }) {
       <div className="overflow-hidden rounded-lg border border-(--border)">
         <iframe
           title={page.title}
-          src={`https://www.youtube-nocookie.com/embed/${content.youtube_id}`}
+          src={trackableSrc(`https://www.youtube.com/embed/${content.youtube_id}`, window.location.origin) ?? undefined}
           className="block aspect-video w-full border-0"
           allow="encrypted-media; picture-in-picture; fullscreen"
           allowFullScreen
@@ -157,6 +158,15 @@ export default function LearnItem({ page }: { page: ItemPageView }) {
   const setProgress = (progress: ItemProgress) =>
     setLoad(state => state.status === 'ready' ? { ...state, progress } : state)
 
+  const contentRef = useRef<HTMLDivElement>(null)
+  const onPercent = useCallback((videoId: string, percent: number) => setLoad(state => {
+    if (state.status !== 'ready') return state
+    const videos = state.progress.videos.map(v => v.video_id === videoId ? { ...v, percent: Math.max(v.percent, percent) } : v)
+    return { ...state, progress: { ...state.progress, videos } }
+  }), [])
+  const videoIds = load.status === 'ready' ? load.progress.videos.map(v => v.video_id) : []
+  useVideoTracking(contentRef, page.id, videoIds, approved && load.status === 'ready', onPercent)
+
   let body
   if (session.status !== 'signed-in') {
     body = (
@@ -186,7 +196,7 @@ export default function LearnItem({ page }: { page: ItemPageView }) {
 
   return (
     <>
-      <div className="mt-6">{body}</div>
+      <div ref={contentRef} className="mt-6">{body}</div>
       <div className="sticky bottom-0 z-10 mt-10 -mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-(--border) bg-(--panel) px-4 py-3">
         <Actions page={page} load={load} onChange={setProgress} />
         {page.next && (
