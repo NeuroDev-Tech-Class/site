@@ -26,7 +26,7 @@ Work the phases in number order. Each phase ends with Topher's review, the manua
 | 8 | Checkpoints + file uploads (R2) | hub | 7 | [ ] |
 | 9 | Checkpoint form | site | 6, 8 | [ ] |
 | 10 | Admin dashboard (Today, Queue, Grade, Students, Activity, Accounts, bell) | site | 7, 9 | [ ] |
-| 11 | Native tests (markdown import, runner, auto-grading) | hub + site | 10 | [ ] |
+| 11 | Native tests and slides (markdown import, test runner, auto-grading; the 9 Google Slides decks rebuilt in the site) | hub + site | 10 | [ ] |
 | 12 | Certificates (PDF, R2, email, student download) | hub + site | 10 | [ ] |
 | 13 | Accreditation review (Topher talks to Mandy; model adjusted if needed) | Topher | before 14 | [ ] |
 | 14 | Firebase export and import (dry runs, progress key mapping, coach account to admin) | hub | 1-12 | [ ] |
@@ -191,6 +191,7 @@ Two repos. Hub work goes on the existing `tech-class` branch (currently equal to
 - *As delivered (2026-09-25)*: migrations `0014_tech_content` and `0015_tech_content_real_shapes` (the first dry run of the real content showed 37 lessons without a subtitle, 2 lessons from `exercises/` without an old page, and `grading_hint` as `{runner, tests}` rather than text); `app/tech/sanitize.py` (nh3 0.3.7; all 358 real HTML pieces come through with identical text and the same images, code blocks, videos, links and tables); `scripts/import_tech_content.py` (create / update / skip / retire / restore; real import into `hub_dev`: 15 courses, 54 units, 120 lessons, 406 items, 94 checkpoints, and a second run skips every row); `app/routers/tech_content.py`. **Changed from the plan:** the course overview is the same for everyone (plus drafts for tech admins) and never carries an item's contents, not even for approved accounts; every item opens through `/items/{id}`, and Phase 5 supplies the per-student progress the course page needs. Tests are served as `needs_content` with no link to the old Google Form; checkpoints never send `grading_hint`, `exercise` or `starter_path` (only `has_starter`). Hub suite 465 tests. **Topher's task:** once `tech-class` is deployed, run the import against production (hub README, "Tech course content").
 
 **Phase 5. Hub: progress + media tracking (M)**: migration `tech_progress`; `POST /tech/items/{id}/complete` **refuses (409, with a reason) while a required video is under 90% watched**; `POST /tech/media/heartbeat` (throttled, monotonic `max_position`, rejects implausible jumps); course and overall percentages; admin view of a student's progress including watch %. Everyone, admins included, has their own progress.
+- *Planned in detail (2026-09-25, Topher)*: **every YouTube video on an item is required**, including the 21 embedded in 20 readings, not only the 29 video items. **Links** are done with Mark complete like readings, videos and slides (the item page records when the link was opened). **Students can un-mark** those four types; checkpoint and test status comes from grading and can't be un-marked. **Items marked `needs_content` (the 13 tests until Phase 11) are left out of percentages** and count once they have content; notes and retired items never count. Steps: 1. migration `0016_tech_progress` (`progress`, `media_views`); 2. heartbeat and watch-credit rules (credit only as fast as real time passes, throttled per video rather than per IP); 3. Mark complete / Mark not done, refused with the watch percentage while a required video is under 90%; 4. progress reads (my course, my courses, an admin's view of a student with watch %); 5. docs, tracker, memory.
 
 **Phase 6. Site: student islands (L)**
 - Course page `/courses/:id`: units with status words (Not started / Done / Submitted / Needs revision / Complete), anchor per unit, scroll to `#unit-...` and a highlight on the just-finished item.
@@ -212,6 +213,7 @@ Two repos. Hub work goes on the existing `tech-class` branch (currently equal to
 ### Milestone 4: tests and certificates
 
 **Phase 11. Hub + site: native tests (L)**: questions, answer keys (never serialised to students; a test proves it), auto-grading mc/tf/multi, provisional totals, attempts; a markdown import (roadmap section 8 format) as a script and an admin upload; the `test.html`-equivalent runner (all questions on one page, "4 of 12 answered", no timer, autosave, submit confirmation naming unanswered questions, result screen). **Topher re-authors the 13 quizzes** (export each Form's responses CSV first to keep the question text).
+- *Added 2026-09-25 (Topher)*: **slides move in too.** The 9 Google Slides decks are rebuilt inside the site, as the Forms are, so no course content lives on Google. How they are rebuilt (native slide pages authored in markdown, or an export of each deck) is decided when this phase is planned; item ids stay the same, so progress already recorded on a slides item carries over.
 
 **Phase 12. Certificates (M)**: a PDF from a template recreated from the `.docx` (pure-Python renderer that runs on Render's native Python runtime, chosen after checking current docs; no system libraries), stored in R2, emailed, a student download endpoint, revoke, and an "eligible" hint. **Topher approves the design.**
 
@@ -233,7 +235,7 @@ Course builder, test builder, checkpoint builder with draft/publish validation (
 | After Phase 4 (**2026-09-25**) | Put the static site up early to test live: commit `render.yaml` + `docs/RENDER-SETUP.md`, create the Blueprint from `render-migration`, move `tech-frontend` into the Tech Class environment, add the `tech` CNAME (add-only) once Render shows the target. Free; public pages work at once, sign-in after `tech-class` is merged and deployed, API data after the production content import. |
 | Before Phase 8 | Create a Cloudflare account, an R2 bucket and an API token; put the keys in the hub's Render env. |
 | During Phase 2 (**done 2026-09-24**) | Approved the exercise rewrites and the new hardware exercise; chose repo-link hand-in with downloadable starters; exercises moved into this repo. |
-| During Phase 11 | Export the 13 Forms' response CSVs and re-author the quizzes. |
+| During Phase 11 | Export the 13 Forms' response CSVs and re-author the quizzes; help rebuild the 9 slide decks. |
 | During Phase 12 | Approve the certificate PDF design. |
 | Before Phase 14 prod run | Talk to Mandy (accreditation); run the Firebase export with `~/keys/github-deploy.json`. |
 | Cutover | Everything marked as his in `CUTOVER.md`. |
