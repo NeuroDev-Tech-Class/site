@@ -21,7 +21,7 @@ Work the phases in number order. Each phase ends with Topher's review, the manua
 | 3 | Astro site shell: theme, header/footer, public pages, sign-in pages | site | 1 | [x] 2026-09-24 |
 | 4 | Content in the database + read API (catalog public, lessons behind login) | hub | 2 | [x] 2026-09-25 |
 | 5 | Progress + video watch tracking | hub | 4 | [x] 2026-09-28 |
-| 6 | Student pages: course page, item pages with Mark complete, catalog progress, My Courses | site | 3, 5 | [ ] |
+| 6 | Student pages: course page, item pages with Mark complete, catalog progress, My Courses | site | 3, 5 | [x] 2026-09-28 |
 | 7 | Submissions, grading, notifications, activity feed | hub | 5 | [ ] |
 | 8 | Checkpoints + file uploads (R2) | hub | 7 | [ ] |
 | 9 | Checkpoint form | site | 6, 8 | [ ] |
@@ -208,6 +208,7 @@ Two repos. Hub work goes on the existing `tech-class` branch (currently equal to
   5. **Catalog, Home, My Courses**: progress rings on started courses in the catalog, the Home card, and `/my-courses` for every role (started courses, most recent first, ring, Continue; an empty state pointing at the catalog).
   6. **Close**: signed-in screenshots (dark, light, phone), the slide-deck check, docs, tracker, memory.
   - **Deploy order:** the site deploys from `main`, so the hub's Phase 5 must be live before Phase 6 reaches `main`, and whenever `content/` changes the production import runs with the site deploy (item pages come from `content/`, their contents from the database).
+- *As delivered (2026-09-28)*: 1. the catalog, course pages and progress totals share one count (hub `app/tech/counting.py`, site `countsTowardProgress`; e.g. GIMP 29 items, Digital Literacy 34); `lib/api.ts` has typed content and progress calls. 2. Course page islands `course/CourseProgressPanel` and `course/CourseUnits`: ring + Start/Continue, "N of M done" per unit, status words (Done; Submitted / Complete / Needs revision for checkpoints), exercise checkboxes, `#unit-` / `#item-` anchors, `?done=` highlight; signing out on the page hides it all. 3. `/learn/<item>`: **160 pages** (116 readings, 28 videos, 9 slides, 7 links; the plan's 170 counted the Web Dev I draft), built from the outline only (a build check proves no lesson text is in them), lesson styles ported from `assets/css/document.css` without emoji, slides embedded via Google's embed view with a new-tab fallback, links open in a new tab, a sticky bar with Mark complete / Mark not done and Next. 4. `lib/videoTracking.ts`: the YouTube IFrame API on the documented `www.youtube.com` embed (`enablejsapi=1`, `origin`), heartbeats every 10 s while playing and on pause or end, the percent and Mark complete update live; checked with a real video in a browser against the hub. 5. `lib/remote.ts` shared reads; catalog `progress/CourseRing`, Home `progress/HomeContinue` ("Pick up where you left off"), `/my-courses` (`progress/MyCourses`) for every role. Checks: site 190 unit tests + 391 build checks, hub 531. All 9 slide decks load embedded (Topher shared the Python II deck on 2026-09-28). Signed-in screenshots and real-hub runs live in the gitignored `site/.shots/` (see memory: tech web toolchain).
 
 ### Milestone 3: checkpoints, grading, notifications, admin
 
