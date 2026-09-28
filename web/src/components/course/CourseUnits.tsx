@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { ProgressStatus } from '../../lib/api'
-import type { ItemView, UnitView } from '../../lib/content'
+import { hasPage, type ItemView, type UnitView } from '../../lib/content'
 import { countsDone, setItemDone, useCourseProgress } from '../../lib/courseProgress'
 import Icon from '../Icon'
 
@@ -81,7 +81,9 @@ function Row({ courseId, item, statuses }: { courseId: string, item: ItemView, s
         </span>
         {item.label}
       </span>
-      <span className="min-w-0 flex-1">{item.title}</span>
+      <span className="min-w-0 flex-1">
+        {hasPage(item.type) ? <a href={`/learn/${item.id}`} className="text-(--text)">{item.title}</a> : item.title}
+      </span>
       {word && (
         <span className="inline-flex shrink-0 items-center gap-1 self-start rounded-full bg-(--page) px-3 py-1 text-sm font-semibold sm:self-auto">
           {countsDone(item.type, status) && <Icon name="check" size={16} className="text-(--accent)" />}

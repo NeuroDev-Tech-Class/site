@@ -4,7 +4,7 @@ import { useSession } from '../../lib/session'
 import ProgressRing from './ProgressRing'
 
 // The top of a course page: how to start (signed out), why you can't yet (pending), or where you are (approved)
-export default function CourseProgressPanel({ courseId }: { courseId: string }) {
+export default function CourseProgressPanel({ courseId, pageIds }: { courseId: string, pageIds: string[] }) {
   const session = useSession()
   const state = useCourseProgress(courseId)
 
@@ -37,7 +37,7 @@ export default function CourseProgressPanel({ courseId }: { courseId: string }) 
         {next ? (
           <>
             <p className="mt-0 text-sm text-(--muted)">Next: {next.title}</p>
-            <a className="btn-primary mt-2" href={`#item-${next.id}`}>
+            <a className="btn-primary mt-2" href={pageIds.includes(next.id) ? `/learn/${next.id}` : `#item-${next.id}`}>
               {done === 0 ? 'Start this course' : 'Continue'} <Icon name="arrow" size={18} />
             </a>
           </>

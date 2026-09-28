@@ -161,3 +161,52 @@
 @utility neon-rule {
   border-image: linear-gradient(90deg, var(--color-brand-cyan), var(--color-brand-pink), var(--color-brand-gold)) 1;
 }
+
+/* Lesson text from the hub (the reading's own HTML), in the old document.css vocabulary, kept calm to read */
+@layer components {
+  .lesson {
+    max-width: 72ch;
+    line-height: 1.75;
+  }
+  .lesson :where(h2) { @apply mt-10 border-b-2 border-(--border) pb-1 text-2xl; }
+  .lesson :where(h3) { @apply mt-8 text-xl; }
+  .lesson :where(h4, h5) { @apply mt-6 text-lg; }
+  .lesson :where(:first-child) { margin-top: 0; }
+  .lesson :where(li)::marker { color: var(--link); }
+  .lesson :where(hr) { @apply my-8 border-(--border); }
+  .lesson :where(blockquote) { @apply mt-4 border-l-4 border-(--border) pl-4 text-(--muted); }
+  .lesson :where(code) { @apply rounded bg-(--page) px-1.5 py-0.5 text-[0.9em]; }
+  .lesson :where(pre) {
+    @apply mt-4 overflow-x-auto rounded-lg bg-(--page) p-4 text-sm leading-relaxed;
+    border-left: 4px solid var(--link);
+  }
+  .lesson :where(pre code) { @apply bg-transparent p-0; }
+  .lesson :where(kbd) {
+    @apply inline-block rounded border border-(--border) bg-(--panel) px-1.5 font-heading text-[0.85em] font-semibold whitespace-nowrap;
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .lesson :where(table) { @apply mt-4 block overflow-x-auto text-sm; border-collapse: collapse; }
+  .lesson :where(th, td) { @apply border-b border-(--border) px-3 py-2 text-left align-top; }
+  .lesson :where(th) { @apply bg-(--page) font-heading font-semibold; }
+  .lesson :where(img) { @apply mx-auto mt-4 block h-auto max-h-[450px] w-auto max-w-full rounded-lg; }
+  .lesson :where(.img-small) { max-width: min(100%, 320px); }
+  .lesson :where(.img-side) { @apply mt-1 mb-4 max-h-none sm:float-right sm:ml-6 sm:max-w-[40%]; }
+  .lesson :where(.img-row) { @apply mt-4 flex flex-wrap justify-center gap-4; }
+  .lesson :where(.img-row img) { @apply m-0 max-h-[220px] max-w-[220px]; }
+  .lesson :where(h2, h3, .tip, .warning, .activity, .video-embed) { clear: both; }
+  .lesson :where(.grid-2) { @apply mt-4 grid gap-4 sm:grid-cols-2; }
+  .lesson :where(.card) { @apply mt-4 rounded-lg border border-(--border) bg-(--page) p-4; }
+  .lesson :where(.tip, .warning, .activity) { @apply mt-5 rounded-r-lg p-4; border-left: 4px solid var(--callout); }
+  .lesson :where(.tip, .warning, .activity)::before {
+    @apply mb-1 block font-heading text-sm font-bold tracking-wide uppercase;
+    color: var(--callout);
+  }
+  .lesson :where(.tip) { --callout: var(--type-lesson); background: color-mix(in srgb, var(--type-lesson) 10%, transparent); }
+  .lesson :where(.tip)::before { content: 'Tip'; }
+  .lesson :where(.warning) { --callout: var(--type-slides); background: color-mix(in srgb, var(--type-slides) 10%, transparent); }
+  .lesson :where(.warning)::before { content: 'Note'; }
+  .lesson :where(.activity) { --callout: var(--type-checkpoint); background: color-mix(in srgb, var(--type-checkpoint) 10%, transparent); }
+  .lesson :where(.activity)::before { content: 'Activity'; }
+  .lesson :where(.video-embed) { @apply mt-4 overflow-hidden rounded-lg border border-(--border); }
+  .lesson :where(.video-embed iframe) { @apply block aspect-video w-full border-0; }
+}

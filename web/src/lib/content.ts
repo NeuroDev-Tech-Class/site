@@ -176,3 +176,55 @@ export function unitViews(course: Course): UnitView[] {
     })),
   }))
 }
+
+const PAGED_TYPES: ItemType[] = ['lesson', 'video', 'slides', 'link']
+const NEXT_TEXT_MAX = 80
+
+export const hasPage = (type: ItemType): boolean => PAGED_TYPES.includes(type)
+
+/** Where an item opens: its own page, or its place on the course page for items without one */
+export const itemHref = (courseId: string, item: { id: string, type: ItemType }): string =>
+  hasPage(item.type) ? `/learn/${item.id}` : `/courses/${courseId}#item-${item.id}`
+
+/** An item page's public outline, built at build time; what the item holds loads after sign-in */
+export interface ItemPageView {
+  id: string
+  type: ItemType
+  label: string
+  title: string
+  course: { id: string, heading: string, category: CategoryKey }
+  unit: { id: string, title: string }
+  next: { href: string, text: string } | null
+}
+
+function nextText(item: Item): string {
+  if (item.type !== 'note') {
+    const { label, title } = itemLabel(item)
+    return `${label}: ${title}`
+  }
+  const words = sanitize(String(item.payload.html ?? '')).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()
+  return words.length > NEXT_TEXT_MAX ? `${words.slice(0, NEXT_TEXT_MAX).replace(/\s+\S*$/, '')}…` : words
+}
+
+export function itemPages(course: Course): ItemPageView[] {
+  const flat = course.units.flatMap(unit => unit.items.map(item => ({ unit, item })))
+  const steps = flat.filter(({ item }) => item.type !== 'note' || isExercise(item))
+  return steps.flatMap(({ unit, item }, index) => {
+    if (!hasPage(item.type)) return []
+    const after = steps[index + 1]?.item
+    return [{
+      id: item.id,
+      type: item.type,
+      ...itemLabel(item),
+      course: { id: course.id, heading: course.heading, category: categoryKey(course.category) },
+      unit: { id: unit.id, title: unitHeading(unit.title).title },
+      next: after ? { href: itemHref(course.id, after), text: nextText(after) } : null,
+    }]
+  })
+}
+
+/** The embed view of a Google Slides deck, or null for anything else */
+export function slidesEmbedUrl(url: string): string | null {
+  const match = url.match(/^https:\/\/docs\.google\.com\/presentation\/(?:u\/\d+\/)?d\/([A-Za-z0-9_-]+)/)
+  return match ? `https://docs.google.com/presentation/d/${match[1]}/embed?start=false&loop=false` : null
+}

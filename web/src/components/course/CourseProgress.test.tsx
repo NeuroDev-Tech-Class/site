@@ -17,6 +17,7 @@ const UNITS: UnitView[] = [
     { id: 'i_v', type: 'video', label: 'Video', title: 'Watch this', html: null, exercise: false, counts: true },
   ] },
 ]
+const PAGE_IDS = ['i_r', 'i_v']
 const COUNTED = [{ id: 'i_r' }, { id: 'i_ex' }, { id: 'i_c', type: 'checkpoint' }, { id: 'i_v' }]
 const status = (item_id: string, value: ItemStatus['status']): ItemStatus =>
   ({ item_id, status: value, done_at: null, opened_at: null })
@@ -27,7 +28,7 @@ async function renderPage(options: Omit<Parameters<typeof fakeCourseHub>[1], 'co
   const hub = fakeCourseHub(fetchMock, { counted: COUNTED, ...options })
   const { default: CourseProgressPanel } = await import('./CourseProgressPanel')
   const { default: CourseUnits } = await import('./CourseUnits')
-  render(<><CourseProgressPanel courseId="gimp" /><CourseUnits courseId="gimp" units={UNITS} /></>)
+  render(<><CourseProgressPanel courseId="gimp" pageIds={PAGE_IDS} /><CourseUnits courseId="gimp" units={UNITS} /></>)
   return hub
 }
 
@@ -75,7 +76,7 @@ describe('approved', () => {
     await renderPage()
     expect(await screen.findByRole('img', { name: '0% complete' })).toBeTruthy()
     expect(screen.getByText('0 of 4 done')).toBeTruthy()
-    expect(screen.getByRole('link', { name: /Start this course/ }).getAttribute('href')).toBe('#item-i_r')
+    expect(screen.getByRole('link', { name: /Start this course/ }).getAttribute('href')).toBe('/learn/i_r')
     expect(within(unit('Basics')).getByText('0 of 3 done')).toBeTruthy()
     expect(within(unit('More')).getByText('0 of 1 done')).toBeTruthy()
   })
@@ -152,6 +153,13 @@ describe('approved', () => {
     expect(exercise()).toBeNull()
     expect(screen.queryByText(/of \d+ done/)).toBeNull()
     expect(screen.getByRole('link', { name: 'Sign in to start this course' })).toBeTruthy()
+  })
+
+  test('readings, videos, slides and links open their own page; checkpoints and notes do not', async () => {
+    await renderPage()
+    expect((await screen.findByRole('link', { name: 'Layers' })).getAttribute('href')).toBe('/learn/i_r')
+    expect(screen.getByRole('link', { name: 'Watch this' }).getAttribute('href')).toBe('/learn/i_v')
+    expect(screen.queryByRole('link', { name: 'Final Project' })).toBeNull()
   })
 
   test('units and items have anchors to jump to', async () => {

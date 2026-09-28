@@ -5,8 +5,11 @@ import {
   courseStats,
   courses,
   itemLabel,
+  itemPages,
   publishedCatalog,
+  publishedCourses,
   sanitize,
+  slidesEmbedUrl,
   unitHeading,
   unitViews,
   type Catalog,
@@ -119,6 +122,65 @@ describe('unitViews', () => {
       { id: 'i_t', type: 'test', label: 'Test', title: 'Unit 1 Test', html: null, exercise: false, counts: false },
     ])
     expect(start).toEqual({ id: 'u_2', number: null, title: 'Getting Started', description: '', items: [] })
+  })
+})
+
+describe('itemPages', () => {
+  const course = {
+    id: 'gimp', heading: '2D Digital Art — GIMP', category: 'Media',
+    units: [
+      { id: 'u_1', title: 'Unit 1: Basics', description: '', items: [
+        { ...item('lesson', 'Reading - Layers'), id: 'i_r' },
+        { ...item('note', null), id: 'i_n', payload: { html: 'Tip.' } },
+        { ...item('note', null), id: 'i_ex', tags: ['exercise'], payload: { html: '<b>Exercise 1.1:</b> Try it.' } },
+        { ...item('video', 'Watch'), id: 'i_v' },
+      ] },
+      { id: 'u_2', title: 'Unit 2: More', description: '', items: [
+        { ...item('checkpoint', 'Checkpoint - Final'), id: 'i_c' },
+        { ...item('slides', 'Slideshow - Colour'), id: 'i_s' },
+        { ...item('link', 'Article - Read this'), id: 'i_l' },
+      ] },
+    ],
+  } as unknown as Course
+
+  test('gives readings, videos, slides and links a page each, and nothing else', () => {
+    expect(itemPages(course).map(p => p.id)).toEqual(['i_r', 'i_v', 'i_s', 'i_l'])
+  })
+
+  test('each page knows its course, unit, label and title', () => {
+    const [reading] = itemPages(course)
+    expect(reading).toMatchObject({
+      id: 'i_r', type: 'lesson', label: 'Reading', title: 'Layers',
+      course: { id: 'gimp', heading: '2D Digital Art — GIMP', category: 'media' }, unit: { id: 'u_1', title: 'Basics' },
+    })
+  })
+
+  test('Next skips plain notes; an item without a page opens on the course page; the last has no Next', () => {
+    const next = Object.fromEntries(itemPages(course).map(p => [p.id, p.next]))
+    expect(next.i_r).toEqual({ href: '/courses/gimp#item-i_ex', text: 'Exercise 1.1: Try it.' })
+    expect(next.i_v).toEqual({ href: '/courses/gimp#item-i_c', text: 'Checkpoint: Final' })
+    expect(next.i_s).toEqual({ href: '/learn/i_l', text: 'Article: Read this' })
+    expect(next.i_l).toBeNull()
+  })
+
+  test('the committed content has a page for every reading, video, slides and link of every published course', () => {
+    const pages = publishedCourses().flatMap(itemPages)
+    expect(pages).toHaveLength(160)
+    expect(new Set(pages.map(p => p.id)).size).toBe(160)
+  })
+})
+
+describe('slidesEmbedUrl', () => {
+  test.each([
+    'https://docs.google.com/presentation/d/ABC_12-x/edit?usp=sharing',
+    'https://docs.google.com/presentation/u/0/d/ABC_12-x',
+    'https://docs.google.com/presentation/d/ABC_12-x',
+  ])('%s', url => {
+    expect(slidesEmbedUrl(url)).toBe('https://docs.google.com/presentation/d/ABC_12-x/embed?start=false&loop=false')
+  })
+
+  test('anything that is not a Google Slides deck gives no embed', () => {
+    expect(slidesEmbedUrl('https://evil.example/presentation/d/ABC/edit')).toBeNull()
   })
 })
 

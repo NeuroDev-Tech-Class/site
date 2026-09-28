@@ -3,7 +3,7 @@ import CourseProgressPanel from '../../components/course/CourseProgressPanel'
 import CourseUnits from '../../components/course/CourseUnits'
 import Icon from '../../components/Icon.astro'
 import Base from '../../layouts/Base.astro'
-import { categoryKey, courseStats, publishedCourses, sanitize, unitViews, type Course } from '../../lib/content'
+import { categoryKey, courseStats, itemPages, publishedCourses, sanitize, unitViews, type Course } from '../../lib/content'
 
 export function getStaticPaths() {
   return publishedCourses().map(course => ({ params: { id: course.id }, props: { course } }))
@@ -27,7 +27,7 @@ const stats = courseStats(course)
       </div>
       <p class="mt-5 max-w-[70ch]">{course.summary}</p>
       <div class="mt-6">
-        <CourseProgressPanel client:load courseId={course.id} />
+        <CourseProgressPanel client:load courseId={course.id} pageIds={itemPages(course).map(page => page.id)} />
       </div>
     </section>
 

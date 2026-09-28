@@ -146,3 +146,48 @@ describe('the revamped pages', () => {
     expect(text(read('resources/index.html'))).toContain('Atwood Innovation Plaza (Access to 3D printers')
   })
 })
+
+const CONTENT = fileURLToPath(new URL('../../content/', import.meta.url))
+type ContentItem = { id: string, type: string, payload: { lesson_id?: string } }
+const published = readdirSync(join(CONTENT, 'courses'))
+  .map(name => JSON.parse(readFileSync(join(CONTENT, 'courses', name), 'utf8')))
+const itemsOf = (courses: typeof published): ContentItem[] =>
+  courses.flatMap(c => c.units.flatMap((u: { items: ContentItem[] }) => u.items))
+const PAGED = ['lesson', 'video', 'slides', 'link']
+
+describe('item pages', () => {
+  const learn = (id: string) => join(DIST, 'learn', id, 'index.html')
+
+  test('every reading, video, slides and link of a published course has one, and nothing else does', () => {
+    const live = itemsOf(published.filter(c => c.status === 'published'))
+    for (const item of live) expect(existsSync(learn(item.id)), item.id).toBe(PAGED.includes(item.type))
+    for (const item of itemsOf(published.filter(c => c.status !== 'published'))) {
+      expect(existsSync(learn(item.id)), `draft ${item.id}`).toBe(false)
+    }
+    expect(readdirSync(join(DIST, 'learn'))).toHaveLength(160)
+  })
+
+  test('never carry the lesson text, which only comes from the hub after sign-in', () => {
+    const live = itemsOf(published.filter(c => c.status === 'published')).filter(i => i.type === 'lesson')
+    expect(live.length).toBe(116)
+    for (const item of live) {
+      const lesson = readFileSync(join(CONTENT, 'lessons', `${item.payload.lesson_id}.html`), 'utf8')
+      const words = text(lesson).trim().split(' ').slice(0, 12).join(' ')
+      expect(text(read(`learn/${item.id}/index.html`)), item.id).not.toContain(words)
+    }
+  })
+
+  test('are kept out of search engines', () => {
+    for (const dir of readdirSync(join(DIST, 'learn'))) {
+      expect(read(`learn/${dir}/index.html`), dir).toContain('<meta name="robots" content="noindex"')
+    }
+  })
+
+  test('every item link on a course page leads to one', () => {
+    for (const dir of readdirSync(join(DIST, 'courses'))) {
+      for (const [, id] of read(`courses/${dir}/index.html`).matchAll(/href="\/learn\/([^"#?]+)"/g)) {
+        expect(existsSync(learn(id)), `${dir} -> ${id}`).toBe(true)
+      }
+    }
+  })
+})
