@@ -106,10 +106,16 @@ export function itemLabel(item: Item): { label: string, title: string } {
   return { label: LABELS[item.type], title }
 }
 
+export const isExercise = (item: Item): boolean => item.type === 'note' && item.tags.includes('exercise')
+
+// Same rule as the hub's progress totals (app/tech/counting.py): plain notes and tests without content don't count
+export const countsTowardProgress = (item: Item): boolean =>
+  item.status === 'ok' && (item.type !== 'note' || isExercise(item))
+
 export function courseStats(course: Course): { units: number, items: number } {
   return {
     units: course.units.length,
-    items: course.units.reduce((sum, unit) => sum + unit.items.filter(item => item.type !== 'note').length, 0),
+    items: course.units.reduce((sum, unit) => sum + unit.items.filter(countsTowardProgress).length, 0),
   }
 }
 

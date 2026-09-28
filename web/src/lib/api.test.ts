@@ -112,3 +112,31 @@ describe('signing in', () => {
       .toBe(`${api.API_URL}/api/v1/tech/auth/google/start?redirect=%2Fcourses%2Fpython-1`)
   })
 })
+
+describe('content and progress calls', () => {
+  const T = '/api/v1/tech'
+  test.each([
+    ['my progress', (a: Api) => a.getMyProgress(), 'GET', `${T}/progress`, undefined],
+    ['a course', (a: Api) => a.getCourseProgress('gimp'), 'GET', `${T}/courses/gimp/progress`, undefined],
+    ['an item', (a: Api) => a.getItem('i_1'), 'GET', `${T}/items/i_1`, undefined],
+    ['an item progress', (a: Api) => a.getItemProgress('i_1'), 'GET', `${T}/items/i_1/progress`, undefined],
+    ['open', (a: Api) => a.openItem('i_1'), 'POST', `${T}/items/i_1/open`, undefined],
+    ['complete', (a: Api) => a.completeItem('i_1'), 'POST', `${T}/items/i_1/complete`, undefined],
+    ['not done', (a: Api) => a.uncompleteItem('i_1'), 'DELETE', `${T}/items/i_1/complete`, undefined],
+    ['heartbeat', (a: Api) => a.sendHeartbeat({ item_id: 'i_1', video_id: 'abc123', position_s: 10, duration_s: 100 }),
+      'POST', `${T}/media/heartbeat`, { item_id: 'i_1', video_id: 'abc123', position_s: 10, duration_s: 100 }],
+  ])('%s', async (_, call, method, path, body) => {
+    fetchMock.mockResolvedValue(json(200, { ok: true }))
+    expect(await call(api)).toEqual({ ok: true })
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit]
+    expect(url).toBe(`${api.API_URL}${path}`)
+    expect(init.method ?? 'GET').toBe(method)
+    expect(init.body === undefined ? undefined : JSON.parse(String(init.body))).toEqual(body)
+  })
+
+  test('ids are escaped so they can never change the path', async () => {
+    fetchMock.mockResolvedValue(json(200, {}))
+    await api.getItem('../accounts')
+    expect(String(fetchMock.mock.calls[0][0])).toBe(`${api.API_URL}/api/v1/tech/items/..%2Faccounts`)
+  })
+})

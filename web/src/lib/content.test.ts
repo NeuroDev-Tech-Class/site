@@ -79,14 +79,19 @@ describe('sanitize', () => {
 })
 
 describe('courseStats', () => {
-  test('counts units and the items a student works through, leaving out untitled notes', () => {
+  test('counts what the progress totals count: exercises in, plain notes and tests without content out', () => {
+    const exercise = { ...item('note', null), tags: ['exercise'] }
     const course = {
       units: [
-        { items: [item('lesson', 'Reading - A'), item('note', null), item('video', 'B')] },
-        { items: [item('test', 'Unit 2 Test')] },
+        { items: [item('lesson', 'Reading - A'), item('note', null), exercise, exercise, item('video', 'B')] },
+        { items: [{ ...item('test', 'Unit 2 Test'), status: 'needs_content' }] },
       ],
     } as unknown as Course
-    expect(courseStats(course)).toEqual({ units: 2, items: 3 })
+    expect(courseStats(course)).toEqual({ units: 2, items: 4 })
+  })
+
+  test.each([['digital-literacy', 34], ['gimp', 29]])('%s matches the hub progress total (%i)', (id, total) => {
+    expect(courseStats(courses.find(c => c.id === id) as Course).items).toBe(total)
   })
 })
 
