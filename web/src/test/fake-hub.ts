@@ -18,9 +18,35 @@ export function fakeFetch(): Mock {
   return fn
 }
 
+const pathOf = (url: unknown) => String(url).replace(/^https?:\/\/[^/]+/, '')
+
+export type Route = (request: { method: string, body: unknown, match: RegExpMatchArray }) => Response | Promise<Response>
+
 /**
- * A hub that answers sign-in refresh and one course's progress routes, keeping progress between calls so a
- * Mark complete really changes the next read. `items` holds the statuses; `counted` is what each item counts as.
+ * A hub that answers the sign-in refresh as `account` (null: signed out), then the first route whose pattern (a
+ * regular expression for the whole path) matches; anything else is a 404.
+ */
+export function fakeHub(fetchMock: Mock, account: Partial<TechAccount> | null, routes: Record<string, Route>): void {
+  const table = Object.entries(routes).map(([pattern, route]) => [new RegExp(`^${pattern}$`), route] as const)
+  fetchMock.mockImplementation(async (url: string, init?: RequestInit) => {
+    const path = pathOf(url)
+    if (path.endsWith('/auth/refresh')) return account === null ? json(401, {}) : signedIn(account)
+    const request = { method: init?.method ?? 'GET', body: init?.body ? JSON.parse(String(init.body)) : undefined }
+    for (const [pattern, route] of table) {
+      const match = path.match(pattern)
+      if (match) return route({ ...request, match })
+    }
+    return json(404, { detail: 'Not found' })
+  })
+}
+
+/** Every request made, as "METHOD /path" */
+export const requests = (fetchMock: Mock): string[] =>
+  fetchMock.mock.calls.map(([url, init]) => `${(init as RequestInit | undefined)?.method ?? 'GET'} ${pathOf(url)}`)
+
+/**
+ * One course's progress routes, keeping progress between calls so a Mark complete really changes the next read.
+ * `items` holds the statuses; `counted` is what each item counts as.
  */
 export function fakeCourseHub(fetchMock: Mock, options: {
   account?: Partial<TechAccount> | null
@@ -44,24 +70,17 @@ export function fakeCourseHub(fetchMock: Mock, options: {
       last_activity_at: null, items: [...items.values()],
     }
   }
-  fetchMock.mockImplementation(async (url: string, init?: RequestInit) => {
-    const path = String(url).replace(/^https?:\/\/[^/]+/, '')
-    const method = init?.method ?? 'GET'
-    if (path.endsWith('/auth/refresh')) return options.account === null ? json(401, {}) : signedIn(options.account ?? {})
-    if (path === `/api/v1/tech/courses/${courseId}/progress`) return json(200, progress())
-    const complete = path.match(/^\/api\/v1\/tech\/items\/([^/]+)\/complete$/)
-    if (complete) {
+  fakeHub(fetchMock, options.account === undefined ? {} : options.account, {
+    [`/api/v1/tech/courses/${courseId}/progress`]: () => json(200, progress()),
+    '/api/v1/tech/items/([^/]+)/complete': ({ method, match }) => {
       if (options.failComplete) return json(500, { detail: 'down' })
-      const id = decodeURIComponent(complete[1])
+      const id = decodeURIComponent(match[1])
       const status = method === 'DELETE' ? null : 'done'
       items.set(id, { item_id: id, status, done_at: status && '2026-10-01T15:00:00Z', opened_at: null })
       return json(200, { ...items.get(id), videos: [] })
-    }
-    return json(404, { detail: 'Not found' })
+    },
   })
-  return {
-    calls: () => fetchMock.mock.calls.map(([url, init]) => `${(init as RequestInit | undefined)?.method ?? 'GET'} ${String(url).replace(/^https?:\/\/[^/]+/, '')}`),
-  }
+  return { calls: () => requests(fetchMock) }
 }
 
 /** The JSON bodies sent to paths ending in `path` */

@@ -15,6 +15,7 @@ import { slidesEmbedUrl, type ItemPageView } from '../../lib/content'
 import { useSession } from '../../lib/session'
 import { trackableSrc, useVideoTracking } from '../../lib/videoTracking'
 import Icon from '../Icon'
+import NotApproved from '../NotApproved'
 
 // Mirrors the hub's REQUIRED_PERCENT and its refusal wording (app/tech/watch.py, progress.py)
 const REQUIRED_PERCENT = 90
@@ -25,12 +26,20 @@ type Load =
   | { status: 'error' }
   | { status: 'ready', item: ItemContent, progress: ItemProgress }
 
-export function watchMessage(videos: VideoProgress[]): string | null {
+function watchMessage(videos: VideoProgress[]): string | null {
   const behind = videos.filter(v => v.percent < REQUIRED_PERCENT).map(v => v.percent)
   if (!behind.length) return null
   return videos.length === 1
     ? `Watch the video to finish (${behind[0]}% watched).`
     : `Watch every video to finish (the least watched is at ${Math.min(...behind)}%).`
+}
+
+function siteName(url: string): string | null {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '')
+  } catch {
+    return null
+  }
 }
 
 function Content({ page, item }: { page: ItemPageView, item: ItemContent }) {
@@ -73,10 +82,11 @@ function Content({ page, item }: { page: ItemPageView, item: ItemContent }) {
     )
   }
   const url = content.url ?? ''
+  const site = siteName(url)
   return (
     <div className="panel flex flex-col gap-3">
       <p className="mt-0">This one lives on another website. It opens in a new tab; come back here when you're done.</p>
-      <p className="mt-0 text-sm font-semibold text-(--muted)">{new URL(url).hostname.replace(/^www\./, '')}</p>
+      {site && <p className="mt-0 text-sm font-semibold text-(--muted)">{site}</p>}
       <a className="btn-primary self-start" href={url} target="_blank" rel="noopener noreferrer">
         Open {page.title} <Icon name="link" size={18} />
       </a>
@@ -168,17 +178,17 @@ export default function LearnItem({ page }: { page: ItemPageView }) {
   useVideoTracking(contentRef, page.id, videoIds, approved && load.status === 'ready', onPercent)
 
   let body
-  if (session.status !== 'signed-in') {
+  if (session.status === 'loading') {
+    body = <p className="text-(--muted)" aria-busy="true">Loading…</p>
+  } else if (session.status === 'signed-out') {
     body = (
       <div className="panel">
         <p className="mt-0">Sign in to open this {page.label.toLowerCase()}.</p>
         <a className="btn-primary mt-4" href={`/sign-in?next=${encodeURIComponent(`/learn/${page.id}`)}`}>Sign in to open this</a>
       </div>
     )
-  } else if (session.account.status === 'pending') {
-    body = <p>Your account is waiting for your tech coach to approve it. You can open this once it's approved.</p>
   } else if (!approved) {
-    body = <p>Your account wasn't approved. Please talk to your tech coach.</p>
+    body = <NotApproved status={session.account.status} then="You can open this once it's approved." />
   } else if (load.status === 'missing') {
     body = (
       <div className="panel">

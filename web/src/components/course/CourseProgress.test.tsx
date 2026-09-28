@@ -46,6 +46,16 @@ afterEach(() => {
   vi.unstubAllGlobals()
 })
 
+describe('while the sign-in is being checked', () => {
+  test('the top neither asks to sign in nor shows progress yet', async () => {
+    fetchMock.mockReturnValue(new Promise(() => undefined))
+    const { default: CourseProgressPanel } = await import('./CourseProgressPanel')
+    render(<CourseProgressPanel courseId="gimp" pageIds={PAGE_IDS} />)
+    expect(screen.getByText('Loading your progress…')).toBeTruthy()
+    expect(screen.queryByRole('link', { name: 'Sign in to start this course' })).toBeNull()
+  })
+})
+
 describe('signed out', () => {
   test('the page reads as it always has, with a way to sign in and nothing fetched about progress', async () => {
     const hub = await renderPage({ account: null })

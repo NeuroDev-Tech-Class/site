@@ -1,4 +1,4 @@
-import { continueHref, type CourseMeta } from '../../lib/content'
+import { continueHref, courseAccent, type CourseMeta } from '../../lib/content'
 import { useMyProgress } from '../../lib/courseProgress'
 import ProgressRing from '../course/ProgressRing'
 import Icon from '../Icon'
@@ -14,7 +14,7 @@ export default function HomeContinue({ courses, pageIds }: { courses: CourseMeta
   return (
     <section
       className="panel mb-10 flex flex-wrap items-center gap-4"
-      style={{ '--accent': meta ? `var(--cat-${meta.category})` : 'var(--color-brand-cyan)' } as React.CSSProperties}
+      style={{ '--accent': courseAccent(meta) } as React.CSSProperties}
     >
       <ProgressRing percent={course.percent} />
       <div className="min-w-0 flex-1">

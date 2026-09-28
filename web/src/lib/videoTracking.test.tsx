@@ -3,7 +3,7 @@ import type { Mock } from 'vitest'
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
 import type { ItemContent } from './api'
 import type { ItemPageView } from './content'
-import { fakeFetch, json, signedIn } from '../test/fake-hub'
+import { fakeFetch, fakeHub, json } from '../test/fake-hub'
 import { trackableSrc, videoIdOf } from './videoTracking'
 
 vi.mock('astro:transitions/client', () => ({ navigate: vi.fn() }))
@@ -34,25 +34,22 @@ let failBeats = false
 function hub(item: { id: string, type: string, content: ItemContent['content'], videos: string[] }) {
   beats = []
   const percent: Record<string, number> = Object.fromEntries(item.videos.map(v => [v, 0]))
-  fetchMock.mockImplementation(async (url: string, init?: RequestInit) => {
-    const path = String(url).replace(/^https?:\/\/[^/]+/, '')
-    if (path.endsWith('/auth/refresh')) return signedIn()
-    if (path === `/api/v1/tech/items/${item.id}`) {
-      return json(200, { id: item.id, type: item.type, title: 'Watch this', status: 'ok', tags: [],
-        course: { id: 'gimp', title: 'GIMP' }, unit: { id: 'u_1', title: 'Basics' }, content: item.content })
-    }
-    if (path === `/api/v1/tech/items/${item.id}/progress`) {
-      return json(200, { item_id: item.id, status: null, done_at: null, opened_at: 'x',
-        videos: item.videos.map(v => ({ video_id: v, percent: percent[v] })) })
-    }
-    if (path === '/api/v1/tech/media/heartbeat') {
+  fakeHub(fetchMock, {}, {
+    [`/api/v1/tech/items/${item.id}`]: () => json(200, {
+      id: item.id, type: item.type, title: 'Watch this', status: 'ok', tags: [],
+      course: { id: 'gimp', title: 'GIMP' }, unit: { id: 'u_1', title: 'Basics' }, content: item.content,
+    }),
+    [`/api/v1/tech/items/${item.id}/progress`]: () => json(200, {
+      item_id: item.id, status: null, done_at: null, opened_at: 'x',
+      videos: item.videos.map(v => ({ video_id: v, percent: percent[v] })),
+    }),
+    '/api/v1/tech/media/heartbeat': ({ body }) => {
       if (failBeats) return json(500, { detail: 'down' })
-      const beat = JSON.parse(String(init?.body))
+      const beat = body as (typeof beats)[number]
       beats.push(beat)
       percent[beat.video_id] = Math.floor((beat.position_s / beat.duration_s) * 100)
       return json(200, { video_id: beat.video_id, percent: percent[beat.video_id], counted: true })
-    }
-    return json(404, {})
+    },
   })
 }
 

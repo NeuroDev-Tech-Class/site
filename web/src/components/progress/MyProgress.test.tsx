@@ -1,9 +1,9 @@
-import { cleanup, render, screen, waitFor, within } from '@testing-library/react'
+import { act, cleanup, render, screen, waitFor, within } from '@testing-library/react'
 import type { Mock } from 'vitest'
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
 import type { CourseProgress, TechAccount } from '../../lib/api'
 import type { CourseMeta } from '../../lib/content'
-import { fakeFetch, json, signedIn } from '../../test/fake-hub'
+import { account, fakeFetch, fakeHub, json, requests } from '../../test/fake-hub'
 
 const COURSES: CourseMeta[] = [
   { id: 'gimp', heading: '2D Digital Art — GIMP', category: 'media' },
@@ -24,14 +24,11 @@ const STARTED = [
 let fetchMock: Mock
 
 function hub(options: { account?: Partial<TechAccount> | null, courses?: CourseProgress[], fail?: boolean } = {}) {
-  fetchMock.mockImplementation(async (url: string) => {
-    const path = String(url).replace(/^https?:\/\/[^/]+/, '')
-    if (path.endsWith('/auth/refresh')) return options.account === null ? json(401, {}) : signedIn(options.account ?? {})
-    if (path === '/api/v1/tech/progress') return options.fail ? json(500, {}) : json(200, { courses: options.courses ?? STARTED })
-    return json(404, {})
+  fakeHub(fetchMock, options.account === undefined ? {} : options.account, {
+    '/api/v1/tech/progress': () => options.fail ? json(500, {}) : json(200, { courses: options.courses ?? STARTED }),
   })
 }
-const progressCalls = () => fetchMock.mock.calls.filter(([url]) => String(url).endsWith('/api/v1/tech/progress')).length
+const progressCalls = () => requests(fetchMock).filter(r => r === 'GET /api/v1/tech/progress').length
 
 beforeEach(() => {
   vi.resetModules()
@@ -61,6 +58,31 @@ describe('My Courses', () => {
     expect(within(gimp).getByRole('link', { name: '2D Digital Art — GIMP' }).getAttribute('href')).toBe('/courses/gimp')
     expect(within(python).getByText('Finished')).toBeTruthy()
     expect(within(python).queryByRole('link', { name: /Continue/ })).toBeNull()
+  })
+
+  test("on a shared computer, the next student never sees the last one's courses", async () => {
+    hub()
+    await renderList()
+    await screen.findAllByRole('article')
+    let answer: (response: Response) => void = () => undefined
+    fakeHub(fetchMock, null, {
+      '/api/v1/tech/auth/logout': () => new Response(null, { status: 204 }),
+      '/api/v1/tech/progress': () => new Promise<Response>(resolve => { answer = resolve }),
+    })
+    const { setAccount, signOut } = await import('../../lib/session')
+    await act(() => signOut())
+    act(() => setAccount(account({ id: 'a2', email: 'ana@example.com', first_name: 'Ana' })))
+    expect(screen.queryByRole('article')).toBeNull()
+    expect(screen.getByText('Loading your courses…')).toBeTruthy()
+    await act(async () => answer(json(200, { courses: [] })))
+    expect(await screen.findByText("You haven't started a course yet.")).toBeTruthy()
+  })
+
+  test('while the sign-in is being checked, it neither shows courses nor asks to sign in', async () => {
+    fetchMock.mockReturnValue(new Promise(() => undefined))
+    await renderList()
+    expect(screen.getByText('Loading your courses…')).toBeTruthy()
+    expect(screen.queryByRole('link', { name: 'Sign in' })).toBeNull()
   })
 
   test('Continue to an item without its own page opens the course page there', async () => {

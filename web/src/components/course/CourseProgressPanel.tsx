@@ -1,4 +1,5 @@
 import Icon from '../Icon'
+import NotApproved from '../NotApproved'
 import { continueHref } from '../../lib/content'
 import { useCourseProgress } from '../../lib/courseProgress'
 import { useSession } from '../../lib/session'
@@ -9,25 +10,22 @@ export default function CourseProgressPanel({ courseId, pageIds }: { courseId: s
   const session = useSession()
   const state = useCourseProgress(courseId)
 
-  if (session.status !== 'signed-in') {
+  const loading = <p className="mt-0 text-(--muted)" aria-busy="true">Loading your progress…</p>
+  if (session.status === 'loading') return loading
+  if (session.status === 'signed-out') {
     return (
       <a className="btn-primary" href={`/sign-in?next=${encodeURIComponent(`/courses/${courseId}`)}`}>
         Sign in to start this course
       </a>
     )
   }
-  if (session.account.status === 'pending') {
-    return <p className="mt-0">Your account is waiting for your tech coach to approve it. You can start once it's approved.</p>
-  }
   if (session.account.status !== 'approved') {
-    return <p className="mt-0">Your account wasn't approved. Please talk to your tech coach.</p>
+    return <NotApproved status={session.account.status} then="You can start once it's approved." />
   }
   if (state.status === 'error') {
     return <p className="mt-0">Couldn't load your progress. Reload the page to try again.</p>
   }
-  if (state.status !== 'ready') {
-    return <p className="mt-0 text-(--muted)" aria-busy="true">Loading your progress…</p>
-  }
+  if (state.status !== 'ready') return loading
 
   const { done, total, percent, next_item: next } = state.progress
   return (

@@ -93,10 +93,11 @@ describe('the catalog and course pages', () => {
     for (const { id } of all.filter(c => c.status !== 'published')) expect(existsSync(join(DIST, `courses/${id}`)), id).toBe(false)
   })
 
-  test('a course page invites a signed-out visitor to sign in and come back', () => {
+  // The Sign in button (and its way back) appears once the page knows the visitor is signed out: CourseProgress.test
+  test('a course page is built with its heading and a loading line where Sign in or progress will go', () => {
     const html = readFileSync(join(DIST, 'courses/digital-literacy/index.html'), 'utf8')
     expect(html).toMatch(/<h1[^>]*>Digital Literacy<\/h1>/)
-    expect(html).toMatch(/href="\/sign-in\?next=%2Fcourses%2Fdigital-literacy"[^>]*>\s*Sign in to start this course/)
+    expect(html).toContain('Loading your progress…')
   })
 
   test('the home page points new students at Digital Literacy and no longer mentions a password', () => {
@@ -197,5 +198,16 @@ describe('My Courses', () => {
     const html = read('my-courses/index.html')
     expect(html).toContain('<meta name="robots" content="noindex"')
     expect(html).toMatch(/<h1[^>]*>\s*My Courses\s*<\/h1>/)
+  })
+})
+
+describe('pages that depend on the sign-in', () => {
+  test('are built showing "Loading", never telling a signed-in student to sign in first', () => {
+    const wording = /Sign in to (open this|start this course|see the courses)/
+    expect(read('my-courses/index.html')).not.toMatch(wording)
+    expect(read('courses/gimp/index.html')).not.toMatch(wording)
+    for (const dir of readdirSync(join(DIST, 'learn')).slice(0, 20)) {
+      expect(read(`learn/${dir}/index.html`), dir).not.toMatch(wording)
+    }
   })
 })

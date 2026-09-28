@@ -1,10 +1,11 @@
 import type { CourseProgress } from '../../lib/api'
-import { continueHref, type CourseMeta } from '../../lib/content'
+import { continueHref, courseAccent, type CourseMeta } from '../../lib/content'
 import { useMyProgress } from '../../lib/courseProgress'
 import { formatDate } from '../../lib/format'
 import { useSession } from '../../lib/session'
 import ProgressRing from '../course/ProgressRing'
 import Icon from '../Icon'
+import NotApproved from '../NotApproved'
 
 interface Props {
   courses: CourseMeta[]
@@ -12,11 +13,10 @@ interface Props {
 }
 
 function Card({ course, meta, pageIds }: { course: CourseProgress, meta?: CourseMeta, pageIds: string[] }) {
-  const accent = meta ? `var(--cat-${meta.category})` : 'var(--color-brand-cyan)'
   const next = course.next_item
   return (
     <li className="mt-0">
-      <article className="panel flex h-full flex-col gap-4" style={{ '--accent': accent } as React.CSSProperties}>
+      <article className="panel flex h-full flex-col gap-4" style={{ '--accent': courseAccent(meta) } as React.CSSProperties}>
         <div className="flex items-center gap-4">
           <ProgressRing percent={course.percent} />
           <div className="min-w-0">
@@ -52,7 +52,9 @@ export default function MyCourses({ courses, pageIds }: Props) {
   const session = useSession()
   const state = useMyProgress()
 
-  if (session.status !== 'signed-in') {
+  const loading = <p className="text-(--muted)" aria-busy="true">Loading your courses…</p>
+  if (session.status === 'loading') return loading
+  if (session.status === 'signed-out') {
     return (
       <div className="panel">
         <p className="mt-0">Sign in to see the courses you've started.</p>
@@ -60,14 +62,11 @@ export default function MyCourses({ courses, pageIds }: Props) {
       </div>
     )
   }
-  if (session.account.status === 'pending') {
-    return <p>Your account is waiting for your tech coach to approve it. Your courses show here once it's approved.</p>
-  }
   if (session.account.status !== 'approved') {
-    return <p>Your account wasn't approved. Please talk to your tech coach.</p>
+    return <NotApproved status={session.account.status} then="Your courses show here once it's approved." />
   }
   if (state.status === 'error') return <p>Couldn't load your courses. Reload the page to try again.</p>
-  if (state.status !== 'ready') return <p className="text-(--muted)" aria-busy="true">Loading your courses…</p>
+  if (state.status !== 'ready') return loading
   if (!state.value.length) {
     return (
       <div className="panel">

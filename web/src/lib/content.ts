@@ -183,7 +183,7 @@ const NEXT_TEXT_MAX = 80
 export const hasPage = (type: ItemType): boolean => PAGED_TYPES.includes(type)
 
 /** Where an item opens: its own page, or its place on the course page for items without one */
-export const itemHref = (courseId: string, item: { id: string, type: ItemType }): string =>
+const itemHref = (courseId: string, item: { id: string, type: ItemType }): string =>
   hasPage(item.type) ? `/learn/${item.id}` : `/courses/${courseId}#item-${item.id}`
 
 /** An item page's public outline, built at build time; what the item holds loads after sign-in */
@@ -238,6 +238,13 @@ export interface CourseMeta {
 
 export const courseMeta = (): CourseMeta[] =>
   publishedCourses().map(course => ({ id: course.id, heading: course.heading, category: categoryKey(course.category) }))
+
+/** A course card's accent colour; a course the site doesn't list (a draft an admin can see) gets the brand cyan */
+export const courseAccent = (meta?: CourseMeta): string =>
+  meta ? `var(--cat-${meta.category})` : 'var(--color-brand-cyan)'
+
+/** Every item that has its own page, across the published courses */
+export const allPageIds = (): string[] => publishedCourses().flatMap(itemPages).map(page => page.id)
 
 /** Where Continue goes for the hub's next_item: its page if it has one (`pageIds`), else its place on the course page */
 export const continueHref = (courseId: string, itemId: string, pageIds: string[]): string =>

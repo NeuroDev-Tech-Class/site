@@ -4,7 +4,7 @@ import type { Mock } from 'vitest'
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
 import type { ItemContent, ItemProgress, TechAccount } from '../../lib/api'
 import type { ItemPageView } from '../../lib/content'
-import { fakeFetch, json, signedIn } from '../../test/fake-hub'
+import { fakeFetch, fakeHub, json, requests } from '../../test/fake-hub'
 
 const { navigate } = vi.hoisted(() => ({ navigate: vi.fn() }))
 vi.mock('astro:transitions/client', () => ({ navigate }))
@@ -37,31 +37,26 @@ interface Hub {
 function hub(options: Hub = {}) {
   const type = options.type ?? 'lesson'
   let progress: ItemProgress = { item_id: 'i_r', status: null, done_at: null, opened_at: null, videos: [], ...options.progress }
-  fetchMock.mockImplementation(async (url: string, init?: RequestInit) => {
-    const path = String(url).replace(/^https?:\/\/[^/]+/, '')
-    const method = init?.method ?? 'GET'
-    if (path.endsWith('/auth/refresh')) return options.account === null ? json(401, {}) : signedIn(options.account ?? {})
-    if (path === '/api/v1/tech/items/i_r') {
+  fakeHub(fetchMock, options.account === undefined ? {} : options.account, {
+    '/api/v1/tech/items/i_r': () => {
       if (options.item) return json(options.item, { detail: options.item === 404 ? 'Item not found.' : 'down' })
       const item: ItemContent = {
         id: 'i_r', type, title: 'Layers', status: 'ok', tags: [], course: { id: 'gimp', title: 'GIMP' },
         unit: { id: 'u_1', title: 'Unit 1: Basics' }, content: options.content ?? CONTENT[type],
       }
       return json(200, item)
-    }
-    if (path === '/api/v1/tech/items/i_r/progress') return json(200, progress)
-    if (path === '/api/v1/tech/items/i_r/open') return json(200, { ...progress, opened_at: '2026-10-01T15:00:00Z' })
-    if (path === '/api/v1/tech/items/i_r/complete') {
+    },
+    '/api/v1/tech/items/i_r/progress': () => json(200, progress),
+    '/api/v1/tech/items/i_r/open': () => json(200, { ...progress, opened_at: '2026-10-01T15:00:00Z' }),
+    '/api/v1/tech/items/i_r/complete': ({ method }) => {
       if (method === 'POST' && options.complete) return json(options.complete.status, options.complete.body)
       progress = { ...progress, status: method === 'DELETE' ? null : 'done' }
       return json(200, progress)
-    }
-    return json(404, { detail: 'Not found' })
+    },
   })
 }
 
-const calls = () => fetchMock.mock.calls.map(([url, init]) =>
-  `${(init as RequestInit | undefined)?.method ?? 'GET'} ${String(url).replace(/^https?:\/\/[^/]+/, '')}`)
+const calls = () => requests(fetchMock)
 
 async function renderItem(page: ItemPageView = PAGE) {
   const { default: LearnItem } = await import('./LearnItem')
@@ -79,6 +74,13 @@ afterEach(() => {
 })
 
 describe('who can open it', () => {
+  test('while the sign-in is being checked, it neither shows the item nor asks to sign in', async () => {
+    fetchMock.mockReturnValue(new Promise(() => undefined))
+    await renderItem()
+    expect(screen.getByText('Loading…')).toBeTruthy()
+    expect(screen.queryByRole('link', { name: 'Sign in to open this' })).toBeNull()
+  })
+
   test('signed out: a way to sign in that comes back here, and nothing about the item is fetched', async () => {
     hub({ account: null })
     await renderItem()
@@ -181,6 +183,12 @@ describe('other kinds of item', () => {
 })
 
 describe('when it goes wrong', () => {
+  test('a link with a broken address still shows its button instead of breaking the page', async () => {
+    hub({ type: 'link', content: { url: 'not a web address' } })
+    await renderItem({ ...PAGE, type: 'link', label: 'Link' })
+    expect(await screen.findByRole('link', { name: /Open Layers/ })).toBeTruthy()
+  })
+
   test('an item that is gone says so and points back to the course', async () => {
     hub({ item: 404 })
     await renderItem()
