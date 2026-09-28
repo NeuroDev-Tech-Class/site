@@ -39,8 +39,8 @@ function Card({ course, meta, pageIds }: { course: CourseProgress, meta?: Course
             </a>
           </div>
         ) : (
-          <p className="mt-auto inline-flex items-center gap-2 self-start rounded-full bg-(--page) px-3 py-1 text-sm font-semibold">
-            <Icon name="check" size={16} className="text-(--accent)" />Finished
+          <p className="done-chip mt-auto self-start">
+            <Icon name="check" size={16} />Finished
           </p>
         )}
       </article>

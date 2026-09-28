@@ -38,7 +38,7 @@ function ExerciseBox({ courseId, item, checked }: { courseId: string, item: Item
       <label className="grid size-11 cursor-pointer place-items-center rounded-lg hover:bg-(--page)">
         <input
           type="checkbox"
-          className="size-5 cursor-pointer accent-(--accent)"
+          className="size-5 cursor-pointer accent-(--check)"
           checked={checked}
           disabled={busy}
           aria-labelledby={`note-${item.id}`}
@@ -85,8 +85,8 @@ function Row({ courseId, item, statuses }: { courseId: string, item: ItemView, s
         {hasPage(item.type) ? <a href={`/learn/${item.id}`} className="text-(--text)">{item.title}</a> : item.title}
       </span>
       {word && (
-        <span className="inline-flex shrink-0 items-center gap-1 self-start rounded-full bg-(--page) px-3 py-1 text-sm font-semibold sm:self-auto">
-          {countsDone(item.type, status) && <Icon name="check" size={16} className="text-(--accent)" />}
+        <span className="done-chip self-start sm:self-auto">
+          {countsDone(item.type, status) && <Icon name="check" size={16} />}
           {word}
         </span>
       )}

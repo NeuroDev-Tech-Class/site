@@ -10,8 +10,8 @@ export default function CourseRing({ courseId }: { courseId: string }) {
   if (!course) return null
   if (course.percent >= 100) {
     return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-(--page) px-3 py-1 text-sm font-semibold">
-        <Icon name="check" size={16} className="text-(--accent)" />Complete
+      <span className="done-chip">
+        <Icon name="check" size={16} />Complete
       </span>
     )
   }
