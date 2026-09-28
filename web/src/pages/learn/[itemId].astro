@@ -1,0 +1,32 @@
+---
+import Icon from '../../components/Icon.astro'
+import LearnItem from '../../components/learn/LearnItem'
+import Base from '../../layouts/Base.astro'
+import { itemPages, publishedCourses, type ItemPageView } from '../../lib/content'
+
+// Only the public outline is built into these pages; what the item holds is loaded after sign-in
+export function getStaticPaths() {
+  return publishedCourses().flatMap(itemPages).map(page => ({ params: { itemId: page.id }, props: { page } }))
+}
+
+const { page } = Astro.props as { page: ItemPageView }
+---
+
+<Base title={`${page.title} | ${page.course.heading}`} description={`${page.label} in ${page.course.heading}.`}>
+  <meta name="robots" content="noindex" slot="head" />
+  <div style={`--accent: var(--cat-${page.course.category}); --t: var(--type-${page.type})`}>
+    <p class="mt-0 flex flex-wrap gap-x-2 text-sm">
+      <a href={`/courses/${page.course.id}`}>{page.course.heading}</a>
+      <span aria-hidden="true">/</span>
+      <a href={`/courses/${page.course.id}#unit-${page.unit.id}`}>{page.unit.title}</a>
+    </p>
+    <p class="mt-4 flex items-center gap-2 font-heading text-xs font-bold tracking-[0.08em] text-(--t) uppercase">
+      <span class="grid size-7 place-items-center rounded-md" style="background: color-mix(in srgb, var(--t) 16%, transparent)">
+        <Icon name={page.type} size={16} />
+      </span>
+      {page.label}
+    </p>
+    <h1 class="mt-2">{page.title}</h1>
+    <LearnItem client:load page={page} />
+  </div>
+</Base>

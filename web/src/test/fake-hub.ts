@@ -1,5 +1,5 @@
 import { vi, type Mock } from 'vitest'
-import type { TechAccount } from '../lib/api'
+import type { CourseItemsProgress, ItemStatus, TechAccount } from '../lib/api'
 
 export const account = (overrides: Partial<TechAccount> = {}): TechAccount => ({
   id: 'a1', email: 'sam@example.com', first_name: 'Sam', last_name: 'Student', role: 'student',
@@ -16,6 +16,71 @@ export function fakeFetch(): Mock {
   const fn = vi.fn()
   vi.stubGlobal('fetch', fn)
   return fn
+}
+
+const pathOf = (url: unknown) => String(url).replace(/^https?:\/\/[^/]+/, '')
+
+export type Route = (request: { method: string, body: unknown, match: RegExpMatchArray }) => Response | Promise<Response>
+
+/**
+ * A hub that answers the sign-in refresh as `account` (null: signed out), then the first route whose pattern (a
+ * regular expression for the whole path) matches; anything else is a 404.
+ */
+export function fakeHub(fetchMock: Mock, account: Partial<TechAccount> | null, routes: Record<string, Route>): void {
+  const table = Object.entries(routes).map(([pattern, route]) => [new RegExp(`^${pattern}$`), route] as const)
+  fetchMock.mockImplementation(async (url: string, init?: RequestInit) => {
+    const path = pathOf(url)
+    if (path.endsWith('/auth/refresh')) return account === null ? json(401, {}) : signedIn(account)
+    const request = { method: init?.method ?? 'GET', body: init?.body ? JSON.parse(String(init.body)) : undefined }
+    for (const [pattern, route] of table) {
+      const match = path.match(pattern)
+      if (match) return route({ ...request, match })
+    }
+    return json(404, { detail: 'Not found' })
+  })
+}
+
+/** Every request made, as "METHOD /path" */
+export const requests = (fetchMock: Mock): string[] =>
+  fetchMock.mock.calls.map(([url, init]) => `${(init as RequestInit | undefined)?.method ?? 'GET'} ${pathOf(url)}`)
+
+/**
+ * One course's progress routes, keeping progress between calls so a Mark complete really changes the next read.
+ * `items` holds the statuses; `counted` is what each item counts as.
+ */
+export function fakeCourseHub(fetchMock: Mock, options: {
+  account?: Partial<TechAccount> | null
+  courseId?: string
+  counted: { id: string, type?: string }[]
+  items?: ItemStatus[]
+  failComplete?: boolean
+}): { calls: () => string[] } {
+  const courseId = options.courseId ?? 'gimp'
+  const items = new Map((options.items ?? []).map(i => [i.item_id, { ...i }]))
+  const done = (id: string) => {
+    const s = items.get(id)?.status
+    return s === 'done' || (s === 'submitted' && options.counted.find(c => c.id === id)?.type === 'test')
+  }
+  const progress = (): CourseItemsProgress => {
+    const count = options.counted.filter(c => done(c.id)).length
+    const next = options.counted.find(c => !['done', 'submitted'].includes(items.get(c.id)?.status ?? ''))
+    return {
+      course_id: courseId, title: 'GIMP', done: count, total: options.counted.length,
+      percent: Math.floor((count * 100) / options.counted.length), next_item: next ? { id: next.id, title: `Title ${next.id}` } : null,
+      last_activity_at: null, items: [...items.values()],
+    }
+  }
+  fakeHub(fetchMock, options.account === undefined ? {} : options.account, {
+    [`/api/v1/tech/courses/${courseId}/progress`]: () => json(200, progress()),
+    '/api/v1/tech/items/([^/]+)/complete': ({ method, match }) => {
+      if (options.failComplete) return json(500, { detail: 'down' })
+      const id = decodeURIComponent(match[1])
+      const status = method === 'DELETE' ? null : 'done'
+      items.set(id, { item_id: id, status, done_at: status && '2026-10-01T15:00:00Z', opened_at: null })
+      return json(200, { ...items.get(id), videos: [] })
+    },
+  })
+  return { calls: () => requests(fetchMock) }
 }
 
 /** The JSON bodies sent to paths ending in `path` */

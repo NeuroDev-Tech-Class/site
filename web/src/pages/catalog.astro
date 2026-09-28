@@ -1,5 +1,6 @@
 ---
 import Icon from '../components/Icon.astro'
+import CourseRing from '../components/progress/CourseRing'
 import Base from '../layouts/Base.astro'
 import { catalog, categoryKey, courseStats, courses, publishedCatalog } from '../lib/content'
 
@@ -25,7 +26,10 @@ const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`
           const stats = statsFor(course.id)
           return (
             <li data-course class="panel card-glow relative mt-0 flex flex-col gap-3">
-              <span class="icon-tile"><Icon name={category.key} /></span>
+              <div class="flex items-center justify-between gap-3">
+                <span class="icon-tile"><Icon name={category.key} /></span>
+                <CourseRing client:load courseId={course.id} />
+              </div>
               <h3 class="mt-0 text-lg">
                 <a href={`/courses/${course.id}`} class="text-(--heading) no-underline after:absolute after:inset-0 after:rounded-(--radius-card) hover:underline">
                   {course.title}

@@ -96,6 +96,79 @@ export const resendCode = (email: string) => post('/resend-code', { email })
 export const forgotPassword = (email: string) => post('/forgot-password', { email })
 export const resetPassword = (token: string, new_password: string) => post('/reset-password', { token, new_password })
 
+// Content and progress (hub: app/routers/tech_content.py, tech_progress.py). Shapes match the hub's schemas.
+const TECH = '/api/v1/tech'
+const id = (value: string) => encodeURIComponent(value)
+
+export type ProgressStatus = 'done' | 'submitted' | 'returned'
+
+export interface Ref {
+  id: string
+  title: string
+}
+
+export interface ItemContent {
+  id: string
+  type: string
+  title: string | null
+  status: string
+  tags: string[]
+  course: Ref
+  unit: Ref
+  content: Record<string, unknown>
+}
+
+export interface VideoProgress {
+  video_id: string
+  percent: number
+}
+
+export interface ItemStatus {
+  item_id: string
+  status: ProgressStatus | null
+  done_at: string | null
+  opened_at: string | null
+}
+
+export interface ItemProgress extends ItemStatus {
+  videos: VideoProgress[]
+}
+
+export interface CourseProgress {
+  course_id: string
+  title: string
+  done: number
+  total: number
+  percent: number
+  next_item: Ref | null
+  last_activity_at: string | null
+}
+
+export interface CourseItemsProgress extends CourseProgress {
+  items: ItemStatus[]
+}
+
+export interface Heartbeat {
+  item_id: string
+  video_id: string
+  position_s: number
+  duration_s: number
+}
+
+export const getMyProgress = () => request<{ courses: CourseProgress[] }>(`${TECH}/progress`)
+export const getCourseProgress = (courseId: string) =>
+  request<CourseItemsProgress>(`${TECH}/courses/${id(courseId)}/progress`)
+export const getItem = (itemId: string) => request<ItemContent>(`${TECH}/items/${id(itemId)}`)
+export const getItemProgress = (itemId: string) => request<ItemProgress>(`${TECH}/items/${id(itemId)}/progress`)
+export const openItem = (itemId: string) =>
+  request<ItemProgress>(`${TECH}/items/${id(itemId)}/open`, { method: 'POST' })
+export const completeItem = (itemId: string) =>
+  request<ItemProgress>(`${TECH}/items/${id(itemId)}/complete`, { method: 'POST' })
+export const uncompleteItem = (itemId: string) =>
+  request<ItemProgress>(`${TECH}/items/${id(itemId)}/complete`, { method: 'DELETE' })
+export const sendHeartbeat = (beat: Heartbeat) =>
+  request<VideoProgress & { counted: boolean }>(`${TECH}/media/heartbeat`, { method: 'POST', body: JSON.stringify(beat) })
+
 export async function logout(): Promise<void> {
   accessToken = null
   await fetch(`${API_URL}${AUTH}/logout`, { method: 'POST', credentials: 'include' }).catch(() => undefined)

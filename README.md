@@ -123,11 +123,20 @@ tools/extract/          reads the live site (courses/, assets/pdfs/) and exercis
 tools/exercises/        import-repos.mjs (the one-time Classroom import), verify.mjs, workflows/ (the test workflows)
 content/                generated, committed: catalog, courses, lessons, checkpoints, legacy-map, vocabulary, report.md
 web/                    the new site: Astro + React islands + Tailwind, served at tech.neurodevmentoring.com
-  src/pages/            Home, Catalog, Resources, courses/[id], the six sign-in pages, 404
-  src/lib/              content.ts (reads content/, sanitises), api.ts (hub client), session.ts, redirect.ts, format.ts
-  src/components/       header, footer, ThemeToggle, UserMenu, CourseStart, auth/ (the sign-in forms)
-  tests/build.test.ts   checks every page in dist/ (one h1, skip link, nav, no /site/, images exist, catalog links)
+  src/pages/            Home, Catalog, Resources, courses/[id], learn/[itemId] (one per reading, video, slides and
+                        link), my-courses, the six sign-in pages, 404
+  src/lib/              content.ts (reads content/, sanitises, item pages, counts), api.ts (hub client), session.ts,
+                        remote.ts + courseProgress.ts (shared progress reads), videoTracking.ts (YouTube heartbeats),
+                        redirect.ts, format.ts, icons.ts
+  src/components/       header, footer, ThemeToggle, UserMenu, Icon, course/ (progress panel, units, ring),
+                        learn/ (item page), progress/ (My Courses, Home card, catalog ring), auth/ (sign-in forms)
+  tests/build.test.ts   checks every page in dist/ (one h1, skip link, nav, no /site/, images exist, catalog links,
+                        an item page per reading/video/slides/link, no lesson text in the static pages)
 ```
+
+Item pages hold only the public outline (title, course, unit, what comes next); what an item contains is fetched
+from the hub after sign-in, so nothing behind the login is in the static site. When `content/` changes, run the hub's
+content import along with the site deploy: the pages come from `content/`, their contents from the database.
 
 The web site runs in Docker only (`docker-compose.yml` at the repo root; `node_modules` lives in a volume). Run these from the repo root, with the hub running for sign-in (`neurodev-hub`: `docker compose up`; API on 8001, Mailpit on 8026):
 

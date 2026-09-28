@@ -93,10 +93,11 @@ describe('the catalog and course pages', () => {
     for (const { id } of all.filter(c => c.status !== 'published')) expect(existsSync(join(DIST, `courses/${id}`)), id).toBe(false)
   })
 
-  test('a course page invites a signed-out visitor to sign in and come back', () => {
+  // The Sign in button (and its way back) appears once the page knows the visitor is signed out: CourseProgress.test
+  test('a course page is built with its heading and a loading line where Sign in or progress will go', () => {
     const html = readFileSync(join(DIST, 'courses/digital-literacy/index.html'), 'utf8')
     expect(html).toMatch(/<h1[^>]*>Digital Literacy<\/h1>/)
-    expect(html).toMatch(/href="\/sign-in\?next=%2Fcourses%2Fdigital-literacy"[^>]*>\s*Sign in to start this course/)
+    expect(html).toContain('Loading your progress…')
   })
 
   test('the home page points new students at Digital Literacy and no longer mentions a password', () => {
@@ -144,5 +145,69 @@ describe('the revamped pages', () => {
 
   test('Resources keeps a space between a link and the words after it', () => {
     expect(text(read('resources/index.html'))).toContain('Atwood Innovation Plaza (Access to 3D printers')
+  })
+})
+
+const CONTENT = fileURLToPath(new URL('../../content/', import.meta.url))
+type ContentItem = { id: string, type: string, payload: { lesson_id?: string } }
+const published = readdirSync(join(CONTENT, 'courses'))
+  .map(name => JSON.parse(readFileSync(join(CONTENT, 'courses', name), 'utf8')))
+const itemsOf = (courses: typeof published): ContentItem[] =>
+  courses.flatMap(c => c.units.flatMap((u: { items: ContentItem[] }) => u.items))
+const PAGED = ['lesson', 'video', 'slides', 'link']
+
+describe('item pages', () => {
+  const learn = (id: string) => join(DIST, 'learn', id, 'index.html')
+
+  test('every reading, video, slides and link of a published course has one, and nothing else does', () => {
+    const live = itemsOf(published.filter(c => c.status === 'published'))
+    for (const item of live) expect(existsSync(learn(item.id)), item.id).toBe(PAGED.includes(item.type))
+    for (const item of itemsOf(published.filter(c => c.status !== 'published'))) {
+      expect(existsSync(learn(item.id)), `draft ${item.id}`).toBe(false)
+    }
+    expect(readdirSync(join(DIST, 'learn'))).toHaveLength(160)
+  })
+
+  test('never carry the lesson text, which only comes from the hub after sign-in', () => {
+    const live = itemsOf(published.filter(c => c.status === 'published')).filter(i => i.type === 'lesson')
+    expect(live.length).toBe(116)
+    for (const item of live) {
+      const lesson = readFileSync(join(CONTENT, 'lessons', `${item.payload.lesson_id}.html`), 'utf8')
+      const words = text(lesson).trim().split(' ').slice(0, 12).join(' ')
+      expect(text(read(`learn/${item.id}/index.html`)), item.id).not.toContain(words)
+    }
+  })
+
+  test('are kept out of search engines', () => {
+    for (const dir of readdirSync(join(DIST, 'learn'))) {
+      expect(read(`learn/${dir}/index.html`), dir).toContain('<meta name="robots" content="noindex"')
+    }
+  })
+
+  test('every item link on a course page leads to one', () => {
+    for (const dir of readdirSync(join(DIST, 'courses'))) {
+      for (const [, id] of read(`courses/${dir}/index.html`).matchAll(/href="\/learn\/([^"#?]+)"/g)) {
+        expect(existsSync(learn(id)), `${dir} -> ${id}`).toBe(true)
+      }
+    }
+  })
+})
+
+describe('My Courses', () => {
+  test('has its own page, kept out of search engines', () => {
+    const html = read('my-courses/index.html')
+    expect(html).toContain('<meta name="robots" content="noindex"')
+    expect(html).toMatch(/<h1[^>]*>\s*My Courses\s*<\/h1>/)
+  })
+})
+
+describe('pages that depend on the sign-in', () => {
+  test('are built showing "Loading", never telling a signed-in student to sign in first', () => {
+    const wording = /Sign in to (open this|start this course|see the courses)/
+    expect(read('my-courses/index.html')).not.toMatch(wording)
+    expect(read('courses/gimp/index.html')).not.toMatch(wording)
+    for (const dir of readdirSync(join(DIST, 'learn')).slice(0, 20)) {
+      expect(read(`learn/${dir}/index.html`), dir).not.toMatch(wording)
+    }
   })
 })
