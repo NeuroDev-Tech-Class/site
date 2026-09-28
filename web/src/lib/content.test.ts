@@ -2,6 +2,8 @@ import { describe, expect, test } from 'vitest'
 import {
   catalog,
   categoryKey,
+  continueHref,
+  courseMeta,
   courseStats,
   courses,
   itemLabel,
@@ -167,6 +169,22 @@ describe('itemPages', () => {
     const pages = publishedCourses().flatMap(itemPages)
     expect(pages).toHaveLength(160)
     expect(new Set(pages.map(p => p.id)).size).toBe(160)
+  })
+})
+
+describe('continueHref', () => {
+  test('an item with its own page opens there; any other opens on its course page', () => {
+    expect(continueHref('gimp', 'i_read', ['i_read'])).toBe('/learn/i_read')
+    expect(continueHref('gimp', 'i_check', ['i_read'])).toBe('/courses/gimp#item-i_check')
+  })
+})
+
+describe('courseMeta', () => {
+  test('names and colours every published course, drafts left out', () => {
+    const meta = courseMeta()
+    expect(meta).toHaveLength(14)
+    expect(meta.find(m => m.id === 'gimp')).toEqual({ id: 'gimp', heading: '2D Digital Art — GIMP', category: 'media' })
+    expect(meta.some(m => m.id === 'web-dev-1')).toBe(false)
   })
 })
 

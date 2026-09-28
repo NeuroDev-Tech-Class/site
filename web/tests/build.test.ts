@@ -191,3 +191,11 @@ describe('item pages', () => {
     }
   })
 })
+
+describe('My Courses', () => {
+  test('has its own page, kept out of search engines', () => {
+    const html = read('my-courses/index.html')
+    expect(html).toContain('<meta name="robots" content="noindex"')
+    expect(html).toMatch(/<h1[^>]*>\s*My Courses\s*<\/h1>/)
+  })
+})

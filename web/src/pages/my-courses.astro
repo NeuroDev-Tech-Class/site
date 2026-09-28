@@ -1,0 +1,14 @@
+---
+import MyCourses from '../components/progress/MyCourses'
+import Base from '../layouts/Base.astro'
+import { courseMeta, itemPages, publishedCourses } from '../lib/content'
+
+const pageIds = publishedCourses().flatMap(itemPages).map(page => page.id)
+---
+
+<Base title="My Courses" description="The courses you've started, and where to pick each one up.">
+  <meta name="robots" content="noindex" slot="head" />
+  <p class="eyebrow mt-0">Your progress</p>
+  <h1 class="mt-1">My Courses</h1>
+  <MyCourses client:load courses={courseMeta()} pageIds={pageIds} />
+</Base>

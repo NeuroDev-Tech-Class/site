@@ -84,7 +84,7 @@ describe('approved', () => {
   test('progress shows as a percent, Continue, and a word on each finished item', async () => {
     await renderPage({ items: [status('i_r', 'done'), status('i_c', 'submitted')] })
     expect(await screen.findByRole('img', { name: '25% complete' })).toBeTruthy()
-    expect(screen.getByRole('link', { name: /Continue/ }).getAttribute('href')).toBe('#item-i_ex')
+    expect(screen.getByRole('link', { name: /Continue/ }).getAttribute('href')).toBe('/courses/gimp#item-i_ex')
     const basics = unit('Basics')
     expect(within(basics).getByText('1 of 3 done')).toBeTruthy()
     expect(within(document.getElementById('item-i_r') as HTMLElement).getByText('Done')).toBeTruthy()

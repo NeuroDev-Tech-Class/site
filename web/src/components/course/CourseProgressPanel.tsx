@@ -1,4 +1,5 @@
 import Icon from '../Icon'
+import { continueHref } from '../../lib/content'
 import { useCourseProgress } from '../../lib/courseProgress'
 import { useSession } from '../../lib/session'
 import ProgressRing from './ProgressRing'
@@ -37,7 +38,7 @@ export default function CourseProgressPanel({ courseId, pageIds }: { courseId: s
         {next ? (
           <>
             <p className="mt-0 text-sm text-(--muted)">Next: {next.title}</p>
-            <a className="btn-primary mt-2" href={pageIds.includes(next.id) ? `/learn/${next.id}` : `#item-${next.id}`}>
+            <a className="btn-primary mt-2" href={continueHref(courseId, next.id, pageIds)}>
               {done === 0 ? 'Start this course' : 'Continue'} <Icon name="arrow" size={18} />
             </a>
           </>

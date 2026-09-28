@@ -228,3 +228,17 @@ export function slidesEmbedUrl(url: string): string | null {
   const match = url.match(/^https:\/\/docs\.google\.com\/presentation\/(?:u\/\d+\/)?d\/([A-Za-z0-9_-]+)/)
   return match ? `https://docs.google.com/presentation/d/${match[1]}/embed?start=false&loop=false` : null
 }
+
+/** What a progress card needs to name and colour a course the hub mentions */
+export interface CourseMeta {
+  id: string
+  heading: string
+  category: CategoryKey
+}
+
+export const courseMeta = (): CourseMeta[] =>
+  publishedCourses().map(course => ({ id: course.id, heading: course.heading, category: categoryKey(course.category) }))
+
+/** Where Continue goes for the hub's next_item: its page if it has one (`pageIds`), else its place on the course page */
+export const continueHref = (courseId: string, itemId: string, pageIds: string[]): string =>
+  pageIds.includes(itemId) ? `/learn/${itemId}` : `/courses/${courseId}#item-${itemId}`
