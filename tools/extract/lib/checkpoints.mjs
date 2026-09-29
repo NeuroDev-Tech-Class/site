@@ -26,6 +26,12 @@ export function validateSpec(spec, targets) {
       if (!field.label?.trim()) say(`${field.id} has no label`);
       if (field.type === 'file' && !field.accept?.length) say(`file ${field.id} lists no accepted extensions`);
       if (field.type === 'checklist' && !field.items?.length) say(`checklist ${field.id} has no items`);
+      // A required checklist needs every box ticked, unless min says how many are enough
+      if ('min' in field && field.type !== 'checklist') say(`min on ${field.id}, which is not a checklist`);
+      if (field.type === 'checklist' && 'min' in field && field.items?.length
+          && !(Number.isInteger(field.min) && field.min >= 1 && field.min <= field.items.length)) {
+        say(`checklist ${field.id} asks for ${field.min} of its ${field.items.length} items`);
+      }
     }
     for (const group of checkpoint.required_one_of || []) {
       for (const id of group) if (!ids.has(id)) say(`required_one_of names ${id}, which is not a field`);

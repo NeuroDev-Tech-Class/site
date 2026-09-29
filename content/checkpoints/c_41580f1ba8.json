@@ -18,7 +18,8 @@
         "Voice mode: have a short spoken conversation and notice how it differs from typing",
         "Custom assistant: create a simple Custom GPT, Gem, or Project with a saved role"
       ],
-      "required": true
+      "required": true,
+      "min": 2
     },
     {
       "id": "reflection",

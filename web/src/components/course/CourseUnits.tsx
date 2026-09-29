@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import type { ProgressStatus } from '../../lib/api'
 import { hasPage, type ItemView, type UnitView } from '../../lib/content'
 import { countsDone, setItemDone, useCourseProgress } from '../../lib/courseProgress'
+import { useItemWork } from '../../lib/myWork'
+import CoachFeedback from '../CoachFeedback'
 import Icon from '../Icon'
 
 type Statuses = Map<string, ProgressStatus | null>
@@ -54,6 +56,13 @@ function ExerciseBox({ courseId, item, checked }: { courseId: string, item: Item
   )
 }
 
+// Asked for only once a checkpoint has come back, so every other row costs no request
+function ReturnedFeedback({ itemId }: { itemId: string }) {
+  const work = useItemWork(itemId)
+  const feedback = work.status === 'ready' ? work.value[0]?.feedback : null
+  return feedback ? <div className="sm:basis-full"><CoachFeedback text={feedback} /></div> : null
+}
+
 function Row({ courseId, item, statuses }: { courseId: string, item: ItemView, statuses: Statuses | null }) {
   const status = statuses?.get(item.id) ?? null
 
@@ -72,7 +81,7 @@ function Row({ courseId, item, statuses }: { courseId: string, item: ItemView, s
     <li
       id={`item-${item.id}`}
       data-item
-      className={`mt-0 flex flex-col gap-1 border-t border-(--border) py-3 sm:flex-row sm:items-center sm:gap-4 ${JUST_DONE}`}
+      className={`mt-0 flex flex-col gap-1 border-t border-(--border) py-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 ${JUST_DONE}`}
       style={{ '--t': `var(--type-${item.type})` } as React.CSSProperties}
     >
       <span className="flex w-36 shrink-0 items-center gap-2 font-heading text-xs font-bold tracking-[0.08em] text-(--t) uppercase">
@@ -90,6 +99,7 @@ function Row({ courseId, item, statuses }: { courseId: string, item: ItemView, s
           {word}
         </span>
       )}
+      {item.type === 'checkpoint' && status === 'returned' && <ReturnedFeedback itemId={item.id} />}
     </li>
   )
 }

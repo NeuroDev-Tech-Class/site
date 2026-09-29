@@ -20,6 +20,7 @@ const good = {
       { id: 'shots', type: 'image', label: 'Screenshots', required: false, multiple: true },
       { id: 'script', type: 'code', label: 'Your script', required: false, language: 'bash' },
       { id: 'steps', type: 'checklist', label: 'Before you submit', required: true, items: ['Saved', 'Rendered'] },
+      { id: 'tried', type: 'checklist', label: 'Pick two', required: true, items: ['A', 'B', 'C'], min: 2 },
       { id: 'coach', type: 'mentorSignOff', label: 'Your coach sees it printed', required: true },
     ],
     required_one_of: [['repo', 'build']],
@@ -40,13 +41,17 @@ test('every kind of mistake in the spec is caught with where it is', () => {
   fields.push({ id: 'design_notes', type: 'essay', label: '', required: true });
   fields.find(f => f.id === 'steps').items = [];
   fields.find(f => f.id === 'build').accept = [];
+  fields.find(f => f.id === 'tried').min = 4;
+  fields.find(f => f.id === 'repo').min = 1;
   bad['a/page.html'].required_one_of = [['repo', 'nope']];
   bad['note:linux:2-10'].requires_sign_off = true;
   bad['gone/page.html'] = { title: 'x', requires_sign_off: false, fields: [] };
 
   assert.deepEqual(validateSpec(bad, targets), [
+    'a/page.html: min on repo, which is not a checklist',
     'a/page.html: file build lists no accepted extensions',
     'a/page.html: checklist steps has no items',
+    'a/page.html: checklist tried asks for 4 of its 3 items',
     'a/page.html: field id design_notes is used twice',
     'a/page.html: design_notes has unknown type essay',
     'a/page.html: design_notes has no label',
@@ -118,6 +123,12 @@ test('every spec entry turned exactly one course item into a checkpoint', () => 
     assert.equal(checkpoint.course_id, item.course);
     assert.ok(checkpoint.fields.length > 0 && checkpoint.instructions_html.length > 0, checkpoint.title);
   }
+});
+
+test('a required checklist asks for every box, except the AI tools one, which asks for any two', () => {
+  const checklists = checkpointFiles.flatMap(p => json(p).fields.filter(f => f.type === 'checklist'));
+  const withMin = checklists.filter(f => 'min' in f);
+  assert.deepEqual(withMin.map(f => [f.id, f.min, f.items.length]), [['features_tried', 2, 4]]);
 });
 
 test('the note checkpoints keep their instructions', () => {

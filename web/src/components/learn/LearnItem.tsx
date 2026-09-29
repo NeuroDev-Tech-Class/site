@@ -113,21 +113,32 @@ function Actions({ page, load, onChange }: { page: ItemPageView, load: Load, onC
     }
   }
 
+  // Any message sits under the controls, so Next beside them stays centred in the bar
+  const shownWaiting = progress.status === 'done' ? null : waiting
+  const notes = (
+    <>
+      {shownWaiting && <p id="watch-needed" className="mt-0 text-sm text-(--muted)">{shownWaiting}</p>}
+      {problem && <p role="alert" className="mt-0 text-sm font-semibold">{problem}</p>}
+    </>
+  )
+  const block = 'flex flex-col items-start gap-2 sm:max-w-[60%] sm:shrink-0'
   if (progress.status === 'done') {
     return (
-      <div className="flex flex-wrap items-center gap-3">
-        <span className="inline-flex items-center gap-2 font-heading font-semibold">
-          <Icon name="check" size={20} className="text-(--accent)" /><span>Done</span>
-        </span>
-        <button type="button" className="btn-quiet" disabled={busy} onClick={() => void run(async () => onChange(await uncompleteItem(page.id)))}>
-          Mark not done
-        </button>
-        {problem && <p role="alert" className="mt-0 text-sm font-semibold">{problem}</p>}
+      <div className={block}>
+        <div className="flex items-center gap-3">
+          <span className="inline-flex items-center gap-2 font-heading font-semibold">
+            <Icon name="check" size={20} className="text-(--accent)" /><span>Done</span>
+          </span>
+          <button type="button" className="btn-quiet" disabled={busy} onClick={() => void run(async () => onChange(await uncompleteItem(page.id)))}>
+            Mark not done
+          </button>
+        </div>
+        {notes}
       </div>
     )
   }
   return (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className={block}>
       <button
         type="button"
         className="btn-primary"
@@ -140,8 +151,7 @@ function Actions({ page, load, onChange }: { page: ItemPageView, load: Load, onC
       >
         Mark complete
       </button>
-      {waiting && <p id="watch-needed" className="mt-0 text-sm text-(--muted)">{waiting}</p>}
-      {problem && <p role="alert" className="mt-0 text-sm font-semibold">{problem}</p>}
+      {notes}
     </div>
   )
 }
@@ -207,10 +217,10 @@ export default function LearnItem({ page }: { page: ItemPageView }) {
   return (
     <>
       <div ref={contentRef} className="mt-6">{body}</div>
-      <div className="sticky bottom-0 z-10 mt-10 -mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-(--border) bg-(--panel) px-4 py-3">
+      <div className="mt-10 -mx-4 flex flex-col items-start gap-x-6 gap-y-2 border-t border-(--border) bg-(--panel) px-4 py-3 sm:flex-row sm:items-center">
         <Actions page={page} load={load} onChange={setProgress} />
         {page.next && (
-          <a className="ml-auto inline-flex min-h-[44px] max-w-full min-w-0 items-center gap-2 font-semibold" href={page.next.href} title={page.next.text}>
+          <a className="inline-flex min-h-[44px] max-w-full min-w-0 items-center gap-2 font-semibold sm:ml-auto" href={page.next.href} title={page.next.text}>
             <span className="truncate">Next: {page.next.text}</span>
             <Icon name="arrow" size={18} className="shrink-0" />
           </a>

@@ -4,7 +4,7 @@ import type { Mock } from 'vitest'
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
 import type { ItemStatus } from '../../lib/api'
 import type { UnitView } from '../../lib/content'
-import { fakeCourseHub, fakeFetch } from '../../test/fake-hub'
+import { fakeCourseHub, fakeFetch, submission } from '../../test/fake-hub'
 
 const UNITS: UnitView[] = [
   { id: 'u_1', number: '1', title: 'Basics', description: 'Start here.', items: [
@@ -108,6 +108,37 @@ describe('approved', () => {
   ] as const)('a checkpoint %s says %s', async (value, words) => {
     await renderPage({ items: [status('i_c', value)] })
     expect(await within(await waitForItem('i_c')).findByText(words)).toBeTruthy()
+  })
+
+  test("a returned checkpoint shows the coach's feedback from its newest attempt, as plain text", async () => {
+    const hub = await renderPage({
+      items: [status('i_c', 'returned')],
+      work: { i_c: [
+        submission({ attempt: 2, status: 'returned', feedback: 'Link the <i>repo</i>, please.' }),
+        submission({ status: 'returned', feedback: 'Older note.' }),
+      ] },
+    })
+    const row = await waitForItem('i_c')
+    expect(await within(row).findByText("Your coach's feedback:")).toBeTruthy()
+    expect(within(row).getByText('Link the <i>repo</i>, please.')).toBeTruthy()
+    expect(row.querySelector('i')).toBeNull()
+    expect(within(row).queryByText('Older note.')).toBeNull()
+    expect(hub.calls()).toContain('GET /api/v1/tech/submissions/mine?item_id=i_c')
+  })
+
+  test('only returned checkpoints ask for feedback', async () => {
+    const hub = await renderPage({ items: [status('i_c', 'submitted'), status('i_r', 'done')] })
+    await within(await waitForItem('i_c')).findByText('Submitted')
+    await new Promise(resolve => setTimeout(resolve, 20))
+    expect(hub.calls().some(c => c.includes('/submissions/'))).toBe(false)
+  })
+
+  test('a returned checkpoint with no feedback written still reads Needs revision', async () => {
+    await renderPage({ items: [status('i_c', 'returned')], work: { i_c: [submission({ status: 'returned' })] } })
+    const row = await waitForItem('i_c')
+    expect(await within(row).findByText('Needs revision')).toBeTruthy()
+    await new Promise(resolve => setTimeout(resolve, 20))
+    expect(within(row).queryByText("Your coach's feedback:")).toBeNull()
   })
 
   test('everything done says so instead of Continue', async () => {

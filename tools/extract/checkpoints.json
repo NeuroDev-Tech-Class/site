@@ -71,8 +71,9 @@
           "Voice mode: have a short spoken conversation and notice how it differs from typing",
           "Custom assistant: create a simple Custom GPT, Gem, or Project with a saved role"
         ],
-        "note": "The page offers 4 options and asks students to try 2 of them; the audit's 'which two were tried' is captured by which items get checked, not a shorter list.",
-        "required": true
+        "note": "The page offers 4 options and asks students to try 2 of them; the audit's 'which two were tried' is captured by which items get checked, not a shorter list. min 2: any two are enough (Topher, 2026-09-28).",
+        "required": true,
+        "min": 2
       },
       {
         "id": "reflection",

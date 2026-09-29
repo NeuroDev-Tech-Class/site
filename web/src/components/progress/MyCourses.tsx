@@ -6,6 +6,7 @@ import { useSession } from '../../lib/session'
 import ProgressRing from '../course/ProgressRing'
 import Icon from '../Icon'
 import NotApproved from '../NotApproved'
+import RecentWork from './RecentWork'
 
 interface Props {
   courses: CourseMeta[]
@@ -15,7 +16,7 @@ interface Props {
 function Card({ course, meta, pageIds }: { course: CourseProgress, meta?: CourseMeta, pageIds: string[] }) {
   const next = course.next_item
   return (
-    <li className="mt-0">
+    <li className="mt-0 min-w-0">
       <article className="panel flex h-full flex-col gap-4" style={{ '--accent': courseAccent(meta) } as React.CSSProperties}>
         <div className="flex items-center gap-4">
           <ProgressRing percent={course.percent} />
@@ -69,18 +70,24 @@ export default function MyCourses({ courses, pageIds }: Props) {
   if (state.status !== 'ready') return loading
   if (!state.value.length) {
     return (
-      <div className="panel">
-        <p className="mt-0">You haven't started a course yet.</p>
-        <a className="btn-primary mt-4" href="/catalog">Browse the catalog</a>
-      </div>
+      <>
+        <div className="panel">
+          <p className="mt-0">You haven't started a course yet.</p>
+          <a className="btn-primary mt-4" href="/catalog">Browse the catalog</a>
+        </div>
+        <RecentWork />
+      </>
     )
   }
   const byId = new Map(courses.map(meta => [meta.id, meta]))
   return (
-    <ul className="mt-6 grid list-none gap-5 pl-0 md:grid-cols-2">
-      {state.value.map(course => (
-        <Card key={course.course_id} course={course} meta={byId.get(course.course_id)} pageIds={pageIds} />
-      ))}
-    </ul>
+    <>
+      <ul className="mt-6 grid list-none gap-5 pl-0 md:grid-cols-2">
+        {state.value.map(course => (
+          <Card key={course.course_id} course={course} meta={byId.get(course.course_id)} pageIds={pageIds} />
+        ))}
+      </ul>
+      <RecentWork />
+    </>
   )
 }
