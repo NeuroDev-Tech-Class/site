@@ -23,7 +23,7 @@ Work the phases in number order. Each phase ends with Topher's review, the manua
 | 5 | Progress + video watch tracking | hub | 4 | [x] 2026-09-28 |
 | 6 | Student pages: course page, item pages with Mark complete, catalog progress, My Courses | site | 3, 5 | [x] 2026-09-28 |
 | 7 | Submissions, grading, notifications, activity feed | hub | 5 | [x] 2026-09-29 |
-| 8 | Checkpoints + file uploads (R2) | hub | 7 | [ ] |
+| 8 | Checkpoints + file uploads (R2) | hub | 7 | [x] 2026-09-29 |
 | 9 | Checkpoint form | site | 6, 8 | [ ] |
 | 10 | Admin dashboard (Today, Queue, Grade, Students, Activity, Accounts, bell) | site | 7, 9 | [ ] |
 | 11 | Native tests and slides (markdown import, test runner, auto-grading; the 9 Google Slides decks rebuilt in the site) | hub + site | 10 | [ ] |
@@ -241,6 +241,11 @@ Two repos. Hub work goes on the existing `tech-class` branch (currently equal to
   4. **Sign-off**: grading a sign-off checkpoint Complete needs `signed_off: true`; stored in `sign_off` and shown to the student and coach.
   5. **Clean-up (superadmin)**: `GET /tech/files/usage` (storage per student), `GET /tech/accounts/{id}/files`, `DELETE /tech/files/{id}`, `POST /tech/accounts/{id}/files/remove-all`; removed files answer "This file was removed" and are logged in activity.
   6. **Close**: a real run against the dev bucket (upload, check, link, CORS preflight from `localhost:4321`, remove), hub README, tracker, memory.
+- *As delivered (2026-09-29)*: built as planned in six steps (hub `phase 8.1`-`8.5` plus the README); 719 hub tests green, every step's tests confirmed red first and checked by deliberately breaking the code (62 breaks, all caught). The hub README's "Tech uploads (Cloudflare R2)" has the rules and the setup. Notes:
+  - **Real run against `tech-class-uploads-dev`**: the browser preflight from `localhost:4321` is allowed; R2 itself refuses an upload of the wrong size or type (403) because both are signed into the link; uploads, the hub's check, view and download links, a Return whose next attempt keeps its files, resubmit and Complete, the sign-off tick, and superadmin removal (an old link then answers 404 from R2 and 410 from the hub) all worked, and the bucket was left empty.
+  - **Choices while building:** answers to file and image fields are lists of upload ids, and a file's order is kept within its question (Postgres keeps no order between questions, so the site groups files by question); the same upload listed twice counts once; autosave checks shapes, lengths, choices and files but not required answers or whole links, so half-finished work always saves; a second tab's first save at the same moment gets a polite 409; the hub checks both size and type when an upload is confirmed and throws away a file that arrived different; "Files removed" is an activity-only type (no one is notified).
+  - **Nothing to set in Render beyond the four `R2_*` keys** (already there): uploads switch on when all four are present. Deploy note: the production hub needs migration `0018`, which runs on start.
+  - **For Phase 9 (the form):** `GET`/`PUT /tech/items/{id}/draft`, `POST .../uploads` then a browser `PUT` with exactly the returned headers then `POST /tech/uploads/{id}/done`, `DELETE /tech/uploads/{id}`, `GET /tech/files/{id}/link`, and submit with no body. **For Phase 10 (dashboard):** the sign-off tick on Complete, files on the grade view, and the clean-up endpoints.
 
 **Phase 9. Site: checkpoint form (M)**: one task per page, draft on first keystroke, autosave with a visible "Saved", upload progress bars, a "Review your answers" step, then a read-only receipt; returned work reopens with feedback pinned at the top.
 
