@@ -92,7 +92,7 @@ export const submission = (overrides: Partial<Submission> = {}): Submission => (
   id: 'a1__i_c__1', kind: 'checkpoint', attempt: 1, status: 'submitted', status_label: 'Waiting for grading',
   score_label: 'Not graded', item: { id: 'i_c', title: 'Final Project' }, course: { id: 'gimp', title: 'GIMP' },
   answers: {}, feedback: null, auto_score: null, manual_score: null, total_score: null, total_max: null, passed: null,
-  submitted_at: '2026-10-02T15:00:00Z', graded_at: null, ...overrides,
+  submitted_at: '2026-10-02T15:00:00Z', graded_at: null, files: [], sign_off: null, ...overrides,
 })
 
 /** The JSON bodies sent to paths ending in `path` */

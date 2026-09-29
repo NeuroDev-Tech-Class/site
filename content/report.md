@@ -28,7 +28,6 @@ _None._
 Places where `tools/extract/checkpoints.json` departs from the audit or had to interpret the page.
 
 - `computer-basics/ai-prompt-engineering/working_with_modern_ai_tools.html`: features_tried: The page offers 4 options and asks students to try 2 of them; the audit's 'which two were tried' is captured by which items get checked, not a shorter list. min 2: any two are enough (Topher, 2026-09-28).
-- `computer-basics/office-software/spreadsheets/application-creating_a_budget.html`: categories_explanation: The page doesn't ask for a written explanation directly; this field is added per the audit to capture the categories chosen.
 - `computer-science/python-1-intro_to_programming/unit3/final_project_text_adventure_game.html`: repo_url: The page doesn't explicitly ask for a repo link; added per the audit as the submission format for a code project.
 - `computer-science/python-1-intro_to_programming/unit3/final_project_text_adventure_game.html`: design_notes: Derived from the page's "Choose a Game Concept" and "Design the Game Map" sections per the audit; the page doesn't call these "design notes" directly.
 - `game-development/unreal-engine/unit2/activity_obstacle_course.html`: checklist: The audit lists 9 items; the page's own Completion Checklist table has 11 rows. Used the page's full list rather than trimming it.

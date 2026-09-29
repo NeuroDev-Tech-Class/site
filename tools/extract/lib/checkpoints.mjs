@@ -36,6 +36,13 @@ export function validateSpec(spec, targets) {
     for (const group of checkpoint.required_one_of || []) {
       for (const id of group) if (!ids.has(id)) say(`required_one_of names ${id}, which is not a field`);
     }
+    // For the coach only: the answers to check typed work against
+    if ('grading_hint' in checkpoint) {
+      const answers = checkpoint.grading_hint?.answers;
+      if (!Array.isArray(answers) || !answers.length || answers.some(a => typeof a !== 'string' || !a.trim())) {
+        say('grading_hint needs a list of answers');
+      }
+    }
     if (Boolean(checkpoint.requires_sign_off) !== fields.some(f => f.type === 'mentorSignOff')) {
       say('requires_sign_off does not match its mentorSignOff fields');
     }
@@ -45,6 +52,25 @@ export function validateSpec(spec, targets) {
 
 const asksForEmailedWork = text => SUBMISSION_EMAIL.test(text) || SEND_TO_COACH.test(text);
 const textOf = el => el.textContent.replace(/\s+/g, ' ').trim();
+
+const TICK_BOX = /[☐□]/;
+
+/** A checkpoint's checklist question is its tick boxes, so the copy drawn with ☐ in the instructions goes: the
+ *  heading, the ☐ table or box, and a lead-in line just before it. Tips and later sections stay. */
+export function withoutChecklistBox(html) {
+  const holder = JSDOM.fragment('<div></div>').firstChild;
+  holder.innerHTML = html;
+  for (const heading of holder.querySelectorAll('h2, h3')) {
+    if (!/checklist/i.test(heading.textContent)) continue;
+    const section = [];
+    for (let el = heading.nextElementSibling; el && !/^H[12]$/.test(el.tagName); el = el.nextElementSibling) section.push(el);
+    const boxes = section.filter(el => TICK_BOX.test(el.textContent));
+    if (!boxes.length) continue;
+    const leadIn = section.filter((el, i) => el.tagName === 'P' && boxes.includes(section[i + 1]));
+    for (const el of [heading, ...leadIn, ...boxes]) el.remove();
+  }
+  return holder.innerHTML;
+}
 
 /** The sentences telling students to email their work become one sentence pointing at the form; the rest of the
  *  paragraph stays. Only the innermost paragraph or list item is changed. */

@@ -19,6 +19,8 @@ Every checkpoint becomes a form built from these field types:
 
 "Text only" means the current page converts with no special handling: one text area under each question.
 
+> **Changed 2026-09-29 (Topher): far fewer uploads.** The tables below are the Sep 8 audit; `tools/extract/checkpoints.json` is the current form of every checkpoint. Of the 26 checkpoints that had an upload field, only 9 creative ones keep one, and only for the finished work: Audacity (MP3 only), GIMP Poster, Restoration and Portfolio (exported images; no `.xcf`), Blender Scene (the render; no `.blend`), Blender Ring (the STL to print), Blender Final (photos and the model to print) and DaVinci (before and after). Office work is typed where the answer is content (Budget, Spreadsheets practice, the Spreadsheet Formulas worksheet, each with the correct answers in a coach-only grading hint) and a share link where formatting is the skill (Résumé, Word Processors, the Careers Day slides). Screenshots and photos on hands-on and text checkpoints are gone: the coach's sign-off or typed answers cover them (PC Build gains a typed "what happened at each stage"; Linux Task 8 pastes `ps aux` output; the AI Final pastes the conversation; the Game Design Document links or describes its reference images). Instructions that asked for those files were reworded through `tools/extract/overrides/lessons/`.
+
 ## Text only (7)
 
 | Certificate | Checkpoint | Fields |

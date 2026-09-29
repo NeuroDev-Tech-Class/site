@@ -18,6 +18,7 @@ export const ICON_PATHS = {
   award: '<circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 8 5-3 5 3-1.5-8"/>',
   check: '<path d="m5 12 5 5 9-10"/>',
   arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  download: '<path d="M12 3v12M7 10l5 5 5-5M4 21h16"/>',
   pin: '<path d="M12 22s7-6.3 7-12a7 7 0 0 0-14 0c0 5.7 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/>',
 } as const
 

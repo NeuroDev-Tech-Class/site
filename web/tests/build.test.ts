@@ -3,6 +3,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { unzipSync } from 'fflate'
 import { describe, expect, test } from 'vitest'
 
 const DIST = fileURLToPath(new URL('../dist/', import.meta.url))
@@ -149,23 +150,23 @@ describe('the revamped pages', () => {
 })
 
 const CONTENT = fileURLToPath(new URL('../../content/', import.meta.url))
-type ContentItem = { id: string, type: string, payload: { lesson_id?: string } }
+type ContentItem = { id: string, type: string, payload: { lesson_id?: string, checkpoint_id?: string } }
 const published = readdirSync(join(CONTENT, 'courses'))
   .map(name => JSON.parse(readFileSync(join(CONTENT, 'courses', name), 'utf8')))
 const itemsOf = (courses: typeof published): ContentItem[] =>
   courses.flatMap(c => c.units.flatMap((u: { items: ContentItem[] }) => u.items))
-const PAGED = ['lesson', 'video', 'slides', 'link']
+const PAGED = ['lesson', 'video', 'slides', 'link', 'checkpoint']
 
 describe('item pages', () => {
   const learn = (id: string) => join(DIST, 'learn', id, 'index.html')
 
-  test('every reading, video, slides and link of a published course has one, and nothing else does', () => {
+  test('every reading, video, slides, link and checkpoint of a published course has one, and nothing else does', () => {
     const live = itemsOf(published.filter(c => c.status === 'published'))
     for (const item of live) expect(existsSync(learn(item.id)), item.id).toBe(PAGED.includes(item.type))
     for (const item of itemsOf(published.filter(c => c.status !== 'published'))) {
       expect(existsSync(learn(item.id)), `draft ${item.id}`).toBe(false)
     }
-    expect(readdirSync(join(DIST, 'learn'))).toHaveLength(160)
+    expect(readdirSync(join(DIST, 'learn'))).toHaveLength(254)
   })
 
   test('never carry the lesson text, which only comes from the hub after sign-in', () => {
@@ -175,6 +176,16 @@ describe('item pages', () => {
       const lesson = readFileSync(join(CONTENT, 'lessons', `${item.payload.lesson_id}.html`), 'utf8')
       const words = text(lesson).trim().split(' ').slice(0, 12).join(' ')
       expect(text(read(`learn/${item.id}/index.html`)), item.id).not.toContain(words)
+    }
+  })
+
+  test("never carry a checkpoint's instructions, which also come from the hub after sign-in", () => {
+    const live = itemsOf(published.filter(c => c.status === 'published')).filter(i => i.type === 'checkpoint')
+    expect(live.length).toBe(94)
+    for (const item of live) {
+      const checkpoint = JSON.parse(readFileSync(join(CONTENT, 'checkpoints', `${item.payload.checkpoint_id}.json`), 'utf8'))
+      const words = text(checkpoint.instructions_html).trim().split(' ').slice(0, 12).join(' ')
+      if (words.split(' ').length >= 6) expect(text(read(`learn/${item.id}/index.html`)), item.id).not.toContain(words)
     }
   })
 
@@ -209,5 +220,32 @@ describe('pages that depend on the sign-in', () => {
     for (const dir of readdirSync(join(DIST, 'learn')).slice(0, 20)) {
       expect(read(`learn/${dir}/index.html`), dir).not.toMatch(wording)
     }
+  })
+})
+
+describe('exercise starters', () => {
+  const SITE = fileURLToPath(new URL('../../', import.meta.url))
+  const CHECKPOINTS = join(SITE, 'content/checkpoints')
+  const withStarters = readdirSync(CHECKPOINTS)
+    .map(name => JSON.parse(readFileSync(join(CHECKPOINTS, name), 'utf8')))
+    .filter(checkpoint => checkpoint.starter_path)
+
+  test('every exercise with starter code has one', () => {
+    expect(withStarters).toHaveLength(56)
+  })
+
+  test.each(withStarters.map(c => [c.exercise, c]))('%s: its starter is zipped whole, inside a folder of its own', (_, c) => {
+    const starter = join(SITE, c.starter_path)
+    const folder = c.exercise.split('/').pop()
+    const expected = filesUnder(starter).map(f => `${folder}/${relative(starter, f).split('\\').join('/')}`).sort()
+    const zip = unzipSync(readFileSync(join(DIST, 'starters', `${c.id}.zip`)))
+    expect(Object.keys(zip).sort()).toEqual(expected)
+    for (const name of expected) {
+      expect(Buffer.from(zip[name]).equals(readFileSync(join(starter, name.slice(folder.length + 1)))), name).toBe(true)
+    }
+  })
+
+  test('nothing else is served under /starters', () => {
+    expect(readdirSync(join(DIST, 'starters')).sort()).toEqual(withStarters.map(c => `${c.id}.zip`).sort())
   })
 })

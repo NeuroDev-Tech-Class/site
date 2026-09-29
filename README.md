@@ -123,16 +123,26 @@ tools/extract/          reads the live site (courses/, assets/pdfs/) and exercis
 tools/exercises/        import-repos.mjs (the one-time Classroom import), verify.mjs, workflows/ (the test workflows)
 content/                generated, committed: catalog, courses, lessons, checkpoints, legacy-map, vocabulary, report.md
 web/                    the new site: Astro + React islands + Tailwind, served at tech.neurodevmentoring.com
-  src/pages/            Home, Catalog, Resources, courses/[id], learn/[itemId] (one per reading, video, slides and
-                        link), my-courses, the six sign-in pages, 404
+  src/pages/            Home, Catalog, Resources, courses/[id], learn/[itemId] (one per reading, video, slides,
+                        link and checkpoint), my-courses, the six sign-in pages, 404
   src/lib/              content.ts (reads content/, sanitises, item pages, counts), api.ts (hub client), session.ts,
                         remote.ts + courseProgress.ts (shared progress reads), videoTracking.ts (YouTube heartbeats),
+                        checkpoint.ts (what the form still needs), upload.ts (browser upload to R2 with progress),
                         redirect.ts, format.ts, icons.ts
   src/components/       header, footer, ThemeToggle, UserMenu, Icon, course/ (progress panel, units, ring),
-                        learn/ (item page), progress/ (My Courses, Home card, catalog ring), auth/ (sign-in forms)
+                        learn/ (item page; Checkpoint, CheckpointForm, FileField, AnswerList for checkpoints),
+                        progress/ (My Courses, Home card, catalog ring), auth/ (sign-in forms)
+  scripts/              sync-assets.mjs (images), zip-starters.mjs (each exercise's starter/ to
+                        public/starters/<checkpoint id>.zip); both run before dev and build
   tests/build.test.ts   checks every page in dist/ (one h1, skip link, nav, no /site/, images exist, catalog links,
-                        an item page per reading/video/slides/link, no lesson text in the static pages)
+                        an item page per reading/video/slides/link/checkpoint, no lesson or checkpoint text in the
+                        static pages, a zip for every starter and nothing else)
 ```
+
+A checkpoint page shows the instructions, the starter download, and the student's work: the form (every question on
+one page, autosaved as a draft, a Review step, then Hand it in), the receipt once handed in, or the form again with
+the coach's feedback pinned on top when it comes back. Files go from the browser straight to R2 with a link the hub
+signs, so uploads need the hub's `R2_*` settings (see the hub README, "Tech uploads (Cloudflare R2)").
 
 Item pages hold only the public outline (title, course, unit, what comes next); what an item contains is fetched
 from the hub after sign-in, so nothing behind the login is in the static site. When `content/` changes, run the hub's

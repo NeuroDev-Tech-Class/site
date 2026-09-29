@@ -9,7 +9,7 @@ const COURSES: CourseMeta[] = [
   { id: 'gimp', heading: '2D Digital Art — GIMP', category: 'media' },
   { id: 'python-1', heading: 'Python I', category: 'programming' },
 ]
-const PAGE_IDS = ['i_read']
+const PAGE_IDS = ['i_read', 'i_final']
 
 const course = (overrides: Partial<CourseProgress>): CourseProgress => ({
   course_id: 'gimp', title: '2D Digital Art - GIMP', done: 12, total: 29, percent: 41,
@@ -147,7 +147,8 @@ describe('Recent work on My Courses', () => {
     await renderList()
     const rows = within(await recent()).getAllByRole('listitem')
     expect(rows.map(r => within(r).getByRole('link').textContent)).toEqual(['Final Project', 'Final Project', 'Unit 1 Test'])
-    expect(within(rows[0]).getByRole('link').getAttribute('href')).toBe('/courses/gimp#item-i_final')
+    expect(within(rows[0]).getByRole('link').getAttribute('href')).toBe('/learn/i_final')
+    expect(within(rows[2]).getByRole('link').getAttribute('href')).toBe('/courses/python-1#item-i_test')
     expect(within(rows[0]).getByText('Waiting for grading')).toBeTruthy()
     expect(within(rows[0]).getByText(/GIMP · Handed in October 2, 2026/)).toBeTruthy()
     expect(within(rows[0]).getByText('Attempt 2')).toBeTruthy()

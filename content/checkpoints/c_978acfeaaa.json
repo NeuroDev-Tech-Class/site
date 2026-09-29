@@ -9,29 +9,87 @@
   "requires_sign_off": false,
   "fields": [
     {
-      "id": "sheet_url",
-      "type": "url",
-      "label": "Link to your copied Google Sheet — make a copy of the linked spreadsheet, complete the tasks on all five sheets, and share the link (make sure sharing is turned on)",
-      "required": false
+      "id": "sum_formulas",
+      "type": "shortText",
+      "label": "Sum sheet: your formulas in D11 (the total) and D12 (the food total)",
+      "required": true
     },
     {
-      "id": "sheet_file",
-      "type": "file",
-      "label": "Or upload your completed workbook",
-      "accept": [
-        ".xlsx"
-      ],
-      "multiple": false,
-      "required": false
+      "id": "sum_results",
+      "type": "shortText",
+      "label": "Sum sheet: what D11 and D12 show",
+      "required": true
+    },
+    {
+      "id": "average_formulas",
+      "type": "shortText",
+      "label": "Average sheet: your formulas in C13 (the class average) and C14 (not counting zeroes)",
+      "required": true
+    },
+    {
+      "id": "average_results",
+      "type": "shortText",
+      "label": "Average sheet: what C13 and C14 show",
+      "required": true
+    },
+    {
+      "id": "if_formulas",
+      "type": "shortText",
+      "label": "If sheet: your formulas in E3 and F3",
+      "required": true
+    },
+    {
+      "id": "if_over",
+      "type": "shortText",
+      "label": "If sheet: which months went over budget, and by how much",
+      "required": true
+    },
+    {
+      "id": "countif_formula",
+      "type": "shortText",
+      "label": "Countif sheet: your formula in C10",
+      "required": true
+    },
+    {
+      "id": "countif_result",
+      "type": "shortText",
+      "label": "Countif sheet: how many adults it counts",
+      "required": true
+    },
+    {
+      "id": "xlookup_formulas",
+      "type": "shortText",
+      "label": "Xlookup sheet: your formulas in C11 (MAX) and B11 (XLOOKUP)",
+      "required": true
+    },
+    {
+      "id": "xlookup_result",
+      "type": "shortText",
+      "label": "Xlookup sheet: the biggest city and its population",
+      "required": true
+    },
+    {
+      "id": "checklist",
+      "type": "checklist",
+      "label": "What you did",
+      "required": true,
+      "items": [
+        "Sorted the purchases on the Sum sheet into alphabetical order",
+        "Filled in the rest of the months on the If sheet by dragging",
+        "Coloured \"Over budget\" red with conditional formatting"
+      ]
     }
   ],
-  "required_one_of": [
-    [
-      "sheet_url",
-      "sheet_file"
-    ]
-  ],
+  "required_one_of": [],
   "instructions_html": "<a href=\"https://docs.google.com/spreadsheets/d/1-DqkSTjb0iq8MDh-hrxfyP-fkK9dMA6bvFY7e-4GFsE/edit?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Worksheet - Spreadsheet Formulas</a> (make a copy of this spreadsheet and complete the tasks on all five sheets)",
   "starter_path": null,
-  "grading_hint": null
+  "grading_hint": {
+    "answers": [
+      "Sum: D11 =SUM(D3:D9) shows $247.46; D12 =SUMIF(B3:B9,\"Food\",D3:D9) shows $15.12",
+      "Average: C13 =AVERAGE(C3:C11) shows 68% (0.68); C14 =AVERAGEIF(C3:C11,\">0\") shows 77% (0.77)",
+      "If: E3 =IF(D3>C3,\"Over budget\",\"Under budget\"); F3 =IF(D3>C3,D3-C3,\"N/A\"); over budget in April by $163.97, August by $83.97 and October by $32.96",
+      "Countif: C10 =COUNTIF(C3:C8,\">17\") shows 3",
+      "Xlookup: C11 =MAX(C3:C9) shows 2,746,388; B11 =XLOOKUP(C11,C3:C9,B3:B9) shows Chicago"
+    ]
+  }
 }

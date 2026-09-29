@@ -196,11 +196,12 @@ describe('approved', () => {
     expect(screen.getByRole('link', { name: 'Sign in to start this course' })).toBeTruthy()
   })
 
-  test('readings, videos, slides and links open their own page; checkpoints and notes do not', async () => {
+  test('readings, videos, slides, links and checkpoints open their own page; notes do not', async () => {
     await renderPage()
     expect((await screen.findByRole('link', { name: 'Layers' })).getAttribute('href')).toBe('/learn/i_r')
     expect(screen.getByRole('link', { name: 'Watch this' }).getAttribute('href')).toBe('/learn/i_v')
-    expect(screen.queryByRole('link', { name: 'Final Project' })).toBeNull()
+    expect(screen.getByRole('link', { name: 'Final Project' }).getAttribute('href')).toBe('/learn/i_c')
+    expect(screen.queryByRole('link', { name: /Try it/ })).toBeNull()
   })
 
   test('units and items have anchors to jump to', async () => {
