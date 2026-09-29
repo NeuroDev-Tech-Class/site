@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { replaceSubmissionEmails, validateSpec } from '../../tools/extract/lib/checkpoints.mjs';
+import { replaceSubmissionEmails, validateSpec, withoutChecklistBox } from '../../tools/extract/lib/checkpoints.mjs';
 import { generate } from '../../tools/extract/lib/generate.mjs';
 
 const SITE = fileURLToPath(new URL('../../', import.meta.url));
@@ -206,6 +206,35 @@ test('checkpoint instructions carry no page chrome, even when an override suppli
     const { title, instructions_html: html } = json(path);
     assert.doesNotMatch(html, /class="(back-link|doc-header|doc-footer)"|← Back to/, title);
   }
+});
+
+test('the tick-box copy of a checklist leaves the instructions; its tip and the next section stay', () => {
+  const html = withoutChecklistBox(`<div>
+    <h2>Build it</h2><p>Model the ring.</p>
+    <h2>Completion Checklist</h2>
+    <p>Before submitting, check off every item:</p>
+    <table><tr><td>☐</td><td>Torus made</td></tr></table>
+    <div class="tip">Going Further: add a gem.</div>
+    <h2>Submission</h2><p>Use the form below.</p>
+  </div>`);
+  const kept = text(html);
+  assert.doesNotMatch(kept, /Completion Checklist|check off every item|Torus made/);
+  assert.match(kept, /Model the ring\..*Going Further: add a gem\..*Submission Use the form below\./);
+});
+
+test('a checklist heading with no tick boxes under it is left alone', () => {
+  const html = '<h2>Checklist</h2><p>Your coach goes through this with you.</p>';
+  assert.equal(withoutChecklistBox(html), html);
+});
+
+test('checkpoints with a checklist question no longer repeat it as tick boxes in the instructions', () => {
+  const withChecklist = checkpointFiles.map(json).filter(c => c.fields.some(f => f.type === 'checklist'));
+  for (const checkpoint of withChecklist) {
+    assert.doesNotMatch(checkpoint.instructions_html, /[☐□]/, checkpoint.title);
+  }
+  const castle = byName('unreal-engine: Activity: Castle Courtyard');
+  assert.doesNotMatch(text(castle.instructions_html), /Completion Checklist/);
+  assert.match(text(castle.instructions_html), /Going Further/);
 });
 
 test('a grading hint in the spec must list its answers', () => {

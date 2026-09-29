@@ -2,7 +2,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { replaceSubmissionEmails, validateSpec } from './checkpoints.mjs';
+import { replaceSubmissionEmails, validateSpec, withoutChecklistBox } from './checkpoints.mjs';
 import { buildCourse, legacyKeys, parseCatalog } from './courses.mjs';
 import { exerciseCheckpoint, loadExercises, matchExercise, renderMarkdown, shiftHeadings } from './exercises.mjs';
 import { checkpointId, lessonId } from './ids.mjs';
@@ -137,6 +137,7 @@ export async function generate(siteRoot) {
       found.push(...checkVocabulary(instructions, where));
     }
     const { title, requires_sign_off, fields: specFields, required_one_of = [], grading_hint = null } = spec[key];
+    if (specFields.some(field => field.type === 'checklist')) instructions = withoutChecklistBox(instructions);
     // A field's "note" is for whoever reviews the spec, not for students
     const fields = specFields.map(({ note, ...field }) => {
       if (note) found.push({ kind: 'spec-note', where: key, detail: `${field.id}: ${note}` });
