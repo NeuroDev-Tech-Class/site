@@ -1,9 +1,9 @@
 import { act, cleanup, render, screen, waitFor, within } from '@testing-library/react'
 import type { Mock } from 'vitest'
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
-import type { CourseProgress, TechAccount } from '../../lib/api'
+import type { CourseProgress, Submission, TechAccount } from '../../lib/api'
 import type { CourseMeta } from '../../lib/content'
-import { account, fakeFetch, fakeHub, json, requests } from '../../test/fake-hub'
+import { account, fakeFetch, fakeHub, json, requests, submission } from '../../test/fake-hub'
 
 const COURSES: CourseMeta[] = [
   { id: 'gimp', heading: '2D Digital Art — GIMP', category: 'media' },
@@ -21,14 +21,30 @@ const STARTED = [
     last_activity_at: '2026-09-20T15:00:00Z' }),
 ]
 
+const piece = (overrides: Partial<Submission>) =>
+  submission({ id: 'a1__i_final__1', item: { id: 'i_final', title: 'Final Project' }, ...overrides })
+const WORK = [
+  piece({ id: 'a1__i_final__2', attempt: 2 }),
+  piece({ status: 'returned', status_label: 'Needs revision', feedback: 'Add a <b>README</b>.',
+    submitted_at: '2026-09-28T15:00:00Z' }),
+  piece({ id: 'a1__i_test__1', kind: 'test', status: 'graded', status_label: 'Passed', score_label: '8 / 10 (80%)',
+    item: { id: 'i_test', title: 'Unit 1 Test' }, course: { id: 'python-1', title: 'Python I' },
+    submitted_at: '2026-09-20T15:00:00Z' }),
+]
+
 let fetchMock: Mock
 
-function hub(options: { account?: Partial<TechAccount> | null, courses?: CourseProgress[], fail?: boolean } = {}) {
+function hub(options: {
+  account?: Partial<TechAccount> | null, courses?: CourseProgress[], fail?: boolean, work?: Submission[],
+  failWork?: boolean,
+} = {}) {
   fakeHub(fetchMock, options.account === undefined ? {} : options.account, {
     '/api/v1/tech/progress': () => options.fail ? json(500, {}) : json(200, { courses: options.courses ?? STARTED }),
+    '/api/v1/tech/submissions/mine': () => options.failWork ? json(500, {}) : json(200, options.work ?? []),
   })
 }
 const progressCalls = () => requests(fetchMock).filter(r => r === 'GET /api/v1/tech/progress').length
+const workCalls = () => requests(fetchMock).filter(r => r.startsWith('GET /api/v1/tech/submissions/mine')).length
 
 beforeEach(() => {
   vi.resetModules()
@@ -116,6 +132,82 @@ describe('My Courses', () => {
     hub({ fail: true })
     await renderList()
     expect(await screen.findByText("Couldn't load your courses. Reload the page to try again.")).toBeTruthy()
+  })
+})
+
+describe('Recent work on My Courses', () => {
+  async function renderList() {
+    const { default: MyCourses } = await import('./MyCourses')
+    render(<MyCourses courses={COURSES} pageIds={PAGE_IDS} />)
+  }
+  const recent = async () => (await screen.findByRole('heading', { name: 'Recent work' })).closest('section') as HTMLElement
+
+  test('lists handed-in work as the hub orders it, with its status, date and where it lives', async () => {
+    hub({ work: WORK })
+    await renderList()
+    const rows = within(await recent()).getAllByRole('listitem')
+    expect(rows.map(r => within(r).getByRole('link').textContent)).toEqual(['Final Project', 'Final Project', 'Unit 1 Test'])
+    expect(within(rows[0]).getByRole('link').getAttribute('href')).toBe('/courses/gimp#item-i_final')
+    expect(within(rows[0]).getByText('Waiting for grading')).toBeTruthy()
+    expect(within(rows[0]).getByText(/GIMP · Handed in October 2, 2026/)).toBeTruthy()
+    expect(within(rows[0]).getByText('Attempt 2')).toBeTruthy()
+    expect(within(rows[1]).queryByText(/Attempt/)).toBeNull()
+  })
+
+  test("shows the coach's feedback as plain text, and a graded test's score", async () => {
+    hub({ work: WORK })
+    await renderList()
+    const [, returned, test] = within(await recent()).getAllByRole('listitem')
+    expect(within(returned).getByText('Needs revision')).toBeTruthy()
+    expect(within(returned).getByText('Add a <b>README</b>.')).toBeTruthy()
+    expect(returned.querySelector('b')).toBeNull()
+    expect(within(test).getByText('Passed · 8 / 10 (80%)')).toBeTruthy()
+    expect(within(test).queryByText(/feedback/i)).toBeNull()
+  })
+
+  test('nothing handed in yet: no Recent work section at all', async () => {
+    hub({ work: [] })
+    await renderList()
+    await screen.findAllByRole('article')
+    await waitFor(() => expect(workCalls()).toBe(1))
+    expect(screen.queryByRole('heading', { name: 'Recent work' })).toBeNull()
+  })
+
+  test("work that can't be loaded says so without hiding the courses", async () => {
+    hub({ work: WORK, failWork: true })
+    await renderList()
+    expect(await screen.findByText("Couldn't load your recent work. Reload the page to try again.")).toBeTruthy()
+    expect(screen.getAllByRole('article')).toHaveLength(2)
+  })
+
+  test("on a shared computer, the next student never sees the last one's work", async () => {
+    hub({ work: WORK })
+    await renderList()
+    await recent()
+    let answer: (response: Response) => void = () => undefined
+    fakeHub(fetchMock, null, {
+      '/api/v1/tech/auth/logout': () => new Response(null, { status: 204 }),
+      '/api/v1/tech/progress': () => json(200, { courses: STARTED }),
+      '/api/v1/tech/submissions/mine': () => new Promise<Response>(resolve => { answer = resolve }),
+    })
+    const { setAccount, signOut } = await import('../../lib/session')
+    await act(() => signOut())
+    act(() => setAccount(account({ id: 'a2', email: 'ana@example.com', first_name: 'Ana' })))
+    await screen.findAllByRole('article')
+    expect(screen.queryByRole('heading', { name: 'Recent work' })).toBeNull()
+    await act(async () => answer(json(200, [])))
+    expect(screen.queryByText('Final Project')).toBeNull()
+  })
+
+  test.each([
+    ['signed out', null, { name: 'Sign in' }],
+    ['waiting for approval', { status: 'pending' }, /waiting for your tech coach/],
+  ] as const)('%s, no work is asked for', async (_, who, shown) => {
+    hub({ account: who as Partial<TechAccount> | null, work: WORK })
+    await renderList()
+    if (shown instanceof RegExp) await screen.findByText(shown)
+    else await screen.findByRole('link', shown)
+    expect(workCalls()).toBe(0)
   })
 })
 

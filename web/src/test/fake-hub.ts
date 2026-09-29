@@ -1,5 +1,5 @@
 import { vi, type Mock } from 'vitest'
-import type { CourseItemsProgress, ItemStatus, TechAccount } from '../lib/api'
+import type { CourseItemsProgress, ItemStatus, Submission, TechAccount } from '../lib/api'
 
 export const account = (overrides: Partial<TechAccount> = {}): TechAccount => ({
   id: 'a1', email: 'sam@example.com', first_name: 'Sam', last_name: 'Student', role: 'student',
@@ -54,6 +54,8 @@ export function fakeCourseHub(fetchMock: Mock, options: {
   counted: { id: string, type?: string }[]
   items?: ItemStatus[]
   failComplete?: boolean
+  // Each item's attempts, newest first, as /submissions/mine?item_id= answers them
+  work?: Record<string, Submission[]>
 }): { calls: () => string[] } {
   const courseId = options.courseId ?? 'gimp'
   const items = new Map((options.items ?? []).map(i => [i.item_id, { ...i }]))
@@ -79,9 +81,19 @@ export function fakeCourseHub(fetchMock: Mock, options: {
       items.set(id, { item_id: id, status, done_at: status && '2026-10-01T15:00:00Z', opened_at: null })
       return json(200, { ...items.get(id), videos: [] })
     },
+    '/api/v1/tech/submissions/mine\\?item_id=([^&]+)': ({ match }) =>
+      json(200, options.work?.[decodeURIComponent(match[1])] ?? []),
   })
   return { calls: () => requests(fetchMock) }
 }
+
+/** One handed-in piece of work, as the hub's SubmissionOut */
+export const submission = (overrides: Partial<Submission> = {}): Submission => ({
+  id: 'a1__i_c__1', kind: 'checkpoint', attempt: 1, status: 'submitted', status_label: 'Waiting for grading',
+  score_label: 'Not graded', item: { id: 'i_c', title: 'Final Project' }, course: { id: 'gimp', title: 'GIMP' },
+  answers: {}, feedback: null, auto_score: null, manual_score: null, total_score: null, total_max: null, passed: null,
+  submitted_at: '2026-10-02T15:00:00Z', graded_at: null, ...overrides,
+})
 
 /** The JSON bodies sent to paths ending in `path` */
 export const sentTo = (fetchMock: Mock, path: string): unknown[] =>

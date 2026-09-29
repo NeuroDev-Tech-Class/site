@@ -6,6 +6,7 @@ import { useSession } from '../../lib/session'
 import ProgressRing from '../course/ProgressRing'
 import Icon from '../Icon'
 import NotApproved from '../NotApproved'
+import RecentWork from './RecentWork'
 
 interface Props {
   courses: CourseMeta[]
@@ -69,18 +70,24 @@ export default function MyCourses({ courses, pageIds }: Props) {
   if (state.status !== 'ready') return loading
   if (!state.value.length) {
     return (
-      <div className="panel">
-        <p className="mt-0">You haven't started a course yet.</p>
-        <a className="btn-primary mt-4" href="/catalog">Browse the catalog</a>
-      </div>
+      <>
+        <div className="panel">
+          <p className="mt-0">You haven't started a course yet.</p>
+          <a className="btn-primary mt-4" href="/catalog">Browse the catalog</a>
+        </div>
+        <RecentWork />
+      </>
     )
   }
   const byId = new Map(courses.map(meta => [meta.id, meta]))
   return (
-    <ul className="mt-6 grid list-none gap-5 pl-0 md:grid-cols-2">
-      {state.value.map(course => (
-        <Card key={course.course_id} course={course} meta={byId.get(course.course_id)} pageIds={pageIds} />
-      ))}
-    </ul>
+    <>
+      <ul className="mt-6 grid list-none gap-5 pl-0 md:grid-cols-2">
+        {state.value.map(course => (
+          <Card key={course.course_id} course={course} meta={byId.get(course.course_id)} pageIds={pageIds} />
+        ))}
+      </ul>
+      <RecentWork />
+    </>
   )
 }

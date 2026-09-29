@@ -17,7 +17,7 @@ export const countsDone = (type: string, status: ProgressStatus | null): boolean
   status === 'done' || (type === 'test' && status === 'submitted')
 
 /** The signed-in, approved account's id, or null for anyone else */
-function useApprovedId(): string | null {
+export function useApprovedId(): string | null {
   const session = useSession()
   return session.status === 'signed-in' && session.account.status === 'approved' ? session.account.id : null
 }

@@ -148,6 +148,27 @@ export interface CourseItemsProgress extends CourseProgress {
   items: ItemStatus[]
 }
 
+// Submissions (hub: app/routers/tech_submissions.py): the student's own work, feedback included
+export interface Submission {
+  id: string
+  kind: 'checkpoint' | 'test'
+  attempt: number
+  status: 'draft' | 'submitted' | 'graded' | 'returned' | 'auto_graded'
+  status_label: string
+  score_label: string
+  item: Ref
+  course: Ref
+  answers: Record<string, string | string[]>
+  feedback: string | null
+  auto_score: number | null
+  manual_score: number | null
+  total_score: number | null
+  total_max: number | null
+  passed: boolean | null
+  submitted_at: string | null
+  graded_at: string | null
+}
+
 export interface Heartbeat {
   item_id: string
   video_id: string
@@ -166,6 +187,9 @@ export const completeItem = (itemId: string) =>
   request<ItemProgress>(`${TECH}/items/${id(itemId)}/complete`, { method: 'POST' })
 export const uncompleteItem = (itemId: string) =>
   request<ItemProgress>(`${TECH}/items/${id(itemId)}/complete`, { method: 'DELETE' })
+/** One item's attempts, newest first; without an item, the most recent work across every course */
+export const getMyWork = (itemId?: string) =>
+  request<Submission[]>(`${TECH}/submissions/mine${itemId ? `?item_id=${id(itemId)}` : ''}`)
 export const sendHeartbeat = (beat: Heartbeat) =>
   request<VideoProgress & { counted: boolean }>(`${TECH}/media/heartbeat`, { method: 'POST', body: JSON.stringify(beat) })
 
