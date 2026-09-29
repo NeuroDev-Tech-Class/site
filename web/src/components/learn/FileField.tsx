@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ApiError, discardUpload, fileLink, finishUpload, startUpload, type CheckpointField, type UploadedFile } from '../../lib/api'
 import { acceptFor, sizeWords } from '../../lib/checkpoint'
 import { putFile } from '../../lib/upload'
+import FieldNotes, { describedBy, Required } from './FieldNotes'
 
 /** Links to files are short-lived, so one is asked for only when the student wants to look */
 async function openFile(fileId: string) {
@@ -9,9 +10,6 @@ async function openFile(fileId: string) {
   window.open(url, '_blank', 'noopener')
 }
 
-// The space sits outside the span, or it drops out of the field's accessible name
-export const Required = ({ field }: { field: CheckpointField }) =>
-  field.required ? <>{' '}<span className="font-normal text-(--muted)">(required)</span></> : null
 
 export function FileRow({ file, onRemove }: { file: UploadedFile, onRemove?: () => void }) {
   return (
@@ -48,7 +46,6 @@ export default function FileField({ itemId, field, chosen, files, error, onUploa
   const [refused, setRefused] = useState<string | null>(null)
   const id = `field-${field.id}`
   const message = refused ?? error
-  const describedBy = [field.help && `${id}-help`, message && `${id}-error`].filter(Boolean).join(' ') || undefined
 
   async function upload(file: File): Promise<string | null> {
     setProgress({ name: file.name, percent: 0 })
@@ -97,15 +94,14 @@ export default function FileField({ itemId, field, chosen, files, error, onUploa
       <label htmlFor={id} className="block font-semibold">
         {field.label}<Required field={field} />
       </label>
-      {field.help && <p id={`${id}-help`} className="mt-1 text-sm text-(--muted)">{field.help}</p>}
-      {message && <p id={`${id}-error`} className="mt-1 text-sm font-semibold text-red-700 dark:text-red-300">{message}</p>}
+      <FieldNotes field={field} error={message} />
       <input
         id={id}
         type="file"
         accept={acceptFor(field)}
         multiple={field.multiple ?? false}
         disabled={progress !== null}
-        aria-describedby={describedBy}
+        aria-describedby={describedBy(field, message)}
         className="mt-2 block w-full text-sm file:btn-quiet file:mr-3"
         onChange={event => {
           const picked = [...(event.target.files ?? [])]

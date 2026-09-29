@@ -171,6 +171,33 @@ describe('autosave', () => {
     expect(screen.getByText('1 of 6 answered')).toBeTruthy()
   })
 
+  test('leaving the page straight after typing still saves', async () => {
+    hub()
+    await renderPage()
+    await userEvent.type(screen.getByRole('textbox', { name: 'Your movie title (required)' }), 'Space Cats')
+    cleanup()
+    await waitFor(() => expect(saved).toEqual([{ title: 'Space Cats' }]))
+  })
+
+  test('leaving without changing anything sends nothing', async () => {
+    hub()
+    await renderPage()
+    window.dispatchEvent(new Event('pagehide'))
+    cleanup()
+    await new Promise(resolve => setTimeout(resolve, 50))
+    expect(puts()).toBe(0)
+  })
+
+  test('closing the tab straight after typing still saves, with a request that outlives the page', async () => {
+    hub()
+    await renderPage()
+    await userEvent.type(screen.getByRole('textbox', { name: 'Your movie title (required)' }), 'Space Cats')
+    window.dispatchEvent(new Event('pagehide'))
+    await waitFor(() => expect(saved).toEqual([{ title: 'Space Cats' }]))
+    const put = fetchMock.mock.calls.find(([, init]) => (init as RequestInit | undefined)?.method === 'PUT')
+    expect((put?.[1] as RequestInit).keepalive).toBe(true)
+  })
+
   test('ticking boxes saves the ticked items', async () => {
     hub()
     await renderPage()

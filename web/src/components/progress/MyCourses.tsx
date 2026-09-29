@@ -75,7 +75,7 @@ export default function MyCourses({ courses, pageIds }: Props) {
           <p className="mt-0">You haven't started a course yet.</p>
           <a className="btn-primary mt-4" href="/catalog">Browse the catalog</a>
         </div>
-        <RecentWork />
+        <RecentWork pageIds={pageIds} />
       </>
     )
   }
@@ -87,7 +87,7 @@ export default function MyCourses({ courses, pageIds }: Props) {
           <Card key={course.course_id} course={course} meta={byId.get(course.course_id)} pageIds={pageIds} />
         ))}
       </ul>
-      <RecentWork />
+      <RecentWork pageIds={pageIds} />
     </>
   )
 }

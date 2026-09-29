@@ -12,29 +12,21 @@ import {
 import { answerable, answeredCount, checklistHint, stillNeeded, withoutBlanks } from '../../lib/checkpoint'
 import { ErrorSummary, type Problem } from '../auth/form'
 import AnswerList from './AnswerList'
-import FileField, { Required } from './FileField'
+import FieldNotes, { describedBy, Required } from './FieldNotes'
+import FileField from './FileField'
 
 // How long typing has to pause before the draft is saved
-export const AUTOSAVE_MS = 600
+const AUTOSAVE_MS = 600
 // The hub's limits (app/tech/answers.py), so the box stops before the hub would refuse
 const LIMITS: Partial<Record<CheckpointField['type'], number>> = { shortText: 200, longText: 10_000, url: 2000, code: 50_000 }
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'failed'
+type Timer = { current: ReturnType<typeof setTimeout> | undefined }
 
-function describedBy(field: CheckpointField, error?: string): string | undefined {
-  const id = `field-${field.id}`
-  return [field.help && `${id}-help`, error && `${id}-error`].filter(Boolean).join(' ') || undefined
-}
-
-function Notes({ field, error, hint }: { field: CheckpointField, error?: string, hint?: string | null }) {
-  const id = `field-${field.id}`
-  return (
-    <>
-      {field.help && <p id={`${id}-help`} className="mt-1 text-sm text-(--muted)">{field.help}</p>}
-      {hint && <p className="mt-1 text-sm text-(--muted)">{hint}</p>}
-      {error && <p id={`${id}-error`} className="mt-1 text-sm font-semibold text-red-700 dark:text-red-300">{error}</p>}
-    </>
-  )
+// undefined afterwards, so "is a save waiting?" is just a check of the ref
+function stop(timer: Timer) {
+  clearTimeout(timer.current)
+  timer.current = undefined
 }
 
 interface QuestionProps {
@@ -58,7 +50,7 @@ function TextQuestion({ field, value, error, onChange }: QuestionProps) {
   return (
     <div className="mt-8">
       <label htmlFor={id} className="block font-semibold">{field.label}<Required field={field} /></label>
-      <Notes field={field} error={error} />
+      <FieldNotes field={field} error={error} />
       {field.type === 'shortText' && <input {...common} type="text" onChange={e => onChange(e.target.value)} />}
       {field.type === 'url' && (
         <input {...common} type="url" inputMode="url" placeholder="https://" onChange={e => onChange(e.target.value)} />
@@ -77,7 +69,7 @@ function ChecklistQuestion({ field, value, error, onChange }: QuestionProps) {
   return (
     <fieldset id={`field-${field.id}`} className="mt-8" aria-describedby={describedBy(field, error)}>
       <legend className="font-semibold">{field.label}<Required field={field} /></legend>
-      <Notes field={field} error={error} hint={checklistHint(field)} />
+      <FieldNotes field={field} error={error} hint={checklistHint(field)} />
       <ul className="mt-2 flex list-none flex-col gap-1 pl-0">
         {items.map(item => (
           <li key={item} className="mt-0">
@@ -127,7 +119,19 @@ export default function CheckpointForm({ itemId, content, draft, onHandedIn }: P
   const reviewButton = useRef<HTMLButtonElement>(null)
   const switched = useRef(false)
 
-  useEffect(() => () => clearTimeout(timer.current), [])
+  // A save still waiting for typing to pause goes now, when the student leaves the page or closes the tab
+  useEffect(() => {
+    function flush() {
+      if (timer.current === undefined) return
+      stop(timer)
+      void saveDraft(itemId, withoutBlanks(latest.current), true).catch(() => undefined)
+    }
+    window.addEventListener('pagehide', flush)
+    return () => {
+      window.removeEventListener('pagehide', flush)
+      flush()
+    }
+  }, [itemId])
   // Swapping between the form and the review moves focus, and with it the scroll, to the part now showing
   useEffect(() => {
     if (!switched.current) return
@@ -140,7 +144,7 @@ export default function CheckpointForm({ itemId, content, draft, onHandedIn }: P
   }
 
   const save = useCallback(async () => {
-    clearTimeout(timer.current)
+    stop(timer)
     setSaveState('saving')
     try {
       await saveDraft(itemId, withoutBlanks(latest.current))
@@ -164,7 +168,7 @@ export default function CheckpointForm({ itemId, content, draft, onHandedIn }: P
   }
 
   async function handInWork() {
-    clearTimeout(timer.current)
+    stop(timer)
     setBusy(true)
     try {
       onHandedIn(await handIn(itemId, withoutBlanks(latest.current)))

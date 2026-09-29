@@ -3,7 +3,7 @@
 import type { Answers, CheckpointContent, CheckpointField } from './api'
 import type { ItemPageView } from './content'
 
-export const IMAGE_ACCEPT = '.png,.jpg,.jpeg,.webp,.gif'
+const IMAGE_ACCEPT = '.png,.jpg,.jpeg,.webp,.gif'
 
 /** Every question the student answers; the coach's in-person sign-off is not one of them */
 export const answerable = (fields: CheckpointField[]): CheckpointField[] => fields.filter(f => f.type !== 'mentorSignOff')

@@ -255,8 +255,9 @@ export const getMyWork = (itemId?: string) =>
 const send = (body: unknown, method = 'POST'): RequestInit => ({ method, body: JSON.stringify(body) })
 
 export const getDraft = (itemId: string) => request<Draft>(`${TECH}/items/${id(itemId)}/draft`)
-export const saveDraft = (itemId: string, answers: Answers) =>
-  request<Draft>(`${TECH}/items/${id(itemId)}/draft`, send({ answers }, 'PUT'))
+/** keepalive lets the save finish after the page has gone */
+export const saveDraft = (itemId: string, answers: Answers, keepalive = false) =>
+  request<Draft>(`${TECH}/items/${id(itemId)}/draft`, { ...send({ answers }, 'PUT'), keepalive })
 export const handIn = (itemId: string, answers: Answers) =>
   request<Submission>(`${TECH}/items/${id(itemId)}/submit`, send({ answers }))
 export const startUpload = (itemId: string, fieldId: string, name: string, size: number) =>

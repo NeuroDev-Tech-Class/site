@@ -1,9 +1,9 @@
 import type { Answers, CheckpointField, UploadedFile } from '../../lib/api'
-import { answerable } from '../../lib/checkpoint'
+import { answerable, filled } from '../../lib/checkpoint'
 import { FileRow } from './FileField'
 
 function Answer({ field, value, files }: { field: CheckpointField, value: string | string[] | undefined, files: Map<string, UploadedFile> }) {
-  if (!value || (Array.isArray(value) && !value.length)) return <span className="text-(--muted)">Not answered</span>
+  if (!value || !filled(value)) return <span className="text-(--muted)">Not answered</span>
   if (field.type === 'file' || field.type === 'image') {
     return (
       <ul className="flex list-none flex-col gap-2 pl-0">
