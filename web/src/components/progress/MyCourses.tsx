@@ -16,7 +16,7 @@ interface Props {
 function Card({ course, meta, pageIds }: { course: CourseProgress, meta?: CourseMeta, pageIds: string[] }) {
   const next = course.next_item
   return (
-    <li className="mt-0">
+    <li className="mt-0 min-w-0">
       <article className="panel flex h-full flex-col gap-4" style={{ '--accent': courseAccent(meta) } as React.CSSProperties}>
         <div className="flex items-center gap-4">
           <ProgressRing percent={course.percent} />

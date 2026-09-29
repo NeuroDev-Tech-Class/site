@@ -22,7 +22,7 @@ Work the phases in number order. Each phase ends with Topher's review, the manua
 | 4 | Content in the database + read API (catalog public, lessons behind login) | hub | 2 | [x] 2026-09-25 |
 | 5 | Progress + video watch tracking | hub | 4 | [x] 2026-09-28 |
 | 6 | Student pages: course page, item pages with Mark complete, catalog progress, My Courses | site | 3, 5 | [x] 2026-09-28 |
-| 7 | Submissions, grading, notifications, activity feed | hub | 5 | [ ] |
+| 7 | Submissions, grading, notifications, activity feed | hub | 5 | [x] 2026-09-29 |
 | 8 | Checkpoints + file uploads (R2) | hub | 7 | [ ] |
 | 9 | Checkpoint form | site | 6, 8 | [ ] |
 | 10 | Admin dashboard (Today, Queue, Grade, Students, Activity, Accounts, bell) | site | 7, 9 | [ ] |
@@ -224,6 +224,12 @@ Two repos. Hub work goes on the existing `tech-class` branch (currently equal to
   5. **Inbox and activity**: `GET /tech/inbox` (newest first, 50 a page), `/inbox/unread-count`, `POST /tech/inbox/{id}/read`, `/inbox/read-all`; `GET /tech/activity` (admin, newest first, 100 a page, filters type, student, course, dates) and `/activity.csv` (same filters, spreadsheet formula characters neutralised). `tests/rules/notifications` behaviours ported (nobody reads another's inbox).
   6. **Site**: My Courses gains Recent work; a returned checkpoint shows "Needs revision" and its feedback on the course page.
   7. **Close**: real run in `hub_dev` (submit, grade, return, resubmit, inbox, CSV), hub README, tracker, memory.
+- *As delivered (2026-09-29)*: built as planned in seven steps (hub `phase 7.1`-`7.5`, site `phase 7.6`); 651 hub tests and 205 web unit tests green, every step's tests confirmed red first and checked by deliberately breaking the code (111 breaks, all caught). The hub README's "Tech submissions, notifications and the activity record" has the rules. Differences and additions:
+  - **Parity with the old site** is a test, not a one-off check: `tests/tech/fixtures/notify_parity/` holds the old JavaScript's own output for 1,100+ lines of cases, and the Python must match it word for word (links aside, and the certificate note's body, both changed on purpose). Not ported, because nothing needs them: `sameDerived` (it only stopped Firebase triggers looping), `parseLegacyKey` and `isUngraded`/`needs_grading`.
+  - **Decisions taken during the phase (Topher, 2026-09-28):** certificates are previewed, created and printed by the coach, never emailed, and shown online only after the coach gives access (Phase 12 above is updated); a required checklist needs every box unless the spec gives `min` (the AI tools checkpoint asks for any two; the extractor validates `min`); the 19 checkpoints needing an upload or sign-off refuse Submit until Phase 8, so 75 of the 94 can be handed in now.
+  - **Chosen while building:** a sign-up is also announced when a password reset is what confirms the email; promoting a waiting student to admin counts as their approval; nobody grades their own work and only the newest attempt can be graded; a checkpoint marked complete reads "Complete" (the old labels only knew scored work); the activity window takes full timestamps rather than dates so the admin screen can send the coach's local day; the CSV is oldest first and complete, never paged.
+  - **Fixed on the way:** the approval email linked to `/profile`, which the new site doesn't have; it goes to `/my-courses`. On My Courses a long "Next:" title pushed the course cards wider than a phone screen (Phase 6).
+  - **Follow-ups:** three checkpoints kept their old reading titles ("Reading - Working with Modern AI Tools", "Reading - Responsible AI Use", "Reading - Game Design Documents"), which show on the course page and in notifications; an extractor override can retitle them. `hub_dev`'s activity record keeps the test lines from the real run, since it is append-only.
 
 **Phase 8. Hub: checkpoints + uploads (L)**: `storage.py` (R2 via S3 API + local fs; presigned PUT with size/MIME caps and a per-student quota; presigned GET); draft create and autosave, submit, resubmit after Return, mentor sign-off field (confirmed by an admin, "Your coach will confirm this in person"). A student can edit only their own draft or returned work, never score fields.
 
