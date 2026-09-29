@@ -16,16 +16,6 @@
       "required": true
     },
     {
-      "id": "xcf_file",
-      "type": "file",
-      "label": "Your GIMP project file",
-      "accept": [
-        ".xcf"
-      ],
-      "multiple": false,
-      "required": true
-    },
-    {
       "id": "checklist",
       "type": "checklist",
       "label": "Activity Checklist",

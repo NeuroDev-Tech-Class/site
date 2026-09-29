@@ -36,6 +36,13 @@ export function validateSpec(spec, targets) {
     for (const group of checkpoint.required_one_of || []) {
       for (const id of group) if (!ids.has(id)) say(`required_one_of names ${id}, which is not a field`);
     }
+    // For the coach only: the answers to check typed work against
+    if ('grading_hint' in checkpoint) {
+      const answers = checkpoint.grading_hint?.answers;
+      if (!Array.isArray(answers) || !answers.length || answers.some(a => typeof a !== 'string' || !a.trim())) {
+        say('grading_hint needs a list of answers');
+      }
+    }
     if (Boolean(checkpoint.requires_sign_off) !== fields.some(f => f.type === 'mentorSignOff')) {
       say('requires_sign_off does not match its mentorSignOff fields');
     }

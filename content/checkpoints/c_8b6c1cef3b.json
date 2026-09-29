@@ -23,16 +23,6 @@
       "required": true
     },
     {
-      "id": "xcf_file",
-      "type": "file",
-      "label": "Your GIMP project file",
-      "accept": [
-        ".xcf"
-      ],
-      "multiple": false,
-      "required": true
-    },
-    {
       "id": "q1_hardest",
       "type": "longText",
       "label": "What damage was hardest to fix?",

@@ -28,13 +28,6 @@
       "required": true
     },
     {
-      "id": "screenshot",
-      "type": "image",
-      "label": "Screenshot of your finished obstacle course",
-      "multiple": false,
-      "required": true
-    },
-    {
       "id": "signoff_playtest",
       "type": "mentorSignOff",
       "label": "Confirms the student play-tested the full course from start to finish",

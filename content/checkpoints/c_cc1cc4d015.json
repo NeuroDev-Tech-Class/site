@@ -25,13 +25,6 @@
       "type": "shortText",
       "label": "Activity 3: What CPU temperature or fan speeds did you see in the Hardware Monitor?",
       "required": true
-    },
-    {
-      "id": "photo",
-      "type": "image",
-      "label": "Photo of your BIOS/UEFI screen",
-      "multiple": false,
-      "required": false
     }
   ],
   "required_one_of": [],

@@ -152,10 +152,9 @@
       },
       {
         "id": "reference_images",
-        "type": "image",
-        "label": "Reference Images / Mood Board — 3–5 images that capture the look and feel you're going for.",
-        "multiple": true,
-        "required": false
+        "type": "longText",
+        "label": "Reference images: paste links to 3–5 images that capture the look and feel you want, or describe them",
+        "required": true
       },
       {
         "id": "must_have_features",
@@ -204,13 +203,6 @@
         "type": "shortText",
         "label": "Activity 3: What CPU temperature or fan speeds did you see in the Hardware Monitor?",
         "required": true
-      },
-      {
-        "id": "photo",
-        "type": "image",
-        "label": "Photo of your BIOS/UEFI screen",
-        "multiple": false,
-        "required": false
       }
     ]
   },
@@ -219,141 +211,138 @@
     "requires_sign_off": false,
     "fields": [
       {
-        "id": "document_file",
-        "type": "file",
-        "label": "Upload your completed \"Frogs\" document",
-        "accept": [
-          ".docx",
-          ".pdf"
-        ],
-        "multiple": false,
-        "required": false
-      },
-      {
         "id": "document_url",
         "type": "url",
-        "label": "Or share a link to your document",
-        "required": false
+        "label": "Link to your finished \"Frogs\" document (Google Docs or OneDrive, shared so your coach can view it)",
+        "required": true
       }
     ],
-    "required_one_of": [
-      [
-        "document_file",
-        "document_url"
-      ]
-    ]
+    "required_one_of": []
   },
   "computer-basics/office-software/word_processors/application-creating_a_résumé.html": {
     "title": "Application: Creating a Résumé",
     "requires_sign_off": false,
     "fields": [
       {
-        "id": "resume_file",
-        "type": "file",
-        "label": "Upload your résumé",
-        "accept": [
-          ".docx",
-          ".pdf"
-        ],
-        "multiple": false,
-        "required": false
-      },
-      {
         "id": "resume_url",
         "type": "url",
-        "label": "Or share a link to your résumé",
-        "required": false
+        "label": "Link to your résumé (Google Docs or OneDrive, shared so your coach can view it)",
+        "required": true
       }
     ],
-    "required_one_of": [
-      [
-        "resume_file",
-        "resume_url"
-      ]
-    ]
+    "required_one_of": []
   },
   "computer-basics/office-software/spreadsheets/practice-spreadsheets.html": {
     "title": "Practice: Spreadsheets",
     "requires_sign_off": false,
     "fields": [
       {
-        "id": "spreadsheet_file",
-        "type": "file",
-        "label": "Upload your \"Gardening Expenses\" spreadsheet",
-        "accept": [
-          ".xlsx"
-        ],
-        "multiple": false,
-        "required": false
+        "id": "d2_formula",
+        "type": "shortText",
+        "label": "The formula you typed in D2 to work out the total cost of the seeds",
+        "required": true
       },
       {
-        "id": "spreadsheet_url",
-        "type": "url",
-        "label": "Or share a link to your spreadsheet",
-        "required": false
+        "id": "item_totals",
+        "type": "shortText",
+        "label": "The total cost of each item: Seeds, Soil, Fertilizer and Garden Tool Set",
+        "required": true
+      },
+      {
+        "id": "grand_total",
+        "type": "shortText",
+        "label": "The formula in E2 and the grand total it shows",
+        "required": true
+      },
+      {
+        "id": "highlighted",
+        "type": "shortText",
+        "label": "Which items the conditional formatting highlighted in red",
+        "required": true
+      },
+      {
+        "id": "sorted_order",
+        "type": "shortText",
+        "label": "The items in order after sorting, highest total cost first",
+        "required": true
+      },
+      {
+        "id": "checklist",
+        "type": "checklist",
+        "label": "What you did",
+        "required": true,
+        "items": [
+          "Named the spreadsheet \"Gardening Expenses\"",
+          "Formatted columns C, D and E as currency",
+          "Made everything in row 1 bold",
+          "Made a 3D pie chart named \"Gardening Expenses\" with the legend on the right",
+          "Froze the top row"
+        ]
       }
     ],
-    "required_one_of": [
-      [
-        "spreadsheet_file",
-        "spreadsheet_url"
+    "required_one_of": [],
+    "grading_hint": {
+      "answers": [
+        "D2: =B2*C2 (then filled down to D5)",
+        "Totals: Seeds $15.00, Soil $18.00, Fertilizer $22.50, Garden Tool Set $25.00",
+        "E2: =SUM(D2:D5), a grand total of $80.50",
+        "Highlighted (over $20): Fertilizer and Garden Tool Set",
+        "Sorted, highest first: Garden Tool Set, Fertilizer, Soil, Seeds"
       ]
-    ]
+    }
   },
   "computer-basics/office-software/spreadsheets/application-creating_a_budget.html": {
     "title": "Application: Creating a Budget",
     "requires_sign_off": false,
     "fields": [
       {
-        "id": "budget_file",
-        "type": "file",
-        "label": "Upload your budget spreadsheet",
-        "accept": [
-          ".xlsx"
-        ],
-        "multiple": false,
-        "required": false
-      },
-      {
-        "id": "budget_url",
-        "type": "url",
-        "label": "Or share a link to your budget spreadsheet",
-        "required": false
-      },
-      {
-        "id": "categories_explanation",
+        "id": "income",
         "type": "longText",
-        "label": "Explain the income and expense categories you included in your budget.",
-        "note": "The page doesn't ask for a written explanation directly; this field is added per the audit to capture the categories chosen.",
+        "label": "Your monthly income: each source and how much",
         "required": true
+      },
+      {
+        "id": "fixed_expenses",
+        "type": "longText",
+        "label": "Your fixed expenses (like rent or a phone plan) and how much each one costs",
+        "required": true
+      },
+      {
+        "id": "variable_expenses",
+        "type": "longText",
+        "label": "Your variable expenses (like groceries or fun) and about how much each one costs",
+        "required": true
+      },
+      {
+        "id": "savings",
+        "type": "shortText",
+        "label": "How much you plan to save each month",
+        "required": true
+      },
+      {
+        "id": "formulas",
+        "type": "longText",
+        "label": "The formulas or functions you used and what each one works out (for example, =SUM(B2:B5) adds up your income)",
+        "required": true
+      },
+      {
+        "id": "extras",
+        "type": "longText",
+        "label": "Anything else you used to make your budget easy to read (cell formatting, a chart, conditional formatting)",
+        "required": false
       }
     ],
-    "required_one_of": [
-      [
-        "budget_file",
-        "budget_url"
-      ]
-    ]
+    "required_one_of": []
   },
   "computer-basics/office-software/presentation_software/application-careers_day_presentation.html": {
     "title": "Application: Careers Day Presentation",
     "requires_sign_off": false,
     "fields": [
       {
-        "id": "presentation_file",
-        "type": "file",
-        "label": "Upload your presentation",
-        "accept": [
-          ".pptx"
-        ],
-        "multiple": false,
-        "required": false
-      },
-      {
         "id": "presentation_url",
         "type": "url",
-        "label": "Or share a link to your presentation",
-        "required": false
+        "label": "Link to your slides (Google Slides or PowerPoint online, shared so your coach can view them)",
+        "required": true
       },
       {
         "id": "q1_role_description",
@@ -380,12 +369,7 @@
         "required": true
       }
     ],
-    "required_one_of": [
-      [
-        "presentation_file",
-        "presentation_url"
-      ]
-    ]
+    "required_one_of": []
   },
   "computer-basics/ai-prompt-engineering/final_assignment-ai_application.html": {
     "title": "Final Assignment: AI Application",
@@ -416,41 +400,19 @@
         "required": true
       },
       {
-        "id": "screenshots",
-        "type": "image",
-        "label": "Screenshots of your conversations with the AI model, including the prompts you used and the responses you received",
-        "multiple": true,
-        "required": false
-      },
-      {
         "id": "transcript_code",
         "type": "code",
-        "label": "Or paste the transcript of your AI conversation",
+        "label": "Paste your conversation with the AI: the prompts you used and the replies you got",
         "language": "text",
-        "required": false
+        "required": true
       }
     ],
-    "required_one_of": [
-      [
-        "screenshots",
-        "transcript_code"
-      ]
-    ]
+    "required_one_of": []
   },
   "game-development/blender-zbrush/unit1/activity_create_a_scene.html": {
     "title": "Activity: Create a 3D Scene",
     "requires_sign_off": false,
     "fields": [
-      {
-        "id": "blend_file",
-        "type": "file",
-        "label": "Upload your .blend project file",
-        "accept": [
-          ".blend"
-        ],
-        "multiple": false,
-        "required": true
-      },
       {
         "id": "render_image",
         "type": "image",
@@ -471,7 +433,7 @@
           "Objects are arranged into a logical, coherent scene",
           "Camera is positioned to frame the scene",
           "A rendered screenshot (PNG) is saved and submitted",
-          "The .blend project file is saved and submitted"
+          "The .blend project file is saved"
         ],
         "required": true
       }
@@ -490,13 +452,11 @@
       {
         "id": "audio_file",
         "type": "file",
-        "label": "Upload your recording (WAV, MP3, and your Audacity project file)",
+        "label": "Upload your finished recording (MP3)",
         "accept": [
-          ".wav",
-          ".mp3",
-          ".aup3"
+          ".mp3"
         ],
-        "multiple": true,
+        "multiple": false,
         "required": true
       },
       {
@@ -528,12 +488,11 @@
       {
         "id": "audio_file",
         "type": "file",
-        "label": "Upload your finished episode (MP3) and Audacity project file",
+        "label": "Upload your finished episode (MP3)",
         "accept": [
-          ".mp3",
-          ".aup3"
+          ".mp3"
         ],
-        "multiple": true,
+        "multiple": false,
         "required": true
       },
       {
@@ -560,7 +519,7 @@
           "Exported as MP3 at 192 kbps.",
           "Metadata tags (Title, Artist, Genre) are filled in.",
           "Written companion document listing all royalty-free music and sound effect sources is included.",
-          "Audacity project file (.aup3) is saved and submitted."
+          "Audacity project file (.aup3) is saved."
         ],
         "required": true
       }
@@ -669,16 +628,6 @@
         "required": true
       },
       {
-        "id": "xcf_file",
-        "type": "file",
-        "label": "Your GIMP project file",
-        "accept": [
-          ".xcf"
-        ],
-        "multiple": false,
-        "required": true
-      },
-      {
         "id": "q1_hardest",
         "type": "longText",
         "label": "What damage was hardest to fix?",
@@ -706,16 +655,6 @@
         "id": "poster_image",
         "type": "image",
         "label": "Your exported poster (PNG or JPEG)",
-        "multiple": false,
-        "required": true
-      },
-      {
-        "id": "xcf_file",
-        "type": "file",
-        "label": "Your GIMP project file",
-        "accept": [
-          ".xcf"
-        ],
         "multiple": false,
         "required": true
       },
@@ -751,16 +690,6 @@
         "required": true
       },
       {
-        "id": "piece1_file",
-        "type": "file",
-        "label": "Piece 1: your GIMP project file",
-        "accept": [
-          ".xcf"
-        ],
-        "multiple": false,
-        "required": true
-      },
-      {
         "id": "piece1_q1",
         "type": "longText",
         "label": "Piece 1: what the piece is and what you were aiming to achieve",
@@ -786,16 +715,6 @@
         "required": true
       },
       {
-        "id": "piece2_file",
-        "type": "file",
-        "label": "Piece 2: your GIMP project file",
-        "accept": [
-          ".xcf"
-        ],
-        "multiple": false,
-        "required": true
-      },
-      {
         "id": "piece2_q1",
         "type": "longText",
         "label": "Piece 2: what the piece is and what you were aiming to achieve",
@@ -817,16 +736,6 @@
         "id": "piece3_image",
         "type": "image",
         "label": "Piece 3 (Creative Composition or Digital Painting): exported PNG or JPEG",
-        "multiple": false,
-        "required": true
-      },
-      {
-        "id": "piece3_file",
-        "type": "file",
-        "label": "Piece 3: your GIMP project file",
-        "accept": [
-          ".xcf"
-        ],
         "multiple": false,
         "required": true
       },
@@ -933,7 +842,7 @@
       {
         "id": "task8_output",
         "type": "code",
-        "label": "Task 8: Monitor and Report — terminal output (disk usage, memory usage, the sleep process)",
+        "label": "Task 8: Monitor and Report — terminal output (disk usage, memory usage, the sleep process, and the list from ps aux --sort=-%cpu | head -10)",
         "language": "bash",
         "required": true
       },
@@ -975,13 +884,6 @@
         "type": "longText",
         "label": "What was the most challenging part of this project, and what did you learn?",
         "required": true
-      },
-      {
-        "id": "htop_screenshot",
-        "type": "image",
-        "label": "Screenshot of htop showing the process list (Task 8)",
-        "multiple": false,
-        "required": false
       }
     ]
   },
@@ -1104,16 +1006,9 @@
         "required": true
       },
       {
-        "id": "wallpaper_slideshow_image",
-        "type": "image",
-        "label": "Screenshot of your wallpaper slideshow setup",
-        "multiple": false,
-        "required": false
-      },
-      {
         "id": "signoff_shortcuts",
         "type": "mentorSignOff",
-        "label": "Confirms the student demonstrated the keyboard shortcuts in person",
+        "label": "Confirms the student demonstrated the keyboard shortcuts and their wallpaper slideshow in person",
         "required": true
       }
     ]
@@ -1284,10 +1179,9 @@
         "required": true
       },
       {
-        "id": "build_photos",
-        "type": "image",
-        "label": "Photos documenting each stage of the build",
-        "multiple": true,
+        "id": "build_notes",
+        "type": "longText",
+        "label": "What happened at each stage of the build, including anything that went wrong and how you fixed it",
         "required": true
       },
       {
@@ -1321,13 +1215,6 @@
         "required": true
       },
       {
-        "id": "screenshot",
-        "type": "image",
-        "label": "Screenshot of your finished courtyard",
-        "multiple": false,
-        "required": true
-      },
-      {
         "id": "signoff_playtest",
         "type": "mentorSignOff",
         "label": "Confirms the student play-tested the level",
@@ -1357,13 +1244,6 @@
           "Level saved (Ctrl+S)"
         ],
         "note": "The audit lists 9 items; the page's own Completion Checklist table has 11 rows. Used the page's full list rather than trimming it.",
-        "required": true
-      },
-      {
-        "id": "screenshot",
-        "type": "image",
-        "label": "Screenshot of your finished obstacle course",
-        "multiple": false,
         "required": true
       },
       {
@@ -1421,16 +1301,9 @@
         "required": true
       },
       {
-        "id": "level_image",
-        "type": "image",
-        "label": "Screenshot of your finished level",
-        "multiple": false,
-        "required": false
-      },
-      {
         "id": "level_url",
         "type": "url",
-        "label": "Or a link to a video walkthrough of your level",
+        "label": "A link to a video walkthrough of your level (optional)",
         "required": false
       },
       {
@@ -1440,40 +1313,94 @@
         "required": true
       }
     ],
-    "required_one_of": [
-      [
-        "level_image",
-        "level_url"
-      ]
-    ]
+    "required_one_of": []
   },
   "note:office-software:1-1": {
     "title": "Worksheet: Spreadsheet Formulas",
     "requires_sign_off": false,
     "fields": [
       {
-        "id": "sheet_url",
-        "type": "url",
-        "label": "Link to your copied Google Sheet — make a copy of the linked spreadsheet, complete the tasks on all five sheets, and share the link (make sure sharing is turned on)",
-        "required": false
+        "id": "sum_formulas",
+        "type": "shortText",
+        "label": "Sum sheet: your formulas in D11 (the total) and D12 (the food total)",
+        "required": true
       },
       {
-        "id": "sheet_file",
-        "type": "file",
-        "label": "Or upload your completed workbook",
-        "accept": [
-          ".xlsx"
-        ],
-        "multiple": false,
-        "required": false
+        "id": "sum_results",
+        "type": "shortText",
+        "label": "Sum sheet: what D11 and D12 show",
+        "required": true
+      },
+      {
+        "id": "average_formulas",
+        "type": "shortText",
+        "label": "Average sheet: your formulas in C13 (the class average) and C14 (not counting zeroes)",
+        "required": true
+      },
+      {
+        "id": "average_results",
+        "type": "shortText",
+        "label": "Average sheet: what C13 and C14 show",
+        "required": true
+      },
+      {
+        "id": "if_formulas",
+        "type": "shortText",
+        "label": "If sheet: your formulas in E3 and F3",
+        "required": true
+      },
+      {
+        "id": "if_over",
+        "type": "shortText",
+        "label": "If sheet: which months went over budget, and by how much",
+        "required": true
+      },
+      {
+        "id": "countif_formula",
+        "type": "shortText",
+        "label": "Countif sheet: your formula in C10",
+        "required": true
+      },
+      {
+        "id": "countif_result",
+        "type": "shortText",
+        "label": "Countif sheet: how many adults it counts",
+        "required": true
+      },
+      {
+        "id": "xlookup_formulas",
+        "type": "shortText",
+        "label": "Xlookup sheet: your formulas in C11 (MAX) and B11 (XLOOKUP)",
+        "required": true
+      },
+      {
+        "id": "xlookup_result",
+        "type": "shortText",
+        "label": "Xlookup sheet: the biggest city and its population",
+        "required": true
+      },
+      {
+        "id": "checklist",
+        "type": "checklist",
+        "label": "What you did",
+        "required": true,
+        "items": [
+          "Sorted the purchases on the Sum sheet into alphabetical order",
+          "Filled in the rest of the months on the If sheet by dragging",
+          "Coloured \"Over budget\" red with conditional formatting"
+        ]
       }
     ],
-    "required_one_of": [
-      [
-        "sheet_url",
-        "sheet_file"
+    "required_one_of": [],
+    "grading_hint": {
+      "answers": [
+        "Sum: D11 =SUM(D3:D9) shows $247.46; D12 =SUMIF(B3:B9,\"Food\",D3:D9) shows $15.12",
+        "Average: C13 =AVERAGE(C3:C11) shows 68% (0.68); C14 =AVERAGEIF(C3:C11,\">0\") shows 77% (0.77)",
+        "If: E3 =IF(D3>C3,\"Over budget\",\"Under budget\"); F3 =IF(D3>C3,D3-C3,\"N/A\"); over budget in April by $163.97, August by $83.97 and October by $32.96",
+        "Countif: C10 =COUNTIF(C3:C8,\">17\") shows 3",
+        "Xlookup: C11 =MAX(C3:C9) shows 2,746,388; B11 =XLOOKUP(C11,C3:C9,B3:B9) shows Chicago"
       ]
-    ]
+    }
   },
   "note:linux:2-10": {
     "title": "Reflection: CLI vs GUI",
@@ -1553,13 +1480,6 @@
         "required": true
       },
       {
-        "id": "screenshot",
-        "type": "image",
-        "label": "One of the screenshots you took (optional)",
-        "required": false,
-        "multiple": false
-      },
-      {
         "id": "signoff",
         "type": "mentorSignOff",
         "label": "Your coach watches you use a few of these shortcuts",
@@ -1594,13 +1514,6 @@
         "type": "longText",
         "label": "Cooling: how the CPU is cooled, how many case fans there are, and which way the air flows",
         "required": true
-      },
-      {
-        "id": "inside_photo",
-        "type": "image",
-        "label": "A photo of the inside of the case (optional)",
-        "required": false,
-        "multiple": false
       },
       {
         "id": "signoff",

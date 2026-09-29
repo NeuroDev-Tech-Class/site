@@ -37,13 +37,6 @@
       "required": true
     },
     {
-      "id": "screenshot",
-      "type": "image",
-      "label": "One of the screenshots you took (optional)",
-      "required": false,
-      "multiple": false
-    },
-    {
       "id": "signoff",
       "type": "mentorSignOff",
       "label": "Your coach watches you use a few of these shortcuts",

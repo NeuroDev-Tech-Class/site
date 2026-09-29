@@ -131,6 +131,96 @@ test('a required checklist asks for every box, except the AI tools one, which as
   assert.deepEqual(withMin.map(f => [f.id, f.min, f.items.length]), [['features_tried', 2, 4]]);
 });
 
+// Uploads are for creative work only, and only the finished work (Topher, 2026-09-29)
+const byName = name => checkpointFiles.map(json).find(c => `${c.course_id}: ${c.title}` === name);
+const text = html => html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+
+test('only the creative checkpoints take uploads', () => {
+  const withUploads = checkpointFiles.map(json)
+    .filter(c => c.fields.some(f => f.type === 'file' || f.type === 'image'))
+    .map(c => `${c.course_id}: ${c.title}`).sort();
+  assert.deepEqual(withUploads, [
+    'audacity: Activity: 60-Second Personal Introduction',
+    'audacity: Final Project: Mini Podcast Episode',
+    'blender-zbrush-mini: Activity: Create a 3D Scene',
+    'blender-zbrush-mini: Activity: Model & Print a Ring',
+    'blender-zbrush-mini: Final Project',
+    'davinci-resolve: Activity: Color Grade a Short Scene',
+    'gimp: Activity: Movie Poster Design',
+    'gimp: Activity: Photo Restoration',
+    'gimp: Final Project: Portfolio Showcase',
+  ]);
+});
+
+test('project files are never uploaded, only the finished work', () => {
+  const accepted = checkpointFiles.flatMap(p => json(p).fields.flatMap(f => f.accept ?? []));
+  assert.deepEqual([...new Set(accepted)].sort(), ['.mp3', '.obj', '.stl']);
+  for (const name of ['audacity: Activity: 60-Second Personal Introduction', 'audacity: Final Project: Mini Podcast Episode']) {
+    const [audio] = byName(name).fields.filter(f => f.type === 'file');
+    assert.deepEqual([audio.accept, audio.multiple], [['.mp3'], false], name);
+  }
+});
+
+test('office work is typed where the answer is content and linked where formatting is the skill', () => {
+  for (const name of ['office-software: Application: Creating a Budget', 'office-software: Practice: Spreadsheets',
+    'office-software: Worksheet: Spreadsheet Formulas']) {
+    const checkpoint = byName(name);
+    assert.ok(checkpoint.fields.every(f => !['file', 'url'].includes(f.type)), name);
+    assert.ok(checkpoint.fields.filter(f => f.required).length >= 4, name);
+    assert.deepEqual(checkpoint.required_one_of, [], name);
+  }
+  for (const name of ['office-software: Application: Creating a Résumé', 'office-software: Practice: Word Processors',
+    'office-software: Application: Careers Day Presentation']) {
+    const checkpoint = byName(name);
+    const links = checkpoint.fields.filter(f => f.type === 'url');
+    assert.deepEqual(links.map(f => f.required), [true], name);
+    assert.deepEqual(checkpoint.required_one_of, [], name);
+  }
+});
+
+test('the spreadsheet checkpoints carry their answers for the coach', () => {
+  const formulas = byName('office-software: Worksheet: Spreadsheet Formulas').grading_hint.answers.join('\n');
+  for (const answer of ['$247.46', '$15.12', '68%', '77%', 'April', 'Chicago', '2,746,388']) {
+    assert.match(formulas, new RegExp(answer.replace(/[$.]/g, '\\$&')), answer);
+  }
+  const practice = byName('office-software: Practice: Spreadsheets').grading_hint.answers.join('\n');
+  assert.match(practice, /=B2\*C2/);
+  assert.match(practice, /\$80\.50/);
+});
+
+test('instructions no longer ask for screenshots or project files that are not handed in', () => {
+  assert.doesNotMatch(text(byName('ai-usage: Final Assignment: AI Application').instructions_html), /screenshot/i);
+  assert.doesNotMatch(text(byName('linux: Final Project: Linux Task Challenge').instructions_html), /screenshot/i);
+  assert.doesNotMatch(text(byName('gimp: Final Project: Portfolio Showcase').instructions_html), /3 XCF project files —/);
+  assert.doesNotMatch(text(byName('audacity: Final Project: Mini Podcast Episode').instructions_html), /saved and submitted/);
+  assert.doesNotMatch(text(byName('audacity: Activity: 60-Second Personal Introduction').instructions_html),
+    /Both a WAV file and a 192 kbps MP3 file are submitted/);
+  assert.doesNotMatch(text(byName('blender-zbrush-mini: Activity: Create a 3D Scene').instructions_html), /Your \.blend file/);
+  assert.doesNotMatch(text(byName('hardware: Final Project: Build a Custom PC').instructions_html), /Take photos/);
+  assert.doesNotMatch(text(byName('hardware: Hands-on Exercise: Identifying Computer Hardware').instructions_html),
+    /Take a photo/);
+});
+
+test('checkpoint instructions carry no page chrome, even when an override supplies them', () => {
+  for (const path of checkpointFiles) {
+    const { title, instructions_html: html } = json(path);
+    assert.doesNotMatch(html, /class="(back-link|doc-header|doc-footer)"|← Back to/, title);
+  }
+});
+
+test('a grading hint in the spec must list its answers', () => {
+  const bad = structuredClone(good);
+  bad['a/page.html'].grading_hint = { answers: [] };
+  bad['note:linux:2-10'].grading_hint = 'D2 is =B2*C2';
+  assert.deepEqual(validateSpec(bad, targets), [
+    'a/page.html: grading_hint needs a list of answers',
+    'note:linux:2-10: grading_hint needs a list of answers',
+  ]);
+  const fine = structuredClone(good);
+  fine['a/page.html'].grading_hint = { answers: ['D2: =B2*C2'] };
+  assert.deepEqual(validateSpec(fine, targets), []);
+});
+
 test('the note checkpoints keep their instructions', () => {
   const linux = json('content/courses/linux.json').units.flatMap(u => u.items).find(i => i.legacy_key === '2-10');
   assert.equal(linux.type, 'checkpoint');

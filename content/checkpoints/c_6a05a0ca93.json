@@ -49,10 +49,9 @@
     },
     {
       "id": "reference_images",
-      "type": "image",
-      "label": "Reference Images / Mood Board — 3–5 images that capture the look and feel you're going for.",
-      "multiple": true,
-      "required": false
+      "type": "longText",
+      "label": "Reference images: paste links to 3–5 images that capture the look and feel you want, or describe them",
+      "required": true
     },
     {
       "id": "must_have_features",

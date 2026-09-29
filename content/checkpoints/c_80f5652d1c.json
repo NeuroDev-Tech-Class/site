@@ -81,16 +81,9 @@
       "required": true
     },
     {
-      "id": "wallpaper_slideshow_image",
-      "type": "image",
-      "label": "Screenshot of your wallpaper slideshow setup",
-      "multiple": false,
-      "required": false
-    },
-    {
       "id": "signoff_shortcuts",
       "type": "mentorSignOff",
-      "label": "Confirms the student demonstrated the keyboard shortcuts in person",
+      "label": "Confirms the student demonstrated the keyboard shortcuts and their wallpaper slideshow in person",
       "required": true
     }
   ],
