@@ -12,19 +12,21 @@ type Load =
   | { status: 'loading' }
   | { status: 'error' }
   | { status: 'closed', message: string }
-  | { status: 'handed-in', work: Submission }
+  | { status: 'handed-in', work: Submission, justHandedIn: boolean }
   | { status: 'open', draft: Draft, returned: Submission | null }
 
 // Handed in and either waiting for the coach or finished; returned work opens again as a new attempt
 const HANDED_IN: Submission['status'][] = ['submitted', 'graded', 'auto_graded']
 
-function Receipt({ work, content }: { work: Submission, content: CheckpointContent }) {
+function Receipt({ work, content, justHandedIn }: { work: Submission, content: CheckpointContent, justHandedIn: boolean }) {
   const heading = useRef<HTMLHeadingElement>(null)
   const waiting = work.status === 'submitted'
-  useEffect(() => heading.current?.focus(), [])
+  useEffect(() => {
+    if (justHandedIn) heading.current?.focus()
+  }, [justHandedIn])
   return (
     <section className="panel" aria-labelledby="receipt-heading">
-      <h2 id="receipt-heading" ref={heading} tabIndex={-1} className="mt-0 flex items-center gap-2">
+      <h2 id="receipt-heading" ref={heading} tabIndex={-1} className="mt-0 flex items-center gap-2 focus:outline-none">
         {!waiting && <Icon name="check" size={22} className="text-(--accent)" />}
         {waiting ? 'Waiting for your coach' : 'Complete'}
       </h2>
@@ -46,16 +48,21 @@ export default function Checkpoint({ page, content }: { page: ItemPageView, cont
 
   useEffect(() => {
     let current = true
-    Promise.allSettled([getMyWork(page.id), getDraft(page.id)]).then(([attempts, draft]) => {
-      if (!current) return
-      const latest = attempts.status === 'fulfilled' ? attempts.value[0] ?? null : null
-      if (latest && HANDED_IN.includes(latest.status)) setLoad({ status: 'handed-in', work: latest })
-      else if (draft.status === 'fulfilled' && attempts.status === 'fulfilled') {
-        setLoad({ status: 'open', draft: draft.value, returned: latest?.status === 'returned' ? latest : null })
-      } else if (draft.status === 'rejected' && draft.reason instanceof ApiError && draft.reason.status === 409) {
-        setLoad({ status: 'closed', message: draft.reason.message })
-      } else setLoad({ status: 'error' })
-    })
+    // The draft is only asked for while the work is open; the hub refuses it once handed in
+    async function fetchWork(): Promise<Load> {
+      const latest = (await getMyWork(page.id))[0] ?? null
+      if (latest && HANDED_IN.includes(latest.status)) return { status: 'handed-in', work: latest, justHandedIn: false }
+      try {
+        return { status: 'open', draft: await getDraft(page.id), returned: latest?.status === 'returned' ? latest : null }
+      } catch (failure) {
+        if (failure instanceof ApiError && failure.status === 409) return { status: 'closed', message: failure.message }
+        throw failure
+      }
+    }
+    fetchWork().then(
+      found => current && setLoad(found),
+      () => current && setLoad({ status: 'error' }),
+    )
     return () => { current = false }
   }, [page.id])
 
@@ -64,14 +71,14 @@ export default function Checkpoint({ page, content }: { page: ItemPageView, cont
   let body
   if (load.status === 'error') body = <p>Couldn't load your work. Reload the page to try again.</p>
   else if (load.status === 'closed') body = <div className="panel"><p className="mt-0">{load.message}</p></div>
-  else if (load.status === 'handed-in') body = <Receipt work={load.work} content={content} />
+  else if (load.status === 'handed-in') body = <Receipt work={load.work} content={content} justHandedIn={load.justHandedIn} />
   else {
     body = (
       <CheckpointForm
         itemId={page.id}
         content={content}
         draft={load.draft}
-        onHandedIn={work => setLoad({ status: 'handed-in', work })}
+        onHandedIn={work => setLoad({ status: 'handed-in', work, justHandedIn: true })}
       />
     )
   }

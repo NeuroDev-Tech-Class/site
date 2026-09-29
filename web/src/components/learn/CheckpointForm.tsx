@@ -123,8 +123,21 @@ export default function CheckpointForm({ itemId, content, draft, onHandedIn }: P
   const [busy, setBusy] = useState(false)
   const latest = useRef(answers)
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const reviewHeading = useRef<HTMLHeadingElement>(null)
+  const reviewButton = useRef<HTMLButtonElement>(null)
+  const switched = useRef(false)
 
   useEffect(() => () => clearTimeout(timer.current), [])
+  // Swapping between the form and the review moves focus, and with it the scroll, to the part now showing
+  useEffect(() => {
+    if (!switched.current) return
+    ;(reviewing ? reviewHeading : reviewButton).current?.focus()
+  }, [reviewing])
+
+  function review(open: boolean) {
+    switched.current = true
+    setReviewing(open)
+  }
 
   const save = useCallback(async () => {
     clearTimeout(timer.current)
@@ -165,6 +178,8 @@ export default function CheckpointForm({ itemId, content, draft, onHandedIn }: P
       setProblems(listed.length ? listed : [{
         message: failure instanceof ApiError ? failure.message : "Couldn't hand it in. Check your connection and try again.",
       }])
+      // The error summary takes focus instead
+      switched.current = false
       setReviewing(false)
     } finally {
       setBusy(false)
@@ -177,7 +192,7 @@ export default function CheckpointForm({ itemId, content, draft, onHandedIn }: P
   if (reviewing) {
     return (
       <section aria-labelledby="review-heading" className="panel">
-        <h2 id="review-heading" className="mt-0">Check your answers</h2>
+        <h2 id="review-heading" ref={reviewHeading} tabIndex={-1} className="mt-0 focus:outline-none">Check your answers</h2>
         <AnswerList fields={content.fields} answers={answers} files={files} />
         {gaps.length > 0 && (
           <div className="mt-4">
@@ -192,14 +207,14 @@ export default function CheckpointForm({ itemId, content, draft, onHandedIn }: P
             onClick={() => void handInWork()}>
             Hand it in
           </button>
-          <button type="button" className="btn-quiet" onClick={() => setReviewing(false)}>Keep editing</button>
+          <button type="button" className="btn-quiet" onClick={() => review(false)}>Keep editing</button>
         </div>
       </section>
     )
   }
 
   return (
-    <form noValidate onSubmit={event => { event.preventDefault(); setReviewing(true) }}>
+    <form noValidate onSubmit={event => { event.preventDefault(); review(true) }}>
       <ErrorSummary problems={problems} />
       <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
         <p className="mt-0 font-semibold">{answeredCount(content.fields, answers)} of {questions.length} answered</p>
@@ -234,7 +249,7 @@ export default function CheckpointForm({ itemId, content, draft, onHandedIn }: P
         }
         return <TextQuestion key={field.id} {...shared} />
       })}
-      <button type="submit" className="btn-primary mt-10">Review and hand in</button>
+      <button type="submit" ref={reviewButton} className="btn-primary mt-10">Review and hand in</button>
     </form>
   )
 }

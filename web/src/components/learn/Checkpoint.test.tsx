@@ -261,6 +261,7 @@ describe('handing it in', () => {
     await renderPage()
     await userEvent.click(screen.getByRole('button', { name: 'Review and hand in' }))
     const review = screen.getByRole('region', { name: 'Check your answers' })
+    expect(document.activeElement).toBe(within(review).getByRole('heading', { name: 'Check your answers' }))
     expect(within(review).getByText('Space Cats')).toBeTruthy()
     const needed = within(review).getByRole('list', { name: 'Still needed' })
     expect(within(needed).getAllByRole('listitem').map(li => li.textContent)).toEqual([
@@ -269,6 +270,7 @@ describe('handing it in', () => {
     expect((within(review).getByRole('button', { name: 'Hand it in' }) as HTMLButtonElement).disabled).toBe(true)
     await userEvent.click(within(review).getByRole('button', { name: 'Keep editing' }))
     expect(screen.queryByRole('region', { name: 'Check your answers' })).toBeNull()
+    expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Review and hand in' }))
   })
 
   test('handing in sends the answers and shows the receipt', async () => {
@@ -276,7 +278,8 @@ describe('handing it in', () => {
     await renderPage()
     await userEvent.click(screen.getByRole('button', { name: 'Review and hand in' }))
     await userEvent.click(screen.getByRole('button', { name: 'Hand it in' }))
-    expect(await screen.findByRole('heading', { name: 'Waiting for your coach' })).toBeTruthy()
+    const receipt = await screen.findByRole('heading', { name: 'Waiting for your coach' })
+    expect(document.activeElement).toBe(receipt)
     expect(submitted).toEqual([{ answers: FULL }])
     expect(screen.queryByRole('textbox')).toBeNull()
     expect(screen.getByText('Space Cats')).toBeTruthy()
@@ -311,6 +314,8 @@ describe('work already handed in', () => {
     expect(screen.getByText(/Handed in October 2, 2026/)).toBeTruthy()
     expect(screen.getByRole('button', { name: 'View poster.png' })).toBeTruthy()
     expect(screen.queryByRole('button', { name: 'Review and hand in' })).toBeNull()
+    expect(document.activeElement).toBe(document.body)
+    expect(requests(fetchMock)).not.toContain('GET /api/v1/tech/items/i_c/draft')
   })
 
   test('complete shows the coach confirmed it in person', async () => {
