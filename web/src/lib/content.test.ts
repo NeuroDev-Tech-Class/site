@@ -145,8 +145,8 @@ describe('itemPages', () => {
     ],
   } as unknown as Course
 
-  test('gives readings, videos, slides and links a page each, and nothing else', () => {
-    expect(itemPages(course).map(p => p.id)).toEqual(['i_r', 'i_v', 'i_s', 'i_l'])
+  test('gives readings, videos, slides, links and checkpoints a page each, and nothing else', () => {
+    expect(itemPages(course).map(p => p.id)).toEqual(['i_r', 'i_v', 'i_c', 'i_s', 'i_l'])
   })
 
   test('each page knows its course, unit, label and title', () => {
@@ -160,15 +160,17 @@ describe('itemPages', () => {
   test('Next skips plain notes; an item without a page opens on the course page; the last has no Next', () => {
     const next = Object.fromEntries(itemPages(course).map(p => [p.id, p.next]))
     expect(next.i_r).toEqual({ href: '/courses/gimp#item-i_ex', text: 'Exercise 1.1: Try it.' })
-    expect(next.i_v).toEqual({ href: '/courses/gimp#item-i_c', text: 'Checkpoint: Final' })
+    expect(next.i_v).toEqual({ href: '/learn/i_c', text: 'Checkpoint: Final' })
+    expect(next.i_c).toEqual({ href: '/learn/i_s', text: 'Slideshow: Colour' })
     expect(next.i_s).toEqual({ href: '/learn/i_l', text: 'Article: Read this' })
     expect(next.i_l).toBeNull()
   })
 
-  test('the committed content has a page for every reading, video, slides and link of every published course', () => {
+  test('the committed content has a page for every reading, video, slides, link and checkpoint of every published course', () => {
     const pages = publishedCourses().flatMap(itemPages)
-    expect(pages).toHaveLength(160)
-    expect(new Set(pages.map(p => p.id)).size).toBe(160)
+    expect(pages).toHaveLength(254)
+    expect(new Set(pages.map(p => p.id)).size).toBe(254)
+    expect(pages.filter(p => p.type === 'checkpoint')).toHaveLength(94)
   })
 })
 

@@ -7,6 +7,7 @@ import {
   getItemProgress,
   openItem,
   uncompleteItem,
+  type CheckpointContent,
   type ItemContent,
   type ItemProgress,
   type VideoProgress,
@@ -16,6 +17,7 @@ import { useSession } from '../../lib/session'
 import { trackableSrc, useVideoTracking } from '../../lib/videoTracking'
 import Icon from '../Icon'
 import NotApproved from '../NotApproved'
+import Checkpoint from './Checkpoint'
 
 // Mirrors the hub's REQUIRED_PERCENT and its refusal wording (app/tech/watch.py, progress.py)
 const REQUIRED_PERCENT = 90
@@ -43,6 +45,7 @@ function siteName(url: string): string | null {
 }
 
 function Content({ page, item }: { page: ItemPageView, item: ItemContent }) {
+  if (item.type === 'checkpoint') return <Checkpoint page={page} content={item.content as unknown as CheckpointContent} />
   const content = item.content as Record<string, string | undefined>
   if (item.type === 'lesson') {
     return (
@@ -218,7 +221,7 @@ export default function LearnItem({ page }: { page: ItemPageView }) {
     <>
       <div ref={contentRef} className="mt-6">{body}</div>
       <div className="mt-10 -mx-4 flex flex-col items-start gap-x-6 gap-y-2 border-t border-(--border) bg-(--panel) px-4 py-3 sm:flex-row sm:items-center">
-        <Actions page={page} load={load} onChange={setProgress} />
+        {page.type !== 'checkpoint' && <Actions page={page} load={load} onChange={setProgress} />}
         {page.next && (
           <a className="inline-flex min-h-[44px] max-w-full min-w-0 items-center gap-2 font-semibold sm:ml-auto" href={page.next.href} title={page.next.text}>
             <span className="truncate">Next: {page.next.text}</span>

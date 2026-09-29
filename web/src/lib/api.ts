@@ -28,10 +28,13 @@ let accessToken: string | null = null
 let refreshing: Promise<TechAccount | null> | null = null
 
 export class ApiError extends Error {
-  constructor(public status: number, message: string) {
+  // A 422 about a form's answers names each field with its problem
+  constructor(public status: number, message: string, public fields: Record<string, string> = {}) {
     super(message)
   }
 }
+
+const GENERIC = 'Something went wrong. Please try again.'
 
 /** Exchanges the refresh cookie for a new access token. Concurrent callers share one request. */
 export function refreshSession(): Promise<TechAccount | null> {
@@ -68,7 +71,9 @@ export async function request<T>(path: string, init: RequestInit = {}, retry = t
   if (res.status === 401 && retry && (await refreshSession())) return request<T>(path, init, false)
   if (!res.ok) {
     const detail = await res.json().then(b => b?.detail, () => null)
-    throw new ApiError(res.status, typeof detail === 'string' ? detail : 'Something went wrong. Please try again.')
+    if (typeof detail === 'string') throw new ApiError(res.status, detail)
+    if (typeof detail?.message === 'string') throw new ApiError(res.status, detail.message, detail.fields ?? {})
+    throw new ApiError(res.status, GENERIC)
   }
   return res.status === 204 ? (undefined as T) : ((await res.json()) as T)
 }
@@ -148,6 +153,60 @@ export interface CourseItemsProgress extends CourseProgress {
   items: ItemStatus[]
 }
 
+// Checkpoints (hub: app/tech/answers.py, drafts.py, uploads.py): the form, drafts, uploads and handing in
+export type FieldType = 'shortText' | 'longText' | 'url' | 'code' | 'checklist' | 'file' | 'image' | 'mentorSignOff'
+
+export interface CheckpointField {
+  id: string
+  type: FieldType
+  label: string
+  required: boolean
+  help?: string
+  // Checklists: the boxes, and how many are enough when not all
+  items?: string[]
+  min?: number
+  // File fields: the extensions it takes
+  accept?: string[]
+  multiple?: boolean
+  language?: string
+}
+
+export interface CheckpointContent {
+  id: string
+  title: string
+  instructions_html: string
+  fields: CheckpointField[]
+  required_one_of: string[][]
+  requires_sign_off: boolean
+  has_starter: boolean
+}
+
+// Text for text, link and code fields; the ticked items for a checklist; upload ids for file and image fields
+export type Answers = Record<string, string | string[]>
+
+export interface UploadedFile {
+  id: string
+  field_id: string
+  name: string
+  content_type: string
+  bytes: number
+  status: 'pending' | 'ready' | 'removed'
+  uploaded_at: string | null
+}
+
+export interface Draft {
+  attempt: number
+  answers: Answers
+  files: UploadedFile[]
+  saved_at: string | null
+  started_from: number | null
+}
+
+export interface UploadTicket {
+  file: UploadedFile
+  upload: { url: string, method: 'PUT', headers: Record<string, string> }
+}
+
 // Submissions (hub: app/routers/tech_submissions.py): the student's own work, feedback included
 export interface Submission {
   id: string
@@ -158,7 +217,7 @@ export interface Submission {
   score_label: string
   item: Ref
   course: Ref
-  answers: Record<string, string | string[]>
+  answers: Answers
   feedback: string | null
   auto_score: number | null
   manual_score: number | null
@@ -167,6 +226,9 @@ export interface Submission {
   passed: boolean | null
   submitted_at: string | null
   graded_at: string | null
+  files: UploadedFile[]
+  // A hands-on checkpoint the coach saw in person
+  sign_off: { by_name: string, at: string } | null
 }
 
 export interface Heartbeat {
@@ -190,6 +252,20 @@ export const uncompleteItem = (itemId: string) =>
 /** One item's attempts, newest first; without an item, the most recent work across every course */
 export const getMyWork = (itemId?: string) =>
   request<Submission[]>(`${TECH}/submissions/mine${itemId ? `?item_id=${id(itemId)}` : ''}`)
+const send = (body: unknown, method = 'POST'): RequestInit => ({ method, body: JSON.stringify(body) })
+
+export const getDraft = (itemId: string) => request<Draft>(`${TECH}/items/${id(itemId)}/draft`)
+export const saveDraft = (itemId: string, answers: Answers) =>
+  request<Draft>(`${TECH}/items/${id(itemId)}/draft`, send({ answers }, 'PUT'))
+export const handIn = (itemId: string, answers: Answers) =>
+  request<Submission>(`${TECH}/items/${id(itemId)}/submit`, send({ answers }))
+export const startUpload = (itemId: string, fieldId: string, name: string, size: number) =>
+  request<UploadTicket>(`${TECH}/items/${id(itemId)}/uploads`, send({ field_id: fieldId, name, size }))
+export const finishUpload = (fileId: string) =>
+  request<UploadedFile>(`${TECH}/uploads/${id(fileId)}/done`, { method: 'POST' })
+export const discardUpload = (fileId: string) => request<void>(`${TECH}/uploads/${id(fileId)}`, { method: 'DELETE' })
+/** A short-lived link to see a file: ask again rather than keeping it */
+export const fileLink = (fileId: string) => request<{ url: string }>(`${TECH}/files/${id(fileId)}/link`)
 export const sendHeartbeat = (beat: Heartbeat) =>
   request<VideoProgress & { counted: boolean }>(`${TECH}/media/heartbeat`, { method: 'POST', body: JSON.stringify(beat) })
 
