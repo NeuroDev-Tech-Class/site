@@ -7,9 +7,9 @@
     "node": "^22.13.0 || >=24"
   },
   "scripts": {
-    "predev": "node scripts/sync-assets.mjs",
+    "predev": "node scripts/sync-assets.mjs && node scripts/zip-starters.mjs",
     "dev": "astro dev --host",
-    "prebuild": "node scripts/sync-assets.mjs",
+    "prebuild": "node scripts/sync-assets.mjs && node scripts/zip-starters.mjs",
     "build": "astro build",
     "preview": "astro preview --host",
     "lint": "eslint .",
@@ -39,6 +39,7 @@
     "eslint": "^10.11.0",
     "eslint-plugin-astro": "^3.2.1",
     "eslint-plugin-react-hooks": "^7.1.1",
+    "fflate": "0.8.3",
     "globals": "^17.12.0",
     "jsdom": "^30.1.1",
     "typescript": "~5.9.3",

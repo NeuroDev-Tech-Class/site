@@ -3,6 +3,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { unzipSync } from 'fflate'
 import { describe, expect, test } from 'vitest'
 
 const DIST = fileURLToPath(new URL('../dist/', import.meta.url))
@@ -209,5 +210,32 @@ describe('pages that depend on the sign-in', () => {
     for (const dir of readdirSync(join(DIST, 'learn')).slice(0, 20)) {
       expect(read(`learn/${dir}/index.html`), dir).not.toMatch(wording)
     }
+  })
+})
+
+describe('exercise starters', () => {
+  const SITE = fileURLToPath(new URL('../../', import.meta.url))
+  const CHECKPOINTS = join(SITE, 'content/checkpoints')
+  const withStarters = readdirSync(CHECKPOINTS)
+    .map(name => JSON.parse(readFileSync(join(CHECKPOINTS, name), 'utf8')))
+    .filter(checkpoint => checkpoint.starter_path)
+
+  test('every exercise with starter code has one', () => {
+    expect(withStarters).toHaveLength(56)
+  })
+
+  test.each(withStarters.map(c => [c.exercise, c]))('%s: its starter is zipped whole, inside a folder of its own', (_, c) => {
+    const starter = join(SITE, c.starter_path)
+    const folder = c.exercise.split('/').pop()
+    const expected = filesUnder(starter).map(f => `${folder}/${relative(starter, f).split('\\').join('/')}`).sort()
+    const zip = unzipSync(readFileSync(join(DIST, 'starters', `${c.id}.zip`)))
+    expect(Object.keys(zip).sort()).toEqual(expected)
+    for (const name of expected) {
+      expect(Buffer.from(zip[name]).equals(readFileSync(join(starter, name.slice(folder.length + 1)))), name).toBe(true)
+    }
+  })
+
+  test('nothing else is served under /starters', () => {
+    expect(readdirSync(join(DIST, 'starters')).sort()).toEqual(withStarters.map(c => `${c.id}.zip`).sort())
   })
 })
