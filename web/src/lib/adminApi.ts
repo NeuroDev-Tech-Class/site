@@ -184,8 +184,6 @@ export const getStaff = () => request<AdminAccount[]>(`${TECH}/accounts?role=sta
 export const getPendingBadge = () => request<{ pending: number }>(`${TECH}/accounts/badge`)
 export const approveAccount = (accountId: string) =>
   request<AdminAccount>(`${TECH}/accounts/${id(accountId)}/approve`, { method: 'POST' })
-export const declineAccount = (accountId: string) =>
-  request<AdminAccount>(`${TECH}/accounts/${id(accountId)}/decline`, { method: 'POST' })
 /** Only for sign-ups that were never approved */
 export const deleteAccount = (accountId: string) =>
   request<void>(`${TECH}/accounts/${id(accountId)}`, { method: 'DELETE' })
