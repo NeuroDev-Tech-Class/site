@@ -113,6 +113,23 @@ describe('approved', () => {
     expect(await within(await waitForItem('i_c')).findByText(words)).toBeTruthy()
   })
 
+  test.each([
+    ['submitted', 'Submitted', '0 of 1 done'],
+    ['returned', 'Try again', '0 of 1 done'],
+    ['done', 'Done', '1 of 1 done'],
+  ] as const)('a test %s says %s, and counts only once finished', async (value, words, done) => {
+    const units: UnitView[] = [{ id: 'u_3', number: '3', title: 'Tests', description: '', items: [
+      { id: 'i_t', type: 'test', label: 'Test', title: 'Unit 3 Test', html: null, exercise: false, counts: true },
+    ] }]
+    fakeCourseHub(fetchMock, { counted: [{ id: 'i_t', type: 'test' }], items: [status('i_t', value)] })
+    const { default: CourseUnits } = await import('./CourseUnits')
+    render(<CourseUnits courseId="gimp" units={units} />)
+    const tests = unit('Tests')
+    expect(await within(tests).findByText(words)).toBeTruthy()
+    expect(within(tests).getByText(done)).toBeTruthy()
+    expect(within(tests).getByRole('link', { name: 'Unit 3 Test' }).getAttribute('href')).toBe('/learn/i_t')
+  })
+
   test("a returned checkpoint shows the coach's feedback from its newest attempt, as plain text", async () => {
     const hub = await renderPage({
       items: [status('i_c', 'returned')],

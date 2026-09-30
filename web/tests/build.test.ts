@@ -172,18 +172,18 @@ const published = readdirSync(join(CONTENT, 'courses'))
   .map(name => JSON.parse(readFileSync(join(CONTENT, 'courses', name), 'utf8')))
 const itemsOf = (courses: typeof published): ContentItem[] =>
   courses.flatMap(c => c.units.flatMap((u: { items: ContentItem[] }) => u.items))
-const PAGED = ['lesson', 'video', 'slides', 'link', 'checkpoint']
+const PAGED = ['lesson', 'video', 'slides', 'link', 'checkpoint', 'test']
 
 describe('item pages', () => {
   const learn = (id: string) => join(DIST, 'learn', id, 'index.html')
 
-  test('every reading, video, slides, link and checkpoint of a published course has one, and nothing else does', () => {
+  test('every reading, video, slides, link, checkpoint and test of a published course has one, and nothing else does', () => {
     const live = itemsOf(published.filter(c => c.status === 'published'))
     for (const item of live) expect(existsSync(learn(item.id)), item.id).toBe(PAGED.includes(item.type))
     for (const item of itemsOf(published.filter(c => c.status !== 'published'))) {
       expect(existsSync(learn(item.id)), `draft ${item.id}`).toBe(false)
     }
-    expect(readdirSync(join(DIST, 'learn'))).toHaveLength(254)
+    expect(readdirSync(join(DIST, 'learn'))).toHaveLength(267)
   })
 
   test('never carry the lesson text, which only comes from the hub after sign-in', () => {

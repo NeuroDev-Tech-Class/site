@@ -151,7 +151,7 @@ export function unitViews(course: Course): UnitView[] {
   }))
 }
 
-const PAGED_TYPES: ItemType[] = ['lesson', 'video', 'slides', 'link', 'checkpoint']
+const PAGED_TYPES: ItemType[] = ['lesson', 'video', 'slides', 'link', 'checkpoint', 'test']
 const NEXT_TEXT_MAX = 80
 
 export const hasPage = (type: ItemType): boolean => PAGED_TYPES.includes(type)

@@ -1,7 +1,7 @@
 import { useId } from 'react'
 import type { TestQuestion } from '../../lib/api'
 
-const plainText = (html: string): string => new DOMParser().parseFromString(html, 'text/html').body.textContent ?? ''
+export const plainText = (html: string): string => new DOMParser().parseFromString(html, 'text/html').body.textContent ?? ''
 
 export const pointsWords = (points: number): string => `${points} point${points === 1 ? '' : 's'}`
 
@@ -88,7 +88,7 @@ export default function Question(props: Field) {
     <fieldset className="panel mt-6 min-w-0">
       <legend className="flex gap-3 font-heading font-bold">
         <span>Question {question.number}</span>
-        <span className="font-normal text-(--muted)">{pointsWords(question.points)}</span>
+        <span className="font-normal text-(--muted)"><span className="sr-only">, </span>{pointsWords(question.points)}</span>
       </legend>
       <div className="lesson" dangerouslySetInnerHTML={{ __html: question.prompt_html }} />
       {question.type === 'mc' || question.type === 'multi' || question.type === 'tf'

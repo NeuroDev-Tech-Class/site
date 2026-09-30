@@ -343,3 +343,68 @@ export interface TestView {
   total_points: number
   questions: TestQuestion[]
 }
+
+export interface TestDraft {
+  attempt: number
+  // By question number
+  answers: Record<string, unknown>
+  saved_at: string | null
+}
+
+export interface TestMark {
+  // null while the coach marks a written answer
+  points: number | null
+  max: number
+  // null for written answers
+  right: boolean | null
+  // match questions: each row right or not
+  rows?: boolean[]
+}
+
+/** The right answers, once the student has finished the test */
+export interface TestKeyEntry {
+  answer?: number | number[] | boolean
+  accept?: string[]
+  explanation_html?: string
+}
+
+export interface TestAttempt {
+  attempt: number
+  status: string
+  status_label: string
+  score_label: string
+  submitted_at: string | null
+  graded_at: string | null
+  total_score: number | null
+  total_max: number | null
+  passed: boolean | null
+  provisional: boolean
+  feedback: string | null
+  questions: TestQuestion[]
+  answers: Record<string, unknown>
+  marks: Record<string, TestMark>
+  key: Record<string, TestKeyEntry> | null
+}
+
+export interface TestState {
+  ready: boolean
+  test: TestView | null
+  attempts_allowed: number | null
+  attempts_used: number
+  can_start: boolean
+  finished: boolean
+  waiting: boolean
+  reason: string | null
+  draft: TestDraft | null
+  // Newest first
+  attempts: TestAttempt[]
+  best_attempt: number | null
+}
+
+const testPath = (itemId: string) => `${TECH}/items/${id(itemId)}/test`
+export const getTestState = (itemId: string) => request<TestState>(testPath(itemId))
+export const startTest = (itemId: string) => request<TestState>(`${testPath(itemId)}/start`, { method: 'POST' })
+export const saveTestAnswers = (itemId: string, answers: Record<string, unknown>) =>
+  request<TestDraft>(`${testPath(itemId)}/answers`, { method: 'PUT', body: JSON.stringify({ answers }) })
+export const submitTest = (itemId: string, answers: Record<string, unknown>) =>
+  request<TestState>(`${testPath(itemId)}/submit`, { method: 'POST', body: JSON.stringify({ answers }) })

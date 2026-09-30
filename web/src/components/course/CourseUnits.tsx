@@ -87,7 +87,7 @@ function Row({ courseId, item, statuses }: { courseId: string, item: ItemView, s
       </span>
       {word && (
         <span className="done-chip self-start sm:self-auto">
-          {countsDone(item.type, status) && <Icon name="check" size={16} />}
+          {countsDone(status) && <Icon name="check" size={16} />}
           {word}
         </span>
       )}
@@ -125,7 +125,7 @@ export default function CourseUnits({ courseId, units }: { courseId: string, uni
     <>
       {units.map(unit => {
         const counted = unit.items.filter(i => i.counts)
-        const done = statuses ? counted.filter(i => countsDone(i.type, statuses.get(i.id) ?? null)).length : 0
+        const done = statuses ? counted.filter(i => countsDone(statuses.get(i.id) ?? null)).length : 0
         return (
           <section key={unit.id} id={`unit-${unit.id}`} className="panel mt-8 scroll-mt-6">
             <div className="flex flex-wrap items-center gap-3">

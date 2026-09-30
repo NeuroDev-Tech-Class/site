@@ -141,12 +141,13 @@ describe('itemPages', () => {
         { ...item('checkpoint', 'Checkpoint - Final'), id: 'i_c' },
         { ...item('slides', 'Slideshow - Colour'), id: 'i_s' },
         { ...item('link', 'Article - Read this'), id: 'i_l' },
+        { ...item('test', 'Unit 2 Test'), id: 'i_t' },
       ] },
     ],
   } as unknown as Course
 
-  test('gives readings, videos, slides, links and checkpoints a page each, and nothing else', () => {
-    expect(itemPages(course).map(p => p.id)).toEqual(['i_r', 'i_v', 'i_c', 'i_s', 'i_l'])
+  test('gives readings, videos, slides, links, checkpoints and tests a page each, and nothing else', () => {
+    expect(itemPages(course).map(p => p.id)).toEqual(['i_r', 'i_v', 'i_c', 'i_s', 'i_l', 'i_t'])
   })
 
   test('each page knows its course, unit, label and title', () => {
@@ -163,7 +164,8 @@ describe('itemPages', () => {
     expect(next.i_v).toEqual({ href: '/learn/i_c', text: 'Checkpoint: Final' })
     expect(next.i_c).toEqual({ href: '/learn/i_s', text: 'Slideshow: Colour' })
     expect(next.i_s).toEqual({ href: '/learn/i_l', text: 'Article: Read this' })
-    expect(next.i_l).toBeNull()
+    expect(next.i_l).toEqual({ href: '/learn/i_t', text: 'Test: Unit 2 Test' })
+    expect(next.i_t).toBeNull()
   })
 
   test('Previous mirrors Next: plain notes skipped, an exercise on the course page, the first has none', () => {
@@ -174,11 +176,12 @@ describe('itemPages', () => {
     expect(previous.i_l).toEqual({ href: '/learn/i_s', text: 'Slideshow: Colour' })
   })
 
-  test('the committed content has a page for every reading, video, slides, link and checkpoint of every published course', () => {
+  test('the committed content has a page for every reading, video, slides, link, checkpoint and test of every published course', () => {
     const pages = publishedCourses().flatMap(itemPages)
-    expect(pages).toHaveLength(254)
-    expect(new Set(pages.map(p => p.id)).size).toBe(254)
+    expect(pages).toHaveLength(267)
+    expect(new Set(pages.map(p => p.id)).size).toBe(267)
     expect(pages.filter(p => p.type === 'checkpoint')).toHaveLength(94)
+    expect(pages.filter(p => p.type === 'test')).toHaveLength(13)
   })
 })
 

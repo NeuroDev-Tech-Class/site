@@ -61,7 +61,7 @@ export function fakeCourseHub(fetchMock: Mock, options: {
   const items = new Map((options.items ?? []).map(i => [i.item_id, { ...i }]))
   const done = (id: string) => {
     const s = items.get(id)?.status
-    return s === 'done' || (s === 'submitted' && options.counted.find(c => c.id === id)?.type === 'test')
+    return s === 'done'
   }
   const progress = (): CourseItemsProgress => {
     const count = options.counted.filter(c => done(c.id)).length

@@ -18,6 +18,10 @@ import { trackableSrc, useVideoTracking } from '../../lib/videoTracking'
 import Icon from '../Icon'
 import NotApproved from '../NotApproved'
 import Checkpoint from './Checkpoint'
+import TestTaker from './TestTaker'
+
+// Finished by handing them in on the page, not with Mark complete
+const HANDED_IN = ['checkpoint', 'test']
 
 // Mirrors the hub's REQUIRED_PERCENT and its refusal wording (app/tech/watch.py, progress.py)
 const REQUIRED_PERCENT = 90
@@ -46,6 +50,7 @@ function siteName(url: string): string | null {
 
 function Content({ page, item }: { page: ItemPageView, item: ItemContent }) {
   if (item.type === 'checkpoint') return <Checkpoint page={page} content={item.content as unknown as CheckpointContent} />
+  if (item.type === 'test') return <TestTaker page={page} />
   const content = item.content as Record<string, string | undefined>
   if (item.type === 'lesson') {
     return (
@@ -235,7 +240,7 @@ export default function LearnItem({ page }: { page: ItemPageView }) {
       <nav aria-label="Course steps" className="mt-10 -mx-4 border-t border-(--border) bg-(--panel) px-4 py-4">
         {/* On a phone the main action comes first, then Previous and Next a row each, so their titles fit */}
         <div className="grid grid-cols-1 items-center gap-x-4 gap-y-2 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
-          {page.type !== 'checkpoint' && (
+          {!HANDED_IN.includes(page.type) && (
             <div className="mb-1 flex flex-col items-center gap-2 sm:mb-0 sm:col-start-2 sm:row-start-1">
               <Actions page={page} load={load} onChange={setProgress} />
             </div>

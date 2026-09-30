@@ -17,14 +17,14 @@ const CHECKPOINT_WORDS: Record<string, string> = { done: 'Complete', submitted: 
 /** How an item's progress is said on course pages and the coach's view of a student's course */
 export function statusWord(type: string, status: ProgressStatus | null): string | null {
   if (type === 'checkpoint') return CHECKPOINT_WORDS[status ?? ''] ?? null
+  if (type === 'test' && status === 'returned') return 'Try again'
   if (status === 'submitted') return 'Submitted'
   if (status === 'returned') return 'Needs revision'
   return status === 'done' ? 'Done' : null
 }
 
-// Mirrors the hub's counts_done: done, or a test once submitted
-export const countsDone = (type: string, status: ProgressStatus | null): boolean =>
-  status === 'done' || (type === 'test' && status === 'submitted')
+// Mirrors the hub: done (a test once passed or out of attempts, a checkpoint once graded complete)
+export const countsDone = (status: ProgressStatus | null): boolean => status === 'done'
 
 /** The signed-in, approved account's id, or null for anyone else */
 export function useApprovedId(): string | null {
