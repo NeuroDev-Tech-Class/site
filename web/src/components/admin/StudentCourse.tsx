@@ -20,7 +20,6 @@ const markable = (item: OutlineItem) => MARKABLE.includes(item.type) || isExerci
 const noteText = (html: string | null | undefined) => (html ?? '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().slice(0, 120)
 
 function Where({ item, progress, latest }: { item: OutlineItem, progress?: ItemProgress, latest?: Submission }) {
-  if (item.type === 'test' && item.status === 'needs_content') return <span className="text-(--muted)">Taken on its form for now</span>
   const word = statusWord(item.type, progress?.status ?? null)
   const behind = progress?.status === 'done' ? [] : (progress?.videos ?? []).map(v => v.percent)
   return (

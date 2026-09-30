@@ -96,7 +96,8 @@ describe('courseStats', () => {
     expect(courseStats(course)).toEqual({ units: 2, items: 4 })
   })
 
-  test.each([['digital-literacy', 34], ['gimp', 29]])('%s matches the hub progress total (%i)', (id, total) => {
+  // Digital Literacy's three tests count since they moved into the site (Phase 11)
+  test.each([['digital-literacy', 37], ['gimp', 29]])('%s matches the hub progress total (%i)', (id, total) => {
     expect(courseStats(courses.find(c => c.id === id) as Course).items).toBe(total)
   })
 })

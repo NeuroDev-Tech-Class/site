@@ -187,11 +187,9 @@
           "legacy_key": "1-6",
           "type": "test",
           "title": "Unit 1 Test",
-          "status": "needs_content",
+          "status": "ok",
           "tags": [],
-          "payload": {
-            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSchezRadI8pDYvw7yUpytgN4q0dt_qXCss7FPemKewPhR93-g/viewform?usp=sharing&ouid=106165783246153405519"
-          }
+          "payload": {}
         }
       ]
     },

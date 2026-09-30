@@ -204,11 +204,9 @@
           "legacy_key": "0-14",
           "type": "test",
           "title": "Unit 1 Test",
-          "status": "needs_content",
+          "status": "ok",
           "tags": [],
-          "payload": {
-            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLScr3Av6NjYj078UyzPSgV_avz7BLk9WN-ftffa5a8AsO4JVPw/viewform?usp=sf_link"
-          }
+          "payload": {}
         }
       ]
     },
@@ -338,11 +336,9 @@
           "legacy_key": "1-9",
           "type": "test",
           "title": "Unit 2 Test",
-          "status": "needs_content",
+          "status": "ok",
           "tags": [],
-          "payload": {
-            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSeenFbj5KMZxnhepGBl91inOmCFtBVolk_n7UmFLd-86_ormQ/viewform?usp=share_link"
-          }
+          "payload": {}
         }
       ]
     },
@@ -512,11 +508,9 @@
           "legacy_key": "2-11",
           "type": "test",
           "title": "Unit 3 Test",
-          "status": "needs_content",
+          "status": "ok",
           "tags": [],
-          "payload": {
-            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSerBjfErFZmleRQKWns2dUar3se9TOzUAFYXUmN_g8x9cbJ0w/viewform?usp=sf_link"
-          }
+          "payload": {}
         }
       ]
     }

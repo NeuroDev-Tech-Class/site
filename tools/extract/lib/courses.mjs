@@ -54,7 +54,8 @@ export function classifyItem(raw) {
     if (/Exercise\s+\d+\.\d+/.test(html)) return item('note', { tags: ['exercise'], payload: { html } });
     return item('note', { payload: { html } });
   }
-  if (url.includes('docs.google.com/forms')) return item('test', { status: 'needs_content', payload: { form_url: url } });
+  // A test's questions are uploaded to the hub (Phase 11); the old Google Form is left behind
+  if (url.includes('docs.google.com/forms')) return item('test');
   if (url.includes('docs.google.com/presentation')) return item('slides', { payload: { slides_url: url } });
   if (url === PLACEHOLDER_URL) return item('link', { status: 'needs_content', payload: { url: null } });
   if (url.startsWith(LESSON_PREFIX) && url.endsWith('.html')) {

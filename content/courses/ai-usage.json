@@ -52,11 +52,9 @@
           "legacy_key": "0-1",
           "type": "test",
           "title": "Quiz - Generative AI",
-          "status": "needs_content",
+          "status": "ok",
           "tags": [],
-          "payload": {
-            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLScApLPHV6QTArfW_I2TUUAmUw8xz3_jJdI0amFrOOMJYyprIA/viewform?usp=sharing"
-          }
+          "payload": {}
         },
         {
           "id": "i_cade7b9ec9",

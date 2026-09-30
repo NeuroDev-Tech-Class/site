@@ -81,11 +81,9 @@
           "legacy_key": "0-5",
           "type": "test",
           "title": "Quiz - CPU, GPU, Motherboard",
-          "status": "needs_content",
+          "status": "ok",
           "tags": [],
-          "payload": {
-            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSdbK59EcsSBoxTUbgtoYZUG8Q6SSsHvJn-e2QEASSMVUb-SVg/viewform?usp=sf_link"
-          }
+          "payload": {}
         }
       ]
     },
@@ -145,11 +143,9 @@
           "legacy_key": "1-4",
           "type": "test",
           "title": "Quiz - Memory, Storage, Power, Cooling",
-          "status": "needs_content",
+          "status": "ok",
           "tags": [],
-          "payload": {
-            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSca37QDCluAtZsCKwBcXC8ySmm0jihmNUTDRBv7IwhrRHflCQ/viewform?usp=sf_link"
-          }
+          "payload": {}
         }
       ]
     },
@@ -175,11 +171,9 @@
           "legacy_key": "2-1",
           "type": "test",
           "title": "Quiz - Building a PC",
-          "status": "needs_content",
+          "status": "ok",
           "tags": [],
-          "payload": {
-            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSdF6s3pxXSLY1IHEL6MINhYr3NR9FTwsvEcU7K1_Olf_bp7Eg/viewform?usp=sf_link"
-          }
+          "payload": {}
         },
         {
           "id": "i_d0e25642e3",
