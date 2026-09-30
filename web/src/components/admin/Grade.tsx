@@ -3,6 +3,7 @@ import { getQueue, getSubmission, gradeSubmission, type GradeBody, type Submissi
 import { ApiError } from '../../lib/api'
 import { formatDate } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
+import Review from '../test/Review'
 import Answers from './Answers'
 import { gradeHref } from './Queue'
 import { ErrorLine, LoadError, Loading, problemWords, StatusLine, useAdmin, ViewHeading } from './shared'
@@ -102,6 +103,69 @@ function GradeForm({ work, onGraded }: { work: SubmissionDetail, onGraded: (upda
   )
 }
 
+/** A test taken on the site: each question with its mark and key, and points for each written answer */
+function TestGradeForm({ work, onGraded }: { work: SubmissionDetail, onGraded: (updated: SubmissionDetail, said: string) => void }) {
+  const test = work.test!
+  const [points, setPoints] = useState<Record<string, string>>(() => Object.fromEntries(
+    test.to_grade.map(n => [String(n), test.marks[String(n)]?.points?.toString() ?? '']),
+  ))
+  const [feedback, setFeedback] = useState(work.feedback ?? '')
+  const [problem, setProblem] = useState<string | null>(null)
+  const [busy, setBusy] = useState(false)
+  const firstName = work.student.name.split(' ')[0]
+  const total = (work.auto_score ?? 0) + test.to_grade.reduce((sum, n) => sum + (Number(points[String(n)]) || 0), 0)
+  const max = work.total_max ?? 0
+  const pct = max ? Math.round((total / max) * 100) : 0
+
+  async function save() {
+    const given: Record<string, number> = {}
+    for (const n of test.to_grade.map(String)) {
+      const raw = points[n]
+      if (raw === '' || Number.isNaN(Number(raw))) return setProblem('Give points for every written answer.')
+      const top = test.marks[n].max
+      if (Number(raw) > top) return setProblem(`Question ${n} is worth ${top} points at most.`)
+      given[n] = Number(raw)
+    }
+    setBusy(true)
+    setProblem(null)
+    try {
+      onGraded(await gradeSubmission(work.id, { points: given, feedback: feedback.trim() }), 'Grade saved.')
+    } catch (failure) {
+      setProblem(problemWords(failure, "Couldn't save the grade. Please try again."))
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <>
+      <Review label="Questions and answers" who="Their" questions={test.questions} answers={work.answers as Record<string, unknown>}
+        marks={test.marks} keys={test.key} extra={question => test.to_grade.includes(question.number) && (
+          <p className="mt-3 flex flex-wrap items-end gap-2">
+            <label className="flex flex-col gap-1 font-semibold">
+              Points for question {question.number}
+              <input type="number" min={0} max={test.marks[String(question.number)]?.max} step="any" className="field w-28"
+                value={points[String(question.number)] ?? ''}
+                onChange={e => setPoints(p => ({ ...p, [String(question.number)]: e.target.value }))} />
+            </label>
+            <span className="pb-3">out of {test.marks[String(question.number)]?.max}</span>
+          </p>
+        )} />
+      <form className="panel mt-8 flex flex-col gap-4" onSubmit={event => event.preventDefault()} aria-label="Grade">
+        <p className="mt-0 font-semibold">
+          {`${total} / ${max} (${pct}%) · ${pct >= test.pass_percent ? 'passes' : `below the ${test.pass_percent}% pass mark`}`}
+        </p>
+        <label className="flex flex-col gap-1 font-semibold">
+          Feedback for {firstName}
+          <textarea className="field" rows={5} value={feedback} onChange={e => setFeedback(e.target.value)} />
+        </label>
+        <ErrorLine>{problem}</ErrorLine>
+        <div><button type="button" className="btn-primary" disabled={busy} onClick={() => void save()}>Save grade</button></div>
+      </form>
+    </>
+  )
+}
+
 function Beside({ work }: { work: SubmissionDetail }) {
   const hint = work.checkpoint?.grading_hint
   return (
@@ -189,8 +253,14 @@ export default function Grade({ id }: { id: string }) {
       <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <div className="min-w-0">
           <h2 className="mt-0 text-lg">Their answers</h2>
-          <Answers form={detail.checkpoint} answers={detail.answers} files={detail.files} />
-          <GradeForm key={detail.status} work={detail} onGraded={(updated, words) => void graded(updated, words)} />
+          {detail.test
+            ? <TestGradeForm key={detail.status} work={detail} onGraded={(updated, words) => void graded(updated, words)} />
+            : (
+                <>
+                  <Answers form={detail.checkpoint} answers={detail.answers} files={detail.files} />
+                  <GradeForm key={detail.status} work={detail} onGraded={(updated, words) => void graded(updated, words)} />
+                </>
+              )}
         </div>
         <Beside work={detail} />
       </div>

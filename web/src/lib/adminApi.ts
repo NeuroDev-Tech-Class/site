@@ -8,6 +8,9 @@ import {
   type Ref,
   type Submission,
   type TechAccount,
+  type TestKeyEntry,
+  type TestMark,
+  type TestQuestion,
   type TestView,
   type UploadedFile,
 } from './api'
@@ -88,12 +91,24 @@ export interface CheckpointForm {
   grading_hint: { answers?: string[], runner?: string } | null
 }
 
+/** A test attempt as the coach grades it: its questions, each mark, and the whole key with rubrics */
+export interface TestGrading {
+  questions: TestQuestion[]
+  key: Record<string, TestKeyEntry & { rubric?: string }>
+  marks: Record<string, TestMark>
+  pass_percent: number
+  // The written answers the coach gives points to
+  to_grade: number[]
+}
+
 export interface SubmissionDetail extends Submission {
   student: Person
   graded_by: string | null
   legacy: boolean
   checkpoint: CheckpointForm | null
   attempts: Attempt[]
+  // A test taken on the site
+  test?: TestGrading | null
 }
 
 export interface GradeBody {
@@ -102,6 +117,8 @@ export interface GradeBody {
   total_max?: number | null
   feedback?: string
   signed_off?: boolean
+  // A test taken on the site: points for each written answer, by question number
+  points?: Record<string, number>
 }
 
 export interface StudentCourse extends CourseProgress {
