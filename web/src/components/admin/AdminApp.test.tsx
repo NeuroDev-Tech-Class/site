@@ -76,6 +76,20 @@ describe('the shell', () => {
     expect(within(nav()).queryByRole('link', { name: 'Storage' })).toBeNull()
   })
 
+  test("follows the site's page router straight away, which moves the address without a hashchange", async () => {
+    await open('#/today')
+    // Everything settled first, so nothing else happens to redraw the dashboard
+    await screen.findByText('Nothing needs you right now.')
+    await waitFor(() => expect(requests(fetchMock)).toContain('GET /api/v1/tech/accounts/badge'))
+    await new Promise(resolve => setTimeout(resolve, 50))
+    // What Astro's router does for a same-page link: pushState, then a popstate of its own
+    act(() => {
+      history.pushState(null, '', '#/queue')
+      window.dispatchEvent(new PopStateEvent('popstate'))
+    })
+    expect(await screen.findByRole('heading', { level: 1, name: 'Grading Queue' })).toBeTruthy()
+  })
+
   test('an address the dashboard does not know opens Today', async () => {
     await open('#/nowhere')
     expect(await screen.findByRole('heading', { level: 1, name: 'Today' })).toBeTruthy()

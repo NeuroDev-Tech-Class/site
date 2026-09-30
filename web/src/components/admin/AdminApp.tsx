@@ -41,9 +41,14 @@ const SECTION_OF: Record<AdminRoute['view'], Section> = {
   'student-course': 'students', activity: 'activity', storage: 'storage',
 }
 
+// Astro's page router moves the address with pushState and a popstate of its own, never a hashchange
 function subscribeHash(listener: () => void) {
   window.addEventListener('hashchange', listener)
-  return () => window.removeEventListener('hashchange', listener)
+  window.addEventListener('popstate', listener)
+  return () => {
+    window.removeEventListener('hashchange', listener)
+    window.removeEventListener('popstate', listener)
+  }
 }
 
 function useHash(): string {
