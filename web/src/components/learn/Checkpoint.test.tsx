@@ -12,6 +12,7 @@ const PAGE: ItemPageView = {
   id: 'i_c', type: 'checkpoint', label: 'Checkpoint', title: 'Movie Poster',
   course: { id: 'gimp', heading: '2D Digital Art — GIMP', category: 'media' },
   unit: { id: 'u_1', title: 'Basics' },
+  previous: { href: '/learn/i_prev', text: 'Video: Tools' },
   next: { href: '/learn/i_next', text: 'Reading: Layers' },
 }
 
@@ -145,6 +146,8 @@ describe('the checkpoint page', () => {
     expect(screen.getByText('Your coach will confirm this in person.')).toBeTruthy()
     expect(screen.queryByRole('button', { name: 'Mark complete' })).toBeNull()
     expect(screen.getByRole('link', { name: /Next: Reading: Layers/ })).toBeTruthy()
+    expect(screen.getByRole('link', { name: /Previous: Video: Tools/ }).getAttribute('href')).toBe('/learn/i_prev')
+    expect(screen.queryByRole('button', { name: /Mark complete/ })).toBeNull()
   })
 
   test('has a labelled field for each question, marking the required ones', async () => {

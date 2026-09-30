@@ -166,6 +166,14 @@ describe('itemPages', () => {
     expect(next.i_l).toBeNull()
   })
 
+  test('Previous mirrors Next: plain notes skipped, an exercise on the course page, the first has none', () => {
+    const previous = Object.fromEntries(itemPages(course).map(p => [p.id, p.previous]))
+    expect(previous.i_r).toBeNull()
+    expect(previous.i_v).toEqual({ href: '/courses/gimp#item-i_ex', text: 'Exercise 1.1: Try it.' })
+    expect(previous.i_c).toEqual({ href: '/learn/i_v', text: 'Video: Watch' })
+    expect(previous.i_l).toEqual({ href: '/learn/i_s', text: 'Slideshow: Colour' })
+  })
+
   test('the committed content has a page for every reading, video, slides, link and checkpoint of every published course', () => {
     const pages = publishedCourses().flatMap(itemPages)
     expect(pages).toHaveLength(254)

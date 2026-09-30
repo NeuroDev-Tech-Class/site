@@ -188,6 +188,15 @@ describe('approved', () => {
     expect(window.location.search).toBe('')
   })
 
+  test('coming back from the last item with the course finished stays at the top, where it says so', async () => {
+    history.replaceState(null, '', '/courses/gimp?done=i_v')
+    await renderPage({ items: ['i_r', 'i_ex', 'i_c', 'i_v'].map(id => status(id, 'done')) })
+    expect(await screen.findByText('You finished this course!')).toBeTruthy()
+    const item = await waitForItem('i_v')
+    await waitFor(() => expect(window.location.search).toBe(''))
+    expect(item.scrollIntoView).not.toHaveBeenCalled()
+  })
+
   test('signing out from the menu on this page takes the progress and checkboxes away', async () => {
     await renderPage({ items: [status('i_r', 'done')] })
     await screen.findByRole('checkbox', { name: /Exercise 1\.1/ })

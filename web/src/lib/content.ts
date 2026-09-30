@@ -168,6 +168,7 @@ export interface ItemPageView {
   title: string
   course: { id: string, heading: string, category: CategoryKey }
   unit: { id: string, title: string }
+  previous: { href: string, text: string } | null
   next: { href: string, text: string } | null
 }
 
@@ -185,6 +186,7 @@ export function itemPages(course: Course): ItemPageView[] {
   const steps = flat.filter(({ item }) => item.type !== 'note' || isExercise(item))
   return steps.flatMap(({ unit, item }, index) => {
     if (!hasPage(item.type)) return []
+    const before = steps[index - 1]?.item
     const after = steps[index + 1]?.item
     return [{
       id: item.id,
@@ -192,6 +194,7 @@ export function itemPages(course: Course): ItemPageView[] {
       ...itemLabel(item),
       course: { id: course.id, heading: course.heading, category: categoryKey(course.category) },
       unit: { id: unit.id, title: unitHeading(unit.title).title },
+      previous: before ? { href: itemHref(course.id, before), text: nextText(before) } : null,
       next: after ? { href: itemHref(course.id, after), text: nextText(after) } : null,
     }]
   })

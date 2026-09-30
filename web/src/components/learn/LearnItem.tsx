@@ -97,6 +97,23 @@ function Content({ page, item }: { page: ItemPageView, item: ItemContent }) {
   )
 }
 
+type Step = NonNullable<ItemPageView['next']>
+
+function StepLink({ step, back = false, primary = false }: { step: Step, back?: boolean, primary?: boolean }) {
+  return (
+    <a
+      href={step.href}
+      title={step.text}
+      className={`${primary ? 'btn-primary' : 'inline-flex min-h-[44px] items-center gap-2 font-semibold'} max-w-full min-w-0`}
+    >
+      {back && <Icon name="back" size={18} className="shrink-0" />}
+      <span className="truncate">{back ? 'Previous' : 'Next'}: {step.text}</span>
+      {!back && <Icon name="arrow" size={18} className="shrink-0" />}
+    </a>
+  )
+}
+
+/** Marking the item done: done and on to the next item, or back to the course from the last one */
 function Actions({ page, load, onChange }: { page: ItemPageView, load: Load, onChange: (p: ItemProgress) => void }) {
   const [busy, setBusy] = useState(false)
   const [problem, setProblem] = useState<string | null>(null)
@@ -116,32 +133,27 @@ function Actions({ page, load, onChange }: { page: ItemPageView, load: Load, onC
     }
   }
 
-  // Any message sits under the controls, so Next beside them stays centred in the bar
-  const shownWaiting = progress.status === 'done' ? null : waiting
   const notes = (
     <>
-      {shownWaiting && <p id="watch-needed" className="mt-0 text-sm text-(--muted)">{shownWaiting}</p>}
-      {problem && <p role="alert" className="mt-0 text-sm font-semibold">{problem}</p>}
+      {progress.status !== 'done' && waiting && <p id="watch-needed" className="mt-0 text-center text-sm text-(--muted)">{waiting}</p>}
+      {problem && <p role="alert" className="mt-0 text-center text-sm font-semibold">{problem}</p>}
     </>
   )
-  const block = 'flex flex-col items-start gap-2 sm:max-w-[60%] sm:shrink-0'
   if (progress.status === 'done') {
     return (
-      <div className={block}>
+      <>
         <div className="flex items-center gap-3">
-          <span className="inline-flex items-center gap-2 font-heading font-semibold">
-            <Icon name="check" size={20} className="text-(--accent)" /><span>Done</span>
-          </span>
+          <span className="done-chip"><Icon name="check" size={16} /> Done</span>
           <button type="button" className="btn-quiet" disabled={busy} onClick={() => void run(async () => onChange(await uncompleteItem(page.id)))}>
             Mark not done
           </button>
         </div>
         {notes}
-      </div>
+      </>
     )
   }
   return (
-    <div className={block}>
+    <>
       <button
         type="button"
         className="btn-primary"
@@ -149,13 +161,14 @@ function Actions({ page, load, onChange }: { page: ItemPageView, load: Load, onC
         aria-describedby={waiting ? 'watch-needed' : undefined}
         onClick={() => void run(async () => {
           await completeItem(page.id)
-          await navigate(`/courses/${page.course.id}?done=${page.id}`)
+          await navigate(page.next ? page.next.href : `/courses/${page.course.id}?done=${page.id}`)
         })}
       >
-        Mark complete
+        {page.next ? 'Mark complete and continue' : 'Mark complete and finish'}
+        <Icon name="arrow" size={18} />
       </button>
       {notes}
-    </div>
+    </>
   )
 }
 
@@ -190,6 +203,9 @@ export default function LearnItem({ page }: { page: ItemPageView }) {
   const videoIds = load.status === 'ready' ? load.progress.videos.map(v => v.video_id) : []
   useVideoTracking(contentRef, page.id, videoIds, approved && load.status === 'ready', onPercent)
 
+  // Already done: going on is the main thing to do
+  const done = page.type !== 'checkpoint' && load.status === 'ready' && load.progress.status === 'done'
+
   let body
   if (session.status === 'loading') {
     body = <p className="text-(--muted)" aria-busy="true">Loading…</p>
@@ -203,12 +219,8 @@ export default function LearnItem({ page }: { page: ItemPageView }) {
   } else if (!approved) {
     body = <NotApproved status={session.account.status} then="You can open this once it's approved." />
   } else if (load.status === 'missing') {
-    body = (
-      <div className="panel">
-        <p className="mt-0">This item isn't available any more.</p>
-        <a className="mt-4 inline-block" href={`/courses/${page.course.id}`}>Back to {page.course.heading}</a>
-      </div>
-    )
+    // The way back to the course is in the bar below
+    body = <p className="panel mt-0">This item isn't available any more.</p>
   } else if (load.status === 'error') {
     body = <p>Couldn't load this. Reload the page to try again.</p>
   } else if (load.status === 'loading') {
@@ -220,15 +232,25 @@ export default function LearnItem({ page }: { page: ItemPageView }) {
   return (
     <>
       <div ref={contentRef} className="mt-6">{body}</div>
-      <div className="mt-10 -mx-4 flex flex-col items-start gap-x-6 gap-y-2 border-t border-(--border) bg-(--panel) px-4 py-3 sm:flex-row sm:items-center">
-        {page.type !== 'checkpoint' && <Actions page={page} load={load} onChange={setProgress} />}
-        {page.next && (
-          <a className="inline-flex min-h-[44px] max-w-full min-w-0 items-center gap-2 font-semibold sm:ml-auto" href={page.next.href} title={page.next.text}>
-            <span className="truncate">Next: {page.next.text}</span>
-            <Icon name="arrow" size={18} className="shrink-0" />
-          </a>
-        )}
-      </div>
+      <nav aria-label="Course steps" className="mt-10 -mx-4 border-t border-(--border) bg-(--panel) px-4 py-4">
+        {/* On a phone the main action comes first, then Previous and Next side by side */}
+        <div className="grid grid-cols-2 items-center gap-x-4 gap-y-3 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
+          {page.type !== 'checkpoint' && (
+            <div className="col-span-2 flex flex-col items-center gap-2 sm:col-span-1 sm:col-start-2 sm:row-start-1">
+              <Actions page={page} load={load} onChange={setProgress} />
+            </div>
+          )}
+          <div className="min-w-0 sm:col-start-1 sm:row-start-1">
+            {page.previous && <StepLink step={page.previous} back />}
+          </div>
+          <div className="flex min-w-0 justify-end sm:col-start-3 sm:row-start-1">
+            {page.next && <StepLink step={page.next} primary={done} />}
+          </div>
+        </div>
+        <p className="mt-3 mb-0 text-center text-sm">
+          <a href={`/courses/${page.course.id}`}>Back to {page.course.heading}</a>
+        </p>
+      </nav>
     </>
   )
 }
