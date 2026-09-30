@@ -10,6 +10,7 @@ import { applyCoursePatches, loadCoursePatches, loadOverrides, unusedOverrides }
 import { extractLesson } from './lessons.mjs';
 import { rewriteHtml } from './links.mjs';
 import { renderReport } from './report.mjs';
+import { loadDecks, withSlides } from './slides.mjs';
 import { VOCABULARY, checkVocabulary } from './vocabulary.mjs';
 
 const asJson = value => `${JSON.stringify(value, null, 2)}\n`;
@@ -42,6 +43,8 @@ export async function generate(siteRoot) {
   const exerciseItems = [];
   const overrides = loadOverrides(siteRoot);
   const patches = loadCoursePatches(siteRoot);
+  const decks = loadDecks(siteRoot);
+  const usedDecks = new Set();
 
   const courses = [];
   for (const category of catalog) {
@@ -87,9 +90,11 @@ export async function generate(siteRoot) {
         if (link.kind === 'lesson-ref') use(link.path, id);
         else found.push(link);
       }
-      courses.push(course);
+      courses.push(withSlides(course, decks, usedDecks));
     }
   }
+  const strayDecks = [...decks.keys()].filter(id => !usedDecks.has(id));
+  if (strayDecks.length) throw new Error(`slide decks no course uses (check the file name): ${strayDecks.join(', ')}`);
 
   const files = new Map();
   const lessons = [];
