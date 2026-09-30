@@ -60,7 +60,7 @@ function Answer({ field, value, files }: { field: CheckpointField, value: string
           return (
             <li key={item} className={`mt-0 flex items-center gap-2 ${on ? '' : 'text-(--muted)'}`}>
               <span className="sr-only">{on ? 'Ticked: ' : 'Not ticked: '}</span>
-              <Icon name={on ? 'check' : 'note'} size={16} className={on ? 'text-(--check)' : 'opacity-40'} />
+              <Icon name={on ? 'check' : 'note'} size={16} className={`shrink-0 ${on ? 'text-(--check)' : 'opacity-40'}`} />
               {item}
             </li>
           )

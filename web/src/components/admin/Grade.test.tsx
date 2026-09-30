@@ -167,7 +167,8 @@ describe('grading a checkpoint', () => {
   test('work already graded shows how, with the feedback ready to change', async () => {
     await hub(detail({ answers: ANSWERS, files: FILES, status: 'graded', status_label: 'Complete', graded_by: 'Ms Lee',
       graded_at: '2026-09-29T15:00:00Z', feedback: 'Nice.' }))
-    expect(await screen.findByText('Complete · graded by Ms Lee on September 29, 2026')).toBeTruthy()
+    expect(await screen.findByText('graded by Ms Lee on September 29, 2026')).toBeTruthy()
+    expect(screen.getByText('Complete', { selector: '.done-chip' })).toBeTruthy()
     expect((screen.getByRole('textbox', { name: /Feedback/ }) as HTMLTextAreaElement).value).toBe('Nice.')
   })
 

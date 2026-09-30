@@ -25,7 +25,7 @@ Work the phases in number order. Each phase ends with Topher's review, the manua
 | 7 | Submissions, grading, notifications, activity feed | hub | 5 | [x] 2026-09-29 |
 | 8 | Checkpoints + file uploads (R2) | hub | 7 | [x] 2026-09-29 |
 | 9 | Checkpoint form | site | 6, 8 | [x] 2026-09-29 |
-| 10 | Admin dashboard (Today, Queue, Grade, Students, Activity, Accounts, bell) | site | 7, 9 | [ ] |
+| 10 | Admin dashboard (Today, Queue, Grade, Students, Activity, Accounts, bell) | site | 7, 9 | [x] 2026-09-30 |
 | 11 | Native tests and slides (markdown import, test runner, auto-grading; the 9 Google Slides decks rebuilt in the site) | hub + site | 10 | [ ] |
 | 12 | Certificates (coach previews, creates and prints the PDF; online access only when the coach gives it) | hub + site | 10 | [ ] |
 | 13 | Accreditation review (Topher talks to Mandy; model adjusted if needed) | Topher | before 14 | [ ] |
@@ -276,6 +276,11 @@ Two repos. Hub work goes on the existing `tech-class` branch (currently equal to
   8. **Storage (superadmin)**: total and space per student, most first, each opening that student's uploads.
   9. **Bell** in the header for every signed-in account: unread count, the latest notes, open marks read, "Mark all read".
   10. **Close**: a real run against `hub_dev` (Playwright, desktop and phone), site README, tracker, memory.
+- *As delivered (2026-09-30)*: built as planned (hub `phase 10.1` and a CORS fix; site `phase 10.2`-`10.8` and the close; Today came with the shell in 10.2). 348 site unit tests and 643 build-output tests green; every step's tests confirmed red first and checked by deliberately breaking the code (about 120 breaks, all caught once the gaps each round found were covered). Notes:
+  - **Real run** (Playwright against `hub_dev` as the coach, the owner and the student; desktop and 390 px): Today's tiles and badge, grading the hands-on checkpoint (stopped without the tick, then Complete with feedback), searching Students and clicking a row, the student page, the course drill-in with the coach's Mark done and back (totals move and return), Activity with the grade on top, a type filter and the CSV, both bells (the student's latest note is the grade), Storage and Admins for the owner, a student turned away from `/admin`, and no sideways scroll on Today, Queue, Students or Grade at phone width.
+  - **Found by the real run and fixed:** the hub did not expose `Content-Disposition` to the site, so the CSV saved as `activity.csv` instead of the dated name (hub CORS `expose_headers`, with a test); the grade view's "Complete · graded by ... on ..." chip could not wrap and pushed a phone 10 px sideways (the chip now holds only the outcome, with who and when beside it); a long checklist line squeezed its tick icon.
+  - **Choices while building:** Deny deletes a never-approved sign-up and asks first; Deactivate lives on the student page (asks first), not on the rows; the in-page "are you sure?" replaces the old `confirm()`; filters and tabs replace the address so Back goes to the previous place; searches apply once typing pauses; the hub's `/admin#/...` links in Activity open in place; a new admin with no name yet shows "No name yet". Test setup: the heavier component test files compile their component once in `beforeAll` (the first compile ran into the 5 s limit under a full parallel run), Vitest runs at most 6 workers, and the build-output checks have a 30 s limit.
+  - **For Topher:** the Mark complete redesign and a Previous link on item pages are next, planned separately as decided. A `site-web-1` dev server container has been running since yesterday; with it running, the first compile of new pages in another container took minutes.
 
 ### Milestone 4: tests and certificates
 

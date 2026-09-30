@@ -15,8 +15,9 @@ type Next = { href: string, left: number } | null
 function Outcome({ work }: { work: SubmissionDetail }) {
   if (!work.graded_at || work.status === 'submitted') return <span className="done-chip">{work.status_label}</span>
   return (
-    <span className="done-chip">
-      {work.status_label} · graded by {work.graded_by ?? 'a coach'} on {formatDate(work.graded_at, { month: 'long' })}
+    <span className="flex flex-wrap items-center gap-2">
+      <span className="done-chip">{work.status_label}</span>
+      <span className="text-sm text-(--muted)">graded by {work.graded_by ?? 'a coach'} on {formatDate(work.graded_at, { month: 'long' })}</span>
     </span>
   )
 }
