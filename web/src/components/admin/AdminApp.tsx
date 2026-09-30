@@ -16,9 +16,10 @@ import Student from './Student'
 import StudentCourse from './StudentCourse'
 import Storage from './Storage'
 import Students from './Students'
+import Tests, { TestPreview } from './Tests'
 import Today from './Today'
 
-type Section = 'today' | 'queue' | 'students' | 'activity' | 'storage'
+type Section = 'today' | 'queue' | 'students' | 'tests' | 'activity' | 'storage'
 
 interface NavItem {
   section: Section
@@ -32,13 +33,14 @@ const NAV: NavItem[] = [
   { section: 'today', href: '#/today', label: 'Today', icon: 'today' },
   { section: 'queue', href: '#/queue', label: 'Grading Queue', icon: 'inbox' },
   { section: 'students', href: '#/students', label: 'Students', icon: 'users' },
+  { section: 'tests', href: '#/tests', label: 'Tests', icon: 'test' },
   { section: 'activity', href: '#/activity', label: 'Activity', icon: 'activity' },
   { section: 'storage', href: '#/storage', label: 'Storage', icon: 'database', superadmin: true },
 ]
 
 const SECTION_OF: Record<AdminRoute['view'], Section> = {
   today: 'today', queue: 'queue', grade: 'queue', students: 'students', student: 'students',
-  'student-course': 'students', activity: 'activity', storage: 'storage',
+  'student-course': 'students', activity: 'activity', storage: 'storage', tests: 'tests', test: 'tests',
 }
 
 // Astro's page router moves the address with pushState and a popstate of its own, never a hashchange
@@ -67,6 +69,10 @@ function View({ route }: { route: AdminRoute }) {
       return <Activity route={route} />
     case 'storage':
       return <Storage />
+    case 'tests':
+      return <Tests />
+    case 'test':
+      return <TestPreview key={route.id} id={route.id} />
     case 'student-course':
       return <StudentCourse key={`${route.id}/${route.course}`} id={route.id} course={route.course} />
     default:
@@ -76,7 +82,7 @@ function View({ route }: { route: AdminRoute }) {
 
 /** Where the coach is, leaving out filters: focus moves only when this changes, never while typing a filter */
 function place(route: AdminRoute): string {
-  if (route.view === 'grade' || route.view === 'student') return `${route.view}/${route.id}`
+  if (route.view === 'grade' || route.view === 'student' || route.view === 'test') return `${route.view}/${route.id}`
   if (route.view === 'student-course') return `${route.view}/${route.id}/${route.course}`
   return route.view
 }

@@ -8,6 +8,7 @@ import {
   type Ref,
   type Submission,
   type TechAccount,
+  type TestView,
   type UploadedFile,
 } from './api'
 import type { ItemType } from './itemLabel'
@@ -171,6 +172,24 @@ export interface CourseOutline {
   }[]
 }
 
+/** A test item and what has been uploaded for it */
+export interface TestRow {
+  item_id: string
+  title: string
+  course: Ref
+  uploaded: boolean
+  questions: number
+  total_points: number
+  // Points only the coach can give (written answers)
+  coach_points: number
+  pass_percent: number | null
+  attempts_allowed: number | null
+  version: number
+  uploaded_at: string | null
+  uploaded_by: string | null
+  handed_in: number
+}
+
 export interface ActivityFilter {
   type?: string
   student?: string
@@ -230,3 +249,10 @@ export const getStudentFiles = (accountId: string) => request<AdminFile[]>(`${TE
 export const removeFile = (fileId: string) => request<void>(`${TECH}/files/${id(fileId)}`, { method: 'DELETE' })
 export const removeAllFiles = (accountId: string) =>
   request<{ count: number, bytes: number }>(`${TECH}/accounts/${id(accountId)}/files/remove-all`, { method: 'POST' })
+
+// Tests kept in the hub
+export const getTests = () => request<TestRow[]>(`${TECH}/tests`)
+export const uploadTest = (itemId: string, source: string) =>
+  request<TestRow>(`${TECH}/tests/${id(itemId)}`, send({ source }, 'PUT'))
+export const testSourcePath = (itemId: string) => `${TECH}/tests/${id(itemId)}/source`
+export const getTestPreview = (itemId: string) => request<TestView>(`${TECH}/tests/${id(itemId)}/preview`)

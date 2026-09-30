@@ -27,9 +27,17 @@ interface TokenResponse {
 let accessToken: string | null = null
 let refreshing: Promise<TechAccount | null> | null = null
 
+export interface LineProblem {
+  // 0 for a problem with the whole file
+  line: number
+  message: string
+}
+
 export class ApiError extends Error {
-  // A 422 about a form's answers names each field with its problem
-  constructor(public status: number, message: string, public fields: Record<string, string> = {}) {
+  // A 422 about a form's answers names each field with its problem; one about an uploaded file, each line's
+  constructor(
+    public status: number, message: string, public fields: Record<string, string> = {}, public problems: LineProblem[] = [],
+  ) {
     super(message)
   }
 }
@@ -73,7 +81,9 @@ async function signedFetch(path: string, init: RequestInit, retry: boolean): Pro
   if (!res.ok) {
     const detail = await res.json().then(b => b?.detail, () => null)
     if (typeof detail === 'string') throw new ApiError(res.status, detail)
-    if (typeof detail?.message === 'string') throw new ApiError(res.status, detail.message, detail.fields ?? {})
+    if (typeof detail?.message === 'string') {
+      throw new ApiError(res.status, detail.message, detail.fields ?? {}, detail.problems ?? [])
+    }
     throw new ApiError(res.status, GENERIC)
   }
   return res
@@ -84,11 +94,25 @@ export async function request<T>(path: string, init: RequestInit = {}, retry = t
   return res.status === 204 ? (undefined as T) : ((await res.json()) as T)
 }
 
-/** A file the hub builds on request (the activity CSV), with the name the hub gives it */
+/** A file the hub builds on request (the activity CSV, a test file), with the name the hub gives it */
 export async function fetchFile(path: string): Promise<{ blob: Blob, name: string | null }> {
   const res = await signedFetch(path, {}, true)
   const name = res.headers.get('Content-Disposition')?.match(/filename="([^"]+)"/)?.[1] ?? null
   return { blob: await res.blob(), name }
+}
+
+/** Fetches a file from the hub and hands it to the browser to save */
+export async function saveFile(path: string, fallbackName: string): Promise<void> {
+  const { blob, name } = await fetchFile(path)
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = name ?? fallbackName
+  // On the page and kept a moment, or some browsers drop the download
+  document.body.append(link)
+  link.click()
+  link.remove()
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
 }
 
 async function signIn(path: string, body: unknown): Promise<TechAccount> {
@@ -291,4 +315,31 @@ export async function logout(): Promise<void> {
 
 export function googleSignInUrl(next: string): string {
   return `${API_URL}${AUTH}/google/start?redirect=${encodeURIComponent(next)}`
+}
+
+// Tests (the hub's app/schemas/tech_tests.py): what a student sees of a test, never its key
+export type QuestionType = 'mc' | 'multi' | 'tf' | 'match' | 'short' | 'written' | 'code'
+
+export interface TestQuestion {
+  number: number
+  type: QuestionType
+  prompt_html: string
+  points: number
+  // mc and multi
+  choices?: string[]
+  // match: a choice from options for each row
+  rows?: string[]
+  options?: string[]
+  // code
+  language?: string
+}
+
+export interface TestView {
+  item_id: string
+  title: string
+  instructions_html: string
+  pass_percent: number
+  attempts_allowed: number
+  total_points: number
+  questions: TestQuestion[]
 }

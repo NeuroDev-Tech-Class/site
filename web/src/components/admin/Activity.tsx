@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { activityCsvPath, getActivity, getStudents, type ActivityFilter, type ActivityLine } from '../../lib/adminApi'
 import type { AdminRoute } from '../../lib/adminRoute'
-import { fetchFile } from '../../lib/api'
+import { saveFile } from '../../lib/api'
 import { formatDate, timeAgo } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
 import { ErrorLine, LoadError, Loading, problemWords, REFRESH_MS, showRoute, useAdmin, ViewHeading } from './shared'
@@ -21,19 +21,6 @@ const TYPES: [string, string][] = [
 
 /** The hub links into the dashboard as /admin#/...; inside it, only the hash needs to change */
 const inDashboard = (link: string) => (link.startsWith('/admin#') ? link.slice('/admin'.length) : link)
-
-async function downloadCsv(filter: ActivityFilter) {
-  const { blob, name } = await fetchFile(activityCsvPath(filter))
-  const url = URL.createObjectURL(blob)
-  const link = document.createElement('a')
-  link.href = url
-  link.download = name ?? 'activity.csv'
-  // On the page and kept a moment, or some browsers drop the download
-  document.body.append(link)
-  link.click()
-  link.remove()
-  setTimeout(() => URL.revokeObjectURL(url), 1000)
-}
 
 /**
  * The first page refreshes on its own until older pages are asked for; then it waits, since the older pages follow
@@ -102,7 +89,7 @@ export default function Activity({ route }: { route: ActivityRoute }) {
   async function csv() {
     setProblem(null)
     try {
-      await downloadCsv(filter)
+      await saveFile(activityCsvPath(filter), 'activity.csv')
     } catch (failure) {
       setProblem(problemWords(failure, "Couldn't download the CSV. Please try again."))
     }
