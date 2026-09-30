@@ -11,6 +11,8 @@ import Icon from '../Icon'
 import { AdminContext, HEADING_ID, REFRESH_MS, ViewHeading } from './shared'
 import Grade from './Grade'
 import Queue from './Queue'
+import Student from './Student'
+import StudentCourse from './StudentCourse'
 import Students from './Students'
 import Today from './Today'
 
@@ -54,6 +56,10 @@ function View({ route }: { route: AdminRoute }) {
       return <Grade key={route.id} id={route.id} />
     case 'students':
       return <Students route={route} />
+    case 'student':
+      return <Student key={route.id} id={route.id} />
+    case 'student-course':
+      return <StudentCourse key={`${route.id}/${route.course}`} id={route.id} course={route.course} />
     default:
       return <Today />
   }

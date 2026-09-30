@@ -1,23 +1,15 @@
 import { useEffect, useState } from 'react'
 import type { ProgressStatus } from '../../lib/api'
 import { hasPage, type ItemView, type UnitView } from '../../lib/content'
-import { countsDone, setItemDone, useCourseProgress } from '../../lib/courseProgress'
+import { countsDone, setItemDone, statusWord, useCourseProgress } from '../../lib/courseProgress'
 import { useItemWork } from '../../lib/myWork'
 import CoachFeedback from '../CoachFeedback'
 import Icon from '../Icon'
 
 type Statuses = Map<string, ProgressStatus | null>
 
-const CHECKPOINT_WORDS: Record<string, string> = { done: 'Complete', submitted: 'Submitted', returned: 'Needs revision' }
 // Drawn on the row the student just finished; set by the effect below, outside React's own rendering
 const JUST_DONE = 'rounded-lg data-just-done:outline-2 data-just-done:outline-offset-2 data-just-done:outline-(--accent) data-just-done:outline-solid'
-
-function statusWord(type: string, status: ProgressStatus | null): string | null {
-  if (type === 'checkpoint') return CHECKPOINT_WORDS[status ?? ''] ?? null
-  if (status === 'submitted') return 'Submitted'
-  if (status === 'returned') return 'Needs revision'
-  return status === 'done' ? 'Done' : null
-}
 
 function ExerciseBox({ courseId, item, checked }: { courseId: string, item: ItemView, checked: boolean }) {
   const [busy, setBusy] = useState(false)

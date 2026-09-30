@@ -10,6 +10,7 @@ import {
   type TechAccount,
   type UploadedFile,
 } from './api'
+import type { ItemType } from './itemLabel'
 
 const TECH = '/api/v1/tech'
 const id = (value: string) => encodeURIComponent(value)
@@ -158,6 +159,18 @@ export interface AdminFile extends UploadedFile {
   removed_at: string | null
 }
 
+/** A course's units and items as the hub serves them (drafts too, for tech admins) */
+export interface CourseOutline {
+  id: string
+  title: string
+  heading: string
+  units: {
+    id: string
+    title: string
+    items: { id: string, type: ItemType, title: string | null, status: string, tags: string[], html?: string | null }[]
+  }[]
+}
+
 export interface ActivityFilter {
   type?: string
   student?: string
@@ -187,6 +200,7 @@ export const getStudentProgress = (accountId: string) =>
   request<{ account_id: string, courses: StudentCourse[] }>(`${TECH}/accounts/${id(accountId)}/progress`)
 export const getStudentWork = (accountId: string) =>
   request<Submission[]>(`${TECH}/accounts/${id(accountId)}/submissions`)
+export const getCourseOutline = (courseId: string) => request<CourseOutline>(`${TECH}/courses/${id(courseId)}`)
 export const markFor = (accountId: string, itemId: string, done: boolean) =>
   request<ItemProgress>(`${TECH}/accounts/${id(accountId)}/items/${id(itemId)}/complete`, { method: done ? 'POST' : 'DELETE' })
 

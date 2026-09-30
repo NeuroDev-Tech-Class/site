@@ -1,8 +1,9 @@
 import sanitizeHtml from 'sanitize-html'
 import catalogJson from '../../../content/catalog.json'
 import vocabulary from '../../../content/vocabulary.json'
+import { itemLabel, type ItemType } from './itemLabel'
 
-export type ItemType = 'lesson' | 'video' | 'checkpoint' | 'test' | 'slides' | 'link' | 'note'
+export { itemLabel, type ItemType }
 
 export interface Item {
   id: string
@@ -45,25 +46,6 @@ export interface Catalog {
   categories: { name: string, courses: CatalogCourse[] }[]
 }
 
-const LABELS: Record<ItemType, string> = {
-  lesson: 'Reading',
-  video: 'Video',
-  checkpoint: 'Checkpoint',
-  test: 'Test',
-  slides: 'Slideshow',
-  link: 'Link',
-  note: 'Note',
-}
-
-// Title prefixes that only repeat what the item's label already says
-const REDUNDANT_PREFIXES: Partial<Record<ItemType, string[]>> = {
-  lesson: ['Reading'],
-  slides: ['Slideshow'],
-  test: ['Quiz'],
-  link: ['Article'],
-  checkpoint: ['Checkpoint'],
-}
-
 const SHIFTED_HEADINGS = { h3: 'h2', h4: 'h3', h5: 'h4' }
 
 export const catalog: Catalog = catalogJson
@@ -96,14 +78,6 @@ export function sanitize(html: string, { shiftHeadings = false } = {}): string {
       ...(shiftHeadings ? SHIFTED_HEADINGS : {}),
     },
   })
-}
-
-export function itemLabel(item: Item): { label: string, title: string } {
-  const title = item.title ?? ''
-  for (const prefix of REDUNDANT_PREFIXES[item.type] ?? []) {
-    if (title.startsWith(`${prefix} - `)) return { label: prefix, title: title.slice(prefix.length + 3) }
-  }
-  return { label: LABELS[item.type], title }
 }
 
 export const isExercise = (item: Item): boolean => item.type === 'note' && item.tags.includes('exercise')
