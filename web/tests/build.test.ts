@@ -60,9 +60,12 @@ describe('the built site', () => {
   })
 
   test('every local image, favicon and logo a page points at exists', () => {
+    // Every page shares the header's logos, so each path is looked up on disk once
+    const found = new Map<string, boolean>()
+    const exists = (src: string) => found.get(src) ?? found.set(src, existsSync(join(DIST, src))).get(src)
     for (const { html, file } of pages.map(page)) {
       for (const [, src] of html.matchAll(/(?:href|src)="(\/(?:favicon|logo|images\/)[^"]+)"/g)) {
-        expect(existsSync(join(DIST, src)), `${file} links ${src}`).toBe(true)
+        expect(exists(src), `${file} links ${src}`).toBe(true)
       }
     }
   })
@@ -209,6 +212,17 @@ describe('My Courses', () => {
     const html = read('my-courses/index.html')
     expect(html).toContain('<meta name="robots" content="noindex"')
     expect(html).toMatch(/<h1[^>]*>\s*My Courses\s*<\/h1>/)
+  })
+})
+
+describe('the dashboard', () => {
+  test('is one page kept out of search engines, built showing "Loading" with its heading and room for tables', () => {
+    const html = read('admin/index.html')
+    expect(html).toContain('<meta name="robots" content="noindex"')
+    expect(html).toMatch(/<h1[^>]*>\s*Dashboard\s*<\/h1>/)
+    expect(text(html)).toContain('Loading…')
+    expect(text(html)).not.toMatch(/Sign in with a coach account|The dashboard is for coaches/)
+    expect(html).toMatch(/<main[^>]*class="[^"]*max-w-7xl/)
   })
 })
 

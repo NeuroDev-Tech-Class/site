@@ -1,7 +1,7 @@
 import { act, cleanup, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { Mock } from 'vitest'
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
+import { afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest'
 import type { ItemStatus } from '../../lib/api'
 import type { UnitView } from '../../lib/content'
 import { fakeCourseHub, fakeFetch, submission } from '../../test/fake-hub'
@@ -34,6 +34,9 @@ async function renderPage(options: Omit<Parameters<typeof fakeCourseHub>[1], 'co
 
 const unit = (title: string) => screen.getByRole('heading', { name: title }).closest('section') as HTMLElement
 const exercise = () => screen.queryByRole('checkbox', { name: /Exercise 1\.1/ })
+
+// Compiles the component once, outside any test's time limit; each test still imports it afresh
+beforeAll(async () => { await Promise.all([import('./CourseProgressPanel'), import('./CourseUnits')]) }, 30_000)
 
 beforeEach(() => {
   vi.resetModules()

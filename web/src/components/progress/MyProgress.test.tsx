@@ -1,6 +1,6 @@
 import { act, cleanup, render, screen, waitFor, within } from '@testing-library/react'
 import type { Mock } from 'vitest'
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
+import { afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest'
 import type { CourseProgress, Submission, TechAccount } from '../../lib/api'
 import type { CourseMeta } from '../../lib/content'
 import { account, fakeFetch, fakeHub, json, requests, submission } from '../../test/fake-hub'
@@ -45,6 +45,9 @@ function hub(options: {
 }
 const progressCalls = () => requests(fetchMock).filter(r => r === 'GET /api/v1/tech/progress').length
 const workCalls = () => requests(fetchMock).filter(r => r.startsWith('GET /api/v1/tech/submissions/mine')).length
+
+// Compiles the component once, outside any test's time limit; each test still imports it afresh
+beforeAll(async () => { await Promise.all([import('./MyCourses'), import('./HomeContinue'), import('./CourseRing')]) }, 30_000)
 
 beforeEach(() => {
   vi.resetModules()

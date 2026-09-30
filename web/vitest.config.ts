@@ -8,5 +8,7 @@ export default getViteConfig({
   test: {
     environment: 'jsdom',
     include: ['src/**/*.test.{ts,tsx}'],
+    // A worker per core swamps the Windows bind mount while files first compile, and first tests time out
+    maxWorkers: 6,
   },
 })

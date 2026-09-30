@@ -7,11 +7,14 @@ import '../styles/global.css'
 interface Props {
   title: string
   description?: string
+  // Room for the dashboard's tables beside its sidebar
+  wide?: boolean
 }
 
 const {
   title,
   description = 'NeuroDev Tech Class: practical, hands-on technology courses for neurodivergent students in St. George, Utah and Raleigh, North Carolina.',
+  wide = false,
 } = Astro.props
 ---
 
@@ -55,7 +58,7 @@ const {
       class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-lg focus:bg-(--panel) focus:p-3"
     >Skip to content</a>
     <SiteHeader />
-    <main id="main" tabindex="-1" class="mx-auto max-w-5xl px-4 py-8 focus:outline-none">
+    <main id="main" tabindex="-1" class:list={['mx-auto px-4 py-8 focus:outline-none', wide ? 'max-w-7xl' : 'max-w-5xl']}>
       <slot />
     </main>
     <SiteFooter />
