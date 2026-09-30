@@ -121,6 +121,13 @@ describe('the revamped pages', () => {
     expect(header).toContain('src="/logo-black.png"')
   })
 
+  test("every page's footer gives the phone number, tappable on a phone", () => {
+    for (const { file, html } of pages.map(page)) {
+      const footer = html.match(/<footer[\s\S]*?<\/footer>/)?.[0] ?? ''
+      expect(footer, file).toMatch(/<a[^>]*href="tel:\+18017345508"[^>]*>801-734-5508<\/a>/)
+    }
+  })
+
   test("every page's header has the notification bell beside the account menu", () => {
     for (const { file, html } of pages.map(page)) {
       const header = html.match(/<header[\s\S]*?<\/header>/)?.[0] ?? ''
