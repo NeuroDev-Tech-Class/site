@@ -221,7 +221,9 @@ export const activityCsvPath = (filter: ActivityFilter) => `${TECH}/activity.csv
 // The bell, for every signed-in account
 export const getInbox = (before?: string) => request<Page<InboxNote>>(`${TECH}/inbox${query({ before })}`)
 export const getUnreadCount = () => request<{ count: number }>(`${TECH}/inbox/unread-count`)
-export const markNoteRead = (noteId: string) => request<void>(`${TECH}/inbox/${id(noteId)}/read`, { method: 'POST' })
+/** Sent as the note's link opens, so keepalive lets it finish after the page has gone */
+export const markNoteRead = (noteId: string) =>
+  request<void>(`${TECH}/inbox/${id(noteId)}/read`, { method: 'POST', keepalive: true })
 export const markAllRead = () => request<{ count: number }>(`${TECH}/inbox/read-all`, { method: 'POST' })
 
 // Storage (superadmin)

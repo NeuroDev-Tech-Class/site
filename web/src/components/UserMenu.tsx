@@ -1,8 +1,9 @@
-import { useEffect, useId, useRef, useState } from 'react'
+import { useId } from 'react'
 import type { TechAccount } from '../lib/api'
 import { fullName, isStaff } from '../lib/format'
 import { safeNext } from '../lib/redirect'
 import { signOut, useSession } from '../lib/session'
+import { usePopover } from '../lib/usePopover'
 
 const STATUS_WORDS: Partial<Record<TechAccount['status'], string>> = {
   pending: 'Waiting for approval',
@@ -18,30 +19,10 @@ function signInHref(): string {
 }
 
 function AccountMenu({ account }: { account: TechAccount }) {
-  const [open, setOpen] = useState(false)
-  const root = useRef<HTMLDivElement>(null)
-  const button = useRef<HTMLButtonElement>(null)
+  const { open, setOpen, root, button } = usePopover()
   const panelId = useId()
   const name = fullName(account) || account.email
   const statusWords = STATUS_WORDS[account.status]
-
-  useEffect(() => {
-    if (!open) return
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return
-      setOpen(false)
-      button.current?.focus()
-    }
-    const onPointer = (event: PointerEvent) => {
-      if (!root.current?.contains(event.target as Node)) setOpen(false)
-    }
-    document.addEventListener('keydown', onKey)
-    document.addEventListener('pointerdown', onPointer)
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.removeEventListener('pointerdown', onPointer)
-    }
-  }, [open])
 
   return (
     <div ref={root} className="relative">

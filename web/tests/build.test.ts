@@ -121,6 +121,13 @@ describe('the revamped pages', () => {
     expect(header).toContain('src="/logo-black.png"')
   })
 
+  test("every page's header has the notification bell beside the account menu", () => {
+    for (const { file, html } of pages.map(page)) {
+      const header = html.match(/<header[\s\S]*?<\/header>/)?.[0] ?? ''
+      expect(header, file).toMatch(/component-url="[^"]*NotificationBell[^"]*"/)
+    }
+  })
+
   test('home opens with a way in and the three steps', () => {
     const home = read('index.html')
     expect(home).toMatch(/<a[^>]*href="\/courses\/digital-literacy"[^>]*>\s*Start with Digital Literacy/)
