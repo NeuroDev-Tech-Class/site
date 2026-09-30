@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useCallback } from 'react'
 import { getQueue } from '../../lib/adminApi'
 import type { AdminRoute } from '../../lib/adminRoute'
 import { useLoad } from '../../lib/useLoad'
-import { LoadError, Loading, REFRESH_MS, showRoute, useAdmin, ViewHeading, waitedWords } from './shared'
-
-// How long typing in the search box has to pause before the queue is asked again
-const SEARCH_PAUSE_MS = 400
+import { LoadError, Loading, REFRESH_MS, SearchField, showRoute, useAdmin, ViewHeading, waitedWords } from './shared'
 
 type QueueRoute = Extract<AdminRoute, { view: 'queue' }>
 
@@ -13,15 +10,8 @@ export const gradeHref = (id: string) => `#/grade/${encodeURIComponent(id)}`
 
 export default function Queue({ route }: { route: QueueRoute }) {
   const { courses } = useAdmin()
-  const [search, setSearch] = useState(route.q ?? '')
   const data = useLoad(() => getQueue({ course: route.course, q: route.q }), [route.course, route.q], { every: REFRESH_MS })
-
-  useEffect(() => {
-    const wanted = search.trim() || undefined
-    if (wanted === route.q) return
-    const timer = setTimeout(() => showRoute({ ...route, q: wanted }, { replace: true }), SEARCH_PAUSE_MS)
-    return () => clearTimeout(timer)
-  }, [search, route])
+  const search = useCallback((q: string | undefined) => showRoute({ ...route, q }, { replace: true }), [route])
 
   const filtered = Boolean(route.course || route.q)
   let body
@@ -80,11 +70,7 @@ export default function Queue({ route }: { route: QueueRoute }) {
             {courses.map(course => <option key={course.id} value={course.id}>{course.heading}</option>)}
           </select>
         </label>
-        <label className="flex max-w-xs flex-1 basis-48 flex-col gap-1 font-semibold">
-          Student
-          <input type="search" className="field" value={search} placeholder="Name or email"
-            onChange={event => setSearch(event.target.value)} />
-        </label>
+        <SearchField label="Student" applied={route.q} onApply={search} placeholder="Name or email" />
       </div>
       {body}
     </>

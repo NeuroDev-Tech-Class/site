@@ -11,6 +11,7 @@ import Icon from '../Icon'
 import { AdminContext, HEADING_ID, REFRESH_MS, ViewHeading } from './shared'
 import Grade from './Grade'
 import Queue from './Queue'
+import Students from './Students'
 import Today from './Today'
 
 type Section = 'today' | 'queue' | 'students' | 'activity' | 'storage'
@@ -51,6 +52,8 @@ function View({ route }: { route: AdminRoute }) {
       return <Queue route={route} />
     case 'grade':
       return <Grade key={route.id} id={route.id} />
+    case 'students':
+      return <Students route={route} />
     default:
       return <Today />
   }
