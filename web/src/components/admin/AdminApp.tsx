@@ -14,6 +14,7 @@ import Grade from './Grade'
 import Queue from './Queue'
 import Student from './Student'
 import StudentCourse from './StudentCourse'
+import Storage from './Storage'
 import Students from './Students'
 import Today from './Today'
 
@@ -61,6 +62,8 @@ function View({ route }: { route: AdminRoute }) {
       return <Student key={route.id} id={route.id} />
     case 'activity':
       return <Activity route={route} />
+    case 'storage':
+      return <Storage />
     case 'student-course':
       return <StudentCourse key={`${route.id}/${route.course}`} id={route.id} course={route.course} />
     default:
