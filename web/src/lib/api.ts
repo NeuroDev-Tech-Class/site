@@ -58,7 +58,8 @@ export function refreshSession(): Promise<TechAccount | null> {
   return refreshing
 }
 
-export async function request<T>(path: string, init: RequestInit = {}, retry = true): Promise<T> {
+/** A signed-in call to the hub, refreshing the session once if the token has run out */
+async function signedFetch(path: string, init: RequestInit, retry: boolean): Promise<Response> {
   const res = await fetch(`${API_URL}${path}`, {
     ...init,
     credentials: 'include',
@@ -68,14 +69,26 @@ export async function request<T>(path: string, init: RequestInit = {}, retry = t
       ...init.headers,
     },
   })
-  if (res.status === 401 && retry && (await refreshSession())) return request<T>(path, init, false)
+  if (res.status === 401 && retry && (await refreshSession())) return signedFetch(path, init, false)
   if (!res.ok) {
     const detail = await res.json().then(b => b?.detail, () => null)
     if (typeof detail === 'string') throw new ApiError(res.status, detail)
     if (typeof detail?.message === 'string') throw new ApiError(res.status, detail.message, detail.fields ?? {})
     throw new ApiError(res.status, GENERIC)
   }
+  return res
+}
+
+export async function request<T>(path: string, init: RequestInit = {}, retry = true): Promise<T> {
+  const res = await signedFetch(path, init, retry)
   return res.status === 204 ? (undefined as T) : ((await res.json()) as T)
+}
+
+/** A file the hub builds on request (the activity CSV), with the name the hub gives it */
+export async function fetchFile(path: string): Promise<{ blob: Blob, name: string | null }> {
+  const res = await signedFetch(path, {}, true)
+  const name = res.headers.get('Content-Disposition')?.match(/filename="([^"]+)"/)?.[1] ?? null
+  return { blob: await res.blob(), name }
 }
 
 async function signIn(path: string, body: unknown): Promise<TechAccount> {

@@ -1,7 +1,7 @@
 // The coach's side of the fake hub: roster rows, queue rows, and a hub answering the dashboard's reads.
 import type { Mock } from 'vitest'
 import type { TechAccount } from '../lib/api'
-import type { QueueRow, StudentRow, SubmissionDetail } from '../lib/adminApi'
+import type { ActivityLine, QueueRow, StudentRow, SubmissionDetail } from '../lib/adminApi'
 import { fakeHub, json, submission, type Route } from './fake-hub'
 
 export const COACH: Partial<TechAccount> = { id: 'c1', email: 'lee@example.com', first_name: 'Ms', last_name: 'Lee', role: 'admin' }
@@ -43,6 +43,12 @@ export const detail = (overrides: Partial<SubmissionDetail> = {}): SubmissionDet
   },
   attempts: [{ id: 's1__i_8__1', attempt: 1, status: 'submitted', submitted_at: '2026-09-28T15:00:00Z', graded_at: null, feedback: null }],
   ...overrides,
+})
+
+export const activityLine = (overrides: Partial<ActivityLine> = {}): ActivityLine => ({
+  id: 'l1', type: 'submission_graded', type_label: 'Work graded', summary: 'Ms Lee marked Movie Poster complete for Sam Student',
+  actor_id: 'c1', actor_name: 'Ms Lee', subject_id: 's1', subject_name: 'Sam Student', course_id: 'gimp', course_name: 'GIMP',
+  link: '/admin#/grade/s1__i_8__1', created_at: '2026-09-30T13:00:00Z', ...overrides,
 })
 
 export interface AdminHub {

@@ -8,6 +8,7 @@ import type { IconName } from '../../lib/icons'
 import { useSession } from '../../lib/session'
 import { useLoad } from '../../lib/useLoad'
 import Icon from '../Icon'
+import Activity from './Activity'
 import { AdminContext, HEADING_ID, REFRESH_MS, ViewHeading } from './shared'
 import Grade from './Grade'
 import Queue from './Queue'
@@ -58,6 +59,8 @@ function View({ route }: { route: AdminRoute }) {
       return <Students route={route} />
     case 'student':
       return <Student key={route.id} id={route.id} />
+    case 'activity':
+      return <Activity route={route} />
     case 'student-course':
       return <StudentCourse key={`${route.id}/${route.course}`} id={route.id} course={route.course} />
     default:
