@@ -4,7 +4,7 @@ import Icon from '../Icon'
 function Slide({ html, number, total }: { html: string, number: number, total: number }) {
   return (
     <div role="group" aria-label={`Slide ${number} of ${total}`}
-      className="lesson aspect-video overflow-y-auto rounded-lg border border-(--border) bg-(--panel) p-6 sm:p-10"
+      className="lesson aspect-video overflow-y-auto rounded-lg border border-(--border) bg-(--panel) p-6 sm:p-10 [&_img]:max-h-[32vh] [&_img]:w-auto [&_img]:bg-white [&_p:has(>img)]:mr-4 [&_p:has(>img)]:inline-block [&_p:has(>img)]:align-top"
       dangerouslySetInnerHTML={{ __html: html }} />
   )
 }
