@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { getAccount, getCourseOutline, getStudentProgress, getStudentWork, markFor, type CourseOutline } from '../../lib/adminApi'
 import { routeHash } from '../../lib/adminRoute'
-import { ApiError, type ItemProgress, type Submission } from '../../lib/api'
+import type { ItemProgress, Submission } from '../../lib/api'
 import { statusWord } from '../../lib/courseProgress'
 import { formatDate, fullName } from '../../lib/format'
 import { itemLabel } from '../../lib/itemLabel'
 import { useLoad } from '../../lib/useLoad'
 import { gradeHref } from './Queue'
-import { LoadError, Loading, ViewHeading } from './shared'
+import { ErrorLine, LoadError, Loading, problemWords, ViewHeading } from './shared'
 
 type OutlineItem = CourseOutline['units'][number]['items'][number]
 
@@ -48,7 +48,7 @@ export default function StudentCourse({ id, course }: { id: string, course: stri
       await markFor(id, item.id, done)
       await progress.reload()
     } catch (failure) {
-      setProblem(failure instanceof ApiError ? failure.message : "Couldn't save that. Please try again.")
+      setProblem(problemWords(failure, "Couldn't save that. Please try again."))
     } finally {
       setBusy(null)
     }
@@ -60,7 +60,7 @@ export default function StudentCourse({ id, course }: { id: string, course: stri
     return (
       <>
         <ViewHeading eyebrow={eyebrow}>{outline.status === 'ready' ? outline.value.title : 'Course'}</ViewHeading>
-        {outline.status === 'error' || progress.status === 'error' ? <LoadError /> : <Loading />}
+        {outline.status === 'error' || progress.status === 'error' ? <LoadError onRetry={() => { void outline.reload(); void progress.reload() }} /> : <Loading />}
       </>
     )
   }
@@ -74,7 +74,7 @@ export default function StudentCourse({ id, course }: { id: string, course: stri
     <>
       <ViewHeading eyebrow={eyebrow}>{outline.value.title}</ViewHeading>
       <p className="mt-2 font-semibold">{mine ? `${mine.done} of ${mine.total} done · ${mine.percent}%` : 'Not started yet'}</p>
-      {problem && <p role="alert" className="mt-2 font-semibold text-red-700 dark:text-red-300">{problem}</p>}
+      <ErrorLine>{problem}</ErrorLine>
       {outline.value.units.map(unit => {
         const items = unit.items.filter(item => item.type !== 'note' || isExercise(item))
         if (!items.length) return null

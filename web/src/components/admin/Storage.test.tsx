@@ -1,4 +1,5 @@
 import { cleanup, screen, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import type { Mock } from 'vitest'
 import { afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest'
 import type { Usage } from '../../lib/adminApi'
@@ -62,8 +63,12 @@ describe('Storage', () => {
     expect(requests(fetchMock)).not.toContain('GET /api/v1/tech/files/usage')
   })
 
-  test('the hub not answering says so', async () => {
-    await open({ routes: { '/api/v1/tech/files/usage': () => json(500, {}) } })
-    expect(await screen.findByText("Couldn't load this. It will try again shortly, or reload the page.")).toBeTruthy()
+  test('the hub not answering says so, with a way to try again (this view does not refresh by itself)', async () => {
+    let up = false
+    await open({ routes: { '/api/v1/tech/files/usage': () => (up ? json(200, USAGE) : json(500, {})) } })
+    expect(await screen.findByText("Couldn't load this.")).toBeTruthy()
+    up = true
+    await userEvent.click(screen.getByRole('button', { name: 'Try again' }))
+    expect(await screen.findByText('Uploads use 7 MB in all.')).toBeTruthy()
   })
 })

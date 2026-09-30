@@ -108,6 +108,28 @@ describe('the bell', () => {
     await waitFor(async () => expect((await bell()).getAttribute('aria-label')).toBe('Notifications, 1 unread'))
   })
 
+  test('opening a note closes the list, as when it leads somewhere on the same page', async () => {
+    hub()
+    await renderBell()
+    await userEvent.click(await bell())
+    const link = within(await screen.findByRole('list', { name: 'Notifications' })).getAllByRole('link')[0]
+    link.addEventListener('click', event => event.preventDefault())
+    await userEvent.click(link)
+    await waitFor(() => expect(screen.queryByRole('list', { name: 'Notifications' })).toBeNull())
+  })
+
+  test('Mark all read failing says so', async () => {
+    hub()
+    await renderBell()
+    await userEvent.click(await bell())
+    await screen.findByRole('list', { name: 'Notifications' })
+    const real = fetchMock.getMockImplementation()!
+    fetchMock.mockImplementation((url: string, init?: RequestInit) =>
+      String(url).endsWith('/inbox/read-all') ? Promise.resolve(json(500, {})) : real(url, init))
+    await userEvent.click(screen.getByRole('button', { name: 'Mark all read' }))
+    expect((await screen.findByRole('alert')).textContent).toContain("Couldn't mark them read.")
+  })
+
   test('Mark all read clears the count', async () => {
     hub()
     await renderBell()

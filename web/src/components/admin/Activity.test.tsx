@@ -1,4 +1,4 @@
-import { cleanup, screen, waitFor, within } from '@testing-library/react'
+import { act, cleanup, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { Mock } from 'vitest'
 import { afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest'
@@ -68,6 +68,37 @@ describe('the activity record', () => {
     await waitFor(() => expect(within(screen.getByRole('list', { name: 'Activity' })).getAllByRole('listitem')).toHaveLength(3))
     expect(requests(fetchMock)).toContain('GET /api/v1/tech/activity?before=c1')
     expect(screen.queryByRole('button', { name: 'Show older' })).toBeNull()
+  })
+
+  test('while older lines are shown, new activity waits, so no line in between is lost', async () => {
+    vi.useRealTimers()
+    vi.useFakeTimers({ shouldAdvanceTime: true })
+    let newer = false
+    await hub({ routes: {
+      '/api/v1/tech/activity(\\?.*)?': ({ match }) => {
+        if (new URLSearchParams((match[1] ?? '').slice(1)).get('before') === 'c1') return json(200, { items: OLDER, next: null })
+        // Two new lines push the first page on: it now ends before the lines it used to hold
+        const lines = newer ? [activityLine({ id: 'l9', summary: 'Newest' }), activityLine({ id: 'l8', summary: 'Newer' })] : FIRST
+        return json(200, { items: lines, next: 'c1' })
+      },
+    } })
+    await userEvent.click(await screen.findByRole('button', { name: 'Show older' }))
+    await waitFor(() => expect(within(screen.getByRole('list', { name: 'Activity' })).getAllByRole('listitem')).toHaveLength(3))
+    newer = true
+    await act(async () => { await vi.advanceTimersByTimeAsync(31_000) })
+    const shown = within(screen.getByRole('list', { name: 'Activity' })).getAllByRole('listitem').map(li => li.textContent)
+    expect(shown.join('|')).toContain('Sam Student handed in Movie Poster')
+    expect(shown.join('|')).toContain('Ms Lee approved Nia New')
+  })
+
+  test('Show older failing says so and can be tried again', async () => {
+    await hub({ routes: {
+      '/api/v1/tech/activity(\\?.*)?': ({ match }) => (new URLSearchParams((match[1] ?? '').slice(1)).get('before')
+        ? json(500, {}) : json(200, { items: FIRST, next: 'c1' })),
+    } })
+    await userEvent.click(await screen.findByRole('button', { name: 'Show older' }))
+    expect((await screen.findByRole('alert')).textContent).toContain("Couldn't load older activity.")
+    expect(screen.getByRole('button', { name: 'Show older' })).toBeTruthy()
   })
 
   test('older pages keep adding up, and a line already shown is not shown twice', async () => {

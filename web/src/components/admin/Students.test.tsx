@@ -105,17 +105,23 @@ describe('the roster', () => {
   test('clicking anywhere on a row opens that student', async () => {
     await hub()
     const [, first] = within(await table()).getAllByRole('row')
+    history.replaceState({ index: 5, scrollX: 0, scrollY: 0 }, '')
     await userEvent.click(within(first).getByText('40%'))
     await waitFor(() => expect(window.location.hash).toBe('#/students/s1'))
+    // A step of its own, carrying the state the page router needs to come Back to it
+    expect(history.state).toMatchObject({ index: 6 })
   })
 
   test('tabs count their students and keep the tab in the address', async () => {
     await hub()
     await table()
-    expect(tab(/Pending/).textContent).toContain('2')
+    // Pending counts the sign-ups waiting on a coach, as the sidebar badge does
+    expect(tab(/Pending/).textContent).toContain('1')
     expect(tab(/Current/).getAttribute('aria-current')).toBe('page')
+    history.replaceState({ index: 5, scrollX: 0, scrollY: 0 }, '', window.location.hash)
     await userEvent.click(tab(/Old/))
     await waitFor(() => expect(window.location.hash).toBe('#/students?tab=old'))
+    expect(history.state).toEqual({ index: 5, scrollX: 0, scrollY: 0 })
     const rows = within(await table()).getAllByRole('row').slice(1)
     expect(rows).toHaveLength(1)
     expect(rows[0].textContent).toContain('Olly Old')
@@ -165,8 +171,11 @@ describe('row actions', () => {
     expect(rows[1].textContent).toContain("hasn't confirmed their email yet")
     await userEvent.click(within(rows[0]).getByRole('button', { name: 'Approve Nia New' }))
     expect(await screen.findByText('Nia New approved.')).toBeTruthy()
-    await waitFor(() => expect(tab(/Pending/).textContent).toContain('1'))
+    await waitFor(() => expect(tab(/Pending/).textContent).toContain('0'))
     expect(sent).toContainEqual({ method: 'POST', path: 'p1/approve', body: undefined })
+    await userEvent.click(tab(/Current/))
+    await waitFor(() => expect(window.location.hash).toBe('#/students'))
+    expect(screen.queryByText('Nia New approved.')).toBeNull()
   })
 
   test('Deny asks first, then deletes the sign-up', async () => {

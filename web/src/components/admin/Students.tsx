@@ -1,4 +1,4 @@
-import { useCallback, useState, type MouseEvent, type ReactNode } from 'react'
+import { useCallback, useState, type MouseEvent } from 'react'
 import {
   addAdmin,
   approveAccount,
@@ -11,10 +11,9 @@ import {
   type StudentRow,
 } from '../../lib/adminApi'
 import { routeHash, type AdminRoute, type StudentsTab } from '../../lib/adminRoute'
-import { ApiError } from '../../lib/api'
 import { formatDate, fullName, timeAgo } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
-import { ConfirmButton, LoadError, Loading, REFRESH_MS, SearchField, showRoute, useAdmin, ViewHeading } from './shared'
+import { CELL, ConfirmButton, DataTable, ErrorLine, LoadError, Loading, problemWords, REFRESH_MS, SearchField, showRoute, StatusLine, useAdmin, ViewHeading, waitingOnCoach } from './shared'
 
 type StudentsRoute = Extract<AdminRoute, { view: 'students' }>
 
@@ -25,8 +24,6 @@ function groupOf(student: StudentRow): Exclude<StudentsTab, 'admins'> {
   return student.student_type === 'old' ? 'old' : 'current'
 }
 
-const problemWords = (failure: unknown, fallback: string) => (failure instanceof ApiError ? failure.message : fallback)
-
 /** A row that opens the student wherever it is clicked, except on its own links and buttons */
 function openRow(id: string) {
   return (event: MouseEvent) => {
@@ -34,21 +31,6 @@ function openRow(id: string) {
   }
 }
 
-function Table({ caption, head, children }: { caption: string, head: string[], children: ReactNode }) {
-  return (
-    <div className="mt-4 overflow-x-auto rounded-lg border border-(--border)">
-      <table className="w-full min-w-[40rem] border-collapse text-left">
-        <caption className="sr-only">{caption}</caption>
-        <thead className="bg-(--panel) text-sm text-(--muted)">
-          <tr>{head.map(title => <th key={title} scope="col" className="px-4 py-3">{title}</th>)}</tr>
-        </thead>
-        <tbody>{children}</tbody>
-      </table>
-    </div>
-  )
-}
-
-const CELL = 'px-4 py-3'
 const ROW = 'cursor-pointer border-t border-(--border) hover:bg-(--panel)'
 
 function StudentLink({ student }: { student: StudentRow }) {
@@ -99,11 +81,11 @@ function Admins({ say }: { say: (words: string) => void }) {
       <p className="mt-2 text-sm text-(--muted)">
         A student with that email becomes an admin; anyone new gets an email to set their password.
       </p>
-      {problem && <p role="alert" className="mt-2 font-semibold text-red-700 dark:text-red-300">{problem}</p>}
+      <ErrorLine>{problem}</ErrorLine>
       {staff.status === 'loading' && <Loading />}
-      {staff.status === 'error' && <LoadError />}
+      {staff.status === 'error' && <LoadError onRetry={() => void staff.reload()} />}
       {staff.status === 'ready' && (
-        <Table caption="Admins" head={['Name', 'Email', 'Role', '']}>
+        <DataTable caption="Admins" head={['Name', 'Email', 'Role', '']}>
           {staff.value.map(member => {
             const name = fullName(member) || member.email
             return (
@@ -119,7 +101,7 @@ function Admins({ say }: { say: (words: string) => void }) {
               </tr>
             )
           })}
-        </Table>
+        </DataTable>
       )}
     </>
   )
@@ -128,8 +110,8 @@ function Admins({ say }: { say: (words: string) => void }) {
 export default function Students({ route }: { route: StudentsRoute }) {
   const { account, refreshCounts } = useAdmin()
   const roster = useLoad(getStudents, [], { every: REFRESH_MS })
-  const [said, setSaid] = useState('')
-  const [problem, setProblem] = useState<string | null>(null)
+  // What the last action came to, shown only on the tab it happened on
+  const [note, setNote] = useState<{ tab: StudentsTab, said: string, problem: string | null }>({ tab: 'current', said: '', problem: null })
   const [busy, setBusy] = useState<string | null>(null)
   const owner = account.role === 'superadmin'
   const tabs: StudentsTab[] = owner ? ['pending', 'current', 'old', 'admins'] : ['pending', 'current', 'old']
@@ -138,15 +120,14 @@ export default function Students({ route }: { route: StudentsRoute }) {
 
   async function act(student: StudentRow, action: () => Promise<unknown>, words: string, fallback: string) {
     setBusy(student.id)
-    setSaid('')
-    setProblem(null)
+    setNote({ tab, said: '', problem: null })
     try {
       await action()
-      setSaid(words)
+      setNote({ tab, said: words, problem: null })
       refreshCounts()
       await roster.reload()
     } catch (failure) {
-      setProblem(problemWords(failure, fallback))
+      setNote({ tab, said: '', problem: problemWords(failure, fallback) })
     } finally {
       setBusy(null)
     }
@@ -156,10 +137,14 @@ export default function Students({ route }: { route: StudentsRoute }) {
   const everyone = roster.status === 'ready' ? roster.value : []
   const found = everyone.filter(s => !words || s.name.toLowerCase().includes(words) || s.email.toLowerCase().includes(words))
   const inTab = (t: StudentsTab) => found.filter(s => groupOf(s) === t)
-  const shown = tab === 'admins' ? [] : inTab(tab)
+  // Pending counts those waiting on a coach (as the sidebar badge does); unconfirmed and declined follow them
+  const counted = (t: StudentsTab) => (t === 'pending' ? inTab(t).filter(waitingOnCoach) : inTab(t)).length
+  const shown = tab === 'admins' ? [] : tab === 'pending'
+    ? [...inTab(tab).filter(waitingOnCoach), ...inTab(tab).filter(s => !waitingOnCoach(s))]
+    : inTab(tab)
 
   let body
-  if (tab === 'admins') body = <Admins say={setSaid} />
+  if (tab === 'admins') body = <Admins say={said => setNote({ tab: 'admins', said, problem: null })} />
   else if (roster.status === 'loading') body = <Loading />
   else if (roster.status === 'error') body = <LoadError />
   else if (!shown.length) {
@@ -171,7 +156,7 @@ export default function Students({ route }: { route: StudentsRoute }) {
     )
   } else if (tab === 'pending') {
     body = (
-      <Table caption="Pending students" head={['Name', 'Email', 'Signed up', '']}>
+      <DataTable caption="Pending students" head={['Name', 'Email', 'Signed up', '']}>
         {shown.map(student => (
           <tr key={student.id} className={ROW} onClick={openRow(student.id)}>
             <td className={CELL}>
@@ -195,12 +180,12 @@ export default function Students({ route }: { route: StudentsRoute }) {
             </td>
           </tr>
         ))}
-      </Table>
+      </DataTable>
     )
   } else {
     const other = tab === 'current' ? 'old' : 'current'
     body = (
-      <Table caption={`${TAB_NAMES[tab]} students`} head={['Name', 'Progress', 'Last active', 'Work', '']}>
+      <DataTable caption={`${TAB_NAMES[tab]} students`} head={['Name', 'Progress', 'Last active', 'Work', '']}>
         {shown.map(student => (
           <tr key={student.id} className={ROW} onClick={openRow(student.id)}>
             <td className={CELL}>
@@ -227,7 +212,7 @@ export default function Students({ route }: { route: StudentsRoute }) {
             </td>
           </tr>
         ))}
-      </Table>
+      </DataTable>
     )
   }
 
@@ -247,13 +232,13 @@ export default function Students({ route }: { route: StudentsRoute }) {
               className="-mb-px flex min-h-[44px] items-center gap-2 border-b-2 border-transparent px-3 font-semibold text-(--text) no-underline aria-[current=page]:border-(--brand-accent) aria-[current=page]:text-(--heading)"
             >
               {TAB_NAMES[t]}
-              {t !== 'admins' && roster.status === 'ready' && <span className="text-sm text-(--muted)">{inTab(t).length}</span>}
+              {t !== 'admins' && roster.status === 'ready' && <span className="text-sm text-(--muted)">{counted(t)}</span>}
             </a>
           </li>
         ))}
       </ul>
-      <p role="status" className="mt-4 min-h-[1.5em] font-semibold">{said}</p>
-      {problem && <p role="alert" className="mt-0 font-semibold text-red-700 dark:text-red-300">{problem}</p>}
+      <StatusLine>{note.tab === tab ? note.said : ''}</StatusLine>
+      <ErrorLine>{note.tab === tab ? note.problem : null}</ErrorLine>
       {body}
     </>
   )

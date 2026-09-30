@@ -28,7 +28,13 @@ function filters<K extends string>(params: URLSearchParams, keys: K[]): Partial<
 export function parseRoute(hash: string): { route: AdminRoute, redirect?: string } {
   const [path, search = ''] = hash.replace(/^#/, '').split('?')
   const params = new URLSearchParams(search)
-  const parts = path.split('/').filter(Boolean).map(decodeURIComponent)
+  let parts: string[]
+  try {
+    parts = path.split('/').filter(Boolean).map(decodeURIComponent)
+  } catch {
+    // A mangled link (a stray %) goes to Today rather than breaking the page
+    return TODAY
+  }
   const [view, id, sub, course] = parts
 
   if (view === 'today' && parts.length === 1) return { route: { view: 'today' } }

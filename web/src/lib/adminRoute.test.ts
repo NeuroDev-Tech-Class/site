@@ -32,6 +32,11 @@ describe('parseRoute', () => {
     expect(parseRoute(hash)).toEqual({ route: { view: 'today' }, redirect: '#/today' })
   })
 
+  test('a mangled link opens Today instead of breaking the page', () => {
+    expect(parseRoute('#/grade/50%')).toEqual({ route: { view: 'today' }, redirect: '#/today' })
+    expect(parseRoute('#/students/%E0%A4%A')).toEqual({ route: { view: 'today' }, redirect: '#/today' })
+  })
+
   test('ids and filters are decoded', () => {
     expect(parseRoute('#/grade/a%20b')).toEqual({ route: { view: 'grade', id: 'a b' } })
     expect(parseRoute('#/queue?q=Sam%20Student')).toEqual({ route: { view: 'queue', q: 'Sam Student' } })

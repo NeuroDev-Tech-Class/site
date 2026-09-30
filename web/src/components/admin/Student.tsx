@@ -16,15 +16,11 @@ import { sizeWords } from '../../lib/checkpoint'
 import { formatDate, fullName, timeAgo } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
 import { gradeHref } from './Queue'
-import { ConfirmButton, LoadError, Loading, showRoute, useAdmin, ViewHeading } from './shared'
+import { CELL, ConfirmButton, DataTable, ErrorLine, LoadError, Loading, problemWords, showRoute, StatusLine, useAdmin, ViewHeading } from './shared'
 
 const STATUS_WORDS: Record<AdminAccount['status'], string> = {
   pending: 'Waiting for approval', approved: 'Approved', declined: 'Declined', deactivated: 'Deactivated',
 }
-
-const CELL = 'px-4 py-3'
-
-const problemWords = (failure: unknown, fallback: string) => (failure instanceof ApiError ? failure.message : fallback)
 
 function Courses({ id }: { id: string }) {
   const { courses } = useAdmin()
@@ -34,7 +30,7 @@ function Courses({ id }: { id: string }) {
     <section aria-labelledby="courses-heading" className="mt-10">
       <h2 id="courses-heading" className="mt-0">Courses</h2>
       {progress.status === 'loading' && <Loading />}
-      {progress.status === 'error' && <LoadError />}
+      {progress.status === 'error' && <LoadError onRetry={() => void progress.reload()} />}
       {progress.status === 'ready' && (progress.value.courses.length
         ? (
             <ul aria-label="Courses" className="mt-4 grid list-none grid-cols-1 gap-4 pl-0 sm:grid-cols-2 xl:grid-cols-3">
@@ -74,28 +70,20 @@ function Work({ id }: { id: string }) {
     <section aria-labelledby="work-heading" className="mt-10">
       <h2 id="work-heading" className="mt-0">Work handed in</h2>
       {work.status === 'loading' && <Loading />}
-      {work.status === 'error' && <LoadError />}
+      {work.status === 'error' && <LoadError onRetry={() => void work.reload()} />}
       {work.status === 'ready' && (work.value.length
         ? (
-            <div className="mt-4 overflow-x-auto rounded-lg border border-(--border)">
-              <table className="w-full min-w-[36rem] border-collapse text-left">
-                <caption className="sr-only">Work handed in</caption>
-                <thead className="bg-(--panel) text-sm text-(--muted)">
-                  <tr>{['Work', 'Course', 'Attempt', 'Status', 'Handed in'].map(t => <th key={t} scope="col" className={CELL}>{t}</th>)}</tr>
-                </thead>
-                <tbody>
-                  {work.value.map(piece => (
-                    <tr key={piece.id} className="border-t border-(--border)">
-                      <td className={`${CELL} font-semibold`}><a href={gradeHref(piece.id)}>{piece.item.title}</a></td>
-                      <td className={CELL}>{piece.course.title}</td>
-                      <td className={CELL}>Attempt {piece.attempt}</td>
-                      <td className={CELL}>{piece.status_label}</td>
-                      <td className={CELL}>{formatDate(piece.submitted_at, { month: 'long' })}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <DataTable caption="Work handed in" head={['Work', 'Course', 'Attempt', 'Status', 'Handed in']} minWidth="36rem">
+              {work.value.map(piece => (
+                <tr key={piece.id} className="border-t border-(--border)">
+                  <td className={`${CELL} font-semibold`}><a href={gradeHref(piece.id)}>{piece.item.title}</a></td>
+                  <td className={CELL}>{piece.course.title}</td>
+                  <td className={CELL}>Attempt {piece.attempt}</td>
+                  <td className={CELL}>{piece.status_label}</td>
+                  <td className={CELL}>{formatDate(piece.submitted_at, { month: 'long' })}</td>
+                </tr>
+              ))}
+            </DataTable>
           )
         : <p>Nothing handed in yet.</p>)}
     </section>
@@ -122,10 +110,10 @@ function Uploads({ id, name }: { id: string, name: string }) {
   return (
     <section aria-labelledby="uploads-heading" className="mt-10">
       <h2 id="uploads-heading" className="mt-0">Uploads</h2>
-      <p role="status" className="mt-2 min-h-[1.5em] font-semibold">{said}</p>
-      {problem && <p role="alert" className="mt-0 font-semibold text-red-700 dark:text-red-300">{problem}</p>}
+      <StatusLine>{said}</StatusLine>
+      <ErrorLine>{problem}</ErrorLine>
       {files.status === 'loading' && <Loading />}
-      {files.status === 'error' && <LoadError />}
+      {files.status === 'error' && <LoadError onRetry={() => void files.reload()} />}
       {files.status === 'ready' && (files.value.length
         ? (
             <>
@@ -139,33 +127,25 @@ function Uploads({ id, name }: { id: string, name: string }) {
                     })} />
                 )}
               </div>
-              <div className="mt-4 overflow-x-auto rounded-lg border border-(--border)">
-                <table className="w-full min-w-[36rem] border-collapse text-left">
-                  <caption className="sr-only">Uploads</caption>
-                  <thead className="bg-(--panel) text-sm text-(--muted)">
-                    <tr>{['File', 'For', 'Size', 'Uploaded', ''].map(t => <th key={t} scope="col" className={CELL}>{t}</th>)}</tr>
-                  </thead>
-                  <tbody>
-                    {files.value.map(file => (
-                      <tr key={file.id} className="border-t border-(--border)">
-                        <td className={`${CELL} font-semibold break-all`}>{file.name}</td>
-                        <td className={CELL}>{file.item.title} <span className="text-sm text-(--muted)">· {file.course.title}</span></td>
-                        <td className={CELL}>{sizeWords(file.bytes)}</td>
-                        <td className={CELL}>{formatDate(file.created_at)}</td>
-                        <td className={CELL}>
-                          {file.status === 'removed'
-                            ? <span className="text-(--muted)">Removed</span>
-                            : <ConfirmButton label="Remove" name={`Remove ${file.name}`} confirm="Yes, remove"
-                                onConfirm={() => void run(async () => {
-                                  await removeFile(file.id)
-                                  return `Removed ${file.name}.`
-                                })} />}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              <DataTable caption="Uploads" head={['File', 'For', 'Size', 'Uploaded', '']} minWidth="36rem">
+                {files.value.map(file => (
+                  <tr key={file.id} className="border-t border-(--border)">
+                    <td className={`${CELL} font-semibold break-all`}>{file.name}</td>
+                    <td className={CELL}>{file.item.title} <span className="text-sm text-(--muted)">· {file.course.title}</span></td>
+                    <td className={CELL}>{sizeWords(file.bytes)}</td>
+                    <td className={CELL}>{formatDate(file.created_at)}</td>
+                    <td className={CELL}>
+                      {file.status === 'removed'
+                        ? <span className="text-(--muted)">Removed</span>
+                        : <ConfirmButton label="Remove" name={`Remove ${file.name}`} confirm="Yes, remove"
+                            onConfirm={() => void run(async () => {
+                              await removeFile(file.id)
+                              return `Removed ${file.name}.`
+                            })} />}
+                    </td>
+                  </tr>
+                ))}
+              </DataTable>
             </>
           )
         : <p>No uploads.</p>)}
@@ -200,7 +180,7 @@ export default function Student({ id }: { id: string }) {
         <ViewHeading eyebrow="Students">Student</ViewHeading>
         {gone
           ? <div className="panel mt-6"><p className="mt-0">This student isn't there any more.</p><a href="#/students">Back to Students</a></div>
-          : <LoadError />}
+          : <LoadError onRetry={() => void person.reload()} />}
       </>
     )
   }
@@ -233,7 +213,7 @@ export default function Student({ id }: { id: string }) {
           </button>
         )}
       </div>
-      {problem && <p role="alert" className="mt-2 font-semibold text-red-700 dark:text-red-300">{problem}</p>}
+      <ErrorLine>{problem}</ErrorLine>
       <Courses id={id} />
       <Work id={id} />
       {me.role === 'superadmin' && <Uploads id={id} name={name} />}

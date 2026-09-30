@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import type { StudentRow } from '../../lib/adminApi'
 import { routeHash, type AdminRoute } from '../../lib/adminRoute'
-import type { TechAccount } from '../../lib/api'
+import { ApiError, type TechAccount } from '../../lib/api'
 import type { CourseMeta } from '../../lib/content'
 
 export const REFRESH_MS = 30_000
@@ -14,15 +15,19 @@ export interface Admin {
   refreshCounts: () => void
 }
 
-/** Goes to a route; `replace` (a filter changing) swaps the address without adding a Back step */
+// Told when the dashboard moves itself, so its router follows without Astro's router stepping in
+export const ROUTE_EVENT = 'admin:route'
+
+/**
+ * Goes to a route; `replace` (a filter changing) swaps the address without adding a Back step. Every entry keeps
+ * the state Astro's page router gives history entries (it ignores Back onto one without), counting a new step on.
+ */
 export function showRoute(route: AdminRoute, { replace = false }: { replace?: boolean } = {}): void {
   const hash = routeHash(route)
-  if (!replace) {
-    window.location.hash = hash
-    return
-  }
-  history.replaceState(null, '', hash)
-  window.dispatchEvent(new HashChangeEvent('hashchange'))
+  const state = history.state as { index?: number } | null
+  if (replace) history.replaceState(state, '', hash)
+  else history.pushState({ ...state, index: (state?.index ?? 0) + 1, scrollX: 0, scrollY: 0 }, '', hash)
+  window.dispatchEvent(new Event(ROUTE_EVENT))
 }
 
 export const AdminContext = createContext<Admin | null>(null)
@@ -56,6 +61,12 @@ export function SearchField({ label, applied, onApply, placeholder }: {
   placeholder?: string
 }) {
   const [words, setWords] = useState(applied ?? '')
+  // The address moved on without the box (the sidebar, Back): the box follows it
+  const [following, setFollowing] = useState(applied)
+  if (applied !== following) {
+    setFollowing(applied)
+    if ((words.trim() || undefined) !== applied) setWords(applied ?? '')
+  }
   useEffect(() => {
     const wanted = words.trim() || undefined
     if (wanted === applied) return
@@ -91,7 +102,52 @@ export function ConfirmButton({ label, name, confirm, onConfirm, disabled }: {
   )
 }
 
-export const LoadError = () => <p className="panel mt-6">{LOAD_FAILED}</p>
+export const CELL = 'px-4 py-3'
+
+/** A sign-up a coach can act on: confirmed their email and waiting (the sidebar badge counts these) */
+export const waitingOnCoach = (s: StudentRow): boolean => s.status === 'pending' && s.email_verified
+
+/** The dashboard's tables: named for screen readers, scrolling sideways inside their box on a phone */
+export function DataTable({ caption, head, minWidth = '40rem', children }: {
+  caption: string
+  head: string[]
+  minWidth?: string
+  children: ReactNode
+}) {
+  return (
+    <div className="mt-4 overflow-x-auto rounded-lg border border-(--border)">
+      <table className="w-full border-collapse text-left" style={{ minWidth }}>
+        <caption className="sr-only">{caption}</caption>
+        <thead className="bg-(--panel) text-sm text-(--muted)">
+          <tr>{head.map((title, i) => <th key={`${i}-${title}`} scope="col" className={CELL}>{title}</th>)}</tr>
+        </thead>
+        <tbody>{children}</tbody>
+      </table>
+    </div>
+  )
+}
+
+/** What went wrong with the last thing the coach did, if anything */
+export const ErrorLine = ({ children }: { children: ReactNode }) =>
+  children ? <p role="alert" className="mt-2 font-semibold text-red-700 dark:text-red-300">{children}</p> : null
+
+/** What the last thing the coach did came to; keeps its space so the page doesn't jump */
+export const StatusLine = ({ children }: { children: ReactNode }) =>
+  <p role="status" className="mt-2 min-h-[1.5em] font-semibold">{children}</p>
+
+export const problemWords = (failure: unknown, fallback: string): string =>
+  failure instanceof ApiError ? failure.message : fallback
+
+/** A view that refreshes itself says it will; one that doesn't gives the coach a way to try again */
+export function LoadError({ onRetry }: { onRetry?: () => void }) {
+  if (!onRetry) return <p className="panel mt-6">{LOAD_FAILED}</p>
+  return (
+    <div className="panel mt-6 flex flex-wrap items-center gap-3">
+      <p className="mt-0">Couldn't load this.</p>
+      <button type="button" className="btn-quiet" onClick={onRetry}>Try again</button>
+    </div>
+  )
+}
 export const Loading = () => <p className="mt-6 text-(--muted)" aria-busy="true">Loading…</p>
 
 const DAY = 24 * 60 * 60 * 1000

@@ -9,7 +9,7 @@ import { useSession } from '../../lib/session'
 import { useLoad } from '../../lib/useLoad'
 import Icon from '../Icon'
 import Activity from './Activity'
-import { AdminContext, HEADING_ID, REFRESH_MS, ViewHeading } from './shared'
+import { AdminContext, HEADING_ID, REFRESH_MS, ROUTE_EVENT, ViewHeading } from './shared'
 import Grade from './Grade'
 import Queue from './Queue'
 import Student from './Student'
@@ -42,13 +42,11 @@ const SECTION_OF: Record<AdminRoute['view'], Section> = {
 }
 
 // Astro's page router moves the address with pushState and a popstate of its own, never a hashchange
+const ADDRESS_EVENTS = ['hashchange', 'popstate', ROUTE_EVENT]
+
 function subscribeHash(listener: () => void) {
-  window.addEventListener('hashchange', listener)
-  window.addEventListener('popstate', listener)
-  return () => {
-    window.removeEventListener('hashchange', listener)
-    window.removeEventListener('popstate', listener)
-  }
+  ADDRESS_EVENTS.forEach(name => window.addEventListener(name, listener))
+  return () => ADDRESS_EVENTS.forEach(name => window.removeEventListener(name, listener))
 }
 
 function useHash(): string {
@@ -105,7 +103,7 @@ function Dashboard({ account, courses }: { account: TechAccount, courses: Course
   const firstView = useRef(true)
 
   useEffect(() => {
-    if (redirect) history.replaceState(null, '', redirect)
+    if (redirect) history.replaceState(history.state, '', redirect)
   }, [redirect])
 
   // A new view takes focus at its heading, so a screen reader hears where it is; not on first arrival

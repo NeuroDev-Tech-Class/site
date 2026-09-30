@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { activityCsvPath, getActivity, getStudents, type ActivityFilter, type ActivityLine } from '../../lib/adminApi'
 import type { AdminRoute } from '../../lib/adminRoute'
-import { ApiError, fetchFile } from '../../lib/api'
+import { fetchFile } from '../../lib/api'
 import { formatDate, timeAgo } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
-import { LoadError, Loading, REFRESH_MS, showRoute, useAdmin, ViewHeading } from './shared'
+import { ErrorLine, LoadError, Loading, problemWords, REFRESH_MS, showRoute, useAdmin, ViewHeading } from './shared'
 
 type ActivityRoute = Extract<AdminRoute, { view: 'activity' }>
 
@@ -28,15 +28,23 @@ async function downloadCsv(filter: ActivityFilter) {
   const link = document.createElement('a')
   link.href = url
   link.download = name ?? 'activity.csv'
+  // On the page and kept a moment, or some browsers drop the download
+  document.body.append(link)
   link.click()
-  URL.revokeObjectURL(url)
+  link.remove()
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
 }
 
-/** The first page refreshes on its own; older pages, once asked for, stay below it */
+/**
+ * The first page refreshes on its own until older pages are asked for; then it waits, since the older pages follow
+ * on from where it ended and new lines would push some out of both.
+ */
 function Lines({ filter, filtered }: { filter: ActivityFilter, filtered: boolean }) {
-  const first = useLoad(() => getActivity(filter), [filter.type, filter.student, filter.course], { every: REFRESH_MS })
   const [older, setOlder] = useState<{ items: ActivityLine[], next: string | null } | null>(null)
+  const first = useLoad(() => getActivity(filter), [filter.type, filter.student, filter.course],
+    { every: older ? undefined : REFRESH_MS })
   const [busy, setBusy] = useState(false)
+  const [problem, setProblem] = useState<string | null>(null)
 
   if (first.status === 'loading') return <Loading />
   if (first.status === 'error') return <LoadError />
@@ -47,9 +55,12 @@ function Lines({ filter, filtered }: { filter: ActivityFilter, filtered: boolean
   async function showOlder() {
     if (!next) return
     setBusy(true)
+    setProblem(null)
     try {
       const page = await getActivity(filter, next)
       setOlder(was => ({ items: [...(was?.items ?? []), ...page.items], next: page.next }))
+    } catch {
+      setProblem("Couldn't load older activity. Please try again.")
     } finally {
       setBusy(false)
     }
@@ -70,6 +81,7 @@ function Lines({ filter, filtered }: { filter: ActivityFilter, filtered: boolean
           </li>
         ))}
       </ul>
+      <ErrorLine>{problem}</ErrorLine>
       {next && (
         <button type="button" className="btn-quiet mt-4" disabled={busy} onClick={() => void showOlder()}>
           {busy ? 'Loading…' : 'Show older'}
@@ -92,7 +104,7 @@ export default function Activity({ route }: { route: ActivityRoute }) {
     try {
       await downloadCsv(filter)
     } catch (failure) {
-      setProblem(failure instanceof ApiError ? failure.message : "Couldn't download the CSV. Please try again.")
+      setProblem(problemWords(failure, "Couldn't download the CSV. Please try again."))
     }
   }
 
@@ -115,7 +127,7 @@ export default function Activity({ route }: { route: ActivityRoute }) {
         {select('Course', 'course', courses.map(c => [c.id, c.heading]), 'Every course')}
         <button type="button" className="btn-quiet" onClick={() => void csv()}>Download CSV</button>
       </div>
-      {problem && <p role="alert" className="mt-2 font-semibold text-red-700 dark:text-red-300">{problem}</p>}
+      <ErrorLine>{problem}</ErrorLine>
       <Lines key={`${route.type}|${route.student}|${route.course}`} filter={filter}
         filtered={Boolean(route.type || route.student || route.course)} />
     </>

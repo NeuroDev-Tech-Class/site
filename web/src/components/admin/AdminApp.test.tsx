@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import type { Mock } from 'vitest'
 import { afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest'
 import { fakeFetch, json, requests } from '../../test/fake-hub'
-import { OWNER, queueRow, studentRow, type AdminHub } from '../../test/fake-admin'
+import { adminHub, OWNER, queueRow, studentRow, type AdminHub } from '../../test/fake-admin'
 import { openAdmin } from '../../test/open-admin'
 
 let fetchMock: Mock
@@ -88,6 +88,17 @@ describe('the shell', () => {
       window.dispatchEvent(new PopStateEvent('popstate'))
     })
     expect(await screen.findByRole('heading', { level: 1, name: 'Grading Queue' })).toBeTruthy()
+  })
+
+  test("arriving on /admin keeps the page router's history state, so Back works after leaving", async () => {
+    // Astro's router gives every history entry a state; it ignores Back onto one without
+    history.replaceState({ index: 3, scrollX: 0, scrollY: 0 }, '', '/admin')
+    adminHub(fetchMock)
+    const { default: AdminApp } = await import('./AdminApp')
+    render(<AdminApp courses={[]} />)
+    await screen.findByRole('heading', { level: 1, name: 'Today' })
+    expect(window.location.hash).toBe('#/today')
+    expect(history.state).toEqual({ index: 3, scrollX: 0, scrollY: 0 })
   })
 
   test('an address the dashboard does not know opens Today', async () => {

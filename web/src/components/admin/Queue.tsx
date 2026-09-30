@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { getQueue } from '../../lib/adminApi'
 import type { AdminRoute } from '../../lib/adminRoute'
 import { useLoad } from '../../lib/useLoad'
-import { LoadError, Loading, REFRESH_MS, SearchField, showRoute, useAdmin, ViewHeading, waitedWords } from './shared'
+import { CELL, DataTable, LoadError, Loading, REFRESH_MS, SearchField, showRoute, useAdmin, ViewHeading, waitedWords } from './shared'
 
 type QueueRoute = Extract<AdminRoute, { view: 'queue' }>
 
@@ -27,33 +27,18 @@ export default function Queue({ route }: { route: QueueRoute }) {
           <a className="btn-primary" href={gradeHref(items[0].id)}>Grade next</a>
           {total > items.length && <p className="mt-0 text-(--muted)">Showing the oldest {items.length} of {total}.</p>}
         </div>
-        <div className="mt-4 overflow-x-auto rounded-lg border border-(--border)">
-          <table className="w-full min-w-[40rem] border-collapse text-left">
-            <caption className="sr-only">Work waiting for grading</caption>
-            <thead className="bg-(--panel) text-sm text-(--muted)">
-              <tr>
-                <th scope="col" className="px-4 py-3">Work</th>
-                <th scope="col" className="px-4 py-3">Student</th>
-                <th scope="col" className="px-4 py-3">Course</th>
-                <th scope="col" className="px-4 py-3">Type</th>
-                <th scope="col" className="px-4 py-3">Attempt</th>
-                <th scope="col" className="px-4 py-3">Waiting</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items.map(row => (
-                <tr key={row.id} className="border-t border-(--border)">
-                  <td className="px-4 py-3 font-semibold"><a href={gradeHref(row.id)}>{row.item.title}</a></td>
-                  <td className="px-4 py-3">{row.student.name}</td>
-                  <td className="px-4 py-3">{row.course.title}</td>
-                  <td className="px-4 py-3">{row.kind === 'test' ? 'Test' : 'Checkpoint'}</td>
-                  <td className="px-4 py-3">Attempt {row.attempt}</td>
-                  <td className="px-4 py-3">{waitedWords(row.submitted_at)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <DataTable caption="Work waiting for grading" head={['Work', 'Student', 'Course', 'Type', 'Attempt', 'Waiting']}>
+          {items.map(row => (
+            <tr key={row.id} className="border-t border-(--border)">
+              <td className="px-4 py-3 font-semibold"><a href={gradeHref(row.id)}>{row.item.title}</a></td>
+              <td className={CELL}>{row.student.name}</td>
+              <td className={CELL}>{row.course.title}</td>
+              <td className={CELL}>{row.kind === 'test' ? 'Test' : 'Checkpoint'}</td>
+              <td className={CELL}>Attempt {row.attempt}</td>
+              <td className={CELL}>{waitedWords(row.submitted_at)}</td>
+            </tr>
+          ))}
+        </DataTable>
       </>
     )
   }

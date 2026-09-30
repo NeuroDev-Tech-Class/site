@@ -102,6 +102,18 @@ describe('the Grading Queue', () => {
     expect(await screen.findByText('Nothing waiting matches these filters.')).toBeTruthy()
   })
 
+  test('Grading Queue in the sidebar clears the search, and it stays cleared', async () => {
+    await open('#/queue', { queue: QUEUE })
+    const box = await screen.findByRole('searchbox', { name: 'Student' })
+    await userEvent.type(box, 'ana')
+    await waitFor(() => expect(window.location.hash).toBe('#/queue?q=ana'))
+    await userEvent.click(within(screen.getByRole('navigation', { name: 'Dashboard' })).getByRole('link', { name: /Grading Queue/ }))
+    await waitFor(() => expect(window.location.hash).toBe('#/queue'))
+    await waitFor(() => expect((screen.getByRole('searchbox', { name: 'Student' }) as HTMLInputElement).value).toBe(''))
+    await new Promise(resolve => setTimeout(resolve, 600))
+    expect(window.location.hash).toBe('#/queue')
+  })
+
   test('opening it from the sidebar moves focus to its heading', async () => {
     await open('#/today', { queue: QUEUE })
     await screen.findByRole('heading', { name: 'Today' })

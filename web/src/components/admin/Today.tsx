@@ -1,13 +1,10 @@
 import { useState } from 'react'
 import { approveAccount, getQueue, getStudents, type StudentRow } from '../../lib/adminApi'
-import { ApiError } from '../../lib/api'
 import { formatDate } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
-import { LoadError, Loading, REFRESH_MS, useAdmin, ViewHeading, waitedWords, withinDays } from './shared'
+import { LoadError, Loading, problemWords, REFRESH_MS, StatusLine, useAdmin, ViewHeading, waitedWords, waitingOnCoach, withinDays } from './shared'
 
 const ATTENTION_WORK = 5
-
-const waitingForApproval = (s: StudentRow) => s.status === 'pending' && s.email_verified
 
 function Tile({ href, label, value }: { href: string, label: string, value: number }) {
   return (
@@ -38,7 +35,7 @@ export default function Today() {
       refreshCounts()
       await data.reload()
     } catch (failure) {
-      setSaid(failure instanceof ApiError ? failure.message : `Couldn't approve ${student.name}. Please try again.`)
+      setSaid(problemWords(failure, `Couldn't approve ${student.name}. Please try again.`))
     } finally {
       setBusy(null)
     }
@@ -49,7 +46,7 @@ export default function Today() {
   else if (data.status === 'error') body = <LoadError />
   else {
     const { students, queue } = data.value
-    const pending = students.filter(waitingForApproval)
+    const pending = students.filter(waitingOnCoach)
       .sort((a, b) => a.created_at.localeCompare(b.created_at))
     const work = queue.items.slice(0, ATTENTION_WORK)
     body = (
@@ -102,7 +99,7 @@ export default function Today() {
   return (
     <>
       <ViewHeading>Today</ViewHeading>
-      <p role="status" className="mt-2 min-h-[1.5em] font-semibold">{said}</p>
+      <StatusLine>{said}</StatusLine>
       {body}
     </>
   )

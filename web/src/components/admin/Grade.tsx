@@ -5,7 +5,7 @@ import { formatDate } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
 import Answers from './Answers'
 import { gradeHref } from './Queue'
-import { LoadError, Loading, useAdmin, ViewHeading } from './shared'
+import { ErrorLine, LoadError, Loading, problemWords, StatusLine, useAdmin, ViewHeading } from './shared'
 
 const NEEDS_CHANGE = 'Say what to change before sending it back.'
 const NEEDS_TICK = 'Tick that you saw this in person before marking it complete.'
@@ -38,7 +38,7 @@ function GradeForm({ work, onGraded }: { work: SubmissionDetail, onGraded: (upda
     try {
       onGraded(await gradeSubmission(work.id, body), said)
     } catch (failure) {
-      setProblem(failure instanceof ApiError ? failure.message : "Couldn't save the grade. Please try again.")
+      setProblem(problemWords(failure, "Couldn't save the grade. Please try again."))
     } finally {
       setBusy(false)
     }
@@ -87,7 +87,7 @@ function GradeForm({ work, onGraded }: { work: SubmissionDetail, onGraded: (upda
           I saw this in person
         </label>
       )}
-      {problem && <p role="alert" className="mt-0 font-semibold text-red-700 dark:text-red-300">{problem}</p>}
+      <ErrorLine>{problem}</ErrorLine>
       <div className="flex flex-wrap gap-3">
         {work.kind === 'test'
           ? <button type="button" className="btn-primary" disabled={busy} onClick={test}>Save grade</button>
@@ -165,7 +165,7 @@ export default function Grade({ id }: { id: string }) {
         <ViewHeading>Grading</ViewHeading>
         {gone
           ? <div className="panel mt-6"><p className="mt-0">This work isn't there any more.</p><a href="#/queue">Back to the queue</a></div>
-          : <LoadError />}
+          : <LoadError onRetry={() => void work.reload()} />}
       </>
     )
   }
@@ -178,7 +178,7 @@ export default function Grade({ id }: { id: string }) {
         <span className="text-(--muted)">Attempt {detail.attempt} · handed in {formatDate(detail.submitted_at, { month: 'long' })}</span>
         <Outcome work={detail} />
       </p>
-      <p role="status" className="mt-2 min-h-[1.5em] font-semibold">{said}</p>
+      <StatusLine>{said}</StatusLine>
       {next !== undefined && (
         <p className="mt-0">
           {next

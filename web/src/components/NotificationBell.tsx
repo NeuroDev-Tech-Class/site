@@ -1,4 +1,4 @@
-import { useId } from 'react'
+import { useId, useState } from 'react'
 import { getInbox, getUnreadCount, markAllRead, markNoteRead, type InboxNote } from '../lib/adminApi'
 import { timeAgo } from '../lib/format'
 import { useSession } from '../lib/session'
@@ -10,19 +10,27 @@ import Icon from './Icon'
 const REFRESH_MS = 30_000
 const onHeader = 'btn relative border border-(--header-text)/40 text-(--header-text) hover:bg-(--header-text)/10'
 
-function Panel({ id, onChanged }: { id: string, onChanged: () => void }) {
+function Panel({ id, onChanged, onClose }: { id: string, onChanged: () => void, onClose: () => void }) {
   const inbox = useLoad(() => getInbox(), [])
+  const [problem, setProblem] = useState<string | null>(null)
 
+  // A note often leads somewhere on this same page (the dashboard), so the list closes as it opens
   async function read(note: InboxNote) {
+    onClose()
     if (note.read) return
     await markNoteRead(note.id).catch(() => undefined)
     onChanged()
   }
 
   async function readAll() {
-    await markAllRead()
-    await inbox.reload()
-    onChanged()
+    setProblem(null)
+    try {
+      await markAllRead()
+      await inbox.reload()
+      onChanged()
+    } catch {
+      setProblem("Couldn't mark them read. Please try again.")
+    }
   }
 
   const notes = inbox.status === 'ready' ? inbox.value.items : []
@@ -34,6 +42,7 @@ function Panel({ id, onChanged }: { id: string, onChanged: () => void }) {
           <button type="button" className="btn-quiet text-sm" onClick={() => void readAll()}>Mark all read</button>
         )}
       </div>
+      {problem && <p role="alert" className="px-2 text-sm font-semibold text-red-700 dark:text-red-300">{problem}</p>}
       {inbox.status === 'loading' && <p className="px-2 text-(--muted)" aria-busy="true">Loading…</p>}
       {inbox.status === 'error' && <p className="px-2">Couldn't load your notifications. Please try again.</p>}
       {inbox.status === 'ready' && (notes.length
@@ -74,7 +83,7 @@ function Bell() {
           </span>
         )}
       </button>
-      {open && <Panel id={panelId} onChanged={() => void unread.reload()} />}
+      {open && <Panel id={panelId} onChanged={() => void unread.reload()} onClose={() => setOpen(false)} />}
     </div>
   )
 }
