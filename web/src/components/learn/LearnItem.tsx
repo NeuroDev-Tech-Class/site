@@ -233,10 +233,10 @@ export default function LearnItem({ page }: { page: ItemPageView }) {
     <>
       <div ref={contentRef} className="mt-6">{body}</div>
       <nav aria-label="Course steps" className="mt-10 -mx-4 border-t border-(--border) bg-(--panel) px-4 py-4">
-        {/* On a phone the main action comes first, then Previous and Next side by side */}
-        <div className="grid grid-cols-2 items-center gap-x-4 gap-y-3 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
+        {/* On a phone the main action comes first, then Previous and Next a row each, so their titles fit */}
+        <div className="grid grid-cols-1 items-center gap-x-4 gap-y-2 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
           {page.type !== 'checkpoint' && (
-            <div className="col-span-2 flex flex-col items-center gap-2 sm:col-span-1 sm:col-start-2 sm:row-start-1">
+            <div className="mb-1 flex flex-col items-center gap-2 sm:mb-0 sm:col-start-2 sm:row-start-1">
               <Actions page={page} load={load} onChange={setProgress} />
             </div>
           )}

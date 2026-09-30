@@ -155,9 +155,11 @@ and replace it, so Back goes to the previous place, not the previous filter. Eve
 after sign-in and refreshed every 30 seconds while the tab is visible; Storage and the Admins tab are for the
 superadmin.
 
-Item pages hold only the public outline (title, course, unit, what comes next); what an item contains is fetched
+Item pages hold only the public outline (title, course, unit, the steps before and after); what an item contains is fetched
 from the hub after sign-in, so nothing behind the login is in the static site. When `content/` changes, run the hub's
 content import along with the site deploy: the pages come from `content/`, their contents from the database.
+Their bottom bar is Previous / Mark complete and continue / Next with Back to the course: completing an item opens the
+next one (or, from the last, the course page); once done, Next is the main button.
 
 The web site runs in Docker only (`docker-compose.yml` at the repo root; `node_modules` lives in a volume). Run these from the repo root, with the hub running for sign-in (`neurodev-hub`: `docker compose up`; API on 8001, Mailpit on 8026):
 
