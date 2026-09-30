@@ -3,16 +3,12 @@ import userEvent from '@testing-library/user-event'
 import type { Mock } from 'vitest'
 import { afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest'
 import { fakeFetch, json, requests } from '../../test/fake-hub'
-import { adminHub, OWNER, queueRow, studentRow, type AdminHub } from '../../test/fake-admin'
+import { OWNER, queueRow, studentRow, type AdminHub } from '../../test/fake-admin'
+import { openAdmin } from '../../test/open-admin'
 
 let fetchMock: Mock
 
-async function open(hash: string, hub: AdminHub = {}) {
-  window.location.hash = hash
-  adminHub(fetchMock, hub)
-  const { default: AdminApp } = await import('./AdminApp')
-  render(<AdminApp />)
-}
+const open = (hash: string, hub: AdminHub = {}) => openAdmin(fetchMock, hash, hub)
 
 const nav = () => screen.getByRole('navigation', { name: 'Dashboard' })
 
@@ -50,7 +46,7 @@ describe('who gets in', () => {
   test('before the sign-in is known the page still has its heading', async () => {
     fetchMock.mockReturnValue(new Promise(() => undefined))
     const { default: AdminApp } = await import('./AdminApp')
-    render(<AdminApp />)
+    render(<AdminApp courses={[]} />)
     expect(screen.getByRole('heading', { level: 1, name: 'Dashboard' })).toBeTruthy()
   })
 })

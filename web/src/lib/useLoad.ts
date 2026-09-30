@@ -3,7 +3,7 @@
 // interval while the tab is visible and straight away when the coach comes back to it.
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 
-export type Loaded<T> = { status: 'loading' } | { status: 'ready', value: T } | { status: 'error' }
+export type Loaded<T> = { status: 'loading' } | { status: 'ready', value: T } | { status: 'error', failure: unknown }
 
 const LOADING = { status: 'loading' } as const
 
@@ -24,9 +24,9 @@ export function useLoad<T>(fetcher: () => Promise<T>, deps: unknown[], { every }
     try {
       const value = await fetchNow()
       if (mine === latest.current) setHeld({ key: asked, loaded: { status: 'ready', value } })
-    } catch {
+    } catch (failure) {
       if (mine !== latest.current) return
-      setHeld(was => (was.key === asked && was.loaded.status === 'ready' ? was : { key: asked, loaded: { status: 'error' } }))
+      setHeld(was => (was.key === asked && was.loaded.status === 'ready' ? was : { key: asked, loaded: { status: 'error', failure } }))
     }
   }, [])
 

@@ -2,12 +2,15 @@ import { useEffect, useMemo, useRef, useSyncExternalStore } from 'react'
 import { getPendingBadge, getQueueCount } from '../../lib/adminApi'
 import { parseRoute, type AdminRoute } from '../../lib/adminRoute'
 import type { TechAccount } from '../../lib/api'
+import type { CourseMeta } from '../../lib/content'
 import { isStaff } from '../../lib/format'
 import type { IconName } from '../../lib/icons'
 import { useSession } from '../../lib/session'
 import { useLoad } from '../../lib/useLoad'
 import Icon from '../Icon'
 import { AdminContext, HEADING_ID, REFRESH_MS, ViewHeading } from './shared'
+import Grade from './Grade'
+import Queue from './Queue'
 import Today from './Today'
 
 type Section = 'today' | 'queue' | 'students' | 'activity' | 'storage'
@@ -44,9 +47,20 @@ function useHash(): string {
 
 function View({ route }: { route: AdminRoute }) {
   switch (route.view) {
+    case 'queue':
+      return <Queue route={route} />
+    case 'grade':
+      return <Grade key={route.id} id={route.id} />
     default:
       return <Today />
   }
+}
+
+/** Where the coach is, leaving out filters: focus moves only when this changes, never while typing a filter */
+function place(route: AdminRoute): string {
+  if (route.view === 'grade' || route.view === 'student') return `${route.view}/${route.id}`
+  if (route.view === 'student-course') return `${route.view}/${route.id}/${route.course}`
+  return route.view
 }
 
 function Badge({ count, words }: { count: number, words: string }) {
@@ -61,7 +75,7 @@ function Badge({ count, words }: { count: number, words: string }) {
   )
 }
 
-function Dashboard({ account }: { account: TechAccount }) {
+function Dashboard({ account, courses }: { account: TechAccount, courses: CourseMeta[] }) {
   const hash = useHash()
   const { route, redirect } = useMemo(() => parseRoute(hash), [hash])
   const counts = useLoad(async () => {
@@ -75,18 +89,19 @@ function Dashboard({ account }: { account: TechAccount }) {
   }, [redirect])
 
   // A new view takes focus at its heading, so a screen reader hears where it is; not on first arrival
+  const here = place(route)
   useEffect(() => {
     if (firstView.current) {
       firstView.current = false
       return
     }
     document.getElementById(HEADING_ID)?.focus()
-  }, [hash])
+  }, [here])
 
   const section = SECTION_OF[route.view]
   const waiting = counts.status === 'ready' ? counts.value : { queue: 0, pending: 0 }
   const reloadCounts = counts.reload
-  const admin = useMemo(() => ({ account, refreshCounts: () => void reloadCounts() }), [account, reloadCounts])
+  const admin = useMemo(() => ({ account, courses, refreshCounts: () => void reloadCounts() }), [account, courses, reloadCounts])
 
   return (
     <AdminContext.Provider value={admin}>
@@ -117,10 +132,10 @@ function Dashboard({ account }: { account: TechAccount }) {
   )
 }
 
-export default function AdminApp() {
+export default function AdminApp({ courses }: { courses: CourseMeta[] }) {
   const session = useSession()
   if (session.status === 'signed-in' && session.account.status === 'approved' && isStaff(session.account)) {
-    return <Dashboard account={session.account} />
+    return <Dashboard account={session.account} courses={courses} />
   }
   return (
     <>

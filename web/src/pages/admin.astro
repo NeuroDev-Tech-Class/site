@@ -1,9 +1,10 @@
 ---
 import AdminApp from '../components/admin/AdminApp'
 import Base from '../layouts/Base.astro'
+import { courseMeta } from '../lib/content'
 ---
 
 <Base title="Dashboard" description="The coaches' dashboard: grading, students and activity." wide>
   <meta name="robots" content="noindex" slot="head" />
-  <AdminApp client:load />
+  <AdminApp client:load courses={courseMeta()} />
 </Base>

@@ -265,8 +265,9 @@ export const startUpload = (itemId: string, fieldId: string, name: string, size:
 export const finishUpload = (fileId: string) =>
   request<UploadedFile>(`${TECH}/uploads/${id(fileId)}/done`, { method: 'POST' })
 export const discardUpload = (fileId: string) => request<void>(`${TECH}/uploads/${id(fileId)}`, { method: 'DELETE' })
-/** A short-lived link to see a file: ask again rather than keeping it */
-export const fileLink = (fileId: string) => request<{ url: string }>(`${TECH}/files/${id(fileId)}/link`)
+/** A short-lived link to see a file (or with `download`, to save it): ask again rather than keeping it */
+export const fileLink = (fileId: string, download = false) =>
+  request<{ url: string }>(`${TECH}/files/${id(fileId)}/link${download ? '?download=true' : ''}`)
 export const sendHeartbeat = (beat: Heartbeat) =>
   request<VideoProgress & { counted: boolean }>(`${TECH}/media/heartbeat`, { method: 'POST', body: JSON.stringify(beat) })
 
