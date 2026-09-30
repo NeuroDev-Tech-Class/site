@@ -1,4 +1,5 @@
 ---
+import NotificationBell from './NotificationBell'
 import UserMenu from './UserMenu'
 
 const links = [
@@ -11,7 +12,8 @@ const current = (href: string) => (href === '/' ? path === '/' : path === href |
 ---
 
 <header class="neon-rule relative border-b-2 px-4 pt-3 pb-2 text-(--header-text) sm:pt-6">
-  <div class="mb-3 flex justify-end sm:absolute sm:top-5 sm:right-5 sm:mb-0">
+  <div class="mb-3 flex justify-end gap-2 sm:absolute sm:top-5 sm:right-5 sm:mb-0">
+    <NotificationBell client:load />
     <UserMenu client:load />
   </div>
   <div class="mx-auto flex max-w-5xl flex-col items-center gap-2">

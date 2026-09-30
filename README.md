@@ -124,12 +124,16 @@ tools/exercises/        import-repos.mjs (the one-time Classroom import), verify
 content/                generated, committed: catalog, courses, lessons, checkpoints, legacy-map, vocabulary, report.md
 web/                    the new site: Astro + React islands + Tailwind, served at tech.neurodevmentoring.com
   src/pages/            Home, Catalog, Resources, courses/[id], learn/[itemId] (one per reading, video, slides,
-                        link and checkpoint), my-courses, the six sign-in pages, 404
+                        link and checkpoint), my-courses, admin (the coaches' dashboard), the six sign-in pages, 404
   src/lib/              content.ts (reads content/, sanitises, item pages, counts), api.ts (hub client), session.ts,
                         remote.ts + courseProgress.ts (shared progress reads), videoTracking.ts (YouTube heartbeats),
                         checkpoint.ts (what the form still needs), upload.ts (browser upload to R2 with progress),
-                        redirect.ts, format.ts, icons.ts
-  src/components/       header, footer, ThemeToggle, UserMenu, Icon, course/ (progress panel, units, ring),
+                        adminApi.ts (the coach's hub calls), adminRoute.ts (the dashboard's #/ addresses),
+                        useLoad.ts (load, reload, refresh every 30 s while visible), usePopover.ts (header dropdowns),
+                        itemLabel.ts, redirect.ts, format.ts, icons.ts
+  src/components/       header, footer, ThemeToggle, UserMenu, NotificationBell, Icon, course/ (progress panel,
+                        units, ring), admin/ (AdminApp shell and one view each: Today, Queue, Grade, Students,
+                        Student, StudentCourse, Activity, Storage),
                         learn/ (item page; Checkpoint, CheckpointForm, FileField, AnswerList for checkpoints),
                         progress/ (My Courses, Home card, catalog ring), auth/ (sign-in forms)
   scripts/              sync-assets.mjs (images), zip-starters.mjs (each exercise's starter/ to
@@ -143,6 +147,13 @@ A checkpoint page shows the instructions, the starter download, and the student'
 one page, autosaved as a draft, a Review step, then Hand it in), the receipt once handed in, or the form again with
 the coach's feedback pinned on top when it comes back. Files go from the browser straight to R2 with a link the hub
 signs, so uploads need the hub's `R2_*` settings (see the hub README, "Tech uploads (Cloudflare R2)").
+
+The dashboard is one page, `/admin`, and one island; the view is in the hash (`#/today`, `#/queue`, `#/grade/{id}`,
+`#/students?tab=`, `#/students/{id}`, `#/students/{id}/courses/{course}`, `#/activity`, `#/storage`), which is what the
+hub's notification links point at (`#/accounts?status=pending` opens the Pending tab). Filters live in the address
+and replace it, so Back goes to the previous place, not the previous filter. Everything it shows is read from the hub
+after sign-in and refreshed every 30 seconds while the tab is visible; Storage and the Admins tab are for the
+superadmin.
 
 Item pages hold only the public outline (title, course, unit, what comes next); what an item contains is fetched
 from the hub after sign-in, so nothing behind the login is in the static site. When `content/` changes, run the hub's

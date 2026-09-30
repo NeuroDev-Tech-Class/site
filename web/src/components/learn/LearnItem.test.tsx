@@ -1,7 +1,7 @@
 import { cleanup, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { Mock } from 'vitest'
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
+import { afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest'
 import type { ItemContent, ItemProgress, TechAccount } from '../../lib/api'
 import type { ItemPageView } from '../../lib/content'
 import { fakeFetch, fakeHub, json, requests } from '../../test/fake-hub'
@@ -62,6 +62,9 @@ async function renderItem(page: ItemPageView = PAGE) {
   const { default: LearnItem } = await import('./LearnItem')
   render(<LearnItem page={page} />)
 }
+
+// Compiles the component once, outside any test's time limit; each test still imports it afresh
+beforeAll(async () => { await Promise.all([import('./LearnItem')]) }, 30_000)
 
 beforeEach(() => {
   vi.resetModules()

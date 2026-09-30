@@ -12,6 +12,16 @@ type CourseProgressState =
 const course = createRemote(getCourseProgress)
 const mine = createRemote(() => getMyProgress().then(body => body.courses))
 
+const CHECKPOINT_WORDS: Record<string, string> = { done: 'Complete', submitted: 'Submitted', returned: 'Needs revision' }
+
+/** How an item's progress is said on course pages and the coach's view of a student's course */
+export function statusWord(type: string, status: ProgressStatus | null): string | null {
+  if (type === 'checkpoint') return CHECKPOINT_WORDS[status ?? ''] ?? null
+  if (status === 'submitted') return 'Submitted'
+  if (status === 'returned') return 'Needs revision'
+  return status === 'done' ? 'Done' : null
+}
+
 // Mirrors the hub's counts_done: done, or a test once submitted
 export const countsDone = (type: string, status: ProgressStatus | null): boolean =>
   status === 'done' || (type === 'test' && status === 'submitted')
