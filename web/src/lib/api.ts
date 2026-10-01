@@ -408,3 +408,17 @@ export const saveTestAnswers = (itemId: string, answers: Record<string, unknown>
   request<TestDraft>(`${testPath(itemId)}/answers`, { method: 'PUT', body: JSON.stringify({ answers }) })
 export const submitTest = (itemId: string, answers: Record<string, unknown>) =>
   request<TestState>(`${testPath(itemId)}/submit`, { method: 'POST', body: JSON.stringify({ answers }) })
+
+// Certificates (the hub's app/schemas/tech_certificates.py)
+export interface MyCertificate {
+  id: string
+  course: Ref
+  course_name: string
+  // YYYY-MM-DD, as printed
+  awarded_on: string
+}
+
+export const getMyCertificates = () => request<MyCertificate[]>(`${TECH}/certificates/mine`)
+/** A short-lived link that opens the PDF: for a coach, or the student once given access */
+export const getCertificateLink = (certificateId: string) =>
+  request<{ url: string }>(`${TECH}/certificates/${id(certificateId)}/link`)

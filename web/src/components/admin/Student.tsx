@@ -13,8 +13,9 @@ import {
 import { routeHash } from '../../lib/adminRoute'
 import { ApiError } from '../../lib/api'
 import { sizeWords } from '../../lib/checkpoint'
-import { countWords, formatDate, fullName, timeAgo } from '../../lib/format'
+import { countWords, formatDate, formatName, fullName, timeAgo } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
+import { StudentCertificates } from './Certificates'
 import { gradeHref } from './Queue'
 import { CELL, ConfirmButton, DataTable, ErrorLine, LoadError, Loading, problemWords, showRoute, StatusLine, useAdmin, ViewHeading } from './shared'
 
@@ -216,6 +217,7 @@ export default function Student({ id }: { id: string }) {
       <ErrorLine>{problem}</ErrorLine>
       <Courses id={id} />
       <Work id={id} />
+      <StudentCertificates id={id} firstName={formatName(student.first_name) || 'They'} />
       {me.role === 'superadmin' && <Uploads id={id} name={name} />}
     </>
   )

@@ -207,6 +207,25 @@ export interface TestRow {
   handed_in: number
 }
 
+/** What a certificate says, as the coach checks it before creating it */
+export interface CertificateText {
+  student_name: string
+  course_name: string
+  // YYYY-MM-DD
+  awarded_on: string
+}
+
+export interface Certificate extends CertificateText {
+  id: string
+  course: Ref
+  created_at: string
+  created_by: string | null
+  access_given_at: string | null
+  access_given_by: string | null
+  revoked_at: string | null
+  revoked_by: string | null
+}
+
 export interface ActivityFilter {
   type?: string
   student?: string
@@ -273,3 +292,15 @@ export const uploadTest = (itemId: string, source: string) =>
   request<TestRow>(`${TECH}/tests/${id(itemId)}`, send({ source }, 'PUT'))
 export const testSourcePath = (itemId: string) => `${TECH}/tests/${id(itemId)}/source`
 export const getTestPreview = (itemId: string) => request<TestView>(`${TECH}/tests/${id(itemId)}/preview`)
+
+// Certificates
+export const getCertificates = (accountId: string) =>
+  request<Certificate[]>(`${TECH}/accounts/${id(accountId)}/certificates`)
+export const certificatePreviewPath = (accountId: string, courseId: string, text: CertificateText) =>
+  `${TECH}/accounts/${id(accountId)}/courses/${id(courseId)}/certificate/preview?${new URLSearchParams({ ...text })}`
+export const createCertificate = (accountId: string, courseId: string, text: CertificateText) =>
+  request<Certificate>(`${TECH}/accounts/${id(accountId)}/courses/${id(courseId)}/certificate`, send(text))
+export const setCertificateAccess = (certificateId: string, given: boolean) =>
+  request<Certificate>(`${TECH}/certificates/${id(certificateId)}/access`, { method: given ? 'POST' : 'DELETE' })
+export const revokeCertificate = (certificateId: string) =>
+  request<Certificate>(`${TECH}/certificates/${id(certificateId)}/revoke`, { method: 'POST' })

@@ -3,9 +3,10 @@ import { getAccount, getCourseOutline, getStudentProgress, getStudentWork, markF
 import { routeHash } from '../../lib/adminRoute'
 import type { ItemProgress, Submission } from '../../lib/api'
 import { statusWord } from '../../lib/courseProgress'
-import { formatDate, fullName } from '../../lib/format'
+import { formatDate, formatName, fullName } from '../../lib/format'
 import { itemLabel } from '../../lib/itemLabel'
 import { useLoad } from '../../lib/useLoad'
+import { CertificatePanel } from './Certificates'
 import { gradeHref } from './Queue'
 import { ErrorLine, LoadError, Loading, problemWords, ViewHeading } from './shared'
 
@@ -74,6 +75,10 @@ export default function StudentCourse({ id, course }: { id: string, course: stri
     <>
       <ViewHeading eyebrow={eyebrow}>{outline.value.title}</ViewHeading>
       <p className="mt-2 font-semibold">{mine ? `${mine.done} of ${mine.total} done · ${mine.percent}%` : 'Not started yet'}</p>
+      {person.status === 'ready' && (
+        <CertificatePanel studentId={id} firstName={formatName(person.value.first_name) || 'They'} fullName={name}
+          courseId={course} courseTitle={outline.value.title} done={mine?.done ?? 0} total={mine?.total ?? 0} />
+      )}
       <ErrorLine>{problem}</ErrorLine>
       {outline.value.units.map(unit => {
         const items = unit.items.filter(item => item.type !== 'note' || isExercise(item))
