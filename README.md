@@ -194,11 +194,16 @@ The web site runs in Docker only (`docker-compose.yml` at the repo root; `node_m
 | Command | Does |
 |---|---|
 | `docker compose up web` | dev server at http://localhost:4321 |
+| `docker compose run --rm web npm run gate` | the whole gate in about a minute: lint, `astro check` and the unit tests run alongside the build, then the built pages are checked; only a failing step's output is shown |
 | `docker compose run --rm web sh -c "npm run lint && npm run typecheck && npm test"` | ESLint, `astro check`, unit and component tests |
 | `docker compose run --rm web sh -c "npm run build && npm run test:build"` | builds `dist/` and checks the built pages |
 | `docker compose run --rm -p 4321:4321 web sh -c "npm run build && npx astro preview --ignore-lock --host"` | serves the production build |
 
 `--ignore-lock` is needed because a stopped preview leaves Astro's lock file in `web/.astro/`.
+
+`web/dist`, `web/public/images` and `web/public/starters` are generated, so compose keeps them in Docker volumes
+rather than the Windows folder (the bind mount is slow to write and read): look at the build inside the container, not
+in Explorer. The image copy and starter zips only rewrite what changed.
 
 The extractor and exercise commands run in WSL:
 
