@@ -11,6 +11,9 @@ import { ErrorLine, LoadError, Loading, problemWords, StatusLine, useAdmin, View
 const NEEDS_CHANGE = 'Say what to change before sending it back.'
 const NEEDS_TICK = 'Tick that you saw this in person before marking it complete.'
 
+// Attempt 0 is a score brought over from the old site's Google Form
+const attemptName = (n: number) => (n === 0 ? 'Old site (Google Form)' : `Attempt ${n}`)
+
 type Next = { href: string, left: number } | null
 
 function Outcome({ work }: { work: SubmissionDetail }) {
@@ -190,7 +193,7 @@ function Beside({ work }: { work: SubmissionDetail }) {
             {work.attempts.map(attempt => (
               <li key={attempt.id} className="mt-0">
                 <a href={gradeHref(attempt.id)} aria-current={attempt.id === work.id ? 'page' : undefined} className="font-semibold">
-                  Attempt {attempt.attempt}
+                  {attemptName(attempt.attempt)}
                 </a>
                 <span className="text-sm text-(--muted)"> · {attempt.status} · {formatDate(attempt.submitted_at, { month: 'long' })}</span>
                 {attempt.feedback && <p className="mt-1 text-sm whitespace-pre-line">{attempt.feedback}</p>}
@@ -239,7 +242,7 @@ export default function Grade({ id }: { id: string }) {
       <ViewHeading eyebrow={`Grading · ${detail.course.title}`}>{detail.item.title}</ViewHeading>
       <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2">
         <a href={`#/students/${encodeURIComponent(detail.student.id)}`} className="font-semibold">{detail.student.name}</a>
-        <span className="text-(--muted)">Attempt {detail.attempt} · handed in {formatDate(detail.submitted_at, { month: 'long' })}</span>
+        <span className="text-(--muted)">{attemptName(detail.attempt)} · handed in {formatDate(detail.submitted_at, { month: 'long' })}</span>
         <Outcome work={detail} />
       </p>
       <StatusLine>{said}</StatusLine>
