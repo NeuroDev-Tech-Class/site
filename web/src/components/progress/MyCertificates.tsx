@@ -16,8 +16,8 @@ function Row({ certificate }: { certificate: MyCertificate }) {
   }
   return (
     <li className="panel mt-0 flex flex-wrap items-center gap-x-4 gap-y-2">
-      <span className="flex items-center gap-2 font-semibold text-(--heading)">
-        <Icon name="award" size={18} />{certificate.course_name}
+      <span className="flex items-start gap-2 font-semibold text-(--heading)">
+        <Icon name="award" size={18} className="mt-1 shrink-0" />{certificate.course_name}
       </span>
       <span className="text-sm text-(--muted)">Awarded {calendarDate(certificate.awarded_on, 'long')}</span>
       <button type="button" className="btn-quiet sm:ml-auto" aria-label={`View the ${certificate.course_name} certificate`}

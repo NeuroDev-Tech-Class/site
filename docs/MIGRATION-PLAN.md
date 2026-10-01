@@ -27,7 +27,7 @@ Work the phases in number order. Each phase ends with Topher's review, the manua
 | 9 | Checkpoint form | site | 6, 8 | [x] 2026-09-29 |
 | 10 | Admin dashboard (Today, Queue, Grade, Students, Activity, Accounts, bell) | site | 7, 9 | [x] 2026-09-30 |
 | 11 | Native tests and slides (markdown import, test runner, auto-grading; the 9 Google Slides decks rebuilt in the site) | hub + site | 10 | [x] |
-| 12 | Certificates (coach previews, creates and prints the PDF; online access only when the coach gives it) | hub + site | 10 | [ ] |
+| 12 | Certificates (coach previews, creates and prints the PDF; online access only when the coach gives it) | hub + site | 10 | [x] 2026-10-01 |
 | 13 | Accreditation review (Topher talks to Mandy; model adjusted if needed) | Topher | before 14 | [ ] |
 | 14 | Firebase export and import (dry runs, progress key mapping, coach account to admin) | hub | 1-12 | [ ] |
 | 15 | Delivery and cutover (render.yaml, CI, redirects, CUTOVER.md) | site | 14 | [ ] |
@@ -326,6 +326,11 @@ Two repos. Hub work goes on the existing `tech-class` branch (currently equal to
   4. **Site: dashboard.** On a student's course page, a Certificate panel: "Ready for a certificate" or "12 of 29 done", the name, course name and date to check, Preview (opens the PDF), Create; once created, Print, Give access / Take access away and Revoke (asked first). The student page lists their certificates.
   5. **Site: My Courses** gains Certificates: each one the coach has given access to, with View.
   6. **Close:** a real run (preview, create, print, give access, the student views it, revoke), README, this tracker, memory; Topher approves the real PDF.
+- *As delivered (2026-10-01)*: built as planned (hub `4da1354` the PDF, `d42dd77` certificates; site `0210dfc` dashboard, `7124f06` My Courses, then this close). Step 3 went in with step 2: the student's list (`GET /tech/certificates/mine`) and their link are the same endpoints as the coach's, the link answering 404 to a student without access. Notes:
+  - **The PDF**: fpdf2 with Poppins and a Noto Sans subset as fallback (both SIL OFL, licences beside them in `app/tech/certificate_assets/`), so Vietnamese, Greek and Cyrillic names print; a long name shrinks from 30pt (to 14pt at least) and a long course name wraps. Stored at `certificates/{student}/{certificate}.pdf` in the uploads bucket and opened inline as `NeuroDev-<course>-<name>.pdf`.
+  - **Choices while building**: a revoked certificate keeps its row and file and stays on the student's page as Revoked; giving access again after taking it away does not send a second note; the coach's Preview is drawn from what is typed and never stored.
+  - **Real run** (Playwright on the dev server against `hub_dev` and `tech-class-uploads-dev`): the panel said "0 of 33 done: not finished yet" with the account's name, the course title and today filled in; Preview returned the PDF; Create stored it ("Created Oct 1, 2026 by Ms Lee", "Sam can't see it yet."); Print opened it from R2; Give access sent "Your Python I - Programming Fundamentals certificate is ready to view in My Courses."; the student saw it under Certificates in My Courses and View opened the same file; Take access away hid it, Revoke (asked first) hid it and brought the form back with a Revoked line; the student page listed it as Revoked; nothing scrolls sideways at 390 px. The run's certificates were removed from the bucket afterwards. One fix from it: the award icon stays beside the first line when a course name wraps on a phone.
+  - 915 hub tests, 421 site unit tests and 674 build checks green; every step's tests confirmed red first; 47 deliberate breaks (24 hub, 23 site), all caught once the gaps the first rounds found were covered.
 
 ### Milestone 5: migration and cutover
 

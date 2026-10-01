@@ -175,6 +175,11 @@ answer keys) are kept only in the hub: coaches upload each test's markdown on th
 the hub README, "Tech tests"), so no answer key is in this repo. A rebuilt slide deck opens in the slide viewer (one
 slide at a time, arrow keys, Full screen, Show all slides).
 
+Certificates are made on a student's course page in the dashboard: check the name, course name and date, Preview,
+Create, then Print, Give access or Revoke. The hub draws the PDF and keeps it in R2 (hub README, "Tech
+certificates"), so this repo holds no template. A student sees one in My Courses, with View, only while the coach has
+given access.
+
 The dashboard is one page, `/admin`, and one island; the view is in the hash (`#/today`, `#/queue`, `#/grade/{id}`,
 `#/students?tab=`, `#/students/{id}`, `#/students/{id}/courses/{course}`, `#/tests`, `#/tests/{item}`, `#/activity`,
 `#/storage`), which is what the
