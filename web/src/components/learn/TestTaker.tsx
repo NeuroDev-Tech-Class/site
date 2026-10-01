@@ -134,6 +134,8 @@ function Overview({ state, onStart, busy }: { state: TestState, onStart: () => v
   const test = state.test!
   const [latest, ...older] = state.attempts
   const next = state.attempts_used + 1
+  // The higher score is the one that counts
+  const best = older.length ? state.attempts.find(a => a.attempt === state.best_attempt) : undefined
   return (
     <>
       {!latest && (
@@ -146,6 +148,7 @@ function Overview({ state, onStart, busy }: { state: TestState, onStart: () => v
         </>
       )}
       {state.reason && <p className="panel mt-4 font-semibold">{state.reason}</p>}
+      {best && <p className="mt-4 text-lg font-semibold">Your best: attempt {best.attempt} · {best.score_label}</p>}
       {state.can_start && (
         <button type="button" className="btn-primary mt-4" disabled={busy} onClick={onStart}>
           {latest ? `Try again (attempt ${next} of ${state.attempts_allowed})` : 'Start the test'}

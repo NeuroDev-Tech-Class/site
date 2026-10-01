@@ -185,7 +185,7 @@ describe('taking it', () => {
 
 describe('the result', () => {
   test('says the score and which questions were wrong, without the right answers, and offers another try', async () => {
-    hub(state({ attempts_used: 1, attempts: [attempt()] }))
+    hub(state({ attempts_used: 1, attempts: [attempt()], best_attempt: 1 }))
     await renderTest()
     expect(await screen.findByText('Not passed · 3 / 6 (50%)')).toBeTruthy()
     const results = screen.getByRole('list', { name: 'Attempt 1, question by question' })
@@ -196,16 +196,18 @@ describe('the result', () => {
     expect(rows[3].textContent).toContain('1 of 2 points')
     expect(rows[3].textContent).toContain('One → 1')
     expect(screen.queryByText(/Right answer/)).toBeNull()
+    expect(screen.queryByText(/Your best/)).toBeNull()
     expect(screen.getByRole('button', { name: 'Try again (attempt 2 of 2)' })).toBeTruthy()
   })
 
   test('once finished, shows the right answers and explanations', async () => {
     hub(state({
       attempts_used: 2, can_start: false, finished: true, reason: "You've used every attempt at this test.",
-      attempts: [attempt({ attempt: 2, key: KEY }), attempt({ key: KEY })], best_attempt: 1,
+      attempts: [attempt({ attempt: 2, key: KEY, score_label: '2 / 6 (33%)' }), attempt({ key: KEY })], best_attempt: 1,
     }))
     await renderTest()
     expect(await screen.findByText("You've used every attempt at this test.")).toBeTruthy()
+    expect(screen.getByText('Your best: attempt 1 · 3 / 6 (50%)')).toBeTruthy()
     const rows = within(screen.getByRole('list', { name: 'Attempt 2, question by question' })).getAllByRole('listitem')
     expect(rows[0].textContent).toContain('Right answer: A')
     expect(rows[0].textContent).toContain('Because A comes first.')
