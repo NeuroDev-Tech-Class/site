@@ -70,6 +70,23 @@ firebase deploy --only firestore,storage --project tech-certificates-af7c3
 
 The first functions deploy on a project can fail with "Permission denied while using the Eventarc Service Agent". Wait two minutes and rerun.
 
+### Branches, checks and releases
+
+Same flow as the hub. Work happens on a branch, goes to `main` through a pull request, and `main` deploys: GitHub
+Pages (the old site) and the Firebase job in `ci.yml` today, and Render's `tech-frontend` (the new site) by itself.
+
+- **Checks** run on every pull request into `main` (and `render-migration`) and on every push to them. A pull request
+  shows **Old site CI** (`ci.yml`: the Firebase tests and emulator run) and **Extractor CI**, **Web CI** and
+  **Exercises CI** (`migration.yml`: the extractor and `content/` check, the `web/` app's lint, types, tests, build
+  and build checks, and every exercise's tests). GitHub can't make them required on this plan, so merging on red is
+  possible; the rule is not to.
+- **Versions** (`auto-tag.yml`): merging a pull request into `main` creates the next `vMAJOR.MINOR.PATCH` tag and a
+  GitHub Release with generated notes. Put a `major`, `minor` or `patch` label on the pull request to say which part
+  moves; no label means patch. The count starts at `v0.1.0`, tagged by hand on `main` once this setup was merged; the
+  cutover, when the old site is switched off, is a good place for `major`.
+- **Manual tags** (`release.yml`): pushing a `v*` tag by hand also produces a Release, with a changelog of the commits
+  since the previous tag.
+
 ### Secrets
 
 The workflow authenticates with the `FIREBASE_SERVICE_ACCOUNT` repository secret: the JSON key of the `github-deploy` service account. No key file is committed; `.gitignore` excludes `service-account*.json` and `*.key.json`. A local copy for the tools below lives outside the repo at `~/keys/github-deploy.json`.
@@ -194,4 +211,4 @@ The extractor and exercise commands run in WSL:
 
 After changing anything the extractor reads (a course page, a lesson, `checkpoints.json`, an override or an exercise), run `npm run extract`, read `content/report.md`, and commit `content/` with the change. **Don't reorder items on the live course pages before cutover**: item ids and the old progress keys are taken from their positions.
 
-`exercises/` is edited by hand; `import-repos.mjs` refuses to run over it. The `Migration` workflow (`.github/workflows/migration.yml`) runs these checks on the `render-migration` branch only; `main` keeps deploying the Firebase site through `ci.yml`.
+`exercises/` is edited by hand; `import-repos.mjs` refuses to run over it. The `Migration` workflow (`.github/workflows/migration.yml`) runs these checks on pull requests into `main` and `render-migration` and on pushes to them (see "Branches, checks and releases"); `main` also keeps deploying the Firebase site through `ci.yml`.

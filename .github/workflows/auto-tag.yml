@@ -1,0 +1,95 @@
+name: Auto Tag on PR Merge
+
+# Merging a PR into main creates the next semver tag based on the PR's label
+# (major / minor / patch, defaulting to patch) and publishes a GitHub Release.
+#
+# The release is created here rather than by release.yml because tags pushed with
+# GITHUB_TOKEN do not trigger other workflows. release.yml still handles manually
+# pushed tags. Same flow as the hub (neurodev-hub/.github/workflows/auto-tag.yml).
+
+on:
+  pull_request_target:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  tag:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    concurrency:
+      group: auto-tag
+      cancel-in-progress: false
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: 0
+
+      - name: Determine version bump from PR label
+        id: bump
+        env:
+          LABELS: ${{ toJson(github.event.pull_request.labels.*.name) }}
+        run: |
+          if echo "$LABELS" | grep -q '"major"'; then
+            echo "bump=major" >> "$GITHUB_OUTPUT"
+          elif echo "$LABELS" | grep -q '"minor"'; then
+            echo "bump=minor" >> "$GITHUB_OUTPUT"
+          else
+            echo "bump=patch" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Get latest tag
+        id: latest_tag
+        run: |
+          TAG=$(git tag -l 'v*' --sort=-v:refname | head -n1)
+          TAG=${TAG:-v0.0.0}
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Compute next version
+        id: next_version
+        env:
+          TAG: ${{ steps.latest_tag.outputs.tag }}
+          BUMP: ${{ steps.bump.outputs.bump }}
+        run: |
+          VERSION="${TAG#v}"
+          MAJOR=$(echo "$VERSION" | cut -d. -f1)
+          MINOR=$(echo "$VERSION" | cut -d. -f2)
+          PATCH=$(echo "$VERSION" | cut -d. -f3)
+
+          if [ "$BUMP" = "major" ]; then
+            MAJOR=$((MAJOR + 1)); MINOR=0; PATCH=0
+          elif [ "$BUMP" = "minor" ]; then
+            MINOR=$((MINOR + 1)); PATCH=0
+          else
+            PATCH=$((PATCH + 1))
+          fi
+
+          echo "version=v$MAJOR.$MINOR.$PATCH" >> "$GITHUB_OUTPUT"
+
+      - name: Create and push tag
+        id: create_tag
+        env:
+          VERSION: ${{ steps.next_version.outputs.version }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          if git rev-parse "$VERSION" >/dev/null 2>&1; then
+            echo "Tag $VERSION already exists, skipping"
+            echo "created=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "$VERSION" -m "Release $VERSION (PR #$PR_NUMBER)"
+          git push origin "$VERSION"
+          echo "created=true" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        if: steps.create_tag.outputs.created == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.next_version.outputs.version }}
+        run: gh release create "$VERSION" --title "Release $VERSION" --generate-notes
