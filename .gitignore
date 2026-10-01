@@ -1,11 +1,6 @@
 .env
-assets_old
 node_modules/
-.firebase/
 *.log
-firebase-debug*.log
-firestore-debug*.log
-ui-debug*.log
 service-account*.json
 *.key.json
 # Local signed-in screenshot runs (seed script, Playwright, output); see memory: tech-web-toolchain

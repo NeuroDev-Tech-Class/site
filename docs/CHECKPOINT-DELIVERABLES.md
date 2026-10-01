@@ -1,6 +1,9 @@
 # Checkpoint Deliverables
 
-Companion to [LMS-ROADMAP.md](LMS-ROADMAP.md). Audit of every lesson page that asks a student to produce or submit something (36 pages plus the GitHub Classroom exercises), and the in-site form each one gets. Audited Sep 8 2026.
+> **Since cutover (October 2026)** each checkpoint's current form is `content/checkpoints/<id>.json`, edited by hand;
+> the extractor and the files it read (`tools/extract/`, the old lesson pages) are in git history only.
+
+Audit of every lesson page that asks a student to produce or submit something (36 pages plus the GitHub Classroom exercises), and the in-site form each one gets. Audited Sep 8 2026.
 
 ## How to read this
 

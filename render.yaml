@@ -8,8 +8,8 @@
 # and add the `tech` CNAME in the neurodevmentoring.com zone pointing at the host Render shows under
 # Settings > Custom Domains. See docs/RENDER-SETUP.md.
 #
-# Deploys from `main` (render-migration is merged into main as each phase lands). The old GitHub Pages site
-# also deploys from `main`; `.nojekyll` at the repo root keeps Pages from running Jekyll over web/ and content/.
+# Deploys from `main`. GitHub Pages no longer serves this repo's files: it serves only the redirect page for old
+# addresses (.github/workflows/pages-redirect.yml).
 
 services:
   - type: web

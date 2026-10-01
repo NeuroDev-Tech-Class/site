@@ -8,7 +8,7 @@ Written 2026-09-25, when Phase 4 was done. Steps marked **(Topher)** need his Re
 
 ## 1. First deploy (once)
 
-1. **(Topher)** Commit and push `render.yaml`, `.nojekyll` and this file, and merge to `main`.
+1. **(Topher)** Commit and push `render.yaml` and this file, and merge to `main`.
 2. **(Topher)** Render dashboard > **New > Blueprint** > repository `NeuroDev-Tech-Class/site` > branch
    **`main`** > Apply. Render creates `tech-frontend` and runs the first build
    (`cd web && npm ci && npm run build`, publishing `web/dist`). It lands "ungrouped".
@@ -42,8 +42,8 @@ expected, not a bug.
 ## 4. Every later deploy
 
 Merge to `main` and Render rebuilds automatically, but only when something under `web/`, `content/`,
-`assets/images/` or `render.yaml` changed (`buildFilter`). `main` also feeds the old GitHub Pages site until cutover: `.nojekyll` at the repo root stops Pages from running
-Jekyll over `web/` and `content/` (Astro's `---` front matter broke the Pages build on 2026-09-25).
+`assets/images/` or `render.yaml` changed (`buildFilter`). Since cutover GitHub Pages serves only the redirect page for
+the old site's addresses (`docs/CUTOVER.md`), not this repo's files.
 
 ## 5. Checks after the first deploy
 
