@@ -102,7 +102,7 @@ describe("a student's course: the certificate", () => {
     await hub()
     const box = await panel()
     expect(await within(box).findByText('12 of 29 done: not finished yet. You can still create one.')).toBeTruthy()
-    expect((within(box).getByRole('textbox', { name: 'Name' }) as HTMLInputElement).value).toBe('Sam Student')
+    expect((await within(box).findByRole('textbox', { name: 'Name' }) as HTMLInputElement).value).toBe('Sam Student')
     expect((within(box).getByRole('textbox', { name: 'Course name' }) as HTMLInputElement).value).toBe('2D Digital Art - GIMP')
     expect((within(box).getByLabelText('Date') as HTMLInputElement).value).toBe('2026-09-30')
   })
