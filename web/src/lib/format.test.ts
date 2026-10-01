@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { formatDate, formatName, fullName, isStaff, timeAgo, toDate } from './format'
+import { countWords, formatDate, formatName, fullName, isStaff, timeAgo, toDate } from './format'
 
 const noonUtc = new Date('2026-09-08T12:00:00Z')
 
@@ -56,5 +56,12 @@ describe('dates', () => {
     expect(ago(8 * 24 * 60 * 60 * 1000)).toBe('Sep 3, 2026')
     expect(timeAgo(new Date(now.getTime() + 60000), now)).toBe('just now')
     expect(timeAgo('garbage', now)).toBe('')
+  })
+})
+
+describe('countWords', () => {
+  test('one of a thing, or many', () => {
+    expect([countWords(1, 'point'), countWords(0, 'point'), countWords(2, 'question'), countWords(1.5, 'point')])
+      .toEqual(['1 point', '0 points', '2 questions', '1.5 points'])
   })
 })

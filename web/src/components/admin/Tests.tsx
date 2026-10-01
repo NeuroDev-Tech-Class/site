@@ -2,12 +2,10 @@ import { useState, type ChangeEvent } from 'react'
 import { getTestPreview, getTests, testSourcePath, uploadTest, type TestRow } from '../../lib/adminApi'
 import { routeHash } from '../../lib/adminRoute'
 import { ApiError, saveFile, type LineProblem } from '../../lib/api'
-import { formatDate } from '../../lib/format'
+import { countWords, formatDate } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
-import Question, { pointsWords } from '../test/Question'
+import Question from '../test/Question'
 import { CELL, DataTable, ErrorLine, LoadError, Loading, problemWords, StatusLine, ViewHeading } from './shared'
-
-const plural = (count: number, word: string) => `${count} ${word}${count === 1 ? '' : 's'}`
 
 const EXAMPLE = `# Unit 1 Test
 pass: 70
@@ -133,8 +131,8 @@ export default function Tests() {
                   {row.uploaded
                     ? (
                         <>
-                          {plural(row.questions, 'question')}, {pointsWords(row.total_points)}
-                          {row.coach_points > 0 && <p className="mt-0 text-sm text-(--muted)">{pointsWords(row.coach_points)} for you to mark</p>}
+                          {countWords(row.questions, 'question')}, {countWords(row.total_points, 'point')}
+                          {row.coach_points > 0 && <p className="mt-0 text-sm text-(--muted)">{countWords(row.coach_points, 'point')} for you to mark</p>}
                         </>
                       )
                     : null}
@@ -182,7 +180,7 @@ export function TestPreview({ id }: { id: string }) {
     <>
       <ViewHeading eyebrow={back}>{view.title}</ViewHeading>
       <p className="mt-2 font-semibold">
-        Pass mark {view.pass_percent}% · {plural(view.attempts_allowed, 'attempt')} · {pointsWords(view.total_points)}
+        Pass mark {view.pass_percent}% · {countWords(view.attempts_allowed, 'attempt')} · {countWords(view.total_points, 'point')}
       </p>
       <p className="mt-1 text-(--muted)">What a student sees, with the answers switched off.</p>
       {view.instructions_html && <div className="lesson mt-4" dangerouslySetInnerHTML={{ __html: view.instructions_html }} />}

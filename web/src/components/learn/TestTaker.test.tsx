@@ -106,6 +106,15 @@ describe('before starting', () => {
     expect(screen.queryByRole('button', { name: /Start/ })).toBeNull()
   })
 
+  test('a test the coach marked done says so, with no attempt to start', async () => {
+    hub(state({ can_start: false, finished: true, reason: 'Your coach has marked this test done.' }))
+    await renderTest()
+    expect(await screen.findByText('Your coach has marked this test done.')).toBeTruthy()
+    expect(screen.getByText('4 questions · 6 points · pass mark 70%')).toBeTruthy()
+    expect(screen.queryByText(/attempt 1 of 2/)).toBeNull()
+    expect(screen.queryByRole('button', { name: /Start/ })).toBeNull()
+  })
+
   test('the start screen says what to expect, and the bar has no Mark complete', async () => {
     hub(state())
     await renderTest()

@@ -10,7 +10,8 @@ import {
   type TestState,
 } from '../../lib/api'
 import type { ItemPageView } from '../../lib/content'
-import Question, { pointsWords } from '../test/Question'
+import { countWords } from '../../lib/format'
+import Question from '../test/Question'
 import Review from '../test/Review'
 
 // How long answering has to pause before the answers are saved
@@ -138,8 +139,8 @@ function Overview({ state, onStart, busy }: { state: TestState, onStart: () => v
       {!latest && (
         <>
           <p className="mt-0 font-semibold">
-            {test.questions.length} question{test.questions.length === 1 ? '' : 's'} · {pointsWords(test.total_points)} ·
-            pass mark {test.pass_percent}% · attempt {next} of {state.attempts_allowed}
+            {countWords(test.questions.length, 'question')} · {countWords(test.total_points, 'point')} · pass mark {test.pass_percent}%
+            {state.can_start && ` · attempt ${next} of ${state.attempts_allowed}`}
           </p>
           {test.instructions_html && <div className="lesson" dangerouslySetInnerHTML={{ __html: test.instructions_html }} />}
         </>

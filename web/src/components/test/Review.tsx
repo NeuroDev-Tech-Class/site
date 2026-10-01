@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import type { TestKeyEntry, TestMark, TestQuestion } from '../../lib/api'
-import { plainText, pointsWords } from './Question'
+import { countWords } from '../../lib/format'
+import { plainText } from './Question'
 
 type Key = TestKeyEntry & { rubric?: string }
 
@@ -31,7 +32,7 @@ function markWords(mark: TestMark | undefined): string | null {
   if (!mark || !mark.max) return null
   if (mark.points === null) return 'Waiting for your coach'
   if (mark.right) return 'Right'
-  return mark.points ? `${mark.points} of ${pointsWords(mark.max)}` : 'Wrong'
+  return mark.points ? `${mark.points} of ${countWords(mark.max, 'point')}` : 'Wrong'
 }
 
 /** An attempt question by question: the answer given, how it was marked, and the key when it may be shown */
