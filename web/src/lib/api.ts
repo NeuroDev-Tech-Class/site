@@ -420,5 +420,8 @@ export interface MyCertificate {
 
 export const getMyCertificates = () => request<MyCertificate[]>(`${TECH}/certificates/mine`)
 /** A short-lived link that opens the PDF: for a coach, or the student once given access */
-export const getCertificateLink = (certificateId: string) =>
-  request<{ url: string }>(`${TECH}/certificates/${id(certificateId)}/link`)
+/** Opens the PDF in a new tab, from a link that lasts minutes */
+export async function openCertificate(certificateId: string) {
+  const { url } = await request<{ url: string }>(`${TECH}/certificates/${id(certificateId)}/link`)
+  window.open(url, '_blank', 'noopener')
+}

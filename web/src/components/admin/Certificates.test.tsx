@@ -28,7 +28,9 @@ const certificate = (overrides: Partial<Certificate> = {}): Certificate => ({
   access_given_by: null, revoked_at: null, revoked_by: null, ...overrides,
 })
 
-function hub(options: { done?: number, started?: boolean, certificates?: Certificate[], refuse?: string } = {}) {
+function hub(options: {
+  done?: number, started?: boolean, certificates?: Certificate[], refuse?: string, madeElsewhere?: Certificate,
+} = {}) {
   sent = []
   let list = options.certificates ?? []
   const record = (method: string, path: string, body?: unknown) => sent.push({ method, path, body })
@@ -48,6 +50,7 @@ function hub(options: { done?: number, started?: boolean, certificates?: Certifi
       },
       '/api/v1/tech/accounts/s1/courses/gimp/certificate': ({ body }) => {
         record('POST', 'create', body)
+        if (options.madeElsewhere) list = [options.madeElsewhere, ...list]
         if (options.refuse) return json(409, { detail: options.refuse })
         const made = certificate(body as Partial<Certificate>)
         list = [made, ...list]
@@ -156,6 +159,16 @@ describe("a student's course: the certificate", () => {
     await hub({ refuse: 'Sam Student already has a certificate for this course.' })
     await userEvent.click(await within(await panel()).findByRole('button', { name: 'Create certificate' }))
     expect(await screen.findByText('Sam Student already has a certificate for this course.')).toBeTruthy()
+  })
+
+  test('refused because another coach just made one, it shows theirs', async () => {
+    await hub({ refuse: 'Sam Student already has a certificate for this course.',
+      madeElsewhere: certificate({ created_by: 'Mr Diaz' }) })
+    const box = await panel()
+    await userEvent.click(await within(box).findByRole('button', { name: 'Create certificate' }))
+    expect(await within(box).findByText('Created Sep 30, 2026 by Mr Diaz')).toBeTruthy()
+    expect(within(box).getByText('Sam Student already has a certificate for this course.')).toBeTruthy()
+    expect(within(box).queryByRole('button', { name: 'Create certificate' })).toBeNull()
   })
 
   test('Print opens it; Give access and Take access away say who can see it', async () => {

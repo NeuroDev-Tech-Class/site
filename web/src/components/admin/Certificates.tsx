@@ -9,7 +9,7 @@ import {
   type CertificateText,
 } from '../../lib/adminApi'
 import { routeHash } from '../../lib/adminRoute'
-import { fetchFile, getCertificateLink } from '../../lib/api'
+import { fetchFile, openCertificate } from '../../lib/api'
 import { calendarDate, formatDate, todayIso } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
 import { ConfirmButton, ErrorLine, LoadError, Loading, problemWords, StatusLine } from './shared'
@@ -22,10 +22,6 @@ async function openPdf(path: string) {
   window.open(url, '_blank', 'noopener')
   // Long enough for the new tab to load it
   setTimeout(() => URL.revokeObjectURL(url), 60_000)
-}
-
-async function openCertificate(id: string) {
-  window.open((await getCertificateLink(id)).url, '_blank', 'noopener')
 }
 
 function Live({ cert, firstName, busy, act }: {
@@ -120,6 +116,8 @@ export function CertificatePanel({ studentId, firstName, fullName, courseId, cou
       if (words) await certificates.reload()
     } catch (failure) {
       setProblem(problemWords(failure, "Couldn't do that. Please try again."))
+      // A refusal can mean another coach changed it a moment ago
+      await certificates.reload()
     } finally {
       setBusy(false)
     }

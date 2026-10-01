@@ -16,6 +16,7 @@ const TYPES: [string, string][] = [
   ['new_registration', 'New registration'],
   ['account_approved', 'Account approved'],
   ['certificate_awarded', 'Certificate awarded'],
+  ['certificate_revoked', 'Certificate revoked'],
   ['files_removed', 'Files removed'],
 ]
 

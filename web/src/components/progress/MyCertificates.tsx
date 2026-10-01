@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getCertificateLink, type MyCertificate } from '../../lib/api'
+import { openCertificate, type MyCertificate } from '../../lib/api'
 import { calendarDate } from '../../lib/format'
 import { useMyCertificates } from '../../lib/myWork'
 import Icon from '../Icon'
@@ -9,7 +9,7 @@ function Row({ certificate }: { certificate: MyCertificate }) {
   async function view() {
     setProblem(null)
     try {
-      window.open((await getCertificateLink(certificate.id)).url, '_blank', 'noopener')
+      await openCertificate(certificate.id)
     } catch {
       setProblem("Couldn't open it. Please try again.")
     }

@@ -131,6 +131,12 @@ describe('the activity record', () => {
     expect(history.length).toBe(before)
   })
 
+  test('a revoked certificate can be picked as a type', async () => {
+    await hub()
+    await userEvent.selectOptions(await screen.findByRole('combobox', { name: 'Type' }), 'Certificate revoked')
+    await waitFor(() => expect(requests(fetchMock)).toContain('GET /api/v1/tech/activity?type=certificate_revoked'))
+  })
+
   test('filters in the address are used when it opens', async () => {
     window.location.hash = '#/activity?course=gimp'
     await hub()
