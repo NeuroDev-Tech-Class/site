@@ -18,7 +18,7 @@ const UNITS: UnitView[] = [
   ] },
 ]
 const PAGE_IDS = ['i_r', 'i_v']
-const COUNTED = [{ id: 'i_r' }, { id: 'i_ex' }, { id: 'i_c', type: 'checkpoint' }, { id: 'i_v' }]
+const COUNTED = [{ id: 'i_r' }, { id: 'i_ex' }, { id: 'i_c' }, { id: 'i_v' }]
 const status = (item_id: string, value: ItemStatus['status']): ItemStatus =>
   ({ item_id, status: value, done_at: null, opened_at: null })
 
@@ -121,7 +121,7 @@ describe('approved', () => {
     const units: UnitView[] = [{ id: 'u_3', number: '3', title: 'Tests', description: '', items: [
       { id: 'i_t', type: 'test', label: 'Test', title: 'Unit 3 Test', html: null, exercise: false, counts: true },
     ] }]
-    fakeCourseHub(fetchMock, { counted: [{ id: 'i_t', type: 'test' }], items: [status('i_t', value)] })
+    fakeCourseHub(fetchMock, { counted: [{ id: 'i_t' }], items: [status('i_t', value)] })
     const { default: CourseUnits } = await import('./CourseUnits')
     render(<CourseUnits courseId="gimp" units={units} />)
     const tests = unit('Tests')

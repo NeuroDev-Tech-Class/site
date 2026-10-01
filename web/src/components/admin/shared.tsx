@@ -3,6 +3,7 @@ import type { StudentRow } from '../../lib/adminApi'
 import { routeHash, type AdminRoute } from '../../lib/adminRoute'
 import { ApiError, type TechAccount } from '../../lib/api'
 import type { CourseMeta } from '../../lib/content'
+import { countWords } from '../../lib/format'
 
 export const REFRESH_MS = 30_000
 export const LOAD_FAILED = "Couldn't load this. It will try again shortly, or reload the page."
@@ -156,7 +157,7 @@ const DAY = 24 * 60 * 60 * 1000
 export function waitedWords(since: string | null, now: number = Date.now()): string {
   if (!since) return ''
   const days = Math.floor((now - new Date(since).getTime()) / DAY)
-  return days < 1 ? 'today' : `${days} day${days === 1 ? '' : 's'}`
+  return days < 1 ? 'today' : countWords(days, 'day')
 }
 
 export const withinDays = (when: string | null, days: number, now: number = Date.now()): boolean =>

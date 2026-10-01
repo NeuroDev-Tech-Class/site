@@ -11,7 +11,7 @@ import {
   type StudentRow,
 } from '../../lib/adminApi'
 import { routeHash, type AdminRoute, type StudentsTab } from '../../lib/adminRoute'
-import { formatDate, fullName, timeAgo } from '../../lib/format'
+import { countWords, formatDate, fullName, timeAgo } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
 import { CELL, ConfirmButton, DataTable, ErrorLine, LoadError, Loading, problemWords, REFRESH_MS, SearchField, showRoute, StatusLine, useAdmin, ViewHeading, waitingOnCoach } from './shared'
 
@@ -195,7 +195,7 @@ export default function Students({ route }: { route: StudentsRoute }) {
             </td>
             <td className={CELL}>
               {student.courses_started
-                ? <>{student.percent}% <span className="text-sm text-(--muted)">· {student.courses_started} course{student.courses_started === 1 ? '' : 's'}</span></>
+                ? <>{student.percent}% <span className="text-sm text-(--muted)">· {countWords(student.courses_started, 'course')}</span></>
                 : <span className="text-(--muted)">Not started</span>}
             </td>
             <td className={CELL}>{student.last_activity_at ? timeAgo(student.last_activity_at) : 'Never'}</td>

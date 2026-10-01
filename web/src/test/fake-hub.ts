@@ -46,12 +46,12 @@ export const requests = (fetchMock: Mock): string[] =>
 
 /**
  * One course's progress routes, keeping progress between calls so a Mark complete really changes the next read.
- * `items` holds the statuses; `counted` is what each item counts as.
+ * `items` holds the statuses; `counted` are the items that count toward the total.
  */
 export function fakeCourseHub(fetchMock: Mock, options: {
   account?: Partial<TechAccount> | null
   courseId?: string
-  counted: { id: string, type?: string }[]
+  counted: { id: string }[]
   items?: ItemStatus[]
   failComplete?: boolean
   // Each item's attempts, newest first, as /submissions/mine?item_id= answers them

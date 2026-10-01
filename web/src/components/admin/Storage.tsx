@@ -1,7 +1,7 @@
 import { getUsage } from '../../lib/adminApi'
 import { routeHash } from '../../lib/adminRoute'
 import { sizeWords } from '../../lib/checkpoint'
-import { timeAgo } from '../../lib/format'
+import { countWords, timeAgo } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
 import { CELL, DataTable, LoadError, Loading, useAdmin, ViewHeading } from './shared'
 
@@ -23,7 +23,7 @@ function Usage() {
               <p className="mt-0 text-sm text-(--muted)">{row.student.email}</p>
             </td>
             <td className={CELL}>{sizeWords(row.bytes)}</td>
-            <td className={CELL}>{row.files} file{row.files === 1 ? '' : 's'}</td>
+            <td className={CELL}>{countWords(row.files, 'file')}</td>
             <td className={CELL}>{timeAgo(row.last_upload_at)}</td>
           </tr>
         ))}
