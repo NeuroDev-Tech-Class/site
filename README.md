@@ -70,6 +70,23 @@ firebase deploy --only firestore,storage --project tech-certificates-af7c3
 
 The first functions deploy on a project can fail with "Permission denied while using the Eventarc Service Agent". Wait two minutes and rerun.
 
+### Branches, checks and releases
+
+Same flow as the hub. Work happens on a branch, goes to `main` through a pull request, and `main` deploys: GitHub
+Pages (the old site) and the Firebase job in `ci.yml` today, and Render's `tech-frontend` (the new site) by itself.
+
+- **Checks** run on every pull request into `main` (and `render-migration`) and on every push to them. A pull request
+  shows **Old site CI** (`ci.yml`: the Firebase tests and emulator run) and **Extractor CI**, **Web CI** and
+  **Exercises CI** (`migration.yml`: the extractor and `content/` check, the `web/` app's lint, types, tests, build
+  and build checks, and every exercise's tests). GitHub can't make them required on this plan, so merging on red is
+  possible; the rule is not to.
+- **Versions** (`auto-tag.yml`): merging a pull request into `main` creates the next `vMAJOR.MINOR.PATCH` tag and a
+  GitHub Release with generated notes. Put a `major`, `minor` or `patch` label on the pull request to say which part
+  moves; no label means patch. The count starts at `v0.1.0`, tagged by hand on `main` once this setup was merged; the
+  cutover, when the old site is switched off, is a good place for `major`.
+- **Manual tags** (`release.yml`): pushing a `v*` tag by hand also produces a Release, with a changelog of the commits
+  since the previous tag.
+
 ### Secrets
 
 The workflow authenticates with the `FIREBASE_SERVICE_ACCOUNT` repository secret: the JSON key of the `github-deploy` service account. No key file is committed; `.gitignore` excludes `service-account*.json` and `*.key.json`. A local copy for the tools below lives outside the repo at `~/keys/github-deploy.json`.
@@ -158,6 +175,11 @@ answer keys) are kept only in the hub: coaches upload each test's markdown on th
 the hub README, "Tech tests"), so no answer key is in this repo. A rebuilt slide deck opens in the slide viewer (one
 slide at a time, arrow keys, Full screen, Show all slides).
 
+Certificates are made on a student's course page in the dashboard: check the name, course name and date, Preview,
+Create, then Print, Give access or Revoke. The hub draws the PDF and keeps it in R2 (hub README, "Tech
+certificates"), so this repo holds no template. A student sees one in My Courses, with View, only while the coach has
+given access.
+
 The dashboard is one page, `/admin`, and one island; the view is in the hash (`#/today`, `#/queue`, `#/grade/{id}`,
 `#/students?tab=`, `#/students/{id}`, `#/students/{id}/courses/{course}`, `#/tests`, `#/tests/{item}`, `#/activity`,
 `#/storage`), which is what the
@@ -177,11 +199,16 @@ The web site runs in Docker only (`docker-compose.yml` at the repo root; `node_m
 | Command | Does |
 |---|---|
 | `docker compose up web` | dev server at http://localhost:4321 |
+| `docker compose run --rm web npm run gate` | the whole gate in about a minute: lint, `astro check` and the unit tests run alongside the build, then the built pages are checked; only a failing step's output is shown |
 | `docker compose run --rm web sh -c "npm run lint && npm run typecheck && npm test"` | ESLint, `astro check`, unit and component tests |
 | `docker compose run --rm web sh -c "npm run build && npm run test:build"` | builds `dist/` and checks the built pages |
 | `docker compose run --rm -p 4321:4321 web sh -c "npm run build && npx astro preview --ignore-lock --host"` | serves the production build |
 
 `--ignore-lock` is needed because a stopped preview leaves Astro's lock file in `web/.astro/`.
+
+`web/dist`, `web/public/images` and `web/public/starters` are generated, so compose keeps them in Docker volumes
+rather than the Windows folder (the bind mount is slow to write and read): look at the build inside the container, not
+in Explorer. The image copy and starter zips only rewrite what changed.
 
 The extractor and exercise commands run in WSL:
 
@@ -194,4 +221,4 @@ The extractor and exercise commands run in WSL:
 
 After changing anything the extractor reads (a course page, a lesson, `checkpoints.json`, an override or an exercise), run `npm run extract`, read `content/report.md`, and commit `content/` with the change. **Don't reorder items on the live course pages before cutover**: item ids and the old progress keys are taken from their positions.
 
-`exercises/` is edited by hand; `import-repos.mjs` refuses to run over it. The `Migration` workflow (`.github/workflows/migration.yml`) runs these checks on the `render-migration` branch only; `main` keeps deploying the Firebase site through `ci.yml`.
+`exercises/` is edited by hand; `import-repos.mjs` refuses to run over it. The `Migration` workflow (`.github/workflows/migration.yml`) runs these checks on pull requests into `main` and `render-migration` and on pushes to them (see "Branches, checks and releases"); `main` also keeps deploying the Firebase site through `ci.yml`.

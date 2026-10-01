@@ -1,15 +1,18 @@
 name: Migration
 
-# The Render migration's checks. They run only for the render-migration branch until cutover,
-# so main keeps deploying the Firebase site through ci.yml untouched.
+# The new site's checks (the Render rewrite): the extractor and content/, the web/ app, and the exercises.
+# They run on every pull request into main or render-migration and every push to them; "Extractor CI",
+# "Web CI" and "Exercises CI" are the checks a PR shows. Render deploys main by itself; nothing here deploys.
+# The old Firebase site keeps its own checks and deploy in ci.yml until cutover.
 on:
   push:
-    branches: [render-migration]
+    branches: [main, render-migration]
   pull_request:
-    branches: [render-migration]
+    branches: [main, render-migration]
 
 jobs:
   extract:
+    name: Extractor CI
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -23,6 +26,7 @@ jobs:
         run: npm run extract -- --check
 
   web:
+    name: Web CI
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -45,6 +49,7 @@ jobs:
         run: npm run test:build
 
   exercises:
+    name: Exercises CI
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7

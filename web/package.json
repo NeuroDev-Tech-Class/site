@@ -15,7 +15,8 @@
     "lint": "eslint .",
     "typecheck": "astro check",
     "test": "vitest run",
-    "test:build": "vitest run --config vitest.build.config.ts"
+    "test:build": "vitest run --config vitest.build.config.ts",
+    "gate": "node scripts/gate.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^7.0.0",

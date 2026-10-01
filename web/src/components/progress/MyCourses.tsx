@@ -6,6 +6,7 @@ import { useSession } from '../../lib/session'
 import ProgressRing from '../course/ProgressRing'
 import Icon from '../Icon'
 import NotApproved from '../NotApproved'
+import MyCertificates from './MyCertificates'
 import RecentWork from './RecentWork'
 
 interface Props {
@@ -75,6 +76,7 @@ export default function MyCourses({ courses, pageIds }: Props) {
           <p className="mt-0">You haven't started a course yet.</p>
           <a className="btn-primary mt-4" href="/catalog">Browse the catalog</a>
         </div>
+        <MyCertificates />
         <RecentWork pageIds={pageIds} />
       </>
     )
@@ -87,6 +89,7 @@ export default function MyCourses({ courses, pageIds }: Props) {
           <Card key={course.course_id} course={course} meta={byId.get(course.course_id)} pageIds={pageIds} />
         ))}
       </ul>
+      <MyCertificates />
       <RecentWork pageIds={pageIds} />
     </>
   )

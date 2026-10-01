@@ -38,6 +38,18 @@ export function formatDate(value: DateInput, { month = 'short', fallback = '' }:
   return date.toLocaleDateString('en-US', { year: 'numeric', month, day: 'numeric' })
 }
 
+/** A date with no time ("2026-09-30", a certificate's date) as that same day, never shifted by the time zone */
+export function calendarDate(iso: string, month: 'short' | 'long' = 'short'): string {
+  const [year, monthNumber, day] = iso.split('-').map(Number)
+  return new Date(year, monthNumber - 1, day).toLocaleDateString('en-US', { year: 'numeric', month, day: 'numeric' })
+}
+
+/** The browser's own date as YYYY-MM-DD, as a date field holds it */
+export function todayIso(now: Date = new Date()): string {
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`
+}
+
 const MINUTE = 60_000
 const HOUR = 60 * MINUTE
 const DAY = 24 * HOUR

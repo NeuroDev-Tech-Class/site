@@ -8,6 +8,11 @@ services:
     volumes:
       - .:/app
       - web_node_modules:/app/web/node_modules
+      # Generated, so kept off the Windows bind mount, which is slow to write and read: the build output and the
+      # images and starter zips the build copies in
+      - web_dist:/app/web/dist
+      - web_public_images:/app/web/public/images
+      - web_public_starters:/app/web/public/starters
       # Hides the extractor's root node_modules so web/ sees only its own packages, as it does in CI
       - /app/node_modules
     ports:
@@ -18,3 +23,6 @@ services:
 
 volumes:
   web_node_modules:
+  web_dist:
+  web_public_images:
+  web_public_starters:

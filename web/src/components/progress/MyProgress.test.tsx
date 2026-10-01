@@ -1,7 +1,8 @@
 import { act, cleanup, render, screen, waitFor, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import type { Mock } from 'vitest'
 import { afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest'
-import type { CourseProgress, Submission, TechAccount } from '../../lib/api'
+import type { CourseProgress, MyCertificate, Submission, TechAccount } from '../../lib/api'
 import type { CourseMeta } from '../../lib/content'
 import { account, fakeFetch, fakeHub, json, requests, submission } from '../../test/fake-hub'
 
@@ -36,11 +37,13 @@ let fetchMock: Mock
 
 function hub(options: {
   account?: Partial<TechAccount> | null, courses?: CourseProgress[], fail?: boolean, work?: Submission[],
-  failWork?: boolean,
+  failWork?: boolean, certificates?: MyCertificate[], failCertificates?: boolean,
 } = {}) {
   fakeHub(fetchMock, options.account === undefined ? {} : options.account, {
     '/api/v1/tech/progress': () => options.fail ? json(500, {}) : json(200, { courses: options.courses ?? STARTED }),
     '/api/v1/tech/submissions/mine': () => options.failWork ? json(500, {}) : json(200, options.work ?? []),
+    '/api/v1/tech/certificates/mine': () => options.failCertificates ? json(500, {}) : json(200, options.certificates ?? []),
+    '/api/v1/tech/certificates/(c\\d)/link': ({ match }) => json(200, { url: `https://r2.test/${match[1]}.pdf` }),
   })
 }
 const progressCalls = () => requests(fetchMock).filter(r => r === 'GET /api/v1/tech/progress').length
@@ -212,6 +215,75 @@ describe('Recent work on My Courses', () => {
     if (shown instanceof RegExp) await screen.findByText(shown)
     else await screen.findByRole('link', shown)
     expect(workCalls()).toBe(0)
+  })
+})
+
+describe('Certificates on My Courses', () => {
+  const CERTIFICATES: MyCertificate[] = [
+    { id: 'c1', course: { id: 'python-1', title: 'Python I' }, course_name: 'Python I', awarded_on: '2026-09-30' },
+    { id: 'c2', course: { id: 'gimp', title: '2D Digital Art - GIMP' }, course_name: 'GIMP', awarded_on: '2026-06-01' },
+  ]
+  async function renderList() {
+    const { default: MyCourses } = await import('./MyCourses')
+    render(<MyCourses courses={COURSES} pageIds={PAGE_IDS} />)
+  }
+  const section = async () => (await screen.findByRole('heading', { name: 'Certificates' })).closest('section') as HTMLElement
+  const certificateCalls = () => requests(fetchMock).filter(r => r === 'GET /api/v1/tech/certificates/mine').length
+
+  test('lists the ones the coach has shared, each opening its PDF', async () => {
+    const opened: unknown[][] = []
+    vi.stubGlobal('open', (...args: unknown[]) => { opened.push(args); return null })
+    hub({ certificates: CERTIFICATES })
+    await renderList()
+    const rows = within(await section()).getAllByRole('listitem')
+    expect(rows.map(r => r.textContent)).toEqual([
+      expect.stringContaining('Python I'), expect.stringContaining('GIMP'),
+    ])
+    expect(within(rows[0]).getByText('Awarded September 30, 2026')).toBeTruthy()
+    await userEvent.click(within(rows[0]).getByRole('button', { name: 'View the Python I certificate' }))
+    await waitFor(() => expect(opened).toEqual([['https://r2.test/c1.pdf', '_blank', 'noopener']]))
+  })
+
+  test('none shared yet: no Certificates section at all', async () => {
+    hub({ certificates: [] })
+    await renderList()
+    await screen.findAllByRole('article')
+    await waitFor(() => expect(certificateCalls()).toBe(1))
+    expect(screen.queryByRole('heading', { name: 'Certificates' })).toBeNull()
+  })
+
+  test("certificates that can't be loaded say so without hiding the courses", async () => {
+    hub({ certificates: CERTIFICATES, failCertificates: true })
+    await renderList()
+    expect(await screen.findByText("Couldn't load your certificates. Reload the page to try again.")).toBeTruthy()
+    expect(screen.getAllByRole('article')).toHaveLength(2)
+  })
+
+  test("on a shared computer, the next student never sees the last one's certificates", async () => {
+    hub({ certificates: CERTIFICATES })
+    await renderList()
+    await section()
+    let answer: (response: Response) => void = () => undefined
+    fakeHub(fetchMock, null, {
+      '/api/v1/tech/auth/logout': () => new Response(null, { status: 204 }),
+      '/api/v1/tech/progress': () => json(200, { courses: STARTED }),
+      '/api/v1/tech/submissions/mine': () => json(200, []),
+      '/api/v1/tech/certificates/mine': () => new Promise<Response>(resolve => { answer = resolve }),
+    })
+    const { setAccount, signOut } = await import('../../lib/session')
+    await act(() => signOut())
+    act(() => setAccount(account({ id: 'a2', email: 'ana@example.com', first_name: 'Ana' })))
+    await screen.findAllByRole('article')
+    expect(screen.queryByRole('heading', { name: 'Certificates' })).toBeNull()
+    await act(async () => answer(json(200, [])))
+    expect(screen.queryByText('Awarded September 30, 2026')).toBeNull()
+  })
+
+  test('a student waiting for approval asks for none', async () => {
+    hub({ account: { status: 'pending' }, certificates: CERTIFICATES })
+    await renderList()
+    await screen.findByText(/waiting for your tech coach/)
+    expect(certificateCalls()).toBe(0)
   })
 })
 

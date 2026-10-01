@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { countWords, formatDate, formatName, fullName, isStaff, timeAgo, toDate } from './format'
+import { calendarDate, countWords, formatDate, formatName, fullName, isStaff, timeAgo, toDate, todayIso } from './format'
 
 const noonUtc = new Date('2026-09-08T12:00:00Z')
 
@@ -63,5 +63,17 @@ describe('countWords', () => {
   test('one of a thing, or many', () => {
     expect([countWords(1, 'point'), countWords(0, 'point'), countWords(2, 'question'), countWords(1.5, 'point')])
       .toEqual(['1 point', '0 points', '2 questions', '1.5 points'])
+  })
+})
+
+describe('calendar dates', () => {
+  test('a plain date reads as that day wherever the browser is', () => {
+    expect(calendarDate('2026-09-30')).toBe('Sep 30, 2026')
+    expect(calendarDate('2026-01-01', 'long')).toBe('January 1, 2026')
+  })
+
+  test("today is the browser's own date, as a form's date field wants it", () => {
+    expect(todayIso(new Date(2026, 8, 30, 23, 30))).toBe('2026-09-30')
+    expect(todayIso(new Date(2026, 0, 5, 0, 10))).toBe('2026-01-05')
   })
 })
