@@ -8,6 +8,10 @@ import {
   type Ref,
   type Submission,
   type TechAccount,
+  type TestKeyEntry,
+  type TestMark,
+  type TestQuestion,
+  type TestView,
   type UploadedFile,
 } from './api'
 import type { ItemType } from './itemLabel'
@@ -87,12 +91,24 @@ export interface CheckpointForm {
   grading_hint: { answers?: string[], runner?: string } | null
 }
 
+/** A test attempt as the coach grades it: its questions, each mark, and the whole key with rubrics */
+export interface TestGrading {
+  questions: TestQuestion[]
+  key: Record<string, TestKeyEntry & { rubric?: string }>
+  marks: Record<string, TestMark>
+  pass_percent: number
+  // The written answers the coach gives points to
+  to_grade: number[]
+}
+
 export interface SubmissionDetail extends Submission {
   student: Person
   graded_by: string | null
   legacy: boolean
   checkpoint: CheckpointForm | null
   attempts: Attempt[]
+  // A test taken on the site
+  test?: TestGrading | null
 }
 
 export interface GradeBody {
@@ -101,6 +117,8 @@ export interface GradeBody {
   total_max?: number | null
   feedback?: string
   signed_off?: boolean
+  // A test taken on the site: points for each written answer, by question number
+  points?: Record<string, number>
 }
 
 export interface StudentCourse extends CourseProgress {
@@ -171,6 +189,24 @@ export interface CourseOutline {
   }[]
 }
 
+/** A test item and what has been uploaded for it */
+export interface TestRow {
+  item_id: string
+  title: string
+  course: Ref
+  uploaded: boolean
+  questions: number
+  total_points: number
+  // Points only the coach can give (written answers)
+  coach_points: number
+  pass_percent: number | null
+  attempts_allowed: number | null
+  version: number
+  uploaded_at: string | null
+  uploaded_by: string | null
+  handed_in: number
+}
+
 export interface ActivityFilter {
   type?: string
   student?: string
@@ -230,3 +266,10 @@ export const getStudentFiles = (accountId: string) => request<AdminFile[]>(`${TE
 export const removeFile = (fileId: string) => request<void>(`${TECH}/files/${id(fileId)}`, { method: 'DELETE' })
 export const removeAllFiles = (accountId: string) =>
   request<{ count: number, bytes: number }>(`${TECH}/accounts/${id(accountId)}/files/remove-all`, { method: 'POST' })
+
+// Tests kept in the hub
+export const getTests = () => request<TestRow[]>(`${TECH}/tests`)
+export const uploadTest = (itemId: string, source: string) =>
+  request<TestRow>(`${TECH}/tests/${id(itemId)}`, send({ source }, 'PUT'))
+export const testSourcePath = (itemId: string) => `${TECH}/tests/${id(itemId)}/source`
+export const getTestPreview = (itemId: string) => request<TestView>(`${TECH}/tests/${id(itemId)}/preview`)

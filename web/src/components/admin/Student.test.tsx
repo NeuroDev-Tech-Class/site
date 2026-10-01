@@ -228,8 +228,10 @@ describe('one course for a student', () => {
     expect(within(rows[2]).getByRole('button', { name: 'Mark Exercise 1.1: Open GIMP. done' })).toBeTruthy()
     expect(within(rows[3]).getByRole('link', { name: 'Grade Movie Poster' }).getAttribute('href')).toBe('#/grade/s1__i_4__2')
     expect(rows[3].textContent).toContain('Submitted')
-    expect(rows[4].textContent).toContain('Taken on its form for now')
+    expect(rows[4].textContent).toContain('Not started')
+    expect(rows[4].textContent).not.toContain('form')
     expect(within(rows[3]).queryByRole('button')).toBeNull()
+    expect(within(rows[4]).queryByRole('button')).toBeNull()
   })
 
   test('the coach marks an item done for them, and back to not done', async () => {
@@ -241,6 +243,23 @@ describe('one course for a student', () => {
     await userEvent.click(within(unit).getByRole('button', { name: 'Mark Tools not done' }))
     await waitFor(() => expect(screen.getByText('12 of 29 done · 41%')).toBeTruthy())
     expect(sent).toEqual([{ method: 'POST', path: 'items/i_2', body: undefined }, { method: 'DELETE', path: 'items/i_2', body: undefined }])
+  })
+
+  test('a test they took on its old Form can be marked done for them, and one they finished by taking it stays done', async () => {
+    const outline: CourseOutline = { ...OUTLINE, units: [{ id: 'u_2', title: 'Unit 2: Tests', items: [
+      { id: 'i_6', type: 'test', title: 'Unit 2 Test', status: 'ok', tags: [] },
+      { id: 'i_7', type: 'test', title: 'Unit 3 Test', status: 'ok', tags: [] },
+    ] }] }
+    await hub({
+      courses: [{ ...GIMP, items: [item('i_7', 'done')] }],
+      work: [submission({ id: 's1__i_7__1', item: { id: 'i_7', title: 'Unit 3 Test' }, kind: 'test', status: 'graded' })],
+      routes: { '/api/v1/tech/courses/(gimp|python-1)': () => json(200, outline) },
+    })
+    const unit = await screen.findByRole('list', { name: 'Unit 2: Tests' })
+    await userEvent.click(within(unit).getByRole('button', { name: 'Mark Unit 2 Test done' }))
+    await waitFor(() => expect(within(unit).getAllByRole('listitem')[0].textContent).toContain('Done'))
+    expect(sent).toEqual([{ method: 'POST', path: 'items/i_6', body: undefined }])
+    expect(within(within(unit).getAllByRole('listitem')[1]).queryByRole('button')).toBeNull()
   })
 
   test('a course they have not started shows everything not started', async () => {

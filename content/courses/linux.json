@@ -183,11 +183,9 @@
           "legacy_key": "1-4",
           "type": "test",
           "title": "Quiz - Bash Commands",
-          "status": "needs_content",
+          "status": "ok",
           "tags": [],
-          "payload": {
-            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLScZK2yr-2tqefaFcV6xJ7Zi0CAq7SWMZms47R0z7IefhG2eQw/viewform?usp=header"
-          }
+          "payload": {}
         },
         {
           "id": "i_63a53ecaa7",

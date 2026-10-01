@@ -67,7 +67,7 @@ test('every kind of item is classified', () => {
   assert.deepEqual(kinds, [
     ['video', 'ok', ''],
     ['lesson', 'ok', ''],
-    ['test', 'needs_content', ''],
+    ['test', 'ok', ''],
     ['slides', 'ok', ''],
     ['checkpoint', 'ok', 'github-exercise'],
     ['note', 'ok', 'exercise'],
@@ -83,7 +83,8 @@ test('each kind keeps what it needs', () => {
   assert.deepEqual(video.payload, { youtube_id: 'd86ws7mQYIg' });
   assert.equal(video.title, 'Intro video');
   assert.deepEqual(lesson.payload, { legacy_path: 'it/computer_hardware/ports.html' });
-  assert.deepEqual(form.payload, { form_url: 'https://docs.google.com/forms/d/e/abc/viewform' });
+  // Tests are kept in the hub now; the old Form link is dropped
+  assert.deepEqual(form.payload, {});
   assert.deepEqual(slides.payload, { slides_url: 'https://docs.google.com/presentation/d/xyz/embed' });
   assert.deepEqual(classroom.payload, { classroom_url: 'https://classroom.github.com/a/YRWXnfst', label: 'Complete Lesson & Exercise 1.2 - Data Types' });
   assert.equal(exercise.payload.html, '<strong>Exercise 1.1:</strong> Record your voice.');
@@ -142,7 +143,7 @@ test('the real course pages classify into the counts measured on 2026-09-24', ()
   assert.deepEqual(tally, {
     lesson: 153,
     'checkpoint:github-exercise': 58,
-    'test:needs_content': 13,
+    test: 13,
     slides: 9,
     video: 29,
     'note:exercise': 68,

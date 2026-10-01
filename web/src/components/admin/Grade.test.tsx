@@ -203,3 +203,75 @@ describe('grading a test', () => {
     expect(screen.getByText('out of 20')).toBeTruthy()
   })
 })
+
+describe('grading a test taken on the site', () => {
+  const NATIVE = detail({
+    id: 's1__i_5__1', kind: 'test', item: { id: 'i_5', title: 'Unit 2 Test' }, checkpoint: null, status: 'auto_graded',
+    status_label: 'Graded (provisional)', auto_score: 2, total_score: 2, total_max: 8, files: [],
+    // A test's answers are choices, true or false and text, not a checkpoint's fields
+    answers: { 1: 1, 2: true, 3: 'ls', 4: 'Layers stack.' } as unknown as SubmissionDetail['answers'],
+    attempts: [{ id: 's1__i_5__1', attempt: 1, status: 'auto_graded', submitted_at: '2026-09-28T15:00:00Z', graded_at: null, feedback: null }],
+    test: {
+      questions: [
+        { number: 1, type: 'mc', prompt_html: '<p>Pick A.</p>', points: 2, choices: ['A', 'B'] },
+        { number: 2, type: 'tf', prompt_html: '<p>The sky is blue.</p>', points: 1 },
+        { number: 3, type: 'short', prompt_html: '<p>Which command lists a folder?</p>', points: 1 },
+        { number: 4, type: 'written', prompt_html: '<p>Why use layers?</p>', points: 4 },
+      ],
+      key: { 1: { answer: 0, explanation_html: '<p>A comes first.</p>' }, 2: { answer: true }, 3: { accept: ['ls'] }, 4: { rubric: '4 = two ideas; 2 = one' } },
+      marks: {
+        1: { points: 0, max: 2, right: false }, 2: { points: 1, max: 1, right: true }, 3: { points: 1, max: 1, right: true },
+        4: { points: null, max: 4, right: null },
+      },
+      pass_percent: 70, to_grade: [4],
+    },
+  })
+  const rows = () => within(screen.getByRole('list', { name: 'Questions and answers' })).getAllByRole('listitem')
+  const pointsFor = (n: number) => screen.getByRole('spinbutton', { name: `Points for question ${n}` })
+
+  test('each question shows their answer, whether it was right, and the key with the rubric', async () => {
+    await hub(NATIVE)
+    await screen.findByRole('list', { name: 'Questions and answers' })
+    expect(rows()[0].textContent).toContain('Their answer: B')
+    expect(rows()[0].textContent).toContain('Wrong')
+    expect(rows()[0].textContent).toContain('Right answer: A')
+    expect(rows()[0].textContent).toContain('A comes first.')
+    expect(rows()[2].textContent).toContain('Accepted answers: ls')
+    expect(rows()[3].textContent).toContain('Layers stack.')
+    expect(rows()[3].textContent).toContain('Rubric: 4 = two ideas; 2 = one')
+    expect(within(rows()[3]).getByRole('spinbutton', { name: 'Points for question 4' }).getAttribute('max')).toBe('4')
+    expect(screen.queryByRole('spinbutton', { name: 'Points' })).toBeNull()
+    expect(screen.queryByRole('spinbutton', { name: 'Out of' })).toBeNull()
+  })
+
+  test('the total follows the points given, and saving sends each written answer its points', async () => {
+    await hub(NATIVE)
+    await userEvent.type(await screen.findByRole('spinbutton', { name: 'Points for question 4' }), '3')
+    expect(screen.getByText('5 / 8 (63%) · below the 70% pass mark')).toBeTruthy()
+    await userEvent.clear(pointsFor(4))
+    await userEvent.type(pointsFor(4), '4')
+    expect(screen.getByText('6 / 8 (75%) · passes')).toBeTruthy()
+    await userEvent.type(screen.getByRole('textbox', { name: /Feedback/ }), 'Good.')
+    await userEvent.click(screen.getByRole('button', { name: 'Save grade' }))
+    await waitFor(() => expect(graded).toEqual([{ points: { 4: 4 }, feedback: 'Good.' }]))
+  })
+
+  test.each([
+    ['', 'Give points for every written answer.'],
+    ['5', 'Question 4 is worth 4 points at most.'],
+  ])('points %j are refused before sending', async (typed, words) => {
+    await hub(NATIVE)
+    if (typed) await userEvent.type(await screen.findByRole('spinbutton', { name: 'Points for question 4' }), typed)
+    await userEvent.click(await screen.findByRole('button', { name: 'Save grade' }))
+    expect(await screen.findByText(words)).toBeTruthy()
+    expect(graded).toEqual([])
+  })
+
+  test('a test marked on the spot only takes feedback', async () => {
+    await hub({ ...NATIVE, status: 'graded', test: { ...NATIVE.test!, to_grade: [], questions: NATIVE.test!.questions.slice(0, 3) } })
+    await userEvent.type(await screen.findByRole('textbox', { name: /Feedback/ }), 'Well done.')
+    expect(screen.queryByRole('spinbutton')).toBeNull()
+    await userEvent.click(screen.getByRole('button', { name: 'Save grade' }))
+    await waitFor(() => expect(graded).toEqual([{ points: {}, feedback: 'Well done.' }]))
+  })
+})

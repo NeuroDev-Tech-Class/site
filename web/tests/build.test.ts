@@ -121,6 +121,13 @@ describe('the revamped pages', () => {
     expect(header).toContain('src="/logo-black.png"')
   })
 
+  test("every page's footer gives the phone number, tappable on a phone", () => {
+    for (const { file, html } of pages.map(page)) {
+      const footer = html.match(/<footer[\s\S]*?<\/footer>/)?.[0] ?? ''
+      expect(footer, file).toMatch(/<a[^>]*href="tel:\+18017345508"[^>]*>801-734-5508<\/a>/)
+    }
+  })
+
   test("every page's header has the notification bell beside the account menu", () => {
     for (const { file, html } of pages.map(page)) {
       const header = html.match(/<header[\s\S]*?<\/header>/)?.[0] ?? ''
@@ -165,18 +172,18 @@ const published = readdirSync(join(CONTENT, 'courses'))
   .map(name => JSON.parse(readFileSync(join(CONTENT, 'courses', name), 'utf8')))
 const itemsOf = (courses: typeof published): ContentItem[] =>
   courses.flatMap(c => c.units.flatMap((u: { items: ContentItem[] }) => u.items))
-const PAGED = ['lesson', 'video', 'slides', 'link', 'checkpoint']
+const PAGED = ['lesson', 'video', 'slides', 'link', 'checkpoint', 'test']
 
 describe('item pages', () => {
   const learn = (id: string) => join(DIST, 'learn', id, 'index.html')
 
-  test('every reading, video, slides, link and checkpoint of a published course has one, and nothing else does', () => {
+  test('every reading, video, slides, link, checkpoint and test of a published course has one, and nothing else does', () => {
     const live = itemsOf(published.filter(c => c.status === 'published'))
     for (const item of live) expect(existsSync(learn(item.id)), item.id).toBe(PAGED.includes(item.type))
     for (const item of itemsOf(published.filter(c => c.status !== 'published'))) {
       expect(existsSync(learn(item.id)), `draft ${item.id}`).toBe(false)
     }
-    expect(readdirSync(join(DIST, 'learn'))).toHaveLength(254)
+    expect(readdirSync(join(DIST, 'learn'))).toHaveLength(267)
   })
 
   test('never carry the lesson text, which only comes from the hub after sign-in', () => {

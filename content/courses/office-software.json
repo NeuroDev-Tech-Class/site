@@ -37,11 +37,9 @@
           "legacy_key": "0-1",
           "type": "test",
           "title": "Quiz - Word Processors",
-          "status": "needs_content",
+          "status": "ok",
           "tags": [],
-          "payload": {
-            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSdqqkhza05g7Aar0w9ElvafKq54gdsBDNkBgZaROEgnWvqa0A/viewform?usp=sf_link"
-          }
+          "payload": {}
         },
         {
           "id": "i_ca7f8759dc",

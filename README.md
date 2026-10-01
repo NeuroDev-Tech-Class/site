@@ -120,11 +120,13 @@ tools/extract/          reads the live site (courses/, assets/pdfs/) and exercis
   checkpoints.json      which lesson pages and notes become checkpoints, and their form fields
   overrides/            fixes that exist only in the extracted copy: lessons/<page path> replaces a page's body,
                         courses.json patches a course page
+  slides/               the 9 slide decks rebuilt as markdown, one file per Google deck id (slides separated by
+                        --- lines, a ## heading each); their pictures are in assets/images/slides/<deck>/
 tools/exercises/        import-repos.mjs (the one-time Classroom import), verify.mjs, workflows/ (the test workflows)
 content/                generated, committed: catalog, courses, lessons, checkpoints, legacy-map, vocabulary, report.md
 web/                    the new site: Astro + React islands + Tailwind, served at tech.neurodevmentoring.com
   src/pages/            Home, Catalog, Resources, courses/[id], learn/[itemId] (one per reading, video, slides,
-                        link and checkpoint), my-courses, admin (the coaches' dashboard), the six sign-in pages, 404
+                        link, checkpoint and test), my-courses, admin (the coaches' dashboard), the six sign-in pages, 404
   src/lib/              content.ts (reads content/, sanitises, item pages, counts), api.ts (hub client), session.ts,
                         remote.ts + courseProgress.ts (shared progress reads), videoTracking.ts (YouTube heartbeats),
                         checkpoint.ts (what the form still needs), upload.ts (browser upload to R2 with progress),
@@ -133,13 +135,15 @@ web/                    the new site: Astro + React islands + Tailwind, served a
                         itemLabel.ts, redirect.ts, format.ts, icons.ts
   src/components/       header, footer, ThemeToggle, UserMenu, NotificationBell, Icon, course/ (progress panel,
                         units, ring), admin/ (AdminApp shell and one view each: Today, Queue, Grade, Students,
-                        Student, StudentCourse, Activity, Storage),
-                        learn/ (item page; Checkpoint, CheckpointForm, FileField, AnswerList for checkpoints),
+                        Student, StudentCourse, Tests, Activity, Storage),
+                        learn/ (item page; Checkpoint, CheckpointForm, FileField, AnswerList for checkpoints;
+                        TestTaker for tests; SlideDeck for rebuilt slides), test/ (Question, Review: a test's
+                        questions and an attempt question by question, shared by the test page and the Grade view),
                         progress/ (My Courses, Home card, catalog ring), auth/ (sign-in forms)
   scripts/              sync-assets.mjs (images), zip-starters.mjs (each exercise's starter/ to
                         public/starters/<checkpoint id>.zip); both run before dev and build
   tests/build.test.ts   checks every page in dist/ (one h1, skip link, nav, no /site/, images exist, catalog links,
-                        an item page per reading/video/slides/link/checkpoint, no lesson or checkpoint text in the
+                        an item page per reading/video/slides/link/checkpoint/test, no lesson or checkpoint text in the
                         static pages, a zip for every starter and nothing else)
 ```
 
@@ -148,16 +152,25 @@ one page, autosaved as a draft, a Review step, then Hand it in), the receipt onc
 the coach's feedback pinned on top when it comes back. Files go from the browser straight to R2 with a link the hub
 signs, so uploads need the hub's `R2_*` settings (see the hub README, "Tech uploads (Cloudflare R2)").
 
+A test page starts an attempt, shows every question with a count of those answered, saves answers as they go, and
+names unanswered questions before Hand in; the result follows question by question. Tests themselves (questions and
+answer keys) are kept only in the hub: coaches upload each test's markdown on the dashboard's Tests page (format in
+the hub README, "Tech tests"), so no answer key is in this repo. A rebuilt slide deck opens in the slide viewer (one
+slide at a time, arrow keys, Full screen, Show all slides).
+
 The dashboard is one page, `/admin`, and one island; the view is in the hash (`#/today`, `#/queue`, `#/grade/{id}`,
-`#/students?tab=`, `#/students/{id}`, `#/students/{id}/courses/{course}`, `#/activity`, `#/storage`), which is what the
+`#/students?tab=`, `#/students/{id}`, `#/students/{id}/courses/{course}`, `#/tests`, `#/tests/{item}`, `#/activity`,
+`#/storage`), which is what the
 hub's notification links point at (`#/accounts?status=pending` opens the Pending tab). Filters live in the address
 and replace it, so Back goes to the previous place, not the previous filter. Everything it shows is read from the hub
 after sign-in and refreshed every 30 seconds while the tab is visible; Storage and the Admins tab are for the
 superadmin.
 
-Item pages hold only the public outline (title, course, unit, what comes next); what an item contains is fetched
+Item pages hold only the public outline (title, course, unit, the steps before and after); what an item contains is fetched
 from the hub after sign-in, so nothing behind the login is in the static site. When `content/` changes, run the hub's
 content import along with the site deploy: the pages come from `content/`, their contents from the database.
+Their bottom bar is Previous / Mark complete and continue / Next with Back to the course: completing an item opens the
+next one (or, from the last, the course page); once done, Next is the main button.
 
 The web site runs in Docker only (`docker-compose.yml` at the repo root; `node_modules` lives in a volume). Run these from the repo root, with the hub running for sign-in (`neurodev-hub`: `docker compose up`; API on 8001, Mailpit on 8026):
 

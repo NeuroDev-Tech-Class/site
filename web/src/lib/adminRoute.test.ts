@@ -14,6 +14,8 @@ describe('parseRoute', () => {
     ['#/activity?type=submission_graded&student=5f0c&course=gimp',
       { view: 'activity', type: 'submission_graded', student: '5f0c', course: 'gimp' }],
     ['#/storage', { view: 'storage' }],
+    ['#/tests', { view: 'tests' }],
+    ['#/tests/i_5', { view: 'test', id: 'i_5' }],
   ] as [string, AdminRoute][])('%s', (hash, route) => {
     expect(parseRoute(hash)).toEqual({ route })
   })
@@ -28,7 +30,7 @@ describe('parseRoute', () => {
     expect(parseRoute('#/students?tab=nope')).toEqual({ route: { view: 'students', tab: 'current' } })
   })
 
-  test.each(['', '#', '#/', '#/nowhere', '#/grade/', '#/students/5f0c/nope'])('%j opens Today', hash => {
+  test.each(['', '#', '#/', '#/nowhere', '#/grade/', '#/students/5f0c/nope', '#/tests/i_5/nope'])('%j opens Today', hash => {
     expect(parseRoute(hash)).toEqual({ route: { view: 'today' }, redirect: '#/today' })
   })
 
@@ -55,6 +57,8 @@ describe('routeHash', () => {
     [{ view: 'student-course', id: '5f0c', course: 'gimp' }, '#/students/5f0c/courses/gimp'],
     [{ view: 'activity', type: 'submission_graded' }, '#/activity?type=submission_graded'],
     [{ view: 'storage' }, '#/storage'],
+    [{ view: 'tests' }, '#/tests'],
+    [{ view: 'test', id: 'i_5' }, '#/tests/i_5'],
   ] as [AdminRoute, string][])('%j', (route, hash) => {
     expect(routeHash(route)).toBe(hash)
     expect(parseRoute(hash).route).toEqual(route)

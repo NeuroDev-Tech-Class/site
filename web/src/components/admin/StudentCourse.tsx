@@ -11,15 +11,15 @@ import { ErrorLine, LoadError, Loading, problemWords, ViewHeading } from './shar
 
 type OutlineItem = CourseOutline['units'][number]['items'][number]
 
-// What a coach may mark for a student: the same things a student marks with Mark complete
+// What a coach may mark for a student: what a student marks with Mark complete, and a test taken on its old Form
 const MARKABLE = ['lesson', 'video', 'slides', 'link']
 
 const isExercise = (item: OutlineItem) => item.type === 'note' && item.tags.includes('exercise')
-const markable = (item: OutlineItem) => MARKABLE.includes(item.type) || isExercise(item)
+const isTest = (item: OutlineItem) => item.type === 'test' && item.status === 'ok'
+const markable = (item: OutlineItem) => MARKABLE.includes(item.type) || isExercise(item) || isTest(item)
 const noteText = (html: string | null | undefined) => (html ?? '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().slice(0, 120)
 
 function Where({ item, progress, latest }: { item: OutlineItem, progress?: ItemProgress, latest?: Submission }) {
-  if (item.type === 'test' && item.status === 'needs_content') return <span className="text-(--muted)">Taken on its form for now</span>
   const word = statusWord(item.type, progress?.status ?? null)
   const behind = progress?.status === 'done' ? [] : (progress?.videos ?? []).map(v => v.percent)
   return (
@@ -91,7 +91,7 @@ export default function StudentCourse({ id, course }: { id: string, course: stri
                     <span className="w-28 shrink-0 font-heading text-xs font-bold tracking-[0.08em] text-(--item-label) uppercase">{label}</span>
                     <span data-testid="title" className="min-w-0 flex-1">{title}</span>
                     <Where item={item} progress={state} latest={latest.get(item.id)} />
-                    {markable(item) && (
+                    {markable(item) && !(isTest(item) && done && latest.has(item.id)) && (
                       <button type="button" className="btn-quiet sm:ml-2" disabled={busy !== null}
                         aria-label={`Mark ${title} ${done ? 'not done' : 'done'}`} onClick={() => void mark(item, !done)}>
                         {busy === item.id ? 'Saving…' : done ? 'Mark not done' : 'Mark done'}

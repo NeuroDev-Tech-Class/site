@@ -18,7 +18,7 @@ const UNITS: UnitView[] = [
   ] },
 ]
 const PAGE_IDS = ['i_r', 'i_v']
-const COUNTED = [{ id: 'i_r' }, { id: 'i_ex' }, { id: 'i_c', type: 'checkpoint' }, { id: 'i_v' }]
+const COUNTED = [{ id: 'i_r' }, { id: 'i_ex' }, { id: 'i_c' }, { id: 'i_v' }]
 const status = (item_id: string, value: ItemStatus['status']): ItemStatus =>
   ({ item_id, status: value, done_at: null, opened_at: null })
 
@@ -113,6 +113,23 @@ describe('approved', () => {
     expect(await within(await waitForItem('i_c')).findByText(words)).toBeTruthy()
   })
 
+  test.each([
+    ['submitted', 'Submitted', '0 of 1 done'],
+    ['returned', 'Try again', '0 of 1 done'],
+    ['done', 'Done', '1 of 1 done'],
+  ] as const)('a test %s says %s, and counts only once finished', async (value, words, done) => {
+    const units: UnitView[] = [{ id: 'u_3', number: '3', title: 'Tests', description: '', items: [
+      { id: 'i_t', type: 'test', label: 'Test', title: 'Unit 3 Test', html: null, exercise: false, counts: true },
+    ] }]
+    fakeCourseHub(fetchMock, { counted: [{ id: 'i_t' }], items: [status('i_t', value)] })
+    const { default: CourseUnits } = await import('./CourseUnits')
+    render(<CourseUnits courseId="gimp" units={units} />)
+    const tests = unit('Tests')
+    expect(await within(tests).findByText(words)).toBeTruthy()
+    expect(within(tests).getByText(done)).toBeTruthy()
+    expect(within(tests).getByRole('link', { name: 'Unit 3 Test' }).getAttribute('href')).toBe('/learn/i_t')
+  })
+
   test("a returned checkpoint shows the coach's feedback from its newest attempt, as plain text", async () => {
     const hub = await renderPage({
       items: [status('i_c', 'returned')],
@@ -186,6 +203,15 @@ describe('approved', () => {
     await waitFor(() => expect(item.getAttribute('data-just-done')).toBe('true'))
     expect(item.scrollIntoView).toHaveBeenCalled()
     expect(window.location.search).toBe('')
+  })
+
+  test('coming back from the last item with the course finished stays at the top, where it says so', async () => {
+    history.replaceState(null, '', '/courses/gimp?done=i_v')
+    await renderPage({ items: ['i_r', 'i_ex', 'i_c', 'i_v'].map(id => status(id, 'done')) })
+    expect(await screen.findByText('You finished this course!')).toBeTruthy()
+    const item = await waitForItem('i_v')
+    await waitFor(() => expect(window.location.search).toBe(''))
+    expect(item.scrollIntoView).not.toHaveBeenCalled()
   })
 
   test('signing out from the menu on this page takes the progress and checkboxes away', async () => {

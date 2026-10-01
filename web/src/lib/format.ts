@@ -42,7 +42,10 @@ const MINUTE = 60_000
 const HOUR = 60 * MINUTE
 const DAY = 24 * HOUR
 
-const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'} ago`
+/** "1 point", "3 points" */
+export const countWords = (count: number, word: string): string => `${count} ${word}${count === 1 ? '' : 's'}`
+
+const plural = (n: number, word: string) => `${countWords(n, word)} ago`
 
 /** Relative wording for feeds. A clock running ahead of the stored time reads as "just now". */
 export function timeAgo(value: DateInput, now: Date = new Date()): string {

@@ -87,7 +87,7 @@ function Row({ courseId, item, statuses }: { courseId: string, item: ItemView, s
       </span>
       {word && (
         <span className="done-chip self-start sm:self-auto">
-          {countsDone(item.type, status) && <Icon name="check" size={16} />}
+          {countsDone(status) && <Icon name="check" size={16} />}
           {word}
         </span>
       )}
@@ -103,27 +103,29 @@ export default function CourseUnits({ courseId, units }: { courseId: string, uni
     : null
   const ready = state.status === 'ready'
 
-  // Back from Mark complete (?done=<item>): bring that item into view once, then tidy the address
+  // Back from the last item (?done=<item>): bring it into view once, then tidy the address. With the course
+  // finished, the page stays at the top, where the progress panel says so
+  const finished = state.status === 'ready' && state.progress.next_item === null
   useEffect(() => {
     if (!ready) return
     const url = new URL(window.location.href)
     const id = url.searchParams.get('done')
     if (!id) return
     const row = document.getElementById(`item-${id}`)
-    if (row) {
+    if (row && !finished) {
       const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
       row.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' })
       row.dataset.justDone = 'true'
     }
     url.searchParams.delete('done')
     history.replaceState(history.state, '', url.pathname + url.search + url.hash)
-  }, [ready])
+  }, [ready, finished])
 
   return (
     <>
       {units.map(unit => {
         const counted = unit.items.filter(i => i.counts)
-        const done = statuses ? counted.filter(i => countsDone(i.type, statuses.get(i.id) ?? null)).length : 0
+        const done = statuses ? counted.filter(i => countsDone(statuses.get(i.id) ?? null)).length : 0
         return (
           <section key={unit.id} id={`unit-${unit.id}`} className="panel mt-8 scroll-mt-6">
             <div className="flex flex-wrap items-center gap-3">

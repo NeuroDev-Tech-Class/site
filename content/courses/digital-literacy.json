@@ -29,7 +29,12 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "slides_url": "https://docs.google.com/presentation/u/0/d/1A5Wxnjh8EWCwFQYhK-_iWr0yY05UBOP80svrONxToss"
+            "slides": [
+              "<h2>Digital Literacy: “When am I gonna use this stuff?”</h2>",
+              "<h2>How will technology help me in my personal life?</h2>\n<p><img src=\"/images/slides/when-am-i-going-to-use-this/01.webp\" alt=\"Diagram of many connected people icons with chat, photo, and money symbols, representing a social network\"></p>\n<p><img src=\"/images/slides/when-am-i-going-to-use-this/02.webp\" alt=\"Illustration of people using laptops around a large clock, books, and a phone, representing time management\"></p>\n<p><img src=\"/images/slides/when-am-i-going-to-use-this/03.webp\" alt=\"Phone and smartwatch showing a fitness app with running, meals, and task icons\"></p>\n<p><img src=\"/images/slides/when-am-i-going-to-use-this/04.webp\" alt=\"Hand typing on a keyboard with digital padlock and security icons overlaid\"></p>\n<p><img src=\"/images/slides/when-am-i-going-to-use-this/05.webp\" alt=\"Icons of a shopping cart, webpage, and shipping truck connected in a circle\"></p>\n<p><img src=\"/images/slides/when-am-i-going-to-use-this/06.webp\" alt=\"Laptop displaying a bookshelf on its screen in front of a real library\"></p>\n<ul>\n<li>Access to limitless information</li>\n<li>Improved communication</li>\n<li>Better time management</li>\n<li>Tools for improving physical health</li>\n<li>Online safety</li>\n<li>More effective shopping, job hunting, and much much more</li>\n</ul>",
+              "<h2>How will technology help me in my professional life?</h2>\n<ul>\n<li>Increased productivity and cost efficiency</li>\n<li>More effective collaboration</li>\n<li>Higher security</li>\n<li>Backups for important documents</li>\n<li>More positive work experience</li>\n</ul>\n<p><img src=\"/images/slides/when-am-i-going-to-use-this/07.webp\" alt=\"Two IT professionals viewing a digital screen of cloud and network icons\"></p>",
+              "<div class=\"video-embed\"><iframe src=\"https://www.youtube.com/embed/p2k3C-iB88w\" title=\"Video\" allowfullscreen></iframe></div>"
+            ]
           }
         },
         {
@@ -52,7 +57,16 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "slides_url": "https://docs.google.com/presentation/d/12idFrbgFHmDyqFY7wbD84SgNzaU1u8qxcUlJuP3DJ8I"
+            "slides": [
+              "<h2>Basics of Computer Safety</h2>",
+              "<h2>Computers are complicated</h2>\n<p>It’s a miracle they even work at all! So it’s no surprise that a lot can go wrong.</p>",
+              "<div class=\"video-embed\"><iframe src=\"https://www.youtube.com/embed/xfKn5OjHLqQ\" title=\"Video\" allowfullscreen></iframe></div>",
+              "<h2>Protecting your computer</h2>\n<div class=\"video-embed\"><iframe src=\"https://www.youtube.com/embed/6mMZFoXbKqI\" title=\"Video\" allowfullscreen></iframe></div>",
+              "<h2>Protecting yourself online</h2>\n<ul>\n<li>Don’t change passwords often - this encourages you to pick weak, easy-to-crack passwords. Instead choose a strong password the first time and use a different one for each site in case one is compromised. Keep track of your passwords (Google Chrome and iCloud Keychain).</li>\n<li>Use two-factor authentication.</li>\n<li><a href=\"https://haveibeenpwned.com/\">https://haveibeenpwned.com/</a></li>\n<li>Don’t click on suspicious links. DO NOT share personal information online. (Look at some examples of phishing.)</li>\n<li>Don’t open random <code>.exe</code> files if you don’t completely trust the source.</li>\n<li><a href=\"https://www.udemy.com/course/computer-literacy/learn/lecture/15741298#overview\">https://www.udemy.com/course/computer-literacy/learn/lecture/15741298#overview</a></li>\n</ul>\n<p><img src=\"/images/slides/basics-of-computer-safety/01.webp\" alt=\"Cartoon of a masked thief reaching out of a computer screen to grab a man&#39;s credit card\"></p>",
+              "<h2>Do I need a VPN?</h2>\n<p>Maybe (usually not.)</p>\n<p>Nowadays it’s harder for strangers to snoop and see data; over 90% of web connections are encrypted. Very little need to waste time and money on a VPN.</p>\n<p>If you’re not being stalked, living in a country where Internet is censored, or trying to watch Netflix shows that aren’t available in your area, you’re probably fine.</p>\n<p>Instead use ad blockers like uBlock Origin and privacy extensions like Privacy Badger to protect yourself from advertisers.</p>\n<p><img src=\"/images/slides/basics-of-computer-safety/02.webp\" alt=\"Hand with a glowing VPN shield icon surrounded by Wi-Fi, lock, and globe symbols\"></p>",
+              "<h2>Why is my computer slow?</h2>\n<ul>\n<li>Run Storage Sense to remove unnecessary files</li>\n<li>Defragment and Optimize Drive</li>\n<li>Uninstall unused programs</li>\n<li>Stop programs from running on startup</li>\n<li>Scan for viruses</li>\n<li>Check for updates</li>\n<li>Switch to “High Performance” settings</li>\n<li>Check disk drive</li>\n<li>If all else fails: reformat &amp; reinstall</li>\n</ul>\n<div class=\"video-embed\"><iframe src=\"https://www.youtube.com/embed/fd6oYUVrcvk\" title=\"Video\" allowfullscreen></iframe></div>",
+              "<h2>Backing Up Files</h2>\n<p>Backup your files regularly!!!</p>\n<p>External Hard Drive, Windows Backup, Google Drive</p>\n<p><img src=\"/images/slides/basics-of-computer-safety/03.webp\" alt=\"External USB storage drive with a cable\"></p>\n<p><img src=\"/images/slides/basics-of-computer-safety/04.webp\" alt=\"Windows 10 Settings screen showing the Backup options page\"></p>\n<p><img src=\"/images/slides/basics-of-computer-safety/05.webp\" alt=\"Google Drive logo\"></p>"
+            ]
           }
         },
         {
@@ -190,11 +204,9 @@
           "legacy_key": "0-14",
           "type": "test",
           "title": "Unit 1 Test",
-          "status": "needs_content",
+          "status": "ok",
           "tags": [],
-          "payload": {
-            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLScr3Av6NjYj078UyzPSgV_avz7BLk9WN-ftffa5a8AsO4JVPw/viewform?usp=sf_link"
-          }
+          "payload": {}
         }
       ]
     },
@@ -212,7 +224,17 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "slides_url": "https://docs.google.com/presentation/d/1YgPZ86xzO6iCwPE-fJGx4Rn6GzQXY3tiKuxAkDjvlog"
+            "slides": [
+              "<h2>What is an operating system?</h2>\n<p><img src=\"/images/slides/what-is-an-operating-system/01.webp\" alt=\"Apple logo\"></p>\n<p><img src=\"/images/slides/what-is-an-operating-system/02.webp\" alt=\"Windows logo\"></p>\n<p><img src=\"/images/slides/what-is-an-operating-system/03.webp\" alt=\"Linux penguin mascot (Tux) logo\"></p>",
+              "<h2>What does an operating system do?</h2>\n<p>Your operating system (OS) is the “system software” that manages all of the other programs on your computer.</p>\n<p>You communicate back and forth with the OS through a user interface, and the OS in turn communicates with programs and hardware as needed.</p>",
+              "<h2>Graphical User Interface (GUI)</h2>\n<p>Uses graphics, icons, and other visual elements to help the user interact with programs. You use a mouse to click on icons, menus, and buttons. A GUI is more visually appealing and user-friendly than a CLI, but it can also be slower and less efficient for many tasks.</p>\n<p><img src=\"/images/slides/what-is-an-operating-system/04.webp\" alt=\"Windows 10 desktop showing app icons and an open file explorer window\"></p>",
+              "<h2>Command Line Interface (CLI)</h2>\n<p>Uses text-based commands which are typed into a terminal, like old-school computers. This offers more speed and utility and flexibility compared to a GUI. This can be intimidating for people who are new to computers, so it’s recommended for advanced users for specific tasks.</p>\n<p><img src=\"/images/slides/what-is-an-operating-system/05.webp\" alt=\"Terminal window showing Ubuntu WSL with git status output\"></p>",
+              "<h2>Application Programming Interface (API)</h2>\n<p>An API is how programs interact with the OS, allowing them to communicate and share resources. The OS acts as a middleman or interpreter between hardware and programs, eliminating the need for programmers to write lengthy code for each program. Instead, the OS handles common tasks, and apps aren&#39;t required to know any hardware specifics.</p>\n<p><img src=\"/images/slides/what-is-an-operating-system/06.webp\" alt=\"Diagram showing User, Application, Operating System, and Hardware stacked in layers\"></p>",
+              "<h2>Application Programming Interface (API)</h2>\n<p>For example, Microsoft Word doesn’t need to know how to print documents. It just sends data to the OS, which sends instructions to the printer. Programs like MS Word don’t need to take into account the thousands of different types of printers with different hardware, and printers don’t need to care about what programs are using them. This makes life easier for both users and programmers.</p>\n<p><img src=\"/images/slides/what-is-an-operating-system/07.webp\" alt=\"Microsoft Word logo\"></p>\n<p><img src=\"/images/slides/what-is-an-operating-system/02.webp\" alt=\"Windows logo\"></p>\n<p><img src=\"/images/slides/what-is-an-operating-system/08.webp\" alt=\"Canon inkjet printer printing a page\"></p>",
+              "<h2>How can I tell what my operating system is?</h2>",
+              "<h2>Microsoft Windows</h2>\n<p><img src=\"/images/slides/what-is-an-operating-system/09.webp\" alt=\"Windows 10 Start menu\"></p>\n<p><img src=\"/images/slides/what-is-an-operating-system/10.webp\" alt=\"Windows 11 Start menu\"></p>\n<p>Windows 10</p>\n<p>Windows 11</p>",
+              "<h2>Apple macOS</h2>\n<p><img src=\"/images/slides/what-is-an-operating-system/11.webp\" alt=\"About This Mac window showing OS X Yosemite system information\"></p>\n<p><img src=\"/images/slides/what-is-an-operating-system/12.webp\" alt=\"macOS Ventura System Settings wallpaper picker\"></p>\n<p>OS X Yosemite</p>\n<p>macOS Ventura</p>"
+            ]
           }
         },
         {
@@ -314,11 +336,9 @@
           "legacy_key": "1-9",
           "type": "test",
           "title": "Unit 2 Test",
-          "status": "needs_content",
+          "status": "ok",
           "tags": [],
-          "payload": {
-            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSeenFbj5KMZxnhepGBl91inOmCFtBVolk_n7UmFLd-86_ormQ/viewform?usp=share_link"
-          }
+          "payload": {}
         }
       ]
     },
@@ -336,7 +356,16 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "slides_url": "https://docs.google.com/presentation/d/1o6iHCSnfMbyhYXQq_TqNxu1VshKGRqylQ4RISb8GcwY"
+            "slides": [
+              "<h2>The Internet &amp; the World Wide Web</h2>\n<p>what’s the difference?</p>",
+              "<h2>Internet and the World Wide Web</h2>\n<h3>Internet</h3>\n<p><img src=\"/images/slides/the-internet-the-world-wide-web/01.webp\" alt=\"Simple globe icon representing the Internet\"></p>\n<p>The Internet is a global network of interconnected computers and devices. Historically, the Internet was built on top of the existing telephone network. Today, the vast majority of Internet traffic is transmitted over fiber optic cables, which use pulses of light to transmit data over long distances.</p>\n<h3>World Wide Web</h3>\n<p><img src=\"/images/slides/the-internet-the-world-wide-web/02.webp\" alt=\"Icon of three overlapping browser windows representing the World Wide Web\"></p>\n<p>The World Wide Web (WWW) is a system of linked web pages which are accessed through the Internet. Websites are hosted on web servers, and users must enter their Uniform Resource Locator (URL) to access them. URLs are made up of a protocol, domain name, and specific page or resource.</p>",
+              "<div class=\"video-embed\"><iframe src=\"https://www.youtube.com/embed/J8hzJxb0rpc\" title=\"Video\" allowfullscreen></iframe></div>",
+              "<h2>A brief history of the Internet</h2>\n<p>The Internet wasn’t invented by a single person, but was a collaborative effort from many researchers and scientists over several decades. It was developed in the late 1960s by the US Department of Defense&#39;s Advanced Research Projects Agency (ARPA) to allow researchers to easily communicate with each other. In the ‘70s, standardized communication protocols allowed these networks to be interconnected globally, leading to the creation of the Internet.</p>\n<p><img src=\"/images/slides/the-internet-the-world-wide-web/03.webp\" alt=\"Black and white photo of researchers working with early computer equipment\"></p>",
+              "<h2>A brief history of the Internet</h2>\n<p>The World Wide Web (WWW) was invented by Sir Tim Berners-Lee in 1989. It was designed as a way to easily share information across the Internet via hyperlinks, and was first made available to the public in 1991. In the mid ‘90s, web browsers such as Netscape Navigator and Microsoft&#39;s Internet Explorer popularized the WWW, and search engines like Yahoo! and Google revolutionized the way people found information online.</p>\n<p><img src=\"/images/slides/the-internet-the-world-wide-web/04.webp\" alt=\"Tim Berners-Lee sitting beside an early computer displaying the first World Wide Web page\"></p>",
+              "<div class=\"video-embed\"><iframe src=\"https://www.youtube.com/embed/n71TUnTNdw8\" title=\"Video\" allowfullscreen></iframe></div>",
+              "<h2>“Why do I need to know this?”</h2>\n<p>The Internet has become an integral part of our daily lives, impacting the way we communicate, access information, work, and engage with others. We can better appreciate the efforts and innovations that have shaped the digital landscape by learning about its history. We can also keep up with new technological developments, security issues, and potential future developments. Understanding the Internet and the WWW empowers us to be more informed, responsible, and adaptable digital citizens.</p>",
+              "<h2>Bill Gates</h2>\n<blockquote>\n<p>“The Internet is becoming the town square for the global village of tomorrow.”</p>\n</blockquote>"
+            ]
           }
         },
         {
@@ -417,7 +446,25 @@
           "status": "ok",
           "tags": [],
           "payload": {
-            "slides_url": "https://docs.google.com/presentation/d/1Ui78wk2fnLQK55Za7MMA2VrRrSksnXzY4nHEbmHHXlk"
+            "slides": [
+              "<h2>Social networking: the pros and cons</h2>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/01.webp\" alt=\"Facebook logo\"></p>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/02.webp\" alt=\"Twitter bird logo\"></p>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/03.webp\" alt=\"LinkedIn logo\"></p>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/04.webp\" alt=\"Instagram logo\"></p>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/05.webp\" alt=\"Discord logo\"></p>",
+              "<h2>What is Social Media?</h2>\n<ul>\n<li>Social media is any online platform that lets users to create and share content, as well as interact with each other through comments and messages. They tend to form virtual communities based on shared interests and connections.</li>\n<li>Examples include YouTube, Facebook, Instagram, Twitter, Snapchat, LinkedIn, TikTok, Pinterest, Reddit, and Discord.</li>\n</ul>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/06.webp\" alt=\"Illustration of two hands holding phones surrounded by social media app icons and connected people\"></p>",
+              "<h2>What is Social Media?</h2>\n<ul>\n<li>In 2021, 70% of teenagers in the U.S. said they use social media multiple times a day, up from 34% in 2012 (Common Sense Media, 2021).</li>\n<li>Social media use has been linked to both positive and negative effects on mental health, social skills, and self-esteem.</li>\n</ul>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/06.webp\" alt=\"Illustration of two hands holding phones surrounded by social media app icons and connected people\"></p>",
+              "<h2>The Pros</h2>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/07.webp\" alt=\"Laughing face emoji with squinted eyes\"></p>",
+              "<h2>Connectivity &amp; Communication</h2>\n<ul>\n<li>Social media allows people to stay in touch with friends and family who live far away, and build new connections with others who share similar interests.</li>\n<li>It also provide opportunities for professional networking and career development.</li>\n</ul>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/08.webp\" alt=\"Businessman touching a glowing network of connected people icons\"></p>",
+              "<h2>Access to Information</h2>\n<ul>\n<li>Social media platforms offer real-time news updates and a space for sharing ideas and opinions, allowing users to learn from different perspectives and viewpoints.</li>\n<li>48% of young adults in the U.S. get their news from social media (Common Sense Media, 2019).</li>\n<li>It can also be a tool for online learning and collaboration.</li>\n</ul>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/09.webp\" alt=\"Close-up of a hand scrolling news headlines on a phone\"></p>",
+              "<h2>Creative Expression &amp; Self-Discovery</h2>\n<ul>\n<li>Social media provides an easy way for people to share their talents and interests with a wider audience.</li>\n<li>It also allows people to to join online communities based on shared interests and values, creating a sense of belonging and connection with others who share their passions.</li>\n</ul>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/10.webp\" alt=\"Hand drawing a landscape on a tablet with a stylus\"></p>",
+              "<h2>Business &amp; Marketing</h2>\n<ul>\n<li>Social media platforms have become essential tools for businesses to connect with their target audience and promote their products.</li>\n<li>It allows businesses to provide quick and personalized customer service, increasing customer satisfaction and improving brand reputation.</li>\n</ul>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/11.webp\" alt=\"Icons of a shopping cart, gift, and online store connected in a circle\"></p>",
+              "<h2>The Cons</h2>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/12.webp\" alt=\"Worried face emoji with a sweat drop\"></p>",
+              "<h2>Mental Health &amp; Well-being</h2>\n<ul>\n<li>Social comparison and “FOMO” (fear of missing out) can be detrimental to mental health</li>\n<li>27% of teenagers feel social media negatively affects their self-esteem</li>\n<li>43% of teenagers in the U.S. report experiencing cyberbullying on social media</li>\n</ul>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/13.webp\" alt=\"Donut chart showing the share of teens with negatively affected self-esteem\"></p>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/14.webp\" alt=\"Donut chart showing the share of teens who experienced cyberbullying\"></p>",
+              "<h2>Mental Health &amp; Well-being</h2>\n<ul>\n<li>Social media addiction is linked to negative mental health outcomes (self-harm, suicidal behavior, poor life satisfaction)</li>\n<li>Media multitasking is linked to negative effects on cognitive control, academic performance, social skills</li>\n</ul>\n<p>Source: ScienceDirect - Social media use and its impact on adolescent mental health</p>",
+              "<h2>Privacy &amp; Security Concerns</h2>\n<ul>\n<li>Social media platforms collect vast amounts of user data, raising privacy concerns and potential misuse of personal information.</li>\n<li>Users also need to be aware of cyber threats such as phishing and identity theft, emphasizing the need for strong security measures and vigilance in online interactions.</li>\n</ul>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/15.webp\" alt=\"Glowing digital padlock connected to a network of data points\"></p>",
+              "<h2>Misinformation &amp; Fake News</h2>\n<ul>\n<li>Social media can allow false information and fake news to spread rapidly and influence public opinion.</li>\n<li>The ease of sharing content on social media platforms can contribute to the rapid dissemination of misinformation.</li>\n</ul>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/16.webp\" alt=\"Magnifying glass over a newspaper headline zooming in on the word &quot;Fake&quot;\"></p>",
+              "<h2>Misinformation &amp; Fake News</h2>\n<ul>\n<li>Read past the headline: Check the content for more context and don’t assume that the headline provides the full picture.</li>\n<li>Check the author: Verify the credibility and expertise of the source.</li>\n<li>Evaluate other sources: Cross-reference the information with other reliable and reputable sources.</li>\n<li>Consult experts: Reach out to those who know about the subject.</li>\n<li>Check your biases: Be aware of your own biases and how they may influence your judgment of the information. Beware of echo chambers.</li>\n<li>Consider if it&#39;s satire: Make sure the content isn&#39;t intended as humor or satire, as these can sometimes be mistaken for genuine news.</li>\n</ul>",
+              "<h2>Decreased Productivity</h2>\n<ul>\n<li>Exposure to blue light and constant mental stimulation can disrupt the body’s production of melatonin, making it harder for the brain to wind down and prepare for sleep.</li>\n<li>45% of teenagers in the U.S. said they are online almost constantly (Pew Research Center, 2018).</li>\n</ul>\n<p><img src=\"/images/slides/social-networking-the-pros-and-cons/17.webp\" alt=\"Man asleep at his desk with his head resting on the keyboard\"></p>",
+              "<h2>Finding Balance</h2>",
+              "<h2>Finding Balance</h2>\n<ul>\n<li>Turn off notifications: Disable non-essential notifications to reduce distractions and fight the urge to constantly check your phone.</li>\n<li>Set time limits: Use your device settings to allocate specific periods for social media use and avoid excessive screen time, especially before bedtime.</li>\n<li>Prioritize meaningful interactions: Focus on connecting with close friends and family and minimize exposure to negative or unproductive content.</li>\n<li>Cultivate offline hobbies and relationships: Participate in activities that don’t involve screens and foster face-to-face interactions to build stronger personal connections.</li>\n<li>Schedule a digital detox: Regularly set aside time for unplugging from social media and electronic devices, allowing for relaxation and reconnection with offline activities.</li>\n</ul>"
+            ]
           }
         },
         {
@@ -461,11 +508,9 @@
           "legacy_key": "2-11",
           "type": "test",
           "title": "Unit 3 Test",
-          "status": "needs_content",
+          "status": "ok",
           "tags": [],
-          "payload": {
-            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSerBjfErFZmleRQKWns2dUar3se9TOzUAFYXUmN_g8x9cbJ0w/viewform?usp=sf_link"
-          }
+          "payload": {}
         }
       ]
     }

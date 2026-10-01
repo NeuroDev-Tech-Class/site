@@ -11,6 +11,8 @@ export type AdminRoute =
   | { view: 'student-course', id: string, course: string }
   | { view: 'activity', type?: string, student?: string, course?: string }
   | { view: 'storage' }
+  | { view: 'tests' }
+  | { view: 'test', id: string }
 
 const TABS: StudentsTab[] = ['pending', 'current', 'old', 'admins']
 const TODAY = { route: { view: 'today' } as AdminRoute, redirect: '#/today' }
@@ -41,6 +43,8 @@ export function parseRoute(hash: string): { route: AdminRoute, redirect?: string
   if (view === 'queue' && parts.length === 1) return { route: { view: 'queue', ...filters(params, ['course', 'q']) } }
   if (view === 'grade' && parts.length === 2) return { route: { view: 'grade', id } }
   if (view === 'storage' && parts.length === 1) return { route: { view: 'storage' } }
+  if (view === 'tests' && parts.length === 1) return { route: { view: 'tests' } }
+  if (view === 'tests' && parts.length === 2) return { route: { view: 'test', id } }
   if (view === 'activity' && parts.length === 1) {
     return { route: { view: 'activity', ...filters(params, ['type', 'student', 'course']) } }
   }
@@ -74,5 +78,7 @@ export function routeHash(route: AdminRoute): string {
     case 'student-course': return `#/students/${e(route.id)}/courses/${e(route.course)}`
     case 'activity': return withQuery('#/activity', { type: route.type, student: route.student, course: route.course })
     case 'storage': return '#/storage'
+    case 'tests': return '#/tests'
+    case 'test': return `#/tests/${e(route.id)}`
   }
 }

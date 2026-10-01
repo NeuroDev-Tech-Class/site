@@ -24,7 +24,7 @@ class FakePlayer {
 
 const PAGE = (id: string, type: ItemPageView['type']): ItemPageView => ({
   id, type, label: type, title: 'Watch this', course: { id: 'gimp', heading: 'GIMP', category: 'media' },
-  unit: { id: 'u_1', title: 'Basics' }, next: null,
+  unit: { id: 'u_1', title: 'Basics' }, previous: null, next: null,
 })
 
 let fetchMock: Mock
@@ -140,7 +140,7 @@ describe('a video item', () => {
     expect(await screen.findByText('Watch the video to finish (50% watched).')).toBeTruthy()
     p.time = 92
     p.emit(STATE.ENDED)
-    await waitFor(() => expect(screen.getByRole('button', { name: 'Mark complete' }).hasAttribute('disabled')).toBe(false))
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Mark complete and finish' }).hasAttribute('disabled')).toBe(false))
     expect(screen.queryByText(/Watch the video/)).toBeNull()
   })
 

@@ -1,4 +1,4 @@
-import { cleanup, render, screen, waitFor } from '@testing-library/react'
+import { cleanup, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { Mock } from 'vitest'
 import { afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest'
@@ -13,6 +13,7 @@ const PAGE: ItemPageView = {
   id: 'i_r', type: 'lesson', label: 'Reading', title: 'Layers',
   course: { id: 'gimp', heading: '2D Digital Art — GIMP', category: 'media' },
   unit: { id: 'u_1', title: 'Basics' },
+  previous: { href: '/learn/i_v', text: 'Video: Tools' },
   next: { href: '/courses/gimp#item-i_ex', text: 'Exercise 1.1: Try it.' },
 }
 
@@ -111,20 +112,46 @@ describe('a reading', () => {
     await waitFor(() => expect(calls()).toContain('POST /api/v1/tech/items/i_r/open'))
   })
 
-  test('Mark complete saves it and goes back to the course at this item', async () => {
+  test('Mark complete and continue saves it and opens the next item', async () => {
     hub()
     await renderItem()
-    await userEvent.click(await screen.findByRole('button', { name: 'Mark complete' }))
-    await waitFor(() => expect(navigate).toHaveBeenCalledWith('/courses/gimp?done=i_r'))
+    await userEvent.click(await screen.findByRole('button', { name: 'Mark complete and continue' }))
+    await waitFor(() => expect(navigate).toHaveBeenCalledWith('/courses/gimp#item-i_ex'))
     expect(calls()).toContain('POST /api/v1/tech/items/i_r/complete')
+  })
+
+  test('on the last item it finishes, going back to the course page', async () => {
+    hub()
+    await renderItem({ ...PAGE, next: null })
+    await userEvent.click(await screen.findByRole('button', { name: 'Mark complete and finish' }))
+    await waitFor(() => expect(navigate).toHaveBeenCalledWith('/courses/gimp?done=i_r'))
+  })
+
+  test('Previous, Next and the way back to the course are always there', async () => {
+    hub()
+    await renderItem()
+    const bar = await screen.findByRole('navigation', { name: 'Course steps' })
+    expect(within(bar).getByRole('link', { name: /Previous: Video: Tools/ }).getAttribute('href')).toBe('/learn/i_v')
+    expect(within(bar).getByRole('link', { name: /Next: Exercise 1\.1: Try it\./ }).getAttribute('href')).toBe('/courses/gimp#item-i_ex')
+    expect(within(bar).getByRole('link', { name: 'Back to 2D Digital Art — GIMP' }).getAttribute('href')).toBe('/courses/gimp')
+  })
+
+  test('the first item has no Previous', async () => {
+    hub()
+    await renderItem({ ...PAGE, previous: null })
+    await screen.findByRole('button', { name: 'Mark complete and continue' })
+    expect(screen.queryByRole('link', { name: /Previous/ })).toBeNull()
   })
 
   test('a finished item says so and can be marked not done', async () => {
     hub({ progress: { status: 'done', done_at: '2026-10-01T15:00:00Z' } })
     await renderItem()
     expect(await screen.findByText('Done')).toBeTruthy()
+    // Already done: going on is the main thing to do
+    expect(screen.getByRole('link', { name: /Next: Exercise 1\.1/ }).className).toContain('btn-primary')
+    expect(screen.queryByRole('button', { name: 'Mark complete and continue' })).toBeNull()
     await userEvent.click(screen.getByRole('button', { name: 'Mark not done' }))
-    expect(await screen.findByRole('button', { name: 'Mark complete' })).toBeTruthy()
+    expect(await screen.findByRole('button', { name: 'Mark complete and continue' })).toBeTruthy()
     expect(calls()).toContain('DELETE /api/v1/tech/items/i_r/complete')
     expect(navigate).not.toHaveBeenCalled()
   })
@@ -132,7 +159,7 @@ describe('a reading', () => {
   test("when the hub refuses, its reason is shown and the student stays", async () => {
     hub({ complete: { status: 409, body: { detail: 'Watch the video to finish (40% watched).' } } })
     await renderItem()
-    await userEvent.click(await screen.findByRole('button', { name: 'Mark complete' }))
+    await userEvent.click(await screen.findByRole('button', { name: 'Mark complete and continue' }))
     expect((await screen.findByRole('alert')).textContent).toContain('Watch the video to finish (40% watched).')
     expect(navigate).not.toHaveBeenCalled()
   })
@@ -143,7 +170,7 @@ describe('a reading', () => {
   ])('a video in it under 90%% keeps the button off and says why', async (videos, words) => {
     hub({ progress: { videos } })
     await renderItem()
-    const button = await screen.findByRole('button', { name: 'Mark complete' })
+    const button = await screen.findByRole('button', { name: 'Mark complete and continue' })
     expect(button.hasAttribute('disabled')).toBe(true)
     expect(screen.getByText(words)).toBeTruthy()
   })
@@ -175,6 +202,16 @@ describe('other kinds of item', () => {
       .toEqual(['https://docs.google.com/presentation/d/DECK_1/edit?usp=sharing', '_blank'])
   })
 
+  test('slides rebuilt in the site open in the slide viewer, with nothing from Google', async () => {
+    hub({ type: 'slides', content: { slides: ['<h2>Layers stack</h2>', '<h2>Order matters</h2>'] } })
+    await renderItem({ ...PAGE, type: 'slides', label: 'Slideshow' })
+    const deck = await screen.findByRole('region', { name: 'Slides: Layers' })
+    expect(within(deck).getByRole('heading', { name: 'Layers stack' })).toBeTruthy()
+    expect(document.querySelector('iframe')).toBeNull()
+    expect(screen.queryByRole('link', { name: /Open the slides/ })).toBeNull()
+    expect(screen.getByRole('button', { name: /Mark complete/ })).toBeTruthy()
+  })
+
   test('a link opens in a new tab, safely', async () => {
     hub({ type: 'link' })
     await renderItem({ ...PAGE, type: 'link', label: 'Link' })
@@ -203,6 +240,6 @@ describe('when it goes wrong', () => {
     hub({ item: 500 })
     await renderItem()
     expect(await screen.findByText("Couldn't load this. Reload the page to try again.")).toBeTruthy()
-    expect(screen.queryByRole('button', { name: 'Mark complete' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Mark complete and continue' })).toBeNull()
   })
 })

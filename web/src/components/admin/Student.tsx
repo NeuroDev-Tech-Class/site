@@ -13,7 +13,7 @@ import {
 import { routeHash } from '../../lib/adminRoute'
 import { ApiError } from '../../lib/api'
 import { sizeWords } from '../../lib/checkpoint'
-import { formatDate, fullName, timeAgo } from '../../lib/format'
+import { countWords, formatDate, fullName, timeAgo } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
 import { gradeHref } from './Queue'
 import { CELL, ConfirmButton, DataTable, ErrorLine, LoadError, Loading, problemWords, showRoute, StatusLine, useAdmin, ViewHeading } from './shared'
@@ -118,12 +118,12 @@ function Uploads({ id, name }: { id: string, name: string }) {
         ? (
             <>
               <div className="flex flex-wrap items-center gap-4">
-                <p className="mt-0">{kept.length} file{kept.length === 1 ? '' : 's'} · {sizeWords(keptBytes)}</p>
+                <p className="mt-0">{countWords(kept.length, 'file')} · {sizeWords(keptBytes)}</p>
                 {kept.length > 0 && (
                   <ConfirmButton label="Remove all" name={`Remove all of ${name}'s uploads`} confirm="Yes, remove all"
                     onConfirm={() => void run(async () => {
                       const freed = await removeAllFiles(id)
-                      return `Removed ${freed.count} file${freed.count === 1 ? '' : 's'} (${sizeWords(freed.bytes)}).`
+                      return `Removed ${countWords(freed.count, 'file')} (${sizeWords(freed.bytes)}).`
                     })} />
                 )}
               </div>
