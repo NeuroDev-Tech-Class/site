@@ -196,6 +196,17 @@ describe('grading a test', () => {
     await waitFor(() => expect(graded).toEqual([{ manual_score: 8, total_max: 10, feedback: '' }]))
   })
 
+  test('a score brought over from the old site says where it came from, beside the attempts on this one', async () => {
+    const OLD: SubmissionDetail = { ...TEST, id: 's1__i_5__0', attempt: 0, legacy: true, submitted_at: '2025-11-04T18:00:00Z', attempts: [
+      { id: 's1__i_5__1', attempt: 1, status: 'graded', submitted_at: '2026-10-02T15:00:00Z', graded_at: null, feedback: null },
+      { id: 's1__i_5__0', attempt: 0, status: 'graded', submitted_at: '2025-11-04T18:00:00Z', graded_at: null, feedback: null },
+    ] }
+    await hub(OLD)
+    expect(await screen.findByText('Old site (Google Form) · handed in November 4, 2025')).toBeTruthy()
+    const attempts = within(screen.getByRole('region', { name: 'Attempts' })).getAllByRole('link').map(a => a.textContent)
+    expect(attempts).toEqual(['Attempt 1', 'Old site (Google Form)'])
+  })
+
   test('a test with its own total only asks for points', async () => {
     await hub({ ...TEST, total_max: 20 })
     await screen.findByRole('spinbutton', { name: 'Points' })
