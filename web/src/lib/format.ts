@@ -1,4 +1,4 @@
-// Ported from assets/js/lib/format.js. Firestore Timestamps are gone: the API sends ISO strings.
+// Ported from the old site's format.js. Firestore Timestamps are gone: the API sends ISO strings.
 
 type DateInput = string | number | Date | null | undefined
 

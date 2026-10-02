@@ -95,10 +95,10 @@ Form)"), grade the checkpoint, create and print a certificate, approve a pending
 
 1. Final export once more (step 1) and archive it beside the first.
 2. **(Topher)** Firebase console > Project settings > Delete project. The only irreversible step.
-3. Claude removes the old site's code and the Firebase jobs in `.github/workflows/ci.yml`; GitHub Pages keeps
-   serving the redirect, since it is built from `web/` and `content/`.
-4. The repo rename to `tech-class-website` (`docs/MIGRATION-PLAN.md`) ends `neurodev-tech-class.github.io/site/`
-   and so the redirect for old links. Do it only once old bookmarks no longer matter.
+3. *(Done early, 2026-10-01, branch `remove-old-site`.)* The old site's code, Firebase config and jobs, the extractor
+   and the old tests are gone from the repo; GitHub Pages keeps serving the redirect it was given.
+4. *(Done 2026-10-02.)* The repo is now `tech-class-website`; the old addresses and their redirect ended with the
+   rename, and Pages is off. The redirect page's script and workflow are in git history.
 
 ## If something goes wrong
 

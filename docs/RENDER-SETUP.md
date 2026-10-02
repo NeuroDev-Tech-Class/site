@@ -8,8 +8,8 @@ Written 2026-09-25, when Phase 4 was done. Steps marked **(Topher)** need his Re
 
 ## 1. First deploy (once)
 
-1. **(Topher)** Commit and push `render.yaml`, `.nojekyll` and this file, and merge to `main`.
-2. **(Topher)** Render dashboard > **New > Blueprint** > repository `NeuroDev-Tech-Class/site` > branch
+1. **(Topher)** Commit and push `render.yaml` and this file, and merge to `main`.
+2. **(Topher)** Render dashboard > **New > Blueprint** > repository `NeuroDev-Tech-Class/tech-class-website` (named `site` until 2026-10-02) > branch
    **`main`** > Apply. Render creates `tech-frontend` and runs the first build
    (`cd web && npm ci && npm run build`, publishing `web/dist`). It lands "ungrouped".
 3. **(Topher)** Move it into the **Tech Class** environment of the NeuroDev project (service > Settings, or the
@@ -42,8 +42,8 @@ expected, not a bug.
 ## 4. Every later deploy
 
 Merge to `main` and Render rebuilds automatically, but only when something under `web/`, `content/`,
-`assets/images/` or `render.yaml` changed (`buildFilter`). `main` also feeds the old GitHub Pages site until cutover: `.nojekyll` at the repo root stops Pages from running
-Jekyll over `web/` and `content/` (Astro's `---` front matter broke the Pages build on 2026-09-25).
+`assets/images/` or `render.yaml` changed (`buildFilter`). GitHub Pages is off for this repo since it was renamed on
+2026-10-02; the old site's addresses ended with the rename.
 
 ## 5. Checks after the first deploy
 
@@ -51,6 +51,4 @@ Jekyll over `web/` and `content/` (Astro's `---` front matter broke the Pages bu
 - `https://tech-frontend….onrender.com/` and, once DNS is in, `https://tech.neurodevmentoring.com/`: Home loads, the
   header logo and course images show (they come from `assets/images` via `scripts/sync-assets.mjs`), Catalog lists
   fourteen courses (`web-dev-1` hidden as a draft), a course page opens, an unknown path shows the site's own 404.
-- `https://tech.neurodevmentoring.com/site/catalog.html` redirects to `/catalog.html` (404 for now; per-page
-  redirects come with Phase 15).
 - Response headers include `X-Frame-Options: DENY`.
