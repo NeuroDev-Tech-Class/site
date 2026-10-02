@@ -19,7 +19,6 @@ import { trackableSrc, useVideoTracking } from '../../lib/videoTracking'
 import Icon from '../Icon'
 import NotApproved from '../NotApproved'
 import Checkpoint from './Checkpoint'
-import SlideDeck from './SlideDeck'
 import TestTaker from './TestTaker'
 import { LessonBones, Skeleton } from '../Skeleton'
 
@@ -54,9 +53,6 @@ function siteName(url: string): string | null {
 function Content({ page, item }: { page: ItemPageView, item: ItemContent }) {
   if (item.type === 'checkpoint') return <Checkpoint page={page} content={item.content as unknown as CheckpointContent} />
   if (item.type === 'test') return <TestTaker page={page} />
-  if (item.type === 'slides' && Array.isArray(item.content.slides)) {
-    return <SlideDeck title={page.title} slides={item.content.slides as string[]} />
-  }
   const content = item.content as Record<string, string | undefined>
   if (item.type === 'lesson') {
     return (

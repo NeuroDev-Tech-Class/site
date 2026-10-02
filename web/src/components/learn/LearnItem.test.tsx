@@ -210,16 +210,6 @@ describe('other kinds of item', () => {
       .toEqual(['https://docs.google.com/presentation/d/DECK_1/edit?usp=sharing', '_blank'])
   })
 
-  test('slides rebuilt in the site open in the slide viewer, with nothing from Google', async () => {
-    hub({ type: 'slides', content: { slides: ['<h2>Layers stack</h2>', '<h2>Order matters</h2>'] } })
-    await renderItem({ ...PAGE, type: 'slides', label: 'Slideshow' })
-    const deck = await screen.findByRole('region', { name: 'Slides: Layers' })
-    expect(within(deck).getByRole('heading', { name: 'Layers stack' })).toBeTruthy()
-    expect(document.querySelector('iframe')).toBeNull()
-    expect(screen.queryByRole('link', { name: /Open the slides/ })).toBeNull()
-    expect(screen.getByRole('button', { name: /Mark complete/ })).toBeTruthy()
-  })
-
   test('a link opens in a new tab, safely', async () => {
     hub({ type: 'link' })
     await renderItem({ ...PAGE, type: 'link', label: 'Link' })
