@@ -8,8 +8,7 @@
 # and add the `tech` CNAME in the neurodevmentoring.com zone pointing at the host Render shows under
 # Settings > Custom Domains. See docs/RENDER-SETUP.md.
 #
-# Deploys from `main`. GitHub Pages no longer serves this repo's files: it serves only the redirect page for old
-# addresses (.github/workflows/pages-redirect.yml).
+# Deploys from `main` of NeuroDev-Tech-Class/tech-class-website (renamed from `site` on 2026-10-02; Pages is off).
 
 services:
   - type: web
@@ -31,12 +30,6 @@ services:
         - web/**/*.test.*
     domains:
       - tech.neurodevmentoring.com
-    routes:
-      # Old GitHub Pages URLs lived under /site/; the new site serves from the root.
-      # (Per-page .html -> /slug/ redirects come with the cutover, Phase 15, from content/legacy-map.json.)
-      - type: redirect
-        source: /site/*
-        destination: /*
     headers:
       - path: /*
         name: X-Frame-Options

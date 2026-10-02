@@ -4,9 +4,9 @@ The NeuroDev Tech Class site, live at **tech.neurodevmentoring.com**: an Astro s
 by Render as the static site `tech-frontend`. Its backend is the hub (`neurodev-hub`, routes under `/api/v1/tech/*`,
 the `tech` schema in the hub's Postgres, files in Cloudflare R2).
 
-The old GitHub Pages + Firebase site was switched off at cutover (October 2026); its code is in git history before
-the `remove-old-site` branch. Old addresses (`neurodev-tech-class.github.io/site/...`) are sent to their new pages
-by the redirect GitHub Pages now serves.
+The repo was called `site` until 2026-10-02. The old GitHub Pages + Firebase site was switched off at cutover
+(October 2026) and its code is in git history before the `remove-old-site` branch; its addresses
+(`neurodev-tech-class.github.io/site/...`) ended with the rename.
 
 Docs:
 
@@ -35,9 +35,8 @@ web/                    the site: Astro + React islands + Tailwind
                         TestTaker for tests; SlideDeck for slides), test/ (Question, Review: shared by the test page
                         and the Grade view), progress/ (My Courses, Home card, catalog ring), auth/ (sign-in forms)
   scripts/              sync-assets.mjs (assets/images into public/), zip-starters.mjs (each exercise's starter/ to
-                        public/starters/<checkpoint id>.zip), both run before dev and build; gate.mjs (the checks);
-                        pages-redirect.mjs (the page GitHub Pages serves for old addresses)
-  tests/                build.test.ts checks every built page; scripts and redirect tests
+                        public/starters/<checkpoint id>.zip), both run before dev and build; gate.mjs (the checks)
+  tests/                build.test.ts checks every built page; scripts.test.ts the scripts
 content/                the course content, edited by hand (see "Changing content"): catalog.json, courses/<id>.json,
                         lessons/<id>.html, lessons.json, checkpoints/<id>.json, vocabulary.json, legacy-map.json
 assets/images/          every picture the site shows, slides' pictures under slides/<deck>/
@@ -114,5 +113,3 @@ itself.
   moves; no label means patch.
 - **Manual tags** (`release.yml`): pushing a `v*` tag by hand also produces a Release, with a changelog of the commits
   since the previous tag.
-- **Pages redirect** (`pages-redirect.yml`, run by hand): rebuilds the page GitHub Pages serves for old addresses from
-  `content/legacy-map.json`.
