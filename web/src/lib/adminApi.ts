@@ -109,6 +109,26 @@ export interface SubmissionDetail extends Submission {
   attempts: Attempt[]
   // A test taken on the site
   test?: TestGrading | null
+  // An old Google Form score, marked against the test uploaded since
+  old_marks?: OldMarks | null
+}
+
+/** One answer typed on an old Google Form, matched by wording to its question on the uploaded test */
+export interface OldMark {
+  question: string
+  answer: string
+  number: number | null
+  status: 'right' | 'wrong' | 'coach' | 'not_on_test'
+  points: number | null
+  max: number | null
+  right_answer: string | null
+  rubric: string | null
+}
+
+export interface OldMarks {
+  rows: OldMark[]
+  auto_points: number
+  out_of: number
 }
 
 export interface GradeBody {

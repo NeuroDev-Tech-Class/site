@@ -191,7 +191,7 @@ describe('the result', () => {
     const results = screen.getByRole('list', { name: 'Attempt 1, question by question' })
     const rows = within(results).getAllByRole('listitem')
     expect(rows[0].textContent).toContain('Wrong')
-    expect(rows[0].textContent).toContain('Your answer: B')
+    expect(within(within(rows[0]).getByRole('group', { name: 'Your answer' })).getByText('B')).toBeTruthy()
     expect(rows[1].textContent).toContain('Right')
     expect(rows[3].textContent).toContain('1 of 2 points')
     expect(rows[3].textContent).toContain('One → 1')

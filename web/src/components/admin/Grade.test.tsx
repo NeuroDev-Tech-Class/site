@@ -94,6 +94,12 @@ describe("the student's answers", () => {
     expect(requests(fetchMock)).toContain('GET /api/v1/tech/files/f3/link?download=true')
   })
 
+  test('each answer sits in its own box under its question', async () => {
+    await hub()
+    const link = within(await screen.findByRole('group', { name: 'Link to your project' }))
+    expect(within(link.getByRole('group', { name: 'Their answer' })).getByRole('link', { name: 'https://github.com/sam/poster' })).toBeTruthy()
+  })
+
   test('the instructions, the coach-only hint and earlier attempts are beside the answers', async () => {
     await hub(detail({
       answers: ANSWERS, files: FILES, attempt: 2, id: 's1__i_8__2',
@@ -116,6 +122,58 @@ describe("the student's answers", () => {
     await openAdmin(fetchMock, '#/grade/gone', { routes: { '/api/v1/tech/submissions/gone': () => json(404, { detail: 'Submission not found.' }) } })
     expect(await screen.findByText("This work isn't there any more.")).toBeTruthy()
     expect(screen.getByRole('link', { name: 'Back to the queue' }).getAttribute('href')).toBe('#/queue')
+  })
+})
+
+describe('grading an old Google Form score, marked against the uploaded test', () => {
+  const OLD: SubmissionDetail = detail({
+    id: 's1__i_5__0', kind: 'test', attempt: 0, legacy: true, item: { id: 'i_5', title: 'Unit 1 Test' }, checkpoint: null,
+    total_max: null, auto_score: null, files: [],
+    answers: { 'Pick A.': 'A', 'The sky is blue.': 'False', 'Explain layers.': 'They stack.', 'What did you enjoy?': 'Fun' },
+    attempts: [{ id: 's1__i_5__0', attempt: 0, status: 'submitted', submitted_at: '2025-11-04T18:00:00Z', graded_at: null, feedback: null }],
+    old_marks: {
+      rows: [
+        { question: 'Pick A.', answer: 'A', number: 1, status: 'right', points: 2, max: 2, right_answer: 'A', rubric: null },
+        { question: 'The sky is blue.', answer: 'False', number: 2, status: 'wrong', points: 0, max: 1, right_answer: 'True', rubric: null },
+        { question: 'Explain layers.', answer: 'They stack.', number: 5, status: 'coach', points: null, max: 4, right_answer: null, rubric: 'They stack' },
+        { question: 'What did you enjoy?', answer: 'Fun', number: null, status: 'not_on_test', points: null, max: null, right_answer: null, rubric: null },
+      ],
+      auto_points: 2, out_of: 7,
+    },
+  })
+  const rows = () => within(screen.getByRole('list', { name: 'Old Form answers' })).getAllByRole('listitem')
+  const box = (row: HTMLElement) => within(row).getByRole('group', { name: 'Their answer' }).textContent
+
+  test('each answer is in its own box under its question, marked, with the right answer', async () => {
+    await hub(OLD)
+    await screen.findByRole('list', { name: 'Old Form answers' })
+    expect(rows().map(row => box(row))).toEqual(['Their answerA', 'Their answerFalse', 'Their answerThey stack.', 'Their answerFun'])
+    expect(rows()[0].textContent).toContain('Right')
+    expect(rows()[1].textContent).toContain('Wrong')
+    expect(rows()[1].textContent).toContain('Right answer: True')
+    expect(rows()[2].textContent).toContain('Yours to score')
+    expect(rows()[2].textContent).toContain('Rubric: They stack')
+    expect(rows()[3].textContent).toContain('Not on the current test')
+    expect(within(rows()[3]).queryByRole('spinbutton')).toBeNull()
+  })
+
+  test('the total adds the points given to the marked ones, and saving sends it out of the matched total', async () => {
+    await hub(OLD)
+    expect(await screen.findByText('2 / 7 (29%) · below the 70% pass mark')).toBeTruthy()
+    await userEvent.type(screen.getByRole('spinbutton', { name: 'Points for question 5' }), '3')
+    expect(screen.getByText('5 / 7 (71%) · passes')).toBeTruthy()
+    await userEvent.click(screen.getByRole('button', { name: 'Save grade' }))
+    await waitFor(() => expect(graded).toEqual([{ manual_score: 5, total_max: 7, feedback: '' }]))
+  })
+
+  test('every answer that is yours to score needs points, no more than it is worth', async () => {
+    await hub(OLD)
+    await userEvent.click(await screen.findByRole('button', { name: 'Save grade' }))
+    expect(await screen.findByText("Give points for every answer that's yours to score.")).toBeTruthy()
+    await userEvent.type(screen.getByRole('spinbutton', { name: 'Points for question 5' }), '5')
+    await userEvent.click(screen.getByRole('button', { name: 'Save grade' }))
+    expect(await screen.findByText('Question 5 is worth 4 points at most.')).toBeTruthy()
+    expect(graded).toEqual([])
   })
 })
 
@@ -207,6 +265,14 @@ describe('grading a test', () => {
     expect(attempts).toEqual(['Attempt 1', 'Old site (Google Form)'])
   })
 
+  test('an old Form score shows each answer in its own box, and says what uploading the test would do', async () => {
+    await hub({ ...TEST, legacy: true, attempt: 0 })
+    const boxes = await screen.findAllByRole('group', { name: 'Their answer' })
+    expect(boxes.map(box => box.textContent)).toEqual(['Their answerB', 'Their answerA router'])
+    expect(screen.getByText('Question 1').closest('[role=group]')).toBeNull()
+    expect(screen.getByText("Upload this course's test on the Tests page and its multiple choice and true/false answers are marked for you.")).toBeTruthy()
+  })
+
   test('a test with its own total only asks for points', async () => {
     await hub({ ...TEST, total_max: 20 })
     await screen.findByRole('spinbutton', { name: 'Points' })
@@ -243,7 +309,7 @@ describe('grading a test taken on the site', () => {
   test('each question shows their answer, whether it was right, and the key with the rubric', async () => {
     await hub(NATIVE)
     await screen.findByRole('list', { name: 'Questions and answers' })
-    expect(rows()[0].textContent).toContain('Their answer: B')
+    expect(within(within(rows()[0]).getByRole('group', { name: 'Their answer' })).getByText('B')).toBeTruthy()
     expect(rows()[0].textContent).toContain('Wrong')
     expect(rows()[0].textContent).toContain('Right answer: A')
     expect(rows()[0].textContent).toContain('A comes first.')

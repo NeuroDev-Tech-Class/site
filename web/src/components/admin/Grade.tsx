@@ -5,6 +5,7 @@ import { formatDate } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
 import Review from '../test/Review'
 import Answers from './Answers'
+import OldFormGrade from './OldFormGrade'
 import { gradeHref } from './Queue'
 import { ErrorLine, LoadError, Loading, problemWords, StatusLine, useAdmin, ViewHeading } from './shared'
 
@@ -258,8 +259,15 @@ export default function Grade({ id }: { id: string }) {
           <h2 className="mt-0 text-lg">Their answers</h2>
           {detail.test
             ? <TestGradeForm key={detail.status} work={detail} onGraded={(updated, words) => void graded(updated, words)} />
-            : (
+            : detail.old_marks
+              ? <OldFormGrade key={detail.status} work={detail} onGraded={(updated, words) => void graded(updated, words)} />
+              : (
                 <>
+                  {detail.legacy && detail.kind === 'test' && (
+                    <p className="text-(--muted)">
+                      Upload this course's test on the Tests page and its multiple choice and true/false answers are marked for you.
+                    </p>
+                  )}
                   <Answers form={detail.checkpoint} answers={detail.answers} files={detail.files} />
                   <GradeForm key={detail.status} work={detail} onGraded={(updated, words) => void graded(updated, words)} />
                 </>

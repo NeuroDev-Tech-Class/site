@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import type { TestKeyEntry, TestMark, TestQuestion } from '../../lib/api'
 import { countWords } from '../../lib/format'
+import AnswerBox from '../AnswerBox'
 import { plainText } from './Question'
 
 type Key = TestKeyEntry & { rubric?: string }
@@ -60,9 +61,7 @@ export default function Review({ label, questions, answers, marks, keys, who = '
               {words && <span className={marks[n]?.right ? 'done-chip' : 'text-sm font-semibold text-(--muted)'}>{words}</span>}
             </p>
             <div className="lesson" dangerouslySetInnerHTML={{ __html: question.prompt_html }} />
-            <p className="mt-2 whitespace-pre-wrap">
-              <span className="font-semibold">{who} answer: </span>{answerText(question, answers[n])}
-            </p>
+            <AnswerBox who={who}><p className="mt-1 whitespace-pre-wrap">{answerText(question, answers[n])}</p></AnswerBox>
             {right && <p className="mt-1 font-semibold">{right}</p>}
             {key?.explanation_html && <div className="lesson mt-1 text-(--muted)" dangerouslySetInnerHTML={{ __html: key.explanation_html }} />}
             {key?.rubric && <p className="mt-1 text-sm"><span className="font-semibold">Rubric: </span>{key.rubric}</p>}
