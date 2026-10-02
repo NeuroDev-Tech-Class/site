@@ -34,12 +34,12 @@ web/                    the site: Astro + React islands + Tailwind
                         learn/ (item page; Checkpoint, CheckpointForm, FileField, AnswerList for checkpoints;
                         TestTaker for tests; SlideDeck for slides), test/ (Question, Review: shared by the test page
                         and the Grade view), progress/ (My Courses, Home card, catalog ring), auth/ (sign-in forms)
-  scripts/              sync-assets.mjs (assets/images into public/), zip-starters.mjs (each exercise's starter/ to
+  scripts/              sync-assets.mjs (images into public/), zip-starters.mjs (each exercise's starter/ to
                         public/starters/<checkpoint id>.zip), both run before dev and build; gate.mjs (the checks)
   tests/                build.test.ts checks every built page; scripts.test.ts the scripts
 content/                the course content, edited by hand (see "Changing content"): catalog.json, courses/<id>.json,
                         lessons/<id>.html, lessons.json, checkpoints/<id>.json, vocabulary.json, legacy-map.json
-assets/images/          every picture the site shows, slides' pictures under slides/<deck>/
+images/          every picture the site shows, slides' pictures under slides/<deck>/
 exercises/              the 58 hands-on exercises, one folder each: exercise.json, lesson.md, assignment.md
                         (Web Dev III), starter/ (what students download, tests and a test workflow included)
 tools/exercises/        verify.mjs (runs every exercise's tests), workflows/ (the test workflows starters carry)
