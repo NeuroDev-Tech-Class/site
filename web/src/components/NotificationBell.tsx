@@ -5,6 +5,7 @@ import { useSession } from '../lib/session'
 import { useLoad } from '../lib/useLoad'
 import { usePopover } from '../lib/usePopover'
 import Icon from './Icon'
+import { ListBones, Skeleton } from './Skeleton'
 
 // The hub's notes on work graded or returned, approvals, and (for coaches) new work and sign-ups
 const REFRESH_MS = 30_000
@@ -43,7 +44,7 @@ function Panel({ id, onChanged, onClose }: { id: string, onChanged: () => void, 
         )}
       </div>
       {problem && <p role="alert" className="px-2 text-sm font-semibold text-red-700 dark:text-red-300">{problem}</p>}
-      {inbox.status === 'loading' && <p className="px-2 text-(--muted)" aria-busy="true">Loading…</p>}
+      {inbox.status === 'loading' && <Skeleton label="Loading notifications"><ListBones count={3} compact /></Skeleton>}
       {inbox.status === 'error' && <p className="px-2">Couldn't load your notifications. Please try again.</p>}
       {inbox.status === 'ready' && (notes.length
         ? (

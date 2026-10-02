@@ -9,6 +9,7 @@ import { useSession } from '../../lib/session'
 import { useLoad } from '../../lib/useLoad'
 import Icon from '../Icon'
 import Activity from './Activity'
+import { ShellBones, Skeleton } from '../Skeleton'
 import { AdminContext, HEADING_ID, REFRESH_MS, ROUTE_EVENT, ViewHeading } from './shared'
 import Grade from './Grade'
 import Queue from './Queue'
@@ -164,7 +165,7 @@ export default function AdminApp({ courses }: { courses: CourseMeta[] }) {
   return (
     <>
       <ViewHeading>Dashboard</ViewHeading>
-      {session.status === 'loading' && <p className="text-(--muted)" aria-busy="true">Loading…</p>}
+      {session.status === 'loading' && <Skeleton label="Loading the dashboard" className="mt-6"><ShellBones /></Skeleton>}
       {session.status === 'signed-out' && (
         <div className="panel mt-6">
           <p className="mt-0">Sign in with a coach account to open the dashboard.</p>

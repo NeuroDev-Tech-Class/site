@@ -142,6 +142,15 @@
   @apply rounded-(--radius-card) bg-(--panel) p-6;
   border: 1.5px solid var(--border);
 }
+/* A grey shape holding a place while its content loads; the reduced-motion rule above stills the pulse */
+@utility skeleton {
+  @apply block rounded-md;
+  background: color-mix(in srgb, var(--muted) 24%, var(--panel));
+  animation: skeleton-pulse 1.6s ease-in-out infinite;
+}
+@keyframes skeleton-pulse {
+  50% { opacity: 0.5; }
+}
 /* A student's answer, set apart from the question it answers */
 @utility answer-box {
   @apply mt-3 rounded-lg px-4 py-3;

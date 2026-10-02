@@ -22,13 +22,15 @@ Docs:
 web/                    the site: Astro + React islands + Tailwind
   src/pages/            Home, Catalog, Resources, courses/[id], learn/[itemId] (one per reading, video, slides,
                         link, checkpoint and test), my-courses, admin (the coaches' dashboard), the six sign-in pages, 404
-  src/lib/              content.ts (reads content/, sanitises, item pages, counts), api.ts (hub client), session.ts,
+  src/lib/              content.ts (reads content/ at build time, sanitises, item pages, counts; browser code imports only
+                        its types and contentLinks.ts, so no script carries the course data), api.ts (hub client), session.ts,
                         remote.ts + courseProgress.ts (shared progress reads), videoTracking.ts (YouTube heartbeats),
                         checkpoint.ts (what the form still needs), upload.ts (browser upload to R2 with progress),
                         adminApi.ts (the coach's hub calls), adminRoute.ts (the dashboard's #/ addresses),
                         useLoad.ts (load, reload, refresh every 30 s while visible), usePopover.ts (header dropdowns),
                         itemLabel.ts, redirect.ts, format.ts, icons.ts
-  src/components/       header, footer, ThemeToggle, UserMenu, NotificationBell, Icon, course/ (progress panel,
+  src/components/       header, footer, ThemeToggle, UserMenu, NotificationBell, Icon, Skeleton (the loading placeholders,
+                        shaped like what they stand in for), AnswerBox, course/ (progress panel,
                         units, ring), admin/ (AdminApp shell and one view each: Today, Queue, Grade, Students,
                         Student, StudentCourse, Tests, Activity, Storage, Certificates),
                         learn/ (item page; Checkpoint, CheckpointForm, FileField, AnswerList for checkpoints;

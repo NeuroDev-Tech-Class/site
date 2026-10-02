@@ -12,7 +12,8 @@ import {
   type ItemProgress,
   type VideoProgress,
 } from '../../lib/api'
-import { slidesEmbedUrl, type ItemPageView } from '../../lib/content'
+import { slidesEmbedUrl } from '../../lib/contentLinks'
+import type { ItemPageView } from '../../lib/content'
 import { useSession } from '../../lib/session'
 import { trackableSrc, useVideoTracking } from '../../lib/videoTracking'
 import Icon from '../Icon'
@@ -20,6 +21,7 @@ import NotApproved from '../NotApproved'
 import Checkpoint from './Checkpoint'
 import SlideDeck from './SlideDeck'
 import TestTaker from './TestTaker'
+import { LessonBones, Skeleton } from '../Skeleton'
 
 // Finished by handing them in on the page, not with Mark complete
 const HANDED_IN = ['checkpoint', 'test']
@@ -217,7 +219,7 @@ export default function LearnItem({ page }: { page: ItemPageView }) {
 
   let body
   if (session.status === 'loading') {
-    body = <p className="text-(--muted)" aria-busy="true">Loading…</p>
+    body = <Skeleton label="Loading this step"><LessonBones /></Skeleton>
   } else if (session.status === 'signed-out') {
     body = (
       <div className="panel">
@@ -233,7 +235,7 @@ export default function LearnItem({ page }: { page: ItemPageView }) {
   } else if (load.status === 'error') {
     body = <p>Couldn't load this. Reload the page to try again.</p>
   } else if (load.status === 'loading') {
-    body = <p className="text-(--muted)" aria-busy="true">Loading…</p>
+    body = <Skeleton label="Loading this step"><LessonBones /></Skeleton>
   } else {
     body = <Content page={page} item={load.item} />
   }

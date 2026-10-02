@@ -13,6 +13,7 @@ import type { ItemPageView } from '../../lib/content'
 import { countWords } from '../../lib/format'
 import Question from '../test/Question'
 import Review from '../test/Review'
+import { QuestionBones, Skeleton } from '../Skeleton'
 
 // How long answering has to pause before the answers are saved
 const SAVE_PAUSE_MS = 600
@@ -186,7 +187,7 @@ export default function TestTaker({ page }: { page: ItemPageView }) {
   }
 
   if (failed) return <p>Couldn't load this. Reload the page to try again.</p>
-  if (!state) return <p className="text-(--muted)" aria-busy="true">Loading…</p>
+  if (!state) return <Skeleton label="Loading the test"><QuestionBones /></Skeleton>
   if (!state.ready || !state.test) return <p className="panel mt-0">{state.reason ?? "This test isn't ready yet."}</p>
   return (
     <>

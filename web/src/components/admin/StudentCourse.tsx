@@ -8,7 +8,8 @@ import { itemLabel } from '../../lib/itemLabel'
 import { useLoad } from '../../lib/useLoad'
 import { CertificatePanel } from './Certificates'
 import { gradeHref } from './Queue'
-import { ErrorLine, LoadError, Loading, problemWords, ViewHeading } from './shared'
+import { Skeleton, UnitBones } from '../Skeleton'
+import { ErrorLine, LoadError, problemWords, ViewHeading } from './shared'
 
 type OutlineItem = CourseOutline['units'][number]['items'][number]
 
@@ -61,7 +62,7 @@ export default function StudentCourse({ id, course }: { id: string, course: stri
     return (
       <>
         <ViewHeading eyebrow={eyebrow}>{outline.status === 'ready' ? outline.value.title : 'Course'}</ViewHeading>
-        {outline.status === 'error' || progress.status === 'error' ? <LoadError onRetry={() => { void outline.reload(); void progress.reload() }} /> : <Loading />}
+        {outline.status === 'error' || progress.status === 'error' ? <LoadError onRetry={() => { void outline.reload(); void progress.reload() }} /> : <Skeleton label="Loading the course"><UnitBones /></Skeleton>}
       </>
     )
   }

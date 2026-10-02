@@ -30,7 +30,7 @@ interface Hub {
   account?: Partial<TechAccount> | null
   type?: keyof typeof CONTENT
   content?: ItemContent['content']
-  item?: number
+  item?: number | 'waiting'
   progress?: Partial<ItemProgress>
   complete?: { status: number, body: unknown }
 }
@@ -40,6 +40,7 @@ function hub(options: Hub = {}) {
   let progress: ItemProgress = { item_id: 'i_r', status: null, done_at: null, opened_at: null, videos: [], ...options.progress }
   fakeHub(fetchMock, options.account === undefined ? {} : options.account, {
     '/api/v1/tech/items/i_r': () => {
+      if (options.item === 'waiting') return new Promise<Response>(() => undefined)
       if (options.item) return json(options.item, { detail: options.item === 404 ? 'Item not found.' : 'down' })
       const item: ItemContent = {
         id: 'i_r', type, title: 'Layers', status: 'ok', tags: [], course: { id: 'gimp', title: 'GIMP' },
@@ -81,8 +82,15 @@ describe('who can open it', () => {
   test('while the sign-in is being checked, it neither shows the item nor asks to sign in', async () => {
     fetchMock.mockReturnValue(new Promise(() => undefined))
     await renderItem()
-    expect(screen.getByText('Loading…')).toBeTruthy()
+    expect(screen.getByRole('status', { name: 'Loading this step' })).toBeTruthy()
     expect(screen.queryByRole('link', { name: 'Sign in to open this' })).toBeNull()
+  })
+
+  test('while the item loads, a placeholder shaped like a lesson holds its place', async () => {
+    hub({ item: 'waiting' })
+    await renderItem()
+    await waitFor(() => expect(calls()).toContain('GET /api/v1/tech/items/i_r'))
+    expect(screen.getByRole('status', { name: 'Loading this step' }).getAttribute('aria-busy')).toBe('true')
   })
 
   test('signed out: a way to sign in that comes back here, and nothing about the item is fetched', async () => {

@@ -38,11 +38,15 @@ let fetchMock: Mock
 function hub(options: {
   account?: Partial<TechAccount> | null, courses?: CourseProgress[], fail?: boolean, work?: Submission[],
   failWork?: boolean, certificates?: MyCertificate[], failCertificates?: boolean,
+  // Requests that never answer, to see what shows while they load
+  waiting?: ('progress' | 'work' | 'certificates')[],
 } = {}) {
+  const wait = (what: 'progress' | 'work' | 'certificates', answer: () => Response) =>
+    () => (options.waiting?.includes(what) ? new Promise<Response>(() => undefined) : answer())
   fakeHub(fetchMock, options.account === undefined ? {} : options.account, {
-    '/api/v1/tech/progress': () => options.fail ? json(500, {}) : json(200, { courses: options.courses ?? STARTED }),
-    '/api/v1/tech/submissions/mine': () => options.failWork ? json(500, {}) : json(200, options.work ?? []),
-    '/api/v1/tech/certificates/mine': () => options.failCertificates ? json(500, {}) : json(200, options.certificates ?? []),
+    '/api/v1/tech/progress': wait('progress', () => options.fail ? json(500, {}) : json(200, { courses: options.courses ?? STARTED })),
+    '/api/v1/tech/submissions/mine': wait('work', () => options.failWork ? json(500, {}) : json(200, options.work ?? [])),
+    '/api/v1/tech/certificates/mine': wait('certificates', () => options.failCertificates ? json(500, {}) : json(200, options.certificates ?? [])),
     '/api/v1/tech/certificates/(c\\d)/link': ({ match }) => json(200, { url: `https://r2.test/${match[1]}.pdf` }),
   })
 }
@@ -95,7 +99,7 @@ describe('My Courses', () => {
     await act(() => signOut())
     act(() => setAccount(account({ id: 'a2', email: 'ana@example.com', first_name: 'Ana' })))
     expect(screen.queryByRole('article')).toBeNull()
-    expect(screen.getByText('Loading your courses…')).toBeTruthy()
+    expect(screen.getByRole('status', { name: 'Loading your courses' })).toBeTruthy()
     await act(async () => answer(json(200, { courses: [] })))
     expect(await screen.findByText("You haven't started a course yet.")).toBeTruthy()
   })
@@ -103,8 +107,16 @@ describe('My Courses', () => {
   test('while the sign-in is being checked, it neither shows courses nor asks to sign in', async () => {
     fetchMock.mockReturnValue(new Promise(() => undefined))
     await renderList()
-    expect(screen.getByText('Loading your courses…')).toBeTruthy()
+    expect(screen.getByRole('status', { name: 'Loading your courses' })).toBeTruthy()
     expect(screen.queryByRole('link', { name: 'Sign in' })).toBeNull()
+  })
+
+  test('while the courses load, placeholders shaped like the cards hold their place', async () => {
+    hub({ waiting: ['progress'] })
+    await renderList()
+    const loading = await screen.findByRole('status', { name: 'Loading your courses' })
+    expect(loading.getAttribute('aria-busy')).toBe('true')
+    expect(screen.queryByRole('article')).toBeNull()
   })
 
   test('Continue to an item without its own page opens the course page there', async () => {
@@ -172,12 +184,19 @@ describe('Recent work on My Courses', () => {
     expect(within(test).queryByText(/feedback/i)).toBeNull()
   })
 
+  test('while it loads a placeholder holds its place', async () => {
+    hub({ waiting: ['work'] })
+    await renderList()
+    expect(await screen.findByRole('status', { name: 'Loading your recent work' })).toBeTruthy()
+  })
+
   test('nothing handed in yet: no Recent work section at all', async () => {
     hub({ work: [] })
     await renderList()
     await screen.findAllByRole('article')
     await waitFor(() => expect(workCalls()).toBe(1))
     expect(screen.queryByRole('heading', { name: 'Recent work' })).toBeNull()
+    await waitFor(() => expect(screen.queryByRole('status', { name: 'Loading your recent work' })).toBeNull())
   })
 
   test("work that can't be loaded says so without hiding the courses", async () => {
@@ -244,12 +263,19 @@ describe('Certificates on My Courses', () => {
     await waitFor(() => expect(opened).toEqual([['https://r2.test/c1.pdf', '_blank', 'noopener']]))
   })
 
+  test('while they load a placeholder holds their place', async () => {
+    hub({ waiting: ['certificates'] })
+    await renderList()
+    expect(await screen.findByRole('status', { name: 'Loading your certificates' })).toBeTruthy()
+  })
+
   test('none shared yet: no Certificates section at all', async () => {
     hub({ certificates: [] })
     await renderList()
     await screen.findAllByRole('article')
     await waitFor(() => expect(certificateCalls()).toBe(1))
     expect(screen.queryByRole('heading', { name: 'Certificates' })).toBeNull()
+    await waitFor(() => expect(screen.queryByRole('status', { name: 'Loading your certificates' })).toBeNull())
   })
 
   test("certificates that can't be loaded say so without hiding the courses", async () => {
@@ -301,6 +327,12 @@ describe('the Home card', () => {
     expect(screen.getByRole('link', { name: /Continue/ }).getAttribute('href')).toBe('/learn/i_read')
   })
 
+  test('while progress loads, a placeholder card holds its place', async () => {
+    hub({ waiting: ['progress'] })
+    await renderCard()
+    expect(await screen.findByRole('status', { name: 'Loading where you left off' })).toBeTruthy()
+  })
+
   test('skips a finished course to the most recent one still going', async () => {
     hub({ courses: [STARTED[1], STARTED[0]] })
     await renderCard()
@@ -333,6 +365,16 @@ describe('catalog rings', () => {
     expect(await within(screen.getByTestId('gimp')).findByText('In progress · 41%')).toBeTruthy()
     expect(within(screen.getByTestId('python-1')).getByText('Complete')).toBeTruthy()
     expect(screen.getByTestId('linux').textContent).toBe('')
+  })
+
+  test('while progress loads each card holds a quiet placeholder, announced to no one', async () => {
+    hub({ waiting: ['progress'] })
+    await renderRings(['gimp', 'linux'])
+    await waitFor(() => expect(progressCalls()).toBe(1))
+    for (const id of ['gimp', 'linux']) {
+      expect(screen.getByTestId(id).querySelector('[aria-hidden="true"]')).toBeTruthy()
+      expect(screen.getByTestId(id).textContent).toBe('')
+    }
   })
 
   test('every ring on the page shares one request', async () => {

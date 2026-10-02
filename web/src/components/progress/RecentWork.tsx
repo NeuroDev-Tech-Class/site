@@ -1,9 +1,10 @@
 import type { Submission } from '../../lib/api'
-import { continueHref } from '../../lib/content'
+import { continueHref } from '../../lib/contentLinks'
 import { formatDate } from '../../lib/format'
 import { useRecentWork } from '../../lib/myWork'
 import CoachFeedback from '../CoachFeedback'
 import Icon from '../Icon'
+import { Bone, ListBones, Skeleton } from '../Skeleton'
 
 const QUIET_CHIP = 'rounded-full border border-(--border) px-3 py-1 text-sm font-semibold'
 
@@ -37,6 +38,9 @@ function WorkRow({ work, pageIds }: { work: Submission, pageIds: string[] }) {
 export default function RecentWork({ pageIds }: { pageIds: string[] }) {
   const state = useRecentWork()
   if (state.status === 'error') return <p className="mt-10">Couldn't load your recent work. Reload the page to try again.</p>
+  if (state.status === 'loading') {
+    return <Skeleton label="Loading your recent work" className="mt-10"><Bone className="h-8 w-44" /><ListBones count={2} /></Skeleton>
+  }
   if (state.status !== 'ready' || !state.value.length) return null
   return (
     <section className="mt-10" aria-labelledby="recent-work">

@@ -28,6 +28,13 @@ afterEach(() => {
 })
 
 describe('WaitingStatus', () => {
+  test('while the account is checked, a placeholder holds its place', async () => {
+    fetchMock.mockReturnValue(new Promise(() => undefined))
+    const { default: WaitingStatus } = await import('./WaitingStatus')
+    render(<WaitingStatus />)
+    expect(screen.getByRole('status', { name: 'Checking your account' })).toBeTruthy()
+  })
+
   test('pending: explains the wait and offers Sign out, which goes home', async () => {
     await renderAs('pending')
     expect(await screen.findByText(/waiting for your tech coach to approve it/)).toBeTruthy()

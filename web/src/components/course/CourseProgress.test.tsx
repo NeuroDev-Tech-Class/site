@@ -4,7 +4,7 @@ import type { Mock } from 'vitest'
 import { afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest'
 import type { ItemStatus } from '../../lib/api'
 import type { UnitView } from '../../lib/content'
-import { fakeCourseHub, fakeFetch, submission } from '../../test/fake-hub'
+import { fakeCourseHub, fakeFetch, fakeHub, requests, submission } from '../../test/fake-hub'
 
 const UNITS: UnitView[] = [
   { id: 'u_1', number: '1', title: 'Basics', description: 'Start here.', items: [
@@ -54,8 +54,16 @@ describe('while the sign-in is being checked', () => {
     fetchMock.mockReturnValue(new Promise(() => undefined))
     const { default: CourseProgressPanel } = await import('./CourseProgressPanel')
     render(<CourseProgressPanel courseId="gimp" pageIds={PAGE_IDS} />)
-    expect(screen.getByText('Loading your progress…')).toBeTruthy()
+    expect(screen.getByRole('status', { name: 'Loading your progress' })).toBeTruthy()
     expect(screen.queryByRole('link', { name: 'Sign in to start this course' })).toBeNull()
+  })
+
+  test('then, while the progress itself loads, a placeholder shaped like the panel holds its place', async () => {
+    fakeHub(fetchMock, {}, { '/api/v1/tech/courses/gimp/progress': () => new Promise<Response>(() => undefined) })
+    const { default: CourseProgressPanel } = await import('./CourseProgressPanel')
+    render(<CourseProgressPanel courseId="gimp" pageIds={PAGE_IDS} />)
+    await waitFor(() => expect(requests(fetchMock)).toContain('GET /api/v1/tech/courses/gimp/progress'))
+    expect(screen.getByRole('status', { name: 'Loading your progress' }).getAttribute('aria-busy')).toBe('true')
   })
 })
 

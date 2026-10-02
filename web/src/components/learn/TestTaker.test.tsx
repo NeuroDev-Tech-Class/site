@@ -99,6 +99,17 @@ afterEach(() => {
 })
 
 describe('before starting', () => {
+  test('while the test loads, a placeholder shaped like it holds its place', async () => {
+    fakeHub(fetchMock, {}, {
+      '/api/v1/tech/items/i_t': () => json(200, { id: 'i_t', type: 'test', title: 'Unit 2 Test', status: 'ok', tags: [],
+        course: { id: 'gimp', title: 'GIMP' }, unit: { id: 'u_2', title: 'Unit 2: Tests' }, content: {} }),
+      '/api/v1/tech/items/i_t/progress': () => json(200, { item_id: 'i_t', status: null, done_at: null, opened_at: 'x', videos: [] }),
+      '/api/v1/tech/items/i_t/test': () => new Promise<Response>(() => undefined),
+    })
+    await renderTest()
+    expect(await screen.findByRole('status', { name: 'Loading the test' })).toBeTruthy()
+  })
+
   test('a test not uploaded yet says so', async () => {
     hub(state({ ready: false, test: null, attempts_allowed: null, can_start: false, reason: "This test isn't ready yet." }))
     await renderTest()

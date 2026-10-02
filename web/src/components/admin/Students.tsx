@@ -13,7 +13,8 @@ import {
 import { routeHash, type AdminRoute, type StudentsTab } from '../../lib/adminRoute'
 import { countWords, formatDate, fullName, timeAgo } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
-import { CELL, ConfirmButton, DataTable, ErrorLine, LoadError, Loading, problemWords, REFRESH_MS, SearchField, showRoute, StatusLine, useAdmin, ViewHeading, waitingOnCoach } from './shared'
+import { Skeleton, TableBones } from '../Skeleton'
+import { CELL, ConfirmButton, DataTable, ErrorLine, LoadError, problemWords, REFRESH_MS, SearchField, showRoute, StatusLine, useAdmin, ViewHeading, waitingOnCoach } from './shared'
 
 type StudentsRoute = Extract<AdminRoute, { view: 'students' }>
 
@@ -82,7 +83,7 @@ function Admins({ say }: { say: (words: string) => void }) {
         A student with that email becomes an admin; anyone new gets an email to set their password.
       </p>
       <ErrorLine>{problem}</ErrorLine>
-      {staff.status === 'loading' && <Loading />}
+      {staff.status === 'loading' && <Skeleton label="Loading the admins"><TableBones rows={3} columns={3} /></Skeleton>}
       {staff.status === 'error' && <LoadError onRetry={() => void staff.reload()} />}
       {staff.status === 'ready' && (
         <DataTable caption="Admins" head={['Name', 'Email', 'Role', '']}>
@@ -145,7 +146,7 @@ export default function Students({ route }: { route: StudentsRoute }) {
 
   let body
   if (tab === 'admins') body = <Admins say={said => setNote({ tab: 'admins', said, problem: null })} />
-  else if (roster.status === 'loading') body = <Loading />
+  else if (roster.status === 'loading') body = <Skeleton label="Loading students"><TableBones /></Skeleton>
   else if (roster.status === 'error') body = <LoadError />
   else if (!shown.length) {
     body = (

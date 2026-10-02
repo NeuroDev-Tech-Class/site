@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { ProgressStatus } from '../../lib/api'
-import { hasPage, type ItemView, type UnitView } from '../../lib/content'
+import { hasPage } from '../../lib/contentLinks'
+import type { ItemView, UnitView } from '../../lib/content'
 import { countsDone, setItemDone, statusWord, useCourseProgress } from '../../lib/courseProgress'
 import { useItemWork } from '../../lib/myWork'
 import CoachFeedback from '../CoachFeedback'

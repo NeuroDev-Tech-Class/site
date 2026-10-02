@@ -7,7 +7,8 @@ import Review from '../test/Review'
 import Answers from './Answers'
 import OldFormGrade from './OldFormGrade'
 import { gradeHref } from './Queue'
-import { ErrorLine, LoadError, Loading, problemWords, StatusLine, useAdmin, ViewHeading } from './shared'
+import { QuestionBones, Skeleton } from '../Skeleton'
+import { ErrorLine, LoadError, problemWords, StatusLine, useAdmin, ViewHeading } from './shared'
 
 const NEEDS_CHANGE = 'Say what to change before sending it back.'
 const NEEDS_TICK = 'Tick that you saw this in person before marking it complete.'
@@ -225,7 +226,7 @@ export default function Grade({ id }: { id: string }) {
     }
   }
 
-  if (work.status === 'loading') return <><ViewHeading>Grading</ViewHeading><Loading /></>
+  if (work.status === 'loading') return <><ViewHeading>Grading</ViewHeading><Skeleton label="Loading this work"><QuestionBones /></Skeleton></>
   if (work.status === 'error') {
     const gone = work.failure instanceof ApiError && work.failure.status === 404
     return (

@@ -4,6 +4,7 @@ import { fullName, isStaff } from '../lib/format'
 import { safeNext } from '../lib/redirect'
 import { signOut, useSession } from '../lib/session'
 import { usePopover } from '../lib/usePopover'
+import { Bone } from './Skeleton'
 
 const STATUS_WORDS: Partial<Record<TechAccount['status'], string>> = {
   pending: 'Waiting for approval',
@@ -69,7 +70,7 @@ function AccountMenu({ account }: { account: TechAccount }) {
 export default function UserMenu() {
   const session = useSession()
 
-  if (session.status === 'loading') return <div className="h-11" aria-hidden="true" />
+  if (session.status === 'loading') return <Bone className="h-11 w-36 rounded-lg" />
   if (session.status === 'signed-in') return <AccountMenu account={session.account} />
   return (
     <div className="flex gap-2">

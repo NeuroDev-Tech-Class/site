@@ -5,7 +5,8 @@ import { ApiError, saveFile, type LineProblem } from '../../lib/api'
 import { countWords, formatDate } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
 import Question from '../test/Question'
-import { CELL, DataTable, ErrorLine, LoadError, Loading, problemWords, StatusLine, ViewHeading } from './shared'
+import { QuestionBones, Skeleton, TableBones } from '../Skeleton'
+import { CELL, DataTable, ErrorLine, LoadError, problemWords, StatusLine, ViewHeading } from './shared'
 
 const EXAMPLE = `# Unit 1 Test
 pass: 70
@@ -102,7 +103,7 @@ export default function Tests() {
       <StatusLine>{said}</StatusLine>
       <ErrorLine>{problem}</ErrorLine>
       {refused && <Refused {...refused} />}
-      {tests.status === 'loading' && <Loading />}
+      {tests.status === 'loading' && <Skeleton label="Loading the tests"><TableBones /></Skeleton>}
       {tests.status === 'error' && <LoadError onRetry={() => void tests.reload()} />}
       {tests.status === 'ready' && byCourse(tests.value).map(({ course, rows }) => (
         <section key={course.id} className="mt-8" aria-labelledby={`tests-${course.id}`}>
@@ -165,7 +166,7 @@ export default function Tests() {
 export function TestPreview({ id }: { id: string }) {
   const test = useLoad(() => getTestPreview(id), [id])
   const back = <a href={routeHash({ view: 'tests' })}>All tests</a>
-  if (test.status === 'loading') return <><ViewHeading eyebrow={back}>Preview</ViewHeading><Loading /></>
+  if (test.status === 'loading') return <><ViewHeading eyebrow={back}>Preview</ViewHeading><Skeleton label="Loading the test"><QuestionBones /></Skeleton></>
   if (test.status === 'error') {
     const missing = test.failure instanceof ApiError && test.failure.status === 404 ? test.failure.message : null
     return (

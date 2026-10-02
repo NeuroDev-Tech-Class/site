@@ -17,7 +17,8 @@ import { countWords, formatDate, formatName, fullName, timeAgo } from '../../lib
 import { useLoad } from '../../lib/useLoad'
 import { StudentCertificates } from './Certificates'
 import { gradeHref } from './Queue'
-import { CELL, ConfirmButton, DataTable, ErrorLine, LoadError, Loading, problemWords, showRoute, StatusLine, useAdmin, ViewHeading } from './shared'
+import { CourseCardBones, Skeleton, TableBones, TextBones } from '../Skeleton'
+import { CELL, ConfirmButton, DataTable, ErrorLine, LoadError, problemWords, showRoute, StatusLine, useAdmin, ViewHeading } from './shared'
 
 const STATUS_WORDS: Record<AdminAccount['status'], string> = {
   pending: 'Waiting for approval', approved: 'Approved', declined: 'Declined', deactivated: 'Deactivated',
@@ -30,7 +31,7 @@ function Courses({ id }: { id: string }) {
   return (
     <section aria-labelledby="courses-heading" className="mt-10">
       <h2 id="courses-heading" className="mt-0">Courses</h2>
-      {progress.status === 'loading' && <Loading />}
+      {progress.status === 'loading' && <Skeleton label="Loading their courses"><CourseCardBones /></Skeleton>}
       {progress.status === 'error' && <LoadError onRetry={() => void progress.reload()} />}
       {progress.status === 'ready' && (progress.value.courses.length
         ? (
@@ -70,7 +71,7 @@ function Work({ id }: { id: string }) {
   return (
     <section aria-labelledby="work-heading" className="mt-10">
       <h2 id="work-heading" className="mt-0">Work handed in</h2>
-      {work.status === 'loading' && <Loading />}
+      {work.status === 'loading' && <Skeleton label="Loading their work"><TableBones rows={3} /></Skeleton>}
       {work.status === 'error' && <LoadError onRetry={() => void work.reload()} />}
       {work.status === 'ready' && (work.value.length
         ? (
@@ -113,7 +114,7 @@ function Uploads({ id, name }: { id: string, name: string }) {
       <h2 id="uploads-heading" className="mt-0">Uploads</h2>
       <StatusLine>{said}</StatusLine>
       <ErrorLine>{problem}</ErrorLine>
-      {files.status === 'loading' && <Loading />}
+      {files.status === 'loading' && <Skeleton label="Loading their uploads"><TableBones rows={3} columns={3} /></Skeleton>}
       {files.status === 'error' && <LoadError onRetry={() => void files.reload()} />}
       {files.status === 'ready' && (files.value.length
         ? (
@@ -173,7 +174,7 @@ export default function Student({ id }: { id: string }) {
     }
   }
 
-  if (person.status === 'loading') return <><ViewHeading eyebrow="Students">Student</ViewHeading><Loading /></>
+  if (person.status === 'loading') return <><ViewHeading eyebrow="Students">Student</ViewHeading><Skeleton label="Loading the student"><TextBones lines={2} className="mt-4 max-w-md" /><CourseCardBones /></Skeleton></>
   if (person.status === 'error') {
     const gone = person.failure instanceof ApiError && person.failure.status === 404
     return (

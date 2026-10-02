@@ -2,6 +2,7 @@ import { navigate } from 'astro:transitions/client'
 import { useEffect } from 'react'
 import { safeNext } from '../../lib/redirect'
 import { signOut, useSession } from '../../lib/session'
+import { Skeleton, TextBones } from '../Skeleton'
 
 export default function WaitingStatus() {
   const session = useSession()
@@ -16,7 +17,9 @@ export default function WaitingStatus() {
     await navigate('/')
   }
 
-  if (session.status === 'loading' || approved) return <p>Checking your account…</p>
+  if (session.status === 'loading' || approved) {
+    return <Skeleton label="Checking your account"><TextBones lines={2} className="max-w-md" /></Skeleton>
+  }
   if (session.status === 'signed-out') {
     return <p>You're not signed in. <a href="/sign-in">Sign in</a> to see your account.</p>
   }

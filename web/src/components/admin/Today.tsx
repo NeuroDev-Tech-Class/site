@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { approveAccount, getQueue, getStudents, type StudentRow } from '../../lib/adminApi'
 import { formatDate } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
-import { LoadError, Loading, problemWords, REFRESH_MS, StatusLine, useAdmin, ViewHeading, waitedWords, waitingOnCoach, withinDays } from './shared'
+import { ListBones, Skeleton, TileBones } from '../Skeleton'
+import { LoadError, problemWords, REFRESH_MS, StatusLine, useAdmin, ViewHeading, waitedWords, waitingOnCoach, withinDays } from './shared'
 
 const ATTENTION_WORK = 5
 
@@ -42,7 +43,7 @@ export default function Today() {
   }
 
   let body
-  if (data.status === 'loading') body = <Loading />
+  if (data.status === 'loading') body = <Skeleton label="Loading today"><TileBones /><ListBones count={2} /></Skeleton>
   else if (data.status === 'error') body = <LoadError />
   else {
     const { students, queue } = data.value

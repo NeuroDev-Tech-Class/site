@@ -2,8 +2,11 @@ import sanitizeHtml from 'sanitize-html'
 import catalogJson from '../../../content/catalog.json'
 import vocabulary from '../../../content/vocabulary.json'
 import { itemLabel, type ItemType } from './itemLabel'
+import { hasPage, type CategoryKey, type CourseMeta } from './contentLinks'
 
 export { itemLabel, type ItemType }
+// The few helpers the browser needs live apart, so the pages' scripts never carry the course data
+export { continueHref, courseAccent, hasPage, slidesEmbedUrl, type CategoryKey, type CourseMeta } from './contentLinks'
 
 export interface Item {
   id: string
@@ -93,8 +96,6 @@ export function courseStats(course: Course): { units: number, items: number } {
   }
 }
 
-export type CategoryKey = 'basics' | 'programming' | 'it' | 'web' | 'game' | 'media'
-
 const CATEGORY_KEYS: Record<string, CategoryKey> = {
   'Computer Basics': 'basics',
   'Computer Programming': 'programming',
@@ -151,10 +152,7 @@ export function unitViews(course: Course): UnitView[] {
   }))
 }
 
-const PAGED_TYPES: ItemType[] = ['lesson', 'video', 'slides', 'link', 'checkpoint', 'test']
 const NEXT_TEXT_MAX = 80
-
-export const hasPage = (type: ItemType): boolean => PAGED_TYPES.includes(type)
 
 /** Where an item opens: its own page, or its place on the course page for items without one */
 const itemHref = (courseId: string, item: { id: string, type: ItemType }): string =>
@@ -200,29 +198,8 @@ export function itemPages(course: Course): ItemPageView[] {
   })
 }
 
-/** The embed view of a Google Slides deck, or null for anything else */
-export function slidesEmbedUrl(url: string): string | null {
-  const match = url.match(/^https:\/\/docs\.google\.com\/presentation\/(?:u\/\d+\/)?d\/([A-Za-z0-9_-]+)/)
-  return match ? `https://docs.google.com/presentation/d/${match[1]}/embed?start=false&loop=false` : null
-}
-
-/** What a progress card needs to name and colour a course the hub mentions */
-export interface CourseMeta {
-  id: string
-  heading: string
-  category: CategoryKey
-}
-
 export const courseMeta = (): CourseMeta[] =>
   publishedCourses().map(course => ({ id: course.id, heading: course.heading, category: categoryKey(course.category) }))
 
-/** A course card's accent colour; a course the site doesn't list (a draft an admin can see) gets the brand cyan */
-export const courseAccent = (meta?: CourseMeta): string =>
-  meta ? `var(--cat-${meta.category})` : 'var(--color-brand-cyan)'
-
 /** Every item that has its own page, across the published courses */
 export const allPageIds = (): string[] => publishedCourses().flatMap(itemPages).map(page => page.id)
-
-/** Where Continue goes for the hub's next_item: its page if it has one (`pageIds`), else its place on the course page */
-export const continueHref = (courseId: string, itemId: string, pageIds: string[]): string =>
-  pageIds.includes(itemId) ? `/learn/${itemId}` : `/courses/${courseId}#item-${itemId}`

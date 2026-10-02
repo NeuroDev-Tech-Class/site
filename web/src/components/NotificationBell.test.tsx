@@ -60,6 +60,16 @@ afterEach(() => {
 })
 
 describe('the bell', () => {
+  test('opened while the notes load, placeholders hold their place', async () => {
+    fakeHub(fetchMock, {}, {
+      '/api/v1/tech/inbox/unread-count': () => json(200, { count: 2 }),
+      '/api/v1/tech/inbox': () => new Promise<Response>(() => undefined),
+    })
+    await renderBell()
+    await userEvent.click(await bell())
+    expect(await screen.findByRole('status', { name: 'Loading notifications' })).toBeTruthy()
+  })
+
   test('shows how many notes are unread', async () => {
     hub()
     await renderBell()

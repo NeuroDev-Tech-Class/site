@@ -2,7 +2,8 @@ import { useCallback } from 'react'
 import { getQueue } from '../../lib/adminApi'
 import type { AdminRoute } from '../../lib/adminRoute'
 import { useLoad } from '../../lib/useLoad'
-import { CELL, DataTable, LoadError, Loading, REFRESH_MS, SearchField, showRoute, useAdmin, ViewHeading, waitedWords } from './shared'
+import { Skeleton, TableBones } from '../Skeleton'
+import { CELL, DataTable, LoadError, REFRESH_MS, SearchField, showRoute, useAdmin, ViewHeading, waitedWords } from './shared'
 
 type QueueRoute = Extract<AdminRoute, { view: 'queue' }>
 
@@ -15,7 +16,7 @@ export default function Queue({ route }: { route: QueueRoute }) {
 
   const filtered = Boolean(route.course || route.q)
   let body
-  if (data.status === 'loading') body = <Loading />
+  if (data.status === 'loading') body = <Skeleton label="Loading the queue"><TableBones /></Skeleton>
   else if (data.status === 'error') body = <LoadError />
   else if (!data.value.items.length) {
     body = <p className="mt-6">{filtered ? 'Nothing waiting matches these filters.' : 'Nothing is waiting. Nice work.'}</p>
