@@ -12,7 +12,8 @@ import { routeHash } from '../../lib/adminRoute'
 import { fetchFile, openCertificate } from '../../lib/api'
 import { calendarDate, formatDate, todayIso } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
-import { ConfirmButton, ErrorLine, LoadError, Loading, problemWords, StatusLine } from './shared'
+import { FormBones, ListBones, Skeleton } from '../Skeleton'
+import { ConfirmButton, ErrorLine, LoadError, problemWords, StatusLine } from './shared'
 
 const printed = (c: CertificateText) => `${c.student_name} · ${c.course_name} · ${calendarDate(c.awarded_on)}`
 
@@ -136,7 +137,7 @@ export function CertificatePanel({ studentId, firstName, fullName, courseId, cou
             ? 'Ready for a certificate: every item is done.'
             : `${done} of ${total} done: not finished yet. You can still create one.`}
       </p>
-      {certificates.status === 'loading' && <Loading />}
+      {certificates.status === 'loading' && <Skeleton label="Loading the certificate"><FormBones /></Skeleton>}
       {certificates.status === 'error' && <LoadError onRetry={() => void certificates.reload()} />}
       {certificates.status === 'ready' && (live
         ? <Live cert={live} firstName={firstName} busy={busy} act={(a, w) => void act(a, w)} />
@@ -159,7 +160,7 @@ export function StudentCertificates({ id, firstName }: { id: string, firstName: 
   return (
     <section aria-labelledby="certificates-heading" className="mt-10">
       <h2 id="certificates-heading" className="mt-0">Certificates</h2>
-      {certificates.status === 'loading' && <Loading />}
+      {certificates.status === 'loading' && <Skeleton label="Loading certificates"><ListBones count={2} /></Skeleton>}
       {certificates.status === 'error' && <LoadError onRetry={() => void certificates.reload()} />}
       {certificates.status === 'ready' && (certificates.value.length
         ? (

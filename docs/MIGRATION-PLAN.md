@@ -358,6 +358,9 @@ Two repos. Hub work goes on the existing `tech-class` branch (currently equal to
 
 ### After cutover (next plan)
 
+- *Post-launch (2026-10-02)*: `assets/images` moved to `images/` at the root (pages keep their `/images/...` addresses). The real export held 128 unmarked old Google Form scores; their grade view now marks each answer against the course's uploaded test (hub `7a67a70`, site `782952d`): on the real answers 21 of 151 old attempts need nothing from the coach, most of the rest being short answers whose drafts have no `accept:` lines yet. Every graded answer now sits in its own labelled box under its question.
+- *Slideshows back on Google (2026-10-02, Topher)*: the nine decks rebuilt in Phase 11 read badly (a fixed 16:9 box too small for wordy slides, pictures stacked in a column), so each slideshow is its Google Slides link again and the page embeds Google's player (site `7037d98`); the rebuilt-deck viewer, its 7.1 MB of slide pictures and the hub's support for a slides list were removed (hub `d77463b`). Production needs the content import (9 item updates). Skeleton loading everywhere and the course data kept out of the browser's scripts landed the same day (site `938fbed`).
+
 Course builder, test builder, checkpoint builder with draft/publish validation (roadmap phase 6); lesson editor with image upload (phase 7); Settings view; build-time catalog from the API plus a Render deploy hook on publish (replacing the committed `content/` snapshot as the catalog source); retention and cleanup; linking tech accounts to hub student profiles when `core.people` exists.
 
 ## Topher's tasks (outside code)

@@ -149,7 +149,6 @@ export function LoadError({ onRetry }: { onRetry?: () => void }) {
     </div>
   )
 }
-export const Loading = () => <p className="mt-6 text-(--muted)" aria-busy="true">Loading…</p>
 
 const DAY = 24 * 60 * 60 * 1000
 

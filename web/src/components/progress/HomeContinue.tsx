@@ -1,11 +1,26 @@
-import { continueHref, courseAccent, type CourseMeta } from '../../lib/content'
+import { continueHref, courseAccent } from '../../lib/contentLinks'
+import type { CourseMeta } from '../../lib/content'
 import { useMyProgress } from '../../lib/courseProgress'
 import ProgressRing from '../course/ProgressRing'
 import Icon from '../Icon'
+import { Bone, Skeleton } from '../Skeleton'
 
 // Home's "Pick up where you left off": the most recent course with something still to do, or nothing at all
 export default function HomeContinue({ courses, pageIds }: { courses: CourseMeta[], pageIds: string[] }) {
   const state = useMyProgress()
+  if (state.status === 'loading') {
+    return (
+      <Skeleton label="Loading where you left off" className="panel mb-10 flex flex-wrap items-center gap-4">
+        <Bone className="size-16 shrink-0 rounded-full" />
+        <div className="flex min-w-0 flex-1 flex-col gap-2">
+          <Bone className="h-4 w-40" />
+          <Bone className="h-5 w-2/3" />
+          <Bone className="h-3 w-1/2" />
+        </div>
+        <Bone className="h-11 w-32 rounded-lg" />
+      </Skeleton>
+    )
+  }
   if (state.status !== 'ready') return null
   const course = state.value.find(c => c.next_item)
   if (!course?.next_item) return null

@@ -3,11 +3,12 @@ import { routeHash } from '../../lib/adminRoute'
 import { sizeWords } from '../../lib/checkpoint'
 import { countWords, timeAgo } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
-import { CELL, DataTable, LoadError, Loading, useAdmin, ViewHeading } from './shared'
+import { Skeleton, TableBones } from '../Skeleton'
+import { CELL, DataTable, LoadError, useAdmin, ViewHeading } from './shared'
 
 function Usage() {
   const usage = useLoad(getUsage, [])
-  if (usage.status === 'loading') return <Loading />
+  if (usage.status === 'loading') return <Skeleton label="Loading storage"><TableBones columns={3} /></Skeleton>
   if (usage.status === 'error') return <LoadError onRetry={() => void usage.reload()} />
   const { total_bytes: total, students } = usage.value
   if (!students.length) return <p className="mt-6">No uploads are stored.</p>

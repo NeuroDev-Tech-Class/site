@@ -1,4 +1,4 @@
-// Copies the site's images (the single source is ../assets/images) into public/images, which is gitignored.
+// Copies the site's images (the single source is ../images) into public/images, which is gitignored.
 // Only what is new or changed is copied, and what is gone is removed: the copy goes through the Windows bind mount,
 // so copying all 18 MB on every build was most of its time.
 import { copyFileSync, existsSync, mkdirSync, readdirSync, rmSync, statSync, utimesSync } from 'node:fs'
@@ -40,7 +40,7 @@ export function syncDir(from, to) {
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const from = fileURLToPath(new URL('../../assets/images/', import.meta.url))
+  const from = fileURLToPath(new URL('../../images/', import.meta.url))
   const to = fileURLToPath(new URL('../public/images/', import.meta.url))
   const { copied, removed } = syncDir(from, to)
   console.log(`sync-assets: ${copied} copied, ${removed} removed (${from} -> ${to})`)

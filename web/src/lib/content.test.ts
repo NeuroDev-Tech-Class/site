@@ -54,6 +54,15 @@ describe('the committed content', () => {
     expect(listed).not.toContain('web-dev-1')
     for (const id of listed) expect(courses.find(c => c.id === id)?.status, id).toBe('published')
   })
+
+  test("every slideshow plays in Google's own player, never a copy rebuilt in the site", () => {
+    const decks = courses.flatMap(c => c.units.flatMap(u => u.items)).filter(i => i.type === 'slides')
+    expect(decks.length).toBeGreaterThan(0)
+    for (const deck of decks) {
+      expect(slidesEmbedUrl(String(deck.payload.slides_url ?? '')), deck.id).not.toBeNull()
+      expect(deck.payload.slides, deck.id).toBeUndefined()
+    }
+  })
 })
 
 describe('sanitize', () => {

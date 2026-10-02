@@ -7,6 +7,7 @@ import CoachFeedback from '../CoachFeedback'
 import Icon from '../Icon'
 import AnswerList from './AnswerList'
 import CheckpointForm from './CheckpointForm'
+import { FormBones, Skeleton, TextBones } from '../Skeleton'
 
 type Load =
   | { status: 'loading' }
@@ -67,7 +68,14 @@ export default function Checkpoint({ page, content }: { page: ItemPageView, cont
   }, [page.id])
 
   // Everything appears at once, so the returned feedback never pushes the instructions down
-  if (load.status === 'loading') return <p className="text-(--muted)" aria-busy="true">Loading…</p>
+  if (load.status === 'loading') {
+    return (
+      <Skeleton label="Loading the checkpoint" className="panel flex flex-col gap-6">
+        <TextBones lines={4} />
+        <FormBones />
+      </Skeleton>
+    )
+  }
   let body
   if (load.status === 'error') body = <p>Couldn't load your work. Reload the page to try again.</p>
   else if (load.status === 'closed') body = <div className="panel"><p className="mt-0">{load.message}</p></div>

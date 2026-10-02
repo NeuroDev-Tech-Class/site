@@ -1,6 +1,6 @@
 name: tech-class-website
 
-# The Astro site (web/). The whole repo is mounted because the build reads ../content and ../assets/images.
+# The Astro site (web/). The whole repo is mounted because the build reads ../content and ../images.
 # Its API is the hub's backend: run `docker compose up` in ../neurodev-hub first (backend on 8001, Mailpit on 8026).
 services:
   web:

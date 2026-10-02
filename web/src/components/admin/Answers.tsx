@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import type { CheckpointForm } from '../../lib/adminApi'
 import { fileLink, type Answers as AnswerSet, type CheckpointField, type UploadedFile } from '../../lib/api'
 import { filled, sizeWords } from '../../lib/checkpoint'
+import AnswerBox from '../AnswerBox'
 import Icon from '../Icon'
 
 /** Links last minutes, so a file asks for its own when it is shown; downloads ask when clicked */
@@ -89,9 +90,11 @@ export default function Answers({ form, answers, files }: { form: CheckpointForm
     return (
       <dl>
         {entries.map(([question, value]) => (
-          <div key={question} className="border-t border-(--border) py-3">
+          <div key={question} className="border-t border-(--border) py-4">
             <dt className="font-semibold">{question}</dt>
-            <dd className="mt-1 ml-0 whitespace-pre-line">{Array.isArray(value) ? value.join(', ') : String(value)}</dd>
+            <dd className="ml-0">
+              <AnswerBox><p className="mt-1 whitespace-pre-line">{Array.isArray(value) ? value.join(', ') : String(value)}</p></AnswerBox>
+            </dd>
           </div>
         ))}
       </dl>
@@ -102,7 +105,9 @@ export default function Answers({ form, answers, files }: { form: CheckpointForm
       {form.fields.map(field => (
         <div key={field.id} role="group" aria-labelledby={`answer-${field.id}`} className="border-t border-(--border) py-4">
           <h3 id={`answer-${field.id}`} className="mt-0 text-base">{field.label}</h3>
-          <Answer field={field} value={answers[field.id]} files={files.filter(file => file.field_id === field.id)} />
+          {field.type === 'mentorSignOff'
+            ? <Answer field={field} value={answers[field.id]} files={[]} />
+            : <AnswerBox><Answer field={field} value={answers[field.id]} files={files.filter(file => file.field_id === field.id)} /></AnswerBox>}
         </div>
       ))}
     </div>

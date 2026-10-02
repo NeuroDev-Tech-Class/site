@@ -30,6 +30,8 @@ const certificate = (overrides: Partial<Certificate> = {}): Certificate => ({
 
 function hub(options: {
   done?: number, started?: boolean, certificates?: Certificate[], refuse?: string, madeElsewhere?: Certificate,
+  // The certificate list never answers, to see what shows while it loads
+  waiting?: boolean,
 } = {}) {
   sent = []
   let list = options.certificates ?? []
@@ -43,7 +45,7 @@ function hub(options: {
       '/api/v1/tech/accounts/s1/submissions': () => json(200, []),
       '/api/v1/tech/accounts/s1/files': () => json(200, []),
       '/api/v1/tech/courses/gimp': () => json(200, OUTLINE),
-      '/api/v1/tech/accounts/s1/certificates': () => json(200, list),
+      '/api/v1/tech/accounts/s1/certificates': () => (options.waiting ? new Promise<Response>(() => undefined) : json(200, list)),
       '/api/v1/tech/accounts/s1/courses/gimp/certificate/preview\\?(.*)': ({ match }) => {
         record('GET', `preview?${match[1]}`)
         return new Response('%PDF-1.7', { status: 200, headers: { 'Content-Type': 'application/pdf' } })
@@ -105,6 +107,11 @@ describe("a student's course: the certificate", () => {
     expect((await within(box).findByRole('textbox', { name: 'Name' }) as HTMLInputElement).value).toBe('Sam Student')
     expect((within(box).getByRole('textbox', { name: 'Course name' }) as HTMLInputElement).value).toBe('2D Digital Art - GIMP')
     expect((within(box).getByLabelText('Date') as HTMLInputElement).value).toBe('2026-09-30')
+  })
+
+  test('while the certificate loads, a placeholder shaped like the form holds its place', async () => {
+    await hub({ waiting: true })
+    expect(await within(await panel()).findByRole('status', { name: 'Loading the certificate' })).toBeTruthy()
   })
 
   test('a course not started yet says so', async () => {

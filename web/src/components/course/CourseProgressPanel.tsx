@@ -1,16 +1,17 @@
 import Icon from '../Icon'
 import NotApproved from '../NotApproved'
-import { continueHref } from '../../lib/content'
+import { continueHref } from '../../lib/contentLinks'
 import { useCourseProgress } from '../../lib/courseProgress'
 import { useSession } from '../../lib/session'
 import ProgressRing from './ProgressRing'
+import { ProgressPanelBones, Skeleton } from '../Skeleton'
 
 // The top of a course page: how to start (signed out), why you can't yet (pending), or where you are (approved)
 export default function CourseProgressPanel({ courseId, pageIds }: { courseId: string, pageIds: string[] }) {
   const session = useSession()
   const state = useCourseProgress(courseId)
 
-  const loading = <p className="mt-0 text-(--muted)" aria-busy="true">Loading your progress…</p>
+  const loading = <Skeleton label="Loading your progress"><ProgressPanelBones /></Skeleton>
   if (session.status === 'loading') return loading
   if (session.status === 'signed-out') {
     return (

@@ -1,5 +1,6 @@
 import type { CourseProgress } from '../../lib/api'
-import { continueHref, courseAccent, type CourseMeta } from '../../lib/content'
+import { continueHref, courseAccent } from '../../lib/contentLinks'
+import type { CourseMeta } from '../../lib/content'
 import { useMyProgress } from '../../lib/courseProgress'
 import { formatDate } from '../../lib/format'
 import { useSession } from '../../lib/session'
@@ -8,6 +9,7 @@ import Icon from '../Icon'
 import NotApproved from '../NotApproved'
 import MyCertificates from './MyCertificates'
 import RecentWork from './RecentWork'
+import { CourseCardBones, Skeleton } from '../Skeleton'
 
 interface Props {
   courses: CourseMeta[]
@@ -54,7 +56,7 @@ export default function MyCourses({ courses, pageIds }: Props) {
   const session = useSession()
   const state = useMyProgress()
 
-  const loading = <p className="text-(--muted)" aria-busy="true">Loading your courses…</p>
+  const loading = <Skeleton label="Loading your courses"><CourseCardBones /></Skeleton>
   if (session.status === 'loading') return loading
   if (session.status === 'signed-out') {
     return (

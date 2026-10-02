@@ -46,6 +46,8 @@ interface Hub {
   saveRefused?: Record<string, string>
   submit?: { status: number, body: unknown }
   uploadRefused?: string
+  // The draft never answers, to see what shows while it loads
+  draftWaits?: boolean
 }
 
 let fetchMock: Mock
@@ -64,6 +66,7 @@ function hub(options: Hub = {}) {
     '/api/v1/tech/items/i_c': () => json(200, item),
     '/api/v1/tech/items/i_c/progress': () => json(200, { item_id: 'i_c', status: null, done_at: null, opened_at: 'x', videos: [] }),
     '/api/v1/tech/items/i_c/draft': ({ method, body }) => {
+      if (options.draftWaits) return new Promise<Response>(() => undefined)
       if (options.draftError) return json(options.draftError.status, { detail: options.draftError.detail })
       if (method === 'PUT') {
         if (options.saveFails) return json(500, { detail: 'down' })
@@ -135,6 +138,13 @@ afterEach(() => {
 })
 
 describe('the checkpoint page', () => {
+  test('while the work loads, a placeholder shaped like the form holds its place', async () => {
+    hub({ draftWaits: true })
+    const { default: LearnItem } = await import('./LearnItem')
+    render(<LearnItem page={PAGE} />)
+    expect(await screen.findByRole('status', { name: 'Loading the checkpoint' })).toBeTruthy()
+  })
+
   test('shows the instructions, the starter to download and the in-person sign-off, and no Mark complete', async () => {
     hub()
     await renderPage()

@@ -16,14 +16,14 @@ services:
     runtime: static
     branch: main
     # Built from the repo root, not `rootDir: web`, because the Astro build imports ../content/*.json
-    # and copies ../assets/images before building.
+    # and copies ../images before building.
     buildCommand: cd web && npm ci && npm run build
     staticPublishPath: web/dist
     buildFilter:
       paths:
         - web/**
         - content/**
-        - assets/images/**
+        - images/**
         - render.yaml
       ignoredPaths:
         - web/tests/**

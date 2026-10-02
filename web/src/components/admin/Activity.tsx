@@ -4,7 +4,8 @@ import type { AdminRoute } from '../../lib/adminRoute'
 import { saveFile } from '../../lib/api'
 import { formatDate, timeAgo } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
-import { ErrorLine, LoadError, Loading, problemWords, REFRESH_MS, showRoute, useAdmin, ViewHeading } from './shared'
+import { ListBones, Skeleton } from '../Skeleton'
+import { ErrorLine, LoadError, problemWords, REFRESH_MS, showRoute, useAdmin, ViewHeading } from './shared'
 
 type ActivityRoute = Extract<AdminRoute, { view: 'activity' }>
 
@@ -34,7 +35,7 @@ function Lines({ filter, filtered }: { filter: ActivityFilter, filtered: boolean
   const [busy, setBusy] = useState(false)
   const [problem, setProblem] = useState<string | null>(null)
 
-  if (first.status === 'loading') return <Loading />
+  if (first.status === 'loading') return <Skeleton label="Loading the activity"><ListBones count={5} /></Skeleton>
   if (first.status === 'error') return <LoadError />
   const seen = new Set<string>()
   const lines = [...first.value.items, ...(older?.items ?? [])].filter(line => !seen.has(line.id) && seen.add(line.id))

@@ -5,8 +5,10 @@ import { formatDate } from '../../lib/format'
 import { useLoad } from '../../lib/useLoad'
 import Review from '../test/Review'
 import Answers from './Answers'
+import OldFormGrade from './OldFormGrade'
 import { gradeHref } from './Queue'
-import { ErrorLine, LoadError, Loading, problemWords, StatusLine, useAdmin, ViewHeading } from './shared'
+import { QuestionBones, Skeleton } from '../Skeleton'
+import { ErrorLine, LoadError, problemWords, StatusLine, useAdmin, ViewHeading } from './shared'
 
 const NEEDS_CHANGE = 'Say what to change before sending it back.'
 const NEEDS_TICK = 'Tick that you saw this in person before marking it complete.'
@@ -224,7 +226,7 @@ export default function Grade({ id }: { id: string }) {
     }
   }
 
-  if (work.status === 'loading') return <><ViewHeading>Grading</ViewHeading><Loading /></>
+  if (work.status === 'loading') return <><ViewHeading>Grading</ViewHeading><Skeleton label="Loading this work"><QuestionBones /></Skeleton></>
   if (work.status === 'error') {
     const gone = work.failure instanceof ApiError && work.failure.status === 404
     return (
@@ -258,8 +260,15 @@ export default function Grade({ id }: { id: string }) {
           <h2 className="mt-0 text-lg">Their answers</h2>
           {detail.test
             ? <TestGradeForm key={detail.status} work={detail} onGraded={(updated, words) => void graded(updated, words)} />
-            : (
+            : detail.old_marks
+              ? <OldFormGrade key={detail.status} work={detail} onGraded={(updated, words) => void graded(updated, words)} />
+              : (
                 <>
+                  {detail.legacy && detail.kind === 'test' && (
+                    <p className="text-(--muted)">
+                      Upload this course's test on the Tests page and its multiple choice and true/false answers are marked for you.
+                    </p>
+                  )}
                   <Answers form={detail.checkpoint} answers={detail.answers} files={detail.files} />
                   <GradeForm key={detail.status} work={detail} onGraded={(updated, words) => void graded(updated, words)} />
                 </>

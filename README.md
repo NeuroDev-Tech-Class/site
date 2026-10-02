@@ -22,24 +22,26 @@ Docs:
 web/                    the site: Astro + React islands + Tailwind
   src/pages/            Home, Catalog, Resources, courses/[id], learn/[itemId] (one per reading, video, slides,
                         link, checkpoint and test), my-courses, admin (the coaches' dashboard), the six sign-in pages, 404
-  src/lib/              content.ts (reads content/, sanitises, item pages, counts), api.ts (hub client), session.ts,
+  src/lib/              content.ts (reads content/ at build time, sanitises, item pages, counts; browser code imports only
+                        its types and contentLinks.ts, so no script carries the course data), api.ts (hub client), session.ts,
                         remote.ts + courseProgress.ts (shared progress reads), videoTracking.ts (YouTube heartbeats),
                         checkpoint.ts (what the form still needs), upload.ts (browser upload to R2 with progress),
                         adminApi.ts (the coach's hub calls), adminRoute.ts (the dashboard's #/ addresses),
                         useLoad.ts (load, reload, refresh every 30 s while visible), usePopover.ts (header dropdowns),
                         itemLabel.ts, redirect.ts, format.ts, icons.ts
-  src/components/       header, footer, ThemeToggle, UserMenu, NotificationBell, Icon, course/ (progress panel,
+  src/components/       header, footer, ThemeToggle, UserMenu, NotificationBell, Icon, Skeleton (the loading placeholders,
+                        shaped like what they stand in for), AnswerBox, course/ (progress panel,
                         units, ring), admin/ (AdminApp shell and one view each: Today, Queue, Grade, Students,
                         Student, StudentCourse, Tests, Activity, Storage, Certificates),
                         learn/ (item page; Checkpoint, CheckpointForm, FileField, AnswerList for checkpoints;
-                        TestTaker for tests; SlideDeck for slides), test/ (Question, Review: shared by the test page
+                        TestTaker for tests), test/ (Question, Review: shared by the test page
                         and the Grade view), progress/ (My Courses, Home card, catalog ring), auth/ (sign-in forms)
-  scripts/              sync-assets.mjs (assets/images into public/), zip-starters.mjs (each exercise's starter/ to
+  scripts/              sync-assets.mjs (images into public/), zip-starters.mjs (each exercise's starter/ to
                         public/starters/<checkpoint id>.zip), both run before dev and build; gate.mjs (the checks)
   tests/                build.test.ts checks every built page; scripts.test.ts the scripts
 content/                the course content, edited by hand (see "Changing content"): catalog.json, courses/<id>.json,
                         lessons/<id>.html, lessons.json, checkpoints/<id>.json, vocabulary.json, legacy-map.json
-assets/images/          every picture the site shows, slides' pictures under slides/<deck>/
+images/                 every picture the site shows
 exercises/              the 58 hands-on exercises, one folder each: exercise.json, lesson.md, assignment.md
                         (Web Dev III), starter/ (what students download, tests and a test workflow included)
 tools/exercises/        verify.mjs (runs every exercise's tests), workflows/ (the test workflows starters carry)
@@ -53,7 +55,8 @@ hub's content import against production (hub README, "Tech course content"); `--
 
 - A course is `content/courses/<id>.json`: units, each with items (`lesson`, `video`, `slides`, `link`, `note`,
   `checkpoint`, `test`). A lesson's page is `content/lessons/<lesson id>.html`, listed in `lessons.json`; a
-  checkpoint's form is `content/checkpoints/<id>.json`; a slide deck's slides are in its item's `payload.slides`.
+  checkpoint's form is `content/checkpoints/<id>.json`; a slideshow is its Google Slides link (`payload.slides_url`),
+  played in Google's own player, so the deck is edited in Google.
 - HTML is cleaned on import against `vocabulary.json` (the hub keeps its own copy and refuses an import if they differ).
 - A new item needs an id nobody has used (`i_` and 10 lowercase hex characters, likewise `u_`, `l_`, `c_`) and a
   `legacy_key` no other item in its course has. Old items' keys are their positions on the old site (`unit-item`);

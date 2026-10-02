@@ -42,13 +42,13 @@ expected, not a bug.
 ## 4. Every later deploy
 
 Merge to `main` and Render rebuilds automatically, but only when something under `web/`, `content/`,
-`assets/images/` or `render.yaml` changed (`buildFilter`). GitHub Pages is off for this repo since it was renamed on
+`images/` or `render.yaml` changed (`buildFilter`). GitHub Pages is off for this repo since it was renamed on
 2026-10-02; the old site's addresses ended with the rename.
 
 ## 5. Checks after the first deploy
 
 - Render build log ends with `astro build` output and "Your site is live".
 - `https://tech-frontend….onrender.com/` and, once DNS is in, `https://tech.neurodevmentoring.com/`: Home loads, the
-  header logo and course images show (they come from `assets/images` via `scripts/sync-assets.mjs`), Catalog lists
+  header logo and course images show (they come from `images/` via `scripts/sync-assets.mjs`), Catalog lists
   fourteen courses (`web-dev-1` hidden as a draft), a course page opens, an unknown path shows the site's own 404.
 - Response headers include `X-Frame-Options: DENY`.

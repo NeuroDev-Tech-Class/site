@@ -98,10 +98,10 @@ describe('the catalog and course pages', () => {
   })
 
   // The Sign in button (and its way back) appears once the page knows the visitor is signed out: CourseProgress.test
-  test('a course page is built with its heading and a loading line where Sign in or progress will go', () => {
+  test('a course page is built with its heading and a placeholder where Sign in or progress will go', () => {
     const html = readFileSync(join(DIST, 'courses/digital-literacy/index.html'), 'utf8')
     expect(html).toMatch(/<h1[^>]*>Digital Literacy<\/h1>/)
-    expect(html).toContain('Loading your progress…')
+    expect(html).toMatch(/role="status" aria-busy="true" aria-label="Loading your progress"/)
   })
 
   test('the home page points new students at Digital Literacy and no longer mentions a password', () => {
@@ -230,11 +230,11 @@ describe('My Courses', () => {
 })
 
 describe('the dashboard', () => {
-  test('is one page kept out of search engines, built showing "Loading" with its heading and room for tables', () => {
+  test('is one page kept out of search engines, built showing placeholders with its heading and room for tables', () => {
     const html = read('admin/index.html')
     expect(html).toContain('<meta name="robots" content="noindex"')
     expect(html).toMatch(/<h1[^>]*>\s*Dashboard\s*<\/h1>/)
-    expect(text(html)).toContain('Loading…')
+    expect(html).toMatch(/role="status" aria-busy="true" aria-label="Loading the dashboard"/)
     expect(text(html)).not.toMatch(/Sign in with a coach account|The dashboard is for coaches/)
     expect(html).toMatch(/<main[^>]*class="[^"]*max-w-7xl/)
   })
@@ -275,5 +275,15 @@ describe('exercise starters', () => {
 
   test('nothing else is served under /starters', () => {
     expect(readdirSync(join(DIST, 'starters')).sort()).toEqual(withStarters.map(c => `${c.id}.zip`).sort())
+  })
+})
+
+describe('the scripts sent to the browser', () => {
+  // The course outlines are built into the pages; the islands only need a few helpers, never the data itself
+  test('never carry the course outlines or the catalogue', () => {
+    const scripts = files.filter(f => f.endsWith('.js')).map(f => ({ file: relative(DIST, f), js: readFileSync(f, 'utf8') }))
+    expect(scripts.length).toBeGreaterThan(0)
+    const carrying = scripts.filter(({ js }) => js.includes('legacy_key') || js.includes('intro_html'))
+    expect(carrying.map(s => s.file)).toEqual([])
   })
 })

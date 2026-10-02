@@ -3,6 +3,7 @@ import { openCertificate, type MyCertificate } from '../../lib/api'
 import { calendarDate } from '../../lib/format'
 import { useMyCertificates } from '../../lib/myWork'
 import Icon from '../Icon'
+import { Bone, ListBones, Skeleton } from '../Skeleton'
 
 function Row({ certificate }: { certificate: MyCertificate }) {
   const [problem, setProblem] = useState<string | null>(null)
@@ -33,6 +34,9 @@ function Row({ certificate }: { certificate: MyCertificate }) {
 export default function MyCertificates() {
   const state = useMyCertificates()
   if (state.status === 'error') return <p className="mt-10">Couldn't load your certificates. Reload the page to try again.</p>
+  if (state.status === 'loading') {
+    return <Skeleton label="Loading your certificates" className="mt-10"><Bone className="h-8 w-40" /><ListBones count={1} /></Skeleton>
+  }
   if (state.status !== 'ready' || !state.value.length) return null
   return (
     <section className="mt-10" aria-labelledby="my-certificates">
